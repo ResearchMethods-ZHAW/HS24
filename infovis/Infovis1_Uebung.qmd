@@ -1,9 +1,8 @@
 ---
-date: 2023-10-23
 lesson: InfoVis1
 thema: Plots & Facets
 execute: 
-  echo: true   # set to true to show musterlösung
+  echo: false   # set to true to show musterlösung
   output: true
 code-fold: true
 code-summary: "Musterlösung"
@@ -26,8 +25,7 @@ Importiere als erstes den Datensatz *tagi_data_kanton.csv*.
 #| echo: true
 #| code-fold: false
 
-library("dplyr")
-library("ggplot2")
+
 library("readr")
 
 kanton <- read_delim("datasets/infovis/tagi_data_kantone.csv", ",")
@@ -51,6 +49,7 @@ Tipp:
 
 # Lösung zu Aufgabe 1
 
+library("ggplot2")
 plot1 <- ggplot(kanton, aes(auslanderanteil, ja_anteil)) +
   geom_point() +
   coord_fixed(1) +

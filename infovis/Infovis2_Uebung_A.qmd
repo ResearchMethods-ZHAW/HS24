@@ -1,9 +1,8 @@
 ---
-date: 2023-10-24
 lesson: InfoVis2
 thema: Vertiefung ggplot
 execute: 
-  echo: true   # set to true to show musterlösung
+  echo: false   # set to true to show musterlösung
   output: true
 code-fold: true
 code-summary: "Musterlösung"
@@ -14,23 +13,13 @@ knitr:
 
 # Infovis 2: Übung A
 
-Für die heutige Übung brauchst du den Datensatz *temperature_2005.csv*. Dabei handelt es sich wieder um Teperaturwerte verschiedener Stationen, diesmal aus dem Jahr 2005. Das Datum ist so formatiert, dass `R` (isbesondere `read_csv`) es korrekt als `datetime` erkennen und als `POSIXct` einlesen sollte.
+Für die heutige Übung brauchst du den Datensatz *temperature_2005.csv*. Dabei handelt es sich wieder um Teperaturwerte verschiedener Stationen, diesmal aus dem Jahr 2005. Das Datum ist so formatiert, dass `R` (isbesondere `read_delim`) es korrekt als `datetime` erkennen und als `POSIXct` einlesen sollte.
+
 
 ```{r}
 #| echo: true
 #| code-fold: false
-
 library("readr")
-library("dplyr")
-library("lubridate")
-library("tidyr")
-library("ggplot2")
-```
-
-```{r}
-#| echo: true
-#| code-fold: false
-
 temperature <- read_delim("datasets/infovis/temperature_2005.csv", ",")
 ```
 
@@ -41,6 +30,7 @@ Mache aus der *wide table* eine *long table* die wie folgt aussieht.
 ```{r}
 #| output: true
 
+library("tidyr")
 temperature_long <- pivot_longer(temperature, -time, names_to = "station", values_to = "temperature")
 
 knitr::kable(head(temperature_long))
@@ -50,6 +40,8 @@ Importiere anschliessend den Datensatz *temperature_2005_metadata.csv* und verbi
 
 ```{r}
 metadata <- read_delim("datasets/infovis/temperature_2005_metadata.csv", ",")
+
+library("dplyr")
 
 temperature_long <- left_join(temperature_long, metadata, by = c(station = "stn"))
 ```
@@ -62,6 +54,7 @@ Erstelle ein Scatterplot (`time` vs. `temperature`) wobei die Punkte aufgrund ih
 #| output: true
 
 # Musterlösung
+library("ggplot2")
 ggplot(temperature_long, aes(time, temperature, color = Meereshoehe)) +
   geom_point(size = 0.5) +
   labs(x = "", y = "Temperatur in ° Celsius") +
@@ -151,6 +144,7 @@ Jetzt verlassen wir den Scatterplot und machen einen Boxplot mit den Temperaturd
 #| output: true
 
 # Musterlösung
+library("lubridate")
 temperature_long <- mutate(temperature_long, monat = month(time, label = T, abbr = F))
 
 ggplot(temperature_long, aes(monat, temperature, fill = Meereshoehe)) +

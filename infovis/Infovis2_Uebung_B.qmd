@@ -1,9 +1,8 @@
 ---
-date: 2023-10-24
 lesson: InfoVis2
 thema: Vertiefung ggplot
 execute: 
-  echo: true   # set to true to show musterlösung
+  echo: false   # set to true to show musterlösung
   output: true
 code-fold: true
 code-summary: "Musterlösung"
@@ -22,9 +21,7 @@ Dazu verwenden wir nach wie vor `ggplot2`, aber mit einigen Tricks.
 #| echo: true
 #| code-fold: false
 
-library("dplyr")
-library("tidyr")
-library("ggplot2")
+
 ```
 
 ## Aufgabe 1: Parallel coordinate plots
@@ -34,10 +31,13 @@ Erstelle einen [parallel coordinate plot](https://en.wikipedia.org/wiki/Parallel
 Zudem müssen die Werte jeweiles auf eine gemeinsame Skala normalisiert werden. Hierfür kannst du die Funktion `scales::rescale` verwenden.
 
 ```{r}
+
+library("tidyr")
 mtcars2 <- mtcars |>
   tibble::rownames_to_column("car") |>
   pivot_longer(-car)
 
+library("dplyr")
 mtcars2 <- mtcars2 |>
   group_by(name) |>
   mutate(value_scaled = scales::rescale(value))
@@ -58,6 +58,8 @@ So sieht der fertige Plot aus:
 mtcars2 <- mtcars2 |>
   group_by(car) |>
   mutate(gear = value[name == "gear"])
+
+library("ggplot2")
 
 ggplot(mtcars2, aes(name, value_scaled, group = car, color = factor(gear))) +
   geom_point() +

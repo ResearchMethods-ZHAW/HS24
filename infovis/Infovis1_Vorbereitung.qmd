@@ -1,7 +1,5 @@
 ---
-date: 2023-10-23
 lesson: InfoVis1
-thema: Vorbereitung
 knitr:
   opts_chunk: 
     collapse: true
@@ -12,18 +10,9 @@ knitr:
 Im Rahmen von InfoVis 1 - 2 werden wir einige R Packages brauchen. Wir empfehlen, diese bereits *vor* der ersten Lektion zu installieren. Analog @sec-prepro-vorbereitung könnt ihr mit nachstehendem Code alle noch nicht installierten packages automatisch installieren.
 
 ```{r}
-#| eval: false
-
-ipak <- function(pkg) {
-  new.pkg <- pkg[!(pkg %in% installed.packages()[, "Package"])]
-  if (length(new.pkg)) {
-    install.packages(new.pkg, dependencies = TRUE)
-  }
-}
-
-packages <- c("dplyr", "ggplot2", "lubridate", "readr", "scales", "tidyr")
-
-ipak(packages)
+#| eval: true
+pacman::p_install("dplyr", "ggplot2", "lubridate", "readr", 
+  "scales", "tidyr", character.only = TRUE,  force = FALSE)
 ```
 
 Zudem könnt ihr die Daten für die Übungen auf [Moodle](https://moodle.zhaw.ch/mod/resource/view.php?id=976901) herunterladen.
