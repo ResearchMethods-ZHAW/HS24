@@ -1,0 +1,14 @@
+book:
+  output-file: prepro1
+  chapters:
+    - index.qmd
+    - prepro/Prepro1_Vorbereitung.qmd
+    - prepro/Prepro1_Demo.qmd
+    - prepro/Prepro1_Uebung.qmd
+format: pdf
+
+project:
+  output-dir: _book/prepro1
+  
+  
+
