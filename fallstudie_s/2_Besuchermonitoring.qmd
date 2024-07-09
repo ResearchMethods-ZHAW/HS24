@@ -1,0 +1,120 @@
+---
+lesson: Besuchermonitoring
+thema: Felderhebungen Grüental
+execute: 
+  echo: false   # set to true to show musterlösung
+  output: false
+code-fold: false # set false to show all code
+code-summary: "Musterlösung"
+knitr:
+  opts_chunk: 
+    collapse: true
+---
+
+# Monitoring
+
+
+## Einführung und Installation
+
+Es gibt eine Vielzahl an möglichen Methoden zur Erfassung der Besuchszahlen. Automatische Zählgeräte bieten die Möglichkeit lange und durchgehende Zeitreihen zu erfassen. Inputs dazu, wie diese ausgewertet werden können, erhält ihr in dieser Aufgabe.
+
+![](images/gruental.jpg){width=50%}
+
+## Ziele
+
+- Die Studierenden können das eingesetzte Zählgerät installieren und kennen die Vor- und Nachteile verschiedener Methoden.
+
+- Die Studierenden können die Daten auslesen und explorativ analysieren.
+
+## Grundlagen
+
+Die Geräte werden innerhalb der unten eingezeichneten Elipsen platziert. Damit soll überprüft werden, wie stark frequentiert die Waldränder der ökologisch aufgewerteten Seeparzelle sind.
+
+![](images/Perimeter_Felderhebung.png){width=100%}
+
+Datenschutz ist ein wichtiges Thema. Die Besuchenden werden über den Zweck der Kameras informiert, die Daten nach der Bearbeitung wieder gelöscht und nicht weitergegeben.
+
+![](images/Begleitzettel_Kamera.png){width=50%}
+
+## Auswertung
+__Nach den Felderhebungen__
+
+_Nachdem die Kameras für zwei Wochen im Einsatz standen, sichten wir zusammen die Ergebnisse._
+
+_Da die Anzahl Passagen auf der Seeparzelle keine schöne Auswertung erlauben, arbeiten wir ab jetzt mit einem Datensatz aus dem WPZ. Die Vorteile für euch sind:_
+
+1. ihr habt genügend Daten für die Auswertung mit R und 
+2. die Daten sind im selben Format wir für die späteren Aufgaben.
+
+
+[Hier](https://moodle.zhaw.ch/mod/folder/view.php?id=956254)könnt ihr die Daten herunterladen.
+
+### Aufgabe 1: Vorarbeiten
+
+- Überlegt euch mögliche Darstellungsformen für die __Anzahl Passagen__ und die beobachteten __Aktivitäten__ an den untersuchten Standorten.
+
+- Skizziert eure Ideen mittels Stift und Papier.
+ 
+
+### Aufgabe 2: Darstellung in R
+
+R bietet sehr viele Optionen zur Analyse und zur Darstellung der Daten. Nehmt bitte den bereitgestellten Datensatz zur Hand und visualisiert eure Ideen mit R. 
+
+Untenstehend sind einige Ideen zur Umsetzung:
+
+```{r}
+### Bibliothek laden
+
+# zuerst muss sie installiert sein. folgende Zeile müsst ihr nur das erste Mal ausführen
+# install.packages("readr")
+# WENN installiert, DANN laden
+library("readr") # einlesen von csv mit read_delim
+
+### Datensatz einlesen
+
+# dabei speichere ich ihn gleich unter der Variable "depo" ab.
+depo <- read_delim("datasets/fallstudie_s/Felderhebungen/Bsp_Data.csv")
+
+### Datum und Uhrzeit
+# das Datum und die Uhrzeit sind in einer Spalte. R liest das als "Buchstaben" ein. Wir definieren es als Datum mit as.POSIXct aus base R
+depo$DatumUhrzeit <- as.POSIXct(depo$DatumUhrzeit, format = "%d.%m.%Y %H:%M")
+```
+
+```{r}
+### Kennzahlen
+
+# zuerst schaue ich mir jeweils den Aufau und die Kennzahlen zum Datensaz an:
+str(depo)
+
+# hat es im Datensatz noch fehlende Werte?
+sum(is.na(depo))
+
+# wie viele Personen sind IN das Gebiet gegangen?
+sum(depo$Fuss_IN)
+
+# wie viele insgesamt?
+# dafür erstellen wir zuerst eine neue Spalte mit der Totalen Anzahl pro Datum und Zeitstempel:
+depo$Total = depo$Fuss_IN + depo$Fuss_OUT + depo$Velo_IN + depo$Velo_OUT
+# und berechnen nachher die Summe dieser neuen Spalte
+sum(depo$Total)
+```
+
+```{r}
+# Darstellen der Anzahl Passagen pro Stunde und Tag, mit Base R
+plot(
+  x = depo$DatumUhrzeit, y = depo$Total,
+  pch = 21, # Form
+  cex = 1.5, # Grösse
+  bg = "blue"
+) # Füllung
+```
+
+```{r}
+# Darstellung der verschiedenen Nutzergruppen als Pie Chart (Kuchendiagram)
+slieces <- c(sum(depo$Fuss_IN), sum(depo$Fuss_OUT), sum(depo$Velo_IN), sum(depo$Velo_OUT))
+lbls <- c("Fuss_IN", "Fuss_OUT", "Velo_IN", "Velo_OUT")
+pie(slieces, labels = lbls)
+```
+
+
+__--> Erklärt dem Plenum nächste Woche was ihr gemacht habt, was eure Daten zeigen und präsentiert diese einfachen Plots. __

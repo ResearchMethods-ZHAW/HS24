@@ -1,5 +1,5 @@
 ---
-title: "Informationsvisualisierung"
+title: "InfoVis"
 ---
 
 ## Infovis 1
