@@ -75,6 +75,8 @@ Je nach gewählter "Clone"-Methode, muss das Git*Hub* Repo als *upstream* gesetz
 
     git branch -u origin/main
 
+### Submodule initialisieren
+
 Nun solltet ihr fast das ganze Repo lokal auf eurem Computer haben und die einzelnen Files bearbeiten können. Es gibt noch eine Ausnahme: Der `datasets` folder. Hierbei handelt es sich um einen einzelnen Ordner mit sämtlichen Datensätzen (csvs, tiffs, txts usw.) welche im Modul gebraucht werden. *Dieser Ordner ist ein separates, verschachteltes Git-Repo*. Dafür gibt es verschiedene Gründe (siehe FAQ). Wichtig ist jetzt, dass der Inhalt diess Ordners noch nicht auf euerem Computer gelandet ist. Dazu braucht es noch folgenden Befehl im Terminal:
 
     git submodule update --init --recursive
