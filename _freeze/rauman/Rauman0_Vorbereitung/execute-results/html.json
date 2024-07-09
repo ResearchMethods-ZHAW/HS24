@@ -1,0 +1,15 @@
+{
+  "hash": "ff9452340a42783d8e03709be2e01d4e",
+  "result": {
+    "engine": "knitr",
+    "markdown": "---\nlesson: RaumAn1\nknitr:\n  opts_chunk: \n    collapse: true\n---\n\n\n\n\n\n## Vorbereitung {#sec-rauman-vorbereitung}\n\nIm Rahmen von Rauman 1 - 5 werden wir einige R Packages brauchen. Wir empfehlen, diese bereits *vor* der ersten Lektion zu installieren. Analog [der Vorbereitungsübung in Prepro1](#sec-prepro-vorbereitung) könnt ihr mit nachstehendem Code alle noch nicht installierten packages automatisch installieren.\n\n\n\n\n\n::: {.cell}\n\n```{.r .cell-code}\npacman::p_install(\"sf\", \"dplyr\", \"ggplot2\", \"spatstat.geom\", \"spatstat.explore\",\n  \"gstat\", \"tidyr\", \"terra\", \"tmap\", character.only = TRUE,  force = FALSE)\n\n```\n:::\n\n\n\n\n\nZudem könnt ihr die Daten für die Übungen auf [Moodle](https://moodle.zhaw.ch/) herunterladen.",
+    "supporting": [],
+    "filters": [
+      "rmarkdown/pagebreak.lua"
+    ],
+    "includes": {},
+    "engineDependencies": {},
+    "preserve": {},
+    "postProcess": true
+  }
+}

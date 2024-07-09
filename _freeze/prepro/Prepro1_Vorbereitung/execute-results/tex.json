@@ -1,0 +1,21 @@
+{
+  "hash": "b45c0c9ad16e56d9616ed8d3caad4fb4",
+  "result": {
+    "engine": "knitr",
+    "markdown": "---\ndate: 2023-10-10\nlesson: PrePro1\nthema: Vorbereitung\nknitr:\n  opts_chunk: \n    collapse: true\n---\n\n\n\n\n## Vorbereitung {#sec-prepro-vorbereitung}\n\nIm Rahmen von Prepro 1 - 3 werden wir folgende Packages brauchen: `dplyr`, `ggplot2`, `lubridate`, `readr` und `tidyr`. Wir empfehlen, diese bereits *vor* der ersten Lektion zu installieren. Einzelne Packages werden typischerweise folgendermassen installiert: \n\n\n\n\n::: {.cell}\n\n```{.r .cell-code}\ninstall.packages(\"dplyr\")     # Anführungs- und Schlusszeichen sind zwingend\ninstall.packages(\"ggplot2\")\n...                           # usw.\n```\n:::\n\n\n\n\nMit nachstehendem Code werden alle noch nicht installierten packages automatisch installiert.\n\n\n\n\n::: {.cell}\n\n```{.r .cell-code}\nipak <- function(pkg) {\n  new.pkg <- pkg[!(pkg %in% installed.packages()[, \"Package\"])]\n  if (length(new.pkg)) {\n    install.packages(new.pkg, dependencies = TRUE)\n  }\n}\n\npackages <- c(\"dplyr\", \"ggplot2\", \"lubridate\", \"readr\", \"tidyr\")\n\nipak(packages)\n```\n:::\n\n\n\n\nZudem könnt ihr die Daten für die Übungen auf [Moodle](https://moodle.zhaw.ch/mod/resource/view.php?id=976899) herunterladen.",
+    "supporting": [
+      "Prepro1_Vorbereitung_files"
+    ],
+    "filters": [
+      "rmarkdown/pagebreak.lua"
+    ],
+    "includes": {},
+    "engineDependencies": {
+      "knitr": [
+        "{\"type\":\"list\",\"attributes\":{},\"value\":[]}"
+      ]
+    },
+    "preserve": null,
+    "postProcess": false
+  }
+}

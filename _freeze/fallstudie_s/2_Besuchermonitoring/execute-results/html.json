@@ -1,0 +1,17 @@
+{
+  "hash": "7b7fa4858ba743a59c91f33d94356c71",
+  "result": {
+    "engine": "knitr",
+    "markdown": "---\nlesson: Besuchermonitoring\nthema: Felderhebungen Grüental\nexecute: \n  echo: false   # set to true to show musterlösung\n  output: false\ncode-fold: false # set false to show all code\ncode-summary: \"Musterlösung\"\nknitr:\n  opts_chunk: \n    collapse: true\n---\n\n\n\n\n\n# Monitoring\n\n\n## Einführung und Installation\n\nEs gibt eine Vielzahl an möglichen Methoden zur Erfassung der Besuchszahlen. Automatische Zählgeräte bieten die Möglichkeit lange und durchgehende Zeitreihen zu erfassen. Inputs dazu, wie diese ausgewertet werden können, erhält ihr in dieser Aufgabe.\n\n![](images/gruental.jpg){width=50%}\n\n## Ziele\n\n- Die Studierenden können das eingesetzte Zählgerät installieren und kennen die Vor- und Nachteile verschiedener Methoden.\n\n- Die Studierenden können die Daten auslesen und explorativ analysieren.\n\n## Grundlagen\n\nDie Geräte werden innerhalb der unten eingezeichneten Elipsen platziert. Damit soll überprüft werden, wie stark frequentiert die Waldränder der ökologisch aufgewerteten Seeparzelle sind.\n\n![](images/Perimeter_Felderhebung.png){width=100%}\n\nDatenschutz ist ein wichtiges Thema. Die Besuchenden werden über den Zweck der Kameras informiert, die Daten nach der Bearbeitung wieder gelöscht und nicht weitergegeben.\n\n![](images/Begleitzettel_Kamera.png){width=50%}\n\n## Auswertung\n__Nach den Felderhebungen__\n\n_Nachdem die Kameras für zwei Wochen im Einsatz standen, sichten wir zusammen die Ergebnisse._\n\n_Da die Anzahl Passagen auf der Seeparzelle keine schöne Auswertung erlauben, arbeiten wir ab jetzt mit einem Datensatz aus dem WPZ. Die Vorteile für euch sind:_\n\n1. ihr habt genügend Daten für die Auswertung mit R und \n2. die Daten sind im selben Format wir für die späteren Aufgaben.\n\n\n[Hier](https://moodle.zhaw.ch/mod/folder/view.php?id=956254)könnt ihr die Daten herunterladen.\n\n### Aufgabe 1: Vorarbeiten\n\n- Überlegt euch mögliche Darstellungsformen für die __Anzahl Passagen__ und die beobachteten __Aktivitäten__ an den untersuchten Standorten.\n\n- Skizziert eure Ideen mittels Stift und Papier.\n \n\n### Aufgabe 2: Darstellung in R\n\nR bietet sehr viele Optionen zur Analyse und zur Darstellung der Daten. Nehmt bitte den bereitgestellten Datensatz zur Hand und visualisiert eure Ideen mit R. \n\nUntenstehend sind einige Ideen zur Umsetzung:\n\n\n\n\n\n::: {.cell}\n\n:::\n\n::: {.cell}\n\n:::\n\n::: {.cell}\n\n:::\n\n::: {.cell}\n\n:::\n\n\n\n\n\n\n__--> Erklärt dem Plenum nächste Woche was ihr gemacht habt, was eure Daten zeigen und präsentiert diese einfachen Plots. __\n",
+    "supporting": [
+      "2_Besuchermonitoring_files"
+    ],
+    "filters": [
+      "rmarkdown/pagebreak.lua"
+    ],
+    "includes": {},
+    "engineDependencies": {},
+    "preserve": {},
+    "postProcess": true
+  }
+}

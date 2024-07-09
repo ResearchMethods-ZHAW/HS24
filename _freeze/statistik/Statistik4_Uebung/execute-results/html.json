@@ -1,0 +1,15 @@
+{
+  "hash": "ff4c226e368e4c214318824181ad54fd",
+  "result": {
+    "engine": "knitr",
+    "markdown": "---\nexecute: \n  echo: false   # set to true to show musterlösung\n  output: false # set to true to show musterlösung\ncode-fold: true\ncode-summary: \"Musterlösung\"\nknitr:\n  opts_chunk: \n    collapse: true\n---\n\n\n\n\n# Statistik 4: Übung",
+    "supporting": [],
+    "filters": [
+      "rmarkdown/pagebreak.lua"
+    ],
+    "includes": {},
+    "engineDependencies": {},
+    "preserve": {},
+    "postProcess": true
+  }
+}
