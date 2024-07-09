@@ -1,10 +1,9 @@
 ---
-date: 2023-10-16
 lesson: PrePro2
 thema: Piping / Joins
 execute: 
-  echo: true   # set to true to show musterlösung
-  output: true # set to true to show musterlösung
+  echo: false   # set to true to show musterlösung
+  output: false # set to true to show musterlösung
 code-fold: true
 code-summary: "Musterlösung"
 knitr:
@@ -19,8 +18,6 @@ knitr:
 #| code-fold: false
 
 # Benötigte Packages
-library("dplyr")
-library("readr")
 ```
 
 ## Aufgabe 1
@@ -28,6 +25,8 @@ library("readr")
 Gegeben sind die Daten von drei Sensoren (*sensor1.csv*, *sensor2.csv*, *sensor3.csv*). Lese die Datensätze ein.
 
 ```{r}
+library("readr")
+
 sensor1 <- read_delim("datasets/prepro/sensor1.csv", ";")
 sensor2 <- read_delim("datasets/prepro/sensor2.csv", ";")
 sensor3 <- read_delim("datasets/prepro/sensor3.csv", ";")
@@ -38,6 +37,8 @@ sensor3 <- read_delim("datasets/prepro/sensor3.csv", ";")
 Erstelle aus den 3 Dataframes eine einzige Dataframe, die aussieht wie unten dargestellt. Nutze dafür zwei joins aus `dplyr` um 3 `data.frames` miteinander zu verbinden. Bereinige im Anschluss die Spaltennamen ([wie geht das?](https://www.statology.org/how-to-rename-data-frame-columns-in-r/)).
 
 ```{r}
+library("dplyr")
+
 sensor1_2 <- full_join(sensor1, sensor2, "Datetime")
 
 sensor1_2 <- rename(sensor1_2, sensor1 = Temp.x, sensor2 = Temp.y)

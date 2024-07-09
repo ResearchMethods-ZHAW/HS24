@@ -1,5 +1,4 @@
 ---
-date: 2023-10-16
 lesson: PrePro2
 thema: Piping / Joins
 knitr:
@@ -9,13 +8,12 @@ knitr:
 
 # Prepro 2: Demo
 
-Diese Demo kann auch als [R Script heruntergeladen werden](Prepro2_Demo.R) (Rechtsklick → *Save Target As..*)
-
 ## Piping
 
 Gegeben ist ein character string (`diary`). Wir wollen aus diesem Text die Temperaturangabe aus dem String extrahieren und danach den Wert von Kelvin in Celsius nach der folgenden Formel umwandeln und zum Schluss den Mittelwert über all diese Werte berechnen.
 
 $$°C = K - 273.15$$
+
 
 ```{r}
 diary <- c(

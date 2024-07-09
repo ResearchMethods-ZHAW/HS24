@@ -1,5 +1,4 @@
 ---
-date: 2023-10-17
 lesson: PrePro3
 thema: Split-Apply-Combine
 knitr:
@@ -15,14 +14,9 @@ In dieser Demo möchten wir weitere Werkzeuge aus dem Tidyverse vorstellen und m
 
 Wir können Euch nicht sämtliche Möglichkeiten von tidyverse zeigen. Wir fokussieren uns deshalb auf weitere wichtige Komponenten und zeigen zusätzliche Funktionalitäten, die wir oft verwenden und Euch ggf. noch nicht bekannt sind. Wer sich vertieft mit dem Thema auseinandersetzen möchte, der sollte sich unbedingt das Buch  @wickham2017 beschaffen. Eine umfangreiche, aber nicht ganz vollständige Version gibt es online^[http://r4ds.had.co.nz/] , das vollständige eBook kann über die Bibliothek bezogen werden^[https://ebookcentral.proquest.com/lib/zhaw/detail.action?docID=4770093].
 
-Wir benötigen dazu folgende Packages:
 
 ```{r}
-library("dplyr")
-library("tidyr")
-library("lubridate")
-library("readr")
-library("ggplot2")
+
 ```
 
 ## Split-Apply-Combine
@@ -32,7 +26,11 @@ library("ggplot2")
 Wir laden die Wetterdaten (Quelle MeteoSchweiz) der letzten Übung.
 
 ```{r}
+library("readr")
+
 wetter <- read_delim("datasets/prepro/weather.csv", ",")
+
+library("dplyr")
 
 wetter <- wetter |>
   mutate(
@@ -62,12 +60,15 @@ Um diese Aufgabe zu lösen, muss zuerst der Monat extrahiert werden (der Monat i
 Nun kann kann die **convenience Variable** "Month" erstellt werden. Ohne `dpylr` wird eine neue Spalte folgendermassen hinzugefügt. 
 
 ```{r}
+library("lubridate")
+
 wetter$month <- month(wetter$time)
 ```
 
 Mit `dplyr` (siehe ^[@wickham2017, Kapitel 10 / http://r4ds.had.co.nz/transform.html]) sieht der gleiche Befehl folgendermassen aus:
 
 ```{r}
+
 wetter <- mutate(wetter, month = month(time))
 ```
 
@@ -144,6 +145,7 @@ weather_summary
 Die Umformung von Tabellen *breit*→*lang* erfolgt mittels `tidyr`(siehe ^[https://r4ds.had.co.nz/tidy-data.html#pivoting]). Auch dieses Package funktioniert wunderbar mit piping (`|>`). 
 
 ```{r}
+library("tidyr")
 weather_summary |>
   pivot_longer(c(temp_max, temp_min))
 ```
@@ -190,6 +192,8 @@ nrow(weather_summary_long)
 Lange Tabellen sind in verschiedenen Situationen praktischer. Beispielsweise ist das Visualisieren mittels `ggplot2` (dieses Package werdet ihr im Block "InfoVis" kennenlernen) mit *long tables* wesentlich einfacher.
 
 ```{r}
+
+library("ggplot2")
 ggplot(weather_summary_long, aes(day, Messwert, colour = Messtyp)) +
   geom_line()
 ```

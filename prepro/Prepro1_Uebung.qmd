@@ -1,10 +1,8 @@
 ---
-date: 2023-10-10
 lesson: PrePro1
-thema: Datentypen
 execute: 
-  echo: true   # set to true to show musterlösung
-  output: true # set to true to show musterlösung
+  echo: false   # set to true to show musterlösung
+  output: false # set to true to show musterlösung
 code-fold: true
 code-summary: "Musterlösung"
 knitr:
@@ -25,6 +23,8 @@ knitr::opts_chunk$set(collapse = TRUE)
 
 Wir empfehlen die Verwendung von "Projects" innerhalb von RStudio. RStudio legt für jedes Projekt dann einen Ordner an, in welches die Projekt-Datei abgelegt wird (Dateiendung `.Rproj`). Sollen innerhalb des Projekts dann R-Skripts geladen oder erzeugt werden, werden diese dann auch im angelegten Ordner abgelegt. Mehr zu RStudio Projects findet ihr [hier](https://support.rstudio.com/hc/en-us/articles/200526207-Using-Projects).
 
+
+
 Das Verwenden von Projects bringt verschiedene Vorteile, wie zum Beispiel:
 
 -   Festlegen der Working Directory ohne die Verwendung des expliziten Pfades (`setwd()`). Das ist sinnvoll, da sich dieser Pfad ändern kann (Zusammenarbeit mit anderen Usern, Ausführung des Scripts zu einem späteren Zeitpunkt)
@@ -32,26 +32,15 @@ Das Verwenden von Projects bringt verschiedene Vorteile, wie zum Beispiel:
 -   Festlegen verschiedener projektspezifischer Optionen
 -   Verwendung von Versionsverwaltungssystemen (z.B. *git*)
 
-## Arbeiten mit Libraries / Packages
 
-R ist ohne Zusatzpackete, sogenannte "Packages" nicht mehr denkbar. Die allermeisten Packages werden auf [CRAN](https://cran.r-project.org/) gehostet und können leicht mittels `install.packages()` installiert werden. Eine sehr wichtige Sammlung von Packages wird von RStudio entwickelt. Unter dem Namen [Tidyverse](https://www.tidyverse.org/) werden eine Reihe von Packages angeboten, den R-Alltag enorm erleichtert. Wir werden später näher auf das "Tidy"-Universum eingehen, an dieser Stelle können wir einfach mal die wichtigsten Packages aus `tidyverse` installieren (heute werden wir davon nur einen kleinen Teil benutzen).
 
-Um ein `package` in R verwenden zu können, gibt es zwei Möglichkeiten:
+:::{.callout-important}
 
--   entweder man lädt es zu Beginn der R-session mittles `library("dplyr")` (ohne Anführungs- und Schlusszeichen).
--   oder man ruft eine `function` mit vorangestelltem Packetname sowie zwei Doppelpunkten auf. `dplyr::filter()` ruft die Funktion `filter()` des Packets `dplyr` auf.
+## Prüfungsrelevant
 
-Letztere Notation ist vor allem dann sinnvoll, wenn sich zwei unterschiedliche Funktionen mit dem gleichen namen in verschiedenen pacakges existieren. `filter()` existiert als Funktion einersits im package `dplyr` sowie in `stats`. Dieses Phänomen nennt man "masking".
+Die korrekte Verwendung von RStudio Projects und relativen Pfaden wird an der praktischen Prüfung vorausgesetzt!
 
-Zu Beginn laden wir die nötigen Pakete:
-
-```{r}
-#| echo: true
-#| code-fold: false
-
-library("readr")
-library("lubridate")
-```
+:::
 
 
 ## Aufgabe 1
@@ -125,6 +114,9 @@ Wir nutzen `readr` um csvs zu importieren und verwenden die Funktion `read_delim
 
 
 ```{r}
+library("readr")
+
+
 wetter <- read_delim("datasets/prepro/weather.csv", ",")
 ```
 
@@ -138,7 +130,7 @@ knitr::kable(head(wetter, 10))
 
 ## Aufgabe 5
 
-Schau dir die Rückmeldung von `read_csv()`an. Sind die Daten korrekt interpretiert worden?
+Schau dir die Rückmeldung von `read_delim()`an. Sind die Daten korrekt interpretiert worden?
 
 ```{r}
 # Die Spalte 'time' wurde als 'integer' interpretiert. Dabei handelt es
@@ -171,6 +163,8 @@ knitr::kable(head(wetter, 10), caption = "Die neue Tabelle sollte so aussehen")
 Erstelle zwei neue Spalten mit Wochentag (Montag, Dienstag, etc) und Kalenderwoche. Verwende dazu die neu erstellte `POSIXct`-Spalte sowie eine geeignete Funktion aus `lubridate`.
 
 ```{r}
+library("lubridate")
+
 wetter$wochentag <- wday(wetter$time, label = T)
 wetter$kw <- week(wetter$time)
 ```

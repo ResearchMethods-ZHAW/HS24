@@ -1,7 +1,5 @@
 ---
-date: 2023-10-10
 lesson: PrePro1
-thema: Datentypen
 knitr:
   opts_chunk: 
     collapse: true
@@ -9,7 +7,7 @@ knitr:
 
 # Prepro 1: Demo
 
-Diese Demo kann auch als [R Script heruntergeladen werden](Prepro1_Demo.R) (Rechtsklick → *Save Target As..*)
+
 
 ### Datentypen
 
