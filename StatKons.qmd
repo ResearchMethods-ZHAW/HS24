@@ -1,24 +1,5 @@
 ---
 title: "Statistik Konsolidierung"
-listing: 
-    type: table
-    contents: statKons
-    max-items: 1000
-    page-size: 1000
-    categories: false
-    fields: [title, date, lesson, thema]
-    field-links: [title]
-    sort-ui: false
-    filter-ui: false
-    sort: 
-        - "date"
-        - "index"
-    field-display-names:
-        title: "Titel"
-        lesson: "Lesson"
-        thema: "Thema"
-        date: "Datum"
-    date-format: iso
 ---
 
 In den vier Blöcken “Konsolidierung Statistik” repetieren die Studierenden die wichtigen Verfahren der Inferenz-Statistik. Beginnend mit den beiden Fällen, dem $Chi ^{2}/$-Test für die Assoziation zwischen zwei kategorialen Variablen und dem t-Test auf Unterschiede in Mittelwerten zwischen zwei Gruppen. Die Studierene wiederholen auch die Varianzanalyse (ANOVA) als Verallgemeinerung des t-Tests, einschliesslich post-hoc-Tests und mehrfaktorieller ANOVA. Weiter geht es mit der Repetition von komplexere Versionen linearer Regressionen und generalized linear models (GLMs), die einige wesentliche Limitierungen von linearen Modellen überwinden. Abschliessend bekommen die Studierenden eine Einführung in die Welt der Ordinationen z.B. PCA.

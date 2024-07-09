@@ -1,24 +1,5 @@
 ---
 title: "Statistik 1 - 4"
-listing: 
-    type: table
-    contents: stat1-4
-    max-items: 1000
-    page-size: 1000
-    categories: false
-    fields: [title, date, lesson, thema]
-    field-links: [title]
-    sort-ui: false
-    filter-ui: false
-    sort: 
-        - "date"
-        - "index"
-    field-display-names:
-        title: "Titel"
-        lesson: "Lesson"
-        thema: "Thema"
-        date: "Datum"
-    date-format: iso
 ---
 
 # Statistik 1
