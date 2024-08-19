@@ -65,7 +65,7 @@ Für "meine" Analysen habe ich folgende Fragestellungen formuliert:
 -	Anhang (für alle Auswertungen relevanter R-Code in geeigneter Form) 
 
 2) Gesamtumfang max. 12'000 Zeichen (inkl. Leerzeichen; exkl. Tabellen, Literaturverzeichnis und Anhang)
-3) Abgabe am __14.1.2024__ per Mail an hoce@zhaw.ch
+3) Abgabe am __12.1.2025__ per Mail an hoce@zhaw.ch
 
 ## Bewertungskriterien
 

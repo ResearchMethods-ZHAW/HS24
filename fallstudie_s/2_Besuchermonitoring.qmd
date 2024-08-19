@@ -14,6 +14,23 @@ knitr:
 # Monitoring
 
 
+
+
+
+_komplett überarbeiten_
+
+
+
+
+
+
+
+
+
+
+
+
+
 ## Einführung und Installation
 
 Es gibt eine Vielzahl an möglichen Methoden zur Erfassung der Besuchszahlen. Automatische Zählgeräte bieten die Möglichkeit lange und durchgehende Zeitreihen zu erfassen. Inputs dazu, wie diese ausgewertet werden können, erhält ihr in dieser Aufgabe.
