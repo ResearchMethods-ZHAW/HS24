@@ -41,7 +41,18 @@ __Bearbeitung NACH den Felderhebungen__
 
 
 
+
+
+
+
+
+
+
+
 [Hier](LINK) könnt ihr die Daten herunterladen.
+
+
+
 
 
 
@@ -151,29 +162,32 @@ indoor_d <- indoor %>%
 
 ## Grafische Darstellung des Verlaufs
 
+# Ich verwende hier eine Funktion, in welcher alle Befehle zusammen durchgeführt werden. 
+# So stelle ich sicher, dass die zweite Linie dem ersten, vor mir spezifizierten Plot hinzugefügt wird.
+plot_passages <- function() {
+  
+  # zeige zuerst indoor, Punkte und Linien
+  plot(indoor_d$DatumUhrzeit, indoor_d$Passagen_pro_Tag, 
+       type = "b", 
+       pch = 19, 
+       col = "lightblue", 
+       xlab = "Datum", 
+       ylab = "Anzahl Passagen pro Tag")
+  
+  # füge dann einen zweiten Plot hinzu
+  lines(outdoor_d$DatumUhrzeit, outdoor_d$Passagen_pro_Tag, 
+        pch = 18, 
+        col = "firebrick3", 
+        type = "b", 
+        lty = 2)
+  
+  # und eine Legende
+  legend("topright", legend=c("Indoor", "Outdoor"),
+         col=c("lightblue", "firebrick3"), lty = 1:2, cex=0.8)
+}
 
-outdoor_d <- indoor_d
-outdoor_d$Passagen_pro_Tag <- outdoor_d$Passagen_pro_Tag+50
-
-
-# Show both points and line
-plot(indoor_d$DatumUhrzeit, indoor_d$Passagen_pro_Tag, 
-     type = "b", 
-     pch = 19, 
-     col = "lightblue", 
-     xlab = "Datum", 
-     ylab = "Anzahl Passagen pro Tag")
-
-# Add a second line
-lines(outdoor_d$DatumUhrzeit, outdoor_d$Passagen_pro_Tag, 
-      pch = 18, 
-      col = "firebrick3", 
-      type = "b", 
-      lty = 2)
-
-# Add a legend to the plot
-legend("topleft", legend=c("Indoor", "Outdoor"),
-       col=c("lightblue", "firebrick3"), lty = 1:2, cex=0.8)
+# führe die funktion aus
+plot_passages()
 
 ```
 
@@ -188,20 +202,18 @@ indoor_d$weekday_status <- weekdays(indoor_d$DatumUhrzeit) %in% c("Samstag", "So
 
 ## Kuchendiagramm der Anzahl Passagen für Werktag und Wochenende
 
+# erstelle zuerst die einzelnen "Stücke", welche in Diagramm dargestellt werden sollen
 slieces <- c(sum(indoor_d$Passagen_pro_Tag[indoor_d$weekday_status=="TRUE"]),
              sum(indoor_d$Passagen_pro_Tag[indoor_d$weekday_status=="FALSE"]))
+# definiere die lables
 lbls <- c("Wochenende", "Werktag")
+
+# erstelle den Plot
 pie(slieces, 
     labels = lbls, 
     main = "Indoor",
     col = c("firebrick3", "lightblue"))
 ```
-
-
-
-
-
-
 
 
 
