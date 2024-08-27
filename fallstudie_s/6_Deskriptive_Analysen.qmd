@@ -345,7 +345,11 @@ Wir interessieren uns in den Analysen für 5 Zeitabschnitte:
 4. Lockdown 2
 5. Ende 2. Lockdown bis Ende Untersuchungsperiode
 
-- Plottet den Verlauf der monatlichen Besuchszahlen an eurer Zählstelle. Auf der x-Achse steht dabei dabei Jahr und Monat (gespeichert im df _depo_m_), auf der y-Achse die monatlichen Besuchszahlen. Zeichnet auch die beiden Lockdown ein (Hinweis: rundet das Start- und Enddatum der Lockdowns auf den Monat, da im Plot die monatlichen Zahlen gezeigt werden).
+Und dabei immer auch für die verschiedenen Tageszeiten (Morgen, Tag, Abend, Nacht).
+
+- Plottet den Verlauf der monatlichen Besuchszahlen an eurer Zählstelle. 
+- Auf der x-Achse steht dabei dabei Jahr und Monat (gespeichert im df _depo_m_), auf der y-Achse die monatlichen Besuchszahlen. 
+- Zeichnet auch die beiden Lockdown ein (Hinweis: rundet das Start- und Enddatum der Lockdowns auf den Monat, da im Plot die monatlichen Zahlen gezeigt werden).
 
 Haltet euch dabei an untenstehenden Plot:
 
@@ -418,7 +422,7 @@ ggplot(data = depo_m, mapping = aes(Ym, Total, group = 1)) + # group 1 braucht R
 
 ### 1b)
 
-Der erste Plot zeigt sehr einfach, wie sich die Besuchszahlen allgemein entwickelt haben. Interessant ist aber auch, wie sie während den einzelnen Monaten zueinander stehen (z.B. "Waren im Mai 2020 mehr Menschen unterwegs als im Mai 2017?"). Dies zeigt uns folgender Plot:
+Der erste Plot zeigt, wie sich die Besuchszahlen allgemein entwickelt haben. Interessant ist aber auch, wie sie während den einzelnen Monaten zueinander stehen (z.B. "Waren im Mai 2020 mehr Menschen unterwegs als im Mai 2017?"). Dies zeigt folgender Plot:
 
 ```{r echo=FALSE, output = TRUE}
 ggplot(depo_m, aes(Monat, Total, group = Jahr, color = Jahr, linetype = Jahr)) +
@@ -455,7 +459,7 @@ __Hinweis:__ Dieser Plot wird erstellt mit dem Argument _group_, _linetype_ und 
 
 Unser Fokus liegt auf der dunklen Tageszeit. Wie verteilen sich die Besuchenden also auf Morgen, Tag, Abend und Nacht?
 
-- Folgender Plot zeigt das. Erstellt und speichert ihn.
+- Erstellt und speichert folgenden Plot:
 
 ```{r echo=FALSE, output = TRUE}
 ggplot(depo_m_daytime, aes(Ym, Total, fill = Tageszeit)) +
@@ -485,7 +489,7 @@ ggplot(depo_m_daytime, aes(Ym, Total, fill = Tageszeit)) +
   labs(title = "", y = "Verteilung Fussgänger:innen / Monat [%]", x = "Jahr")
 ```
 
-Folgende Codeschnipsel helfen euch:
+Diese Codeschnipsel helfen euch:
 
 ```{r eval=FALSE, echo=TRUE}
 ggplot(depo_m_daytime, aes(Ym, Total, fill = Tageszeit)) +
@@ -501,7 +505,7 @@ ggplot(depo_m_daytime, aes(Ym, Total, fill = Tageszeit)) +
 
 ## Aufgabe 2: Wochengang
 
-Nun möchten wir genauer untersuchen, wie sich die Besuchszahlen je nach Phase (Pre, Normal, Lockdown 1, Lockdown 2 und Covid) auf die __Wochentage und Tageszeiten__ verteilen. 
+Nun möchten wir genauer untersuchen, wie sich die Besuchszahlen je nach Phase (Pre, Lockdown 1, Inter, Lockdown 2 und Post) auf die __Wochentage und Tageszeiten__ verteilen. 
 
 
 ### 2a)
@@ -510,8 +514,8 @@ Nun möchten wir genauer untersuchen, wie sich die Besuchszahlen je nach Phase (
 
 ```{r echo=FALSE, output = TRUE}
 ggplot(data = depo, aes(x = Wochentag, y = Total, fill = Tageszeit)) +
-  geom_violin() +
-  labs(title = "", y = "Fussgänger:innen pro Tag (log10)") +
+  geom_violin(alpha = 0.5) +
+  labs(title = "", y = "Fussgänger:innen pro Tag [log10]") +
   facet_grid(cols = vars(Tageszeit), rows = vars(Phase))+
   scale_y_log10()+
   scale_fill_manual(values = mycolors) +
@@ -525,8 +529,8 @@ ggplot(data = depo, aes(x = Wochentag, y = Total, fill = Tageszeit)) +
 
 ```{r}
 ggplot(data = depo, aes(x = Wochentag, y = Total, fill = Tageszeit)) +
-  geom_violin() +
-  labs(title = "", y = "Fussgänger:innen pro Tag") +
+  geom_violin(alpha = 0.5) +
+  labs(title = "", y = "Fussgänger:innen pro Tag [log10]") +
   facet_grid(cols = vars(Tageszeit), rows = vars(Phase))+
   scale_y_log10()+
   scale_fill_manual(values = mycolors) +
@@ -551,46 +555,13 @@ ggplot(data = depo, aes(x = Wochentag, y = Total, fill = Tageszeit)) +
 ```
 
 - Warum macht es Sinn, hier die y-Achse zu logarithmieren?
+- Ginbt es alternaitve Darstellungsformen, welche besser geeignet wären?
 - Exportiert auch diesen Plot mit __ggsave()__. Welche Breite und Höhe passt hier?
-
-### 2b)
-
-Ist euch aufgefallen, dass in meinen Daten während dem ersten Lockdown in der Nacht keine Leuten unterwegs waren? Nun könnte man also sagen: "Ja gut, der Lockdown 1 war verglichen mit Pre ja deutlich kürzer und es macht keinen Sinn hier die absoluten Zahlen darzustellen". Stimmt. Darum berechnen wir noch den Durchschnitt pro Phase und Tageszeit.
-
-- Berechnet:
-
-```{r echo=TRUE}
-mean_phase <- depo_daytime |>
-  group_by(Phase, Tageszeit) |>
-  summarise(
-    Mean = mean(Total))
-```
-
-- Plottet:
-```{r echo=FALSE, output = TRUE}
-ggplot(mean_phase, aes(Tageszeit, Mean, fill = Phase))+
-  geom_col(position = "dodge", color = "black") +
-  scale_fill_viridis_d() +
-  labs(title = "", y = "Durchschnitt Fussgänger:innen pro Tag") +
-  # scale_fill_manual(values = mycolors) +
-  theme_classic(base_size = 15) +
-  theme(legend.position = "bottom")
-```
-
-```{r}
-ggplot(mean_phase, aes(Tageszeit, Mean, fill = Phase))+
-  geom_col(position = "dodge", color = "black") +
-  scale_fill_viridis_d() +
-  labs(title = "", y = "Durchschnitt Fussgänger:innen pro Tag") +
-  # scale_fill_manual(values = mycolors) +
-  theme_classic(base_size = 15) +
-  theme(legend.position = "bottom")
-```
 
 
 ## Aufgabe 3: Tagesgang
 
-Vom Grossen zum Kleinen, von der Übersicht ins Detail. Jetzt widmen wir uns dem Tagesgang, das heisst der Verteilung der Besuchenden auf die 24 Tagesstunden je nach Phase.
+Von der Übersicht ins Detail. Jetzt widmen wir uns dem Tagesgang, das heisst der Verteilung der Besuchenden auf die 24 Tagesstunden je nach Phase.
 
 ### 3a)
 
@@ -606,7 +577,7 @@ Vergewissert euch vor dem Plotten, dass der Datensatz im long-Format vorliegt.
 
 ### 3b)
 
-- Plottet den Tagesgang, unterteilt nach den 7 Wochentagen nun für unsere Phasen.
+- Plottet den Tagesgang, unterteilt nach den 7 Wochentagen nun für die verschiedenen Phasen.
 
 ```{r echo=FALSE, output = TRUE} 
 ggplot(Mean_h, aes(x = Stunde, y = Total, colour = Wochentag, linetype = Wochentag)) +
@@ -649,5 +620,5 @@ ggplot(Mean_h, aes(x = Stunde, y = Total, colour = Wochentag, linetype = Wochent
 
 Bis hier hin haben wir in diesem Kapitel v.a. visuell gearbeitet. Für den Bericht kann es aber sinnvoll sein, auch einige Kennzahlen in der Hinterhand zu haben. Wir haben das bereits im Kapitel [Datenverarbeitung] berechnet. 
 
-- Reflektiert, welche Zahlen ihr habe und was für den Bericht spannend sein könnte, resp. eure Abbildungen unterstützt oder ergänzt.
+- Reflektiert, welche Zahlen ihr habt und was für den Bericht spannend sein könnte, resp. eure Abbildungen unterstützen oder ergänzen.
 
