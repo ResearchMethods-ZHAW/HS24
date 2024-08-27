@@ -1,5 +1,5 @@
 ---
-lesson: Projektierung
+lesson: Projekt
 thema: Projekt Fallstudie erstellen
 execute: 
   echo: false   # set to true to show musterlösung
@@ -11,12 +11,12 @@ knitr:
     collapse: true
 ---
 
-# Projektierung
+# Projek erstellen
 
 
 ## Vorbereitung
 
-Vor den eigentlichen Auswertungen müssen einige Vorbereitungen unternommen werden. Die Zeit, die man hier investiert, wird in der späteren Projektphase um ein Mehrfaches eingespart. 
+Vor den eigentlichen Auswertungen müssen einige Vorbereitungen unternommen werden. Die Zeit, die man hier investiert, wird in den späteren Phasen um ein Mehrfaches eingespart. 
 
 Wie im Unterricht am Morgen empfehle auch ich mit Projekten zu arbeiten, da diese sehr einfach ausgetauscht (auf verschiedene Rechner) und somit auch reproduziert werden können. Wichtig ist, dass es keine absoluten Arbeitspfade sondern nur relative gibt. Der Datenimport (und -export) kann mithilfe dieser relativen Pfade stark vereinfacht werden. --> Kurz gesagt: Projekte helfen alles am richtigen Ort zu behalten (mehr zur Arbeit mit Projekten: [Link](https://support.rstudio.com/hc/en-us/articles/200526207-Using-Projects)).
 
@@ -28,14 +28,16 @@ Wie im Unterricht am Morgen empfehle auch ich mit Projekten zu arbeiten, da dies
 
 __Hinweise:__
 
-Nutzt für allen Text, welcher nicht im Code integriert ist, das Symbol #. Wenn ihr den Text als Titel definieren wollt, so dass er in der Übersicht erscheint, könnnen vor dem Wort "#" und nach dem Wort "####" eingefügt werden.
+Nutzt für allen Text, welcher nicht im Code integriert ist, das Symbol #. Wenn ihr den Text als Titel definieren wollt, so dass er in der Übersicht erscheint, können vor dem Wort "#" und nach dem Wort "####" eingefügt werden.
 
 ```{r eval=FALSE}
 # Texte, vor denen ein # und nach denen #### stehen, sind Überschriften
 
-# Ich bin eine Überschrift ####
+# Ich bin eine first level Überschrift ####
 
-# Texte, vor denen ein # steht, erklaeren den Ablauf
+## Ich bin eine second level Überschrift ####
+
+# Texte, vor denen ein # steht, erklaeren den Ablauf (nicht was, sondern warum)
 
 # Dann folgen die Arbeitsschritte
 1 + 1
@@ -48,7 +50,8 @@ Tipps:
 
 - Alt + - = <- 
 
-- Ctrl + Shift + C = # vor der ausgewählten Zeile
+- Ctrl + Shift + C = # vor der ausgewählten Zeile / den ausgewählten Zeilen hinzufügen oder wieder löschen
+
 
 __Aufbau eines Skripts__
 
@@ -58,20 +61,20 @@ Im Skript soll immer die __Ordnerstruktur__ des Projekts genannt werden. So kann
 
 Beschreibt zudem kurz die verwendeten __Meteodaten__ (siehe dazu Metadata Meteodaten, --> order_XXX_legend.txt)
 
-Ein Skript kann in R eigentlich immer (mehr oder weniger) nach dem selbem Schema aufgebaut sein. Dieses Schema enthällt bei uns folgende Kapitel: 
+Ein Skript kann in R eigentlich immer (mehr oder weniger) nach dem selbem Schema aufgebaut sein. Dieses Schema enthält bei uns folgende Kapitel: 
 
 0) Metadaten und Definitionen
-1) Datenimport, 
-2) Vorbereitung, 
-3) Deskriptive Analyse und Visualisierung und 
-4) Multifaktorielle Analyse und Visualisierung.
+1) Datenimport
+2) Vorbereitung 
+3) Deskriptive Analyse und Visualisierung 
+4) Multifaktorielle Analyse und Visualisierung
 
 Bereitet euer Skript mit diesen Kapitel vor.
 
 ```{r}
 # .###########################################################################################
-# Einfluss von COVID19 auf das Naherholungsverhalten in WPZ ####
-# Fallstudie Modul Research Methods, HS22. Autor/in ####
+# TITEL ####
+# Fallstudie Modul Research Methods, HS24. Autor/in ####
 # .##########################################################################################
 
 # .##########################################################################################
@@ -87,7 +90,7 @@ Bereitet euer Skript mit diesen Kapitel vor.
 
 ```
 
-In einem Bericht ist es schön, wenn die Abbildung einheitlich sind. Dafür braucht es u.a. eine Farbpalette. Ich definiere meine Auswahl bereits hier; das hat den Vorteil, dass man die Farbnamen nur einmal schreiben muss und später die selbst definierte Palette unter der Variable "mycolors" abrufen kann.
+In einem professionellen Bericht ist es angebracht, wenn alle Abbildung einheitlich sind. Dafür braucht es u.a. eine Farbpalette. Ich definiere meine Auswahl bereits hier; das hat den Vorteil, dass man die Farbnamen nur einmal schreiben muss und später die selbst definierte Palette unter der Variable "mycolors" abrufen kann.
 
 ```{r}
 mycolors <- c("orangered", "gold", "mediumvioletred", "darkblue")
@@ -96,7 +99,7 @@ mycolors <- c("orangered", "gold", "mediumvioletred", "darkblue")
 
 ## Aufgabe 2: Laden der Bibliotheken
 
-- Lädt nun die nachfolgenden, benoetigten Bibliotheken.
+- Lädt nun die nachfolgenden, benötigten Bibliotheken.
 
 - Diese habt ihr, falls nötig, im Kapitel [Vorbereitung] installiert.
 
@@ -113,12 +116,12 @@ library("lme4") # Multivariate Modelle
 library("blmeco") # Bayesian data analysis using linear models
 library("sjPlot") # Plotten von Modellergebnissen (tab_model)
 library("lattice") # einfaches plotten von Zusammenhängen zwischen Variablen
-library("readr")
+library("readr") # Einlesen von Daten
 ```
 
 ## Aufgabe 3: Zeitliche Definitionen
 
-Wir lesen später zwei verschiedene Datensätze ein. Beide sollen exakt denselben Zeitraum umfassen. Definiert dazu den ersten und letzten Tag __gemäss den vorhandenen Zähldaten__.
+Wir lesen später zwei verschiedene Datensätze ein. Beide sollen exakt denselben Zeitraum umfassen. Definiert dazu den ersten und letzten Tag __gemäss den bei euch vorhandenen Zähldaten__ (das unterscheidet sich von Gruppe zu Gruppe).
 
 ```{r}
 depo_start <- as.Date("2017-01-01")
