@@ -264,9 +264,9 @@ depo$Stunde <- hour(depo$Datetime)
 typeof(depo$Stunde)
 
 # Die Daten wurden kalibriert. Wir runden sie fuer unserer Analysen auf Ganzzahlen
-depo$Total <- round(depo$Total, digits = 0)
-depo$Fuss_IN <- round(depo$Fuss_IN, digits = 0)
-depo$Fuss_OUT <- round(depo$Fuss_OUT, digits = 0)
+depo$Total <- as.integer(round(depo$Total, digits = 0))
+depo$Fuss_IN <- as.integer(round(depo$Fuss_IN, digits = 0))
+depo$Fuss_OUT <- as.integer(round(depo$Fuss_OUT, digits = 0))
 
 # 2.2 Tageszeit hinzufuegen ####
 
