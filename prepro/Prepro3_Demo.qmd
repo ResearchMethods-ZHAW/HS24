@@ -21,7 +21,7 @@ Wir können Euch nicht sämtliche Möglichkeiten von tidyverse zeigen. Wir fokus
 
 ## Split-Apply-Combine
 
-### Daten Laden
+### Daten laden
 
 Wir laden die Wetterdaten (Quelle MeteoSchweiz) der letzten Übung.
 
@@ -41,7 +41,7 @@ wetter <- wetter |>
 
 ### Kennwerte berechnen
 
-Wir möchten den Mittelwert aller gemessenen Temperaturwerte berechnen. Dazu könnten wir folgenden Befehl verwenden:
+Wir möchten den Mittelwert aller gemessenen Temperaturwerten berechnen. Dazu könnten wir folgenden Befehl verwenden:
 
 ```{r}
 mean(wetter$tre200h0, na.rm = TRUE)
@@ -49,7 +49,7 @@ mean(wetter$tre200h0, na.rm = TRUE)
 
 Die Option `na.rm = T` bedeutet, dass NA Werte von der Berechnung ausgeschlossen werden sollen. 
 
-Mit der selben Herangehensweise können diverse Werte berechnet werden (z.B. das Maximum (`max()`), Minimum (`min()`), Median (`median()`) u.v.m.). 
+Mit derselben Herangehensweise können diverse Werte berechnet werden (z.B. das Maximum (`max()`), Minimum (`min()`), Median (`median()`) u.v.m.). 
 
 Diese Herangehensweise funktioniert nur dann gut, wenn wir die Kennwerte über *alle* Beobachtungen für eine Variable (Spalte) berechnen wollen. Sobald wir die Beobachtungen gruppieren wollen, wird es schwierig. Zum Beispiel, wenn wir die durchschnittliche Temperatur *pro Monat* berechnen wollen.
 
@@ -96,7 +96,7 @@ Auf Deutsch übersetzt heisst die obige Operation folgendermassen:
 2) Bilde Gruppen pro Jahr  (`group_by(wetter,year)`) 
 3) Berechne das Temperaturmittel (`mean(tre200h0)`)
 
-Diese Übersetzung `R`-> Deutsch unterscheidet sich vor allem darin, dass die Operation auf Deutsch *verkettet* ausgesprochen wird (Operation 1->2->3) während der Computer *verschachtelt* liest 3(2(1)). Um `R` näher an die gesprochene Sprache zu bringen, kann man den `|>`-Operator verwenden  (siehe ^[@wickham2017, Kapitel 14 / http://r4ds.had.co.nz/pipes.html]). 
+Diese Übersetzung `R` -> Deutsch unterscheidet sich vor allem darin, dass die Operation auf Deutsch *verkettet* ausgesprochen wird (Operation 1->2->3) während der Computer *verschachtelt* liest 3(2(1)). Um `R` näher an die gesprochene Sprache zu bringen, kann man den `|>`-Operator verwenden  (siehe ^[@wickham2017, Kapitel 14 / http://r4ds.had.co.nz/pipes.html]). 
 
 ```{r}
 #| eval: false
