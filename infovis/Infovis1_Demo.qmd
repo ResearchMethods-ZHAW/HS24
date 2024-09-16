@@ -138,7 +138,7 @@ ggplot(temperature_day, aes(time, temp, colour = station)) +
 ```
 
 
-Das gleiche Spiel kann man für die y-Achse betreiben. Bei unserer y-Achse handelt es sich ja um Datumsangaben. `ggplot` nennt diese: `scale_x_date()`. 
+Das gleiche Spiel kann man für die x-Achse betreiben. Bei unserer x-Achse handelt es sich ja um Datumsangaben. `ggplot` nennt diese: `scale_x_date()`. 
 
 ```{r}
 ggplot(temperature_day, aes(time, temp, colour = station)) +
