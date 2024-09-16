@@ -407,18 +407,23 @@ Mean_h <- depo |>
 ```
 
 
-Nachdem die deskriptiven Resultate vorliegen, kann jetzt die Berechnung eines multivariaten Modells angegangen werden. Das Ziel ist es, den Zusammenhang zwischen der gesamten Anzahl Besucher:innen (Total) und verschiedenen erklärenden Variablen (Wochentag, Ferien, Monat, Jahr, Phasen der Covid-Pandemie, Sonnenscheindauer, Höchsttemperatur, Niederschlagssumme) aufzuzeigen, und das während dem Tag, der Dämmerung und der Nacht (siehe dazu auch [Aufgabenstellung Abschlussbericht]).
+Nachdem die deskriptiven Resultate vorliegen, kann jetzt die Berechnung eines multivariaten Modells angegangen werden. 
+
+Das Ziel ist es (siehe dazu auch [Aufgabenstellung Abschlussbericht]), 
+- den Zusammenhang zwischen der gesamten Anzahl Besucher:innen (Total; entweder Fussgänger:innen ODER Fahrräder, je nach dem für was ihr euch entschieden habt) 
+- und verschiedenen erklärenden Variablen (Wochentag, Ferien, Monat, Jahr, Phasen der Covid-Pandemie, Sonnenscheindauer, Höchsttemperatur, Niederschlagssumme) aufzuzeigen 
+- und das während dem Tag, der Dämmerung und der Nacht.
 
 
 ## Aufgabe 1: Verbinden von Daten
 
 Aktuell haben wir noch zwei verschiedene Datensätze von Interesse:
 
-1) Einen mit den Besuchszahlen pro Tageszeit von Besucher:innen mit den dazugehörigen Datumsinformationen (Datensatz "depo_daytime" - zu Tageszeiten und Wochenende / Werktag aggregierte Stunden) 
+1) Einen mit den Besuchszahlen pro Tageszeit von Besucher:innen mit den dazugehörigen Convenience Variablen (Datensatz "depo_daytime" - zu Tageszeiten und Convenience Variablen aggregierte Stunden) 
 
 2) und einen mit den Wetterparametern pro Tag ("meteo_day"). 
 
-- Diese beiden Datensätze müssen miteinander verbunden werden. __Ziel__: Ein Datensatz mit den __täglichen Zähldaten__ (weiter unterteilt nach Tageszeit) und Conviniencevariablen wie Phase Covid, Ferien Ja oder Nein, Jahr, Monat, KW, Tageszeit, Wochenendtag oder Werktag, angereichert mit __Wetterdaten__.
+- Diese beiden Datensätze müssen miteinander verbunden werden. __Ziel__: Ein Datensatz mit den __Zähldaten__ und Convenience Variablen wie Phase Covid, Ferien Ja oder Nein, Jahr, Monat, KW, Tageszeit, Wochenendtag oder Werktag, angereichert mit __Meteodaten__. Welcher join-Befehl eignet sich dazu?
 
 - Der neue Datensatz soll " __umwelt__ " heissen.
 
@@ -440,16 +445,16 @@ summary(umwelt)
 
 ### 2a) 
 
-- Vergewissert euch, dass die numerischen Messwerte zu Wetter auch in numerischer Form vorliegen. (__is.numeric()__)
+- Vergewissert euch, dass die numerischen Messwerte zu den Meteodaten auch in numerischer Form vorliegen. (__is.numeric()__)
 
-- Nachfolgende Schritte funktionieren nur, wenn __umwelt__ als data.frame vorliegt! Prüft das und ändert das, falls noch kein __data.frame__ (Hinweis: auch ein "tibble" funktioniert nicht, obwohl bei der Abfrage __is.data.frame()__ TRUE angegeben wird. Damit ihr beim scalen keine NaN Werte erhaltet, wendet ihr darum am besten in allen Fällen zuerst den Befehl __as.data.frame()__ an).
+- Nachfolgende Schritte funktionieren nur, wenn __umwelt__ als data.frame vorliegt! Prüft das und ändert das, falls noch kein __data.frame__ (Hinweis: auch ein "tibble" funktioniert nicht, obwohl bei der Abfrage __is.data.frame()__ TRUE angegeben wird. Damit ihr beim scalen keine NaN Werte erhaltet, wendet ihr darum am besten sowieso zuerst den Befehl __as.data.frame()__ auf __umwelt__ an).
 
 ```{r}
 umwelt <- as.data.frame(umwelt)
 ```
 
 
-- Unser Modell kann in der abhängigen Variabel nur mit Ganzzahlen (Integer) umgehen. Daher müssen Kommazahlen in Integer umgewandelt werden. Zum Glück haben wir das schon gemacht und uns bleibt nichts weiter zu tun. =)
+- Unser Modell kann in der abhängigen Variabel nur mit Ganzzahlen (Integer) umgehen. Daher müssen Kommazahlen in Integer umgewandelt werden. Zum Glück haben wir das schon gemacht in der Datenvorverarbeitung (Aufgabe 3c) und uns bleibt nichts weiter zu tun.
 
 ### 2b) 
 
@@ -473,6 +478,26 @@ umwelt <- umwelt |>
     sremaxdv_scaled = scale(sremaxdv)
   )
 ```
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 
 ## Aufgabe 3: Korrelationen und Variablenselektion
