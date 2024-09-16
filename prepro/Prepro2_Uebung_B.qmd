@@ -34,7 +34,7 @@ sensor3 <- read_delim("datasets/prepro/sensor3.csv", ";")
 
 ## Aufgabe 2
 
-Erstelle aus den 3 Dataframes eine einzige Dataframe, die aussieht wie unten dargestellt. Nutze dafür zwei joins aus `dplyr` um 3 `data.frames` miteinander zu verbinden. Bereinige im Anschluss die Spaltennamen ([wie geht das?](https://www.statology.org/how-to-rename-data-frame-columns-in-r/)).
+Erstelle aus den 3 Dataframes einen einzigen Dataframe, welcher aussieht wie unten dargestellt. Nutze dafür zwei joins aus `dplyr`, um 3 `data.frames` miteinander zu verbinden. Bereinige im Anschluss die Spaltennamen ([wie geht das?](https://www.statology.org/how-to-rename-data-frame-columns-in-r/)).
 
 ```{r}
 library("dplyr")
@@ -84,7 +84,7 @@ sensor_fail <- sensor_fail |>
 
 ## Aufgabe 4
 
-Warum spielt das es eine Rolle, ob `0` oder `NA` erfasst wird? Berechne die Mittlere der Temperatur / Feuchtigkeit nach der Korrektur. 
+Warum spielt es eine Rolle, ob `0` oder `NA` erfasst wird? Berechne die Mittlere der Temperatur / Feuchtigkeit nach der Korrektur. 
 
 ```{r}
 # Mittelwerte der falschen Sensordaten: 0 fliesst in die Berechnung
