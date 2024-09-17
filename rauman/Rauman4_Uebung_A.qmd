@@ -13,9 +13,9 @@ knitr:
 
 # Rauman 4: Übung
 
-Heute berechnen wir Morans $I$, also ein globales Mass für Autokorrelation, für die Abstimmungsresultate der Zweitwohnungsinitiative. Dieser Wert beschreibt, ob Kantone, die nahe beieinander liegen, ähnliche Abstimmungswerte haben. Hierfür verwenden wir den Datensatz *zweitwohnungsinitiative.gpkg*.
+Heute berechnen wir Morans $I$, also ein globales Mass für Autokorrelation, für die Abstimmungsresultate der Zweitwohnungsinitiative. Dieser Wert beschreibt, ob Kantone, die nahe beieinanderliegen, ähnliche Abstimmungswerte haben. Hierfür verwenden wir den Datensatz *zweitwohnungsinitiative.gpkg*.
 
-Das Geopackage beinhaltet 3 Layers (siehe `st_layers(zweitwohnung_kanton)`). In jedem Layer sind die Abstimmungsresultate auf eine andere politische Ebene aggregiert. Wir started mit der Aggregationsstufe "kanton".
+Das Geopackage beinhaltet 3 Layers (siehe `st_layers(zweitwohnung_kanton)`). In jedem Layer sind die Abstimmungsresultate auf eine andere politische Ebene aggregiert. Wir starten mit der Aggregationsstufe "kanton".
 
 ```{r}
 #| echo: true
@@ -29,7 +29,7 @@ zweitwohnung_kanton <- read_sf("datasets/rauman/zweitwohnungsinitiative.gpkg", l
 ```
 
 ```{r}
-#| fig-cap: Was für einen Autokorrelationswert würdest du erwarten? Eher 1 (hohe Autokorrelation, beieinanderliegende Kantone haben ähnliche Werte) oder eher -1 (beieinanderliegende Kantone haben sehr unterschiedliche Werte) oder eher 0 (gar keine Autokorrelation)
+#| fig-cap: Was für einen Autokorrelationswert würdest du erwarten? Eher 1 (hohe Autokorrelation, beieinanderliegende Kantone haben ähnliche Werte) oder eher -1 (beieinanderliegende Kantone haben sehr unterschiedliche Werte) oder eher 0 (gar keine Autokorrelation)?
 #| label: fig-autokorrelation-kantone
 #| code-fold: false
 #| output: true
@@ -58,7 +58,7 @@ $$ {#eq-morans-i}
 
 <span style="color:#FF0000">Rot</span> markiert entpricht der Summe der gewichtetn Ähnlichkeitsmatrix aus der Vorlesung. Alles <span style="color:#00FFFF">blaue</span> ist relativ trivial und dient lediglich der Normalisierung auf die Werte -1 bis +1. Die Begriffe `zaehler1`, `nenner1` usw. sind die Variablen, die wir in R für die jeweiligen Berechnungen nutzen werden und dienen lediglich der Orientierung. Zudem gilt: 
 
-- $n$: Anzahl räumlichen Objekte (hier: 26 Kantone)
+- $n$: Anzahl räumliche Objekte (hier: 26 Kantone)
 - $y$: die untersuchte Variabel (hier: Ja-Anteil in %)
 - $\bar{y}$: Mittelwert der untersuchten Variabel
 - $w_{ij}$: die Gewichtsmatrix
@@ -73,7 +73,7 @@ Widmen wir uns dem Kern von Morans $I$, der Berechnung der gewichteten Ähnlichk
 
 $$\text{Morans } I = \frac{n}{\sum_{i=1}^n (y_i - \bar{y})^2} \times \frac{\sum_{i=1}^n \sum_{j=1}^n {\color{red}w_{ij}}(y_i - \bar{y})(y_j - \bar{y})}{\sum_{i=1}^n \sum_{j=1}^n w_{ij}}$$
 
-$w$ beschreibt die räumlichen Gewichte der Kantone (den "Schalter" aus der Vorlesung). $w_{ij}$ ist das Gewicht vom Kanton $i$ im Vergleich zum Kanton $j$. Sind Kantone $i$ und $j$ räumlich nah, gilt ein Gewicht von 1, sind sie weit entfernt, gilt ein Gewicht von 0. Dabei ist die Definition von "räumlich nah" nicht festgelegt. Denkbar wären verschiedene Optionen (siehe Vorlesung). Wer werden es mit die Bedigungen *touches* verwenden. Die Funktion `st_touches` prüft zwischen allen Kantonen, ob sie sich berühren. Mit der Option `sparse = TRUE` wird eine 26x26 Kreuzmatrix erstellt, wo jeder Kanton mit jedem anderen verglichen wird. Berühren sie sich, steht in der entsprechenden Stelle der Wert `TRUE`, was in R gleichbedeutend ist wie 1. Berühren sie sich *nicht*, steht der Wert `FALSE`, was gleichbedeutend ist wie 0. 
+$w$ beschreibt die räumlichen Gewichte der Kantone (den "Schalter" aus der Vorlesung). $w_{ij}$ ist das Gewicht vom Kanton $i$ im Vergleich zum Kanton $j$. Sind Kantone $i$ und $j$ räumlich nah, gilt ein Gewicht von 1, sind sie weit entfernt, gilt ein Gewicht von 0. Dabei ist die Definition von "räumlich nah" nicht festgelegt. Denkbar wären verschiedene Optionen (siehe Vorlesung). Wir werden es mit die Bedigungen *touches* verwenden. Die Funktion `st_touches` prüft zwischen allen Kantonen, ob sie sich berühren. Mit der Option `sparse = TRUE` wird eine 26x26 Kreuzmatrix erstellt, wo jeder Kanton mit jedem anderen verglichen wird. Berühren sie sich, steht in der entsprechenden Stelle der Wert `TRUE`, was in R gleichbedeutend ist wie 1. Berühren sie sich *nicht*, steht der Wert `FALSE`, was gleichbedeutend ist wie 0. 
 
 ```{r}
 #| echo: true
@@ -82,7 +82,7 @@ $w$ beschreibt die räumlichen Gewichte der Kantone (den "Schalter" aus der Vorl
 # st_touches berechnet eine Kreuzmatrix aller Objekte
 w_ij <- st_touches(zweitwohnung_kanton, sparse = FALSE)
 
-# Schauen wir uns matrix mal an
+# Schauen wir uns die Matrix mal an
 # (aus Platzmangen beschränken wir uns auf die ersten 5 Zeilen und Spalten
 # in RStudio könnt ihr mit View(w_ij) die gesamte Matrix anschauen)
 w_ij[1:5, 1:5]
@@ -90,7 +90,7 @@ w_ij[1:5, 1:5]
 
 <!-- Seltsamerweise gehen bei der Konvertierung die Matrix-Eigenschaft verloren (spricht: die Aufteilung der 26x26 Werte in Zeilen und Spalten). Diese müssen wir manuell wieder Herstellen. -->
 
-Die erste Zeile entspricht dem ersten Kanton in `zweitwohnung_kanton`, die zweite Zeile dem zweiten Kanton usw. Das gleiche Gilt für die Spalten. Um die Kreuzmatrix besser interpretieren zu können, können wir die Namen aus der Spalte `KANTONSNAME` verwenden, um die Zeilen und Spalten unserer Kreuzmatrix zu benennen.
+Die erste Zeile entspricht dem ersten Kanton in `zweitwohnung_kanton`, die zweite Zeile dem zweiten Kanton usw. Das gleiche gilt für die Spalten. Um die Kreuzmatrix besser interpretieren zu können, können wir die Namen aus der Spalte `KANTONSNAME` verwenden, um die Zeilen und Spalten unserer Kreuzmatrix zu benennen.
 
 ```{r}
 #| echo: true
@@ -153,7 +153,7 @@ $$\text{Morans } I = \frac{\color{cyan}n}{\color{cyan}\sum_{i=1}^n (y_i - \bar{y
 
 #### Berechnung von $n$ (`zaehler1`)
 
-Der Termin `zaehler1` resp. `n` entspricht der Anzahl Objekte (hier: Kantone) in unserem Datensatz. 
+Der Term `zaehler1` resp. `n` entspricht der Anzahl Objekte (hier: Kantone) in unserem Datensatz. 
 
 ```{r}
 #| echo: true
@@ -196,7 +196,7 @@ nenner2 <- sum(w_ij)
 
 ### Auflösung der Formel
 
-Nun haben wir alle Bestandteile von Morans $I$ Berechnet und müssen diese nur noch Zusammenrechnen.
+Nun haben wir alle Bestandteile von Morans $I$ berechnet und müssen diese nur noch zusammenrechnen.
 
 ```{r}
 #| echo: true
@@ -211,7 +211,7 @@ Der Global Morans $I$ für die Abstimmungsdaten beträgt auf Kantonsebene also `
 
 ## Aufgabe 2: Morans I für Bezirke berechnen
 
-Nun könnt ihr Morans $I$ auf der Ebene der Bezirke und untersuchen, ob und wie sich Morans $I$ verändert. Importiert dazu den Layer `bezirk` aus dem Datensatz `zweitwohnungsinitiative.gpkg`. Visualisiert in einem ersten Schritt die Abstimmungsresultate. Formuliert nun eine Erwartungshaltung: ist Morans $I$ auf der Ebene Bezirke tiefer oder Höher als auf der Ebene Kantone? 
+Nun könnt ihr Morans $I$ auf der Ebene der Bezirke und untersuchen, ob und wie sich Morans $I$ verändert. Importiert dazu den Layer `bezirk` aus dem Datensatz `zweitwohnungsinitiative.gpkg`. Visualisiert in einem ersten Schritt die Abstimmungsresultate. Formuliert nun eine Erwartungshaltung: Ist Morans $I$ auf der Ebene Bezirke tiefer oder Höher als auf der Ebene Kantone? 
 
 :::{.callout-note}
 ## Für Fortgeschrittene 
