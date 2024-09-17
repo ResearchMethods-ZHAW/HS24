@@ -614,19 +614,19 @@ Abbildung&nbsp;38.1: Eine solche Visualisierung zeigt dir beispielsweise die rä
 <p>Als erstes berechnen wir die G-Function für die Rotmilanpositionen:</p>
 <section id="schritt-1" class="level3">
 <h3 class="anchored" data-anchor-id="schritt-1">Schritt 1</h3>
-<p>Mit <code>st_distance()</code> können Distanzen zwischen zwei <code>sf</code> Datensätze berechnet werden. Wird nur ein Datensatz angegeben, wird eine Kreuzmatrix erstellt wo die Distanzen zwischen allen Features zu allen anderen Features dargestellt werden. Wir nützen diese Funktion zur Berechnung der nächsten Nachbarn.</p>
+<p>Mit <code>st_distance()</code> können Distanzen zwischen zwei <code>sf</code>-Datensätze berechnet werden. Wird nur ein Datensatz angegeben, wird eine Kreuzmatrix erstellt, wo die Distanzen zwischen allen Features zu allen anderen Features dargestellt werden. Wir nützen diese Funktion zur Berechnung der nächsten Nachbarn.</p>
 </section>
 <section id="schritt-2" class="level3">
 <h3 class="anchored" data-anchor-id="schritt-2">Schritt 2</h3>
-<p>Nun wollen wir wissen, wie gross die <em>kürzeste</em> Distanz von jedem Punkt zu seinem nächsten Nachbarn beträgt, also die <em>kürzeste Distanz pro Zeile</em>. Bevor wir diese ermitteln müssen wir die diagonalen Werte noch entfernen, denn diese stellen ja jeweils die Distanz zu sich selber dar und sind immer <code>0</code>. Danach kann mit <code>apply()</code> eine Funktion (<code>FUN = min</code>) über die Zeilen (<code>MARGIN = 1</code>) einer Matrix (<code>X = rotmilan_distanzmatrix</code>) gerechnet werden. Zusätzlich müssen wir noch <code>na.rm = TRUE</code> setzen, damit <code>NA</code> Werte von der Berechnung ausgeschlossen werden. Das Resultat ist ein Vektor mit gleich vielen Werten wie Zeilen in der Matrix.</p>
+<p>Nun wollen wir wissen, wie gross die <em>kürzeste</em> Distanz von jedem Punkt zu seinem nächsten Nachbarn ist, also die <em>kürzeste Distanz pro Zeile</em>. Bevor wir diese ermitteln, müssen wir die diagonalen Werte noch entfernen, denn diese stellen ja jeweils die Distanz zu sich selber dar und sind immer <code>0</code>. Danach kann mit <code>apply()</code> eine Funktion (<code>FUN = min</code>) über die Zeilen (<code>MARGIN = 1</code>) einer Matrix (<code>X = rotmilan_distanzmatrix</code>) gerechnet werden. Zusätzlich müssen wir noch <code>na.rm = TRUE</code> setzen, damit <code>NA</code> Werte von der Berechnung ausgeschlossen werden. Das Resultat ist ein Vektor mit gleich vielen Werten wie Zeilen in der Matrix.</p>
 </section>
 <section id="schritt-3" class="level3">
 <h3 class="anchored" data-anchor-id="schritt-3">Schritt 3</h3>
-<p>Nun müssen wir die Distanzen nach ihrer Grösse sortieren</p>
+<p>Nun müssen wir die Distanzen nach ihrer Grösse sortieren.</p>
 </section>
 <section id="schritt-4" class="level3">
 <h3 class="anchored" data-anchor-id="schritt-4">Schritt 4</h3>
-<p>Jetzt berechnen wir die kummulierte Häufigkeit von jeder Distanz berechnen. Die kummulierte Häufikgeit vom ersten Wert ist 1 (der Index des ersten Wertes) dividiert durch die Anzahl Werte insgesamt. Mit <code>seq_along</code> erhalten wir die Indizes aller Werte, mit <code>lenth</code> die Anzahl Werte insgesamt.</p>
+<p>Jetzt berechnen wir die kummulierte Häufigkeit von jeder Distanz. Die kummulierte Häufikgeit vom ersten Wert ist 1 (der Index des ersten Wertes) dividiert durch die Anzahl Werte insgesamt. Mit <code>seq_along</code> erhalten wir die Indizes aller Werte, mit <code>length</code> die Anzahl Werte insgesamt.</p>
 </section>
 <section id="schritt-5" class="level3">
 <h3 class="anchored" data-anchor-id="schritt-5">Schritt 5</h3>

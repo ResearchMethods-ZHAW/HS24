@@ -604,9 +604,9 @@ window.Quarto = {
 </header>
 
 
-<p>In <a href="Rauman1_Uebung_B.html">der letzten Übung</a> haben wir einen Spatial Join zwischen Bäumen und Wiesen durchgeführt um herauszufinden, ob sich der Baum in einer Wiese befindet oder nicht. Basis waren dafür die Daten vom Campus Grüental (<em>gruental.gpkg</em>)</p>
+<p>In <a href="Rauman1_Uebung_B.html">der letzten Übung</a> haben wir einen Spatial Join zwischen Bäumen und Wiesen durchgeführt, um herauszufinden, ob sich der Baum in einer Wiese befindet oder nicht. Basis waren dafür die Daten vom Campus Grüental (<em>gruental.gpkg</em>)</p>
 <p>Heute gehen wir einen Schritt weiter und wollen folgende Frage beantworten: <em>Wie viel Wiese befinden sich in einem Umkreis von 20m um jeden Baum?</em></p>
-<p>Lade dazu die benötigten Libraries und Datensätze in deine Session. Exploriere die Daten visualisiere Sie räumlich.</p>
+<p>Lade dazu die benötigten Libraries und Datensätze in deine Session. Exploriere die Daten und visualisiere sie räumlich.</p>
 <div class="cell">
 <div class="sourceCode cell-code" id="cb1"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb1-1"><a href="#cb1-1" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(<span class="st">"dplyr"</span>)</span>
 <span id="cb1-2"><a href="#cb1-2" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(<span class="st">"sf"</span>)</span>
@@ -615,7 +615,7 @@ window.Quarto = {
 <span id="cb1-5"><a href="#cb1-5" aria-hidden="true" tabindex="-1"></a>wiesen <span class="ot">&lt;-</span> <span class="fu">read_sf</span>(<span class="st">"datasets/rauman/gruental.gpkg"</span>, <span class="st">"wiesen"</span>)</span>
 <span id="cb1-6"><a href="#cb1-6" aria-hidden="true" tabindex="-1"></a>baeume <span class="ot">&lt;-</span> <span class="fu">read_sf</span>(<span class="st">"datasets/rauman/gruental.gpkg"</span>, <span class="st">"baeume"</span>)</span></code><button title="In die Zwischenablage kopieren" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
-<p>Um die Übung etwas zu vereinfachen arbeiten wir erstmals mit nur 10 Bäumen. Nutze nachstehenden Code um zufällig 10 Bäume auszuwählen. Wenn ihr den gleichen “Seed” wie ich benutzt (<code>set.seed(100)</code>) habt ihr “zufällig” auch die gleichen Bäume wie ich.</p>
+<p>Um die Übung etwas zu vereinfachen, arbeiten wir erstmals mit nur 10 Bäumen. Nutze nachstehenden Code, um zufällig 10 Bäume auszuwählen. Wenn ihr den gleichen “Seed” wie ich benutzt (<code>set.seed(100)</code>), habt ihr “zufällig” auch die gleichen Bäume wie ich.</p>
 <div class="cell">
 <div class="sourceCode cell-code" id="cb2"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb2-1"><a href="#cb2-1" aria-hidden="true" tabindex="-1"></a><span class="fu">set.seed</span>(<span class="dv">100</span>)</span>
 <span id="cb2-2"><a href="#cb2-2" aria-hidden="true" tabindex="-1"></a>baeume_sample <span class="ot">&lt;-</span> <span class="fu">sample_n</span>(baeume, <span class="dv">10</span>)</span></code><button title="In die Zwischenablage kopieren" class="code-copy-button"><i class="bi"></i></button></pre></div>
@@ -634,7 +634,7 @@ window.Quarto = {
 </div>
 <section id="aufgabe-1" class="level2">
 <h2 class="anchored" data-anchor-id="aufgabe-1">Aufgabe 1</h2>
-<p>Als erster Schritt müssen wir jeden Baum mit einem 20m Puffer verstehen. Nutze dazu <code>st_buffer</code> um speichere den Output als <code>baeume_20m</code>. Schau dir <code>baeume_20m</code> nun genau an. Um welchen Geometrietyp handelt es sich dabei nun?</p>
+<p>Als erster Schritt müssen wir jeden Baum mit einem 20m Puffer versehen. Nutze dazu <code>st_buffer</code> und speichere den Output als <code>baeume_20m</code>. Schau dir <code>baeume_20m</code> nun genau an. Um welchen Geometrietyp handelt es sich dabei nun?</p>
 <div class="cell">
 <div class="cell-output-display">
 <div id="fig-buffer1" class="quarto-figure quarto-figure-center quarto-float anchored">
@@ -670,7 +670,7 @@ Abbildung&nbsp;34.1: Dargestellt sind die Bäume als Punkte mit einem 20m Puffer
 <section id="aufgabe-4-optional" class="level2">
 <h2 class="anchored" data-anchor-id="aufgabe-4-optional">Aufgabe 4 (Optional)</h2>
 <p>Berechne nun aus <code>wiesen_flaeche</code> den <code>wiesen_anteil</code>. Tipp: 100% ist die Kreisfläche aus <span class="math inline">\(r^2\times \pi\)</span>, wobei in unserem Fall <span class="math inline">\(r = 20\)</span> entspricht.</p>
-<p>Überführe anschliessend die berechneten Anteilswerte in den Datensatz <code>baeume</code> mit einem <code>left_join</code> zwischen <code>baeume</code> und <code>baeume_wiesen</code>. Welche Spalte wäre für diesen Join geeignet? Hinweis: Nutze <code>st_drop_geometry()</code> um die Geometriespalte in <code>baeme_wiesen</code> vor dem Join zu entfernen.</p>
+<p>Überführe anschliessend die berechneten Anteilswerte in den Datensatz <code>baeume</code> mit einem <code>left_join</code> zwischen <code>baeume</code> und <code>baeume_wiesen</code>. Welche Spalte wäre für diesen Join geeignet? Hinweis: Nutze <code>st_drop_geometry()</code>, um die Geometriespalte in <code>baeme_wiesen</code> vor dem Join zu entfernen.</p>
 <div class="cell">
 <div class="cell-output-display">
 <div id="fig-ggplot-ex4" class="quarto-figure quarto-figure-center quarto-float anchored">
@@ -688,8 +688,8 @@ Abbildung&nbsp;34.2: Nach dieser Übung kannst du das Resultat in dieser Weise v
 </section>
 <section id="sec-raster-intro1" class="level2">
 <h2 class="anchored" data-anchor-id="sec-raster-intro1">Aufgabe 5</h2>
-<p>Nun habt ihr ein paar Vektoroperationen wie <code>st_buffer()</code> und <code>st_intersection()</code> und <code>st_area()</code> durchgeführt. Gewisse Fragen lassen sich aber besser in der Raster-Welt beantworten. Wollen wir beispielsweise für jeden Punkt im Raum wissen, wie weit der nächstgelegene Baum ist, lässt sich das besser in einem Raster darstellen.</p>
-<p>Bevor wir die Frage aber beantworten können, müssen wir den Vektordatensatz in ein Rasterdatensatz konvertieren. Dafür wiederum braucht es ein Raster “Template”, damit R in etwa weiss, wie der Raster Output auszusehen hat.</p>
+<p>Nun habt ihr ein paar Vektoroperationen wie <code>st_buffer()</code>, <code>st_intersection()</code> und <code>st_area()</code> durchgeführt. Gewisse Fragen lassen sich aber besser in der Raster-Welt beantworten. Wollen wir beispielsweise für jeden Punkt im Raum wissen, wie weit der nächstgelegene Baum ist, lässt sich das besser in einem Raster darstellen.</p>
+<p>Bevor wir die Frage aber beantworten können, müssen wir den Vektordatensatz in ein Rasterdatensatz konvertieren. Dafür wiederum braucht es ein Raster “Template”, damit R in etwa weiss, wie der Raster-Output auszusehen hat.</p>
 <div class="cell">
 <div class="sourceCode cell-code" id="cb4"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb4-1"><a href="#cb4-1" aria-hidden="true" tabindex="-1"></a></span>
 <span id="cb4-2"><a href="#cb4-2" aria-hidden="true" tabindex="-1"></a><span class="co"># Um mit Raster arbeiten zu können brauchen wir das Package "terra"</span></span>

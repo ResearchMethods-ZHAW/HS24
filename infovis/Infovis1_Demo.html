@@ -552,7 +552,7 @@ window.onload = function() {
   <li><a href="#xy-achse-anpassen" id="toc-xy-achse-anpassen" class="nav-link" data-scroll-target="#xy-achse-anpassen">X/Y-Achse anpassen</a></li>
   <li><a href="#themes" id="toc-themes" class="nav-link" data-scroll-target="#themes">Themes</a></li>
   <li><a href="#facets-small-multiples" id="toc-facets-small-multiples" class="nav-link" data-scroll-target="#facets-small-multiples">Facets / Small Multiples</a></li>
-  <li><a href="#in-variabel-abspeichern-und-exportieren" id="toc-in-variabel-abspeichern-und-exportieren" class="nav-link" data-scroll-target="#in-variabel-abspeichern-und-exportieren">In Variabel abspeichern und Exportieren</a></li>
+  <li><a href="#in-variabel-abspeichern-und-exportieren" id="toc-in-variabel-abspeichern-und-exportieren" class="nav-link" data-scroll-target="#in-variabel-abspeichern-und-exportieren">In Variabel abspeichern und exportieren</a></li>
   <li><a href="#smoothing" id="toc-smoothing" class="nav-link" data-scroll-target="#smoothing">Smoothing</a></li>
   </ul>
 </nav>
@@ -639,7 +639,7 @@ window.onload = function() {
 </div>
 <section id="base-plot-vs.-ggplot" class="level2">
 <h2 class="anchored" data-anchor-id="base-plot-vs.-ggplot">Base-plot vs.&nbsp;ggplot</h2>
-<p>Um in “base-R” einen Scatterplot zu erstellen wo Datum der Temperatur gegenübersteht, gehen wir wie folgt vor:</p>
+<p>Um in “base-R” einen Scatterplot zu erstellen, wo Datum der Temperatur gegenübersteht, gehen wir wie folgt vor:</p>
 <div class="cell">
 <div class="sourceCode cell-code" id="cb3"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb3-1"><a href="#cb3-1" aria-hidden="true" tabindex="-1"></a><span class="fu">plot</span>(temperature<span class="sc">$</span>time, temperature<span class="sc">$</span>SHA, <span class="at">type =</span> <span class="st">"l"</span>, <span class="at">col =</span> <span class="st">"red"</span>)</span>
 <span id="cb3-2"><a href="#cb3-2" aria-hidden="true" tabindex="-1"></a><span class="fu">lines</span>(temperature<span class="sc">$</span>time, temperature<span class="sc">$</span>ZER, <span class="at">col =</span> <span class="st">"blue"</span>)</span></code><button title="In die Zwischenablage kopieren" class="code-copy-button"><i class="bi"></i></button></pre></div>
@@ -663,7 +663,7 @@ window.onload = function() {
 </div>
 </div>
 </div>
-<p>Weiter braucht es <em>mindestens</em> ein “Layer” der beschreibt, wie die Daten dargestellt werden sollen (z.B. <code>geom_point()</code>). Anders als bei “Piping” (<code>|&gt;</code>) wird ein Layer mit <code>+</code> hinzugefügt.</p>
+<p>Weiter braucht es <em>mindestens</em> ein “Layer”, der beschreibt, wie die Daten dargestellt werden sollen (z.B. <code>geom_point()</code>). Anders als bei “Piping” (<code>|&gt;</code>) wird ein Layer mit <code>+</code> hinzugefügt.</p>
 <div class="cell">
 <div class="sourceCode cell-code" id="cb5"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb5-1"><a href="#cb5-1" aria-hidden="true" tabindex="-1"></a><span class="fu">ggplot</span>(<span class="at">data =</span> temperature, <span class="at">mapping =</span> <span class="fu">aes</span>(time, SHA)) <span class="sc">+</span></span>
 <span id="cb5-2"><a href="#cb5-2" aria-hidden="true" tabindex="-1"></a>  <span class="co"># Layer: "geom_point" entspricht Punkten in einem Scatterplot</span></span>
@@ -676,7 +676,7 @@ window.onload = function() {
 </div>
 </div>
 </div>
-<p>Da ggplot die Eingaben in der Reihenfolge <code>data =</code> und dann <code>mapping =</code>erwartet, können wir diese Spezifizierungen auch weglassen.</p>
+<p>Da ggplot die Eingaben in der Reihenfolge <code>data =</code> und dann <code>mapping =</code> erwartet, können wir diese Spezifizierungen auch weglassen.</p>
 <div class="cell">
 <div class="sourceCode cell-code" id="cb6"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb6-1"><a href="#cb6-1" aria-hidden="true" tabindex="-1"></a><span class="fu">ggplot</span>(temperature, <span class="fu">aes</span>(time, SHA)) <span class="sc">+</span></span>
 <span id="cb6-2"><a href="#cb6-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_point</span>()</span></code><button title="In die Zwischenablage kopieren" class="code-copy-button"><i class="bi"></i></button></pre></div>
@@ -688,7 +688,7 @@ window.onload = function() {
 <div class="cell">
 <div class="sourceCode cell-code" id="cb7"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb7-1"><a href="#cb7-1" aria-hidden="true" tabindex="-1"></a>temperature_long <span class="ot">&lt;-</span> <span class="fu">pivot_longer</span>(temperature, <span class="sc">-</span>time, <span class="at">names_to =</span> <span class="st">"station"</span>, <span class="at">values_to =</span> <span class="st">"temp"</span>)</span></code><button title="In die Zwischenablage kopieren" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
-<p>Nun wollen wir die unterschiedlichen Stationen unterschiedlich einfärben. Da wir Variablen definieren wollen, welche Einfluss auf die Grafik haben sollen, gehört diese Information in <code>aes()</code>.</p>
+<p>Nun wollen wir die Stationen unterschiedlich einfärben. Da wir Variablen definieren wollen, welche Einfluss auf die Grafik haben sollen, gehört diese Information in <code>aes()</code>.</p>
 <div class="cell">
 <div class="sourceCode cell-code" id="cb8"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb8-1"><a href="#cb8-1" aria-hidden="true" tabindex="-1"></a><span class="fu">ggplot</span>(temperature_long, <span class="fu">aes</span>(time, temp, <span class="at">colour =</span> station)) <span class="sc">+</span></span>
 <span id="cb8-2"><a href="#cb8-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_point</span>()</span></code><button title="In die Zwischenablage kopieren" class="code-copy-button"><i class="bi"></i></button></pre></div>
@@ -738,7 +738,7 @@ window.onload = function() {
 </section>
 <section id="split-apply-combine" class="level2">
 <h2 class="anchored" data-anchor-id="split-apply-combine">Split Apply Combine</h2>
-<p>Im obigen Plot fällt auf, dass stündliche Werte eine zu hohe Auflösung ist, wenn wir daten über 2 Jahre visualisieren. Mit <em>Split Apply Combine</em> (PrePro 3) können wir die Auflösung unserer Daten verändern:</p>
+<p>Im obigen Plot fällt auf, dass stündliche Werte eine zu hohe Auflösung haben, wenn wir die Daten über 2 Jahre visualisieren. Mit <em>Split Apply Combine</em> (PrePro 3) können wir die Auflösung unserer Daten verändern:</p>
 <div class="cell">
 <div class="sourceCode cell-code" id="cb11"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb11-1"><a href="#cb11-1" aria-hidden="true" tabindex="-1"></a>temperature_day <span class="ot">&lt;-</span> temperature_long <span class="sc">|&gt;</span></span>
 <span id="cb11-2"><a href="#cb11-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">mutate</span>(<span class="at">time =</span> <span class="fu">as.Date</span>(time))</span>
@@ -804,7 +804,7 @@ window.onload = function() {
 </div>
 </div>
 </div>
-<p>Das gleiche Spiel kann man für die y-Achse betreiben. Bei unserer y-Achse handelt es sich ja um Datumsangaben. <code>ggplot</code> nennt diese: <code>scale_x_date()</code>.</p>
+<p>Das gleiche Spiel kann man für die x-Achse betreiben. Bei unserer x-Achse handelt es sich ja um Datumsangaben. <code>ggplot</code> nennt diese: <code>scale_x_date()</code>.</p>
 <div class="cell">
 <div class="sourceCode cell-code" id="cb13"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb13-1"><a href="#cb13-1" aria-hidden="true" tabindex="-1"></a><span class="fu">ggplot</span>(temperature_day, <span class="fu">aes</span>(time, temp, <span class="at">colour =</span> station)) <span class="sc">+</span></span>
 <span id="cb13-2"><a href="#cb13-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_line</span>() <span class="sc">+</span></span>
@@ -831,7 +831,7 @@ window.onload = function() {
 </section>
 <section id="themes" class="level2">
 <h2 class="anchored" data-anchor-id="themes">Themes</h2>
-<p>Mit <code>theme</code> verändert man das allgmeine Layout der Plots. Beispielsweise kann man mit <code>theme_classic()</code> <code>ggplot</code>-Grafiken etwas weniger “Poppig” erscheinen lassen: so sind sie besser für Bachelor- / Masterarbeiten sowie Publikationen geeignet. <code>theme_classic()</code> kann man indiviudell pro Plot anwenden, oder für die aktuelle Session global setzen (s.u.)</p>
+<p>Mit <code>theme</code> verändert man das allgmeine Layout der Plots. Beispielsweise kann man mit <code>theme_classic()</code> <code>ggplot</code>-Grafiken etwas weniger “poppig” erscheinen lassen: so sind sie besser für Bachelor- / Masterarbeiten sowie Publikationen geeignet. <code>theme_classic()</code> kann man indiviudell pro Plot anwenden oder für die aktuelle Session global setzen (s.u.).</p>
 <p>Individuell pro Plot:</p>
 <div class="cell">
 <div class="sourceCode cell-code" id="cb14"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb14-1"><a href="#cb14-1" aria-hidden="true" tabindex="-1"></a><span class="fu">ggplot</span>(temperature_day, <span class="fu">aes</span>(time, temp, <span class="at">colour =</span> station)) <span class="sc">+</span></span>
@@ -898,8 +898,8 @@ window.onload = function() {
 </div>
 </section>
 <section id="in-variabel-abspeichern-und-exportieren" class="level2">
-<h2 class="anchored" data-anchor-id="in-variabel-abspeichern-und-exportieren">In Variabel abspeichern und Exportieren</h2>
-<p>Genau wie <code>data.frames</code> und andere Objekte, kann man einen ganzen Plot auch in einer Variabel speichern. Dies kann nützlich sein um einen Plot zu exportieren (als png, jpg usw.) oder sukzessive erweitern wie in diesem Beispiel.</p>
+<h2 class="anchored" data-anchor-id="in-variabel-abspeichern-und-exportieren">In Variabel abspeichern und exportieren</h2>
+<p>Genau wie <code>data.frames</code> und andere Objekte kann man einen ganzen Plot auch in einer Variabel speichern. Dies kann nützlich sein, um einen Plot zu exportieren (als png, jpg usw.) oder sukzessiv zu erweitern wie in diesem Beispiel.</p>
 <div class="cell">
 <div class="sourceCode cell-code" id="cb18"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb18-1"><a href="#cb18-1" aria-hidden="true" tabindex="-1"></a>p <span class="ot">&lt;-</span> <span class="fu">ggplot</span>(temperature_day, <span class="fu">aes</span>(time, temp, <span class="at">colour =</span> station)) <span class="sc">+</span></span>
 <span id="cb18-2"><a href="#cb18-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_line</span>() <span class="sc">+</span></span>
@@ -921,12 +921,12 @@ window.onload = function() {
 <div class="cell">
 <div class="sourceCode cell-code" id="cb19"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb19-1"><a href="#cb19-1" aria-hidden="true" tabindex="-1"></a><span class="fu">ggsave</span>(<span class="at">filename =</span> <span class="st">"plot.png"</span>, <span class="at">plot =</span> p)</span></code><button title="In die Zwischenablage kopieren" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
-<p>.. und so kann ich einen bestehenden Plot (in einer Variabel) mit einem Layer / einer Option erweitern</p>
+<p>.. und so kann ich einen bestehenden Plot (in einer Variabel) mit einem Layer / einer Option erweitern.</p>
 <div class="cell">
 <div class="sourceCode cell-code" id="cb20"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb20-1"><a href="#cb20-1" aria-hidden="true" tabindex="-1"></a>p <span class="sc">+</span></span>
 <span id="cb20-2"><a href="#cb20-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">theme</span>(<span class="at">legend.position =</span> <span class="st">"none"</span>)</span></code><button title="In die Zwischenablage kopieren" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
-<p>Wie üblich wurde diese Änderung nicht gespeichert, sondern nur das Resultat davon ausgeben. Wenn die Änderung in meinem Plot (in der Variabel) abspeichern will, muss ich die Variabel überschreiben:</p>
+<p>Wie üblich wurde diese Änderung nicht gespeichert, sondern nur das Resultat davon ausgegeben. Wenn ich die Änderung in meinem Plot (in der Variabel) abspeichern will, muss ich die Variabel überschreiben:</p>
 <div class="cell">
 <div class="sourceCode cell-code" id="cb21"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb21-1"><a href="#cb21-1" aria-hidden="true" tabindex="-1"></a>p <span class="ot">&lt;-</span> p <span class="sc">+</span></span>
 <span id="cb21-2"><a href="#cb21-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">theme</span>(<span class="at">legend.position =</span> <span class="st">"none"</span>)</span></code><button title="In die Zwischenablage kopieren" class="code-copy-button"><i class="bi"></i></button></pre></div>

@@ -584,7 +584,7 @@ window.onload = function() {
 </div>
 <section id="aufgabe-1-vektor-daten-importieren" class="level2">
 <h2 class="anchored" data-anchor-id="aufgabe-1-vektor-daten-importieren">Aufgabe 1: Vektor Daten importieren</h2>
-<p>Importiere die Datensätze <em>kantone.gpkg</em> und <em>gemeinden.gpkg</em> wie folgt. Es handelt sich um Geodatensätze im Format Geopackage (“*.gpkg”), eine alternatives Datenformat zum bekannteren Format “Shapefiles”.</p>
+<p>Importiere die Datensätze <em>kantone.gpkg</em> und <em>gemeinden.gpkg</em> wie folgt. Es handelt sich um Geodatensätze im Format Geopackage (“*.gpkg”), ein alternatives Datenformat zum bekannteren Format “Shapefiles”.</p>
 <div class="cell">
 <div class="sourceCode cell-code" id="cb2"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb2-1"><a href="#cb2-1" aria-hidden="true" tabindex="-1"></a>kantone <span class="ot">&lt;-</span> <span class="fu">read_sf</span>(<span class="st">"datasets/rauman/kantone.gpkg"</span>)</span>
 <span id="cb2-2"><a href="#cb2-2" aria-hidden="true" tabindex="-1"></a>gemeinden <span class="ot">&lt;-</span> <span class="fu">read_sf</span>(<span class="st">"datasets/rauman/gemeinden.gpkg"</span>)</span></code><button title="In die Zwischenablage kopieren" class="code-copy-button"><i class="bi"></i></button></pre></div>
@@ -606,7 +606,7 @@ Hinweis
 </section>
 <section id="aufgabe-2-daten-visualisieren" class="level2">
 <h2 class="anchored" data-anchor-id="aufgabe-2-daten-visualisieren">Aufgabe 2: Daten visualisieren</h2>
-<p>Eine sehr einfache Möglichkeit, <code>sf</code>-Objekte zu visualiseren ist die base-R Funktion <code>plot()</code>. Führe die angegebenen R-Befehle aus und studiere die entstehenden Plots. Welche Unterschiede findest Du? Wie erklärst Du diese Unterschiede?</p>
+<p>Eine sehr einfache Möglichkeit, <code>sf</code>-Objekte zu visualiseren, ist die base-R Funktion <code>plot()</code>. Führe die angegebenen R-Befehle aus und studiere die entstehenden Plots. Welche Unterschiede findest Du? Wie erklärst Du diese Unterschiede?</p>
 <div class="cell">
 <div class="sourceCode cell-code" id="cb3"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb3-1"><a href="#cb3-1" aria-hidden="true" tabindex="-1"></a><span class="co"># ohne max.plot = 1 macht R einen Plot pro Spalte</span></span>
 <span id="cb3-2"><a href="#cb3-2" aria-hidden="true" tabindex="-1"></a><span class="fu">plot</span>(gemeinden, <span class="at">max.plot =</span> <span class="dv">1</span>)</span></code><button title="In die Zwischenablage kopieren" class="code-copy-button"><i class="bi"></i></button></pre></div>
@@ -671,7 +671,7 @@ Hinweis
 <li><code>CH1903+ LV95</code>: das neue Koordinatensystem der Schweiz</li>
 <li><code>WGS84</code>: ein häufig genutztes, weltumspannendes geodätisches Koordinatensystem, sprich die Koordinaten werden in Länge und Breite angegeben (Lat/Lon).</li>
 </ul>
-<p>Nun gilt es, anhand der Koordinaten die in der Spalte <code>geometry</code> ersichtlich sind, das korrekte Koordinatensystem festzustellen. Wenn man auf <a href="https://map.geo.admin.ch">map.geo.admin.ch</a> mit der rechten Maustaste einen Ort anwählt, erfährt man die Koordinaten dieses Ortes in verschiedenen Koordinatenbezugssystemen.</p>
+<p>Nun gilt es, anhand der Koordinaten, die in der Spalte <code>geometry</code> ersichtlich sind, das korrekte Koordinatensystem festzustellen. Wenn man auf <a href="https://map.geo.admin.ch">map.geo.admin.ch</a> mit der rechten Maustaste einen Ort anwählt, erfährt man die Koordinaten dieses Ortes in verschiedenen Koordinatenbezugssystemen.</p>
 <p><img src="images/map.geo.admin.png" class="img-fluid"></p>
 <!--
 Wenn man sich auf [epsg.io/map](https://epsg.io/map#srs=4326&x=8.407288&y=46.773731&z=9&layer=streets) die Schweiz anschaut, kann man die Koordinaten in verschiedenen Koordinatensystem betrachten.
@@ -686,12 +686,12 @@ Wenn man sich auf [epsg.io/map](https://epsg.io/map#srs=4326&x=8.407288&y=46.773
 ![Für Enthusiasten: Schau Dir die Schweiz in verschiedenen Koordinatensystemen an, in dem Du auf "Reproject Map" klickst](images/reproject.jpg)
 :::
 -->
-<p>Wenn man diese Koordinaten mit den Koordinaten unserer Datensätze vergleicht, dann ist schnell klar, dass es sich beim Datensatz <code>kantone</code> um das Koordinatenbezugsystem (CRS) WGS84 handelt. Wir können diese Information nutzen um das CRS unserers Datensatzes mit <code>st_set_crs()</code> zu setzen.</p>
+<p>Wenn man diese Koordinaten mit den Koordinaten unserer Datensätze vergleicht, dann ist schnell klar, dass es sich beim Datensatz <code>kantone</code> um das Koordinatenbezugsystem (CRS) WGS84 handelt. Wir können diese Information nutzen, um das CRS unserers Datensatzes mit <code>st_set_crs()</code> zu setzen.</p>
 <div class="cell">
 <div class="sourceCode cell-code" id="cb6"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb6-1"><a href="#cb6-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Zuweisen mit st_set_crs()...</span></span>
 <span id="cb6-2"><a href="#cb6-2" aria-hidden="true" tabindex="-1"></a>kantone <span class="ot">&lt;-</span> <span class="fu">st_set_crs</span>(kantone, <span class="st">"WGS84"</span>)</span></code><button title="In die Zwischenablage kopieren" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
-<p>Wenn wir die CRS Information nun abrufen, sehen wir das diese Zuweisung funktioniert hat.</p>
+<p>Wenn wir die CRS Information nun abrufen, sehen wir, dass diese Zuweisung funktioniert hat.</p>
 <div class="cell">
 <div class="sourceCode cell-code" id="cb7"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb7-1"><a href="#cb7-1" aria-hidden="true" tabindex="-1"></a><span class="co"># ... abfragen mit st_crs()</span></span>
 <span id="cb7-2"><a href="#cb7-2" aria-hidden="true" tabindex="-1"></a><span class="fu">st_crs</span>(kantone)</span>
@@ -727,7 +727,7 @@ Wenn man sich auf [epsg.io/map](https://epsg.io/map#srs=4326&x=8.407288&y=46.773
 <li><a href="https://epsg.io/2056">CH1903+ LV95</a>: <code>EPSG:2056</code></li>
 <li><a href="https://epsg.io/4326">WGS84</a>: <code>EPSG:4326</code></li>
 </ul>
-<p>Dieser Code können wir nutzen, um das CRS des Datensatz <code>gemeinde</code> zu setzen:</p>
+<p>Diesen Code können wir nutzen, um das CRS des Datensatz <code>gemeinde</code> zu setzen:</p>
 <div class="cell">
 <div class="sourceCode cell-code" id="cb9"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb9-1"><a href="#cb9-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Zuweisen mit st_set_crs()...</span></span>
 <span id="cb9-2"><a href="#cb9-2" aria-hidden="true" tabindex="-1"></a>gemeinden <span class="ot">&lt;-</span> <span class="fu">st_set_crs</span>(gemeinden, <span class="dv">2056</span>)</span>
@@ -782,7 +782,7 @@ Wenn man sich auf [epsg.io/map](https://epsg.io/map#srs=4326&x=8.407288&y=46.773
 <span id="cb9-51"><a href="#cb9-51" aria-hidden="true" tabindex="-1"></a><span class="do">##         BBOX[45.82,5.96,47.81,10.49]],</span></span>
 <span id="cb9-52"><a href="#cb9-52" aria-hidden="true" tabindex="-1"></a><span class="do">##     ID["EPSG",2056]]</span></span></code><button title="In die Zwischenablage kopieren" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
-<p>Jetzt wo das CRS der Datensätze bekannt ist, können wir <code>ggplot2</code> nutzen um usere Daten zu visualisieren. In InfoVis 1 &amp; 2 haben wir intensiv mit <code>ggplot2</code> gearbeitet und dort die Layers <code>geom_point()</code> und <code>geom_line()</code> kennen gelernt. Zusätzlich beinhaltet <code>ggplot</code> die Möglichkeit, mit <code>geom_sf()</code> Vektordaten direkt und sehr einfach zu plotten.</p>
+<p>Jetzt, wo das CRS der Datensätze bekannt ist, können wir <code>ggplot2</code> nutzen, um usere Daten zu visualisieren. In InfoVis 1 &amp; 2 haben wir intensiv mit <code>ggplot2</code> gearbeitet und dort die Layers <code>geom_point()</code> und <code>geom_line()</code> kennengelernt. Zusätzlich beinhaltet <code>ggplot</code> die Möglichkeit, mit <code>geom_sf()</code> Vektordaten direkt und sehr einfach zu plotten.</p>
 </section>
 <section id="aufgabe-3-koordinatensyteme-transformieren" class="level2">
 <h2 class="anchored" data-anchor-id="aufgabe-3-koordinatensyteme-transformieren">Aufgabe 3: Koordinatensyteme <em>transformieren</em></h2>
@@ -838,7 +838,7 @@ Wenn man sich auf [epsg.io/map](https://epsg.io/map#srs=4326&x=8.407288&y=46.773
 </section>
 <section id="aufgabe-4-tidyverse-funktionen" class="level2">
 <h2 class="anchored" data-anchor-id="aufgabe-4-tidyverse-funktionen">Aufgabe 4: Tidyverse Funktionen</h2>
-<p><code>sf</code> Objekte sind im wesentlichen <code>data.frames</code> mit ein paar Metadaten und einer speziellen <code>geometry</code>-Spalte. Wir können ihnen die gleichen Operationen durchführen, wie mit <code>data.frames</code>. Beispielsweise können wir aus den Spalten <code>EINWOHNERZ</code> und <code>KANTONSFLA</code> die Einwohnerdichte berechnen:</p>
+<p><code>sf</code> Objekte sind im wesentlichen <code>data.frames</code> mit ein paar Metadaten und einer speziellen <code>geometry</code>-Spalte. Wir können mit ihnen die gleichen Operationen durchführen wie mit <code>data.frames</code>. Beispielsweise können wir aus den Spalten <code>EINWOHNERZ</code> und <code>KANTONSFLA</code> die Einwohnerdichte berechnen:</p>
 <div class="cell">
 <div class="sourceCode cell-code" id="cb12"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb12-1"><a href="#cb12-1" aria-hidden="true" tabindex="-1"></a>kantone <span class="ot">&lt;-</span> kantone <span class="sc">|&gt;</span></span>
 <span id="cb12-2"><a href="#cb12-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">mutate</span>(</span>
@@ -862,7 +862,7 @@ Wenn man sich auf [epsg.io/map](https://epsg.io/map#srs=4326&x=8.407288&y=46.773
 </div>
 </div>
 </div>
-<p>Hier sind farblich kaum Unterschiede erkennbar, weil die extrem hohe Bevölkerungsdichte vom Halbkanton Basel-Stadt (&gt;5’000 Einwohner pro km<sup>2</sup>!) die ganze Farbskala dominiert. Der <a href="https://www.atlas.bfs.admin.ch/maps/13/de/15467_75_3501_70/24216.html">Statistischer Atlas der Schweiz</a> löst das Problem, indem es Klassen mit irregulären Schwellwerte verwendet und alle zahlen &gt;2’000 gruppiert. Diese Vorgehensweise können wir mit <code>cut()</code> rekonstruieren.</p>
+<p>Hier sind farblich kaum Unterschiede erkennbar, weil die extrem hohe Bevölkerungsdichte vom Halbkanton Basel-Stadt (&gt;5’000 Einwohner pro km<sup>2</sup>!) die ganze Farbskala dominiert. Der <a href="https://www.atlas.bfs.admin.ch/maps/13/de/15467_75_3501_70/24216.html">Statistischer Atlas der Schweiz</a> löst das Problem, indem es Klassen mit irregulären Schwellenwerte verwendet und alle Zahlen &gt;2’000 gruppiert. Diese Vorgehensweise können wir mit <code>cut()</code> rekonstruieren.</p>
 <div class="cell">
 <div class="sourceCode cell-code" id="cb13"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb13-1"><a href="#cb13-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Schwellwerte analog BFS "Statistischer Atlas der Schweiz"</span></span>
 <span id="cb13-2"><a href="#cb13-2" aria-hidden="true" tabindex="-1"></a>breaks <span class="ot">=</span> <span class="fu">c</span>(<span class="dv">0</span>, <span class="dv">50</span>, <span class="dv">100</span>, <span class="dv">150</span>, <span class="dv">200</span>, <span class="dv">300</span>, <span class="dv">500</span>, <span class="dv">750</span>, <span class="dv">1000</span>, <span class="dv">2000</span>, <span class="cn">Inf</span>)</span>

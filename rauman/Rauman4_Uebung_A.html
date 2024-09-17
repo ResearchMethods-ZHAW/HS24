@@ -606,8 +606,8 @@ window.Quarto = {
 </header>
 
 
-<p>Heute berechnen wir Morans <span class="math inline">\(I\)</span>, also ein globales Mass für Autokorrelation, für die Abstimmungsresultate der Zweitwohnungsinitiative. Dieser Wert beschreibt, ob Kantone, die nahe beieinander liegen, ähnliche Abstimmungswerte haben. Hierfür verwenden wir den Datensatz <em>zweitwohnungsinitiative.gpkg</em>.</p>
-<p>Das Geopackage beinhaltet 3 Layers (siehe <code>st_layers(zweitwohnung_kanton)</code>). In jedem Layer sind die Abstimmungsresultate auf eine andere politische Ebene aggregiert. Wir started mit der Aggregationsstufe “kanton”.</p>
+<p>Heute berechnen wir Morans <span class="math inline">\(I\)</span>, also ein globales Mass für Autokorrelation, für die Abstimmungsresultate der Zweitwohnungsinitiative. Dieser Wert beschreibt, ob Kantone, die nahe beieinanderliegen, ähnliche Abstimmungswerte haben. Hierfür verwenden wir den Datensatz <em>zweitwohnungsinitiative.gpkg</em>.</p>
+<p>Das Geopackage beinhaltet 3 Layers (siehe <code>st_layers(zweitwohnung_kanton)</code>). In jedem Layer sind die Abstimmungsresultate auf eine andere politische Ebene aggregiert. Wir starten mit der Aggregationsstufe “kanton”.</p>
 <div class="cell">
 <div class="sourceCode cell-code" id="cb1"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb1-1"><a href="#cb1-1" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(<span class="st">"dplyr"</span>)</span>
 <span id="cb1-2"><a href="#cb1-2" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(<span class="st">"ggplot2"</span>)</span>
@@ -632,7 +632,7 @@ window.Quarto = {
 <img src="Rauman4_Uebung_A_files/figure-html/fig-autokorrelation-kantone-1.png" class="img-fluid figure-img" width="672">
 </div>
 <figcaption class="quarto-float-caption-bottom quarto-float-caption quarto-float-fig" id="fig-autokorrelation-kantone-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
-Abbildung&nbsp;39.1: Was für einen Autokorrelationswert würdest du erwarten? Eher 1 (hohe Autokorrelation, beieinanderliegende Kantone haben ähnliche Werte) oder eher -1 (beieinanderliegende Kantone haben sehr unterschiedliche Werte) oder eher 0 (gar keine Autokorrelation)
+Abbildung&nbsp;39.1: Was für einen Autokorrelationswert würdest du erwarten? Eher 1 (hohe Autokorrelation, beieinanderliegende Kantone haben ähnliche Werte) oder eher -1 (beieinanderliegende Kantone haben sehr unterschiedliche Werte) oder eher 0 (gar keine Autokorrelation)?
 </figcaption>
 </figure>
 </div>
@@ -648,7 +648,7 @@ Abbildung&nbsp;39.1: Was für einen Autokorrelationswert würdest du erwarten? E
 \tag{39.1}\]</span></span></p>
 <p><span style="color:#FF0000">Rot</span> markiert entpricht der Summe der gewichtetn Ähnlichkeitsmatrix aus der Vorlesung. Alles <span style="color:#00FFFF">blaue</span> ist relativ trivial und dient lediglich der Normalisierung auf die Werte -1 bis +1. Die Begriffe <code>zaehler1</code>, <code>nenner1</code> usw. sind die Variablen, die wir in R für die jeweiligen Berechnungen nutzen werden und dienen lediglich der Orientierung. Zudem gilt:</p>
 <ul>
-<li><span class="math inline">\(n\)</span>: Anzahl räumlichen Objekte (hier: 26 Kantone)</li>
+<li><span class="math inline">\(n\)</span>: Anzahl räumliche Objekte (hier: 26 Kantone)</li>
 <li><span class="math inline">\(y\)</span>: die untersuchte Variabel (hier: Ja-Anteil in %)</li>
 <li><span class="math inline">\(\bar{y}\)</span>: Mittelwert der untersuchten Variabel</li>
 <li><span class="math inline">\(w_{ij}\)</span>: die Gewichtsmatrix</li>
@@ -661,18 +661,18 @@ Abbildung&nbsp;39.1: Was für einen Autokorrelationswert würdest du erwarten? E
 <section id="nachbarschaftsmatrix-w_ij" class="level4">
 <h4 class="anchored" data-anchor-id="nachbarschaftsmatrix-w_ij">Nachbarschaftsmatrix <span class="math inline">\(w_{ij}\)</span></h4>
 <p><span class="math display">\[\text{Morans } I = \frac{n}{\sum_{i=1}^n (y_i - \bar{y})^2} \times \frac{\sum_{i=1}^n \sum_{j=1}^n {\color{red}w_{ij}}(y_i - \bar{y})(y_j - \bar{y})}{\sum_{i=1}^n \sum_{j=1}^n w_{ij}}\]</span></p>
-<p><span class="math inline">\(w\)</span> beschreibt die räumlichen Gewichte der Kantone (den “Schalter” aus der Vorlesung). <span class="math inline">\(w_{ij}\)</span> ist das Gewicht vom Kanton <span class="math inline">\(i\)</span> im Vergleich zum Kanton <span class="math inline">\(j\)</span>. Sind Kantone <span class="math inline">\(i\)</span> und <span class="math inline">\(j\)</span> räumlich nah, gilt ein Gewicht von 1, sind sie weit entfernt, gilt ein Gewicht von 0. Dabei ist die Definition von “räumlich nah” nicht festgelegt. Denkbar wären verschiedene Optionen (siehe Vorlesung). Wer werden es mit die Bedigungen <em>touches</em> verwenden. Die Funktion <code>st_touches</code> prüft zwischen allen Kantonen, ob sie sich berühren. Mit der Option <code>sparse = TRUE</code> wird eine 26x26 Kreuzmatrix erstellt, wo jeder Kanton mit jedem anderen verglichen wird. Berühren sie sich, steht in der entsprechenden Stelle der Wert <code>TRUE</code>, was in R gleichbedeutend ist wie 1. Berühren sie sich <em>nicht</em>, steht der Wert <code>FALSE</code>, was gleichbedeutend ist wie 0.</p>
+<p><span class="math inline">\(w\)</span> beschreibt die räumlichen Gewichte der Kantone (den “Schalter” aus der Vorlesung). <span class="math inline">\(w_{ij}\)</span> ist das Gewicht vom Kanton <span class="math inline">\(i\)</span> im Vergleich zum Kanton <span class="math inline">\(j\)</span>. Sind Kantone <span class="math inline">\(i\)</span> und <span class="math inline">\(j\)</span> räumlich nah, gilt ein Gewicht von 1, sind sie weit entfernt, gilt ein Gewicht von 0. Dabei ist die Definition von “räumlich nah” nicht festgelegt. Denkbar wären verschiedene Optionen (siehe Vorlesung). Wir werden es mit die Bedigungen <em>touches</em> verwenden. Die Funktion <code>st_touches</code> prüft zwischen allen Kantonen, ob sie sich berühren. Mit der Option <code>sparse = TRUE</code> wird eine 26x26 Kreuzmatrix erstellt, wo jeder Kanton mit jedem anderen verglichen wird. Berühren sie sich, steht in der entsprechenden Stelle der Wert <code>TRUE</code>, was in R gleichbedeutend ist wie 1. Berühren sie sich <em>nicht</em>, steht der Wert <code>FALSE</code>, was gleichbedeutend ist wie 0.</p>
 <div class="cell">
 <div class="sourceCode cell-code" id="cb3"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb3-1"><a href="#cb3-1" aria-hidden="true" tabindex="-1"></a><span class="co"># st_touches berechnet eine Kreuzmatrix aller Objekte</span></span>
 <span id="cb3-2"><a href="#cb3-2" aria-hidden="true" tabindex="-1"></a>w_ij <span class="ot">&lt;-</span> <span class="fu">st_touches</span>(zweitwohnung_kanton, <span class="at">sparse =</span> <span class="cn">FALSE</span>)</span>
 <span id="cb3-3"><a href="#cb3-3" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb3-4"><a href="#cb3-4" aria-hidden="true" tabindex="-1"></a><span class="co"># Schauen wir uns matrix mal an</span></span>
+<span id="cb3-4"><a href="#cb3-4" aria-hidden="true" tabindex="-1"></a><span class="co"># Schauen wir uns die Matrix mal an</span></span>
 <span id="cb3-5"><a href="#cb3-5" aria-hidden="true" tabindex="-1"></a><span class="co"># (aus Platzmangen beschränken wir uns auf die ersten 5 Zeilen und Spalten</span></span>
 <span id="cb3-6"><a href="#cb3-6" aria-hidden="true" tabindex="-1"></a><span class="co"># in RStudio könnt ihr mit View(w_ij) die gesamte Matrix anschauen)</span></span>
 <span id="cb3-7"><a href="#cb3-7" aria-hidden="true" tabindex="-1"></a>w_ij[<span class="dv">1</span><span class="sc">:</span><span class="dv">5</span>, <span class="dv">1</span><span class="sc">:</span><span class="dv">5</span>]</span></code><button title="In die Zwischenablage kopieren" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
 <!-- Seltsamerweise gehen bei der Konvertierung die Matrix-Eigenschaft verloren (spricht: die Aufteilung der 26x26 Werte in Zeilen und Spalten). Diese müssen wir manuell wieder Herstellen. -->
-<p>Die erste Zeile entspricht dem ersten Kanton in <code>zweitwohnung_kanton</code>, die zweite Zeile dem zweiten Kanton usw. Das gleiche Gilt für die Spalten. Um die Kreuzmatrix besser interpretieren zu können, können wir die Namen aus der Spalte <code>KANTONSNAME</code> verwenden, um die Zeilen und Spalten unserer Kreuzmatrix zu benennen.</p>
+<p>Die erste Zeile entspricht dem ersten Kanton in <code>zweitwohnung_kanton</code>, die zweite Zeile dem zweiten Kanton usw. Das gleiche gilt für die Spalten. Um die Kreuzmatrix besser interpretieren zu können, können wir die Namen aus der Spalte <code>KANTONSNAME</code> verwenden, um die Zeilen und Spalten unserer Kreuzmatrix zu benennen.</p>
 <div class="cell">
 <div class="sourceCode cell-code" id="cb4"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb4-1"><a href="#cb4-1" aria-hidden="true" tabindex="-1"></a><span class="fu">rownames</span>(w_ij) <span class="ot">&lt;-</span> zweitwohnung_kanton<span class="sc">$</span>kuerzel</span>
 <span id="cb4-2"><a href="#cb4-2" aria-hidden="true" tabindex="-1"></a><span class="fu">colnames</span>(w_ij) <span class="ot">&lt;-</span> zweitwohnung_kanton<span class="sc">$</span>kuerzel</span>
@@ -720,7 +720,7 @@ Abbildung&nbsp;39.1: Was für einen Autokorrelationswert würdest du erwarten? E
 <p><span class="math display">\[\text{Morans } I = \frac{\color{cyan}n}{\color{cyan}\sum_{i=1}^n (y_i - \bar{y})^2} \times \frac{\sum_{i=1}^n \sum_{j=1}^n w_{ij}(y_i - \bar{y})(y_j - \bar{y})}{\color{cyan}\sum_{i=1}^n \sum_{j=1}^n w_{ij}} \]</span></p>
 <section id="berechnung-von-n-zaehler1" class="level4">
 <h4 class="anchored" data-anchor-id="berechnung-von-n-zaehler1">Berechnung von <span class="math inline">\(n\)</span> (<code>zaehler1</code>)</h4>
-<p>Der Termin <code>zaehler1</code> resp. <code>n</code> entspricht der Anzahl Objekte (hier: Kantone) in unserem Datensatz.</p>
+<p>Der Term <code>zaehler1</code> resp. <code>n</code> entspricht der Anzahl Objekte (hier: Kantone) in unserem Datensatz.</p>
 <div class="cell">
 <div class="sourceCode cell-code" id="cb7"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb7-1"><a href="#cb7-1" aria-hidden="true" tabindex="-1"></a>zaehler1 <span class="ot">&lt;-</span> n <span class="ot">&lt;-</span> <span class="fu">nrow</span>(zweitwohnung_kanton)</span>
 <span id="cb7-2"><a href="#cb7-2" aria-hidden="true" tabindex="-1"></a></span>
@@ -750,7 +750,7 @@ Abbildung&nbsp;39.1: Was für einen Autokorrelationswert würdest du erwarten? E
 </section>
 <section id="auflösung-der-formel" class="level3">
 <h3 class="anchored" data-anchor-id="auflösung-der-formel">Auflösung der Formel</h3>
-<p>Nun haben wir alle Bestandteile von Morans <span class="math inline">\(I\)</span> Berechnet und müssen diese nur noch Zusammenrechnen.</p>
+<p>Nun haben wir alle Bestandteile von Morans <span class="math inline">\(I\)</span> berechnet und müssen diese nur noch zusammenrechnen.</p>
 <div class="cell">
 <div class="sourceCode cell-code" id="cb10"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb10-1"><a href="#cb10-1" aria-hidden="true" tabindex="-1"></a>MI_kantone <span class="ot">&lt;-</span> zaehler1 <span class="sc">/</span> nenner1 <span class="sc">*</span> zaehler2 <span class="sc">/</span> nenner2</span>
 <span id="cb10-2"><a href="#cb10-2" aria-hidden="true" tabindex="-1"></a></span>
@@ -761,7 +761,7 @@ Abbildung&nbsp;39.1: Was für einen Autokorrelationswert würdest du erwarten? E
 </section>
 <section id="aufgabe-2-morans-i-für-bezirke-berechnen" class="level2 page-columns page-full">
 <h2 class="anchored" data-anchor-id="aufgabe-2-morans-i-für-bezirke-berechnen">Aufgabe 2: Morans I für Bezirke berechnen</h2>
-<p>Nun könnt ihr Morans <span class="math inline">\(I\)</span> auf der Ebene der Bezirke und untersuchen, ob und wie sich Morans <span class="math inline">\(I\)</span> verändert. Importiert dazu den Layer <code>bezirk</code> aus dem Datensatz <code>zweitwohnungsinitiative.gpkg</code>. Visualisiert in einem ersten Schritt die Abstimmungsresultate. Formuliert nun eine Erwartungshaltung: ist Morans <span class="math inline">\(I\)</span> auf der Ebene Bezirke tiefer oder Höher als auf der Ebene Kantone?</p>
+<p>Nun könnt ihr Morans <span class="math inline">\(I\)</span> auf der Ebene der Bezirke und untersuchen, ob und wie sich Morans <span class="math inline">\(I\)</span> verändert. Importiert dazu den Layer <code>bezirk</code> aus dem Datensatz <code>zweitwohnungsinitiative.gpkg</code>. Visualisiert in einem ersten Schritt die Abstimmungsresultate. Formuliert nun eine Erwartungshaltung: Ist Morans <span class="math inline">\(I\)</span> auf der Ebene Bezirke tiefer oder Höher als auf der Ebene Kantone?</p>
 <div class="callout callout-style-default callout-note callout-titled">
 <div class="callout-header d-flex align-content-center">
 <div class="callout-icon-container">
