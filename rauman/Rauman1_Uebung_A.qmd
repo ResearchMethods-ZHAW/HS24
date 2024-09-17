@@ -25,7 +25,7 @@ library("ggplot2")
 
 ## Aufgabe 1: Vektor Daten importieren
 
-Importiere die Datensätze *kantone.gpkg* und *gemeinden.gpkg* wie folgt. Es handelt sich um Geodatensätze im Format Geopackage ("\*.gpkg"), eine alternatives Datenformat zum bekannteren Format "Shapefiles". 
+Importiere die Datensätze *kantone.gpkg* und *gemeinden.gpkg* wie folgt. Es handelt sich um Geodatensätze im Format Geopackage ("\*.gpkg"), ein alternatives Datenformat zum bekannteren Format "Shapefiles". 
 
 ```{r}
 #| echo: true
@@ -43,7 +43,7 @@ Am meisten Informationen zu `sf` Objekten bekommst du, wenn du dir den Datensatz
 
 ## Aufgabe 2: Daten visualisieren
 
-Eine sehr einfache Möglichkeit, `sf`-Objekte zu visualiseren ist die base-R Funktion `plot()`. Führe die angegebenen R-Befehle aus und studiere die entstehenden Plots. Welche Unterschiede findest Du? Wie erklärst Du diese Unterschiede?
+Eine sehr einfache Möglichkeit, `sf`-Objekte zu visualiseren, ist die base-R Funktion `plot()`. Führe die angegebenen R-Befehle aus und studiere die entstehenden Plots. Welche Unterschiede findest Du? Wie erklärst Du diese Unterschiede?
 
 ```{r}
 #| echo: true
@@ -81,7 +81,7 @@ Leider sind in unserem Fall keine Koordinatensysteme zugewiesen. Mit etwas Erfah
 - `CH1903+ LV95`: das neue Koordinatensystem der Schweiz
 - `WGS84`: ein häufig genutztes, weltumspannendes geodätisches Koordinatensystem, sprich die Koordinaten werden in Länge und Breite angegeben (Lat/Lon).
 
-Nun gilt es, anhand der Koordinaten die in der Spalte `geometry` ersichtlich sind, das korrekte Koordinatensystem festzustellen. Wenn man auf [map.geo.admin.ch](https://map.geo.admin.ch) mit der rechten Maustaste einen Ort anwählt, erfährt man die Koordinaten dieses Ortes in verschiedenen Koordinatenbezugssystemen. 
+Nun gilt es, anhand der Koordinaten, die in der Spalte `geometry` ersichtlich sind, das korrekte Koordinatensystem festzustellen. Wenn man auf [map.geo.admin.ch](https://map.geo.admin.ch) mit der rechten Maustaste einen Ort anwählt, erfährt man die Koordinaten dieses Ortes in verschiedenen Koordinatenbezugssystemen. 
 
 ![](images/map.geo.admin.png)
 
@@ -99,7 +99,7 @@ Wenn man sich auf [epsg.io/map](https://epsg.io/map#srs=4326&x=8.407288&y=46.773
 :::
 -->
 
-Wenn man diese Koordinaten mit den Koordinaten unserer Datensätze vergleicht, dann ist schnell klar, dass es sich beim Datensatz `kantone` um das Koordinatenbezugsystem (CRS) WGS84 handelt. Wir können diese Information nutzen um das CRS unserers Datensatzes mit `st_set_crs()` zu setzen.
+Wenn man diese Koordinaten mit den Koordinaten unserer Datensätze vergleicht, dann ist schnell klar, dass es sich beim Datensatz `kantone` um das Koordinatenbezugsystem (CRS) WGS84 handelt. Wir können diese Information nutzen, um das CRS unserers Datensatzes mit `st_set_crs()` zu setzen.
 
 ```{r}
 #| echo: true
@@ -109,7 +109,7 @@ Wenn man diese Koordinaten mit den Koordinaten unserer Datensätze vergleicht, d
 kantone <- st_set_crs(kantone, "WGS84")
 ```
 
-Wenn wir die CRS Information nun abrufen, sehen wir das diese Zuweisung funktioniert hat.
+Wenn wir die CRS Information nun abrufen, sehen wir, dass diese Zuweisung funktioniert hat.
 
 ```{r}
 #| echo: true
@@ -139,7 +139,7 @@ Die ausgeschriebenen Namen dieser CRS sind fehleranfällig. Deshalb ist es besse
 - [CH1903+ LV95](https://epsg.io/2056): `EPSG:2056`
 - [WGS84](https://epsg.io/4326): `EPSG:4326`
 
-Dieser Code können wir nutzen, um das CRS des Datensatz `gemeinde` zu setzen: 
+Diesen Code können wir nutzen, um das CRS des Datensatz `gemeinde` zu setzen: 
 
 ```{r}
 #| echo: true
@@ -153,7 +153,7 @@ gemeinden <- st_set_crs(gemeinden, 2056)
 st_crs(gemeinden)
 ```
 
-Jetzt wo das CRS der Datensätze bekannt ist, können wir `ggplot2` nutzen um usere Daten zu visualisieren. In InfoVis 1 & 2 haben wir intensiv mit `ggplot2` gearbeitet und dort die Layers `geom_point()` und `geom_line()` kennen gelernt. Zusätzlich beinhaltet `ggplot` die Möglichkeit, mit `geom_sf()` Vektordaten direkt und sehr einfach zu plotten. 
+Jetzt, wo das CRS der Datensätze bekannt ist, können wir `ggplot2` nutzen, um usere Daten zu visualisieren. In InfoVis 1 & 2 haben wir intensiv mit `ggplot2` gearbeitet und dort die Layers `geom_point()` und `geom_line()` kennengelernt. Zusätzlich beinhaltet `ggplot` die Möglichkeit, mit `geom_sf()` Vektordaten direkt und sehr einfach zu plotten. 
 
 ```{r}
 ggplot() +
@@ -192,7 +192,7 @@ kantone
 
 ## Aufgabe 4: Tidyverse Funktionen
 
-`sf` Objekte sind im wesentlichen `data.frames` mit ein paar Metadaten und einer speziellen `geometry`-Spalte. Wir können ihnen die gleichen Operationen durchführen, wie mit `data.frames`. Beispielsweise können wir aus den Spalten `EINWOHNERZ` und `KANTONSFLA` die Einwohnerdichte berechnen:
+`sf` Objekte sind im wesentlichen `data.frames` mit ein paar Metadaten und einer speziellen `geometry`-Spalte. Wir können mit ihnen die gleichen Operationen durchführen wie mit `data.frames`. Beispielsweise können wir aus den Spalten `EINWOHNERZ` und `KANTONSFLA` die Einwohnerdichte berechnen:
 
 ```{r}
 #| echo: true
@@ -230,7 +230,7 @@ ggplot(kantone) +
   geom_sf(aes(fill = bevoelkerungsdichte))
 ```
 
-Hier sind farblich kaum Unterschiede erkennbar, weil die extrem hohe Bevölkerungsdichte vom Halbkanton Basel-Stadt (>5'000 Einwohner pro km<sup>2</sup>!) die ganze Farbskala dominiert. Der [Statistischer Atlas der Schweiz](https://www.atlas.bfs.admin.ch/maps/13/de/15467_75_3501_70/24216.html) löst das Problem, indem es Klassen mit irregulären Schwellwerte verwendet und alle zahlen >2'000 gruppiert. Diese Vorgehensweise können wir mit `cut()` rekonstruieren.
+Hier sind farblich kaum Unterschiede erkennbar, weil die extrem hohe Bevölkerungsdichte vom Halbkanton Basel-Stadt (>5'000 Einwohner pro km<sup>2</sup>!) die ganze Farbskala dominiert. Der [Statistischer Atlas der Schweiz](https://www.atlas.bfs.admin.ch/maps/13/de/15467_75_3501_70/24216.html) löst das Problem, indem es Klassen mit irregulären Schwellenwerte verwendet und alle Zahlen >2'000 gruppiert. Diese Vorgehensweise können wir mit `cut()` rekonstruieren.
 
 ```{r}
 #| echo: true
