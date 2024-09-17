@@ -13,7 +13,7 @@ knitr:
 
 # Rauman 3: Übung B
 
-In dieser Übung geht es darum, zwei verschiedene Interpolationsverfahren in R umzusetzen. Im ersten Interpolationsverfahren verwenden wir die *inverse distance weighted interpolation*, später verwenden wir die *nearest neighbour* methode. Dazu braucht ihr die folgenden Packages:
+In dieser Übung geht es darum, zwei verschiedene Interpolationsverfahren in R umzusetzen. Im ersten Interpolationsverfahren verwenden wir die *inverse distance weighted interpolation*, später verwenden wir die *nearest neighbour* Methode. Dazu braucht ihr die folgenden Packages:
 
 ```{r}
 #| echo: true
@@ -36,7 +36,7 @@ luftqualitaet <- read_sf("datasets/rauman/luftqualitaet.gpkg")
 schweiz <- read_sf("datasets/rauman/schweiz.gpkg")
 ```
 
-Die Library `gstat` bietet verschiedene Möglichkeiten, Datenpunkte zu interpolieren, unter anderem auch die *inverse distance weighted* Methode. Leider ist das Package noch nicht so benutzerfreundlich wie `sf`: Das Package wird aber aktuell überarbeitet und in mittlerer Zukunft sollte es ebenso einfach  zugänglich sein. Damit Ihr Euch nicht mit den Eigenheiten dieser Library umschlagen müsst, haben wir eine Function vorbereitet, die Euch die Verwendung der IDW-Interpolation erleichtern soll.
+Die Library `gstat` bietet verschiedene Möglichkeiten, Datenpunkte zu interpolieren, unter anderem auch die *inverse distance weighted* Methode. Leider ist das Package noch nicht so benutzerfreundlich wie `sf`: Das Package wird aber aktuell überarbeitet und in mittlerer Zukunft sollte es ebenso einfach  zugänglich sein. Damit Ihr Euch nicht mit den Eigenheiten dieser Library herumschlagen müsst, haben wir eine Function vorbereitet, die Euch die Verwendung der IDW-Interpolation erleichtern soll.
 
 Wir nehmen Euch damit etwas Komplexität weg und liefern Euch ein pfannenfertiges Werkzeug. Das hat auch Nachteile und wir ermutigen alle, die dafür Kapazität haben, unsere Function eingehend zu studieren und allenfalls ganz auf die Function zu verzichten und stattdessen direkt `gstat` zu verwenden. Wenn ihr mit unserer Function arbeiten möchtet, müsst ihr den unten stehenden Code in euer Skript kopieren und ausführen. 
 
@@ -76,7 +76,7 @@ Folgende Parameter stehen Euch zur Verfügung:
 - **Notwendige Parameter**:
   - `groundtruth`: Punktdatensatz mit den Messwerten (`sf`-Objekt)
   - `column`: Name der Spalte mit den Messwerten (in Anführungs- und Schlusszeichen)
-  - `cellsize`: Zellgrösse des output Rasters
+  - `cellsize`: Zellgrösse des Output-Rasters
 - **Optionale Parameter**
   - `nmax`: Maximale Anzahl Punkte, die für die Interpolation berücksichtigt werden sollen. Default: `Inf` (alle Werte im gegebenen Suchradius)
   - `maxdist`: Suchradius, welcher für die Interpolation verwendet werden soll. Default `Inf` (alle Werte bis `nmax`)
@@ -85,9 +85,9 @@ Folgende Parameter stehen Euch zur Verfügung:
 - **Ouput**
   - der Output der Funktion ist eine `data.frame` mit 3 Spalten: 
     - `X`, `Y` Koordinaten der interpolierten Werte
-    - `pred`: der Interpolierte Wert
+    - `pred`: der interpolierte Wert
   
-Beim Output handelt sich hier um einen Raster-ähnlichen Datentyp (siehe Vorlesung *Spatial DataScience 1*). Diesen können wir mit `geom_raster` mit `ggplot` visualisieren. Dafür müsst ihr in `aes` die `X` und `Y` Koordinaten angeben, und der interpolierte Wert mit `fill` einfärben.
+Beim Output handelt sich hier um einen Raster-ähnlichen Datentyp (siehe Vorlesung *Spatial DataScience 1*). Diesen können wir mit `geom_raster` mit `ggplot` visualisieren. Dafür müsst ihr in `aes` die `X` und `Y` Koordinaten angeben und der interpolierte Wert mit `fill` einfärben.
 
 ### Aufgabe 1: Raeumliche Interpolation mit IDW
 
@@ -96,8 +96,8 @@ Rechnet so den IDW für die Luftqualitätsmessungen mit verschiedenen Parametern
 Tips: 
 
 - Was für Distanzen bei `maxdist` Sinn machen, könnt ihr dem Output aus der G-Funktion (vorherige Übung) entnehmen
-- Wählt am Anfang eine etwas Konvervative (grosse) `cellsize` und verringert diesen nur wenn euer Rechner damit gut klar kommt
-- Da der Output aus der Interpolation im gleichen Koordinatenbezugssystem sind wie `schweiz.gpkg` kann man diese beiden Datensätze im gleichen `ggplot` darstellen. Dafür müsst ihr die *aesthetics* (`aes()`) für jeden Layer einzeln setzen, und nicht auf der Ebene von `ggplot()`.
+- Wählt am Anfang eine etwas konvervative (grosse) `cellsize` und verringert diesen nur, wenn euer Rechner damit gut klar kommt
+- Da der Output aus der Interpolation im gleichen Koordinatenbezugssystem ist wie `schweiz.gpkg`, kann man diese beiden Datensätze im gleichen `ggplot` darstellen. Dafür müsst ihr die *aesthetics* (`aes()`) für jeden Layer einzeln setzen und nicht auf der Ebene von `ggplot()`.
 
 ::: {.column-body}
 ```{r}
@@ -133,7 +133,7 @@ ggsave("rauman/images/idw.png", height = 18, width = 20, units = "cm")
 
 ### Aufgabe 2: Interpolation mit Nearest Neighbour
 
-Eine weitere einfache Möglichkeit zur Interpolation bietet die Erstellung eines Voronoi-Diagrammes, auch als Thiessen-Polygone oder Dirichlet-Zerlegung bekannt. `sf` liefert dazu die Funktion `st_voronoi()`, die einen Punktdatensatz annimmt und eben um die Punkte die Thiessenpolygone konstruiert. Dazu braucht es lediglich einen kleinen Vorverarbeitungsschritt: `sf` möchte für jedes Feature, also für jede *Zeile* in unserem Datensatz, ein Voronoidiagramm. Das macht bei uns wenig Sinn, weil jede Zeile nur aus einem Punkt besteht. Deshalb müssen wir vorher `luftqualitaet` mit `st_union()` von einem `POINT` in ein `MULTIPOINT` Objekt konvertieren, in welchem alle Punkte in einer Zeile zusammengefasst sind.
+Eine weitere einfache Möglichkeit zur Interpolation bietet die Erstellung eines Voronoi-Diagrammes, auch als Thiessen-Polygone oder Dirichlet-Zerlegung bekannt. `sf` liefert dazu die Funktion `st_voronoi()`, die einen Punktdatensatz annimmt und eben um die Punkte die Thiessenpolygone konstruiert. Dazu braucht es lediglich einen kleinen Vorverarbeitungsschritt: `sf` möchte für jedes Feature, also für jede *Zeile* in unserem Datensatz, ein Voronoidiagramm. Das macht bei uns wenig Sinn, weil jede Zeile nur aus einem Punkt besteht. Deshalb müssen wir vorher `luftqualitaet` mit `st_union()` von einem `POINT`- in ein `MULTIPOINT`-Objekt konvertieren, in welchem alle Punkte in einer Zeile zusammengefasst sind.
 
 ```{r}
 luftqualitaet_union <- st_union(luftqualitaet)
@@ -151,8 +151,8 @@ ggplot() +
 
 `st_voronoi` hat die Thiessenpolygone etwas weiter gezogen als wir sie wollen. Dies ist allerdings eine schöne Illustration der Randeffekte von Thiessenpolygonen, die zum Rand hin (wo es immer weniger Punkte hat) sehr gross werden können. Wir können die Polygone auf die Ausdehnung der Schweiz mit `st_intersection()` clippen. Auch hier braucht es zwei kleine Vorverarbeitungsschritte:
 
-1. wie vorher müssen wir die einzelnen Kantons-Polygone miteinander verschmelzen. Dies erreichen wir mit `st_union()`. Wir speichern den Output als `schweiz`, was als Resultat ein einzelnes Polygon der Schweizergrenze retourniert.
-2. für die Thiessen-Polygone machen wir genau das Umgekehrte: `st_voronoi()` liefert ein einzelnes Feature mit allen Polygonen, welches sich nicht gerne clippen lässt. Mit `st_cast()` wird die `GEOMETRYCOLLECTION` in Einzelpolygone aufgeteilt. 
+1. Wie vorher müssen wir die einzelnen Kantons-Polygone miteinander verschmelzen. Dies erreichen wir mit `st_union()`. Wir speichern den Output als `schweiz`, was als Resultat ein einzelnes Polygon der Schweizergrenze retourniert.
+2. Für die Thiessen-Polygone machen wir genau das Umgekehrte: `st_voronoi()` liefert ein einzelnes Feature mit allen Polygonen, welches sich nicht gerne clippen lässt. Mit `st_cast()` wird die `GEOMETRYCOLLECTION` in Einzelpolygone aufgeteilt. 
 
 ```{r}
 thiessenpolygone <- st_cast(thiessenpolygone)
@@ -168,7 +168,7 @@ ggplot() +
   geom_sf(data = thiessenpolygone_clip, fill = NA)
 ```
 
-Jetzt müssen wir nur noch den jeweiligen Wert für jedes Polygon ermitteln. Dies erreichen wir wieder durch `st_join`. Auch hier ist noch ein *kleiner* Vorverarbeitungsschritt nötig: Wir konvertieren das `sfc` Objekt (nur Geometrien) in ein `sf` Objekt (Geometrien mit Attributtabelle).
+Jetzt müssen wir nur noch den jeweiligen Wert für jedes Polygon ermitteln. Dies erreichen wir wieder durch `st_join`. Auch hier ist noch ein *kleiner* Vorverarbeitungsschritt nötig: Wir konvertieren das `sfc`-Objekt (nur Geometrien) in ein `sf`-Objekt (Geometrien mit Attributtabelle).
 
 ```{r}
 thiessenpolygone_clip <- st_as_sf(thiessenpolygone_clip)
