@@ -13,10 +13,10 @@ knitr:
 
 # Rauman 5: Übung B
 
-In der letzten Übung (Übung A) haben wir die potentielle Standorte für Windkraftanalgen hinsichtlich zweier Distanzkriterien bewertet. In dieser Übung (Übung B) schliessen wir die Multikriterien-Evaluation ab, in dem wir:
+In der letzten Übung (Übung A) haben wir die potentielle Standorte für Windkraftanlagen hinsichtlich zweier Distanzkriterien bewertet. In dieser Übung (Übung B) schliessen wir die Multikriterien-Evaluation ab, indem wir:
 
-1. Folgende Kriterien mitberücksichtigen: Windgeschwindigkeit und Hangneigung
-2. Die *Ausschlusskriterien* vom Resultat ausschliessen
+1. folgende Kriterien mitberücksichtigen: Windgeschwindigkeit und Hangneigung
+2. die *Ausschlusskriterien* vom Resultat ausschliessen
 
 Für Punkt 1 müssen wir zusätzliche Daten einlesen, die im Rasterformat daherkommen. Punkt 2 beruht im Wesentlichen auf Daten, die wir bereits verwendet haben.
 
@@ -36,7 +36,7 @@ source(tempr)
 
 ## Aufgabe 1: Rasterdaten einlesen
 
-Zur Bewertung der Standorte hinsichtlich Windgeschwindigkeit steht uns der Datensatz *wind250m.tif* zur Verfügung (siehe @tbl-mce-data). Lade den Datensatz mit der Funktion `rast()` in R ein. Explorieren Sie den Datensatz visuell und versuchen Sie ein Verständnis für die Datensätze zu bekommen. 
+Zur Bewertung der Standorte hinsichtlich Windgeschwindigkeit steht uns der Datensatz *wind250m.tif* zur Verfügung (siehe @tbl-mce-data). Lade den Datensatz mit der Funktion `rast()` in R ein. Exploriere den Datensatz visuell und versuche ein Verständnis für die Datensätze zu bekommen. 
 
 ```{r}
 wind250m <- rast("datasets/rauman/wind250m.tif")
@@ -52,7 +52,7 @@ tm_shape(wind250m) +
 
 ## Aufgabe 2: Wind bewerten
 
-Diese Rasterdaten müssen wir nicht weiter verarbeiten, wir können sie direkt bewerten. Führen Sie diese Bewertung aufgrund nachstehender Tabelle durch. Nutzen Sie dafür die Funktion `classify()` analog @sec-classify1. Sie können die Schwellwerte frei wählen, wir werden diejenigen verwenden, die in @tbl-bewerungstabelle-other festgehalten sind.
+Diese Rasterdaten müssen wir nicht weiter verarbeiten, wir können sie direkt bewerten. Führe diese Bewertung aufgrund nachstehender Tabelle durch. Nutze dafür die Funktion `classify()` analog @sec-classify1. Ihr könnt die Schwellenwerte frei wählen, wir werden diejenigen verwenden, die in @tbl-bewerungstabelle-other festgehalten sind.
 
 ```{r}
 #### reclassify wind
@@ -73,9 +73,9 @@ wind_classify <- classify(wind250m, wind_klassen)
 
 ## Aufgabe 3: Slope berechnen und bewerten
 
-Für die Berechnung und anschliessende Bewertung der Hangneigung brauchen wir ein Höhenmodell. Lade das Höhenmodell *dhm250m.tif* herunter (siehe @tbl-mce-data) und in R ein. Berechne anschliessend die Hangneigung mit der Funktion `terrain()` analog @sec-raster-slope (beachten Sie die Einheit des Output!). 
+Für die Berechnung und anschliessende Bewertung der Hangneigung brauchen wir ein Höhenmodell. Lade das Höhenmodell *dhm250m.tif* herunter (siehe @tbl-mce-data) und in R ein. Berechne anschliessend die Hangneigung mit der Funktion `terrain()` analog @sec-raster-slope (beachte die Einheit des Output!). 
 
-Bewerten Sie die Hangneigung danach gemäss Tabelle @tbl-bewerungstabelle-other. 
+Bewerte die Hangneigung danach gemäss Tabelle @tbl-bewerungstabelle-other. 
 
 ```{r}
 dhm250m <- rast("datasets/rauman/dhm250m.tif")
@@ -118,7 +118,7 @@ cbind(wind_klassen, neigung_klassen) |>
 
 ## Aufgabe 4: Raster Overlay {#sec-raster-overlay2}
 
-Analog @sec-raster-overlay1 können wir an dieser Stelle eine vorläufige Beurteilung der Gebiete durchführen. Du kannst die Gewichte wieder so anpassen wie du willst.
+Analog @sec-raster-overlay1 können wir an dieser Stelle eine vorläufige Beurteilung der Gebiete durchführen. Du kannst die Gewichte wieder so anpassen, wie du willst.
 
 ```{r}
 #| fig-cap: Ungewichtetes Überlagern aller Kriterien mit Ausnahme der Ausschlussgebiete
@@ -144,9 +144,10 @@ seen <- read_sf(gpkg_path, "Seeflaechen") |> st_transform(2056)
 kt_schwyz <- read_sf(gpkg_path, "Untersuchungsgebiet_Schwyz") |> st_transform(2056)
 ```
 
-Um diese Flächen aus von unserem Resultat auzuschliessen, können wir wieder die Funktion `mask()` verwenden (siehe @sec-rauman5-mask). Doch diesmal möchten wir nicht die Flächen *ausserhalb* der Polygone mit `NA` ersetzen, sondern die Flächen *innerhalb* der Polygone. Deshalb verwenden wir `mask()` mit dem Argument `inverse = TRUE`.
+Um diese Flächen aus unserem Resultat auzuschliessen, können wir wieder die Funktion `mask()` verwenden (siehe @sec-rauman5-mask). Doch diesmal möchten wir nicht die Flächen *ausserhalb* der Polygone mit `NA` ersetzen, sondern die Flächen *innerhalb* der Polygone. Deshalb verwenden wir `mask()` mit dem Argument `inverse = TRUE`.
 
 Versuche mit `mask()`, den oben erwähnten Vektordatensätze sowie der Option `inverse = TRUE` die Ausschlussgebiete vom Raster-Overlay zu entfernen und visualisiere das Resultat.
+
 ```{r}
 #| output: true
 
