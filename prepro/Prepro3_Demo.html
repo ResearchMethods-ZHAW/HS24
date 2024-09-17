@@ -567,7 +567,7 @@ window.onload = function() {
   <ul>
   <li><a href="#split-apply-combine" id="toc-split-apply-combine" class="nav-link active" data-scroll-target="#split-apply-combine">Split-Apply-Combine</a>
   <ul class="collapse">
-  <li><a href="#daten-laden" id="toc-daten-laden" class="nav-link" data-scroll-target="#daten-laden">Daten Laden</a></li>
+  <li><a href="#daten-laden" id="toc-daten-laden" class="nav-link" data-scroll-target="#daten-laden">Daten laden</a></li>
   <li><a href="#kennwerte-berechnen" id="toc-kennwerte-berechnen" class="nav-link" data-scroll-target="#kennwerte-berechnen">Kennwerte berechnen</a></li>
   <li><a href="#convenience-variablen" id="toc-convenience-variablen" class="nav-link" data-scroll-target="#convenience-variablen">Convenience Variablen</a></li>
   <li><a href="#kennwerte-nach-gruppen-berechnen" id="toc-kennwerte-nach-gruppen-berechnen" class="nav-link" data-scroll-target="#kennwerte-nach-gruppen-berechnen">Kennwerte nach Gruppen berechnen</a></li>
@@ -608,7 +608,7 @@ window.onload = function() {
 <section id="split-apply-combine" class="level2">
 <h2 class="anchored" data-anchor-id="split-apply-combine">Split-Apply-Combine</h2>
 <section id="daten-laden" class="level3">
-<h3 class="anchored" data-anchor-id="daten-laden">Daten Laden</h3>
+<h3 class="anchored" data-anchor-id="daten-laden">Daten laden</h3>
 <p>Wir laden die Wetterdaten (Quelle MeteoSchweiz) der letzten Übung.</p>
 <div class="cell">
 <div class="sourceCode cell-code" id="cb1"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb1-1"><a href="#cb1-1" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(<span class="st">"readr"</span>)</span>
@@ -626,13 +626,13 @@ window.onload = function() {
 </section>
 <section id="kennwerte-berechnen" class="level3">
 <h3 class="anchored" data-anchor-id="kennwerte-berechnen">Kennwerte berechnen</h3>
-<p>Wir möchten den Mittelwert aller gemessenen Temperaturwerte berechnen. Dazu könnten wir folgenden Befehl verwenden:</p>
+<p>Wir möchten den Mittelwert aller gemessenen Temperaturwerten berechnen. Dazu könnten wir folgenden Befehl verwenden:</p>
 <div class="cell">
 <div class="sourceCode cell-code" id="cb2"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb2-1"><a href="#cb2-1" aria-hidden="true" tabindex="-1"></a><span class="fu">mean</span>(wetter<span class="sc">$</span>tre200h0, <span class="at">na.rm =</span> <span class="cn">TRUE</span>)</span>
 <span id="cb2-2"><a href="#cb2-2" aria-hidden="true" tabindex="-1"></a><span class="do">## [1] 6.324744</span></span></code><button title="In die Zwischenablage kopieren" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
 <p>Die Option <code>na.rm = T</code> bedeutet, dass NA Werte von der Berechnung ausgeschlossen werden sollen.</p>
-<p>Mit der selben Herangehensweise können diverse Werte berechnet werden (z.B. das Maximum (<code>max()</code>), Minimum (<code>min()</code>), Median (<code>median()</code>) u.v.m.).</p>
+<p>Mit derselben Herangehensweise können diverse Werte berechnet werden (z.B. das Maximum (<code>max()</code>), Minimum (<code>min()</code>), Median (<code>median()</code>) u.v.m.).</p>
 <p>Diese Herangehensweise funktioniert nur dann gut, wenn wir die Kennwerte über <em>alle</em> Beobachtungen für eine Variable (Spalte) berechnen wollen. Sobald wir die Beobachtungen gruppieren wollen, wird es schwierig. Zum Beispiel, wenn wir die durchschnittliche Temperatur <em>pro Monat</em> berechnen wollen.</p>
 </section>
 <section id="convenience-variablen" class="level3">
@@ -661,7 +661,7 @@ window.onload = function() {
 <p>Dies müssen wir pro Monat wiederholen, was natürlich sehr umständlich ist. Deshalb nutzen wir das package <code>dplyr</code>. Damit geht die Aufgabe (Temperaturmittel pro Monat berechnen) folgendermassen:</p>
 <div class="cell">
 <div class="sourceCode cell-code" id="cb6"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb6-1"><a href="#cb6-1" aria-hidden="true" tabindex="-1"></a><span class="fu">summarise</span>(<span class="fu">group_by</span>(wetter, month), <span class="at">temp_mittel =</span> <span class="fu">mean</span>(tre200h0, <span class="at">na.rm =</span> <span class="cn">TRUE</span>))</span>
-<span id="cb6-2"><a href="#cb6-2" aria-hidden="true" tabindex="-1"></a><span class="do">## # A tibble: 12 × 2</span></span>
+<span id="cb6-2"><a href="#cb6-2" aria-hidden="true" tabindex="-1"></a><span class="do">## # A tibble: 13 × 2</span></span>
 <span id="cb6-3"><a href="#cb6-3" aria-hidden="true" tabindex="-1"></a><span class="do">##    month temp_mittel</span></span>
 <span id="cb6-4"><a href="#cb6-4" aria-hidden="true" tabindex="-1"></a><span class="do">##    &lt;dbl&gt;       &lt;dbl&gt;</span></span>
 <span id="cb6-5"><a href="#cb6-5" aria-hidden="true" tabindex="-1"></a><span class="do">##  1     1      -1.96 </span></span>
@@ -675,7 +675,8 @@ window.onload = function() {
 <span id="cb6-13"><a href="#cb6-13" aria-hidden="true" tabindex="-1"></a><span class="do">##  9     9       9.49 </span></span>
 <span id="cb6-14"><a href="#cb6-14" aria-hidden="true" tabindex="-1"></a><span class="do">## 10    10       8.79 </span></span>
 <span id="cb6-15"><a href="#cb6-15" aria-hidden="true" tabindex="-1"></a><span class="do">## 11    11       1.21 </span></span>
-<span id="cb6-16"><a href="#cb6-16" aria-hidden="true" tabindex="-1"></a><span class="do">## 12    12      -0.898</span></span></code><button title="In die Zwischenablage kopieren" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<span id="cb6-16"><a href="#cb6-16" aria-hidden="true" tabindex="-1"></a><span class="do">## 12    12      -0.898</span></span>
+<span id="cb6-17"><a href="#cb6-17" aria-hidden="true" tabindex="-1"></a><span class="do">## 13    NA       2.95</span></span></code><button title="In die Zwischenablage kopieren" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
 </section>
 <section id="verketten-vs.-verschachteln" class="level3">
@@ -686,7 +687,7 @@ window.onload = function() {
 <li>Bilde Gruppen pro Jahr (<code>group_by(wetter,year)</code>)</li>
 <li>Berechne das Temperaturmittel (<code>mean(tre200h0)</code>)</li>
 </ol>
-<p>Diese Übersetzung <code>R</code>-&gt; Deutsch unterscheidet sich vor allem darin, dass die Operation auf Deutsch <em>verkettet</em> ausgesprochen wird (Operation 1-&gt;2-&gt;3) während der Computer <em>verschachtelt</em> liest 3(2(1)). Um <code>R</code> näher an die gesprochene Sprache zu bringen, kann man den <code>|&gt;</code>-Operator verwenden (siehe <a href="#fn4" class="footnote-ref" id="fnref4" role="doc-noteref"><sup>4</sup></a>).</p>
+<p>Diese Übersetzung <code>R</code> -&gt; Deutsch unterscheidet sich vor allem darin, dass die Operation auf Deutsch <em>verkettet</em> ausgesprochen wird (Operation 1-&gt;2-&gt;3) während der Computer <em>verschachtelt</em> liest 3(2(1)). Um <code>R</code> näher an die gesprochene Sprache zu bringen, kann man den <code>|&gt;</code>-Operator verwenden (siehe <a href="#fn4" class="footnote-ref" id="fnref4" role="doc-noteref"><sup>4</sup></a>).</p>
 <div class="cell">
 <div class="sourceCode cell-code" id="cb7"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb7-1"><a href="#cb7-1" aria-hidden="true" tabindex="-1"></a><span class="co"># 1 nimm den Datensatz "wetter"</span></span>
 <span id="cb7-2"><a href="#cb7-2" aria-hidden="true" tabindex="-1"></a><span class="co"># 2 Bilde Gruppen pro Monat</span></span>

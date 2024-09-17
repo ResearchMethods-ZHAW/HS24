@@ -624,7 +624,7 @@ Prüfungsrelevant
 </section>
 <section id="aufgabe-3" class="level2">
 <h2 class="anchored" data-anchor-id="aufgabe-3">Aufgabe 3</h2>
-<p>Nutze die Spalte <code>Gewicht</code> um die Tiere in 3 Gewichtskategorien einzuteilen:</p>
+<p>Nutze die Spalte <code>Gewicht</code>, um die Tiere in 3 Gewichtskategorien einzuteilen:</p>
 <ul>
 <li>leicht: &lt; 5kg</li>
 <li>mittel: 5 - 100 kg</li>
@@ -692,7 +692,7 @@ Prüfungsrelevant
 </section>
 <section id="aufgabe-4" class="level2">
 <h2 class="anchored" data-anchor-id="aufgabe-4">Aufgabe 4</h2>
-<p>Auf Moodle findest du ein Zip-Files mit dem Namen <em>prepro.zip</em>. Lade das File herunter und entpacke es <strong>in deinem Projektordner</strong>. Importiere die Datei <code>weather.csv</code>. Falls du dafür das RStudio GUI verwendest, speichere den Import-Befehl in deinem R-Script ab. Bitte verwende einen relativen Pfad (also kein Pfad der mit <code>C:/</code>, <code>~/</code> o.ä. beginnt).)</p>
+<p>Auf Moodle findest du ein Zip-File mit dem Namen <em>prepro.zip</em>. Lade das File herunter und entpacke es <strong>in deinem Projektordner</strong>. Importiere die Datei <code>weather.csv</code>. Falls du dafür das RStudio GUI verwendest, speichere den Import-Befehl in deinem R-Script ab. Bitte verwende einen relativen Pfad (also kein Pfad, der mit <code>C:/</code>, <code>~/</code> o.ä. beginnt).)</p>
 <div class="callout callout-style-default callout-note callout-titled">
 <div class="callout-header d-flex align-content-center">
 <div class="callout-icon-container">
@@ -703,7 +703,7 @@ Hinweis
 </div>
 </div>
 <div class="callout-body-container callout-body">
-<p>Wir nutzen <code>readr</code> um csvs zu importieren und verwenden die Funktion <code>read_delim</code> (mit <em>underscore</em>) als alternative zu <code>read.csv</code> oder <code>read.delim</code> (mit <em>Punkt</em>). Das ist eine persönliche Präferenz<a href="#fn1" class="footnote-ref" id="fnref1" role="doc-noteref"><sup>1</sup></a>, es ist euch überlassen welche Funktion ihr verwendet. Beachtet, dass die beiden Funktionen leicht andere Parameter erwarten.</p>
+<p>Wir nutzen <code>readr</code>, um csvs zu importieren, und verwenden die Funktion <code>read_delim</code> (mit <em>underscore</em>) als alternative zu <code>read.csv</code> oder <code>read.delim</code> (mit <em>Punkt</em>). Das ist eine persönliche Präferenz<a href="#fn1" class="footnote-ref" id="fnref1" role="doc-noteref"><sup>1</sup></a>, es ist euch überlassen, welche Funktion ihr verwendet. Beachtet, dass die beiden Funktionen leicht andere Parameter erwarten.</p>
 </div>
 </div>
 <div class="cell">
@@ -774,7 +774,7 @@ Hinweis
 </section>
 <section id="aufgabe-5" class="level2">
 <h2 class="anchored" data-anchor-id="aufgabe-5">Aufgabe 5</h2>
-<p>Schau dir die Rückmeldung von <code>read_delim()</code>an. Sind die Daten korrekt interpretiert worden?</p>
+<p>Schau dir die Rückmeldung von <code>read_delim()</code> an. Sind die Daten korrekt interpretiert worden?</p>
 </section>
 <section id="aufgabe-6" class="level2">
 <h2 class="anchored" data-anchor-id="aufgabe-6">Aufgabe 6</h2>
@@ -791,7 +791,7 @@ Tipp
 <div class="callout-body-container callout-body">
 <ul>
 <li>Wenn keine Zeitzone festgelegt wird, trifft <code>as.POSIXct()</code> eine Annahme (basierend auf <code>Sys.timezone()</code>). In unserem Fall handelt es sich aber um Werte in UTC (siehe <em>metadata.csv</em>)</li>
-<li><code>as.POSIXct</code>erwartet <code>character</code>: Wenn du eine Fehlermeldung hast die <code>'origin' must be supplied</code> (o.ä) heisst, hast du der Funktion vermutlich einen <code>Numeric</code> übergeben.</li>
+<li><code>as.POSIXct</code> erwartet <code>character</code>: Wenn du eine Fehlermeldung hast die <code>'origin' must be supplied</code> (o.ä) heisst, hast du der Funktion vermutlich einen <code>Numeric</code> übergeben.</li>
 </ul>
 </div>
 </div>
@@ -882,70 +882,70 @@ Tipp
 <td style="text-align: left;">ABO</td>
 <td style="text-align: left;">2000-01-01 00:00:00</td>
 <td style="text-align: right;">-2.6</td>
-<td style="text-align: left;">Sat</td>
+<td style="text-align: left;">Sa</td>
 <td style="text-align: right;">1</td>
 </tr>
 <tr class="even">
 <td style="text-align: left;">ABO</td>
 <td style="text-align: left;">2000-01-01 01:00:00</td>
 <td style="text-align: right;">-2.5</td>
-<td style="text-align: left;">Sat</td>
+<td style="text-align: left;">Sa</td>
 <td style="text-align: right;">1</td>
 </tr>
 <tr class="odd">
 <td style="text-align: left;">ABO</td>
 <td style="text-align: left;">2000-01-01 02:00:00</td>
 <td style="text-align: right;">-3.1</td>
-<td style="text-align: left;">Sat</td>
+<td style="text-align: left;">Sa</td>
 <td style="text-align: right;">1</td>
 </tr>
 <tr class="even">
 <td style="text-align: left;">ABO</td>
 <td style="text-align: left;">2000-01-01 03:00:00</td>
 <td style="text-align: right;">-2.4</td>
-<td style="text-align: left;">Sat</td>
+<td style="text-align: left;">Sa</td>
 <td style="text-align: right;">1</td>
 </tr>
 <tr class="odd">
 <td style="text-align: left;">ABO</td>
 <td style="text-align: left;">2000-01-01 04:00:00</td>
 <td style="text-align: right;">-2.5</td>
-<td style="text-align: left;">Sat</td>
+<td style="text-align: left;">Sa</td>
 <td style="text-align: right;">1</td>
 </tr>
 <tr class="even">
 <td style="text-align: left;">ABO</td>
 <td style="text-align: left;">2000-01-01 05:00:00</td>
 <td style="text-align: right;">-3.0</td>
-<td style="text-align: left;">Sat</td>
+<td style="text-align: left;">Sa</td>
 <td style="text-align: right;">1</td>
 </tr>
 <tr class="odd">
 <td style="text-align: left;">ABO</td>
 <td style="text-align: left;">2000-01-01 06:00:00</td>
 <td style="text-align: right;">-3.7</td>
-<td style="text-align: left;">Sat</td>
+<td style="text-align: left;">Sa</td>
 <td style="text-align: right;">1</td>
 </tr>
 <tr class="even">
 <td style="text-align: left;">ABO</td>
 <td style="text-align: left;">2000-01-01 07:00:00</td>
 <td style="text-align: right;">-4.4</td>
-<td style="text-align: left;">Sat</td>
+<td style="text-align: left;">Sa</td>
 <td style="text-align: right;">1</td>
 </tr>
 <tr class="odd">
 <td style="text-align: left;">ABO</td>
 <td style="text-align: left;">2000-01-01 08:00:00</td>
 <td style="text-align: right;">-4.1</td>
-<td style="text-align: left;">Sat</td>
+<td style="text-align: left;">Sa</td>
 <td style="text-align: right;">1</td>
 </tr>
 <tr class="even">
 <td style="text-align: left;">ABO</td>
 <td style="text-align: left;">2000-01-01 09:00:00</td>
 <td style="text-align: right;">-4.1</td>
-<td style="text-align: left;">Sat</td>
+<td style="text-align: left;">Sa</td>
 <td style="text-align: right;">1</td>
 </tr>
 </tbody>
@@ -955,7 +955,7 @@ Tipp
 </section>
 <section id="aufgabe-8" class="level2">
 <h2 class="anchored" data-anchor-id="aufgabe-8">Aufgabe 8</h2>
-<p>Erstelle eine neue Spalte basierend auf die Temperaturwerte mit der Einteilung “kalt” (unter Null Grad) und “warm” (über Null Grad)</p>
+<p>Erstelle eine neue Spalte basierend auf den Temperaturwerten mit der Einteilung “kalt” (unter Null Grad) und “warm” (über Null Grad)</p>
 <div class="cell">
 <div class="cell-output-display">
 <table class="caption-top table table-sm table-striped small">
@@ -974,7 +974,7 @@ Tipp
 <td style="text-align: left;">ABO</td>
 <td style="text-align: left;">2000-01-01 00:00:00</td>
 <td style="text-align: right;">-2.6</td>
-<td style="text-align: left;">Sat</td>
+<td style="text-align: left;">Sa</td>
 <td style="text-align: right;">1</td>
 <td style="text-align: left;">kalt</td>
 </tr>
@@ -982,7 +982,7 @@ Tipp
 <td style="text-align: left;">ABO</td>
 <td style="text-align: left;">2000-01-01 01:00:00</td>
 <td style="text-align: right;">-2.5</td>
-<td style="text-align: left;">Sat</td>
+<td style="text-align: left;">Sa</td>
 <td style="text-align: right;">1</td>
 <td style="text-align: left;">kalt</td>
 </tr>
@@ -990,7 +990,7 @@ Tipp
 <td style="text-align: left;">ABO</td>
 <td style="text-align: left;">2000-01-01 02:00:00</td>
 <td style="text-align: right;">-3.1</td>
-<td style="text-align: left;">Sat</td>
+<td style="text-align: left;">Sa</td>
 <td style="text-align: right;">1</td>
 <td style="text-align: left;">kalt</td>
 </tr>
@@ -998,7 +998,7 @@ Tipp
 <td style="text-align: left;">ABO</td>
 <td style="text-align: left;">2000-01-01 03:00:00</td>
 <td style="text-align: right;">-2.4</td>
-<td style="text-align: left;">Sat</td>
+<td style="text-align: left;">Sa</td>
 <td style="text-align: right;">1</td>
 <td style="text-align: left;">kalt</td>
 </tr>
@@ -1006,7 +1006,7 @@ Tipp
 <td style="text-align: left;">ABO</td>
 <td style="text-align: left;">2000-01-01 04:00:00</td>
 <td style="text-align: right;">-2.5</td>
-<td style="text-align: left;">Sat</td>
+<td style="text-align: left;">Sa</td>
 <td style="text-align: right;">1</td>
 <td style="text-align: left;">kalt</td>
 </tr>
@@ -1014,7 +1014,7 @@ Tipp
 <td style="text-align: left;">ABO</td>
 <td style="text-align: left;">2000-01-01 05:00:00</td>
 <td style="text-align: right;">-3.0</td>
-<td style="text-align: left;">Sat</td>
+<td style="text-align: left;">Sa</td>
 <td style="text-align: right;">1</td>
 <td style="text-align: left;">kalt</td>
 </tr>
@@ -1022,7 +1022,7 @@ Tipp
 <td style="text-align: left;">ABO</td>
 <td style="text-align: left;">2000-01-01 06:00:00</td>
 <td style="text-align: right;">-3.7</td>
-<td style="text-align: left;">Sat</td>
+<td style="text-align: left;">Sa</td>
 <td style="text-align: right;">1</td>
 <td style="text-align: left;">kalt</td>
 </tr>
@@ -1030,7 +1030,7 @@ Tipp
 <td style="text-align: left;">ABO</td>
 <td style="text-align: left;">2000-01-01 07:00:00</td>
 <td style="text-align: right;">-4.4</td>
-<td style="text-align: left;">Sat</td>
+<td style="text-align: left;">Sa</td>
 <td style="text-align: right;">1</td>
 <td style="text-align: left;">kalt</td>
 </tr>
@@ -1038,7 +1038,7 @@ Tipp
 <td style="text-align: left;">ABO</td>
 <td style="text-align: left;">2000-01-01 08:00:00</td>
 <td style="text-align: right;">-4.1</td>
-<td style="text-align: left;">Sat</td>
+<td style="text-align: left;">Sa</td>
 <td style="text-align: right;">1</td>
 <td style="text-align: left;">kalt</td>
 </tr>
@@ -1046,7 +1046,7 @@ Tipp
 <td style="text-align: left;">ABO</td>
 <td style="text-align: left;">2000-01-01 09:00:00</td>
 <td style="text-align: right;">-4.1</td>
-<td style="text-align: left;">Sat</td>
+<td style="text-align: left;">Sa</td>
 <td style="text-align: right;">1</td>
 <td style="text-align: left;">kalt</td>
 </tr>

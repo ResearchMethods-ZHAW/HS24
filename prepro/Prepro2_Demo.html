@@ -603,7 +603,7 @@ window.Quarto = {
 
 <section id="piping" class="level2">
 <h2 class="anchored" data-anchor-id="piping">Piping</h2>
-<p>Gegeben ist ein character string (<code>diary</code>). Wir wollen aus diesem Text die Temperaturangabe aus dem String extrahieren und danach den Wert von Kelvin in Celsius nach der folgenden Formel umwandeln und zum Schluss den Mittelwert über all diese Werte berechnen.</p>
+<p>Gegeben ist ein character string (<code>diary</code>). Wir wollen aus diesem Text die Temperaturangabe aus dem String extrahieren, danach den Wert von Kelvin in Celsius nach der folgenden Formel umwandeln und zum Schluss den Mittelwert über all diese Werte berechnen.</p>
 <p><span class="math display">\[°C = K - 273.15\]</span></p>
 <div class="cell">
 <div class="sourceCode cell-code" id="cb1"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb1-1"><a href="#cb1-1" aria-hidden="true" tabindex="-1"></a>diary <span class="ot">&lt;-</span> <span class="fu">c</span>(</span>
@@ -630,7 +630,7 @@ window.Quarto = {
 <span id="cb2-10"><a href="#cb2-10" aria-hidden="true" tabindex="-1"></a><span class="fu">substr</span>(charvec2, <span class="dv">4</span>, <span class="dv">6</span>)</span>
 <span id="cb2-11"><a href="#cb2-11" aria-hidden="true" tabindex="-1"></a><span class="do">## [1] "def"</span></span></code><button title="In die Zwischenablage kopieren" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
-<p>Zudem nutzen haben wir eine Hilfsfunktion <code>subtrahieren</code>, welche zwei Werte annimmt, den <code>minuend</code> und den <code>subtrahend</code>:</p>
+<p>Zudem nutzen wir eine Hilfsfunktion <code>subtrahieren</code>, welche zwei Werte annimmt, den <code>minuend</code> und den <code>subtrahend</code>:</p>
 <div class="cell">
 <div class="sourceCode cell-code" id="cb3"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb3-1"><a href="#cb3-1" aria-hidden="true" tabindex="-1"></a>subtrahieren <span class="ot">&lt;-</span> <span class="cf">function</span>(minuend, subtrahend) {</span>
 <span id="cb3-2"><a href="#cb3-2" aria-hidden="true" tabindex="-1"></a>  minuend <span class="sc">-</span> subtrahend</span>
