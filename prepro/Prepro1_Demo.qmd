@@ -9,6 +9,9 @@ knitr:
 
 
 
+Diese Demo kann [hier](Prepro1_Demo.R) heruntergeladen werden (Rechtsklick → Speicher Unteer).
+
+
 ### Datentypen
 
 #### Numerics
