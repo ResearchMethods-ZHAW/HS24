@@ -48,7 +48,7 @@ paste(fname, lname)
 fname2 <- "Simon"
 fname == fname2
 
-wochentage <- c("Donnerstag", "Freitag", "Samstag")
+wochentage <- c("Montag", "Dienstag", "Mittwoch")
 
 typeof(wochentage)
 
