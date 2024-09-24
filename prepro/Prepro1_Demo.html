@@ -538,7 +538,7 @@ window.onload = function() {
 </header>
 
 
-<p>Diese Demo kann <a href="Prepro1_Demo.R">hier</a> heruntergeladen werden (Rechtsklick → Speicher Unteer).</p>
+<p>Diese Demo kann <a href="Prepro1_Demo.R">hier</a> heruntergeladen werden (Rechtsklick → speichern unter).</p>
 <section id="datentypen" class="level3">
 <h3 class="anchored" data-anchor-id="datentypen">Datentypen</h3>
 <section id="numerics" class="level4">
@@ -650,7 +650,7 @@ window.onload = function() {
 <h4 class="anchored" data-anchor-id="factors">Factors</h4>
 <p>Mit Factors wird in R eine Sammlung von Zeichenketten bezeichnet, die sich wiederholen, z.B. Wochentage (es gibt nur 7 unterschiedliche Werte für “Wochentage”).</p>
 <div class="cell">
-<div class="sourceCode cell-code" id="cb9"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb9-1"><a href="#cb9-1" aria-hidden="true" tabindex="-1"></a>wochentage <span class="ot">&lt;-</span> <span class="fu">c</span>(<span class="st">"Donnerstag"</span>, <span class="st">"Freitag"</span>, <span class="st">"Samstag"</span>)</span>
+<div class="sourceCode cell-code" id="cb9"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb9-1"><a href="#cb9-1" aria-hidden="true" tabindex="-1"></a>wochentage <span class="ot">&lt;-</span> <span class="fu">c</span>(<span class="st">"Montag"</span>, <span class="st">"Dienstag"</span>, <span class="st">"Mittwoch"</span>)</span>
 <span id="cb9-2"><a href="#cb9-2" aria-hidden="true" tabindex="-1"></a></span>
 <span id="cb9-3"><a href="#cb9-3" aria-hidden="true" tabindex="-1"></a><span class="fu">typeof</span>(wochentage)</span>
 <span id="cb9-4"><a href="#cb9-4" aria-hidden="true" tabindex="-1"></a><span class="do">## [1] "character"</span></span>
@@ -658,16 +658,16 @@ window.onload = function() {
 <span id="cb9-6"><a href="#cb9-6" aria-hidden="true" tabindex="-1"></a>wochentage_fac <span class="ot">&lt;-</span> <span class="fu">as.factor</span>(wochentage)</span>
 <span id="cb9-7"><a href="#cb9-7" aria-hidden="true" tabindex="-1"></a></span>
 <span id="cb9-8"><a href="#cb9-8" aria-hidden="true" tabindex="-1"></a>wochentage</span>
-<span id="cb9-9"><a href="#cb9-9" aria-hidden="true" tabindex="-1"></a><span class="do">## [1] "Donnerstag" "Freitag"    "Samstag"</span></span>
+<span id="cb9-9"><a href="#cb9-9" aria-hidden="true" tabindex="-1"></a><span class="do">## [1] "Montag"   "Dienstag" "Mittwoch"</span></span>
 <span id="cb9-10"><a href="#cb9-10" aria-hidden="true" tabindex="-1"></a>wochentage_fac</span>
-<span id="cb9-11"><a href="#cb9-11" aria-hidden="true" tabindex="-1"></a><span class="do">## [1] Donnerstag Freitag    Samstag   </span></span>
-<span id="cb9-12"><a href="#cb9-12" aria-hidden="true" tabindex="-1"></a><span class="do">## Levels: Donnerstag Freitag Samstag</span></span></code><button title="In die Zwischenablage kopieren" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<span id="cb9-11"><a href="#cb9-11" aria-hidden="true" tabindex="-1"></a><span class="do">## [1] Montag   Dienstag Mittwoch</span></span>
+<span id="cb9-12"><a href="#cb9-12" aria-hidden="true" tabindex="-1"></a><span class="do">## Levels: Dienstag Mittwoch Montag</span></span></code><button title="In die Zwischenablage kopieren" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
 <p>Wie man oben sieht, unterscheiden sich <code>character vectors</code> und <code>factors</code> v.a. dadurch, dass letztere über sogenannte <code>levels</code> verfügt. Diese <code>levels</code> entsprechen den eindeutigen Werten.</p>
 <p>Zudem fällt auf, dass die Reihenfolge der Wohentag alphabetisch sortiert ist. Eine Ordnung kann man mit dem Befehl <code>ordered = T</code> festlegen, dabei muss die Reihenfolge der Werte im Argument <code>levels =</code> explizit festgehalten werden<a href="#fn1" class="footnote-ref" id="fnref1" role="doc-noteref"><sup>1</sup></a>.</p>
 <div class="cell">
 <div class="sourceCode cell-code" id="cb10"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb10-1"><a href="#cb10-1" aria-hidden="true" tabindex="-1"></a><span class="fu">factor</span>(wochentage, <span class="at">levels =</span> <span class="fu">c</span>(<span class="st">"Montag"</span>, <span class="st">"Dienstag"</span>, <span class="st">"Mittwoch"</span>, <span class="st">"Donnerstag"</span>, <span class="st">"Freitag"</span>, <span class="st">"Samstag"</span>, <span class="st">"Sonntag"</span>), <span class="at">ordered =</span> <span class="cn">TRUE</span>)</span>
-<span id="cb10-2"><a href="#cb10-2" aria-hidden="true" tabindex="-1"></a><span class="do">## [1] Donnerstag Freitag    Samstag   </span></span>
+<span id="cb10-2"><a href="#cb10-2" aria-hidden="true" tabindex="-1"></a><span class="do">## [1] Montag   Dienstag Mittwoch</span></span>
 <span id="cb10-3"><a href="#cb10-3" aria-hidden="true" tabindex="-1"></a><span class="do">## 7 Levels: Montag &lt; Dienstag &lt; Mittwoch &lt; Donnerstag &lt; Freitag &lt; ... &lt; Sonntag</span></span></code><button title="In die Zwischenablage kopieren" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
 <p>Beachtet das <code>&lt;</code>-Zeichen zwischen den Levels!</p>
