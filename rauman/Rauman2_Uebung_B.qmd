@@ -13,7 +13,7 @@ knitr:
 
 # Rauman 2: Übung B {#sec-raster-intro}
 
-In [der letzten Übung](#sec-raster-intro1) habt ihr nun eine erste Erfahrung mit Raster Daten gemacht. Dabei haben wir zuerst einen Vektordatensatz rasterisiert. Häufig arbeiten wir aber mit Geodaten, die bereits im Rasterformat erfast werden. 
+In [der letzten Übung](#sec-raster-intro1) habt ihr nun eine erste Erfahrung mit Raster Daten gemacht. Dabei haben wir zuerst einen Vektordatensatz rasterisiert. Häufig arbeiten wir aber mit Geodaten, die bereits im Rasterformat erfasst werden. 
 
 ## Aufgabe 1
 
@@ -102,7 +102,7 @@ tm_shape(dhm_schwyz) +
   tm_raster(style = "cont", palette = "Spectral")
 ```
 
-Eine grosse Stärke von `tmap` ist die Tatsache, das mit dem gleichen Befehl sowohl statische wie auch interative Plots erstellt werden können. Dafür muss der Modus von statisch auf interaktiv gewechselt werden. 
+Eine grosse Stärke von `tmap` ist die Tatsache, dass mit dem gleichen Befehl sowohl statische wie auch interative Plots erstellt werden können. Dafür muss der Modus von statisch auf interaktiv gewechselt werden. 
 
 ```{r}
 #| output: true
@@ -118,7 +118,7 @@ tmap_mode("plot") # wechselt zurück auf statische Plots
 
 ## Aufgabe 2 {#sec-raster-slope}
 
-Mit `terra` können wir eine Vielzahl von Rasteroperationen über unser Höhenmodell laufen lassen. Eine klassische Rasteroperation ist zum Beispiel das Berechnen der Hangneigung ("slope") oder dessen Orientierung ("aspect"). Nutzen Sie die Funktion `terrain()` aus `terra` um die Hangneigung und Orientierung zu berechnen. Visualisieren Sie die Resultate.
+Mit `terra` können wir eine Vielzahl von Rasteroperationen über unser Höhenmodell laufen lassen. Eine klassische Rasteroperation ist zum Beispiel das Berechnen der Hangneigung ("slope") oder dessen Orientierung ("aspect"). Nutzen Sie die Funktion `terrain()` aus `terra`, um die Hangneigung und Orientierung zu berechnen. Visualisieren Sie die Resultate.
 
 ```{r}
 #| output: true
@@ -136,7 +136,7 @@ plot(schwyz_aspect)
 ```
  
 ::: {.callout-note}
-Bei "aspect" handelt es sich ja um Werte, die von 0 bis 360 reichen. In klassischen Palettes liegen die beiden Extremwerte (in diesem Fall 0 und 360) farblich weit auseinander. Bei Aspect sollten diese aber nahe beieinander liegen (da eine Ausrichtung von 1° nur 2 Grad von einer Ausrichtung von 359° entfernt ist). Um dieser Tatsache Rechnung zu Tragen können wir eine eine eigene Colourpalette erstellen, wo die erste Farbe wiederholt ist.
+Bei "aspect" handelt es sich ja um Werte, die von 0 bis 360 reichen. In klassischen Palettes liegen die beiden Extremwerte (in diesem Fall 0 und 360) farblich weit auseinander. Bei Aspect sollten diese aber nahe beieinander liegen (da eine Ausrichtung von 1° nur 2 Grad von einer Ausrichtung von 359° entfernt ist). Um dieser Tatsache Rechnung zu tragen, können wir eine eigene Colourpalette erstellen, wo die erste Farbe wiederholt ist.
 :::
 
 ```{r}
@@ -154,7 +154,7 @@ tm_shape(schwyz_aspect) +
 
 Mit Hangneigung und -ausrichtung können wir einen *Hillshading*-Effekt berechnen. Hillshading bedeutet, dass der Schattenwurf des Oberflächenmodells bei gegebenen Einfallswinkel der Sonne (Höhe und Azimut) berechnet wird. Der typische Einfallswinkel liegt bei 45° über dem Horizont und von Nordwesten bei 315°.
 
-Um einen Hillshading Effekt zu erzeugen, berechne zuerst `slope` und `aspect` von `dhm_schwyz` analog der letzten Aufgabe, **achte aber darauf das die Einheit `radians` entspricht**. Nutze diese beiden Objekte in der Funktion `shade()` um den Hillshade zu berechnen. Visualisiere den Output anschliessend mit `plot` oder `tmap`.
+Um einen Hillshading Effekt zu erzeugen, berechne zuerst `slope` und `aspect` von `dhm_schwyz` analog der letzten Aufgabe, **achte aber darauf, dass die Einheit `radians` entspricht**. Nutze diese beiden Objekte in der Funktion `shade()`, um den Hillshade zu berechnen. Visualisiere den Output anschliessend mit `plot` oder `tmap`.
 
 ```{r}
 #| output: true

@@ -37,8 +37,8 @@ Rekonstrukturiere folgenden Plot aus @kovic2014 mithilfe von ggplot und dem tagi
 
 Tipp:
 
-- Nutze `ggplot(kanton, aes(auslanderanteil, ja_anteil))` um den ggplot zu initiieren. Füge danach ein einen Punkte Layer hinzu (`geom_point()`)
-- Nutze `coord_fixed()` um die beiden Achsen in ein fixes Verhältnis zu setzen (1:1).
+- Nutze `ggplot(kanton, aes(auslanderanteil, ja_anteil))`, um den ggplot zu initiieren. Füge danach einen Punkte-Layer hinzu (`geom_point()`)
+- Nutze `coord_fixed()`, um die beiden Achsen in ein fixes Verhältnis zu setzen (1:1).
 - Optional: 
   - Setze die Achsen Start- und Endwerte mittels `scale_y_continuous` bzw. `scale_x_continuous`.
   - Setze analog @kovic2014 die `breaks` (0.0, 0.1...0.7) manuell (innerhalb `scale_*_continuous`)

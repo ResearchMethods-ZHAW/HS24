@@ -79,7 +79,7 @@ df$Anzahl <- as.integer(df$Anzahl)
 
 ## Aufgabe 3
 
-Nutze die Spalte `Gewicht` um die Tiere in 3 Gewichtskategorien einzuteilen:
+Nutze die Spalte `Gewicht`, um die Tiere in 3 Gewichtskategorien einzuteilen:
 
 -   leicht: \< 5kg
 -   mittel: 5 - 100 kg
@@ -102,10 +102,10 @@ knitr::kable(df)
 
 ## Aufgabe 4
 
-Auf Moodle findest du ein Zip-Files mit dem Namen *prepro.zip*. Lade das File herunter und entpacke es **in deinem Projektordner**. Importiere die Datei `weather.csv`. Falls du dafür das RStudio GUI verwendest, speichere den Import-Befehl in deinem R-Script ab. Bitte verwende einen relativen Pfad (also kein Pfad der mit `C:/`, `~/` o.ä. beginnt).)
+Auf Moodle findest du ein Zip-File mit dem Namen *prepro.zip*. Lade das File herunter und entpacke es **in deinem Projektordner**. Importiere die Datei `weather.csv`. Falls du dafür das RStudio GUI verwendest, speichere den Import-Befehl in deinem R-Script ab. Bitte verwende einen relativen Pfad (also kein Pfad, der mit `C:/`, `~/` o.ä. beginnt).)
 
 :::{.callout-note}
-Wir nutzen `readr` um csvs zu importieren und verwenden die Funktion `read_delim` (mit *underscore*) als alternative zu `read.csv` oder `read.delim` (mit *Punkt*). Das ist eine persönliche Präferenz[^readr], es ist euch überlassen welche Funktion ihr verwendet. Beachtet, dass die beiden Funktionen leicht andere Parameter erwarten.
+Wir nutzen `readr`, um csvs zu importieren, und verwenden die Funktion `read_delim` (mit *underscore*) als alternative zu `read.csv` oder `read.delim` (mit *Punkt*). Das ist eine persönliche Präferenz[^readr], es ist euch überlassen, welche Funktion ihr verwendet. Beachtet, dass die beiden Funktionen leicht andere Parameter erwarten.
 :::
 
 [^readr]: Vorteile von `read_delim` gegenüber `read.csv`: <https://stackoverflow.com/a/60374974/4139249>
@@ -130,7 +130,7 @@ knitr::kable(head(wetter, 10))
 
 ## Aufgabe 5
 
-Schau dir die Rückmeldung von `read_delim()`an. Sind die Daten korrekt interpretiert worden?
+Schau dir die Rückmeldung von `read_delim()` an. Sind die Daten korrekt interpretiert worden?
 
 ```{r}
 # Die Spalte 'time' wurde als 'integer' interpretiert. Dabei handelt es
@@ -143,7 +143,7 @@ Die Spalte `time` ist eine Datum/Zeitangabe im Format JJJJMMTTHH (siehe *meta.tx
 
 :::{.callout-tip}
 - Wenn keine Zeitzone festgelegt wird, trifft `as.POSIXct()` eine Annahme (basierend auf `Sys.timezone()`). In unserem Fall handelt es sich aber um Werte in UTC (siehe *metadata.csv*)
-- `as.POSIXct`erwartet `character`: Wenn du eine Fehlermeldung hast die `'origin' must be supplied` (o.ä) heisst, hast du der Funktion vermutlich einen `Numeric` übergeben.
+- `as.POSIXct` erwartet `character`: Wenn du eine Fehlermeldung hast die `'origin' must be supplied` (o.ä) heisst, hast du der Funktion vermutlich einen `Numeric` übergeben.
 :::
 
 ```{r}
@@ -179,7 +179,7 @@ knitr::kable(head(wetter, 10))
 
 ## Aufgabe 8
 
-Erstelle eine neue Spalte basierend auf die Temperaturwerte mit der Einteilung "kalt" (unter Null Grad) und "warm" (über Null Grad)
+Erstelle eine neue Spalte basierend auf den Temperaturwerten mit der Einteilung "kalt" (unter Null Grad) und "warm" (über Null Grad)
 
 ```{r}
 wetter$temp_kat[wetter$tre200h0 > 0] <- "warm"

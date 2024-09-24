@@ -2,9 +2,9 @@
 lesson: Besuchermonitoring
 thema: Felderhebungen Grüental
 execute: 
-  echo: false   # set to true to show musterlösung
+  echo: true   # set to true to show musterlösung
   output: false
-code-fold: false # set false to show all code
+code-fold: true  # set false to show all code
 code-summary: "Musterlösung"
 knitr:
   opts_chunk: 
@@ -14,46 +14,62 @@ knitr:
 # Monitoring
 
 
-## Einführung und Installation
+## Einführung
 
-Es gibt eine Vielzahl an möglichen Methoden zur Erfassung der Besuchszahlen. Automatische Zählgeräte bieten die Möglichkeit lange und durchgehende Zeitreihen zu erfassen. Inputs dazu, wie diese ausgewertet werden können, erhält ihr in dieser Aufgabe.
+Es gibt eine Vielzahl an möglichen Methoden zur Erfassung der Besuchszahlen. Automatische Zählgeräte bieten die Möglichkeit, lange und durchgehende Zeitreihen zu erfassen. Inputs dazu, wie diese ausgewertet werden können, erhält ihr in dieser Aufgabe.
 
 ![](images/gruental.jpg){width=50%}
 
+
 ## Ziele
 
-- Die Studierenden können das eingesetzte Zählgerät installieren und kennen die Vor- und Nachteile verschiedener Methoden.
+1. Ihr könnt das eingesetzte Zählgerät installieren und kennt die Vor- und Nachteile verschiedener Methoden.
 
-- Die Studierenden können die Daten auslesen und explorativ analysieren.
+2. Ihr könnt die generierten Daten explorativ und dekriptiv auswerten.
+
 
 ## Grundlagen
 
-Die Geräte werden innerhalb der unten eingezeichneten Elipsen platziert. Damit soll überprüft werden, wie stark frequentiert die Waldränder der ökologisch aufgewerteten Seeparzelle sind.
+Die Geräte werden gemeinsam an zwei Standorten auf dem Campus Grüntal platziert. 
 
-![](images/Perimeter_Felderhebung.png){width=100%}
-
-Datenschutz ist ein wichtiges Thema. Die Besuchenden werden über den Zweck der Kameras informiert, die Daten nach der Bearbeitung wieder gelöscht und nicht weitergegeben.
-
-![](images/Begleitzettel_Kamera.png){width=50%}
-
-## Auswertung
-__Nach den Felderhebungen__
-
-_Nachdem die Kameras für zwei Wochen im Einsatz standen, sichten wir zusammen die Ergebnisse._
-
-_Da die Anzahl Passagen auf der Seeparzelle keine schöne Auswertung erlauben, arbeiten wir ab jetzt mit einem Datensatz aus dem WPZ. Die Vorteile für euch sind:_
-
-1. ihr habt genügend Daten für die Auswertung mit R und 
-2. die Daten sind im selben Format wir für die späteren Aufgaben.
+Datenschutz ist ein wichtiges Thema. Die eingesetzten Geräte erfassen keine Personendaten, sondern nur Bewegungen. Es handelt sich um Pyroelektrische Infrarotsensoren, welche auf den Temperaturunterschied reagieren, wenn sich eine Person vor der Linse bewegt. Insofern handelt es sich, vereinfacht gesagt, um Bewegungsmelder.
 
 
-[Hier](https://moodle.zhaw.ch/mod/folder/view.php?id=956254)könnt ihr die Daten herunterladen.
+# Auswertung
+
+__Bearbeitung NACH den Felderhebungen__
+
+
+
+
+
+
+
+
+
+
+
+[Hier](LINK) könnt ihr die Daten herunterladen.
+
+
+
+
+
+
+
+
+
+
 
 ### Aufgabe 1: Vorarbeiten
 
-- Überlegt euch mögliche Darstellungsformen für die __Anzahl Passagen__ und die beobachteten __Aktivitäten__ an den untersuchten Standorten.
+Oftmals möchte man direkt mit den Auswertungen in R beginnen, weiss aber selbst noch nicht genau, was eigentlich dargestellt werden soll. Darum macht es Sinn, einen Schritt zurückzutreten und sich zuerst konzeptionell zu überlegen, was mit den Daten eigentlich dargestellt werden soll.
 
-- Skizziert eure Ideen mittels Stift und Papier.
+- Überlegt euch mögliche Darstellungsformen für __1. die Anzahl Passagen pro Richtung und Standort__,  __2. den Verlauf der Zählungen pro Tag über die gesamte Untersuchungsdauer__ und __3. die Unterschiede Werktag und Wochenende__ an den beiden untersuchten Standorten.
+
+- Skizziert eure Ideen mittels Stift und Papier (oder digital) in Kleingruppen.
+
+- Individuelle Besprechung der Ideen und anschliessende Umsetzung in R.
  
 
 ### Aufgabe 2: Darstellung in R
@@ -62,59 +78,147 @@ R bietet sehr viele Optionen zur Analyse und zur Darstellung der Daten. Nehmt bi
 
 Untenstehend sind einige Ideen zur Umsetzung:
 
-```{r}
-### Bibliothek laden
+#### Daten einlesen und Vorbereiten
 
-# zuerst muss sie installiert sein. folgende Zeile müsst ihr nur das erste Mal ausführen
+```{r}
+## benötigte Bibliothek laden
+
+# zuerst muss diese installiert sein. folgende Zeile müsst ihr nur das erste Mal ausführen
+
 # install.packages("readr")
+
 # WENN installiert, DANN laden
-library("readr") # einlesen von csv mit read_delim
+library("readr") # zum Einlesen von .csv-Dateien mit read_delim
 
-### Datensatz einlesen
 
-# dabei speichere ich ihn gleich unter der Variable "depo" ab.
-depo <- read_delim("datasets/fallstudie_s/Felderhebungen/Bsp_Data.csv")
+## Datensatz einlesen
 
-### Datum und Uhrzeit
-# das Datum und die Uhrzeit sind in einer Spalte. R liest das als "Buchstaben" ein. Wir definieren es als Datum mit as.POSIXct aus base R
-depo$DatumUhrzeit <- as.POSIXct(depo$DatumUhrzeit, format = "%d.%m.%Y %H:%M")
-```
+# dabei speichere ich ihn gleich als Variable ab.
+indoor <- read_delim("datasets/fallstudie_s/Felderhebungen/dummy_data.csv")
+outdoor <- read_delim("datasets/fallstudie_s/Felderhebungen/outdoor.csv")
 
-```{r}
-### Kennzahlen
+## Datum und Uhrzeit
 
-# zuerst schaue ich mir jeweils den Aufau und die Kennzahlen zum Datensaz an:
-str(depo)
+# das Datum und die Uhrzeit sind in einer Spaltegespeichert. 
+# R liest das als "Buchstaben" ein. Wir definieren es als Datum mit as.POSIXct aus base R
+# dies ist eine mächtige Funktion, welche auch im späteren Verlauf der Fallstudie noch
+# eine wichtige Rolle spielen wird. 
+# Damit sie funktioniert, ist es wichtig, dass das Format so eingegeben wird, 
+# wie es im .csv ersichtlich ist.
+
+indoor$DatumUhrzeit <- as.POSIXct(indoor$DatumUhrzeit, format = "%d.%m.%Y %H:%M")
+# d = Tag
+# m = Monat
+# Y = Jahr
+# H = Stunde
+# M = Minute
+
+outdoor$DatumUhrzeit <- as.POSIXct(outdoor$DatumUhrzeit, format = "%d.%m.%Y %H:%M")
+
+# prüfen des Aufaus Datensaz
+str(indoor)
 
 # hat es im Datensatz noch fehlende Werte?
-sum(is.na(depo))
+sum(is.na(indoor)) # Falls "0", dann gibt es keine NA's im Datendatz
 
-# wie viele Personen sind IN das Gebiet gegangen?
-sum(depo$Fuss_IN)
+# falls es noch NA hat, dann müssen diese entfernt werden
+indoor <- na.omit(indoor)
 
-# wie viele insgesamt?
-# dafür erstellen wir zuerst eine neue Spalte mit der Totalen Anzahl pro Datum und Zeitstempel:
-depo$Total = depo$Fuss_IN + depo$Fuss_OUT + depo$Velo_IN + depo$Velo_OUT
-# und berechnen nachher die Summe dieser neuen Spalte
-sum(depo$Total)
 ```
+
+
+#### 1. Anzahl Passagen pro Richtung und Standort
 
 ```{r}
-# Darstellen der Anzahl Passagen pro Stunde und Tag, mit Base R
-plot(
-  x = depo$DatumUhrzeit, y = depo$Total,
-  pch = 21, # Form
-  cex = 1.5, # Grösse
-  bg = "blue"
-) # Füllung
+## Berechnen der Anzahl Passagen, pro Richtung
+
+sum(indoor$IN)
+
+# Wiederholung von diesem Befehl für die weiteren Standorte / Richtungen
+
+## Berechnung der Anzahl Passagen pro Standort insgesamt
+# in der Funktion sum können weitere Operationen ausgeführt werden
+sum(indoor$IN + indoor$OUT)
 ```
+
+
+#### 2. Verlauf der Zählungen pro Tag über die gesamte Untersuchungsdauer
 
 ```{r}
-# Darstellung der verschiedenen Nutzergruppen als Pie Chart (Kuchendiagram)
-slieces <- c(sum(depo$Fuss_IN), sum(depo$Fuss_OUT), sum(depo$Velo_IN), sum(depo$Velo_OUT))
-lbls <- c("Fuss_IN", "Fuss_OUT", "Velo_IN", "Velo_OUT")
-pie(slieces, labels = lbls)
+## Berechnung der Anzahl Passagen / Tag
+
+# mit Base R
+indoor_d <- aggregate(IN + OUT ~ DatumUhrzeit, data = indoor, sum)
+names(indoor_d)[2] <- "Passagen_pro_Tag"
+
+# oder dann mit der library dplyr aus dem tidyverse universe
+# --> das Ergebnis ist dasselbe, der Weg unterscheidet sich. Ich zeige beide Methoden, da wir später 
+# sehr viel mit tidyverse arbeiten werden. Die Inputs dazu am morgen folgen aber erst später.
+library("dplyr")
+indoor_d <- indoor %>%
+  group_by(DatumUhrzeit) %>%
+  summarise(Passagen_pro_Tag = sum(IN + OUT))
+
+
+## Grafische Darstellung des Verlaufs
+
+# Ich verwende hier eine Funktion, in welcher alle Befehle zusammen durchgeführt werden. 
+# So stelle ich sicher, dass die zweite Linie dem ersten, vor mir spezifizierten Plot hinzugefügt wird.
+plot_passages <- function() {
+  
+  # zeige zuerst indoor, Punkte und Linien
+  plot(indoor_d$DatumUhrzeit, indoor_d$Passagen_pro_Tag, 
+       type = "b", 
+       pch = 19, 
+       col = "lightblue", 
+       xlab = "Datum", 
+       ylab = "Anzahl Passagen pro Tag")
+  
+  # füge dann einen zweiten Plot hinzu
+  lines(outdoor_d$DatumUhrzeit, outdoor_d$Passagen_pro_Tag, 
+        pch = 18, 
+        col = "firebrick3", 
+        type = "b", 
+        lty = 2)
+  
+  # und eine Legende
+  legend("topright", legend=c("Indoor", "Outdoor"),
+         col=c("lightblue", "firebrick3"), lty = 1:2, cex=0.8)
+}
+
+# führe die funktion aus
+plot_passages()
+
 ```
 
 
-__--> Erklärt dem Plenum nächste Woche was ihr gemacht habt, was eure Daten zeigen und präsentiert diese einfachen Plots. __
+#### 3. Unterschiede Werktag und Wochenende
+
+```{r}
+## Hinzufügen des Wochentags aufgrund Datum
+
+indoor_d$weekday_status <- weekdays(indoor_d$DatumUhrzeit) %in% c("Samstag", "Sonntag")
+
+
+## Kuchendiagramm der Anzahl Passagen für Werktag und Wochenende
+
+# erstelle zuerst die einzelnen "Stücke", welche in Diagramm dargestellt werden sollen
+slieces <- c(sum(indoor_d$Passagen_pro_Tag[indoor_d$weekday_status=="TRUE"]),
+             sum(indoor_d$Passagen_pro_Tag[indoor_d$weekday_status=="FALSE"]))
+# definiere die lables
+lbls <- c("Wochenende", "Werktag")
+
+# erstelle den Plot
+pie(slieces, 
+    labels = lbls, 
+    main = "Indoor",
+    col = c("firebrick3", "lightblue"))
+```
+
+
+
+
+
+
+
+__--> Erklärt dem Plenum nächste Woche was ihr gemacht habt, was eure Daten zeigen und präsentiert eure Daratellungen. __

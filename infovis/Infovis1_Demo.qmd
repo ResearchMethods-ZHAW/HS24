@@ -30,7 +30,7 @@ knitr::kable(head(temperature))
 
 ## Base-plot vs. ggplot
 
-Um in "base-R" einen Scatterplot zu erstellen wo Datum der Temperatur gegenübersteht, gehen wir wie folgt vor:
+Um in "base-R" einen Scatterplot zu erstellen, wo Datum der Temperatur gegenübersteht, gehen wir wie folgt vor:
 
 ```{r}
 plot(temperature$time, temperature$SHA, type = "l", col = "red")
@@ -44,7 +44,7 @@ In `ggplot` sieht das etwas anders und auf den ersten Blick etwas komplizierter 
 ggplot(data = temperature, mapping = aes(time, SHA))
 ```
 
-Weiter braucht es *mindestens* ein "Layer" der beschreibt, wie die Daten dargestellt werden sollen (z.B. `geom_point()`).
+Weiter braucht es *mindestens* ein "Layer", der beschreibt, wie die Daten dargestellt werden sollen (z.B. `geom_point()`).
 Anders als bei "Piping" (`|>`) wird ein Layer mit `+` hinzugefügt.
 
 ```{r}
@@ -53,7 +53,7 @@ ggplot(data = temperature, mapping = aes(time, SHA)) +
   geom_point()
 ```
 
-Da ggplot die Eingaben in der Reihenfolge `data = ` und dann `mapping = `erwartet, können wir diese Spezifizierungen auch weglassen.
+Da ggplot die Eingaben in der Reihenfolge `data = ` und dann `mapping = ` erwartet, können wir diese Spezifizierungen auch weglassen.
 
 ```{r}
 #| eval: false
@@ -69,7 +69,7 @@ Wie wir in PrePro 2 bereits erwähnt haben, ist `ggplot2` auf *long tables* ausg
 temperature_long <- pivot_longer(temperature, -time, names_to = "station", values_to = "temp")
 ```
 
-Nun wollen wir die unterschiedlichen Stationen unterschiedlich einfärben. Da wir Variablen definieren wollen, welche Einfluss auf die Grafik haben sollen, gehört diese Information in `aes()`.
+Nun wollen wir die Stationen unterschiedlich einfärben. Da wir Variablen definieren wollen, welche Einfluss auf die Grafik haben sollen, gehört diese Information in `aes()`.
 
 ```{r}
 ggplot(temperature_long, aes(time, temp, colour = station)) +
@@ -102,7 +102,7 @@ ggplot(temperature_long, aes(time, temp, colour = station)) +
 
 ## Split Apply Combine
 
-Im obigen Plot fällt auf, dass stündliche Werte eine zu hohe Auflösung ist, wenn wir daten über 2 Jahre visualisieren. Mit *Split Apply Combine* (PrePro 3) können wir die Auflösung unserer Daten verändern: 
+Im obigen Plot fällt auf, dass stündliche Werte eine zu hohe Auflösung haben, wenn wir die Daten über 2 Jahre visualisieren. Mit *Split Apply Combine* (PrePro 3) können wir die Auflösung unserer Daten verändern: 
 
 ```{r}
 temperature_day <- temperature_long |>
@@ -138,7 +138,7 @@ ggplot(temperature_day, aes(time, temp, colour = station)) +
 ```
 
 
-Das gleiche Spiel kann man für die y-Achse betreiben. Bei unserer y-Achse handelt es sich ja um Datumsangaben. `ggplot` nennt diese: `scale_x_date()`. 
+Das gleiche Spiel kann man für die x-Achse betreiben. Bei unserer x-Achse handelt es sich ja um Datumsangaben. `ggplot` nennt diese: `scale_x_date()`. 
 
 ```{r}
 ggplot(temperature_day, aes(time, temp, colour = station)) +
@@ -159,7 +159,7 @@ ggplot(temperature_day, aes(time, temp, colour = station)) +
 
 ## Themes
 
-Mit `theme` verändert man das allgmeine Layout der Plots. Beispielsweise kann man mit `theme_classic()` `ggplot`-Grafiken etwas weniger "Poppig" erscheinen lassen: so sind sie besser für Bachelor- / Masterarbeiten sowie Publikationen geeignet. `theme_classic()` kann man indiviudell pro Plot anwenden, oder für die aktuelle Session global setzen (s.u.)
+Mit `theme` verändert man das allgmeine Layout der Plots. Beispielsweise kann man mit `theme_classic()` `ggplot`-Grafiken etwas weniger "poppig" erscheinen lassen: so sind sie besser für Bachelor- / Masterarbeiten sowie Publikationen geeignet. `theme_classic()` kann man indiviudell pro Plot anwenden oder für die aktuelle Session global setzen (s.u.).
 
 Individuell pro Plot:
 
@@ -221,9 +221,9 @@ ggplot(temperature_day, aes(time, temp, colour = station)) +
   theme(legend.position = "none")
 ```
 
-## In Variabel abspeichern und Exportieren
+## In Variabel abspeichern und exportieren
 
-Genau wie `data.frames` und andere Objekte, kann man einen ganzen Plot auch in einer Variabel speichern. Dies kann nützlich sein um einen Plot zu exportieren (als png, jpg usw.) oder sukzessive erweitern wie in diesem Beispiel.
+Genau wie `data.frames` und andere Objekte kann man einen ganzen Plot auch in einer Variabel speichern. Dies kann nützlich sein, um einen Plot zu exportieren (als png, jpg usw.) oder sukzessiv zu erweitern wie in diesem Beispiel.
 
 ```{r}
 p <- ggplot(temperature_day, aes(time, temp, colour = station)) +
@@ -251,7 +251,7 @@ Folgendermassen kann ich den Plot als png-File abspeichern (ohne Angabe von "plo
 ggsave(filename = "plot.png", plot = p)
 ```
 
-.. und so kann ich einen bestehenden Plot (in einer Variabel) mit einem Layer / einer Option erweitern
+.. und so kann ich einen bestehenden Plot (in einer Variabel) mit einem Layer / einer Option erweitern.
 
 ```{r}
 #| eval: false
@@ -260,7 +260,7 @@ p +
   theme(legend.position = "none")
 ```
 
-Wie üblich wurde diese Änderung nicht gespeichert, sondern nur das Resultat davon ausgeben. Wenn die Änderung in meinem Plot (in der Variabel) abspeichern will, muss ich die Variabel überschreiben:
+Wie üblich wurde diese Änderung nicht gespeichert, sondern nur das Resultat davon ausgegeben. Wenn ich die Änderung in meinem Plot (in der Variabel) abspeichern will, muss ich die Variabel überschreiben:
 
 ```{r}
 p <- p +

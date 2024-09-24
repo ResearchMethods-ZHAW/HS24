@@ -10,7 +10,7 @@ knitr:
 
 ## Piping
 
-Gegeben ist ein character string (`diary`). Wir wollen aus diesem Text die Temperaturangabe aus dem String extrahieren und danach den Wert von Kelvin in Celsius nach der folgenden Formel umwandeln und zum Schluss den Mittelwert über all diese Werte berechnen.
+Gegeben ist ein character string (`diary`). Wir wollen aus diesem Text die Temperaturangabe aus dem String extrahieren, danach den Wert von Kelvin in Celsius nach der folgenden Formel umwandeln und zum Schluss den Mittelwert über all diese Werte berechnen.
 
 $$°C = K - 273.15$$
 
@@ -39,7 +39,7 @@ charvec2 <- "abcdefgh"
 substr(charvec2, 4, 6)
 ```
 
-Zudem nutzen haben wir eine Hilfsfunktion `subtrahieren`, welche zwei Werte annimmt, den `minuend` und den `subtrahend`:
+Zudem nutzen wir eine Hilfsfunktion `subtrahieren`, welche zwei Werte annimmt, den `minuend` und den `subtrahend`:
 
 ```{r}
 subtrahieren <- function(minuend, subtrahend) {

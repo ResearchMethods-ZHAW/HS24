@@ -18,11 +18,9 @@ knitr:
 
 Ihr habt selbst ein (kleines) Besuchermonitoring auf dem Grüental durchgeführt und euch bereits mit dem WPZ beschäftigt. Die Aufgaben im Zusammenhang mit dem Grüental sind __abgeschlossen__ und wir beschäftigen uns ab jetzt ausschliesslich mit dem __WPZ__.
 
-Im Rahmen unserer Analyse programmieren wir multivariate Modelle, welche den Zusammenhang zwischen der Anzahl Besuchenden und verschiedenen Einflussfaktoren beschreiben. Dank den Modellen können wir sagen, wie die Besucher:innen auf die untersuchten Faktoren reagiert haben (siehe dazu auch euren Forschungsplan sowie [Einführung], Ziele). 
+Im Rahmen unserer Analyse programmieren wir multivariate Modelle, welche den Zusammenhang zwischen der Anzahl Besuchenden und verschiedenen Einflussfaktoren beschreiben. Dank den Modellen können wir sagen, wie die Besuchenden auf die untersuchten Faktoren reagiert haben (siehe dazu auch euren Forschungsplan sowie [Einführung], Ziele). 
 
-__Konkret sollen eure Fragestellungen aus dem Forschungsplan untersucht werden. __
-
-Für "meine" Analysen habe ich folgende Fragestellungen formuliert:
+Für meine Analysen habe ich untenstehende Fragestellungen formuliert. Ihr könnt aber auch eure Fragestellungen aus eurem Forschungsplan übernehmen, falls ihr das möchtet und falls diese mit den zur Verügung stehenden Daten bearbeitet werden können.
 
 >1) Welchen Einfluss haben zeitliche Variablen (Wochentag, Ferien, Monat, Jahr, Phasen der Covid-Pandemie) und Wetterparameter (Sonnenscheindauer, Höchsttemperatur, Niederschlagssumme) auf die Besuchszahlen im WPZ __am Tag, in der Dämmerung und in der Nacht__?
 >
@@ -33,11 +31,11 @@ Für "meine" Analysen habe ich folgende Fragestellungen formuliert:
 >4)	Welches sind die mutmasslichen Auswirkungen dieser Nutzung auf das Verhalten der Rege im WPZ?
 >
 
-- Jede Gruppe wertet __Daten von einem Zähler__ aus. Sprecht miteinander ab, wer welchen Zähler behandelt (211 oder 502; Spezifikationen siehe [Einführung], Hinweis). Jeder Zähler soll nur von einer Gruppe ausgewertet werden!
+- Jede Gruppe wertet __Daten von einem Zählgerät__ aus. Sprecht miteinander ab, wer welchen Zähler behandelt (211 oder 502; Spezifikationen siehe [Einführung], Hinweis). Die Daten von jeder Zählstelle sollen nur von einer Gruppe ausgewertet werden!
 
 - Bezieht in eure Auswertungen den gesamten zur Verfügung stehenden Zeitraum ein. 
 
-- Für euren Zähler stehen Zahlen zu Fussgänger:innen und Velos zur Verfügung (siehe [Einführung], Hinweis). Entscheidet euch selbst, ob ihr Fussgänger:innen __ODER__ Velos auswerten wollt. Die anderen Daten dürft ihr vernachlässigen.
+- Für euren Zähler stehen Zahlen zu Fussgänger:innen und Fahrrädern zur Verfügung (siehe [Einführung], Hinweis). Entscheidet euch selbst, ob ihr Fussgänger:innen __ODER__ Fahrräder auswerten wollt. Die anderen Daten dürft ihr vernachlässigen.
 
 - Im Bericht sollen die Informationen und Erfahrungen aus dem gesamten Verlauf der Fallstudie in geeigneter Weise einfliessen. Bezüglich der Felderhebung Grüental erwarten wir __keine__ Angaben. 
 
@@ -65,7 +63,9 @@ Für "meine" Analysen habe ich folgende Fragestellungen formuliert:
 -	Anhang (für alle Auswertungen relevanter R-Code in geeigneter Form) 
 
 2) Gesamtumfang max. 12'000 Zeichen (inkl. Leerzeichen; exkl. Tabellen, Literaturverzeichnis und Anhang)
-3) Abgabe am __14.1.2024__ per Mail an hoce@zhaw.ch
+
+3) Abgabe am __12.1.2025__ per Mail an hoce@zhaw.ch
+
 
 ## Bewertungskriterien
 
@@ -83,8 +83,11 @@ Für "meine" Analysen habe ich folgende Fragestellungen formuliert:
 
 -	Zusätzliche bewerten wir die inhaltliche Dichte der Arbeit und die formale Qualität (Sprache, Struktur, Aufbau, Darstellung, Literaturverzeichnis, Umgang mit Literatur im Text)
 
-__Zusammensetzung der Fallstudiennote:__
+
+## Zusammensetzung der Fallstudiennote:
 
 -	Fallstudie-Leistungsnachweis 1 - Forschungsplan: 30 %
 
 -	Fallstudie-Leistungsnachweis 2 - Multivariate Analyse: 70 %
+
+Die Note der Fallstudie fliesst in die Gesamtbewertung des Moduls Research Methods mit ein.

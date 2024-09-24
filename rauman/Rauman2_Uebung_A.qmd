@@ -13,11 +13,11 @@ knitr:
 
 # Rauman 2: Übung A
 
-In [der letzten Übung](#sec-rauman1b) haben wir einen Spatial Join zwischen Bäumen und Wiesen durchgeführt um herauszufinden, ob sich der Baum in einer Wiese befindet oder nicht. Basis waren dafür die Daten vom Campus Grüental (*gruental.gpkg*)
+In [der letzten Übung](#sec-rauman1b) haben wir einen Spatial Join zwischen Bäumen und Wiesen durchgeführt, um herauszufinden, ob sich der Baum in einer Wiese befindet oder nicht. Basis waren dafür die Daten vom Campus Grüental (*gruental.gpkg*)
 
 Heute gehen wir einen Schritt weiter und wollen folgende Frage beantworten: *Wie viel Wiese befinden sich in einem Umkreis von 20m um jeden Baum?*
 
-Lade dazu die benötigten Libraries und Datensätze in deine Session. Exploriere die Daten visualisiere Sie räumlich.
+Lade dazu die benötigten Libraries und Datensätze in deine Session. Exploriere die Daten und visualisiere sie räumlich.
 
 ```{r}
 #| echo: true
@@ -31,7 +31,7 @@ wiesen <- read_sf("datasets/rauman/gruental.gpkg", "wiesen")
 baeume <- read_sf("datasets/rauman/gruental.gpkg", "baeume")
 ```
 
-Um die Übung etwas zu vereinfachen arbeiten wir erstmals mit nur 10 Bäumen. Nutze nachstehenden Code um zufällig 10 Bäume auszuwählen. Wenn ihr den gleichen "Seed" wie ich benutzt (`set.seed(100)`) habt ihr "zufällig" auch die gleichen Bäume wie ich.
+Um die Übung etwas zu vereinfachen, arbeiten wir erstmals mit nur 10 Bäumen. Nutze nachstehenden Code, um zufällig 10 Bäume auszuwählen. Wenn ihr den gleichen "Seed" wie ich benutzt (`set.seed(100)`), habt ihr "zufällig" auch die gleichen Bäume wie ich.
 
 ```{r}
 #| echo: true
@@ -53,7 +53,7 @@ ggplot() +
 
 ## Aufgabe 1
 
-Als erster Schritt müssen wir jeden Baum mit einem 20m Puffer verstehen. Nutze dazu `st_buffer` um speichere den Output als `baeume_20m`. Schau dir `baeume_20m` nun genau an. Um welchen Geometrietyp handelt es sich dabei nun?
+Als erster Schritt müssen wir jeden Baum mit einem 20m Puffer versehen. Nutze dazu `st_buffer` und speichere den Output als `baeume_20m`. Schau dir `baeume_20m` nun genau an. Um welchen Geometrietyp handelt es sich dabei nun?
 
 ```{r}
 baeume_20m <- st_buffer(baeume_sample, 20)
@@ -102,7 +102,7 @@ kreisflaeche <- 20^2 * pi
 baeume_wiesen$wiesen_anteil <- baeume_wiesen$wiesen_flaeche / kreisflaeche
 ```
 
-Überführe anschliessend die berechneten Anteilswerte in den Datensatz `baeume` mit einem `left_join` zwischen `baeume` und `baeume_wiesen`. Welche Spalte wäre für diesen Join geeignet? Hinweis: Nutze `st_drop_geometry()` um die Geometriespalte in `baeme_wiesen` vor dem Join zu entfernen.
+Überführe anschliessend die berechneten Anteilswerte in den Datensatz `baeume` mit einem `left_join` zwischen `baeume` und `baeume_wiesen`. Welche Spalte wäre für diesen Join geeignet? Hinweis: Nutze `st_drop_geometry()`, um die Geometriespalte in `baeme_wiesen` vor dem Join zu entfernen.
 
 ```{r}
 #| output: true
@@ -122,9 +122,9 @@ ggplot() +
 
 ## Aufgabe 5 {#sec-raster-intro1}
 
-Nun habt ihr ein paar Vektoroperationen wie `st_buffer()` und `st_intersection()` und `st_area()` durchgeführt. Gewisse Fragen lassen sich aber besser in der Raster-Welt beantworten. Wollen wir beispielsweise für jeden Punkt im Raum wissen, wie weit der nächstgelegene Baum ist, lässt sich das besser in einem Raster darstellen.
+Nun habt ihr ein paar Vektoroperationen wie `st_buffer()`, `st_intersection()` und `st_area()` durchgeführt. Gewisse Fragen lassen sich aber besser in der Raster-Welt beantworten. Wollen wir beispielsweise für jeden Punkt im Raum wissen, wie weit der nächstgelegene Baum ist, lässt sich das besser in einem Raster darstellen.
 
-Bevor wir die Frage aber beantworten können, müssen wir den Vektordatensatz in ein Rasterdatensatz konvertieren. Dafür wiederum braucht es ein Raster "Template", damit R in etwa weiss, wie der Raster Output auszusehen hat. 
+Bevor wir die Frage aber beantworten können, müssen wir den Vektordatensatz in ein Rasterdatensatz konvertieren. Dafür wiederum braucht es ein Raster "Template", damit R in etwa weiss, wie der Raster-Output auszusehen hat. 
 
 ```{r}
 #| echo: true

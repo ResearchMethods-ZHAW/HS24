@@ -17,7 +17,7 @@ knitr:
 
 Gegeben sei ein Datensatz *sensors_combined.csv*, mit den Temperaturwerten von drei verschiedenen Sensoren. Importiere ihn als csv in R (als `sensors_combined`). 
 
-Formatiere die `Datetime` Spalte in `POSIXct` um. Verwende dazu die Funktion `as.POSIXct` (lies mit `?strftime()` nochmal nach wie du das spezfische Format (die "Schablone") festlegen kannst.
+Formatiere die `Datetime` Spalte in `POSIXct` um. Verwende dazu die Funktion `as.POSIXct` (lies mit `?strftime()` nochmal nach, wie du das spezfische Format (die "Schablone") festlegen kannst.
 
 ```{r}
 library("readr")
@@ -34,7 +34,7 @@ sensors_combined$Datetime <- as.POSIXct(sensors_combined$Datetime, format = "%d%
 Tipp: 
 
 - im Argument `cols` kannst du entweder die Spalten auflisten, die "pivotiert" werden sollen. 
-- Alternativ kannst du (mit vorangestelltem Minuszeichen, `-`) die Spalte, bezeichnen, die *nicht* pivotiert werden soll. 
+- Alternativ kannst du (mit vorangestelltem Minuszeichen, `-`) die Spalte bezeichnen, die *nicht* pivotiert werden soll. 
 - In beiden Fällen musst du die Spalten weder mit Anführungs- und Schlusszeichen noch mit dem `$`-Zeichen versehen.
 
 ```{r}
@@ -49,7 +49,7 @@ sensors_long <- pivot_longer(sensors_combined, c(sensor1:sensor3))
 
 ## Aufgabe 3
 
-Gruppiere `sensors_long` nach der neuen Spalte wo die Sensor-Information enthalten ist (default: `name`) mit `group_by` und berechne die mittlere Temperatur pro Sensor (`summarise`). Hinweis: Beide Funktionen sind Teil des Packages `dplyr`.
+Gruppiere `sensors_long` nach der neuen Spalte, wo die Sensor-Information enthalten ist (default: `name`) mit `group_by` und berechne die mittlere Temperatur pro Sensor (`summarise`). Hinweis: Beide Funktionen sind Teil des Packages `dplyr`.
 
 Der Output sieht folgendermassen aus: 
 
