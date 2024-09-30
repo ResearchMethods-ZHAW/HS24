@@ -1199,7 +1199,7 @@
     "href": "rauman/Rauman5_Uebung_A.html#sec-classify1",
     "title": "Rauman 5: Übung A",
     "section": "Aufgabe 3: Distanzkriterien bewerten",
-    "text": "Aufgabe 3: Distanzkriterien bewerten\nJetzt haben wir die Distanzen zu den relevanten Gebieten berechnet. Nun müssen wir diese Distanzen bewerten. Dafür teilen wir die kontinuierlichen Distanzwerte in diskrete Kategorien ein. Wir verwenden für die Aufgabe folgende Einteilung aus der Tabelle 40.2.\nUm die Klassifizierung durchzuführen, brauchen wir die Function classify(). Wie wir aus der Dokumentation der Funktion (mit ?classify) entnehmen können, gibt es verschiedene Wege, wie wir einen Raster reklassifizieren können (siehe Beschreibung für das Argument rcl). Eine sehr explizite Variante ist, dass wir für rcl eine Matrix mit 3 Spalten verwenden. Diese drei Spalten stellen from, to und becomes dar.\nWir könnten diese Tabelle in einem Spreadsheet-Programm schreiben und in R einlesen. Alternativ können wir sie auch “von Hand” in R erstellen. Um in R tabellarische Daten zu schreiben, empfehlen wir die Funktion tribble(), welche eine sehr anschauliche Art bietet, Tabellen in R zu generieren. Da classify eine Matrix als Input will, müssen wir unser data.frame noch in eine Matrix umwandeln.\n\n\n\n\n\nBeispiel Distanzklassen anhand der Strassen\n\n\n\n\nJetzt, wo wir diese Matrix haben, können wir sie nutzen, um den Kanton Schwyz hinsichtlich der Distanz zu Strassen zu bewerten. Dafür verwenden wir die Funktion classify() mit dem Argument include.lowest = TRUE, damit eine Distanz von 0m ebenfalls in 1 reklassifiziert wird.\n\n\n\n\n\n\n\n\n\nBewerte auf die gleiche Art die Distanz zu den Schutzgebieten. Wir nutzen die Schwellenwerte, wie sie in der nachstehenden Tabelle ersichtlich ist (Tabelle 40.2). Du kannst diese aber frei wählen.\n\n\n\n\n\nTabelle 40.2: Bewertungstabelle für die Distanz zu Strassen und Wildschutzgebieten (Meter)\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\nDistanz zu Strassen\n\n\nDistanz zu Wildschutzgebieten\n\n\n\nvon\nbis\nzu\nvon\nbis\nzu\n\n\n\n\n0\n250\n1.0\n0\n250\n0.0\n\n\n250\n500\n0.8\n250\n500\n0.2\n\n\n500\n750\n0.6\n500\n750\n0.4\n\n\n750\n1000\n0.4\n750\n1000\n0.6\n\n\n1000\n1250\n0.2\n1000\n1250\n0.8\n\n\n1250\nInf\n0.0\n1250\nInf\n1.0",
+    "text": "Aufgabe 3: Distanzkriterien bewerten\nJetzt haben wir die Distanzen zu den relevanten Gebieten berechnet. Nun müssen wir diese Distanzen bewerten. Dafür teilen wir die kontinuierlichen Distanzwerte in diskrete Kategorien ein. Wir verwenden für die Aufgabe folgende Einteilung aus der Tabelle 40.2.\nUm die Klassifizierung durchzuführen, brauchen wir die Function classify(). Wie wir aus der Dokumentation der Funktion (mit ?classify) entnehmen können, gibt es verschiedene Wege, wie wir einen Raster reklassifizieren können (siehe Beschreibung für das Argument rcl). Eine sehr explizite Variante ist, dass wir für rcl eine Matrix mit 3 Spalten verwenden. Diese drei Spalten stellen from, to und becomes dar.\nWir könnten diese Tabelle in einem Spreadsheet-Programm schreiben und in R einlesen. Alternativ können wir sie auch “von Hand” in R erstellen. Um in R tabellarische Daten zu schreiben, empfehlen wir die Funktion tribble(), welche eine sehr anschauliche Art bietet, Tabellen in R zu generieren. Da classify eine Matrix als Input will, müssen wir unser data.frame noch in eine Matrix umwandeln.\n\n\n\n\n\nBeispiel Distanzklassen anhand der Strassen\n\n\n\n\nJetzt, wo wir diese Matrix haben, können wir sie nutzen, um den Kanton Schwyz hinsichtlich der Distanz zu Strassen zu bewerten. Dafür verwenden wir die Funktion classify() mit dem Argument include.lowest = TRUE, damit eine Distanz von 0m ebenfalls in 1 reklassifiziert wird.\n\n\n\n\n\n\n\n\n\nBewerte auf die gleiche Art die Distanz zu den Schutzgebieten. Wir nutzen die Schwellenwerte, wie sie in der nachstehenden Tabelle ersichtlich ist (Tabelle 40.2). Du kannst diese aber frei wählen.\n\n\n\n\n\nTabelle 40.2: Bewertungstabelle für die Distanz zu Strassen und Wildschutzgebieten (Meter)\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\nDistanz zu Strassen\n\n\nDistanz zu Wildschutzgebieten\n\n\n\nvon\nbis\nzu\nvon\nbis\nzu\n\n\n\n\n0\n250\n1.0\n0\n250\n0.0\n\n\n250\n500\n0.8\n250\n500\n0.2\n\n\n500\n750\n0.6\n500\n750\n0.4\n\n\n750\n1000\n0.4\n750\n1000\n0.6\n\n\n1000\n1250\n0.2\n1000\n1250\n0.8\n\n\n1250\nInf\n0.0\n1250\nInf\n1.0",
     "crumbs": [
       "Räumliche Analysen",
       "<span class='chapter-number'>40</span>  <span class='chapter-title'>Rauman 5: Übung A</span>"
@@ -1265,7 +1265,7 @@
     "href": "rauman/Rauman5_Uebung_B.html#aufgabe-3-slope-berechnen-und-bewerten",
     "title": "Rauman 5: Übung B",
     "section": "Aufgabe 3: Slope berechnen und bewerten",
-    "text": "Aufgabe 3: Slope berechnen und bewerten\nFür die Berechnung und anschliessende Bewertung der Hangneigung brauchen wir ein Höhenmodell. Lade das Höhenmodell dhm250m.tif herunter (siehe Tabelle 40.1) und in R ein. Berechne anschliessend die Hangneigung mit der Funktion terrain() analog Aufgabe 2 (beachte die Einheit des Output!).\nBewerte die Hangneigung danach gemäss Tabelle Tabelle 41.1.\n\n\n\n\n\nTabelle 41.1: Bewertungstabelle die Windgeschwindigkeit (m/s) und Hangneigung (Grad)\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\nWindgeschwindigkeit\n\n\nHangneigung\n\n\n\nvon\nbis\nzu\nvon\nbis\nzu\n\n\n\n\n0\n20\n0.0\n0\n4\n1.0\n\n\n20\n30\n0.2\n4\n8\n0.8\n\n\n30\n40\n0.4\n8\n12\n0.6\n\n\n40\n50\n0.6\n12\n16\n0.4\n\n\n50\n60\n0.8\n16\n20\n0.2\n\n\n60\nInf\n1.0\n20\n90\n0.0",
+    "text": "Aufgabe 3: Slope berechnen und bewerten\nFür die Berechnung und anschliessende Bewertung der Hangneigung brauchen wir ein Höhenmodell. Lade das Höhenmodell dhm250m.tif herunter (siehe Tabelle 40.1) und in R ein. Berechne anschliessend die Hangneigung mit der Funktion terrain() analog Aufgabe 2 (beachte die Einheit des Output!).\nBewerte die Hangneigung danach gemäss Tabelle Tabelle 41.1.\n\n\n\n\n\nTabelle 41.1: Bewertungstabelle die Windgeschwindigkeit (m/s) und Hangneigung (Grad)\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\nWindgeschwindigkeit\n\n\nHangneigung\n\n\n\nvon\nbis\nzu\nvon\nbis\nzu\n\n\n\n\n0\n20\n0.0\n0\n4\n1.0\n\n\n20\n30\n0.2\n4\n8\n0.8\n\n\n30\n40\n0.4\n8\n12\n0.6\n\n\n40\n50\n0.6\n12\n16\n0.4\n\n\n50\n60\n0.8\n16\n20\n0.2\n\n\n60\nInf\n1.0\n20\n90\n0.0",
     "crumbs": [
       "Räumliche Analysen",
       "<span class='chapter-number'>41</span>  <span class='chapter-title'>Rauman 5: Übung B</span>"
@@ -1360,6 +1360,39 @@
     ]
   },
   {
+    "objectID": "fallstudie_s/2_Besuchermonitoring.html",
+    "href": "fallstudie_s/2_Besuchermonitoring.html",
+    "title": "Monitoring",
+    "section": "",
+    "text": "Einführung\nEs gibt eine Vielzahl an möglichen Methoden zur Erfassung der Besuchszahlen. Automatische Zählgeräte bieten die Möglichkeit, lange und durchgehende Zeitreihen zu erfassen. Inputs dazu, wie diese ausgewertet werden können, erhält ihr in dieser Aufgabe.",
+    "crumbs": [
+      "Fallstudie S",
+      "<span class='chapter-number'>44</span>  <span class='chapter-title'>Monitoring</span>"
+    ]
+  },
+  {
+    "objectID": "fallstudie_s/2_Besuchermonitoring.html#ziele",
+    "href": "fallstudie_s/2_Besuchermonitoring.html#ziele",
+    "title": "Monitoring",
+    "section": "Ziele",
+    "text": "Ziele\n\nIhr könnt das eingesetzte Zählgerät installieren und kennt die Vor- und Nachteile verschiedener Methoden.\nIhr könnt die generierten Daten explorativ und deskriptiv auswerten.",
+    "crumbs": [
+      "Fallstudie S",
+      "<span class='chapter-number'>44</span>  <span class='chapter-title'>Monitoring</span>"
+    ]
+  },
+  {
+    "objectID": "fallstudie_s/2_Besuchermonitoring.html#grundlagen",
+    "href": "fallstudie_s/2_Besuchermonitoring.html#grundlagen",
+    "title": "Monitoring",
+    "section": "Grundlagen",
+    "text": "Grundlagen\nDie Geräte werden gemeinsam auf dem Campus Grüntal platziert.\nDatenschutz ist ein wichtiges Thema. Die eingesetzten Geräte erfassen keine Personendaten, sondern nur Bewegungen. Es handelt sich um Pyroelektrische Infrarotsensoren, welche auf den Temperaturunterschied reagieren, wenn sich eine Person vor der Linse bewegt. Insofern handelt es sich, vereinfacht gesagt, um Bewegungsmelder.",
+    "crumbs": [
+      "Fallstudie S",
+      "<span class='chapter-number'>44</span>  <span class='chapter-title'>Monitoring</span>"
+    ]
+  },
+  {
     "objectID": "fallstudie_n/1_Vorbemerkung.html",
     "href": "fallstudie_n/1_Vorbemerkung.html",
     "title": "Vorbemerkung",
@@ -1367,7 +1400,7 @@
     "text": "Aktuell dient diese Plattform für die BiEc Fallstudie - Profil N einzig der Bereitstellung von Aufgaben die von euch im Rahmen dieses Fallstudienprojekts erarbeitet werden sollen. Die Aufgaben werden in den meisten Fällen mit Code-Beispielen erläutert oder benötigten Code-snippets resp. Funktionen werden mitgeliefert. Im Laufe des Semesters werden hier ausserdem häppchenweise (mögliche) Lösungen zu den Aufgaben aufgeschaltet. Alles grundlegende Material und alle Unterlagen zu den theoretischen Inputs sind weiterhin und ausschliesslich im Moodlekurs Research Methods - Fallstudie BiEc zu finden. Die für die Aufgaben benötigten Datengrundlagen sind ebenfalls im entsprechenden Abschnitt auf Moodle zu finden. Frohes Schaffen!\n\nIm Rahmen der Fallstudie werden wir einige R Packages brauchen. Wir empfehlen, diese bereits vor der ersten Lektion zu installieren. Analog der Vorbereitungsübung in Prepro1 könnt ihr mit nachstehendem Code alle noch nicht installierten packages automatisch installieren.\n\npacman::p_install(\"adehabitatHR\", \"bbmle\", \"car\", \"cowplot\", \"DHARMa\", \"dplyr\",\n  \"ggeffects\", \"ggplot2\", \"ggspatial\", \"glmmTMB\", \"gstat\", \"kableExtra\", \"lme4\",\n  \"MASS\", \"MuMIn\", \"pastecs\", \"performance\", \"PerformanceAnalytics\", \"psych\",\n  \"readr\", \"rms\", \"ROCR\", \"sf\", \"sjPlot\", \"sjstats\", \"terra\", character.only = TRUE,  force = FALSE)",
     "crumbs": [
       "Fallstudie N",
-      "<span class='chapter-number'>44</span>  <span class='chapter-title'>Vorbemerkung</span>"
+      "<span class='chapter-number'>45</span>  <span class='chapter-title'>Vorbemerkung</span>"
     ]
   },
   {
@@ -1377,7 +1410,7 @@
     "section": "",
     "text": "Gilgen, \"Kurt, and Alma Sartoris\". \"2010\". “\"Empfehlung Zur\nPlanung von Windenergieanlagen: Die Anwendung von\nRaumplanungsinstrumenten Und Kriterien Zur Standortwahl\".”\n\"Eidgenössisches Departement für Umwelt, Verkehr, Energie und\nKommunikation UVEK\".\n\n\nKovic, Marko. 2014. “Je Weniger Ausländer, Desto Mehr Ja-Stimmen?\nWirklich?” Tagesanzeiger Datenblog. https://blog.tagesanzeiger.ch/datenblog/index.php/668/je-weniger-auslaender-desto-mehr-ja-stimmen-wirklich.\n\n\n\"Scherler, Patrick\". \"2020\". “Drivers of Departure and Prospecting\nin Dispersing Juvenile Red Kites (Milvus Milvus).” PhD thesis,\n\"University of Zurich\".\n\n\nTegou, Leda-Ioanna, Heracles Polatidis, and Dias A. Haralambopoulos.\n2010. “Environmental Management Framework for Wind Farm Siting:\nMethodology and Case Study.” Journal of Environmental\nManagement 91 (11): 2134–47. https://doi.org/10.1016/j.jenvman.2010.05.010.\n\n\nWickham, Hadley, and Garrett Grolemund. 2017. R for Data\nScience. O’Reilly. https://ebookcentral.proquest.com/lib/zhaw/detail.action?docID=4770093.",
     "crumbs": [
-      "<span class='chapter-number'>45</span>  <span class='chapter-title'>Literaturverzeichnis</span>"
+      "<span class='chapter-number'>46</span>  <span class='chapter-title'>Literaturverzeichnis</span>"
     ]
   }
 ]
