@@ -561,7 +561,7 @@ window.onload = function() {
 </section>
 <section id="aufgabe-3" class="level2">
 <h2 class="anchored" data-anchor-id="aufgabe-3">Aufgabe 3</h2>
-<p>Gruppiere <code>sensors_long</code> nach der neuen Spalte, wo die Sensor-Information enthalten ist (default: <code>name</code>) mit <code>group_by</code> und berechne die mittlere Temperatur pro Sensor (<code>summarise</code>). Hinweis: Beide Funktionen sind Teil des Packages <code>dplyr</code>.</p>
+<p>Gruppiere <code>sensors_long</code> nach der neuen Spalte, wo die Sensor-Information enthalten ist (default: <code>name</code>) mit <code>group_by</code> und berechne den Mittelwert der Temperatur pro Sensor (<code>summarise</code>). Hinweis: Beide Funktionen sind Teil des Packages <code>dplyr</code>.</p>
 <p>Der Output sieht folgendermassen aus:</p>
 <div class="cell">
 <pre><code>## # A tibble: 3 × 2
@@ -574,7 +574,7 @@ window.onload = function() {
 </section>
 <section id="aufgabe-4" class="level2">
 <h2 class="anchored" data-anchor-id="aufgabe-4">Aufgabe 4</h2>
-<p>Erstelle für <code>sensors_long</code> eine neue <em>convenience</em> Variabel <code>month</code> welche den Monat beinhaltet (Tipp: verwende dazu die Funktion <code>month</code> aus <code>lubridate</code>). Gruppiere nun nach <code>month</code> <em>und</em> Sensor und berechne die mittlere Temperatur.</p>
+<p>Erstelle für <code>sensors_long</code> eine neue <em>convenience</em> Variabel <code>month</code>, welche den Monat beinhaltet (Tipp: verwende dazu die Funktion <code>month</code> aus <code>lubridate</code>). Gruppiere nun nach <code>month</code> <em>und</em> Sensor und berechne den Mittelwert der Temperatur.</p>
 </section>
 <section id="aufgabe-5" class="level2">
 <h2 class="anchored" data-anchor-id="aufgabe-5">Aufgabe 5</h2>
@@ -582,13 +582,13 @@ window.onload = function() {
 </section>
 <section id="aufgabe-6" class="level2">
 <h2 class="anchored" data-anchor-id="aufgabe-6">Aufgabe 6</h2>
-<p>Erstelle nun eine <em>convenience Variable</em> für die Kalenderwoche pro Messung (<code>lubridate::week</code>). Berechne im Anschluss den mittleren Temperaturwert pro Kalenderwoche.</p>
+<p>Erstelle nun eine <em>convenience Variable</em> für die Kalenderwoche pro Messung (<code>lubridate::week</code>). Berechne im Anschluss den Mittelwert der Temperatur pro Kalenderwoche.</p>
 <p>Visualisiere im Anschluss das Resultat:</p>
 <p><img src="Prepro3_Uebung_files/figure-html/unnamed-chunk-7-1.png" class="img-fluid" width="672"></p>
 </section>
 <section id="aufgabe-7" class="level2">
 <h2 class="anchored" data-anchor-id="aufgabe-7">Aufgabe 7</h2>
-<p>In der vorherigen Aufgabe haben wir die mittlere Temperatur pro Kalenderwoche über <em>alle Jahre</em> (2000 und 2001) berechnet. Wenn wir die Jahre aber miteinander vergleichen wollen, müssen wir das Jahr als zusätzliche <em>convenience Variable</em> erstellen und danach gruppieren. Versuche dies mit den Wetterdaten und visualisiere den Output anschliessend.</p>
+<p>In der vorherigen Aufgabe haben wir den Mittelwert der Temperatur pro Kalenderwoche über <em>alle Jahre</em> (2000 und 2001) berechnet. Wenn wir die Jahre aber miteinander vergleichen wollen, müssen wir das Jahr als zusätzliche <em>convenience Variable</em> erstellen und danach gruppieren. Versuche dies mit den Wetterdaten und visualisiere den Output anschliessend.</p>
 <div class="cell">
 <div class="cell-output-display">
 <div id="fig-baseplot-ex7" class="quarto-figure quarto-figure-center quarto-float anchored">
