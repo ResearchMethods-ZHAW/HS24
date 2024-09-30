@@ -86,11 +86,11 @@ weather <- read_delim("datasets/prepro/weather.csv", col_types = cols(col_factor
 
 ## Aufgabe 6
 
-Erstelle nun eine *convenience Variable* für die Kalenderwoche pro Messung (`lubridate::isoweek`). Berechne im Anschluss den mittleren Temperaturwert pro Kalenderwoche.
+Erstelle nun eine *convenience Variable* für die Kalenderwoche pro Messung (`lubridate::week`). Berechne im Anschluss den mittleren Temperaturwert pro Kalenderwoche.
 
 ```{r}
 weather_summary <- weather |>
-  mutate(week = isoweek(time)) |>
+  mutate(week = week(time)) |>
   group_by(week) |>
   summarise(
     temp_mean = mean(tre200h0, na.rm = TRUE)
