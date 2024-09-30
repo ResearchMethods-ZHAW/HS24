@@ -125,7 +125,7 @@ Wir lesen später zwei verschiedene Datensätze ein. Beide sollen exakt denselbe
 
 ```{r}
 depo_start <- as.Date("2017-01-01")
-depo_end <- as.Date("2022-7-31")
+depo_end <- as.Date("2023-12-31")
 ```
 
 

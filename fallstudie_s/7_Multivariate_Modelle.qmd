@@ -495,11 +495,6 @@ umwelt <- umwelt |>
 
 
 
-
-
-
-
-
 ## Aufgabe 3: Korrelationen und Variablenselektion
 
 ### 3a) 
