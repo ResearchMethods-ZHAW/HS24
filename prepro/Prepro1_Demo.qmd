@@ -9,6 +9,9 @@ knitr:
 
 
 
+Diese Demo kann [hier](Prepro1_Demo.R) heruntergeladen werden (Rechtsklick → speichern unter).
+
+
 ### Datentypen
 
 #### Numerics
@@ -115,7 +118,7 @@ fname == fname2
 Mit Factors wird in R eine Sammlung von Zeichenketten bezeichnet, die sich wiederholen, z.B. Wochentage (es gibt nur 7 unterschiedliche Werte für "Wochentage").
 
 ```{r}
-wochentage <- c("Donnerstag", "Freitag", "Samstag")
+wochentage <- c("Montag", "Dienstag", "Mittwoch")
 
 typeof(wochentage)
 

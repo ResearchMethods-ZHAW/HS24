@@ -2,6 +2,38 @@
 .Rhistory
 .RData
 .Ruserdata
+<<<<<<< HEAD
+.DS_Store
+.config/
+.local/
+.bash_history
+
+data/
+/.quarto/
+/_site/
+_book/
+
+/prepro/**/data/
+/infovis/**/data/
+/rauman/**/data/
+/statistik/**/data/
+/statistik-konsolidierung/**/data/
+/fallstudien/**/data/
+
+/fallstudien/_R_analysis/
+/fallstudien/**/Results/
+/site_libs/
+purl
+
+*.csv
+*.gpkg
+
+presenter-mode.css
+Results
+
+# temporarily ignore _book and _freeze
+=======
 
 /.quarto/
 _book
+>>>>>>> 6b1c1f6ea92d83ad5a0f9ee83c30994a101620ca

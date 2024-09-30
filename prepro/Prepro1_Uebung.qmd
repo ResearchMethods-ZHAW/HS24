@@ -34,7 +34,7 @@ Das Verwenden von Projects bringt verschiedene Vorteile, wie zum Beispiel:
 
 
 
-:::{.callout-important}
+:::{#imp-rstudio-projects .callout-important}
 
 ## Prüfungsrelevant
 
@@ -104,7 +104,7 @@ knitr::kable(df)
 
 Auf Moodle findest du ein Zip-File mit dem Namen *prepro.zip*. Lade das File herunter und entpacke es **in deinem Projektordner**. Importiere die Datei `weather.csv`. Falls du dafür das RStudio GUI verwendest, speichere den Import-Befehl in deinem R-Script ab. Bitte verwende einen relativen Pfad (also kein Pfad, der mit `C:/`, `~/` o.ä. beginnt).)
 
-:::{.callout-note}
+:::{#nte-readr .callout-note}
 Wir nutzen `readr`, um csvs zu importieren, und verwenden die Funktion `read_delim` (mit *underscore*) als alternative zu `read.csv` oder `read.delim` (mit *Punkt*). Das ist eine persönliche Präferenz[^readr], es ist euch überlassen, welche Funktion ihr verwendet. Beachtet, dass die beiden Funktionen leicht andere Parameter erwarten.
 :::
 
