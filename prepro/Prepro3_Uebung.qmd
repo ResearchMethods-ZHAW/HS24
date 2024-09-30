@@ -49,7 +49,7 @@ sensors_long <- pivot_longer(sensors_combined, c(sensor1:sensor3))
 
 ## Aufgabe 3
 
-Gruppiere `sensors_long` nach der neuen Spalte, wo die Sensor-Information enthalten ist (default: `name`) mit `group_by` und berechne die mittlere Temperatur pro Sensor (`summarise`). Hinweis: Beide Funktionen sind Teil des Packages `dplyr`.
+Gruppiere `sensors_long` nach der neuen Spalte, wo die Sensor-Information enthalten ist (default: `name`) mit `group_by` und berechne den Mittelwert der Temperatur pro Sensor (`summarise`). Hinweis: Beide Funktionen sind Teil des Packages `dplyr`.
 
 Der Output sieht folgendermassen aus: 
 
@@ -65,7 +65,7 @@ sensors_long |>
 
 ## Aufgabe 4
 
-Erstelle für `sensors_long` eine neue *convenience* Variabel `month` welche den Monat beinhaltet (Tipp: verwende dazu die Funktion `month` aus `lubridate`). Gruppiere nun nach `month` *und* Sensor und berechne die mittlere Temperatur. 
+Erstelle für `sensors_long` eine neue *convenience* Variabel `month`, welche den Monat beinhaltet (Tipp: verwende dazu die Funktion `month` aus `lubridate`). Gruppiere nun nach `month` *und* Sensor und berechne den Mittelwert der Temperatur. 
 
 ```{r}
 library("lubridate")
@@ -86,7 +86,7 @@ weather <- read_delim("datasets/prepro/weather.csv", col_types = cols(col_factor
 
 ## Aufgabe 6
 
-Erstelle nun eine *convenience Variable* für die Kalenderwoche pro Messung (`lubridate::week`). Berechne im Anschluss den mittleren Temperaturwert pro Kalenderwoche.
+Erstelle nun eine *convenience Variable* für die Kalenderwoche pro Messung (`lubridate::week`). Berechne im Anschluss den Mittelwert der Temperatur pro Kalenderwoche.
 
 ```{r}
 weather_summary <- weather |>
@@ -108,7 +108,7 @@ plot(weather_summary$week, weather_summary$temp_mean, type = "l")
 
 ## Aufgabe 7
 
-In der vorherigen Aufgabe haben wir die mittlere Temperatur pro Kalenderwoche über *alle Jahre* (2000 und 2001) berechnet. Wenn wir die Jahre aber miteinander vergleichen wollen, müssen wir das Jahr als zusätzliche *convenience Variable* erstellen und danach gruppieren. Versuche dies mit den Wetterdaten und visualisiere den Output anschliessend.
+In der vorherigen Aufgabe haben wir den Mittelwert der Temperatur pro Kalenderwoche über *alle Jahre* (2000 und 2001) berechnet. Wenn wir die Jahre aber miteinander vergleichen wollen, müssen wir das Jahr als zusätzliche *convenience Variable* erstellen und danach gruppieren. Versuche dies mit den Wetterdaten und visualisiere den Output anschliessend.
 
 ```{r}
 weather_summary2 <- weather |>
