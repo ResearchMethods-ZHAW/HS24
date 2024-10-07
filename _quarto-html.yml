@@ -7,13 +7,13 @@ book:
       - --
       - prepro/Prepro1_Demo.qmd
       - prepro/Prepro1_Uebung.qmd
-      # - --
-      # - prepro/Prepro2_Demo.qmd
-      # - prepro/Prepro2_Uebung_A.qmd
-      # - prepro/Prepro2_Uebung_B.qmd
-      # - --
-      # - prepro/Prepro3_Demo.qmd
-      # - prepro/Prepro3_Uebung.qmd
+      - --
+      - prepro/Prepro2_Demo.qmd
+      - prepro/Prepro2_Uebung_A.qmd
+      - prepro/Prepro2_Uebung_B.qmd
+      - --
+      - prepro/Prepro3_Demo.qmd
+      - prepro/Prepro3_Uebung.qmd
     # - part: InfoVis.qmd
     #   chapters:
     #   - infovis/Infovis1_Vorbereitung.qmd
