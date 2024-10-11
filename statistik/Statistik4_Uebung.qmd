@@ -11,8 +11,6 @@ knitr:
 
 # Statistik 4: Übung
 
-# Statistik 4: Übung
-
 - Lesen Sie den Datensatz *steprasen_ukraine.csv* in R  ein. Dieser enthält Pflanzenartenzahlen (Species.richness) von 199
 10 m² grossen Plots (Vegetationsaufnahmen) von Steppenrasen in der Ukraine sowie zahlreiche Umweltvariablen, deren Bedeutung und Einheiten im Kopf der ExcelTabelle angegeben sind.
 - **Ermitteln Sie ein minimal adäquates Modell, das den Artenreichtum in den Plots durch die Umweltvariablen erklärt.**
