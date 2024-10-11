@@ -9,7 +9,7 @@ knitr:
     collapse: true
 ---
 
-# BiEc2_N Daten(vor)verarbeitung
+# Daten(vor)verarbeitung
 
 ## Projektaufbau RStudio-Projekte
 
@@ -93,6 +93,9 @@ Verschiedene Dinge funktionierten nicht auf Anhieb:
 Versucht wenn möglich solche Dinge jeweils direkt mit R zu lösen, dies ist vorallem bei grösseren Datensätzen extrem hilfreich, damit die Datensätze zu einem sauberen Gesamtdatensatz zusammengefügt werden können.
 
 ```{r}
+#| echo: true
+#| code-fold: false
+
 df_team1 <- read_delim("datasets/fallstudie_n/Aufgabe3_Feldaufnahmen_alle_Gruppen/Aufgabe_2_Team1.csv", delim = ";") 
 
 df_team2 <- read_delim("datasets/fallstudie_n/Aufgabe3_Feldaufnahmen_alle_Gruppen/FelderhebungenSilhwaldKreise.csv", delim = ",")
