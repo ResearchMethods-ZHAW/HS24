@@ -12,14 +12,14 @@ knitr:
 
 # Rauman 3: Übung A
 
-Für die heutige Übung benötigen wir folgende Datensätze. Importiere diese in R. Prüfe, ob das CRS korrekt gesetzt wurde, setze es wenn nötig. Mache dich mit den Daten vertraut (visualieren, durchscrollen usw).
+Für die heutige Übung benötigen wir folgende Datensätze. Importiere diese in R. Prüfe, ob das CRS korrekt gesetzt wurde und setze es wenn nötig. Mache dich mit den Daten vertraut (visualieren, durchscrollen usw).
 
 - *rotmilan.gpkg*: Dieser Datensatz stammt aus einem grösseren Forschungsprojekt der [Vogelwarte Sempach](https://www.vogelwarte.ch/de/projekte/oekologische-forschung/mechanismen-der-populationsdynamik-beim-rotmilan), welcher über die die Plattform [movebank](http://www.movebank.org/panel_embedded_movebank_webapp?gwt_fragment=page%3Dsearch_map_linked%2CindividualIds%3D676571254%2Clat%3D44.465151013519666%2Clon%3D9.096679687499508%2Cz%3D5) zur Verfügung gestellt wurde (siehe @scherler2020). Es handelt sich dabei um ein einzelnes Individuum, welches seit 2017 mit einem Sender versehen ist und über ganz Mitteleuropa zieht. Wir arbeiten in dieser Übung nur mit denjenigen Datenpunkten, die in der Schweiz erfasst wurden. Wer den ganzen Datensatz analysieren möchte, kann sich diesen über den Movebank-Link runterladen.
 - *luftqualitaet.gpkg*: Dieser Datensatz beinhaltet Messungen von Stickstoffdioxid $NO_2$ aus dem Jahr 2015 für 97 Messstellen in der Schweiz. Stickstoffdioxid entstehen beim Verbrennen von Brenn- und Treibstoffen, insbesondere bei hohen Verbrennungstemperaturen, wobei der Strassenverkehr als Hauptquelle gilt. 
 Mehr Informationen dazu findet ihr [hier](https://www.bafu.admin.ch/bafu/de/home/themen/thema-luft/luft--daten--indikatoren-und-karten/luft--indikatoren/indikator-luft.pt.html/aHR0cHM6Ly93d3cuaW5kaWthdG9yZW4uYWRtaW4uY2gvUHVibG/ljL0FlbURldGFpbD9pbmQ9TFUwMjAmbG5nPWRlJlN1Ymo9Tg%3d%3d.html).
 - *schweiz.gpkg*: Landesgrenze der Schweiz
 
-Als erstes wollen wir für die Datensätze `luftqualitaet` und `rotmilan` Dichteschätzungen durchführen. Lade vorgängig die dafür die notwendigen Packages in deine R-Session.
+Als erstes wollen wir für die Datensätze `luftqualitaet` und `rotmilan` Dichteschätzungen durchführen. Lade vorgängig die dafür notwendigen Packages in deine R-Session.
 
 ```{r}
 #| echo: true
@@ -58,9 +58,9 @@ ggplot(schweiz) +
 
 In einer ersten Annäherung funktioniert dies, doch wir sehen hier ein klassisches Problem des "Overplotting". Das heisst, dass wir durch die Überlagerung vieler Punkte in den dichten Regionen nicht abschätzen können, wie viele Punkte dort effektiv liegen und ggf. übereinander liegen. Es gibt hier verschiedene Möglichkeiten, die Punktdichte klarer zu visualisieren. Eine unter Biologen sehr beliebte Methode ist die Dichteverteilung mit einer Kernel Density Estimation (KDE). Dies v.a. darum, weil mit KDE das Habitat (Streifgebiet) eines Tieres abgeschätzt werden kann. Homeranges werden oft mit KDE95 und Core Areas mit KDE50 definiert ([Fleming C., Calabrese J., 2016](https://besjournals.onlinelibrary.wiley.com/doi/full/10.1111/2041-210X.12673)).
 
-Für die Berechnung der Density verwenden wir die Funktion `density.ppp` aus `spatstat`. Diese library ist etwas komplex in der Anwendung, damit wir dieses Verfahren aber dennoch auf unsere Rotmilan-Daten anwenden können, haben wir eine eigene KDE-Funktion erstellt, die wir Euch zur Verfügung stellen. 
+Für die Berechnung der Density verwenden wir die Funktion `density.ppp` aus `spatstat`. Diese library ist etwas komplex in der Anwendung. Damit wir dieses Verfahren aber dennoch auf unsere Rotmilan-Daten anwenden können, haben wir eine eigene KDE-Funktion erstellt, die wir Euch zur Verfügung stellen. 
 
-Wir ermutigen alle, die dafür Kapazität haben, unsere Function eingehend zu studieren und allenfalls ganz auf die Funktion zu verzichten und stattdessen direkt `spatstat` zu verwenden. Wenn ihr mit unserer Funktion arbeiten möchtet, müsst ihr den unten stehenden Code in euer Skript kopieren und ausführen. 
+Wir ermutigen alle, die dafür Kapazität haben, unsere Funktion eingehend zu studieren und allenfalls ganz auf die Funktion zu verzichten und stattdessen direkt `spatstat` zu verwenden. Wenn ihr mit unserer Funktion arbeiten möchtet, müsst ihr den unten stehenden Code in euer Skript kopieren und ausführen. 
 
 ```{r}
 #| echo: true
@@ -91,11 +91,11 @@ my_kde <- function(points, cellsize, bandwith, extent = NULL){
 Die Parameter der Funktion sollten relativ klar sein:
 
 - `points`: Ein Punktdatensatz aus der Class `sf`
-- `cellsize`: Die Zellgrösse des output-Rasters
+- `cellsize`: Die Zellgrösse des Output-Rasters
 - `bandwith`: Der Suchradius für die Dichteberechnung
 - `extent` (optional): Der Perimeter, in dem die Dichteverteilung berechnet werden soll. Wenn kein Perimeter angegeben wird, wird die "bounding box" von `points` genutzt.
 
-Wenn wir nun mit `my_kde()` die Dichteverteilung berechnen, erhalten wir ein `data.frame` mit X und Y Koordinaten sowie eine Spalte `value` zurück. Nutzt diese drei Spalten mit `geom_raster()` um eure Daten mit `ggplot` zu visualisieren (`aes(x = X, y = Y, fill = value)`. 
+Wenn wir nun mit `my_kde()` die Dichteverteilung berechnen, erhalten wir ein `data.frame` mit X und Y Koordinaten sowie eine Spalte `value` zurück. Nutzt diese drei Spalten mit `geom_raster()`, um eure Daten mit `ggplot` zu visualisieren (`aes(x = X, y = Y, fill = value)`. 
 ```{r}
 #| echo: true
 #| output: true
@@ -116,9 +116,9 @@ ggplot() +
   theme_void()
 ```
 
-Die Kernel Density Estimation ist nun sehr stark von den tiefen Werten dominiert, da die Dichte in den meisten Zellen unseres Untersuchungsgebiets nahe bei Null liegt. Wie erwähnt sind Wissenschaftler häufig nur an den höchsten 95\% der Werte interessiert. Folge folgende Schritte um das Resultat etwas besser zu verantschaulichen:
+Die Kernel Density Estimation ist nun sehr stark von den tiefen Werten dominiert, da die Dichte in den meisten Zellen unseres Untersuchungsgebiets nahe bei Null liegt. Wie erwähnt sind Wissenschaftler häufig nur an den höchsten 95\% der Werte interessiert. Folge folgenden Schritten, um das Resultat etwas besser zu veranschaulichen:
 
-1. Berechne die 95. Perzentile aller Werte mit der Funktion `quantile` und benne diesen `q95`
+1. Berechne die 95. Perzentile aller Werte mit der Funktion `quantile` und bennene diesen `q95`
 2. Erstelle eine neue Spalte in `rotmilan_kde`, wo alle Werte tiefer als `q95` `NA` entsprechen
 3. (Optional): Transformiere die Werte mit log10, um einen differenzierteren Farbverlauf zu erhalten
 
@@ -146,8 +146,8 @@ ggplot() +
 
 ## Aufgabe 3: Dichteverteilung mit Thiessen Polygonen
 
-Thiessen Polygone bieten eine spannende Alternative um Unterschiede in der Dichteverteilung von Punktdatensätzen zu visualisieren. 
-Wir wollen dies nun ausprobieren und konstruieren zum Schluss die Thiessenpolygone für die Rotmilan-Daten für das Untersuchungsgebiet Schweiz. Nutze die Anleitung für das Erstellen von Thiessenpolygonen aus der Übung B um Thiessenpolygone für die Rotmilanpositionen zu erstellen. 
+Thiessen Polygone bieten eine spannende Alternative, um Unterschiede in der Dichteverteilung von Punktdatensätzen zu visualisieren. 
+Wir wollen dies nun ausprobieren und konstruieren zum Schluss die Thiessenpolygone für die Rotmilan-Daten für das Untersuchungsgebiet Schweiz. Nutze die Anleitung für das Erstellen von Thiessenpolygonen aus der Übung B, um Thiessenpolygone für die Rotmilanpositionen zu erstellen. 
 
 ```{r}
 thiessenpolygone <- rotmilan |>

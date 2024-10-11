@@ -46,7 +46,7 @@ Wenn Umlaute und Sonderzeichen nicht korrekt dargestellt werden (z.B. das è in 
 - Funktionen aus dem Package `readr`: `locale = locale(encoding = "UTF-8")`
 - Base-R Funktionen: `fileEncoding = "UTF-8"`
 
-Wenn ihr die codierung eines Files *nicht* kennt, könnt wie folgt vorgehen: Anleitung [für Windows](https://stackoverflow.com/a/13464816/4139249), [für Mac](https://stackoverflow.com/a/2461193/4139249) und [für Linux](https://stackoverflow.com/a/805474/4139249). 
+Wenn ihr die Codierung eines Files *nicht* kennt, könnt ihr wie folgt vorgehen: Anleitung [für Windows](https://stackoverflow.com/a/13464816/4139249), [für Mac](https://stackoverflow.com/a/2461193/4139249) und [für Linux](https://stackoverflow.com/a/805474/4139249). 
 :::
 
 ```{r}
@@ -55,7 +55,7 @@ metadata <- read_delim("datasets/prepro/metadata.csv", delim = ";", locale = loc
 
 ## Aufgabe 3
 
-Nun wollen wir den Datensatz `wetter`mit den Informationen aus `metadata` anreichern. Uns interessiert aber nur das Stationskürzel, der Name, die x/y Koordinaten sowie die Meereshöhe, selektiere diese Spalten.
+Nun wollen wir den Datensatz `wetter` mit den Informationen aus `metadata` anreichern. Uns interessiert aber nur das Stationskürzel, der Name, die x/y Koordinaten sowie die Meereshöhe. Selektiere diese Spalten.
 
 ```{r}
 metadata <- metadata[, c("stn", "Name", "x", "y", "Meereshoehe")]
@@ -65,7 +65,7 @@ metadata <- metadata[, c("stn", "Name", "x", "y", "Meereshoehe")]
 
 Jetzt kann `metadata` mit dem Datensatz `wetter` verbunden werden. Überlege dir, welcher Join dafür sinnvoll ist und mit welchem Attribut wir "joinen" können.
 
-Nutze die Join-Möglichkeiten von `dplyr` (Hilfe via `?dplyr::join`)  um die Datensätze `wetter` und `metadata` zu verbinden.
+Nutze die Join-Möglichkeiten von `dplyr` (Hilfe via `?dplyr::join`), um die Datensätze `wetter` und `metadata` zu verbinden.
 
 ```{r}
 library("dplyr")
@@ -77,7 +77,7 @@ wetter <- left_join(wetter, metadata, by = "stn")
 
 ## Aufgabe 5
 
-Erstelle eine neue Spalte `month` welche den jeweiligen Monat (aus `time`) beinhaltet. Nutze dafür die Funktion `lubridate::month()`.
+Erstelle eine neue Spalte `month`, welche den jeweiligen Monat (aus `time`) beinhaltet. Nutze dafür die Funktion `lubridate::month()`.
 
 ```{r}
 library("lubridate")

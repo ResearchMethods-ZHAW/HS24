@@ -50,7 +50,7 @@ Als erstes berechnen wir die G-Function für die Rotmilanpositionen:
 
 ### Schritt 1
 
-Mit `st_distance()` können Distanzen zwischen zwei `sf` Datensätze berechnet werden. Wird nur ein Datensatz angegeben, wird eine Kreuzmatrix erstellt wo die Distanzen zwischen allen Features zu allen anderen Features dargestellt werden. Wir nützen diese Funktion zur Berechnung der nächsten Nachbarn.
+Mit `st_distance()` können Distanzen zwischen zwei `sf`-Datensätze berechnet werden. Wird nur ein Datensatz angegeben, wird eine Kreuzmatrix erstellt, wo die Distanzen zwischen allen Features zu allen anderen Features dargestellt werden. Wir nützen diese Funktion zur Berechnung der nächsten Nachbarn.
 
 ```{r}
 rotmilan_distanzmatrix <- st_distance(rotmilan)
@@ -65,7 +65,7 @@ rotmilan_distanzmatrix[1:6, 1:6]
 
 ### Schritt 2
 
-Nun wollen wir wissen, wie gross die *kürzeste* Distanz von jedem Punkt zu seinem nächsten Nachbarn beträgt, also die *kürzeste Distanz pro Zeile*. Bevor wir diese ermitteln müssen wir die diagonalen Werte noch entfernen, denn diese stellen ja jeweils die Distanz zu sich selber dar und sind immer `0`. Danach kann mit `apply()` eine Funktion (`FUN = min`) über die Zeilen (`MARGIN = 1`) einer Matrix (`X = rotmilan_distanzmatrix`) gerechnet werden. Zusätzlich müssen wir noch `na.rm = TRUE` setzen, damit `NA` Werte von der Berechnung ausgeschlossen werden. Das Resultat ist ein Vektor mit gleich vielen Werten wie Zeilen in der Matrix.
+Nun wollen wir wissen, wie gross die *kürzeste* Distanz von jedem Punkt zu seinem nächsten Nachbarn ist, also die *kürzeste Distanz pro Zeile*. Bevor wir diese ermitteln, müssen wir die diagonalen Werte noch entfernen, denn diese stellen ja jeweils die Distanz zu sich selber dar und sind immer `0`. Danach kann mit `apply()` eine Funktion (`FUN = min`) über die Zeilen (`MARGIN = 1`) einer Matrix (`X = rotmilan_distanzmatrix`) gerechnet werden. Zusätzlich müssen wir noch `na.rm = TRUE` setzen, damit `NA` Werte von der Berechnung ausgeschlossen werden. Das Resultat ist ein Vektor mit gleich vielen Werten wie Zeilen in der Matrix.
 
 ```{r}
 diag(rotmilan_distanzmatrix) <- NA # entfernt alle diagonalen Werte
@@ -77,7 +77,7 @@ rotmilan_mindist <- apply(rotmilan_distanzmatrix, 1, min, na.rm = TRUE)
 
 ### Schritt 3
 
-Nun müssen wir die Distanzen nach ihrer Grösse sortieren 
+Nun müssen wir die Distanzen nach ihrer Grösse sortieren.
 
 ```{r}
 rotmilan_mindist <- sort(rotmilan_mindist)
@@ -85,7 +85,7 @@ rotmilan_mindist <- sort(rotmilan_mindist)
 
 ### Schritt 4
 
-Jetzt berechnen wir die kummulierte Häufigkeit von jeder Distanz berechnen. Die kummulierte Häufikgeit vom ersten Wert ist 1 (der Index des ersten Wertes) dividiert durch die Anzahl Werte insgesamt. Mit `seq_along` erhalten wir die Indizes aller Werte, mit `lenth` die Anzahl Werte insgesamt.
+Jetzt berechnen wir die kummulierte Häufigkeit von jeder Distanz. Die kummulierte Häufikgeit vom ersten Wert ist 1 (der Index des ersten Wertes) dividiert durch die Anzahl Werte insgesamt. Mit `seq_along` erhalten wir die Indizes aller Werte, mit `length` die Anzahl Werte insgesamt.
 
 ```{r}
 kumm_haeufgikeit <- seq_along(rotmilan_mindist) / length(rotmilan_mindist)

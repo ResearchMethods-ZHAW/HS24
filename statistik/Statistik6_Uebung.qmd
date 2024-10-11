@@ -10,3 +10,140 @@ knitr:
 ---
 
 # Statistik 6: Übung
+
+**Datensatz *novanimal.csv***
+
+### Hintergrund Daten
+
+Im Forschungsprojekt NOVANIMAL wird u.a. der Frage nachgegangen, was es braucht, damit Menschen freiwillig weniger tierische Produkte konsumieren? Ein interessanter Ansatzpunkt ist die Ausser-Haus-Verpflegung. Gemäss der ersten in den Jahren 2014/2015 durchgeführten nationalen Ernährungserhebung menuCH essen 70 % der Bevölkerung zwischen 18 und 75 Jahren am Mittag auswärts [@bochud2017]. Daher rückt die Gastronomie als zentraler Akteur einer innovativen und nachhaltigen Ernährungswirtschaft ins Blickfeld. Welche Innovationen in der Gastronomie könnten dazu beitragen, den Pro-Kopf-Verbrauch an tierischen Nahrungsmitteln zu senken?
+
+Dazu wurde u.a. ein Experiment in zwei Hochschulmensen durchgeführt. Forschungsleitend war die Frage, wie die Gäste dazu bewogen werden können, häufiger vegetarische oder vegane Gerichte zu wählen. Konkret wurde untersucht, wie die Gäste auf ein verändertes Menü-Angebot mit einem höheren Anteil an vegetarischen und veganen Gerichten reagieren. Das Experiment fand während 12 Wochen statt und bestand aus zwei Mensazyklen à 6 Wochen. Über den gesamten Untersuchungszeitraum werden insgesamt 90 verschiedene Gerichte angeboten. In den 6 Referenz- bzw. Basiswochen wurden zwei fleisch- oder fischhaltige Menüs und ein vegetarisches Menü angeboten. In den 6 Interventionswochen wurde das Verhältnis umgekehrt und es wurden ein veganes, ein vegetarisches und ein fleisch- oder fischhaltiges Gericht angeboten. Basis- und Interventionsangebote wechselten wöchentlich ab. Während der gesamten 12 Wochen konnten die Gäste jeweils auf ein Buffet ausweichen und ihre Mahlzeit aus warmen und kalten Komponenten selber zusammenstellen. Die Gerichte wurden über drei vorgegebene Menülinien (F, K, W) randomisiert angeboten.
+
+![Die Abbildung zeigt das Versuchsdesign der ersten 6 Experimentwochen (Kalenderwoche 40 bis 45).](figures/design_experiment.png)
+
+Mehr Informationen über das Forschungsprojekt NOVANIMAL findet ihr auf der [Webpage](https://www.novanimal.ch).
+
+### Aufgaben
+
+Führt mit dem novanimal Datensatz (inviduelle Daten) eine logistische Regression durch, wobei ihr die einzelnen Käufer (single campus_card holder) als weitere randomisierte Variable mitberücksichtigt. Kann der Fleischkonsum durch das Geschlecht, die Hochschulzugehörigkeit und das Alter erklärt werden? Berüchsicht auch möglich Interaktionen zwischen dem Geschlecht und dem Alter sowie dem Geshclecht und der Hochschulzugehörigkeit
+
+
+-   Bestimmt das minimal adäquate Modell
+-   Stellt die Ergebnisse dar
+
+# Stat5: Lösung
+
+-   Download dieses Lösungsscript via "\</\>Code" (oben rechts)
+
+## Musterlösung Übung 6: GLMM
+
+### Kommentierter Lösungsweg
+
+```{r}
+#| echo: false
+#| results: hide
+
+
+library("pacman")
+p_load("tidyverse", "glmmTMB", "performance", "DHARMa")
+```
+
+```{r}
+# lade daten
+nova <- read_delim("datasets/stat/novanimal.csv", delim = ";") |>
+  mutate(across(where(is.character), as.factor))
+
+str(nova)
+summary(nova)
+
+# sieht euch die Verteilung zwischen Fleisch und  kein Fleisch an,
+# beide Kategorien kommen nicht gleich häufig vor, ist aber nicht tragisch
+table(nova$meat) 
+prop.table(table(nova$meat)) # Werte in Prozent
+
+# Definiert das logistische Modell mit ccrs als random intercept und
+# wendet es auf den Datensatz an
+
+# Exkurs für Neugierige
+# check out ICC: https://www.datanovia.com/en/lessons/intraclass-correlation-coefficient-in-r/
+
+glmm_1 <- glmmTMB(meat ~ gender + age_group + member + gender:age_group + gender:member + 
+                    (1 | ccrs), 
+                 family = binomial, 
+                 data = nova)
+
+Anova(glmm_1)
+summary(glmm_1)
+## erste Interpretation: Geschlecht (Referenzkategorie: Mann) scheint den Fleischkonsum positiv zu beeinflussen, schauen wir ob wir das Model vereinfachen können:
+
+
+# Model optimierung
+drop1(glmm_1, test = "Chi")
+glmm_2 <- update(glmm_1,~. -gender:age_group)
+
+drop1(glmm_2, test = "Chi")
+glmm_3 <- update(glmm_2,~. -age_group)
+
+drop1(glmm_3, test = "Chi")
+glmm_4 <- update(glmm_3,~. -gender:member)
+
+drop1(glmm_4, test="Chi")
+
+Anova(glmm_4)
+summary(glmm_4)
+
+# Model validation
+# Test overdisepersion
+check_overdispersion(glmm_3)
+# der Wert ist nahe 1 daher i.o
+
+set.seed(123)
+simulationOutput <- simulateResiduals(fittedModel = glmm_4, plot = TRUE, n = 500)
+
+
+# Plot residuals vs covariates des models
+plotResiduals(simulationOutput, form = nova$gender)
+plotResiduals(simulationOutput, form = nova$member)
+
+# Die formalen Tests zeigen, dass es Probleme gibt.Die visuelle Inspektion zeigt jedoch, dass es überhapt keine Probleme gibt und die Residiuen beinahe perfekt normalverteilt sind (dies zeigt, dass die Testergebnisse stark von der Anzahl der Beobachtungen (in diesem Fall viele) abhängen).
+
+
+# Modelresultat
+Anova(glmm_4)
+summary(glmm_4)
+
+# Pseudo R^2
+r2(glmm_1)
+# das marginale R^2 (r2m) gibt uns die erklärte Varianz der fixen Effekte: hier 4% (das ist sehr wenig)
+# das conditionale R^2 (r2c) gibt uns die erklärte Varianz für das ganze Modell
+# (mit fixen und variablen Effekten): hier 34% 
+
+
+# zusätzliche Informationen, welche für die Interpretation gut sein kann
+# berechnet den Standardfehler (mehr infos: https://mgimond.github.io/Stats-in-R/CI.html)
+# weitere info: https://stats.stackexchange.com/questions/26650/how-do-i-reference-a-regression-models-coefficients-standard-errors
+( conf_intervals <- confint(glmm_4, level = 0.95) )
+# zeigt eine Tabelle der Schätzer mit 95% Konfidenzintervall (KI)
+# => Faustregel: falls 0 im KI enthalten ist, dann ist der Unterschied statistisch NICHT signifikant
+
+
+# erzeugt die Odds Ratios
+( odsr <- exp(conf_intervals) )
+```
+
+### Methoden
+
+Die Responsevariable “Fleischkonsum” ist eine binäre Variable. Demnach wird eine multiple logistische Regression mit den Prädiktoren “Alter (Gruppen)”, “Geschlecht” und “Hochschulzugehörigkeit” gerechnet. Da in den Daten gewisse Individuen mehrmals vorkommen, wird das Individuum (Variable ccrs) als variabler Effekt in das Modell aufgenommen.
+
+### Ergebnisse
+
+Das Geschlecht und die Hochschulzugehörigkeit (Mitarbeiter oder Student) nehmen einen signifikanten Einfluss auf den Fleischkonsum (siehe Table 1): Männer kaufen signifikant häufiger ein fleischhaltiges Gericht als Frauen; Mitarbeiter kaufen signifikant häufiger ein fleischhaltiges Gericht als Studenten in der Mensa. 
+
+```{r}
+conf_intervals
+
+# Achtung wir sind hier im log Raum
+odsr
+```
+
+Die Chance, dass Männer ein fleischhaltiges Gericht kaufen ist 2.5 mal (+157%) höher als bei Frauen. Die Chance, dass Studierende ein fleischhaltiges Gericht kaufen ist kleiner (-18%) als bei den Mitarbeitern
