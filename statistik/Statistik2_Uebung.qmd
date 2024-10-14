@@ -7,6 +7,22 @@ code-summary: "Musterlösung"
 knitr:
   opts_chunk: 
     collapse: true
+musterloesung: true
 ---
 
 # Statistik 2: Übung
+
+Aufgabenbeschreibung
+
+
+
+:::{.callout-note .content-hidden unless-meta="muesterloesung"}
+
+## Lösung Übung 2
+
+```{r}
+
+```
+
+:::
+

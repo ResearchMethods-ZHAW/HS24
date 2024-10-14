@@ -7,6 +7,7 @@ code-summary: "Musterlösung"
 knitr:
   opts_chunk: 
     collapse: true
+musterloesung: true
 ---
 
 # Statistik 5: Übung
@@ -19,6 +20,8 @@ Bitte prüft mit einer logistischen Regression, ob und ggf. wie die Inselform di
 
 - Download dieses Lösungsscript via "\</\>Code" (oben rechts)
 - [Lösungstext als Download](Statistik_Loesung_5.pdf)
+
+:::{.callout-note .content-hidden unless-meta="muesterloesung"}
 
 ## Musterlösung Aufgabe 5: Multiple logistische Regression
 
@@ -97,3 +100,5 @@ ggplot(data = polis, aes(x = RATIO, y = PA)) +
   stat_smooth(method = "glm", method.args = list(family = "binomial")) +
   theme_classic()
 ```
+
+:::
