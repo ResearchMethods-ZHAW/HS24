@@ -209,7 +209,7 @@ summary(glm_binomial_2)
 2^ld50_feamle
 
 # ld 50 male
-dose.p(glm_binomial_2, cf = c(1, 2, 3)) 
+# dose.p(glm_binomial_2, cf = c(1, 2, 3)) 
 # funktioniert nicht wir müssen es manuell ausrechnen
 ld50_male <- -(glm_binomial_2$coefficients[1] + glm_binomial_2$coefficients[2] ) / glm_binomial_2$coefficients[3]
 # Zurücktransformieren
