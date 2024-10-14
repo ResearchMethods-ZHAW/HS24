@@ -236,6 +236,7 @@ Der Code dazu könnte so aussehen:
 ```{r eval=FALSE, echo=TRUE}
   ...|>
   mutate(Wochenende = ifelse(Wochentag %in% c(6,7), "Wochenende", "Werktag")) |>
+  # 1 means Monday and 7 means Sunday (default)
   mutate(Wochenende = as.factor(Wochenende)) |>
   ...
 ```
