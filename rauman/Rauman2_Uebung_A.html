@@ -2,7 +2,7 @@
 <html xmlns="http://www.w3.org/1999/xhtml" lang="de" xml:lang="de"><head>
 
 <meta charset="utf-8">
-<meta name="generator" content="quarto-1.4.549">
+<meta name="generator" content="quarto-1.4.554">
 
 <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
 
@@ -106,40 +106,76 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 }</script>
 
 
+
+
 <!-- loads fontawesome, so that I can create a fontawesome button (see below) -->
+
 <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.2/css/all.min.css" integrity="sha512-z3gLpd7yknf1YoNbCzqRKc4qyor8gaKU1qmn+CShxbuBusANI9QpRohGBreCFkKxLhei6S9CQXFEbbKuqLg0DA==" crossorigin="anonymous" referrerpolicy="no-referrer">
+
 <script>
 
+
+
 // the following function adds padding to all h2 elements, so that I can 
+
 // easily present the content of the page in a more readable way
+
 function presenter(){
+
     var paragraphs = document.querySelectorAll("h2, h3");
+
     paragraphs.forEach(function (paragraph) {
+
         paragraph.classList.toggle("padding-top-500");
+
     });
+
 }
 
+
+
 // once the page is loaded, the button is injected into the sidebar. This button
+
 // calls the presenter function (see above)
+
 window.onload = function() {
+
     // create the button (similar to the buttons already availables)
+
     const linkElement = document.createElement('a');
 
+
+
     linkElement.classList.add('quarto-navigation-tool');
+
     linkElement.classList.add('px-1');
+
     linkElement.innerHTML = '<i class="fa-solid fa-person-chalkboard"></i>';
+
     linkElement.href = '#';
+
     linkElement.addEventListener('click', function(event) {
+
         event.preventDefault(); // Prevent the default link behavior
+
         presenter();
+
     });
 
+
+
     // Find the target element by its class name
+
     const sidebar_tools = document.querySelector(".sidebar-tools-main")
+
     sidebar_tools.appendChild(linkElement);
+
 };
 
+
+
 </script>
+
 
   <script src="https://polyfill.io/v3/polyfill.min.js?features=es6"></script>
   <script src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-chtml-full.js" type="text/javascript"></script>
@@ -505,6 +541,11 @@ window.Quarto = {
   <a href="../fallstudie_s/1_Einführung.html" class="sidebar-item-text sidebar-link"><span class="chapter-title">Einführung</span></a>
   </div>
 </li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../fallstudie_s/2_Besuchermonitoring.html" class="sidebar-item-text sidebar-link"><span class="chapter-title">Monitoring</span></a>
+  </div>
+</li>
       </ul>
   </li>
         <li class="sidebar-item sidebar-item-section">
@@ -518,7 +559,7 @@ window.Quarto = {
       <ul id="quarto-sidebar-section-6" class="collapse list-unstyled sidebar-section depth1 ">  
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
-  <a href="../fallstudie_n/1_Vorbemerkung.html" class="sidebar-item-text sidebar-link"><span class="chapter-title">BiEc1_N Vorbemerkung</span></a>
+  <a href="../fallstudie_n/1_Vorbemerkung.html" class="sidebar-item-text sidebar-link"><span class="chapter-title">Vorbemerkung</span></a>
   </div>
 </li>
       </ul>
@@ -568,9 +609,9 @@ window.Quarto = {
 </header>
 
 
-<p>In <a href="Rauman1_Uebung_B.html">der letzten Übung</a> haben wir einen Spatial Join zwischen Bäumen und Wiesen durchgeführt um herauszufinden, ob sich der Baum in einer Wiese befindet oder nicht. Basis waren dafür die Daten vom Campus Grüental (<em>gruental.gpkg</em>)</p>
+<p>In <a href="Rauman1_Uebung_B.html">der letzten Übung</a> haben wir einen Spatial Join zwischen Bäumen und Wiesen durchgeführt, um herauszufinden, ob sich der Baum in einer Wiese befindet oder nicht. Basis waren dafür die Daten vom Campus Grüental (<em>gruental.gpkg</em>)</p>
 <p>Heute gehen wir einen Schritt weiter und wollen folgende Frage beantworten: <em>Wie viel Wiese befinden sich in einem Umkreis von 20m um jeden Baum?</em></p>
-<p>Lade dazu die benötigten Libraries und Datensätze in deine Session. Exploriere die Daten visualisiere Sie räumlich.</p>
+<p>Lade dazu die benötigten Libraries und Datensätze in deine Session. Exploriere die Daten und visualisiere sie räumlich.</p>
 <div class="cell">
 <div class="sourceCode cell-code" id="cb1"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb1-1"><a href="#cb1-1" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(<span class="st">"dplyr"</span>)</span>
 <span id="cb1-2"><a href="#cb1-2" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(<span class="st">"sf"</span>)</span>
@@ -579,7 +620,7 @@ window.Quarto = {
 <span id="cb1-5"><a href="#cb1-5" aria-hidden="true" tabindex="-1"></a>wiesen <span class="ot">&lt;-</span> <span class="fu">read_sf</span>(<span class="st">"datasets/rauman/gruental.gpkg"</span>, <span class="st">"wiesen"</span>)</span>
 <span id="cb1-6"><a href="#cb1-6" aria-hidden="true" tabindex="-1"></a>baeume <span class="ot">&lt;-</span> <span class="fu">read_sf</span>(<span class="st">"datasets/rauman/gruental.gpkg"</span>, <span class="st">"baeume"</span>)</span></code><button title="In die Zwischenablage kopieren" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
-<p>Um die Übung etwas zu vereinfachen arbeiten wir erstmals mit nur 10 Bäumen. Nutze nachstehenden Code um zufällig 10 Bäume auszuwählen. Wenn ihr den gleichen “Seed” wie ich benutzt (<code>set.seed(100)</code>) habt ihr “zufällig” auch die gleichen Bäume wie ich.</p>
+<p>Um die Übung etwas zu vereinfachen, arbeiten wir erstmals mit nur 10 Bäumen. Nutze nachstehenden Code, um zufällig 10 Bäume auszuwählen. Wenn ihr den gleichen “Seed” wie ich benutzt (<code>set.seed(100)</code>), habt ihr “zufällig” auch die gleichen Bäume wie ich.</p>
 <div class="cell">
 <div class="sourceCode cell-code" id="cb2"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb2-1"><a href="#cb2-1" aria-hidden="true" tabindex="-1"></a><span class="fu">set.seed</span>(<span class="dv">100</span>)</span>
 <span id="cb2-2"><a href="#cb2-2" aria-hidden="true" tabindex="-1"></a>baeume_sample <span class="ot">&lt;-</span> <span class="fu">sample_n</span>(baeume, <span class="dv">10</span>)</span></code><button title="In die Zwischenablage kopieren" class="code-copy-button"><i class="bi"></i></button></pre></div>
@@ -598,7 +639,7 @@ window.Quarto = {
 </div>
 <section id="aufgabe-1" class="level2">
 <h2 class="anchored" data-anchor-id="aufgabe-1">Aufgabe 1</h2>
-<p>Als erster Schritt müssen wir jeden Baum mit einem 20m Puffer verstehen. Nutze dazu <code>st_buffer</code> um speichere den Output als <code>baeume_20m</code>. Schau dir <code>baeume_20m</code> nun genau an. Um welchen Geometrietyp handelt es sich dabei nun?</p>
+<p>Als erster Schritt müssen wir jeden Baum mit einem 20m Puffer versehen. Nutze dazu <code>st_buffer</code> und speichere den Output als <code>baeume_20m</code>. Schau dir <code>baeume_20m</code> nun genau an. Um welchen Geometrietyp handelt es sich dabei nun?</p>
 <div class="cell">
 <div class="cell-output-display">
 <div id="fig-buffer1" class="quarto-figure quarto-figure-center quarto-float anchored">
@@ -634,7 +675,7 @@ Abbildung&nbsp;34.1: Dargestellt sind die Bäume als Punkte mit einem 20m Puffer
 <section id="aufgabe-4-optional" class="level2">
 <h2 class="anchored" data-anchor-id="aufgabe-4-optional">Aufgabe 4 (Optional)</h2>
 <p>Berechne nun aus <code>wiesen_flaeche</code> den <code>wiesen_anteil</code>. Tipp: 100% ist die Kreisfläche aus <span class="math inline">\(r^2\times \pi\)</span>, wobei in unserem Fall <span class="math inline">\(r = 20\)</span> entspricht.</p>
-<p>Überführe anschliessend die berechneten Anteilswerte in den Datensatz <code>baeume</code> mit einem <code>left_join</code> zwischen <code>baeume</code> und <code>baeume_wiesen</code>. Welche Spalte wäre für diesen Join geeignet? Hinweis: Nutze <code>st_drop_geometry()</code> um die Geometriespalte in <code>baeme_wiesen</code> vor dem Join zu entfernen.</p>
+<p>Überführe anschliessend die berechneten Anteilswerte in den Datensatz <code>baeume</code> mit einem <code>left_join</code> zwischen <code>baeume</code> und <code>baeume_wiesen</code>. Welche Spalte wäre für diesen Join geeignet? Hinweis: Nutze <code>st_drop_geometry()</code>, um die Geometriespalte in <code>baeme_wiesen</code> vor dem Join zu entfernen.</p>
 <div class="cell">
 <div class="cell-output-display">
 <div id="fig-ggplot-ex4" class="quarto-figure quarto-figure-center quarto-float anchored">
@@ -652,8 +693,8 @@ Abbildung&nbsp;34.2: Nach dieser Übung kannst du das Resultat in dieser Weise v
 </section>
 <section id="sec-raster-intro1" class="level2">
 <h2 class="anchored" data-anchor-id="sec-raster-intro1">Aufgabe 5</h2>
-<p>Nun habt ihr ein paar Vektoroperationen wie <code>st_buffer()</code> und <code>st_intersection()</code> und <code>st_area()</code> durchgeführt. Gewisse Fragen lassen sich aber besser in der Raster-Welt beantworten. Wollen wir beispielsweise für jeden Punkt im Raum wissen, wie weit der nächstgelegene Baum ist, lässt sich das besser in einem Raster darstellen.</p>
-<p>Bevor wir die Frage aber beantworten können, müssen wir den Vektordatensatz in ein Rasterdatensatz konvertieren. Dafür wiederum braucht es ein Raster “Template”, damit R in etwa weiss, wie der Raster Output auszusehen hat.</p>
+<p>Nun habt ihr ein paar Vektoroperationen wie <code>st_buffer()</code>, <code>st_intersection()</code> und <code>st_area()</code> durchgeführt. Gewisse Fragen lassen sich aber besser in der Raster-Welt beantworten. Wollen wir beispielsweise für jeden Punkt im Raum wissen, wie weit der nächstgelegene Baum ist, lässt sich das besser in einem Raster darstellen.</p>
+<p>Bevor wir die Frage aber beantworten können, müssen wir den Vektordatensatz in ein Rasterdatensatz konvertieren. Dafür wiederum braucht es ein Raster “Template”, damit R in etwa weiss, wie der Raster-Output auszusehen hat.</p>
 <div class="cell">
 <div class="sourceCode cell-code" id="cb4"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb4-1"><a href="#cb4-1" aria-hidden="true" tabindex="-1"></a></span>
 <span id="cb4-2"><a href="#cb4-2" aria-hidden="true" tabindex="-1"></a><span class="co"># Um mit Raster arbeiten zu können brauchen wir das Package "terra"</span></span>
@@ -972,6 +1013,24 @@ window.document.addEventListener("DOMContentLoaded", function (event) {
   if (showAllCode) {
     showAllCode.addEventListener("click", toggleCodeHandler(true));
   }
+    var localhostRegex = new RegExp(/^(?:http|https):\/\/localhost\:?[0-9]*\//);
+    var mailtoRegex = new RegExp(/^mailto:/);
+      var filterRegex = new RegExp('/' + window.location.host + '/');
+    var isInternal = (href) => {
+        return filterRegex.test(href) || localhostRegex.test(href) || mailtoRegex.test(href);
+    }
+    // Inspect non-navigation links and adorn them if external
+ 	var links = window.document.querySelectorAll('a[href]:not(.nav-link):not(.navbar-brand):not(.toc-action):not(.sidebar-link):not(.sidebar-item-toggle):not(.pagination-link):not(.no-external):not([aria-hidden]):not(.dropdown-item):not(.quarto-navigation-tool)');
+    for (var i=0; i<links.length; i++) {
+      const link = links[i];
+      if (!isInternal(link.href)) {
+        // undo the damage that might have been done by quarto-nav.js in the case of
+        // links that we want to consider external
+        if (link.dataset.originalHref !== undefined) {
+          link.href = link.dataset.originalHref;
+        }
+      }
+    }
   function tippyHover(el, contentFn, onTriggerFn, onUntriggerFn) {
     const config = {
       allowHTML: true,
@@ -1006,7 +1065,11 @@ window.document.addEventListener("DOMContentLoaded", function (event) {
       try { href = new URL(href).hash; } catch {}
       const id = href.replace(/^#\/?/, "");
       const note = window.document.getElementById(id);
-      return note.innerHTML;
+      if (note) {
+        return note.innerHTML;
+      } else {
+        return "";
+      }
     });
   }
   const xrefs = window.document.querySelectorAll('a.quarto-xref');
@@ -1282,12 +1345,12 @@ window.document.addEventListener("DOMContentLoaded", function (event) {
 </script>
 <nav class="page-navigation">
   <div class="nav-page nav-page-previous">
-      <a href="../rauman/Rauman1_Uebung_B.html" class="pagination-link  aria-label=" &lt;span="" 1:="" übung="" b&lt;="" span&gt;"="">
+      <a href="../rauman/Rauman1_Uebung_B.html" class="pagination-link" aria-label="Rauman 1: Übung B">
         <i class="bi bi-arrow-left-short"></i> <span class="nav-page-text"><span class="chapter-title">Rauman 1: Übung B</span></span>
       </a>          
   </div>
   <div class="nav-page nav-page-next">
-      <a href="../rauman/Rauman2_Uebung_B.html" class="pagination-link" aria-label="<span class='chapter-number'>35</span>&nbsp; <span class='chapter-title'>Rauman 2: Übung B</span>">
+      <a href="../rauman/Rauman2_Uebung_B.html" class="pagination-link" aria-label="Rauman 2: Übung B">
         <span class="nav-page-text"><span class="chapter-title">Rauman 2: Übung B</span></span> <i class="bi bi-arrow-right-short"></i>
       </a>
   </div>

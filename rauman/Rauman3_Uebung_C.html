@@ -2,7 +2,7 @@
 <html xmlns="http://www.w3.org/1999/xhtml" lang="de" xml:lang="de"><head>
 
 <meta charset="utf-8">
-<meta name="generator" content="quarto-1.4.549">
+<meta name="generator" content="quarto-1.4.554">
 
 <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
 
@@ -106,40 +106,76 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 }</script>
 
 
+
+
 <!-- loads fontawesome, so that I can create a fontawesome button (see below) -->
+
 <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.2/css/all.min.css" integrity="sha512-z3gLpd7yknf1YoNbCzqRKc4qyor8gaKU1qmn+CShxbuBusANI9QpRohGBreCFkKxLhei6S9CQXFEbbKuqLg0DA==" crossorigin="anonymous" referrerpolicy="no-referrer">
+
 <script>
 
+
+
 // the following function adds padding to all h2 elements, so that I can 
+
 // easily present the content of the page in a more readable way
+
 function presenter(){
+
     var paragraphs = document.querySelectorAll("h2, h3");
+
     paragraphs.forEach(function (paragraph) {
+
         paragraph.classList.toggle("padding-top-500");
+
     });
+
 }
 
+
+
 // once the page is loaded, the button is injected into the sidebar. This button
+
 // calls the presenter function (see above)
+
 window.onload = function() {
+
     // create the button (similar to the buttons already availables)
+
     const linkElement = document.createElement('a');
 
+
+
     linkElement.classList.add('quarto-navigation-tool');
+
     linkElement.classList.add('px-1');
+
     linkElement.innerHTML = '<i class="fa-solid fa-person-chalkboard"></i>';
+
     linkElement.href = '#';
+
     linkElement.addEventListener('click', function(event) {
+
         event.preventDefault(); // Prevent the default link behavior
+
         presenter();
+
     });
 
+
+
     // Find the target element by its class name
+
     const sidebar_tools = document.querySelector(".sidebar-tools-main")
+
     sidebar_tools.appendChild(linkElement);
+
 };
 
+
+
 </script>
+
 
 
 <link rel="stylesheet" href="../custom.css">
@@ -476,6 +512,11 @@ window.onload = function() {
   <a href="../fallstudie_s/1_Einführung.html" class="sidebar-item-text sidebar-link"><span class="chapter-title">Einführung</span></a>
   </div>
 </li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../fallstudie_s/2_Besuchermonitoring.html" class="sidebar-item-text sidebar-link"><span class="chapter-title">Monitoring</span></a>
+  </div>
+</li>
       </ul>
   </li>
         <li class="sidebar-item sidebar-item-section">
@@ -489,7 +530,7 @@ window.onload = function() {
       <ul id="quarto-sidebar-section-6" class="collapse list-unstyled sidebar-section depth1 ">  
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
-  <a href="../fallstudie_n/1_Vorbemerkung.html" class="sidebar-item-text sidebar-link"><span class="chapter-title">BiEc1_N Vorbemerkung</span></a>
+  <a href="../fallstudie_n/1_Vorbemerkung.html" class="sidebar-item-text sidebar-link"><span class="chapter-title">Vorbemerkung</span></a>
   </div>
 </li>
       </ul>
@@ -578,19 +619,19 @@ Abbildung&nbsp;38.1: Eine solche Visualisierung zeigt dir beispielsweise die rä
 <p>Als erstes berechnen wir die G-Function für die Rotmilanpositionen:</p>
 <section id="schritt-1" class="level3">
 <h3 class="anchored" data-anchor-id="schritt-1">Schritt 1</h3>
-<p>Mit <code>st_distance()</code> können Distanzen zwischen zwei <code>sf</code> Datensätze berechnet werden. Wird nur ein Datensatz angegeben, wird eine Kreuzmatrix erstellt wo die Distanzen zwischen allen Features zu allen anderen Features dargestellt werden. Wir nützen diese Funktion zur Berechnung der nächsten Nachbarn.</p>
+<p>Mit <code>st_distance()</code> können Distanzen zwischen zwei <code>sf</code>-Datensätze berechnet werden. Wird nur ein Datensatz angegeben, wird eine Kreuzmatrix erstellt, wo die Distanzen zwischen allen Features zu allen anderen Features dargestellt werden. Wir nützen diese Funktion zur Berechnung der nächsten Nachbarn.</p>
 </section>
 <section id="schritt-2" class="level3">
 <h3 class="anchored" data-anchor-id="schritt-2">Schritt 2</h3>
-<p>Nun wollen wir wissen, wie gross die <em>kürzeste</em> Distanz von jedem Punkt zu seinem nächsten Nachbarn beträgt, also die <em>kürzeste Distanz pro Zeile</em>. Bevor wir diese ermitteln müssen wir die diagonalen Werte noch entfernen, denn diese stellen ja jeweils die Distanz zu sich selber dar und sind immer <code>0</code>. Danach kann mit <code>apply()</code> eine Funktion (<code>FUN = min</code>) über die Zeilen (<code>MARGIN = 1</code>) einer Matrix (<code>X = rotmilan_distanzmatrix</code>) gerechnet werden. Zusätzlich müssen wir noch <code>na.rm = TRUE</code> setzen, damit <code>NA</code> Werte von der Berechnung ausgeschlossen werden. Das Resultat ist ein Vektor mit gleich vielen Werten wie Zeilen in der Matrix.</p>
+<p>Nun wollen wir wissen, wie gross die <em>kürzeste</em> Distanz von jedem Punkt zu seinem nächsten Nachbarn ist, also die <em>kürzeste Distanz pro Zeile</em>. Bevor wir diese ermitteln, müssen wir die diagonalen Werte noch entfernen, denn diese stellen ja jeweils die Distanz zu sich selber dar und sind immer <code>0</code>. Danach kann mit <code>apply()</code> eine Funktion (<code>FUN = min</code>) über die Zeilen (<code>MARGIN = 1</code>) einer Matrix (<code>X = rotmilan_distanzmatrix</code>) gerechnet werden. Zusätzlich müssen wir noch <code>na.rm = TRUE</code> setzen, damit <code>NA</code> Werte von der Berechnung ausgeschlossen werden. Das Resultat ist ein Vektor mit gleich vielen Werten wie Zeilen in der Matrix.</p>
 </section>
 <section id="schritt-3" class="level3">
 <h3 class="anchored" data-anchor-id="schritt-3">Schritt 3</h3>
-<p>Nun müssen wir die Distanzen nach ihrer Grösse sortieren</p>
+<p>Nun müssen wir die Distanzen nach ihrer Grösse sortieren.</p>
 </section>
 <section id="schritt-4" class="level3">
 <h3 class="anchored" data-anchor-id="schritt-4">Schritt 4</h3>
-<p>Jetzt berechnen wir die kummulierte Häufigkeit von jeder Distanz berechnen. Die kummulierte Häufikgeit vom ersten Wert ist 1 (der Index des ersten Wertes) dividiert durch die Anzahl Werte insgesamt. Mit <code>seq_along</code> erhalten wir die Indizes aller Werte, mit <code>lenth</code> die Anzahl Werte insgesamt.</p>
+<p>Jetzt berechnen wir die kummulierte Häufigkeit von jeder Distanz. Die kummulierte Häufikgeit vom ersten Wert ist 1 (der Index des ersten Wertes) dividiert durch die Anzahl Werte insgesamt. Mit <code>seq_along</code> erhalten wir die Indizes aller Werte, mit <code>length</code> die Anzahl Werte insgesamt.</p>
 </section>
 <section id="schritt-5" class="level3">
 <h3 class="anchored" data-anchor-id="schritt-5">Schritt 5</h3>
@@ -907,6 +948,24 @@ window.document.addEventListener("DOMContentLoaded", function (event) {
   if (showAllCode) {
     showAllCode.addEventListener("click", toggleCodeHandler(true));
   }
+    var localhostRegex = new RegExp(/^(?:http|https):\/\/localhost\:?[0-9]*\//);
+    var mailtoRegex = new RegExp(/^mailto:/);
+      var filterRegex = new RegExp('/' + window.location.host + '/');
+    var isInternal = (href) => {
+        return filterRegex.test(href) || localhostRegex.test(href) || mailtoRegex.test(href);
+    }
+    // Inspect non-navigation links and adorn them if external
+ 	var links = window.document.querySelectorAll('a[href]:not(.nav-link):not(.navbar-brand):not(.toc-action):not(.sidebar-link):not(.sidebar-item-toggle):not(.pagination-link):not(.no-external):not([aria-hidden]):not(.dropdown-item):not(.quarto-navigation-tool)');
+    for (var i=0; i<links.length; i++) {
+      const link = links[i];
+      if (!isInternal(link.href)) {
+        // undo the damage that might have been done by quarto-nav.js in the case of
+        // links that we want to consider external
+        if (link.dataset.originalHref !== undefined) {
+          link.href = link.dataset.originalHref;
+        }
+      }
+    }
   function tippyHover(el, contentFn, onTriggerFn, onUntriggerFn) {
     const config = {
       allowHTML: true,
@@ -941,7 +1000,11 @@ window.document.addEventListener("DOMContentLoaded", function (event) {
       try { href = new URL(href).hash; } catch {}
       const id = href.replace(/^#\/?/, "");
       const note = window.document.getElementById(id);
-      return note.innerHTML;
+      if (note) {
+        return note.innerHTML;
+      } else {
+        return "";
+      }
     });
   }
   const xrefs = window.document.querySelectorAll('a.quarto-xref');
@@ -1217,12 +1280,12 @@ window.document.addEventListener("DOMContentLoaded", function (event) {
 </script>
 <nav class="page-navigation">
   <div class="nav-page nav-page-previous">
-      <a href="../rauman/Rauman3_Uebung_B.html" class="pagination-link  aria-label=" &lt;span="" 3:="" übung="" b&lt;="" span&gt;"="">
+      <a href="../rauman/Rauman3_Uebung_B.html" class="pagination-link" aria-label="Rauman 3: Übung B">
         <i class="bi bi-arrow-left-short"></i> <span class="nav-page-text"><span class="chapter-title">Rauman 3: Übung B</span></span>
       </a>          
   </div>
   <div class="nav-page nav-page-next">
-      <a href="../rauman/Rauman4_Uebung_A.html" class="pagination-link" aria-label="<span class='chapter-number'>39</span>&nbsp; <span class='chapter-title'>Rauman 4: Übung</span>">
+      <a href="../rauman/Rauman4_Uebung_A.html" class="pagination-link" aria-label="Rauman 4: Übung">
         <span class="nav-page-text"><span class="chapter-title">Rauman 4: Übung</span></span> <i class="bi bi-arrow-right-short"></i>
       </a>
   </div>

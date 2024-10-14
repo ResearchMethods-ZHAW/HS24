@@ -2,7 +2,7 @@
 <html xmlns="http://www.w3.org/1999/xhtml" lang="de" xml:lang="de"><head>
 
 <meta charset="utf-8">
-<meta name="generator" content="quarto-1.4.549">
+<meta name="generator" content="quarto-1.4.554">
 
 <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
 
@@ -106,40 +106,76 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 }</script>
 
 
+
+
 <!-- loads fontawesome, so that I can create a fontawesome button (see below) -->
+
 <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.2/css/all.min.css" integrity="sha512-z3gLpd7yknf1YoNbCzqRKc4qyor8gaKU1qmn+CShxbuBusANI9QpRohGBreCFkKxLhei6S9CQXFEbbKuqLg0DA==" crossorigin="anonymous" referrerpolicy="no-referrer">
+
 <script>
 
+
+
 // the following function adds padding to all h2 elements, so that I can 
+
 // easily present the content of the page in a more readable way
+
 function presenter(){
+
     var paragraphs = document.querySelectorAll("h2, h3");
+
     paragraphs.forEach(function (paragraph) {
+
         paragraph.classList.toggle("padding-top-500");
+
     });
+
 }
 
+
+
 // once the page is loaded, the button is injected into the sidebar. This button
+
 // calls the presenter function (see above)
+
 window.onload = function() {
+
     // create the button (similar to the buttons already availables)
+
     const linkElement = document.createElement('a');
 
+
+
     linkElement.classList.add('quarto-navigation-tool');
+
     linkElement.classList.add('px-1');
+
     linkElement.innerHTML = '<i class="fa-solid fa-person-chalkboard"></i>';
+
     linkElement.href = '#';
+
     linkElement.addEventListener('click', function(event) {
+
         event.preventDefault(); // Prevent the default link behavior
+
         presenter();
+
     });
 
+
+
     // Find the target element by its class name
+
     const sidebar_tools = document.querySelector(".sidebar-tools-main")
+
     sidebar_tools.appendChild(linkElement);
+
 };
 
+
+
 </script>
+
 
 
 <link rel="stylesheet" href="../custom.css">
@@ -476,6 +512,11 @@ window.onload = function() {
   <a href="../fallstudie_s/1_Einführung.html" class="sidebar-item-text sidebar-link"><span class="chapter-title">Einführung</span></a>
   </div>
 </li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../fallstudie_s/2_Besuchermonitoring.html" class="sidebar-item-text sidebar-link"><span class="chapter-title">Monitoring</span></a>
+  </div>
+</li>
       </ul>
   </li>
         <li class="sidebar-item sidebar-item-section">
@@ -489,7 +530,7 @@ window.onload = function() {
       <ul id="quarto-sidebar-section-6" class="collapse list-unstyled sidebar-section depth1 ">  
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
-  <a href="../fallstudie_n/1_Vorbemerkung.html" class="sidebar-item-text sidebar-link"><span class="chapter-title">BiEc1_N Vorbemerkung</span></a>
+  <a href="../fallstudie_n/1_Vorbemerkung.html" class="sidebar-item-text sidebar-link"><span class="chapter-title">Vorbemerkung</span></a>
   </div>
 </li>
       </ul>
@@ -549,7 +590,7 @@ window.onload = function() {
 <pre><code>Warning message:
 In evalq((function (..., call. = TRUE, immediate. = FALSE, noBreaks. = FALSE,  :
   automatically selected the first layer in a data source containing more than one.</code></pre>
-<p>Diese Warnmeldung weist darauf hin, dass das Geopackage <code>gruental.gpkg</code> mehrere Layers (rep. Datensätze) enthält und nur der erste Layer importiert wurde. Bringe mit dem Befehl <code>st_layers</code> die Layer Namen in Erfahrung und nutze diese im Anschluss in <code>read_sf</code> (als Argument <code>layer =</code>) um die layers einzeln zu importieren und in variablen zu speichern (zB in als Variable <code>wiesen</code> und <code>baeume</code>).</p>
+<p>Diese Warnmeldung weist darauf hin, dass das Geopackage <code>gruental.gpkg</code> mehrere Layers (rep. Datensätze) enthält und nur der erste Layer importiert wurde. Bringe mit dem Befehl <code>st_layers</code> die Layer-Namen in Erfahrung und nutze diese im Anschluss in <code>read_sf</code> (als Argument <code>layer =</code>), um die layers einzeln zu importieren und in Variablen zu speichern (z.B. als Variable <code>wiesen</code> und <code>baeume</code>).</p>
 </section>
 <section id="aufgabe-2-datensätze-erkunden" class="level2 page-columns page-full">
 <h2 class="anchored" data-anchor-id="aufgabe-2-datensätze-erkunden">Aufgabe 2: Datensätze erkunden</h2>
@@ -588,8 +629,8 @@ Abbildung&nbsp;33.2: Bäume eingefärbt nach Baumtyp
 </section>
 <section id="sec-spatial-join-points" class="level2">
 <h2 class="anchored" data-anchor-id="sec-spatial-join-points">Aufgabe 3: Spatial Join mit Punkten</h2>
-<p>Wir wollen nun für jeden <em>Baum</em> wissen, ob er sich in einer Wiese befindet oder nicht. Dazu nutzen wir die GIS-Technik <em>Spatial Join</em>, die in der Vorlesung beschrieben wurde. In <code>sf</code> können wir Spatial Joins mit der Funktion <code>st_join</code> durchführen, dabei gibt es nur <code>left</code> sowie <code>inner</code>-Joins (vgl. PrePro 1 &amp; 2). So müssen die Punkte “Links”, also an erste Stelle aufgeführt werden, da wir ja Attribute <em>an</em> die Punkte anheften wollen.</p>
-<p>Beachte, dass der Output eine neue Spalte <code>flaechen_typ</code> aufweist. Diese ist leer (<code>NA</code>) wenn sich der entsprechende Baum nicht in einer Wiese befindet. Wie viele Bäume befinden sich in einer Wiese, wie viele nicht?</p>
+<p>Wir wollen nun für jeden <em>Baum</em> wissen, ob er sich in einer Wiese befindet oder nicht. Dazu nutzen wir die GIS-Technik <em>Spatial Join</em>, die in der Vorlesung beschrieben wurde. In <code>sf</code> können wir Spatial Joins mit der Funktion <code>st_join</code> durchführen, dabei gibt es nur <code>left</code> sowie <code>inner</code>-Joins (vgl. PrePro 1 &amp; 2). So müssen die Punkte “Links” also an erster Stelle aufgeführt werden, da wir ja Attribute <em>an</em> die Punkte anheften wollen.</p>
+<p>Beachte, dass der Output eine neue Spalte <code>flaechen_typ</code> aufweist. Diese ist leer (<code>NA</code>), wenn sich der entsprechende Baum nicht in einer Wiese befindet. Wie viele Bäume befinden sich in einer Wiese, wie viele nicht?</p>
 
 
 </section>
@@ -869,6 +910,24 @@ window.document.addEventListener("DOMContentLoaded", function (event) {
   if (showAllCode) {
     showAllCode.addEventListener("click", toggleCodeHandler(true));
   }
+    var localhostRegex = new RegExp(/^(?:http|https):\/\/localhost\:?[0-9]*\//);
+    var mailtoRegex = new RegExp(/^mailto:/);
+      var filterRegex = new RegExp('/' + window.location.host + '/');
+    var isInternal = (href) => {
+        return filterRegex.test(href) || localhostRegex.test(href) || mailtoRegex.test(href);
+    }
+    // Inspect non-navigation links and adorn them if external
+ 	var links = window.document.querySelectorAll('a[href]:not(.nav-link):not(.navbar-brand):not(.toc-action):not(.sidebar-link):not(.sidebar-item-toggle):not(.pagination-link):not(.no-external):not([aria-hidden]):not(.dropdown-item):not(.quarto-navigation-tool)');
+    for (var i=0; i<links.length; i++) {
+      const link = links[i];
+      if (!isInternal(link.href)) {
+        // undo the damage that might have been done by quarto-nav.js in the case of
+        // links that we want to consider external
+        if (link.dataset.originalHref !== undefined) {
+          link.href = link.dataset.originalHref;
+        }
+      }
+    }
   function tippyHover(el, contentFn, onTriggerFn, onUntriggerFn) {
     const config = {
       allowHTML: true,
@@ -903,7 +962,11 @@ window.document.addEventListener("DOMContentLoaded", function (event) {
       try { href = new URL(href).hash; } catch {}
       const id = href.replace(/^#\/?/, "");
       const note = window.document.getElementById(id);
-      return note.innerHTML;
+      if (note) {
+        return note.innerHTML;
+      } else {
+        return "";
+      }
     });
   }
   const xrefs = window.document.querySelectorAll('a.quarto-xref');
@@ -1179,12 +1242,12 @@ window.document.addEventListener("DOMContentLoaded", function (event) {
 </script>
 <nav class="page-navigation">
   <div class="nav-page nav-page-previous">
-      <a href="../rauman/Rauman1_Uebung_A.html" class="pagination-link  aria-label=" &lt;span="" 1:="" übung="" a&lt;="" span&gt;"="">
+      <a href="../rauman/Rauman1_Uebung_A.html" class="pagination-link" aria-label="Rauman 1: Übung A">
         <i class="bi bi-arrow-left-short"></i> <span class="nav-page-text"><span class="chapter-title">Rauman 1: Übung A</span></span>
       </a>          
   </div>
   <div class="nav-page nav-page-next">
-      <a href="../rauman/Rauman2_Uebung_A.html" class="pagination-link" aria-label="<span class='chapter-number'>34</span>&nbsp; <span class='chapter-title'>Rauman 2: Übung A</span>">
+      <a href="../rauman/Rauman2_Uebung_A.html" class="pagination-link" aria-label="Rauman 2: Übung A">
         <span class="nav-page-text"><span class="chapter-title">Rauman 2: Übung A</span></span> <i class="bi bi-arrow-right-short"></i>
       </a>
   </div>

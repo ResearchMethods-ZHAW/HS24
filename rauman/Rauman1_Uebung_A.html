@@ -2,7 +2,7 @@
 <html xmlns="http://www.w3.org/1999/xhtml" lang="de" xml:lang="de"><head>
 
 <meta charset="utf-8">
-<meta name="generator" content="quarto-1.4.549">
+<meta name="generator" content="quarto-1.4.554">
 
 <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
 
@@ -106,40 +106,76 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 }</script>
 
 
+
+
 <!-- loads fontawesome, so that I can create a fontawesome button (see below) -->
+
 <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.2/css/all.min.css" integrity="sha512-z3gLpd7yknf1YoNbCzqRKc4qyor8gaKU1qmn+CShxbuBusANI9QpRohGBreCFkKxLhei6S9CQXFEbbKuqLg0DA==" crossorigin="anonymous" referrerpolicy="no-referrer">
+
 <script>
 
+
+
 // the following function adds padding to all h2 elements, so that I can 
+
 // easily present the content of the page in a more readable way
+
 function presenter(){
+
     var paragraphs = document.querySelectorAll("h2, h3");
+
     paragraphs.forEach(function (paragraph) {
+
         paragraph.classList.toggle("padding-top-500");
+
     });
+
 }
 
+
+
 // once the page is loaded, the button is injected into the sidebar. This button
+
 // calls the presenter function (see above)
+
 window.onload = function() {
+
     // create the button (similar to the buttons already availables)
+
     const linkElement = document.createElement('a');
 
+
+
     linkElement.classList.add('quarto-navigation-tool');
+
     linkElement.classList.add('px-1');
+
     linkElement.innerHTML = '<i class="fa-solid fa-person-chalkboard"></i>';
+
     linkElement.href = '#';
+
     linkElement.addEventListener('click', function(event) {
+
         event.preventDefault(); // Prevent the default link behavior
+
         presenter();
+
     });
 
+
+
     // Find the target element by its class name
+
     const sidebar_tools = document.querySelector(".sidebar-tools-main")
+
     sidebar_tools.appendChild(linkElement);
+
 };
 
+
+
 </script>
+
 
 
 <link rel="stylesheet" href="../custom.css">
@@ -476,6 +512,11 @@ window.onload = function() {
   <a href="../fallstudie_s/1_Einführung.html" class="sidebar-item-text sidebar-link"><span class="chapter-title">Einführung</span></a>
   </div>
 </li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../fallstudie_s/2_Besuchermonitoring.html" class="sidebar-item-text sidebar-link"><span class="chapter-title">Monitoring</span></a>
+  </div>
+</li>
       </ul>
   </li>
         <li class="sidebar-item sidebar-item-section">
@@ -489,7 +530,7 @@ window.onload = function() {
       <ul id="quarto-sidebar-section-6" class="collapse list-unstyled sidebar-section depth1 ">  
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
-  <a href="../fallstudie_n/1_Vorbemerkung.html" class="sidebar-item-text sidebar-link"><span class="chapter-title">BiEc1_N Vorbemerkung</span></a>
+  <a href="../fallstudie_n/1_Vorbemerkung.html" class="sidebar-item-text sidebar-link"><span class="chapter-title">Vorbemerkung</span></a>
   </div>
 </li>
       </ul>
@@ -548,7 +589,7 @@ window.onload = function() {
 </div>
 <section id="aufgabe-1-vektor-daten-importieren" class="level2">
 <h2 class="anchored" data-anchor-id="aufgabe-1-vektor-daten-importieren">Aufgabe 1: Vektor Daten importieren</h2>
-<p>Importiere die Datensätze <em>kantone.gpkg</em> und <em>gemeinden.gpkg</em> wie folgt. Es handelt sich um Geodatensätze im Format Geopackage (“*.gpkg”), eine alternatives Datenformat zum bekannteren Format “Shapefiles”.</p>
+<p>Importiere die Datensätze <em>kantone.gpkg</em> und <em>gemeinden.gpkg</em> wie folgt. Es handelt sich um Geodatensätze im Format Geopackage (“*.gpkg”), ein alternatives Datenformat zum bekannteren Format “Shapefiles”.</p>
 <div class="cell">
 <div class="sourceCode cell-code" id="cb2"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb2-1"><a href="#cb2-1" aria-hidden="true" tabindex="-1"></a>kantone <span class="ot">&lt;-</span> <span class="fu">read_sf</span>(<span class="st">"datasets/rauman/kantone.gpkg"</span>)</span>
 <span id="cb2-2"><a href="#cb2-2" aria-hidden="true" tabindex="-1"></a>gemeinden <span class="ot">&lt;-</span> <span class="fu">read_sf</span>(<span class="st">"datasets/rauman/gemeinden.gpkg"</span>)</span></code><button title="In die Zwischenablage kopieren" class="code-copy-button"><i class="bi"></i></button></pre></div>
@@ -570,7 +611,7 @@ Hinweis
 </section>
 <section id="aufgabe-2-daten-visualisieren" class="level2">
 <h2 class="anchored" data-anchor-id="aufgabe-2-daten-visualisieren">Aufgabe 2: Daten visualisieren</h2>
-<p>Eine sehr einfache Möglichkeit, <code>sf</code>-Objekte zu visualiseren ist die base-R Funktion <code>plot()</code>. Führe die angegebenen R-Befehle aus und studiere die entstehenden Plots. Welche Unterschiede findest Du? Wie erklärst Du diese Unterschiede?</p>
+<p>Eine sehr einfache Möglichkeit, <code>sf</code>-Objekte zu visualiseren, ist die base-R Funktion <code>plot()</code>. Führe die angegebenen R-Befehle aus und studiere die entstehenden Plots. Welche Unterschiede findest Du? Wie erklärst Du diese Unterschiede?</p>
 <div class="cell">
 <div class="sourceCode cell-code" id="cb3"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb3-1"><a href="#cb3-1" aria-hidden="true" tabindex="-1"></a><span class="co"># ohne max.plot = 1 macht R einen Plot pro Spalte</span></span>
 <span id="cb3-2"><a href="#cb3-2" aria-hidden="true" tabindex="-1"></a><span class="fu">plot</span>(gemeinden, <span class="at">max.plot =</span> <span class="dv">1</span>)</span></code><button title="In die Zwischenablage kopieren" class="code-copy-button"><i class="bi"></i></button></pre></div>
@@ -635,7 +676,7 @@ Hinweis
 <li><code>CH1903+ LV95</code>: das neue Koordinatensystem der Schweiz</li>
 <li><code>WGS84</code>: ein häufig genutztes, weltumspannendes geodätisches Koordinatensystem, sprich die Koordinaten werden in Länge und Breite angegeben (Lat/Lon).</li>
 </ul>
-<p>Nun gilt es, anhand der Koordinaten die in der Spalte <code>geometry</code> ersichtlich sind, das korrekte Koordinatensystem festzustellen. Wenn man auf <a href="https://map.geo.admin.ch">map.geo.admin.ch</a> mit der rechten Maustaste einen Ort anwählt, erfährt man die Koordinaten dieses Ortes in verschiedenen Koordinatenbezugssystemen.</p>
+<p>Nun gilt es, anhand der Koordinaten, die in der Spalte <code>geometry</code> ersichtlich sind, das korrekte Koordinatensystem festzustellen. Wenn man auf <a href="https://map.geo.admin.ch">map.geo.admin.ch</a> mit der rechten Maustaste einen Ort anwählt, erfährt man die Koordinaten dieses Ortes in verschiedenen Koordinatenbezugssystemen.</p>
 <p><img src="images/map.geo.admin.png" class="img-fluid"></p>
 <!--
 Wenn man sich auf [epsg.io/map](https://epsg.io/map#srs=4326&x=8.407288&y=46.773731&z=9&layer=streets) die Schweiz anschaut, kann man die Koordinaten in verschiedenen Koordinatensystem betrachten.
@@ -650,12 +691,12 @@ Wenn man sich auf [epsg.io/map](https://epsg.io/map#srs=4326&x=8.407288&y=46.773
 ![Für Enthusiasten: Schau Dir die Schweiz in verschiedenen Koordinatensystemen an, in dem Du auf "Reproject Map" klickst](images/reproject.jpg)
 :::
 -->
-<p>Wenn man diese Koordinaten mit den Koordinaten unserer Datensätze vergleicht, dann ist schnell klar, dass es sich beim Datensatz <code>kantone</code> um das Koordinatenbezugsystem (CRS) WGS84 handelt. Wir können diese Information nutzen um das CRS unserers Datensatzes mit <code>st_set_crs()</code> zu setzen.</p>
+<p>Wenn man diese Koordinaten mit den Koordinaten unserer Datensätze vergleicht, dann ist schnell klar, dass es sich beim Datensatz <code>kantone</code> um das Koordinatenbezugsystem (CRS) WGS84 handelt. Wir können diese Information nutzen, um das CRS unserers Datensatzes mit <code>st_set_crs()</code> zu setzen.</p>
 <div class="cell">
 <div class="sourceCode cell-code" id="cb6"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb6-1"><a href="#cb6-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Zuweisen mit st_set_crs()...</span></span>
 <span id="cb6-2"><a href="#cb6-2" aria-hidden="true" tabindex="-1"></a>kantone <span class="ot">&lt;-</span> <span class="fu">st_set_crs</span>(kantone, <span class="st">"WGS84"</span>)</span></code><button title="In die Zwischenablage kopieren" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
-<p>Wenn wir die CRS Information nun abrufen, sehen wir das diese Zuweisung funktioniert hat.</p>
+<p>Wenn wir die CRS Information nun abrufen, sehen wir, dass diese Zuweisung funktioniert hat.</p>
 <div class="cell">
 <div class="sourceCode cell-code" id="cb7"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb7-1"><a href="#cb7-1" aria-hidden="true" tabindex="-1"></a><span class="co"># ... abfragen mit st_crs()</span></span>
 <span id="cb7-2"><a href="#cb7-2" aria-hidden="true" tabindex="-1"></a><span class="fu">st_crs</span>(kantone)</span>
@@ -691,7 +732,7 @@ Wenn man sich auf [epsg.io/map](https://epsg.io/map#srs=4326&x=8.407288&y=46.773
 <li><a href="https://epsg.io/2056">CH1903+ LV95</a>: <code>EPSG:2056</code></li>
 <li><a href="https://epsg.io/4326">WGS84</a>: <code>EPSG:4326</code></li>
 </ul>
-<p>Dieser Code können wir nutzen, um das CRS des Datensatz <code>gemeinde</code> zu setzen:</p>
+<p>Diesen Code können wir nutzen, um das CRS des Datensatz <code>gemeinde</code> zu setzen:</p>
 <div class="cell">
 <div class="sourceCode cell-code" id="cb9"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb9-1"><a href="#cb9-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Zuweisen mit st_set_crs()...</span></span>
 <span id="cb9-2"><a href="#cb9-2" aria-hidden="true" tabindex="-1"></a>gemeinden <span class="ot">&lt;-</span> <span class="fu">st_set_crs</span>(gemeinden, <span class="dv">2056</span>)</span>
@@ -746,7 +787,7 @@ Wenn man sich auf [epsg.io/map](https://epsg.io/map#srs=4326&x=8.407288&y=46.773
 <span id="cb9-51"><a href="#cb9-51" aria-hidden="true" tabindex="-1"></a><span class="do">##         BBOX[45.82,5.96,47.81,10.49]],</span></span>
 <span id="cb9-52"><a href="#cb9-52" aria-hidden="true" tabindex="-1"></a><span class="do">##     ID["EPSG",2056]]</span></span></code><button title="In die Zwischenablage kopieren" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
-<p>Jetzt wo das CRS der Datensätze bekannt ist, können wir <code>ggplot2</code> nutzen um usere Daten zu visualisieren. In InfoVis 1 &amp; 2 haben wir intensiv mit <code>ggplot2</code> gearbeitet und dort die Layers <code>geom_point()</code> und <code>geom_line()</code> kennen gelernt. Zusätzlich beinhaltet <code>ggplot</code> die Möglichkeit, mit <code>geom_sf()</code> Vektordaten direkt und sehr einfach zu plotten.</p>
+<p>Jetzt, wo das CRS der Datensätze bekannt ist, können wir <code>ggplot2</code> nutzen, um usere Daten zu visualisieren. In InfoVis 1 &amp; 2 haben wir intensiv mit <code>ggplot2</code> gearbeitet und dort die Layers <code>geom_point()</code> und <code>geom_line()</code> kennengelernt. Zusätzlich beinhaltet <code>ggplot</code> die Möglichkeit, mit <code>geom_sf()</code> Vektordaten direkt und sehr einfach zu plotten.</p>
 </section>
 <section id="aufgabe-3-koordinatensyteme-transformieren" class="level2">
 <h2 class="anchored" data-anchor-id="aufgabe-3-koordinatensyteme-transformieren">Aufgabe 3: Koordinatensyteme <em>transformieren</em></h2>
@@ -802,7 +843,7 @@ Wenn man sich auf [epsg.io/map](https://epsg.io/map#srs=4326&x=8.407288&y=46.773
 </section>
 <section id="aufgabe-4-tidyverse-funktionen" class="level2">
 <h2 class="anchored" data-anchor-id="aufgabe-4-tidyverse-funktionen">Aufgabe 4: Tidyverse Funktionen</h2>
-<p><code>sf</code> Objekte sind im wesentlichen <code>data.frames</code> mit ein paar Metadaten und einer speziellen <code>geometry</code>-Spalte. Wir können ihnen die gleichen Operationen durchführen, wie mit <code>data.frames</code>. Beispielsweise können wir aus den Spalten <code>EINWOHNERZ</code> und <code>KANTONSFLA</code> die Einwohnerdichte berechnen:</p>
+<p><code>sf</code> Objekte sind im wesentlichen <code>data.frames</code> mit ein paar Metadaten und einer speziellen <code>geometry</code>-Spalte. Wir können mit ihnen die gleichen Operationen durchführen wie mit <code>data.frames</code>. Beispielsweise können wir aus den Spalten <code>EINWOHNERZ</code> und <code>KANTONSFLA</code> die Einwohnerdichte berechnen:</p>
 <div class="cell">
 <div class="sourceCode cell-code" id="cb12"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb12-1"><a href="#cb12-1" aria-hidden="true" tabindex="-1"></a>kantone <span class="ot">&lt;-</span> kantone <span class="sc">|&gt;</span></span>
 <span id="cb12-2"><a href="#cb12-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">mutate</span>(</span>
@@ -826,7 +867,7 @@ Wenn man sich auf [epsg.io/map](https://epsg.io/map#srs=4326&x=8.407288&y=46.773
 </div>
 </div>
 </div>
-<p>Hier sind farblich kaum Unterschiede erkennbar, weil die extrem hohe Bevölkerungsdichte vom Halbkanton Basel-Stadt (&gt;5’000 Einwohner pro km<sup>2</sup>!) die ganze Farbskala dominiert. Der <a href="https://www.atlas.bfs.admin.ch/maps/13/de/15467_75_3501_70/24216.html">Statistischer Atlas der Schweiz</a> löst das Problem, indem es Klassen mit irregulären Schwellwerte verwendet und alle zahlen &gt;2’000 gruppiert. Diese Vorgehensweise können wir mit <code>cut()</code> rekonstruieren.</p>
+<p>Hier sind farblich kaum Unterschiede erkennbar, weil die extrem hohe Bevölkerungsdichte vom Halbkanton Basel-Stadt (&gt;5’000 Einwohner pro km<sup>2</sup>!) die ganze Farbskala dominiert. Der <a href="https://www.atlas.bfs.admin.ch/maps/13/de/15467_75_3501_70/24216.html">Statistischer Atlas der Schweiz</a> löst das Problem, indem es Klassen mit irregulären Schwellenwerte verwendet und alle Zahlen &gt;2’000 gruppiert. Diese Vorgehensweise können wir mit <code>cut()</code> rekonstruieren.</p>
 <div class="cell">
 <div class="sourceCode cell-code" id="cb13"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb13-1"><a href="#cb13-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Schwellwerte analog BFS "Statistischer Atlas der Schweiz"</span></span>
 <span id="cb13-2"><a href="#cb13-2" aria-hidden="true" tabindex="-1"></a>breaks <span class="ot">=</span> <span class="fu">c</span>(<span class="dv">0</span>, <span class="dv">50</span>, <span class="dv">100</span>, <span class="dv">150</span>, <span class="dv">200</span>, <span class="dv">300</span>, <span class="dv">500</span>, <span class="dv">750</span>, <span class="dv">1000</span>, <span class="dv">2000</span>, <span class="cn">Inf</span>)</span>
@@ -854,7 +895,7 @@ Wenn man sich auf [epsg.io/map](https://epsg.io/map#srs=4326&x=8.407288&y=46.773
 <div id="fig-ggplot-ex4" class="quarto-layout-panel page-columns page-full">
 <figure class="quarto-float quarto-float-fig figure page-columns page-full">
 <div aria-describedby="fig-ggplot-ex4-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca" class="page-columns page-full">
-<div class="quarto-layout-row page-columns page-full">
+<div class="quarto-layout-row page-full">
 <div class="cell-output-display quarto-layout-cell-subref quarto-layout-cell page-columns page-full" data-ref-parent="fig-ggplot-ex4" style="flex-basis: 50.0%;justify-content: flex-start;">
 <div id="fig-ggplot-ex4-1" class="quarto-figure quarto-figure-center quarto-float anchored page-columns page-full">
 <figure class="quarto-float quarto-subfloat-fig figure page-columns page-full">
@@ -1165,6 +1206,24 @@ window.document.addEventListener("DOMContentLoaded", function (event) {
   if (showAllCode) {
     showAllCode.addEventListener("click", toggleCodeHandler(true));
   }
+    var localhostRegex = new RegExp(/^(?:http|https):\/\/localhost\:?[0-9]*\//);
+    var mailtoRegex = new RegExp(/^mailto:/);
+      var filterRegex = new RegExp('/' + window.location.host + '/');
+    var isInternal = (href) => {
+        return filterRegex.test(href) || localhostRegex.test(href) || mailtoRegex.test(href);
+    }
+    // Inspect non-navigation links and adorn them if external
+ 	var links = window.document.querySelectorAll('a[href]:not(.nav-link):not(.navbar-brand):not(.toc-action):not(.sidebar-link):not(.sidebar-item-toggle):not(.pagination-link):not(.no-external):not([aria-hidden]):not(.dropdown-item):not(.quarto-navigation-tool)');
+    for (var i=0; i<links.length; i++) {
+      const link = links[i];
+      if (!isInternal(link.href)) {
+        // undo the damage that might have been done by quarto-nav.js in the case of
+        // links that we want to consider external
+        if (link.dataset.originalHref !== undefined) {
+          link.href = link.dataset.originalHref;
+        }
+      }
+    }
   function tippyHover(el, contentFn, onTriggerFn, onUntriggerFn) {
     const config = {
       allowHTML: true,
@@ -1199,7 +1258,11 @@ window.document.addEventListener("DOMContentLoaded", function (event) {
       try { href = new URL(href).hash; } catch {}
       const id = href.replace(/^#\/?/, "");
       const note = window.document.getElementById(id);
-      return note.innerHTML;
+      if (note) {
+        return note.innerHTML;
+      } else {
+        return "";
+      }
     });
   }
   const xrefs = window.document.querySelectorAll('a.quarto-xref');
@@ -1475,12 +1538,12 @@ window.document.addEventListener("DOMContentLoaded", function (event) {
 </script>
 <nav class="page-navigation">
   <div class="nav-page nav-page-previous">
-      <a href="../rauman/Rauman0_Vorbereitung.html" class="pagination-link  aria-label=" &lt;span="">
+      <a href="../rauman/Rauman0_Vorbereitung.html" class="pagination-link" aria-label="Vorbereitung">
         <i class="bi bi-arrow-left-short"></i> <span class="nav-page-text"><span class="chapter-title">Vorbereitung</span></span>
       </a>          
   </div>
   <div class="nav-page nav-page-next">
-      <a href="../rauman/Rauman1_Uebung_B.html" class="pagination-link" aria-label="<span class='chapter-number'>33</span>&nbsp; <span class='chapter-title'>Rauman 1: Übung B</span>">
+      <a href="../rauman/Rauman1_Uebung_B.html" class="pagination-link" aria-label="Rauman 1: Übung B">
         <span class="nav-page-text"><span class="chapter-title">Rauman 1: Übung B</span></span> <i class="bi bi-arrow-right-short"></i>
       </a>
   </div>
