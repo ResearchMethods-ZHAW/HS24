@@ -31,6 +31,435 @@
     ]
   },
   {
+    "objectID": "prepro/Prepro1_Demo.html",
+    "href": "prepro/Prepro1_Demo.html",
+    "title": "Prepro 1: Demo",
+    "section": "",
+    "text": "Datentypen",
+    "crumbs": [
+      "Pre-Processing",
+      "<span class='chapter-number'>2</span>  <span class='chapter-title'>Prepro 1: Demo</span>"
+    ]
+  },
+  {
+    "objectID": "prepro/Prepro1_Demo.html#footnotes",
+    "href": "prepro/Prepro1_Demo.html#footnotes",
+    "title": "Prepro 1: Demo",
+    "section": "",
+    "text": "ordered = T kann nur bei der Funktion factor() spezifiziert werden, nicht bei as.factor(). Ansonsten sind factor() und as.factor() sehr ähnlich.↩︎",
+    "crumbs": [
+      "Pre-Processing",
+      "<span class='chapter-number'>2</span>  <span class='chapter-title'>Prepro 1: Demo</span>"
+    ]
+  },
+  {
+    "objectID": "prepro/Prepro1_Uebung.html",
+    "href": "prepro/Prepro1_Uebung.html",
+    "title": "PrePro 1: Übung",
+    "section": "",
+    "text": "Arbeiten mit RStudio “Project”\nWir empfehlen die Verwendung von “Projects” innerhalb von RStudio. RStudio legt für jedes Projekt dann einen Ordner an, in welches die Projekt-Datei abgelegt wird (Dateiendung .Rproj). Sollen innerhalb des Projekts dann R-Skripts geladen oder erzeugt werden, werden diese dann auch im angelegten Ordner abgelegt. Mehr zu RStudio Projects findet ihr hier.\nDas Verwenden von Projects bringt verschiedene Vorteile, wie zum Beispiel:",
+    "crumbs": [
+      "Pre-Processing",
+      "<span class='chapter-number'>3</span>  <span class='chapter-title'>PrePro 1: Übung</span>"
+    ]
+  },
+  {
+    "objectID": "prepro/Prepro1_Uebung.html#arbeiten-mit-rstudio-project",
+    "href": "prepro/Prepro1_Uebung.html#arbeiten-mit-rstudio-project",
+    "title": "PrePro 1: Übung",
+    "section": "",
+    "text": "Festlegen der Working Directory ohne die Verwendung des expliziten Pfades (setwd()). Das ist sinnvoll, da sich dieser Pfad ändern kann (Zusammenarbeit mit anderen Usern, Ausführung des Scripts zu einem späteren Zeitpunkt)\nAutomatisches Zwischenspeichern geöffneter Scripts und Wiederherstellung der geöffneten Scripts bei der nächsten Session\nFestlegen verschiedener projektspezifischer Optionen\nVerwendung von Versionsverwaltungssystemen (z.B. git)\n\n\n\n\n\n\n\nImportant 3.1: Prüfungsrelevant\n\n\n\nDie korrekte Verwendung von RStudio Projects und relativen Pfaden wird an der praktischen Prüfung vorausgesetzt!",
+    "crumbs": [
+      "Pre-Processing",
+      "<span class='chapter-number'>3</span>  <span class='chapter-title'>PrePro 1: Übung</span>"
+    ]
+  },
+  {
+    "objectID": "prepro/Prepro1_Uebung.html#aufgabe-1",
+    "href": "prepro/Prepro1_Uebung.html#aufgabe-1",
+    "title": "PrePro 1: Übung",
+    "section": "Aufgabe 1",
+    "text": "Aufgabe 1\nErstelle eine data.frame mit nachstehenden Daten.\n\n\nMusterlösung\ndf &lt;- data.frame(\n  Tierart = c(\"Fuchs\", \"Bär\", \"Hase\", \"Elch\"),\n  Anzahl = c(2, 5, 1, 3),\n  Gewicht = c(4.4, 40.3, 1.1, 120),\n  Geschlecht = c(\"m\", \"f\", \"m\", \"m\"),\n  Beschreibung = c(\"Rötlich\", \"Braun, gross\", \"klein, mit langen Ohren\", \"Lange Beine, Schaufelgeweih\")\n)\n\n\n\n\n\n\n\nTierart\nAnzahl\nGewicht\nGeschlecht\nBeschreibung\n\n\n\n\nFuchs\n2\n4.4\nm\nRötlich\n\n\nBär\n5\n40.3\nf\nBraun, gross\n\n\nHase\n1\n1.1\nm\nklein, mit langen Ohren\n\n\nElch\n3\n120.0\nm\nLange Beine, Schaufelgeweih",
+    "crumbs": [
+      "Pre-Processing",
+      "<span class='chapter-number'>3</span>  <span class='chapter-title'>PrePro 1: Übung</span>"
+    ]
+  },
+  {
+    "objectID": "prepro/Prepro1_Uebung.html#aufgabe-2",
+    "href": "prepro/Prepro1_Uebung.html#aufgabe-2",
+    "title": "PrePro 1: Übung",
+    "section": "Aufgabe 2",
+    "text": "Aufgabe 2\nWas für Datentypen wurden in der letzten Aufgabe automatisch angenommen? Ermittle diese mit str() und prüfe, ob diese sinnvoll sind und wandle um wo nötig.\n\n\nMusterlösung\nstr(df)\n## 'data.frame':    4 obs. of  5 variables:\n##  $ Tierart     : chr  \"Fuchs\" \"Bär\" \"Hase\" \"Elch\"\n##  $ Anzahl      : num  2 5 1 3\n##  $ Gewicht     : num  4.4 40.3 1.1 120\n##  $ Geschlecht  : chr  \"m\" \"f\" \"m\" \"m\"\n##  $ Beschreibung: chr  \"Rötlich\" \"Braun, gross\" \"klein, mit langen Ohren\" \"Lange Beine, Schaufelgeweih\"\ntypeof(df$Anzahl)\n## [1] \"double\"\n# Anzahl wurde als `double` interpretiert, ist aber eigentlich ein `integer`.\n\ndf$Anzahl &lt;- as.integer(df$Anzahl)",
+    "crumbs": [
+      "Pre-Processing",
+      "<span class='chapter-number'>3</span>  <span class='chapter-title'>PrePro 1: Übung</span>"
+    ]
+  },
+  {
+    "objectID": "prepro/Prepro1_Uebung.html#aufgabe-3",
+    "href": "prepro/Prepro1_Uebung.html#aufgabe-3",
+    "title": "PrePro 1: Übung",
+    "section": "Aufgabe 3",
+    "text": "Aufgabe 3\nNutze die Spalte Gewicht, um die Tiere in 3 Gewichtskategorien einzuteilen:\n\nleicht: &lt; 5kg\nmittel: 5 - 100 kg\nschwer: &gt; 100kg\n\n\n\nMusterlösung\ndf$Gewichtsklasse[df$Gewicht &gt; 100] &lt;- \"schwer\"\ndf$Gewichtsklasse[df$Gewicht &lt;= 100 & df$Gewicht &gt; 5] &lt;- \"mittel\"\ndf$Gewichtsklasse[df$Gewicht &lt;= 5] &lt;- \"leicht\"\n\n\nDas Resultat:\n\n\n\n\n\n\n\n\n\n\n\n\n\nTierart\nAnzahl\nGewicht\nGeschlecht\nBeschreibung\nGewichtsklasse\n\n\n\n\nFuchs\n2\n4.4\nm\nRötlich\nleicht\n\n\nBär\n5\n40.3\nf\nBraun, gross\nmittel\n\n\nHase\n1\n1.1\nm\nklein, mit langen Ohren\nleicht\n\n\nElch\n3\n120.0\nm\nLange Beine, Schaufelgeweih\nschwer",
+    "crumbs": [
+      "Pre-Processing",
+      "<span class='chapter-number'>3</span>  <span class='chapter-title'>PrePro 1: Übung</span>"
+    ]
+  },
+  {
+    "objectID": "prepro/Prepro1_Uebung.html#aufgabe-4",
+    "href": "prepro/Prepro1_Uebung.html#aufgabe-4",
+    "title": "PrePro 1: Übung",
+    "section": "Aufgabe 4",
+    "text": "Aufgabe 4\nAuf Moodle findest du ein Zip-File mit dem Namen prepro.zip. Lade das File herunter und entpacke es in deinem Projektordner. Importiere die Datei weather.csv. Falls du dafür das RStudio GUI verwendest, speichere den Import-Befehl in deinem R-Script ab. Bitte verwende einen relativen Pfad (also kein Pfad, der mit C:/, ~/ o.ä. beginnt).)\n\n\n\n\n\n\nNote 3.1\n\n\n\nWir nutzen readr, um csvs zu importieren, und verwenden die Funktion read_delim (mit underscore) als alternative zu read.csv oder read.delim (mit Punkt). Das ist eine persönliche Präferenz1, es ist euch überlassen, welche Funktion ihr verwendet. Beachtet, dass die beiden Funktionen leicht andere Parameter erwarten.\n\n\n\n\nMusterlösung\nlibrary(\"readr\")\n\n\nwetter &lt;- read_delim(\"datasets/prepro/weather.csv\", \",\")\n\n\n\n\n\n\n\nstn\ntime\ntre200h0\n\n\n\n\nABO\n2000010100\n-2.6\n\n\nABO\n2000010101\n-2.5\n\n\nABO\n2000010102\n-3.1\n\n\nABO\n2000010103\n-2.4\n\n\nABO\n2000010104\n-2.5\n\n\nABO\n2000010105\n-3.0\n\n\nABO\n2000010106\n-3.7\n\n\nABO\n2000010107\n-4.4\n\n\nABO\n2000010108\n-4.1\n\n\nABO\n2000010109\n-4.1",
+    "crumbs": [
+      "Pre-Processing",
+      "<span class='chapter-number'>3</span>  <span class='chapter-title'>PrePro 1: Übung</span>"
+    ]
+  },
+  {
+    "objectID": "prepro/Prepro1_Uebung.html#aufgabe-5",
+    "href": "prepro/Prepro1_Uebung.html#aufgabe-5",
+    "title": "PrePro 1: Übung",
+    "section": "Aufgabe 5",
+    "text": "Aufgabe 5\nSchau dir die Rückmeldung von read_delim() an. Sind die Daten korrekt interpretiert worden?\n\n\nMusterlösung\n# Die Spalte 'time' wurde als 'integer' interpretiert. Dabei handelt es\n# sich offensichtlich um Zeitangaben.",
+    "crumbs": [
+      "Pre-Processing",
+      "<span class='chapter-number'>3</span>  <span class='chapter-title'>PrePro 1: Übung</span>"
+    ]
+  },
+  {
+    "objectID": "prepro/Prepro1_Uebung.html#aufgabe-6",
+    "href": "prepro/Prepro1_Uebung.html#aufgabe-6",
+    "title": "PrePro 1: Übung",
+    "section": "Aufgabe 6",
+    "text": "Aufgabe 6\nDie Spalte time ist eine Datum/Zeitangabe im Format JJJJMMTTHH (siehe meta.txt). Damit R dies als Datum-/Zeitangabe erkennt, müssen wir die Spalte in einem R-Format (POSIXct) einlesen und dabei R mitteilen, wie sie aktuell formatiert ist. Lies die Spalte mit as.POSIXct() ein und spezifiziere sowohl format wie auch tz.\n\n\n\n\n\n\nTipp\n\n\n\n\nWenn keine Zeitzone festgelegt wird, trifft as.POSIXct() eine Annahme (basierend auf Sys.timezone()). In unserem Fall handelt es sich aber um Werte in UTC (siehe metadata.csv)\nas.POSIXct erwartet character: Wenn du eine Fehlermeldung hast die 'origin' must be supplied (o.ä) heisst, hast du der Funktion vermutlich einen Numeric übergeben.\n\n\n\n\n\nMusterlösung\nwetter$time &lt;- as.POSIXct(as.character(wetter$time), format = \"%Y%m%d%H\", tz = \"UTC\")\n\n\n\n\n\nDie neue Tabelle sollte so aussehen\n\n\nstn\ntime\ntre200h0\n\n\n\n\nABO\n2000-01-01 00:00:00\n-2.6\n\n\nABO\n2000-01-01 01:00:00\n-2.5\n\n\nABO\n2000-01-01 02:00:00\n-3.1\n\n\nABO\n2000-01-01 03:00:00\n-2.4\n\n\nABO\n2000-01-01 04:00:00\n-2.5\n\n\nABO\n2000-01-01 05:00:00\n-3.0\n\n\nABO\n2000-01-01 06:00:00\n-3.7\n\n\nABO\n2000-01-01 07:00:00\n-4.4\n\n\nABO\n2000-01-01 08:00:00\n-4.1\n\n\nABO\n2000-01-01 09:00:00\n-4.1",
+    "crumbs": [
+      "Pre-Processing",
+      "<span class='chapter-number'>3</span>  <span class='chapter-title'>PrePro 1: Übung</span>"
+    ]
+  },
+  {
+    "objectID": "prepro/Prepro1_Uebung.html#aufgabe-7",
+    "href": "prepro/Prepro1_Uebung.html#aufgabe-7",
+    "title": "PrePro 1: Übung",
+    "section": "Aufgabe 7",
+    "text": "Aufgabe 7\nErstelle zwei neue Spalten mit Wochentag (Montag, Dienstag, etc) und Kalenderwoche. Verwende dazu die neu erstellte POSIXct-Spalte sowie eine geeignete Funktion aus lubridate.\n\n\nMusterlösung\nlibrary(\"lubridate\")\n\nwetter$wochentag &lt;- wday(wetter$time, label = T)\nwetter$kw &lt;- week(wetter$time)\n\n\n\n\n\n\n\nstn\ntime\ntre200h0\nwochentag\nkw\n\n\n\n\nABO\n2000-01-01 00:00:00\n-2.6\nSa\n1\n\n\nABO\n2000-01-01 01:00:00\n-2.5\nSa\n1\n\n\nABO\n2000-01-01 02:00:00\n-3.1\nSa\n1\n\n\nABO\n2000-01-01 03:00:00\n-2.4\nSa\n1\n\n\nABO\n2000-01-01 04:00:00\n-2.5\nSa\n1\n\n\nABO\n2000-01-01 05:00:00\n-3.0\nSa\n1\n\n\nABO\n2000-01-01 06:00:00\n-3.7\nSa\n1\n\n\nABO\n2000-01-01 07:00:00\n-4.4\nSa\n1\n\n\nABO\n2000-01-01 08:00:00\n-4.1\nSa\n1\n\n\nABO\n2000-01-01 09:00:00\n-4.1\nSa\n1",
+    "crumbs": [
+      "Pre-Processing",
+      "<span class='chapter-number'>3</span>  <span class='chapter-title'>PrePro 1: Übung</span>"
+    ]
+  },
+  {
+    "objectID": "prepro/Prepro1_Uebung.html#aufgabe-8",
+    "href": "prepro/Prepro1_Uebung.html#aufgabe-8",
+    "title": "PrePro 1: Übung",
+    "section": "Aufgabe 8",
+    "text": "Aufgabe 8\nErstelle eine neue Spalte basierend auf den Temperaturwerten mit der Einteilung “kalt” (unter Null Grad) und “warm” (über Null Grad)\n\n\nMusterlösung\nwetter$temp_kat[wetter$tre200h0 &gt; 0] &lt;- \"warm\"\nwetter$temp_kat[wetter$tre200h0 &lt;= 0] &lt;- \"kalt\"\n\n\n\n\n\n\n\nstn\ntime\ntre200h0\nwochentag\nkw\ntemp_kat\n\n\n\n\nABO\n2000-01-01 00:00:00\n-2.6\nSa\n1\nkalt\n\n\nABO\n2000-01-01 01:00:00\n-2.5\nSa\n1\nkalt\n\n\nABO\n2000-01-01 02:00:00\n-3.1\nSa\n1\nkalt\n\n\nABO\n2000-01-01 03:00:00\n-2.4\nSa\n1\nkalt\n\n\nABO\n2000-01-01 04:00:00\n-2.5\nSa\n1\nkalt\n\n\nABO\n2000-01-01 05:00:00\n-3.0\nSa\n1\nkalt\n\n\nABO\n2000-01-01 06:00:00\n-3.7\nSa\n1\nkalt\n\n\nABO\n2000-01-01 07:00:00\n-4.4\nSa\n1\nkalt\n\n\nABO\n2000-01-01 08:00:00\n-4.1\nSa\n1\nkalt\n\n\nABO\n2000-01-01 09:00:00\n-4.1\nSa\n1\nkalt",
+    "crumbs": [
+      "Pre-Processing",
+      "<span class='chapter-number'>3</span>  <span class='chapter-title'>PrePro 1: Übung</span>"
+    ]
+  },
+  {
+    "objectID": "prepro/Prepro1_Uebung.html#footnotes",
+    "href": "prepro/Prepro1_Uebung.html#footnotes",
+    "title": "PrePro 1: Übung",
+    "section": "",
+    "text": "Vorteile von read_delim gegenüber read.csv: https://stackoverflow.com/a/60374974/4139249↩︎",
+    "crumbs": [
+      "Pre-Processing",
+      "<span class='chapter-number'>3</span>  <span class='chapter-title'>PrePro 1: Übung</span>"
+    ]
+  },
+  {
+    "objectID": "prepro/Prepro2_Demo.html",
+    "href": "prepro/Prepro2_Demo.html",
+    "title": "Prepro 2: Demo",
+    "section": "",
+    "text": "Piping\nGegeben ist ein character string (diary). Wir wollen aus diesem Text die Temperaturangabe aus dem String extrahieren, danach den Wert von Kelvin in Celsius nach der folgenden Formel umwandeln und zum Schluss den Mittelwert über all diese Werte berechnen.\n\\[°C = K - 273.15\\]\ndiary &lt;- c(\n  \"The temperature is 310° Kelvin\",\n  \"The temperature is 322° Kelvin\",\n  \"The temperature is 410° Kelvin\"\n)\n\ndiary\n## [1] \"The temperature is 310° Kelvin\" \"The temperature is 322° Kelvin\"\n## [3] \"The temperature is 410° Kelvin\"\nDazu brauchen wir die Funktion substr(), welche aus einem character einen Teil “raus schnipseln” kann.\n# Wenn die Buchstaben einzelne _Elemente_ eines Vektors wären, würden wir diese\n# folgendermassen subsetten:\n\ncharvec1 &lt;- c(\"a\", \"b\", \"c\", \"d\", \"e\", \"f\", \"g\", \"h\")\ncharvec1[4:6]\n## [1] \"d\" \"e\" \"f\"\n\n# Aber wenn diese in einem einzigen character gespeichert sind, brauchen wir substr:\ncharvec2 &lt;- \"abcdefgh\"\nsubstr(charvec2, 4, 6)\n## [1] \"def\"\nZudem nutzen wir eine Hilfsfunktion subtrahieren, welche zwei Werte annimmt, den minuend und den subtrahend:\nsubtrahieren &lt;- function(minuend, subtrahend) {\n  minuend - subtrahend\n}\n\nsubtrahieren(10, 4)\n## [1] 6\nÜbersetzt in R-Code entsteht folgende Operation:\noutput &lt;- mean(subtrahieren(as.numeric(substr(diary, 20, 22)), 273.15))\n#                                             \\_1_/\n#                                      \\________2__________/\n#                           \\___________________3___________/\n#              \\________________________________4__________________/\n#         \\_____________________________________5____________________/\n\n# 1. Nimm diary\n# 2. Extrahiere auf jeder Zeile die Werte 20 bis 22\n# 3. Konvertiere \"character\" zu \"numeric\"\n# 4. Subtrahiere 273.15\n# 5. Berechne den Mittlwert\nDie ganze Operation liest sich etwas leichter, wenn diese sequentiell notiert wird:\ntemp &lt;- substr(diary, 20, 22)      # 2\ntemp &lt;- as.numeric(temp)           # 3\ntemp &lt;- subtrahieren(temp, 273.15) # 4\noutput &lt;- mean(temp)               # 5\nUmständlich ist dabei einfach, dass die Zwischenresultate immer abgespeichert und in der darauf folgenden Operation wieder abgerufen werden müssen. Hier kommt “piping” ins Spiel: Mit “piping” wird der Output der einen Funktion der erste Parameter der darauf folgenden Funktion.\ndiary |&gt;                  # 1\n  substr(20, 22) |&gt;       # 2\n  as.numeric() |&gt;         # 3\n  subtrahieren(273.15) |&gt; # 4\n  mean()                  # 5\n## [1] 74.18333",
+    "crumbs": [
+      "Pre-Processing",
+      "<span class='chapter-number'>4</span>  <span class='chapter-title'>Prepro 2: Demo</span>"
+    ]
+  },
+  {
+    "objectID": "prepro/Prepro2_Demo.html#piping",
+    "href": "prepro/Prepro2_Demo.html#piping",
+    "title": "Prepro 2: Demo",
+    "section": "",
+    "text": "Wichtig\n\n\n\n\nder |&gt; Pipe Operator wurde erst in R 4.1 eingeführt\nNeben dem base R Pipe Operator existiert im Package magrittr ein sehr ähnlicher1 Pipe Operator: %&gt;%\nDie Tastenkombination Ctrl+Shift+M in RStudio fügt einen Pipe Operator ein.\nWelcher Pipe Operator |&gt; oder %&gt;% mit der obigen Tastenkombination eingeführt wird, kann über die RStudio Settings Tools → Global Options → Code → Häckchen setzen bei Use nativ pipe operator\nWir empfehlen die base-R Pipe |&gt; zu verwenden",
+    "crumbs": [
+      "Pre-Processing",
+      "<span class='chapter-number'>4</span>  <span class='chapter-title'>Prepro 2: Demo</span>"
+    ]
+  },
+  {
+    "objectID": "prepro/Prepro2_Demo.html#joins",
+    "href": "prepro/Prepro2_Demo.html#joins",
+    "title": "Prepro 2: Demo",
+    "section": "Joins",
+    "text": "Joins\n\nstudierende &lt;- data.frame(\n  Matrikel_Nr = c(100002, 100003, 200003),\n  Studi = c(\"Patrick\", \"Manuela\", \"Eva\"),\n  PLZ = c(8006, 8001, 8820)\n)\n\nstudierende\n##   Matrikel_Nr   Studi  PLZ\n## 1      100002 Patrick 8006\n## 2      100003 Manuela 8001\n## 3      200003     Eva 8820\n\nortschaften &lt;- data.frame(\n  PLZ = c(8003, 8006, 8810, 8820),\n  Ortsname = c(\"Zürich\", \"Zürich\", \"Horgen\", \"Wädenswil\")\n)\n\nortschaften\n##    PLZ  Ortsname\n## 1 8003    Zürich\n## 2 8006    Zürich\n## 3 8810    Horgen\n## 4 8820 Wädenswil\n\n\n# Load library\nlibrary(\"dplyr\")\n\ninner_join(studierende, ortschaften, by = \"PLZ\")\n##   Matrikel_Nr   Studi  PLZ  Ortsname\n## 1      100002 Patrick 8006    Zürich\n## 2      200003     Eva 8820 Wädenswil\n\nleft_join(studierende, ortschaften, by = \"PLZ\")\n##   Matrikel_Nr   Studi  PLZ  Ortsname\n## 1      100002 Patrick 8006    Zürich\n## 2      100003 Manuela 8001      &lt;NA&gt;\n## 3      200003     Eva 8820 Wädenswil\n\nright_join(studierende, ortschaften, by = \"PLZ\")\n##   Matrikel_Nr   Studi  PLZ  Ortsname\n## 1      100002 Patrick 8006    Zürich\n## 2      200003     Eva 8820 Wädenswil\n## 3          NA    &lt;NA&gt; 8003    Zürich\n## 4          NA    &lt;NA&gt; 8810    Horgen\n\nfull_join(studierende, ortschaften, by = \"PLZ\")\n##   Matrikel_Nr   Studi  PLZ  Ortsname\n## 1      100002 Patrick 8006    Zürich\n## 2      100003 Manuela 8001      &lt;NA&gt;\n## 3      200003     Eva 8820 Wädenswil\n## 4          NA    &lt;NA&gt; 8003    Zürich\n## 5          NA    &lt;NA&gt; 8810    Horgen\n\n\nstudierende &lt;- data.frame(\n  Matrikel_Nr = c(100002, 100003, 200003),\n  Studi = c(\"Patrick\", \"Manuela\", \"Pascal\"),\n  Wohnort = c(8006, 8001, 8006)\n)\n\nleft_join(studierende, ortschaften, by = c(\"Wohnort\" = \"PLZ\"))\n##   Matrikel_Nr   Studi Wohnort Ortsname\n## 1      100002 Patrick    8006   Zürich\n## 2      100003 Manuela    8001     &lt;NA&gt;\n## 3      200003  Pascal    8006   Zürich",
+    "crumbs": [
+      "Pre-Processing",
+      "<span class='chapter-number'>4</span>  <span class='chapter-title'>Prepro 2: Demo</span>"
+    ]
+  },
+  {
+    "objectID": "prepro/Prepro2_Demo.html#footnotes",
+    "href": "prepro/Prepro2_Demo.html#footnotes",
+    "title": "Prepro 2: Demo",
+    "section": "",
+    "text": "siehe https://stackoverflow.com/q/67633022/4139249↩︎",
+    "crumbs": [
+      "Pre-Processing",
+      "<span class='chapter-number'>4</span>  <span class='chapter-title'>Prepro 2: Demo</span>"
+    ]
+  },
+  {
+    "objectID": "prepro/Prepro2_Uebung_A.html",
+    "href": "prepro/Prepro2_Uebung_A.html",
+    "title": "Prepro 2: Übung A",
+    "section": "",
+    "text": "Aufgabe 1\nLese die Wetterdaten von letzer Woche weather.csv (Quelle MeteoSchweiz) in R ein. Sorge dafür, dass die Spalten korrekt formatiert sind (stn als factor, time als POSIXct, tre200h0 als numeric.)",
+    "crumbs": [
+      "Pre-Processing",
+      "<span class='chapter-number'>5</span>  <span class='chapter-title'>Prepro 2: Übung A</span>"
+    ]
+  },
+  {
+    "objectID": "prepro/Prepro2_Uebung_A.html#aufgabe-2",
+    "href": "prepro/Prepro2_Uebung_A.html#aufgabe-2",
+    "title": "Prepro 2: Übung A",
+    "section": "Aufgabe 2",
+    "text": "Aufgabe 2\nLese den Datensatz metadata.csv ebenfalls als csv ein.\n\n\n\n\n\n\nTipp\n\n\n\nWenn Umlaute und Sonderzeichen nicht korrekt dargestellt werden (z.B. das è in Genève), hat das vermutlich mit der Zeichencodierung zu tun. Das File ist aktuell in UTF-8 codiert. Wenn Umlaute nicht korrekt dargestellt werden, hat R diese Codierung nicht erkannt und sie muss in der Import-Funktion spezifitiert werden. Dies wird je nach verwendete import Funktion unterschiedlich gemacht:\n\nFunktionen aus dem Package readr: locale = locale(encoding = \"UTF-8\")\nBase-R Funktionen: fileEncoding = \"UTF-8\"\n\nWenn ihr die Codierung eines Files nicht kennt, könnt ihr wie folgt vorgehen: Anleitung für Windows, für Mac und für Linux.",
+    "crumbs": [
+      "Pre-Processing",
+      "<span class='chapter-number'>5</span>  <span class='chapter-title'>Prepro 2: Übung A</span>"
+    ]
+  },
+  {
+    "objectID": "prepro/Prepro2_Uebung_A.html#aufgabe-3",
+    "href": "prepro/Prepro2_Uebung_A.html#aufgabe-3",
+    "title": "Prepro 2: Übung A",
+    "section": "Aufgabe 3",
+    "text": "Aufgabe 3\nNun wollen wir den Datensatz wetter mit den Informationen aus metadata anreichern. Uns interessiert aber nur das Stationskürzel, der Name, die x/y Koordinaten sowie die Meereshöhe. Selektiere diese Spalten.",
+    "crumbs": [
+      "Pre-Processing",
+      "<span class='chapter-number'>5</span>  <span class='chapter-title'>Prepro 2: Übung A</span>"
+    ]
+  },
+  {
+    "objectID": "prepro/Prepro2_Uebung_A.html#aufgabe-4",
+    "href": "prepro/Prepro2_Uebung_A.html#aufgabe-4",
+    "title": "Prepro 2: Übung A",
+    "section": "Aufgabe 4",
+    "text": "Aufgabe 4\nJetzt kann metadata mit dem Datensatz wetter verbunden werden. Überlege dir, welcher Join dafür sinnvoll ist und mit welchem Attribut wir “joinen” können.\nNutze die Join-Möglichkeiten von dplyr (Hilfe via ?dplyr::join), um die Datensätze wetter und metadata zu verbinden.",
+    "crumbs": [
+      "Pre-Processing",
+      "<span class='chapter-number'>5</span>  <span class='chapter-title'>Prepro 2: Übung A</span>"
+    ]
+  },
+  {
+    "objectID": "prepro/Prepro2_Uebung_A.html#aufgabe-5",
+    "href": "prepro/Prepro2_Uebung_A.html#aufgabe-5",
+    "title": "Prepro 2: Übung A",
+    "section": "Aufgabe 5",
+    "text": "Aufgabe 5\nErstelle eine neue Spalte month, welche den jeweiligen Monat (aus time) beinhaltet. Nutze dafür die Funktion lubridate::month().",
+    "crumbs": [
+      "Pre-Processing",
+      "<span class='chapter-number'>5</span>  <span class='chapter-title'>Prepro 2: Übung A</span>"
+    ]
+  },
+  {
+    "objectID": "prepro/Prepro2_Uebung_A.html#aufgabe-6",
+    "href": "prepro/Prepro2_Uebung_A.html#aufgabe-6",
+    "title": "Prepro 2: Übung A",
+    "section": "Aufgabe 6",
+    "text": "Aufgabe 6\nBerechne mit der Spalte month die Durchschnittstemperatur pro Monat.",
+    "crumbs": [
+      "Pre-Processing",
+      "<span class='chapter-number'>5</span>  <span class='chapter-title'>Prepro 2: Übung A</span>"
+    ]
+  },
+  {
+    "objectID": "prepro/Prepro2_Uebung_B.html",
+    "href": "prepro/Prepro2_Uebung_B.html",
+    "title": "Prepro 2: Übung B",
+    "section": "",
+    "text": "Aufgabe 1\nGegeben sind die Daten von drei Sensoren (sensor1.csv, sensor2.csv, sensor3.csv). Lese die Datensätze ein.",
+    "crumbs": [
+      "Pre-Processing",
+      "<span class='chapter-number'>6</span>  <span class='chapter-title'>Prepro 2: Übung B</span>"
+    ]
+  },
+  {
+    "objectID": "prepro/Prepro2_Uebung_B.html#aufgabe-2",
+    "href": "prepro/Prepro2_Uebung_B.html#aufgabe-2",
+    "title": "Prepro 2: Übung B",
+    "section": "Aufgabe 2",
+    "text": "Aufgabe 2\nErstelle aus den 3 Dataframes einen einzigen Dataframe, welcher aussieht wie unten dargestellt. Nutze dafür zwei joins aus dplyr, um 3 data.frames miteinander zu verbinden. Bereinige im Anschluss die Spaltennamen (wie geht das?).\n\n\n\n\n\nDatetime\nsensor1\nsensor2\nsensor3\n\n\n\n\n16102017_1800\n23.5\n13.5\n26.5\n\n\n17102017_1800\n25.4\n24.4\n24.4\n\n\n18102017_1800\n12.4\n22.4\n13.4\n\n\n19102017_1800\n5.4\n12.4\n7.4\n\n\n23102017_1800\n23.5\n13.5\nNA\n\n\n24102017_1800\n21.3\n11.3\nNA",
+    "crumbs": [
+      "Pre-Processing",
+      "<span class='chapter-number'>6</span>  <span class='chapter-title'>Prepro 2: Übung B</span>"
+    ]
+  },
+  {
+    "objectID": "prepro/Prepro2_Uebung_B.html#aufgabe-3",
+    "href": "prepro/Prepro2_Uebung_B.html#aufgabe-3",
+    "title": "Prepro 2: Übung B",
+    "section": "Aufgabe 3",
+    "text": "Aufgabe 3\nImportiere die Datei sensor_fail.csv in R.\nsensor_fail.csv hat eine Variabel SensorStatus: 1 bedeutet der Sensor misst, 0 bedeutet der Sensor misst nicht. Fälschlicherweise wurde auch dann der Messwert Temp = 0 erfasst, wenn Sensorstatus = 0. Richtig wäre hier NA (not available). Korrigiere den Datensatz entsprechend.\n\n\n\n\n\nSensor\nTemp\nHum_%\nDatetime\nSensorStatus\n\n\n\n\nSen102\n0.6\n98\n16102017_1800\n1\n\n\nSen102\n0.3\n96\n17102017_1800\n1\n\n\nSen102\n0.0\n87\n18102017_1800\n1\n\n\nSen102\n0.0\n86\n19102017_1800\n0\n\n\nSen102\n0.0\n98\n23102017_1800\n0\n\n\nSen102\n0.0\n98\n24102017_1800\n0\n\n\nSen102\n0.0\n96\n25102017_1800\n1\n\n\nSen103\n-0.3\n87\n26102017_1800\n1\n\n\nSen103\n-0.7\n98\n27102017_1800\n1\n\n\nSen103\n-1.2\n98\n28102017_1800\n1",
+    "crumbs": [
+      "Pre-Processing",
+      "<span class='chapter-number'>6</span>  <span class='chapter-title'>Prepro 2: Übung B</span>"
+    ]
+  },
+  {
+    "objectID": "prepro/Prepro2_Uebung_B.html#aufgabe-4",
+    "href": "prepro/Prepro2_Uebung_B.html#aufgabe-4",
+    "title": "Prepro 2: Übung B",
+    "section": "Aufgabe 4",
+    "text": "Aufgabe 4\nWarum spielt es eine Rolle, ob 0 oder NA erfasst wird? Berechne die Mittlere der Temperatur / Feuchtigkeit nach der Korrektur.",
+    "crumbs": [
+      "Pre-Processing",
+      "<span class='chapter-number'>6</span>  <span class='chapter-title'>Prepro 2: Übung B</span>"
+    ]
+  },
+  {
+    "objectID": "prepro/Prepro3_Demo.html",
+    "href": "prepro/Prepro3_Demo.html",
+    "title": "Prepro 3: Demo",
+    "section": "",
+    "text": "Split-Apply-Combine",
+    "crumbs": [
+      "Pre-Processing",
+      "<span class='chapter-number'>7</span>  <span class='chapter-title'>Prepro 3: Demo</span>"
+    ]
+  },
+  {
+    "objectID": "prepro/Prepro3_Demo.html#split-apply-combine",
+    "href": "prepro/Prepro3_Demo.html#split-apply-combine",
+    "title": "Prepro 3: Demo",
+    "section": "",
+    "text": "Daten laden\nWir laden die Wetterdaten (Quelle MeteoSchweiz) der letzten Übung.\n\nlibrary(\"readr\")\n\nwetter &lt;- read_delim(\"datasets/prepro/weather.csv\", \",\")\n\nlibrary(\"dplyr\")\n\nwetter &lt;- wetter |&gt;\n  mutate(\n    stn = as.factor(stn),\n    time = as.POSIXct(as.character(time), format = \"%Y%m%d%H\")\n  )\n\n\n\nKennwerte berechnen\nWir möchten den Mittelwert aller gemessenen Temperaturwerten berechnen. Dazu könnten wir folgenden Befehl verwenden:\n\nmean(wetter$tre200h0, na.rm = TRUE)\n## [1] 6.324744\n\nDie Option na.rm = T bedeutet, dass NA Werte von der Berechnung ausgeschlossen werden sollen.\nMit derselben Herangehensweise können diverse Werte berechnet werden (z.B. das Maximum (max()), Minimum (min()), Median (median()) u.v.m.).\nDiese Herangehensweise funktioniert nur dann gut, wenn wir die Kennwerte über alle Beobachtungen für eine Variable (Spalte) berechnen wollen. Sobald wir die Beobachtungen gruppieren wollen, wird es schwierig. Zum Beispiel, wenn wir die durchschnittliche Temperatur pro Monat berechnen wollen.\n\n\nConvenience Variablen\nUm diese Aufgabe zu lösen, muss zuerst der Monat extrahiert werden (der Monat ist die convenience variable). Hierfür brauchen wir die Funktion lubridate::month().\nNun kann kann die convenience Variable “Month” erstellt werden. Ohne dpylr wird eine neue Spalte folgendermassen hinzugefügt.\n\nlibrary(\"lubridate\")\n\nwetter$month &lt;- month(wetter$time)\n\nMit dplyr (siehe 3) sieht der gleiche Befehl folgendermassen aus:\n\n\nwetter &lt;- mutate(wetter, month = month(time))\n\nDer grosse Vorteil von dplyr ist an dieser Stelle noch nicht ersichtlich. Dieser wird aber später klar.\n\n\nKennwerte nach Gruppen berechnen\nUm mit base R den Mittelwert pro Monat zu berechnen, kann man zuerst ein Subset mit [] erstellen und davon den Mittelwert berechnen, z.B. folgendermassen:\n\nmean(wetter$tre200h0[wetter$month == 1], na.rm = TRUE)\n## [1] -1.963239\n\nDies müssen wir pro Monat wiederholen, was natürlich sehr umständlich ist. Deshalb nutzen wir das package dplyr. Damit geht die Aufgabe (Temperaturmittel pro Monat berechnen) folgendermassen:\n\nsummarise(group_by(wetter, month), temp_mittel = mean(tre200h0, na.rm = TRUE))\n## # A tibble: 13 × 2\n##    month temp_mittel\n##    &lt;dbl&gt;       &lt;dbl&gt;\n##  1     1      -1.96 \n##  2     2       0.355\n##  3     3       2.97 \n##  4     4       4.20 \n##  5     5      11.0  \n##  6     6      12.4  \n##  7     7      13.0  \n##  8     8      15.0  \n##  9     9       9.49 \n## 10    10       8.79 \n## 11    11       1.21 \n## 12    12      -0.898\n## 13    NA       2.95\n\n\n\nVerketten vs. verschachteln\nAuf Deutsch übersetzt heisst die obige Operation folgendermassen:\n\nnimm den Datensatz wetter\nBilde Gruppen pro Jahr (group_by(wetter,year))\nBerechne das Temperaturmittel (mean(tre200h0))\n\nDiese Übersetzung R -&gt; Deutsch unterscheidet sich vor allem darin, dass die Operation auf Deutsch verkettet ausgesprochen wird (Operation 1-&gt;2-&gt;3) während der Computer verschachtelt liest 3(2(1)). Um R näher an die gesprochene Sprache zu bringen, kann man den |&gt;-Operator verwenden (siehe 4).\n\n# 1 nimm den Datensatz \"wetter\"\n# 2 Bilde Gruppen pro Monat\n# 3 berechne das Temperaturmittel\n\nsummarise(group_by(wetter, month), temp_mittel = mean(tre200h0))\n#                  \\_1_/\n#         \\__________2_________/\n# \\__________________3_______________________________________/\n\n# wird zu:\n\nwetter |&gt;                                 # 1\n  group_by(month) |&gt;                      # 2\n  summarise(temp_mittel = mean(tre200h0)) # 3\n\nDieses Verketten mittels |&gt; (genannt “pipe”) macht den Code einiges schreib- und leserfreundlicher, und wir werden ihn in den nachfolgenden Übungen verwenden. Die “pipe” wird mit dem package magrittr bereitgestellt und mit dplyr mitinstalliert.\nZu dplyr gibt es etliche Tutorials online (siehe5), deshalb werden wir diese Tools nicht in allen Details erläutern. Nur noch folgenden wichtigen Unterschied zu zwei wichtigen Funktionen in dpylr: mutate() und summarise().\n\nsummarise() fasst einen Datensatz zusammen. Dabei reduziert sich die Anzahl Beobachtungen (Zeilen) auf die Anzahl Gruppen (z.B. eine zusammengefasste Beobachtung (Zeile) pro Jahr). Zudem reduziert sich die Anzahl Variablen (Spalten) auf diejenigen, die in der “summarise” Funktion spezifiziert wurde (z.B. temp_mittel).\nmit mutate wird ein data.frame vom Umfang her belassen, es werden lediglich zusätzliche Variablen (Spalten) hinzugefügt (siehe Beispiel unten).\n\n\n# Maximal und minimal Temperatur pro Kalenderwoche\nweather_summary &lt;- wetter |&gt;                # 1) nimm den Datensatz \"wetter\"\n  filter(month == 1) |&gt;                     # 2) filter auf den Monat Januar\n  mutate(day = day(time)) |&gt;                # 3) erstelle eine neue Spalte \"day\"\n  group_by(day) |&gt;                          # 4) Nutze die neue Spalte um Gruppen zu bilden\n  summarise(\n    temp_max = max(tre200h0, na.rm = TRUE), # 5) Berechne das Maximum\n    temp_min = min(tre200h0, na.rm = TRUE)  # 6) Berechne das Minimum\n  )\n\nweather_summary\n## # A tibble: 31 × 3\n##      day temp_max temp_min\n##    &lt;int&gt;    &lt;dbl&gt;    &lt;dbl&gt;\n##  1     1      5.8     -4.4\n##  2     2      2.8     -4.3\n##  3     3      4.2     -3.1\n##  4     4      4.7     -2.8\n##  5     5     11.4     -0.6\n##  6     6      6.7     -1.6\n##  7     7      2.9     -2.8\n##  8     8      0.2     -3.6\n##  9     9      2.1     -8.8\n## 10    10      1.6     -2.4\n## # ℹ 21 more rows",
+    "crumbs": [
+      "Pre-Processing",
+      "<span class='chapter-number'>7</span>  <span class='chapter-title'>Prepro 3: Demo</span>"
+    ]
+  },
+  {
+    "objectID": "prepro/Prepro3_Demo.html#reshaping-data",
+    "href": "prepro/Prepro3_Demo.html#reshaping-data",
+    "title": "Prepro 3: Demo",
+    "section": "Reshaping data",
+    "text": "Reshaping data\n\nBreit → lang\nDie Umformung von Tabellen breit→lang erfolgt mittels tidyr(siehe 6). Auch dieses Package funktioniert wunderbar mit piping (|&gt;).\n\nlibrary(\"tidyr\")\nweather_summary |&gt;\n  pivot_longer(c(temp_max, temp_min))\n## # A tibble: 62 × 3\n##      day name     value\n##    &lt;int&gt; &lt;chr&gt;    &lt;dbl&gt;\n##  1     1 temp_max   5.8\n##  2     1 temp_min  -4.4\n##  3     2 temp_max   2.8\n##  4     2 temp_min  -4.3\n##  5     3 temp_max   4.2\n##  6     3 temp_min  -3.1\n##  7     4 temp_max   4.7\n##  8     4 temp_min  -2.8\n##  9     5 temp_max  11.4\n## 10     5 temp_min  -0.6\n## # ℹ 52 more rows\n\nIm Befehl pivot_longer() müssen wir festlegen, welche Spalten zusammengefasst werden sollen (hier: temp_max,temp_min,temp_mean). Alternativ können wir angeben, welche Spalten wir nicht zusammenfassen wollen:\n\nweather_summary |&gt;\n  pivot_longer(-day)\n## # A tibble: 62 × 3\n##      day name     value\n##    &lt;int&gt; &lt;chr&gt;    &lt;dbl&gt;\n##  1     1 temp_max   5.8\n##  2     1 temp_min  -4.4\n##  3     2 temp_max   2.8\n##  4     2 temp_min  -4.3\n##  5     3 temp_max   4.2\n##  6     3 temp_min  -3.1\n##  7     4 temp_max   4.7\n##  8     4 temp_min  -2.8\n##  9     5 temp_max  11.4\n## 10     5 temp_min  -0.6\n## # ℹ 52 more rows\n\nWenn wir die Namen neuen Spalten festlegen wollen (anstelle von name und value) erreichen wir dies mit names_to bzw. values_to:\n\nweather_summary_long &lt;- weather_summary |&gt;\n  pivot_longer(-day, names_to = \"Messtyp\", values_to = \"Messwert\")\n\nDie ersten 6 Zeilen von weather_summary_long:\n\n\n\n\n\nday\nMesstyp\nMesswert\n\n\n\n\n1\ntemp_max\n5.8\n\n\n1\ntemp_min\n-4.4\n\n\n2\ntemp_max\n2.8\n\n\n2\ntemp_min\n-4.3\n\n\n3\ntemp_max\n4.2\n\n\n3\ntemp_min\n-3.1\n\n\n\n\n\nDie ersten 6 Zeilen von wetter_sry:\n\n\n\n\n\nday\ntemp_max\ntemp_min\n\n\n\n\n1\n5.8\n-4.4\n\n\n2\n2.8\n-4.3\n\n\n3\n4.2\n-3.1\n\n\n4\n4.7\n-2.8\n\n\n5\n11.4\n-0.6\n\n\n6\n6.7\n-1.6\n\n\n\n\n\nBeachte: weather_summary_long umfasst 62 Beobachtungen (Zeilen), das sind doppelt soviel wie weather_summary, da wir ja zwei Spalten zusammengefasst haben.\n\nnrow(weather_summary)\n## [1] 31\nnrow(weather_summary_long)\n## [1] 62\n\nLange Tabellen sind in verschiedenen Situationen praktischer. Beispielsweise ist das Visualisieren mittels ggplot2 (dieses Package werdet ihr im Block “InfoVis” kennenlernen) mit long tables wesentlich einfacher.\n\n\nlibrary(\"ggplot2\")\nggplot(weather_summary_long, aes(day, Messwert, colour = Messtyp)) +\n  geom_line()\n\n\n\n\n\n\n\n\n\n\nLang → breit\nDas Gegenstück zu pivot_longer ist pivot_wider. Mit dieser Funktion können wir eine lange Tabelle in eine breite überführen. Dazu müssen wir in names_from angeben, aus welcher Spalte die neuen Spaltennamen erstellt werden sollen (names_from) und aus welcher Spalte die Werte entstammen sollen (values_from):\n\nweather_summary_long |&gt;\n  pivot_wider(names_from = Messtyp, values_from = Messwert)\n## # A tibble: 31 × 3\n##      day temp_max temp_min\n##    &lt;int&gt;    &lt;dbl&gt;    &lt;dbl&gt;\n##  1     1      5.8     -4.4\n##  2     2      2.8     -4.3\n##  3     3      4.2     -3.1\n##  4     4      4.7     -2.8\n##  5     5     11.4     -0.6\n##  6     6      6.7     -1.6\n##  7     7      2.9     -2.8\n##  8     8      0.2     -3.6\n##  9     9      2.1     -8.8\n## 10    10      1.6     -2.4\n## # ℹ 21 more rows\n\nZum Vergleich: mit einer wide table müssen wir in ggplot2 jede Spalte einzeln plotten. Dies ist bei wenigen Variabeln wie hier noch nicht problematisch, aber bei einer hohen Anzahl wird dies schnell mühsam.\n\nggplot(weather_summary) +\n  geom_line(aes(day, temp_max)) +\n  geom_line(aes(day, temp_min))\n\n\n\n\n\n\n\n\n\n\n\n\nWickham, Hadley, und Garrett Grolemund. 2017. R for Data Science. O’Reilly. https://ebookcentral.proquest.com/lib/zhaw/detail.action?docID=4770093.",
+    "crumbs": [
+      "Pre-Processing",
+      "<span class='chapter-number'>7</span>  <span class='chapter-title'>Prepro 3: Demo</span>"
+    ]
+  },
+  {
+    "objectID": "prepro/Prepro3_Demo.html#footnotes",
+    "href": "prepro/Prepro3_Demo.html#footnotes",
+    "title": "Prepro 3: Demo",
+    "section": "",
+    "text": "http://r4ds.had.co.nz/↩︎\nhttps://ebookcentral.proquest.com/lib/zhaw/detail.action?docID=4770093↩︎\nWickham und Grolemund (2017), Kapitel 10 / http://r4ds.had.co.nz/transform.html↩︎\nWickham und Grolemund (2017), Kapitel 14 / http://r4ds.had.co.nz/pipes.html↩︎\nWickham und Grolemund (2017), Kapitel 10 / http://r4ds.had.co.nz/transform.html, oder Hands-on dplyr tutorial..↩︎\nhttps://r4ds.had.co.nz/tidy-data.html#pivoting↩︎",
+    "crumbs": [
+      "Pre-Processing",
+      "<span class='chapter-number'>7</span>  <span class='chapter-title'>Prepro 3: Demo</span>"
+    ]
+  },
+  {
+    "objectID": "prepro/Prepro3_Uebung.html",
+    "href": "prepro/Prepro3_Uebung.html",
+    "title": "Prepro 3: Übung",
+    "section": "",
+    "text": "Aufgabe 1\nGegeben sei ein Datensatz sensors_combined.csv, mit den Temperaturwerten von drei verschiedenen Sensoren. Importiere ihn als csv in R (als sensors_combined).\nFormatiere die Datetime Spalte in POSIXct um. Verwende dazu die Funktion as.POSIXct (lies mit ?strftime() nochmal nach, wie du das spezfische Format (die “Schablone”) festlegen kannst.",
+    "crumbs": [
+      "Pre-Processing",
+      "<span class='chapter-number'>8</span>  <span class='chapter-title'>Prepro 3: Übung</span>"
+    ]
+  },
+  {
+    "objectID": "prepro/Prepro3_Uebung.html#aufgabe-2",
+    "href": "prepro/Prepro3_Uebung.html#aufgabe-2",
+    "title": "Prepro 3: Übung",
+    "section": "Aufgabe 2",
+    "text": "Aufgabe 2\nÜberführe die Tabelle in ein langes Format (verwende dazu die Funktion pivot_longer aus tidyr) und speichere den output als sensors_long.\nTipp:\n\nim Argument cols kannst du entweder die Spalten auflisten, die “pivotiert” werden sollen.\nAlternativ kannst du (mit vorangestelltem Minuszeichen, -) die Spalte bezeichnen, die nicht pivotiert werden soll.\nIn beiden Fällen musst du die Spalten weder mit Anführungs- und Schlusszeichen noch mit dem $-Zeichen versehen.",
+    "crumbs": [
+      "Pre-Processing",
+      "<span class='chapter-number'>8</span>  <span class='chapter-title'>Prepro 3: Übung</span>"
+    ]
+  },
+  {
+    "objectID": "prepro/Prepro3_Uebung.html#aufgabe-3",
+    "href": "prepro/Prepro3_Uebung.html#aufgabe-3",
+    "title": "Prepro 3: Übung",
+    "section": "Aufgabe 3",
+    "text": "Aufgabe 3\nGruppiere sensors_long nach der neuen Spalte, wo die Sensor-Information enthalten ist (default: name) mit group_by und berechne den Mittelwert der Temperatur pro Sensor (summarise). Hinweis: Beide Funktionen sind Teil des Packages dplyr.\nDer Output sieht folgendermassen aus:\n\n## # A tibble: 3 × 2\n##   name    temp_mean\n##   &lt;chr&gt;       &lt;dbl&gt;\n## 1 sensor1      14.7\n## 2 sensor2      12.0\n## 3 sensor3      14.4",
+    "crumbs": [
+      "Pre-Processing",
+      "<span class='chapter-number'>8</span>  <span class='chapter-title'>Prepro 3: Übung</span>"
+    ]
+  },
+  {
+    "objectID": "prepro/Prepro3_Uebung.html#aufgabe-4",
+    "href": "prepro/Prepro3_Uebung.html#aufgabe-4",
+    "title": "Prepro 3: Übung",
+    "section": "Aufgabe 4",
+    "text": "Aufgabe 4\nErstelle für sensors_long eine neue convenience Variabel month, welche den Monat beinhaltet (Tipp: verwende dazu die Funktion month aus lubridate). Gruppiere nun nach month und Sensor und berechne den Mittelwert der Temperatur.",
+    "crumbs": [
+      "Pre-Processing",
+      "<span class='chapter-number'>8</span>  <span class='chapter-title'>Prepro 3: Übung</span>"
+    ]
+  },
+  {
+    "objectID": "prepro/Prepro3_Uebung.html#aufgabe-5",
+    "href": "prepro/Prepro3_Uebung.html#aufgabe-5",
+    "title": "Prepro 3: Übung",
+    "section": "Aufgabe 5",
+    "text": "Aufgabe 5\nLade jetzt nochmal den Datensatz weather.csv (Quelle MeteoSchweiz) herunter und importiere ihn als CSV mit den korrekten Spaltentypen (stn als factor, time als POSIXct, tre200h0 als double).",
+    "crumbs": [
+      "Pre-Processing",
+      "<span class='chapter-number'>8</span>  <span class='chapter-title'>Prepro 3: Übung</span>"
+    ]
+  },
+  {
+    "objectID": "prepro/Prepro3_Uebung.html#aufgabe-6",
+    "href": "prepro/Prepro3_Uebung.html#aufgabe-6",
+    "title": "Prepro 3: Übung",
+    "section": "Aufgabe 6",
+    "text": "Aufgabe 6\nErstelle nun eine convenience Variable für die Kalenderwoche pro Messung (lubridate::week). Berechne im Anschluss den Mittelwert der Temperatur pro Kalenderwoche.\nVisualisiere im Anschluss das Resultat:",
+    "crumbs": [
+      "Pre-Processing",
+      "<span class='chapter-number'>8</span>  <span class='chapter-title'>Prepro 3: Übung</span>"
+    ]
+  },
+  {
+    "objectID": "prepro/Prepro3_Uebung.html#aufgabe-7",
+    "href": "prepro/Prepro3_Uebung.html#aufgabe-7",
+    "title": "Prepro 3: Übung",
+    "section": "Aufgabe 7",
+    "text": "Aufgabe 7\nIn der vorherigen Aufgabe haben wir den Mittelwert der Temperatur pro Kalenderwoche über alle Jahre (2000 und 2001) berechnet. Wenn wir die Jahre aber miteinander vergleichen wollen, müssen wir das Jahr als zusätzliche convenience Variable erstellen und danach gruppieren. Versuche dies mit den Wetterdaten und visualisiere den Output anschliessend.\n\n\n\n\n\n\n\n\nAbbildung 8.1: baseplot mag keine long tables und macht aus den beiden Jahren eine kontinuierliche Linie",
+    "crumbs": [
+      "Pre-Processing",
+      "<span class='chapter-number'>8</span>  <span class='chapter-title'>Prepro 3: Übung</span>"
+    ]
+  },
+  {
+    "objectID": "prepro/Prepro3_Uebung.html#aufgabe-8",
+    "href": "prepro/Prepro3_Uebung.html#aufgabe-8",
+    "title": "Prepro 3: Übung",
+    "section": "Aufgabe 8",
+    "text": "Aufgabe 8\nÜberführe den Output aus der letzten Übung in eine wide table. Nun lassen sich die beiden Jahre viel besser miteinander vergleichen.",
+    "crumbs": [
+      "Pre-Processing",
+      "<span class='chapter-number'>8</span>  <span class='chapter-title'>Prepro 3: Übung</span>"
+    ]
+  },
+  {
     "objectID": "fallstudie_s/0_Vorbereitung.html",
     "href": "fallstudie_s/0_Vorbereitung.html",
     "title": "Vorbereitung",
@@ -38,7 +467,7 @@
     "text": "Im Rahmen der Fallstudie werden wir einige R Packages brauchen. Wir empfehlen, diese bereits vor der ersten Lektion zu installieren. Analog der Vorbereitungsübung in Prepro1 könnt ihr mit nachstehendem Code alle noch nicht installierten packages automatisch installieren.\n\nipak &lt;- function(pkg) {\n  new.pkg &lt;- pkg[!(pkg %in% installed.packages()[, \"Package\"])]\n  if (length(new.pkg)) {\n    install.packages(new.pkg, dependencies = TRUE)\n  }\n}\n\npackages &lt;- c(\n  \"readr\", \"ggplot2\", \"lubridate\", \"ggpubr\", \"PerformanceAnalytics\",\n  \"MuMIn\", \"AICcmodavg\", \"fitdistrplus\", \"lme4\", \"DHARMa\", \"blmeco\", \"sjPlot\", \"lattice\",\n  \"dplyr\", \"suncalc\", \"glmmTMB\"\n)\n\nipak(packages)\n\nZudem könnt ihr alle für die Fallstudie Profil S benötigten Daten unter folgendem Link herunterladen.",
     "crumbs": [
       "Fallstudie S",
-      "<span class='chapter-number'>18</span>  <span class='chapter-title'>Vorbereitung</span>"
+      "<span class='chapter-number'>9</span>  <span class='chapter-title'>Vorbereitung</span>"
     ]
   },
   {
@@ -49,7 +478,7 @@
     "text": "Hintergrund\nDas rund 1100 ha grosse Naturschutzgebiet Wildnispark Zürich Sihlwald, welches im periurbanen Raum südlich von Zürich liegt, gilt seit dem 1. Januar 2010 als erster national anerkannter Naturerlebnispark. Er ist Teil des Wildnisparks Zürich und wichtiges Naherholungsgebiet für die Stadt Zürich.\nDas Schutzgebiet befindet sich im Spannungsfeld zwischen Schutz und Nutzen, denn einerseits sollen die Besuchenden den Wald erleben dürfen, andererseits soll sich dieser, in der Kernzone, frei entwickeln dürfen. Im Perimeter gelten darum verschiedene Regeln. So darf z. B. nur auf bestimmten Wegen mit den Velo gefahren werden.\nDas Management braucht solide, empirisch erhobene Daten zur Natur und zu den Besuchenden damit die Ziele von Nutzen und Schürzen erreicht werden können. Das Besuchermonitoring deckt den zweiten Teil dieser notwendigen Daten ab. Im Wildnispark Zürich sind dazu mehrere automatische Zählstellen in Betrieb. Die Zählstellen erfassen stundenweise die Besuchenden auf den Wegen. Einige Zählstellen erfassen richtungsgetrennt und / oder können zwischen verschiedenen Nutzergruppen wie Personen, die zu Fuss gehen, und Velofahrenden unterscheiden.\nIm Rahmen des Moduls Research Methods werden in dieser Fallstudie mehrere dieser automatischen Zählstellen genauer untersucht. Die Daten, welche im Besitz des WPZ sind, wurden bereits kalibriert. Das heisst, Zählungen während Wartungsarbeiten, bei Felhbetrieb o.ä. wurden bereits ausgeschlossen. Dies ist eine zeitintensive Arbeit und wir dürfen hier mit einem sauber aufbereiteten “Datenschatz” arbeiten.\nPerimeter des Wildnispark Zürichs mit den ungefähren Standorten von zwei ausgewählten automatischen Zählstellen.\nHinweis:\nDer Wildnispark wertet die Zahlen auf verschiedene Weise aus. So sind z. B. Jahresgänge (an welchen Monaten herrscht besonders viel Betrieb?) und die absoluten Nutzungszahlen bekannt. Vertiefte Auswertungen, die beispielsweise den Zusammenhang zwischen Besuchszahlen und dem Wetter untersuchen, werden nicht gemacht.\nUnsere Analysen in diesem Modul helfen dem Management, ein besseres Verständnis zum Verhalten der Besuchenden zu erlangen und bilden Grundlagen für Managemententscheide in der Praxis.",
     "crumbs": [
       "Fallstudie S",
-      "<span class='chapter-number'>19</span>  <span class='chapter-title'>Einführung</span>"
+      "<span class='chapter-number'>10</span>  <span class='chapter-title'>Einführung</span>"
     ]
   },
   {
@@ -60,7 +489,7 @@
     "text": "Die Zähler 211 und 502 erfassen sowohl Fussgänger:innen als auch Fahrräder. Die Erfassung erfolgt richtungsgetrennt.",
     "crumbs": [
       "Fallstudie S",
-      "<span class='chapter-number'>19</span>  <span class='chapter-title'>Einführung</span>"
+      "<span class='chapter-number'>10</span>  <span class='chapter-title'>Einführung</span>"
     ]
   },
   {
@@ -71,7 +500,7 @@
     "text": "Ziel\nIn dieser Fallstudie zeigen wir, welche Einflüsse die Covid19-Pandemie im Frühjahr 2020 auf die täglichen Besuchszahlen im Wildnispark Zürich hatte. Dabei setzen wir den Fokus auf die Dämmerung und die Nacht, den in diesen Zeiten sind Wildtiere (u.a. Rehe) besonders sensibel gegenüber Störungen. Wir untersuchen ebenfalls, wie sich die Besuchszhalen seit der Pandemie entwickelt haben und ob sie sich wieder dem Muster von vor der Pandemie annähern. Auch dabei ist die “dunkle” Tageszeit im Fokus.\nIn unsere Analysen ziehen wir auch weitere erklärende Faktoren wie Wetter, Wochentag, Kalenderwoche und Schulferien mit ein. Die statistischen Auswertungen erlauben und somit klare Rückschlüsse auf die Effekte der Faktoren und deren Stärke zu ziehen.",
     "crumbs": [
       "Fallstudie S",
-      "<span class='chapter-number'>19</span>  <span class='chapter-title'>Einführung</span>"
+      "<span class='chapter-number'>10</span>  <span class='chapter-title'>Einführung</span>"
     ]
   },
   {
@@ -82,7 +511,7 @@
     "text": "Grundlagen\nZur Verfügung stehen:\n\ndie stündlichen Zählungen von Fussgänger:innen und Velos an den Zählstellen\nMeteodaten (Temperatur, Sonnenscheindauer, Niederschlagssumme)\nR-Skripte mit Hinweisen zur Auswertung",
     "crumbs": [
       "Fallstudie S",
-      "<span class='chapter-number'>19</span>  <span class='chapter-title'>Einführung</span>"
+      "<span class='chapter-number'>10</span>  <span class='chapter-title'>Einführung</span>"
     ]
   },
   {
@@ -93,7 +522,7 @@
     "text": "Aufbau der Fallstudie\nIn dieser Fallstudie erheben wir zuerst selbst Daten auf dem Grüntal, welche wir dann deskriptiv auswerten. Anschliessend beschäftigen wir uns mit den Daten aus dem Wildnispark Zürich, welche wir ebenfalls deskriptiv auswerten und auch sttistische Modelle damit programmieren. Diese Ergebnisse werden dann im Abschlussbericht dokumentiert.",
     "crumbs": [
       "Fallstudie S",
-      "<span class='chapter-number'>19</span>  <span class='chapter-title'>Einführung</span>"
+      "<span class='chapter-number'>10</span>  <span class='chapter-title'>Einführung</span>"
     ]
   },
   {
@@ -104,7 +533,7 @@
     "text": "Einführung\nEs gibt eine Vielzahl an möglichen Methoden zur Erfassung der Besuchszahlen. Automatische Zählgeräte bieten die Möglichkeit, lange und durchgehende Zeitreihen zu erfassen. Inputs dazu, wie diese ausgewertet werden können, erhält ihr in dieser Aufgabe.",
     "crumbs": [
       "Fallstudie S",
-      "<span class='chapter-number'>20</span>  <span class='chapter-title'>Monitoring</span>"
+      "<span class='chapter-number'>11</span>  <span class='chapter-title'>Monitoring</span>"
     ]
   },
   {
@@ -115,7 +544,7 @@
     "text": "Ziele\n\nIhr könnt das eingesetzte Zählgerät installieren und kennt die Vor- und Nachteile verschiedener Methoden.\nIhr könnt die generierten Daten explorativ und deskriptiv auswerten.",
     "crumbs": [
       "Fallstudie S",
-      "<span class='chapter-number'>20</span>  <span class='chapter-title'>Monitoring</span>"
+      "<span class='chapter-number'>11</span>  <span class='chapter-title'>Monitoring</span>"
     ]
   },
   {
@@ -126,7 +555,7 @@
     "text": "Grundlagen\nDie Geräte werden gemeinsam auf dem Campus Grüntal platziert.\nDatenschutz ist ein wichtiges Thema. Die eingesetzten Geräte erfassen keine Personendaten, sondern nur Bewegungen. Es handelt sich um Pyroelektrische Infrarotsensoren, welche auf den Temperaturunterschied reagieren, wenn sich eine Person vor der Linse bewegt. Insofern handelt es sich, vereinfacht gesagt, um Bewegungsmelder.",
     "crumbs": [
       "Fallstudie S",
-      "<span class='chapter-number'>20</span>  <span class='chapter-title'>Monitoring</span>"
+      "<span class='chapter-number'>11</span>  <span class='chapter-title'>Monitoring</span>"
     ]
   },
   {
@@ -137,7 +566,116 @@
     "text": "Aktuell dient diese Plattform für die BiEc Fallstudie - Profil N einzig der Bereitstellung von Aufgaben die von euch im Rahmen dieses Fallstudienprojekts erarbeitet werden sollen. Die Aufgaben werden in den meisten Fällen mit Code-Beispielen erläutert oder benötigten Code-snippets resp. Funktionen werden mitgeliefert. Im Laufe des Semesters werden hier ausserdem häppchenweise (mögliche) Lösungen zu den Aufgaben aufgeschaltet. Alles grundlegende Material und alle Unterlagen zu den theoretischen Inputs sind weiterhin und ausschliesslich im Moodlekurs Research Methods - Fallstudie BiEc zu finden. Die für die Aufgaben benötigten Datengrundlagen sind ebenfalls im entsprechenden Abschnitt auf Moodle zu finden. Frohes Schaffen!\n\nIm Rahmen der Fallstudie werden wir einige R Packages brauchen. Wir empfehlen, diese bereits vor der ersten Lektion zu installieren. Analog der Vorbereitungsübung in Prepro1 könnt ihr mit nachstehendem Code alle noch nicht installierten packages automatisch installieren.\n\npacman::p_install(\"adehabitatHR\", \"bbmle\", \"car\", \"cowplot\", \"DHARMa\", \"dplyr\",\n  \"ggeffects\", \"ggplot2\", \"ggspatial\", \"glmmTMB\", \"gstat\", \"kableExtra\", \"lme4\",\n  \"MASS\", \"MuMIn\", \"pastecs\", \"performance\", \"PerformanceAnalytics\", \"psych\",\n  \"readr\", \"rms\", \"ROCR\", \"sf\", \"sjPlot\", \"sjstats\", \"terra\", character.only = TRUE,  force = FALSE)",
     "crumbs": [
       "Fallstudie N",
-      "<span class='chapter-number'>21</span>  <span class='chapter-title'>Vorbemerkung</span>"
+      "<span class='chapter-number'>12</span>  <span class='chapter-title'>Vorbemerkung</span>"
+    ]
+  },
+  {
+    "objectID": "fallstudie_n/2_Datenverarbeitung.html",
+    "href": "fallstudie_n/2_Datenverarbeitung.html",
+    "title": "Daten(vor)verarbeitung",
+    "section": "",
+    "text": "Projektaufbau RStudio-Projekte\nVor den eigentlichen Auswertungen müssen einige vorbereitende Arbeiten unternommen werden. Die Zeit, die man hier investiert, wird in der späteren Projektphase um ein vielfaches eingespart. Im Skript soll die Ordnerstruktur des Projekts genannt werden, damit der Arbeitsvorgang auf verschiedenen Rechnern reproduzierbar ist.\nArbeitet mit Projekten, da diese sehr einfach untereinander ausgetauscht und somit auch reproduziert werden können; es gibt keine absoluten Arbeitspfade sondern nur relative. Der Datenimport (und auch der Export) kann mithilfe dieser relativen Pfaden stark vereinfacht werden. Projekte helfen alles am richtigen Ort zu behalten. (mehr zur Arbeit mit Projekten: Link)",
+    "crumbs": [
+      "Fallstudie N",
+      "<span class='chapter-number'>13</span>  <span class='chapter-title'>Daten(vor)verarbeitung</span>"
+    ]
+  },
+  {
+    "objectID": "fallstudie_n/2_Datenverarbeitung.html#aufbau-von-r-skripten",
+    "href": "fallstudie_n/2_Datenverarbeitung.html#aufbau-von-r-skripten",
+    "title": "Daten(vor)verarbeitung",
+    "section": "Aufbau von R-Skripten",
+    "text": "Aufbau von R-Skripten\nIm Kopf des Skripts zuerst immer den Titel des Projekts sowie die Autor:innen des Skripts nennen. Hier soll auch die Herkunft der Daten ersichtlich sein und falls externe Daten verwendet werden, sollte geklärt werden, wer die Datenherrschaft hat (Rehdaten: Forschungsgruppe WILMA).\n\n# .##################################################################################\n# Daten(vor)verarbeitung Fallstudie WPZ  ####\n# Modul Research Methods, HS24. Autor/in ####\n# .##################################################################################\n\nBeschreibt zudem folgendes:\n\nOrdnerstruktur; ich verwende hier den Projektordner mit den Unterordnern:\n\nSkripts\nData\nResults\nPlots\n\nVerwendete Daten\n\nEin Skript soll in R eigentlich immer nach dem selbem Schema aufgebaut sein. Dieses Schema beinhaltet (nach dem bereits erwähnten Kopf des Skripts) 4 Kapitel:\n\nDatenimport\nDatenvorverarbeitung\nAnalyse\nVisualisierung\n\nBereitet euer Skript also nach dieser Struktur vor. Nutzt für den Text, welcher nicht Code ist, vor dem Text das Symbol #. Wenn ihr den Text als Titel definieren wollt, der die grobe Struktur des Skripts absteckt, baut in wie in folgendem Beispiel auf:\n\n# .###################################################################################\n# METADATA ####\n# .###################################################################################\n# Datenherkunft ####\n# ...\n\n# .###################################################################################\n# 1. DATENIMPORT ####\n# .###################################################################################",
+    "crumbs": [
+      "Fallstudie N",
+      "<span class='chapter-number'>13</span>  <span class='chapter-title'>Daten(vor)verarbeitung</span>"
+    ]
+  },
+  {
+    "objectID": "fallstudie_n/2_Datenverarbeitung.html#libraries-laden",
+    "href": "fallstudie_n/2_Datenverarbeitung.html#libraries-laden",
+    "title": "Daten(vor)verarbeitung",
+    "section": "Libraries laden",
+    "text": "Libraries laden\n\nlibrary(\"readr\")\nlibrary(\"dplyr\")\nlibrary(\"ggplot2\")\nlibrary(\"purrr\")",
+    "crumbs": [
+      "Fallstudie N",
+      "<span class='chapter-number'>13</span>  <span class='chapter-title'>Daten(vor)verarbeitung</span>"
+    ]
+  },
+  {
+    "objectID": "fallstudie_n/2_Datenverarbeitung.html#daten-laden",
+    "href": "fallstudie_n/2_Datenverarbeitung.html#daten-laden",
+    "title": "Daten(vor)verarbeitung",
+    "section": "Daten laden",
+    "text": "Daten laden\nHerunterladen der Daten der Feldaufnahmen von Moodle (Aufgabe3_Feldaufnahmen_alle_Gruppen.zip), Einlesen, Sichtung der Datensätze und der Datentypen.\nVerschiedene Dinge funktionierten nicht auf Anhieb:\n\nDaten Gruppe 1: leere Zeilen zwischen jedem Dateneintrag (R ist intelligent genug dies beim Einlesen zu erkennen)\nDaten Gruppe 5: leere Zeilen zwischen jedem Dateneintrag (R ist intelligent genug dies beim Einlesen zu erkennen)\nDaten Gruppe 6:\n\nExcelfile –&gt; csv daraus machen\nKoordinaten fehlen, diese werden benötigt um die Daten über die Kreise eindeutig mit den LIDAR-Daten zusammenzuführen –&gt; einfügen aus Zuteilung_Kreise_Aufnahmen_Landforst_HS24.docx\nKreise als Datentyp character, müssen numeric sein\n\nDaten Gruppe 7: Koordinaten fehlen, diese werden benötigt um die Daten über die Kreise eindeutig mit den LIDAR-Daten zusammenzuführen –&gt; einfügen aus Zuteilung_Kreise_Aufnahmen_Landforst_HS24.docx\n\nVersucht wenn möglich solche Dinge jeweils direkt mit R zu lösen, dies ist vorallem bei grösseren Datensätzen extrem hilfreich, damit die Datensätze zu einem sauberen Gesamtdatensatz zusammengefügt werden können.\n\ndf_team1 &lt;- read_delim(\"datasets/fallstudie_n/Aufgabe3_Feldaufnahmen_alle_Gruppen/Aufgabe_2_Team1.csv\", delim = \";\") \n\ndf_team2 &lt;- read_delim(\"datasets/fallstudie_n/Aufgabe3_Feldaufnahmen_alle_Gruppen/FelderhebungenSilhwaldKreise.csv\", delim = \",\")\n\ndf_team3 &lt;- read_delim(\"datasets/fallstudie_n/Aufgabe3_Feldaufnahmen_alle_Gruppen/Felderhebungen Waldstruktur Team 3 pink (Gruppe 4).csv\", delim = \";\")\n\ndf_team4 &lt;- read_delim(\"datasets/fallstudie_n/Aufgabe3_Feldaufnahmen_alle_Gruppen/Felderhebung_Gruppe 5.csv\", delim = \";\")\n\ndf_team5 &lt;- read_delim(\"datasets/fallstudie_n/Aufgabe3_Feldaufnahmen_alle_Gruppen/TEAM 5 (violett) - Felderhebungen Waldstruktur.csv\", delim = \",\")\n\ndf_team6 &lt;- read_delim(\"datasets/fallstudie_n/Aufgabe3_Feldaufnahmen_alle_Gruppen/Felderhebung_Team6.csv\", \n                       delim = \";\", \n                       locale = locale(encoding = \"latin1\")) %&gt;%\n  mutate(Punkt = parse_number(Punkt)) \n\n\ndf_team7 &lt;- read_delim(\"datasets/fallstudie_n/Aufgabe3_Feldaufnahmen_alle_Gruppen/gr7_ground_thruth_lidar.csv\", delim = \";\")\n\n\n# hier können die Probekreise mit den Angaben zur Anzahl Rehlokalisationen und der\n# LIDAR-basierten Ableitung der Waldstruktur eingelesen werden\n\ndf_lidar &lt;- read_delim(\"datasets/fallstudie_n/Aufgabe3_LIDAR_Waldstruktur_Reh_Kreise_241011.csv\", delim = \";\")\nstr(df_lidar)\n\n# Die eingelesenen Datensätze anschauen und versuchen zu einem Gesamtdatensatz\n# verbinden. Ist der Output zufriedenstellend?\n\ndf_gesamt &lt;- bind_rows(df_team1, df_team2, df_team3, df_team4, df_team5,df_team6,df_team7)\nstr(df_gesamt)",
+    "crumbs": [
+      "Fallstudie N",
+      "<span class='chapter-number'>13</span>  <span class='chapter-title'>Daten(vor)verarbeitung</span>"
+    ]
+  },
+  {
+    "objectID": "fallstudie_n/2_Datenverarbeitung.html#aufgabe-1",
+    "href": "fallstudie_n/2_Datenverarbeitung.html#aufgabe-1",
+    "title": "Daten(vor)verarbeitung",
+    "section": "Aufgabe 1",
+    "text": "Aufgabe 1\n\n1.1 Einfügen zusätzliche Spalte pro Datensatz mit der Gruppenzugehörigkeit (Team1-7)\n1.2 Spaltenumbenennung damit die Bezeichungen in allen Datensätzen gleich sind und der Gesamtdatensatz ohne Probleme zusammengefügt werden kann\n\n→ Befehle mutate und rename, mit pipes (alt: %&gt;%, neu: |&gt;) in einem Schritt möglich\n\n\nDas Learning aus den Vorbereitungen die ich übernommen habe und aus Aufgabe 1 ist, dass beim Erfassen und Dokumentieren von Daten aus verschiedenen Quellen darauf geachtet werden sollte, dies möglichst einheitlich zu tun (Dateiformate, Spalten, Bezeichnungen, Datentypen, usw.), damit kann man sich viel Arbeit ersparen. Hilfreich ist in diesem Zusammenhang immer ein einheitliches Feldprotokoll resp. eine Vorlage für die Erfassung der Daten zu erstellen.",
+    "crumbs": [
+      "Fallstudie N",
+      "<span class='chapter-number'>13</span>  <span class='chapter-title'>Daten(vor)verarbeitung</span>"
+    ]
+  },
+  {
+    "objectID": "fallstudie_n/2_Datenverarbeitung.html#aufgabe-2",
+    "href": "fallstudie_n/2_Datenverarbeitung.html#aufgabe-2",
+    "title": "Daten(vor)verarbeitung",
+    "section": "Aufgabe 2",
+    "text": "Aufgabe 2\nZusammenführen der Teildatensätze zu einem Datensatz",
+    "crumbs": [
+      "Fallstudie N",
+      "<span class='chapter-number'>13</span>  <span class='chapter-title'>Daten(vor)verarbeitung</span>"
+    ]
+  },
+  {
+    "objectID": "fallstudie_n/2_Datenverarbeitung.html#aufgabe-3",
+    "href": "fallstudie_n/2_Datenverarbeitung.html#aufgabe-3",
+    "title": "Daten(vor)verarbeitung",
+    "section": "Aufgabe 3",
+    "text": "Aufgabe 3\nVerbinden (join) des Datensatzes der Felderhebungen mit dem Datensatz der LIDAR Variablen in den Reh-Kreisen (Aufgabe3_LIDAR_Waldstruktur_Reh_Kreise_241011.csv).\nZiel: ein Datensatz mit allen Kreisen der Felderhebung, angereichert mit den Umweltvariablen Understory und Overstory aus den LIDAR-Daten (DG_us_2022, DG_os_2022) aus dem LIDAR-Waldstruktur-Datensatz. –&gt; Welche Art von join? Welche Spalten zum Verbinden (join_by()) der Datensätze",
+    "crumbs": [
+      "Fallstudie N",
+      "<span class='chapter-number'>13</span>  <span class='chapter-title'>Daten(vor)verarbeitung</span>"
+    ]
+  },
+  {
+    "objectID": "fallstudie_n/2_Datenverarbeitung.html#aufgabe-4",
+    "href": "fallstudie_n/2_Datenverarbeitung.html#aufgabe-4",
+    "title": "Daten(vor)verarbeitung",
+    "section": "Aufgabe 4",
+    "text": "Aufgabe 4\nScatterplot der korrespondondierenden Umweltvariablen aus den Felderhebungen gegen die Umweltvariablen aus den LiDAR-Daten (DG_xy_2022) erstellen (zusätzlich Einfärben der Gruppen und Regressionslinie darüberlegen). Korrelieren die Feldaufnahmen und die LiDAR basierte Waldstruktur?\nIm LiDAR Datensatz gibt es dieselben Variablen der Waldstruktur aus der LiDAR-Befliegung 2014. Ihr könnt untersuchen wie sich diese verändert haben und wie gut oder eben auch nicht sie mit euren Feldaufnahmen übereinstimmen.",
+    "crumbs": [
+      "Fallstudie N",
+      "<span class='chapter-number'>13</span>  <span class='chapter-title'>Daten(vor)verarbeitung</span>"
+    ]
+  },
+  {
+    "objectID": "fallstudie_n/2_Datenverarbeitung.html#zusatz-aufgabe-5",
+    "href": "fallstudie_n/2_Datenverarbeitung.html#zusatz-aufgabe-5",
+    "title": "Daten(vor)verarbeitung",
+    "section": "(Zusatz-)Aufgabe 5",
+    "text": "(Zusatz-)Aufgabe 5\nHerunterladen der Felderhebungsdaten von Moodle aus den vergangenen Jahren. Zusammenführen aller Datensätze. Explorative Datenanalyse zu den Veränderungen der Erhebungen ground truth LiDAR über die Zeit und zum Zusammenhang mit den LiDAR-basierten Waldstrukturvariablen aus den zwei Befliegungszeiträumen (2014 und 2022)\n!Achtung! es sind nicht alle Jahre gleich viele Teams an den Erhebungen beteiligt gewesen, daher gib es nicht für alle Teams in allen Jahren Daten.",
+    "crumbs": [
+      "Fallstudie N",
+      "<span class='chapter-number'>13</span>  <span class='chapter-title'>Daten(vor)verarbeitung</span>"
+    ]
+  },
+  {
+    "objectID": "References.html",
+    "href": "References.html",
+    "title": "Literaturverzeichnis",
+    "section": "",
+    "text": "Wickham, Hadley, and Garrett Grolemund. 2017. R for Data\nScience. O’Reilly. https://ebookcentral.proquest.com/lib/zhaw/detail.action?docID=4770093.",
+    "crumbs": [
+      "<span class='chapter-number'>14</span>  <span class='chapter-title'>Literaturverzeichnis</span>"
     ]
   }
 ]
