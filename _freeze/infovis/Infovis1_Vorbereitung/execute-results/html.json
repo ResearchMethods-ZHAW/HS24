@@ -2,7 +2,7 @@
   "hash": "a5ed7286fb903d2016ea41cd90e3a0b1",
   "result": {
     "engine": "knitr",
-    "markdown": "---\nlesson: InfoVis1\nknitr:\n  opts_chunk: \n    collapse: true\n---\n\n\n## Vorbereitung {#sec-infovis-vorbereitung}\n\nIm Rahmen von InfoVis 1 - 2 werden wir einige R Packages brauchen. Wir empfehlen, diese bereits *vor* der ersten Lektion zu installieren. Analog @sec-prepro-vorbereitung könnt ihr mit nachstehendem Code alle noch nicht installierten packages automatisch installieren.\n\n\n::: {.cell}\n\n```{.r .cell-code}\npacman::p_install(\"dplyr\", \"ggplot2\", \"lubridate\", \"readr\", \n  \"scales\", \"tidyr\", character.only = TRUE,  force = FALSE)\n```\n:::\n\n\nZudem könnt ihr die Daten für die Übungen auf [Moodle](https://moodle.zhaw.ch/mod/resource/view.php?id=976901) herunterladen.",
+    "markdown": "---\nlesson: InfoVis1\nknitr:\n  opts_chunk: \n    collapse: true\n---\n\n\n\n\n\n## Vorbereitung {#sec-infovis-vorbereitung}\n\nIm Rahmen von InfoVis 1 - 2 werden wir einige R Packages brauchen. Wir empfehlen, diese bereits *vor* der ersten Lektion zu installieren. Analog @sec-prepro-vorbereitung könnt ihr mit nachstehendem Code alle noch nicht installierten packages automatisch installieren.\n\n\n\n\n\n::: {.cell}\n\n```{.r .cell-code}\npacman::p_install(\"dplyr\", \"ggplot2\", \"lubridate\", \"readr\", \n  \"scales\", \"tidyr\", character.only = TRUE,  force = FALSE)\n```\n:::\n\n\n\n\n\nZudem könnt ihr die Daten für die Übungen auf [Moodle](https://moodle.zhaw.ch/mod/resource/view.php?id=976901) herunterladen.",
     "supporting": [],
     "filters": [
       "rmarkdown/pagebreak.lua"
