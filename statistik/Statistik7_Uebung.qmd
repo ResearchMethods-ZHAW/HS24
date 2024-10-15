@@ -117,7 +117,7 @@ cld_letters <- data.frame(cluster = names(letters$mcletters$Letters),
 f_Murder <-
   ggplot(crime_KM4, aes(x = cluster,  y = Murder)) + 
   geom_boxplot() +
-  geom_text(data = cld_letters, aes(label = letters, x = c(1:4), y = max(crime_KM4$Murder) * 1.1))+
+  geom_text(data = cld_letters, aes(label = letters, x = c(1:4), y = max(crime_KM4$Murder) * 1.1)) +
   ylim(0, max(crime_KM4$Murder) * 1.1) +
   theme_classic()
 #
@@ -141,7 +141,7 @@ cld_letters <- data.frame(cluster = names(letters$mcletters$Letters),
 f_Robbery <-
   ggplot(crime_KM4, aes(x = cluster,  y = Robbery)) + 
   geom_boxplot() +
-  geom_text(data = cld_letters, aes(label = letters, x = c(1:4), y = max(crime_KM4$Robbery) * 1.1))+
+  geom_text(data = cld_letters, aes(label = letters, x = c(1:4), y = max(crime_KM4$Robbery) * 1.1)) +
   ylim(0, max(crime_KM4$Robbery) * 1.1) +
   theme_classic()
 #
@@ -153,7 +153,7 @@ cld_letters <- data.frame(cluster = names(letters$mcletters$Letters),
 f_Ausault <-
   ggplot(crime_KM4, aes(x = cluster,  y = Assault)) + 
   geom_boxplot() +
-  geom_text(data = cld_letters, aes(label = letters, x = c(1:4), y = max(crime_KM4$Assault) * 1.1))+
+  geom_text(data = cld_letters, aes(label = letters, x = c(1:4), y = max(crime_KM4$Assault) * 1.1)) +
   ylim(0, max(crime_KM4$Assault) * 1.1) +
   theme_classic()
 #
@@ -165,7 +165,7 @@ cld_letters <- data.frame(cluster = names(letters$mcletters$Letters),
 f_Burglary <-
   ggplot(crime_KM4, aes(x = cluster,  y = Burglary)) + 
   geom_boxplot() +
-  geom_text(data = cld_letters, aes(label = letters, x = c(1:4), y = max(crime_KM4$Burglary)* 1.1))+
+  geom_text(data = cld_letters, aes(label = letters, x = c(1:4), y = max(crime_KM4$Burglary)* 1.1)) +
   ylim(0, max(crime_KM4$Burglary)*1.1) +
   theme_classic()
 #
@@ -177,7 +177,7 @@ cld_letters <- data.frame(cluster = names(letters$mcletters$Letters),
 f_Theft <-
   ggplot(crime_KM4, aes(x = cluster,  y = Theft)) + 
   geom_boxplot() +
-  geom_text(data = cld_letters, aes(label = letters, x = c(1:4), y = max(crime_KM4$Theft)* 1.1))+
+  geom_text(data = cld_letters, aes(label = letters, x = c(1:4), y = max(crime_KM4$Theft)* 1.1)) +
   ylim(0, max(crime_KM4$Theft)*1.1) +
   theme_classic()
 #
@@ -189,7 +189,7 @@ cld_letters <- data.frame(cluster = names(letters$mcletters$Letters),
 f_Vehicle <-
   ggplot(crime_KM4, aes(x = cluster,  y = Vehicle)) + 
   geom_boxplot() +
-  geom_text(data = cld_letters, aes(label = letters, x = c(1:4), y = max(crime_KM4$Vehicle) * 1.1))+
+  geom_text(data = cld_letters, aes(label = letters, x = c(1:4), y = max(crime_KM4$Vehicle) * 1.1)) +
   ylim(0, max(crime_KM4$Vehicle) * 1.1) +
   theme_classic()
 
