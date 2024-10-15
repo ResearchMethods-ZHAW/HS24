@@ -72,7 +72,7 @@ Lädt die Daten zuerst von Moodle herunter:
 
 - Zähldaten zu eurem Standort (211_sihlwaldstrasse_2017_2024.csv, 502_sihluferweg_2016_2024.csv)
 
-- Meteodaten (order_105742_data.txt) und Legende
+- Meteodaten und Legende
 
 Hinweis: Siehe [Einführung] für den Standort der __Zähler 211 und 502__. 
 
@@ -196,9 +196,22 @@ Was ist eigentlich Niederschlag:
 
 - Nun schneiden wir den Datensatz auf die Untersuchungsdauer zu.
 
-- Dann müssen auch hier alle nicht verfügbare Werte (NA's) herausgefiltert werden.
+```{r echo = TRUE, eval=F}
+    ... |>
+    filter(time >= depo_start, time <= depo_end)
 
-- Prüft nun, wie die Struktur des data.frame (df) aussieht und ob alle NA Werte entfernt wurden (sum(is.na(df$Variable))). Stimmen alle Datentypen?
+```
+
+- Dann müssen auch hier alle nicht verfügbare Werte (NA's) herausgefiltert werden. Macht das wieder mit na.omit()
+
+- Prüft nun, wie die Struktur des data.frame (df) aussieht und ob alle NA Werte entfernt wurden:
+
+```{r echo = TRUE, eval=F}
+sum(is.na(df$Variable))
+
+```
+
+- Stimmen alle Datentypen? str()
 
 
 ```{r}
@@ -223,7 +236,6 @@ str(meteo)
 sum(is.na(meteo)) # zeigt die Anzahl NA's im data.frame an
 ```
 
-
 ## Aufgabe 3: Datenvorverarbeitung (Mutationen)
 
 ### 3a) 
@@ -231,7 +243,7 @@ sum(is.na(meteo)) # zeigt die Anzahl NA's im data.frame an
 Jetzt fügen wir viele Convenience Variablen hinzu. Wir brauchen:
 
 1. Wochentag; der Befehl dazu ist __wday()__. Danach als Faktor speichern.
-2. Werktag oder Wochenende als Faktor. 
+2. Werktag oder Wochenende, ebebfalls als Faktor. 
 
 Der Code dazu könnte so aussehen:
 
@@ -244,6 +256,7 @@ Der Code dazu könnte so aussehen:
 ```
 
 je als Faktor: 
+
 3. Kalenderwoche: __isoweek()__
 4. Monat: __month()__
 5. Jahr: __year()__
@@ -268,9 +281,7 @@ depo <- depo |>
 ```
 
 
-Dies machen wir auch mit dem "meteo" Datensatz.
-
-- Wiederum bitte Wochentag, Werktag oder Wochenende, Kalenderwoche, Monat und Jahr. Ebenfalls alles als Faktor speichern.
+Dies machen wir auch mit dem "meteo" Datensatz. Wiederum bitte Wochentag, Werktag oder Wochenende, Kalenderwoche, Monat und Jahr. Ebenfalls alles als Faktor speichern.
 
 ```{r}
 # Wir gruppieren die Meteodaten noch nach Kalenderwoche und Werktag / Wochenende
@@ -308,9 +319,9 @@ meteo_day <- meteo |>
 ```
 
 
-Wieder zurück zum Depo-Datensazt.
+Wieder zurück zum depo-Datensazt.
 
-Ich mache den folgenden Punkt nachgelagert, da zu viele Operationen in einem Schritt auch schon mal etwas durcheinander erzeugen können.
+Ich mache den folgenden Punkt nachgelagert zu den voerherigen Convenience Variablen, da zu viele Operationen in einem Schritt auch schon mal etwas durcheinander erzeugen können.
 
 Phasen der Covid-Pandemie (Code untenstehend). Wir definieren 5 Phasen: 
 
@@ -484,13 +495,14 @@ sum(is.na(depo))
 
 Unsere Daten liegen, wie ihr wisst, im Stundenformat vor. Für einige Auswertungen müssen wir aber auf ganze Tage zurückgreifen. 
 
-- Die Stundendaten werden zu ganzen Tagen aggregiert. Bezieht folgende Gruppierungen (__group_by()__) mit ein: __Datum, Wochentag, Wochenende, KW, Monat, Jahr, Phase__. Summiert die Zählmengen separat (Total, IN, OUT) auf und speichert das Resultat unter __depo_d__ ("_d" für "day").
+- Die Stundendaten werden zu ganzen Tagen aggregiert. Bezieht nur die Gruppierung (__group_by()__) Datum mit ein und speichert das Resultat unter __depo_d__ ("_d" für "day"). 
 
-Tipp: Wenn man die Convenience Variablen als grouping variable einspeisst, dann werden sie in das neue df übernommen und müssen nicht nochmals hinzugefügt werden
+Hinweis: Wir gruppieren nur nach Datum, da ich mit den vielen weiteren Gruppierungen hier Probleme hatte, eine korrekte Summe zu erhalten.
+
 
 ```{r eval=FALSE, echo=TRUE}
 depo_d <- depo |> 
-  group_by(VARIABLE1, VARIABLE2, ...) |>   # Gruppieren nach den Variablen
+  group_by(Datum) |>   # Gruppieren nach der Variable Datum
   summarise(Total = sum(Fuss_IN + Fuss_OUT),# Berechnen der gewünschten Werte
             Fuss_IN = sum(Fuss_IN),
             ...
@@ -599,6 +611,7 @@ head(depo_d)
 
 
 - Erstellt nun. ähnlich wie oben, einen Datensatz depo_daytime, in welchem ihr gruppiert nach:
+
 a) Jahr
 b) Monat
 c) Kalenderwoche

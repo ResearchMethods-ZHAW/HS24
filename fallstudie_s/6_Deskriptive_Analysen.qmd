@@ -120,7 +120,6 @@ meteo <- mutate(meteo, time = as.Date(as.character(time), "%Y%m%d"))
 # --> da wir mit Tageshöchstwerten oder -summen rechnen, können wir zum Glück ignorieren, dass das nicht 
 # mit den Zähldaten übereinstimmt.
 
-
 # Die eigentlichen Messwerte sind alle nummerisch
 meteo <- meteo |>
   mutate(
@@ -518,7 +517,7 @@ ggplot(depo_m, aes(Monat, Total, group = Jahr, color = Jahr, linetype = Jahr)) +
   geom_line(size = 2) +
   geom_point() +
   scale_colour_viridis_d() +
-  scale_linetype_manual(values = c(rep("solid", 3), "twodash", "twodash", "solid")) +
+  scale_linetype_manual(values = c(rep("solid", 3), "twodash", "twodash", "solid", "solid")) +
   scale_x_discrete(breaks = c(seq(0, 12, by = 1))) +
   geom_vline(xintercept = c(seq(1, 12, by = 1)), linetype = "dashed", color = "gray") +
   labs(title = "", y = "Fussgänger:innen pro Monat", x = "Monat") +
@@ -531,7 +530,7 @@ ggplot(depo_m, aes(Monat, Total, group = Jahr, color = Jahr, linetype = Jahr)) +
   geom_line(size = 2) +
   geom_point() +
   scale_colour_viridis_d() +
-  scale_linetype_manual(values = c(rep("solid", 3), "twodash", "twodash", "solid")) +
+  scale_linetype_manual(values = c(rep("solid", 3), "twodash", "twodash", "solid", "solid")) +
   scale_x_discrete(breaks = c(seq(0, 12, by = 1))) +
   geom_vline(xintercept = c(seq(1, 12, by = 1)), linetype = "dashed", color = "gray") +
   labs(title = "", y = "Fussgänger:innen pro Monat", x = "Monat") +
@@ -632,6 +631,7 @@ ggplot(data = depo, aes(x = Wochentag, y = Total, fill = Tageszeit)) +
 ```
 
 __Hinweis:__ 
+
 - Nutzt zum plotten __ggplot()__
 - folgende Codeschnipsel helfen euch:
 

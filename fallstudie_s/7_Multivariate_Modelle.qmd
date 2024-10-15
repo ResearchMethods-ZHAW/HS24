@@ -13,8 +13,8 @@ knitr:
 
 # Multivariate Modelle
 
-
 ```{r include=FALSE}
+# Benoetigte Bibliotheken ####
 library("readr") # read data into r
 library("ggplot2") # plot nice graphs
 library("dplyr") # select data
@@ -39,9 +39,9 @@ library("glmmTMB")# zero-inflated model
 mycolors <- c("orangered", "gold", "mediumvioletred", "darkblue")
 
 # Start und Ende ####
-# Untersuchungszeitraum, ich waehle hier das Jahr 2019 bis und mit Sommer 2021
+# Untersuchungszeitraum, ich waehle hier alle verfügbaren Daten
 depo_start <- as.Date("2017-01-01")
-depo_end <- as.Date("2022-7-31")
+depo_end <- as.Date("2023-12-31")
 
 # Start und Ende Lockdown
 # definieren, wichtig fuer die spaeteren Auswertungen
@@ -76,7 +76,7 @@ schulferien <- read_delim("datasets/fallstudie_s/ferien.csv", ",")
 
 # lese die Daten ein
 # Je nach Bedarf muss der Speicherort sowie der Dateiname angepasst werden
-depo <- read_delim("datasets/fallstudie_s/WPZ/211_sihlwaldstrasse_2017_2022.csv", ";")
+depo <- read_delim("datasets/fallstudie_s/211_sihlwaldstrasse.csv", ";")
 
 # Hinweis zu den Daten:
 # In hourly analysis format, the data at 11:00 am corresponds to the counts saved between
@@ -87,15 +87,16 @@ str(depo)
 
 depo <- depo |>
   mutate(
-    Datetime = as.POSIXct(DatumUhrzeit, format = "%d.%m.%Y %H:%M", tz = "CET"),
+    Datetime = as.POSIXct(as.character(Datetime), format = "%Y%m%d%H", tz = "CET"),
     Datum = as.Date(Datetime)
   )
+
 
 # In dieser Auswertung werden nur Personen zu Fuss betrachtet!
 depo <- depo |>
   # mit select werden spalten ausgewaehlt oder eben fallengelassen
   # (velos interessieren uns in dieser Auswertung nicht und Zeit soll in R immer zusammen mit Datum gespeichert werden)
-  dplyr::select(-c(Velo_IN, Velo_OUT, Zeit, DatumUhrzeit)) |>
+  dplyr::select(-c(Velo_IN, Velo_OUT)) |>
   # Berechnen des Totals, da dieses in den Daten nicht vorhanden ist
   mutate(Total = Fuss_IN + Fuss_OUT)
 
@@ -106,7 +107,7 @@ depo <- na.omit(depo)
 
 # 1.2 Meteodaten ####
 # Einlesen
-meteo <- read_delim("datasets/fallstudie_s/WPZ/order_105742_data.txt", ";")
+meteo <- read_delim("datasets/fallstudie_s/order_124839_data.txt", ";")
 
 # Datentypen setzen
 # Das Datum wird als Integer erkannt. Zuerst muss es in Text umgewaldelt werden aus dem dann
@@ -243,9 +244,9 @@ depo$Stunde <- hour(depo$Datetime)
 typeof(depo$Stunde)
 
 # Die Daten wurden kalibriert. Wir runden sie fuer unserer Analysen auf Ganzzahlen
-depo$Total <- round(depo$Total, digits = 0)
-depo$Fuss_IN <- round(depo$Fuss_IN, digits = 0)
-depo$Fuss_OUT <- round(depo$Fuss_OUT, digits = 0)
+depo$Total <- as.integer(round(depo$Total, digits = 0))
+depo$Fuss_IN <- as.integer(round(depo$Fuss_IN, digits = 0))
+depo$Fuss_OUT <- as.integer(round(depo$Fuss_OUT, digits = 0))
 
 # 2.2 Tageszeit hinzufuegen ####
 
@@ -302,7 +303,7 @@ depo <- depo |>
 
 
 # behalte die relevanten Var
-depo <- depo |> dplyr::select(-nightEnd, -goldenHourEnd, -goldenHour, -night)
+depo <- depo |> dplyr::select(-nightEnd, -goldenHourEnd, -goldenHour, -night, -lat, -lon)
 
 # Plotte zum pruefn ob das funktioniert hat
 ggplot(depo, aes(y = Datetime, color = Tageszeit, x = Stunde)) +
@@ -321,18 +322,58 @@ sum(is.na(depo))
 # 2.4 Aggregierung der Stundendaten zu ganzen Tagen ####
 # Zur Berechnung von Kennwerten ist es hilfreich, wenn neben den Stundendaten auch auf Ganztagesdaten
 # zurueckgegriffen werden kann
-# hier werden also pro Nutzergruppe und Richtung die Stundenwerte pro Tag aufsummiert
+# hier werden also pro Nutzergruppe und Richtung die Stundenwerte pro Tag aufsummiert.
+# Convenience Variablen nehme ich hier bewusst aus der Gruppierung - zu komplexe Operationen
+# könne zu Fehlern in der Gruppierung führen.
 depo_d <- depo |>
-  group_by(Datum, Wochentag, Wochenende, KW, Monat, Jahr, Phase) |>
+  group_by(Datum) |>
   summarise(
     Total = sum(Fuss_IN + Fuss_OUT),
     Fuss_IN = sum(Fuss_IN),
     Fuss_OUT = sum(Fuss_OUT)
-  )
-# Wenn man die Convinience Variablen als grouping variable einspeisst, dann werden sie in
-# das neue df uebernommen und muessen nicht nochmals hinzugefuegt werden
-# pruefe das df
-head(depo_d)
+  )|>
+  # Berechne die Anzahl Tage bis Neujahr, wir brauchen sie später in den Modellen
+  mutate(Tage_bis_Neujahr = as.numeric(difftime(ymd(paste0(year(Datum), "-12-31")), Datum, units = "days")))
+
+# und noch die convenience var. gem oben hinzufuegen
+depo_d <- depo_d |>
+  mutate(
+  Wochentag = wday(Datum, week_start = 1),
+  Wochentag = factor(Wochentag),
+  # Werktag oder Wochenende hinzufuegen
+  Wochenende = ifelse(Wochentag %in% c(6, 7), "Wochenende", "Werktag"),
+  Wochenende = as.factor(Wochenende),
+  # Kalenderwoche hinzufuegen
+  KW = isoweek(Datum),
+  KW = factor(KW),
+  # monat und Jahr
+  Monat = month(Datum),
+  Monat = factor(Monat),
+  Jahr = year(Datum),
+  Jahr = factor(Jahr))
+
+depo_d <- depo_d |>
+  mutate(Phase = case_when(
+    Datum < lock_1_start ~ "Pre",
+    Datum >= lock_1_start & Datum <= lock_1_end ~ "Lockdown_1",
+    Datum > lock_1_end & Datum < lock_2_start ~ "Inter",
+    Datum >= lock_2_start & Datum <= lock_2_end ~ "Lockdown_2",
+    Datum > lock_2_end ~ "Post"
+  ))
+
+depo_d <- depo_d |>
+  mutate(Phase = base::factor(Phase, levels = c("Pre", "Lockdown_1", "Inter", "Lockdown_2", "Post")))
+
+for (i in 1:nrow(schulferien)) {
+  depo_d$Ferien[depo_d$Datum >= schulferien[i, "Start"] & depo_d$Datum <= schulferien[i, "Ende"]] <- 1
+}
+depo_d$Ferien[is.na(depo_d$Ferien)] <- 0
+
+depo_d$Ferien <- factor(depo_d$Ferien)
+
+
+
+
 
 # nun gruppieren wir nicht nach Tag sondern v.a. nach Tageszeit
 # Das Datum schliessen wir aus dieser Gruppierung aus, denn wenn wir es drin hätten,
@@ -344,7 +385,7 @@ depo_daytime <- depo |>
   summarise(
     Total = sum(Fuss_IN + Fuss_OUT),
     Fuss_IN = sum(Fuss_IN),
-    Fuss_OUT = sum(Fuss_OUT))
+    Fuss_OUT = sum(Fuss_OUT)) 
 
 # mean besser Vergleichbar, da Zeitreihen unterschiedlich lange
 mean_phase_d <- depo_daytime |>
@@ -386,16 +427,6 @@ depo_m_daytime <- depo_m_daytime |>
 
 
 
-# 3.2 Wochengang ####
-
-
-# gruppiere nur nach Tageszeit und Phasen für Kennwerte
-mean_phase <- depo_daytime |>
-  group_by(Phase, Tageszeit) |>
-  summarise(
-    Mean = mean(Total))
-
-
 # 3.3 Tagesgang ####
 # Bei diesen Berechnungen wird jeweils der Mittelwert pro Stunde berechnet.
 # wiederum nutzen wir dafuer "pipes"
@@ -411,24 +442,22 @@ Nachdem die deskriptiven Resultate vorliegen, kann jetzt die Berechnung eines mu
 
 Das Ziel ist es (siehe dazu auch [Aufgabenstellung Abschlussbericht]), 
 - den Zusammenhang zwischen der gesamten Anzahl Besucher:innen (Total; entweder Fussgänger:innen ODER Fahrräder, je nach dem für was ihr euch entschieden habt) 
-- und verschiedenen erklärenden Variablen (Wochentag, Ferien, Monat, Jahr, Phasen der Covid-Pandemie, Sonnenscheindauer, Höchsttemperatur, Niederschlagssumme) aufzuzeigen 
-- und das während dem Tag, der Dämmerung und der Nacht.
-
+- und verschiedenen erklärenden Variablen (Wochentag, Ferien, Monat, Jahr, Phasen der Covid-Pandemie, Sonnenscheindauer, Höchsttemperatur, Niederschlagssumme) aufzuzeigen.
 
 ## Aufgabe 1: Verbinden von Daten
 
 Aktuell haben wir noch zwei verschiedene Datensätze von Interesse:
 
-1) Einen mit den Besuchszahlen pro Tageszeit von Besucher:innen mit den dazugehörigen Convenience Variablen (Datensatz "depo_daytime" - zu Tageszeiten und Convenience Variablen aggregierte Stunden) 
+1) Einen mit den Besuchszahlen pro Tag von Besucher:innen mit den dazugehörigen Convenience Variablen (Datensatz "depo_d" - zu Tagen aggregierte Stunden und Convenience Variablen ) 
 
 2) und einen mit den Wetterparametern pro Tag ("meteo_day"). 
 
-- Diese beiden Datensätze müssen miteinander verbunden werden. __Ziel__: Ein Datensatz mit den __Zähldaten__ und Convenience Variablen wie Phase Covid, Ferien Ja oder Nein, Jahr, Monat, KW, Tageszeit, Wochenendtag oder Werktag, angereichert mit __Meteodaten__. Welcher join-Befehl eignet sich dazu?
+- Diese beiden Datensätze müssen miteinander verbunden werden. __Ziel__: Ein Datensatz mit den __Zähldaten__ und Convenience Variablen wie Phase Covid, Ferien Ja oder Nein, Jahr, Monat, KW, Wochenendtag oder Werktag, angereichert mit __Meteodaten__. Welcher join-Befehl eignet sich dazu?
 
 - Der neue Datensatz soll " __umwelt__ " heissen.
 
 ```{r}
-umwelt <- inner_join(depo_daytime, meteo_day, by = c("Jahr", "Monat", "KW", "Wochenende"))
+umwelt <- inner_join(depo_d, meteo_day, by = c("Jahr", "Monat", "KW", "Wochenende"))
 ```
 
 - Sind durch das Zusammenführen NA's entstanden? Falls ja, müssen __alle__ für die weiteren Auswertungen ausgeschlossen werden.
@@ -480,21 +509,6 @@ umwelt <- umwelt |>
 ```
 
 
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
 ## Aufgabe 3: Korrelationen und Variablenselektion
 
 ### 3a) 
@@ -540,31 +554,6 @@ chart.Correlation(subset(umwelt, select = c(ERSTE SPALTE MIT ERKLAERENDEN MESSWE
 Wo kann eine kritische Korrelation beobachtet werden? Kann man es verantworten, trotzdem alle (Wetter)parameter in das Modell zu geben? 
 
 Falls ja: warum? Falls nein: schliesst den betreffenden Parameter aus. Wenn ihr Parameter ausschliesst: welchen der beiden korrelierenden Parameter behaltet ihr im Modell?
-
-
-### 3c)
-
-Aktuell haben wir im umwelt-Datensatz noch alle Tageszeiten zusammen gespeichert. Für die Berechnung der Modelle unterteilen wir das noch in Tag, Dämmerung (Morgen- und Abenddämmerung zusammen) und Nacht. Hier eine Inspiration dazu:
-
-```{r echo=TRUE, eval=FALSE}
-umwelt_day <- umwelt |> 
-  filter(Tageszeit == "Tag")
-
-umwelt_duskdawn <- ...
-
-umwelt_night <- ...
-```
-
-```{r}
-umwelt_day <- umwelt |> 
-  filter(Tageszeit == "Tag")
-
-umwelt_duskdawn <- umwelt |> 
-  filter(Tageszeit == "Morgen" | Tageszeit == "Abend" )
-
-umwelt_night <- umwelt |> 
-  filter(Tageszeit == "Nacht")
-```
 
 
 ## Aufgabe 4 (OPTIONAL): Automatische Variablenselektion
@@ -613,17 +602,17 @@ __Hinweis:__ es kann sein, dass nicht jede Verteilung geplottet werden kann, es 
 __Hinweis:__ CDF =  Cumulative distribution function; Wikipedia = "Anschaulich entspricht dabei der Wert der Verteilungsfunktion an der Stelle x der Wahrscheinlichkeit, dass die zugehörige Zufallsvariable X einen Wert kleiner oder gleich x annimmt." Ihr müsst aber nicht weiter verstehen, wie das berechnet wird, wichtig für euch ist, dass ihr den Plot interpretieren könnt.
 
 ```{r echo = TRUE, eval=FALSE}
-f1 <- fitdist(umwelt_day$Total, "norm") # Normalverteilung
-f1_1 <- fitdist((umwelt_day$Total + 1), "lnorm") # log-Normalvert (beachte, dass ich +1 rechne.
+f1 <- fitdist(umwelt$Total, "norm") # Normalverteilung
+f1_1 <- fitdist((umwelt$Total + 1), "lnorm") # log-Normalvert (beachte, dass ich +1 rechne.
 # log muss positiv sein; allerdings kann man die
 # Verteilungen dann nicht mehr miteinander vergleichen).
-f2 <- fitdist(umwelt_day$Total, "pois") # Poisson
-f3 <- fitdist(umwelt_day$Total, "nbinom") # negativ binomial
-f4 <- fitdist(umwelt_day$Total, "exp") # exponentiell
-f5<-fitdist(umwelt_day$Total,"gamma")  # gamma (berechnung mit meinen Daten nicht möglich)
-f6 <- fitdist(umwelt_day$Total, "logis") # logistisch
-f7 <- fitdist(umwelt_day$Total, "geom") # geometrisch
-f8<-fitdist(umwelt_day$Total,"weibull")  # Weibull (berechnung mit meinen Daten nicht möglich)
+f2 <- fitdist(umwelt$Total, "pois") # Poisson
+f3 <- fitdist(umwelt$Total, "nbinom") # negativ binomial
+f4 <- fitdist(umwelt$Total, "exp") # exponentiell
+f5<-fitdist(umwelt$Total,"gamma")  # gamma (berechnung mit meinen Daten nicht möglich)
+f6 <- fitdist(umwelt$Total, "logis") # logistisch
+f7 <- fitdist(umwelt$Total, "geom") # geometrisch
+f8<-fitdist(umwelt$Total,"weibull")  # Weibull (berechnung mit meinen Daten nicht möglich)
 
 gofstat(list(f1, f2, f3, f4, f6, f7),
   fitnames = c(
@@ -638,23 +627,21 @@ cdfcomp(list(f1, f4, f3), legendtext = plot.legend)
 ```
 
 ```{r echo=FALSE, output = TRUE}
-f1 <- fitdist(umwelt_day$Total, "norm") # Normalverteilung
-f3 <- fitdist(umwelt_day$Total, "nbinom") # negativ binomial
-f4 <- fitdist(umwelt_day$Total, "exp") # exponentiell
+f1 <- fitdist(umwelt$Total, "norm") # Normalverteilung
+f3 <- fitdist(umwelt$Total, "nbinom") # negativ binomial
+f4 <- fitdist(umwelt$Total, "exp") # exponentiell
 plot.legend <- c("Normalverteilung", "exponentiell", "negativ binomial")
 cdfcomp(list(f1, f4, f3), legendtext = plot.legend)
 ```
 
 - Wie sind unsere Daten verteilt? Welche Modelle können wir anwenden?
 
-- Wählt die besten Verteilungen pro Tageszeit (umwelt_day, umwelt_duskdawn, umwelt_night) aus und berechnet damit nachfolgend Modelle.
-
 
 ## Aufgabe 6: Multivariates Modell berechnen
 
-Jetzt gehts ans Eingemachte!
+Jetzt geht's ans Eingemachte!
 
-Ich verwende hauptsächlich die Funktione __glmmTMB()__. Es ist wahnsinnig schnell und erlaubt viele Spezifikationen:
+Ich verwende hauptsächlich die Funktion __glmmTMB()__. Es ist wahnsinnig schnell und erlaubt viele Spezifikationen:
 [Link](https://glmmtmb.github.io/glmmTMB/articles/glmmTMB.pdf)
 
 Auch __glmer()__ aus der Bibliothek __lme4__ ist recht neu und praktisch (diese Bibliothek wird auch in vielen wissenschaftlichen Papern im Feld Biologie / Wildtiermamagement zitiert).
@@ -663,13 +650,12 @@ Auch __glmer()__ aus der Bibliothek __lme4__ ist recht neu und praktisch (diese 
 
 ### 6a) Modelle berechnen
 
-__Hinweis:__ Auch wenn wir gerade herausgefunden haben, dass die Verteilung negativ binominal (in meinem Fall) ist, berechne ich für den Vergleich zuerst ein "einfaches Modell" der Familie poisson. Alternative Modelle rechnen wir in später. Wir starten mit dem TAG (Datensatz __umwelt_day__).
+__Hinweis:__ Auch wenn wir gerade herausgefunden haben, dass die Verteilung negativ binominal (in meinem Fall) ist, berechne ich für den Vergleich zuerst ein "einfaches Modell" der Familie poisson. Alternative Modelle rechnen wir in später. 
 
-- Die Totale Besucheranzahl pro Tageszeit soll durch die abhängigen Variablen erklärt werden (Datensatz "umwelt_day"). Die einzelnen Jahre sollen hierbei nicht beachtet werden, sie werden als "random factor" bestimmt. 
+- Die Totale Besucheranzahl pro Tag soll durch die abhängigen Variablen erklärt werden (Datensatz "umwelt"). Die Tage bis Neujahr sollen hierbei nicht beachtet werden, sie werden als "random factor" bestimmt. 
 
-Frage: Warum bestimmen wir das Jahr als random factor?
+Frage: Warum bestimmen wir die Tage bis Neujahr als random factor?
 
-Falls ihr der Meinung seid, Jahr ist kein "guter" random factor, dann nehmt es nicht an random factor ins Modell sondern als erklärende Variable. Begründet das unbedingt in eurer Methodik.
 
 Die Modellformel lautet:
 
@@ -677,7 +663,7 @@ Die Modellformel lautet:
 poisson_model <- glmer(Total ~ Monat + Ferien + Phase + Wochenende +
                        tre200jx_scaled + rre150j0_scaled + rre150n0_scaled +
                          sremaxdv_scaled +
-                         (1 | Jahr), family = poisson, data = umwelt_day)
+                         (1 | Tage_bis_Neujahr), family = poisson, data = umwelt)
 
 summary(poisson_model) # zeigt das Ergebins des Modells
 ```
@@ -691,7 +677,7 @@ Löst zuerst Aufgabe 6b bevor ihr alternative (besser passende) Modelle rechnet;
 - Prüft ob euer Modell valide ist, mit dem Package DHARMa:
 [Link](https://cran.r-project.org/web/packages/DHARMa/vignettes/DHARMa.html)
 
-Bitte unbedingt die Vignette des DHARMa-Package konsultieren!
+Bitte unbedingt diese obenstehende Vignette des DHARMa-Package konsultieren!
 
 __Hinweis:__ Wir verwenden etwas andere Funktionen als in der Vorlesung am morgen. Sie sind unten aufgeführt, und die Funktionen analog zu den Funktionen aus der Vorlesung, aber halt etwas anders.
 
@@ -700,6 +686,10 @@ __Hinweis:__ Wir verwenden etwas andere Funktionen als in der Vorlesung am morge
 # können anschliessend getestet werden. Dabei kann die Anzahl Simulationen eingestellt
 # werden (dauert je nach dem sehr lange)
 
+# wenn faktoren drin sind, dann gibt Anova einen einfachen überblick, welche faktoren signifikant sind
+car::Anova(poisson_model)
+
+# dann kommt dharma
 simulationOutput <- simulateResiduals(fittedModel = poisson_model, n = 1000)
 
 # plotting and testing scaled residuals
@@ -743,34 +733,21 @@ Sind die Voraussetzungen des Modells erfüllt?
 
 Wir sind auf der Suche nach dem minimalen adäquaten Modell. Das ist ein iterativer Prozess. Wir schreiben ein Modell, prüfen ob die Voraussetzungen erfüllt sind und ob die abhängige Variable besser erklärt wird als im Vorhergehenden. Und machen das nochmals und nochmals und nochmals...
 
-- __glmmTMB()__ ist eine sehr schnelle und kompatible Funktion, auch für negativ binomiale Daten. Ich empfehle (spätenstens ab dem exponierten Modell weiter unten) mit ihr zu arbeiten.
-
-```{r eval=FALSE, echo=TRUE}
-glmmTMB(Total ~ Monat + Ferien + ..., family =nbinom1,
-                               data = umwelt_day)
-```
-
-- Über __family =__ kann in der Funktion _glmer()__ einiges (aber leider nicht alles so einfach [z.B. negativ binominale Modelle]) angepasst werden: [Link](https://stat.ethz.ch/R-manual/R-devel/library/stats/html/family.html)
-
-- Auch über __link =__ kann man anpassen: [Link](https://stat.ethz.ch/R-manual/R-devel/library/stats/html/make.link.html)
+- __glmmTMB()__ ist eine sehr schnelle und kompatible Funktion, auch für negativ binomiale Daten. Ich empfehle (spätestens ab dem exponierten Modell weiter unten) mit ihr zu arbeiten.
 
 - Unsere (meine) Daten sind negativ binominal verteilt. Daher sollte wir unbedingt ein solches Modell programmieren. --> Funktion __glmer.nb()__
 
-
 ```{r eval=FALSE, echo=TRUE}
-nb_model_day <- glmer.nb(Total ~ Monat + Ferien + 
-                           ..., 
-                         data = umwelt_day)
-
+nb_model <- glmmTMB(Total ~ Monat + Ferien + ..., 
+                        family =nbinom1,
+                        data = umwelt)
 ```
 
-```{r eval=FALSE}
-nb_model_day <- glmer.nb(Total ~ Monat + Ferien + Phase + Wochenende +
-                             tre200jx_scaled + rre150j0_scaled +
-                             sremaxdv_scaled  +
-                             (1 | Jahr), data = umwelt_day)
+- schliesst im Modell Variablen aus, welche nicht signifikant sind. In euren "besten" Modellen sollen nur signifikante Variablen verbleiben.
 
-```
+- Über __family =__ kann in der Funktion _glmer()__ einiges (aber leider nicht alles so einfach [z.B. negativ binominale Modelle]) angepasst werden: [Link](https://stat.ethz.ch/R-manual/R-devel/library/stats/html/family.html)
+
+- Auch über __link =__ kann man in _glmer()__ anpassen: [Link](https://stat.ethz.ch/R-manual/R-devel/library/stats/html/make.link.html)
 
 
 - Falls die Daten exponentiell Verteilt sind, hier der Link zu einem Blogeintrag dazu: [Link](https://stats.stackexchange.com/questions/240455/fitting-exponential-regression-model-by-mle)
@@ -783,7 +760,7 @@ glmmTMB((Total + 1) ~ ...
 ```{r eval=FALSE}
 glmmTMB((Total + 1) ~ Monat + Ferien + Phase + Wochenende +
                            tre200nx_scaled + I(tre200nx_scaled^2) + rre150n0_scaled +
-                          (1 | Jahr), 
+                          (1 | Tage_bis_Neujahr), 
                          family = Gamma(link = "log"), data = umwelt_night)
 ```
 
@@ -792,11 +769,12 @@ glmmTMB((Total + 1) ~ Monat + Ferien + Phase + Wochenende +
 __Hinweis:__ ich welchsel hier auf glmmTBM, da diese funktion beudeutend schneller ist und das Ergeniss besser wird (in meinem Fall).
 
 ```{r echo=TRUE, eval=FALSE}
-nb_quad_model_day <- glmmTMB(Total ~ Monat + Ferien + Phase + Wochenende +
+nb_quad_model <- glmmTMB(Total ~ Monat + Ferien + Phase + Wochenende +
                                tre200jx_scaled + I(tre200jx_scaled^2) + # hier ist der quadratische Term
                                rre150j0_scaled +  sremaxdv_scaled +
-                               (1 | Jahr), family =nbinom1, # es ist ein negativ binomiales Modell
-                               data = umwelt_day)
+                               (1 | Tage_bis_Neujahr), 
+                             family =nbinom1, # es ist ein negativ binomiales Modell
+                               data = umwelt)
 ```
 
 
@@ -811,31 +789,33 @@ Monat * rre150j0_scaled +
 ```
 
 ```{r eval=FALSE}
-nb_quad_int_model_day <- glmmTMB(Total ~  Ferien + Phase + Wochenende +
+nb_quad_int_model <- glmmTMB(Total ~  Ferien + Phase + Wochenende +
                                    Monat * rre150j0_scaled+ tre200jx_scaled + I(tre200jx_scaled^2)  +
                                    sremaxdv_scaled +
-                                  (1|Jahr), data = umwelt_day)
+                                  (1|Jahr), data = umwelt)
 ```
 
 
 - Habt ihr ein Problem mit zeroinflation? (Dies wisst ihr aus dem Test __testZeroInflation()__ und __testResiduals()__)
+
 ```{r eval=FALSE, echo=TRUE}
-nb_model_day_zi <- glmmTMB(..., 
+nb_model_zi <- glmmTMB(..., 
                            # The basic glmmTMB fit — a zero-inflated Poisson model with a single zero-
                            # inflation parameter applying to all observations (ziformula~1)
                            ziformula=~1,
-                           family = nbinom1)
+                           family = nbinom2) # family nbinom1 oder nbinom2
 ```
 
 ```{r eval=FALSE}
-nb_model_day_zi <- glmmTMB(Total ~ Monat + Phase + Wochenende +
-                             tre200jx_scaled + rre150j0_scaled +
-                             sremaxdv_scaled  +
-                             (1 | Jahr), data = umwelt_day, 
-                           # The basic glmmTMB fit — a zero-inflated Poisson model with a single zero-
-                           # inflation parameter applying to all observations (ziformula~1)
-                           ziformula=~1,
-                             family = nbinom1)
+nb_model_zi <- glmmTMB(Total ~ Jahr + Monat + Wochenende + Phase + 
+                                      tre200jx_scaled + rre150j0_scaled +
+                                      sremaxdv_scaled +
+                                      (1 | Tage_bis_Neujahr), # repeated measurement, daher der Tag von jahr als RF
+                                    data = umwelt, 
+                                    # The basic glmmTMB fit — a zero-inflated Poisson model with a single zero-
+                                    # inflation parameter applying to all observations (ziformula~1)
+                                    ziformula= ~ 1,
+                                    family = nbinom2)
 ```
 
 - Wenn ihr verschiedene Modelle gerechnet habt, können diese über den AICc verglichen werden. Folgender Code kann dazu genutzt werden:
@@ -877,7 +857,7 @@ Falls die Voraussetzungen stark verletzt werden, wäre eine Transformation angez
 
 ```{r echo=TRUE, eval=FALSE}
 library("moments")
-skewness(umwelt_day$Anzahl_Total)
+skewness(umwelt$Anzahl_Total)
 ## A positive value means the distribution is positively skewed (rechtsschief).
 ## The most frequent values are low; tail is toward the high values (on the right-hand side)
 ```
@@ -887,33 +867,20 @@ skewness(umwelt_day$Anzahl_Total)
 
 
 
-### 6c) Modelle für DUSKDAWN und NIGHT
-
-Ihr habt bereits sehr viel Arbeit in die Suche nach dem besten Modell für den Tag investiert und das nun gefunden. In wir interessieren uns nun dafür, ob die Effekte während der Dämmerung und der Nacht gleich oder verschieden sind. 
-
-- Sucht analog dem vorgehen am Tag auch für die Dämmerung und die Nacht nach den dort besten Modellen.
-
-__Hinweis:__ ihr müsst nicht mehr alles komplett duchspielen. Das Modell, welches am Tag gut war, ist sehr wahrscheinlich auch bei den anderen Datensätzen recht gut. Startet also mit einer ähnlichen spezifikation wie beim besten Modell für den Tag.
-
-
-
 ### 6d) Exportiere die Modellresultate (der besten Modelle)
 
-Welches ist euer bestes Modell für den Tag? 
+Welches ist euer bestes Modell? Meines ist jenes ohne Interaktionen und zero-inflated-adjusted.
 
 ```{r}
-# mein bestes Modell ist:
-
-# interaktion zero inflation
-# "Ferien" not sig, therefore exclude
-nb_int_model_day_zi <- glmmTMB(Total ~ Phase + Wochenende +
-                             Monat * rre150j0_scaled + tre200jx_scaled + I(tre200jx_scaled^2) +
-                             sremaxdv_scaled +
-                             (1 | Jahr), data = umwelt_day, 
-                           # The basic glmmTMB fit — a zero-inflated Poisson model with a single zero-
-                           # inflation parameter applying to all observations (ziformula~1)
-                           ziformula=~1,
-                           family = nbinom1)
+nb_model_zi <- glmmTMB(Total ~ Jahr + Monat + Wochenende + Phase + 
+                                      tre200jx_scaled + rre150j0_scaled +
+                                      sremaxdv_scaled +
+                                      (1 | Tage_bis_Neujahr), # repeated measurement, daher der Tag von jahr als RF
+                                    data = umwelt, 
+                                    # The basic glmmTMB fit — a zero-inflated Poisson model with a single zero-
+                                    # inflation parameter applying to all observations (ziformula~1)
+                                    ziformula= ~ 1,
+                                    family = nbinom2)
 ```
 
 
@@ -932,11 +899,11 @@ tab_model(MODELLNAME,
 
 ## Aufgabe 7: Modellvisualisierung
 
-- Visualisiert die (signifikanten) Ergebnisse eures Modells. Sabrina Harsch hat im HS21 eine sehr nützliche Funktion dafür geschriben (welche ich etwas weiter ausgebaut habe). Es gibt für die kontinuierlichen Variablen und für die diskreten Variablen je eine seperate Funktion und das jeweils für die drei Tageszeiten (die Linien der Plots sind anders eingefärbt).
+- Visualisiert die (signifikanten) Ergebnisse eures Modells. Sabrina Harsch hat im HS21 eine sehr nützliche Funktion dafür geschriben (welche ich etwas weiter ausgebaut habe). Es gibt für die kontinuierlichen Variablen und für die diskreten Variablen je eine separate Funktion.
 
 ```{r eval=TRUE, echo=TRUE}
 # schreibe fun fuer continuierliche var
-rescale_plot_num_day <- function(input_df, input_term, unscaled_var, scaled_var, num_breaks, x_lab, y_lab, x_scaling, x_nk) {
+rescale_plot_num <- function(input_df, input_term, unscaled_var, scaled_var, num_breaks, x_lab, y_lab, x_scaling, x_nk) {
   plot_id <- plot_model(input_df, type = "pred", terms = input_term, axis.title = "", title = "", color = "orangered")
   labels <- round(seq(floor(min(unscaled_var)), ceiling(max(unscaled_var)), length.out = num_breaks + 1) * x_scaling, x_nk)
   
@@ -945,96 +912,42 @@ rescale_plot_num_day <- function(input_df, input_term, unscaled_var, scaled_var,
   
   plot_id <- plot_id +
     scale_x_continuous(breaks = custom_breaks, limits = custom_limits, labels = c(labels), labs(x = x_lab)) +
-    scale_y_continuous(labs(y = y_lab), limits = c(0, 170)) +
+    scale_y_continuous(labs(y = y_lab), limits = c(0, 25)) +
     theme_classic(base_size = 20)
   
   return(plot_id)
 }
-
-rescale_plot_num_night <- function(input_df, input_term, unscaled_var, scaled_var, num_breaks, x_lab, y_lab, x_scaling, x_nk) {
-  plot_id <- plot_model(input_df, type = "pred", terms = input_term, axis.title = "", title = "", color = "darkblue")
-  labels <- round(seq(floor(min(unscaled_var)), ceiling(max(unscaled_var)), length.out = num_breaks + 1) * x_scaling, x_nk)
-  
-  custom_breaks <- seq(min(scaled_var), max(scaled_var), by = ((max(scaled_var) - min(scaled_var)) / num_breaks))
-  custom_limits <- c(min(scaled_var), max(scaled_var))
-  
-  plot_id <- plot_id +
-    scale_x_continuous(breaks = custom_breaks, limits = custom_limits, labels = c(labels), labs(x = x_lab)) +
-    scale_y_continuous(labs(y = y_lab), limits = c(0, 20)) +
-    theme_classic(base_size = 20)
-  
-  return(plot_id)
-}
-
-rescale_plot_num_duskdawn <- function(input_df, input_term, unscaled_var, scaled_var, num_breaks, x_lab, y_lab, x_scaling, x_nk) {
-  plot_id <- plot_model(input_df, type = "pred", terms = input_term, axis.title = "", title = "", color = "mediumvioletred")
-  labels <- round(seq(floor(min(unscaled_var)), ceiling(max(unscaled_var)), length.out = num_breaks + 1) * x_scaling, x_nk)
-  
-  custom_breaks <- seq(min(scaled_var), max(scaled_var), by = ((max(scaled_var) - min(scaled_var)) / num_breaks))
-  custom_limits <- c(min(scaled_var), max(scaled_var))
-  
-  plot_id <- plot_id +
-    scale_x_continuous(breaks = custom_breaks, limits = custom_limits, labels = c(labels), labs(x = x_lab)) +
-    scale_y_continuous(labs(y = y_lab), limits = c(0, 15)) +
-    theme_classic(base_size = 20)
-  
-  return(plot_id)
-}
-
-
 
 # schreibe fun fuer diskrete var
-rescale_plot_fac_day <- function(input_df, input_term, unscaled_var, scaled_var, num_breaks, x_lab, y_lab, x_scaling, x_nk) {
+rescale_plot_fac <- function(input_df, input_term, unscaled_var, scaled_var, num_breaks, x_lab, y_lab, x_scaling, x_nk) {
   plot_id <- plot_model(input_df, type = "pred", terms = input_term, axis.title = "", title = "", color = "orangered")
   
   plot_id <- plot_id +
-    scale_y_continuous(labs(y = y_lab), limits = c(0, 170)) +
+    scale_y_continuous(labs(y = y_lab), limits = c(0, 40)) +
     theme_classic(base_size = 20) +
     theme(axis.text.x = element_text(angle = 45, vjust = 1, hjust = 1))
   
   return(plot_id)
 }
 
-rescale_plot_fac_night <- function(input_df, input_term, unscaled_var, scaled_var, num_breaks, x_lab, y_lab, x_scaling, x_nk) {
-  plot_id <- plot_model(input_df, type = "pred", terms = input_term, axis.title = "", title = "", color = "darkblue")
-  
-  plot_id <- plot_id +
-    scale_y_continuous(labs(y = y_lab), limits = c(0, 20)) +
-    theme_classic(base_size = 20) +
-    theme(axis.text.x = element_text(angle = 45, vjust = 1, hjust = 1))
-  
-  return(plot_id)
-}
-
-rescale_plot_fac_duskdawn <- function(input_df, input_term, unscaled_var, scaled_var, num_breaks, x_lab, y_lab, x_scaling, x_nk) {
-  plot_id <- plot_model(input_df, type = "pred", terms = input_term, axis.title = "", title = "", color = "mediumvioletred")
-  
-  plot_id <- plot_id +
-    scale_y_continuous(labs(y = y_lab), limits = c(0, 15)) +
-    theme_classic(base_size = 20) +
-    theme(axis.text.x = element_text(angle = 45, vjust = 1, hjust = 1))
-  
-  return(plot_id)
-}
 ```
-
 
 Nun können die einzelnen Variabeln aus den besten Modellen in der Funktion jeweils für die Plots angepasst werden:
 
 ```{r eval=TRUE, echo=TRUE, output = TRUE}
 ## Tagesmaximaltemperatur
-input_df <- nb_int_model_day_zi
+input_df <- nb_model_zi
 input_term <- "tre200jx_scaled [all]"
-unscaled_var <- umwelt_day$tre200jx
-scaled_var <- umwelt_day$tre200jx_scaled
+unscaled_var <- umwelt$tre200jx
+scaled_var <- umwelt$tre200jx_scaled
 num_breaks <- 10
 x_lab <- "Temperatur [°C]"
 y_lab <- "Fussgänger:innen pro Tag"
 x_scaling <- 1 # in prozent
-x_nk <- 0 # x round nachkommastellen
+x_nk <- 0 # x runde nachkommastellen
 
 
-p_temp <- rescale_plot_num_day(
+p_temp <- rescale_plot_num(
   input_df, input_term, unscaled_var, scaled_var, num_breaks,
   x_lab, y_lab, x_scaling, x_nk
 )
@@ -1045,18 +958,18 @@ p_temp
 
 ```{r eval=TRUE, echo=TRUE, output = TRUE}
 ## Wochentag 
-input_df <- nb_int_model_day_zi
+input_df <- nb_model_zi
 input_term <- "Wochenende [all]"
-unscaled_var <- umwelt_day$Wochenende
-scaled_var <- umwelt_day$Wochenende
+unscaled_var <- umwelt$Wochenende
+scaled_var <- umwelt$Wochenende
 num_breaks <- 10
 x_lab <- "Wochentag"
 y_lab <- "Fussgänger:innen pro Tag"
 x_scaling <- 1 # in prozent
-x_nk <- 0 # x round nachkommastellen
+x_nk <- 0 # x runde nachkommastellen
 
 
-p_wd <- rescale_plot_fac_day(
+p_wd <- rescale_plot_fac(
   input_df, input_term, unscaled_var, scaled_var, num_breaks,
   x_lab, y_lab, x_scaling, x_nk)
 p_wd
@@ -1073,3 +986,4 @@ __Hinweis:__ Es könnten auch interaction-plots erstellt werden: [Link](https://
 Nun habt ihr verschiedenste Ergebnisse vorliegen. In einem wissenschaftlichen Bericht sollen aber niemals alle Ergebnisse abgebildet werden. Eine Faustregel besagt, dass nur signifikante Ergebnisse visualisiert werden. Entscheidet euch daher, was ihr in eurem Bericht abbilden wollt und was lediglich besprochen werden soll.
 
 Stellt im Bericht die Ergebnisse des Tages, der Dämmerung und der Nacht gegenüber und beschreibt die Gemeinsamkeiten und Unterschieden. Behaltet dabei immer die Forschungsfragen in Erinnerung.
+

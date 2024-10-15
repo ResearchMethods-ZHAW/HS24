@@ -120,7 +120,6 @@ sum(outdoor$IN)
 sum(outdoor$IN + outdoor$OUT)
 ```
 
-
 #### 2. Verlauf der Zählungen pro Tag über die gesamte Untersuchungsdauer
 
 ```{r output = TRUE}
@@ -189,11 +188,6 @@ pie(slieces,
     main = "outdoor",
     col = c("firebrick3", "lightblue"))
 ```
-
-
-
-
-
 
 
 __--> Erklärt dem Plenum nächste Woche was ihr gemacht habt, was eure Daten zeigen und präsentiert eure Daratellungen. __

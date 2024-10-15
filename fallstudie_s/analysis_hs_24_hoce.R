@@ -580,47 +580,16 @@ ggsave("Proz_Entwicklung_Zaehlstelle_Phase.png",
 
 
 
-
-
-
 # .################################################################################################
 # 4. MULTIFAKTORIELLE ANALYSE UND VISUALISIERUNG #####
 # .################################################################################################
 
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-# TODO
-# Füge Tage bis Neujahr noch ein bei depo_day und mache daraus RF. --> um Zeile 350
 
 # --> verwende nur die ganzen Tage und nicht die Tageszeit. wenn die Tageszeit ebenfalls als Faktor in die 
 # Modelle genommen werden wollte, dann müsste diese ebenfalls als Interaktionsterm mit allen anderen 
 # Variablen im Modell eingegeben werden - denn die Tageszeit interagiert mit allen anderen Variablen, 
 # welche einen Einfluss auf die Besuchszahlen haben. 
 # Zudem werden die Modelle unter verwendung dieser Aggregierung deutlich besser gegenüber der Aggregierung nach Tageszeit.
-
-# passe scale y bei den Plots an
-
-
-
-
-
-
-
-
-
-
 
 
 
@@ -690,7 +659,7 @@ chart.Correlation(subset(umwelt, select = c(tre200nx: sremaxdv)),
 #   tre200jx_scaled + rre150j0_scaled + rre150n0_scaled +
 #   sremaxdv_scaled
 # # Jetzt kommt der Random-Factor hinzu und es wird eine Formel daraus gemacht
-# f_dredge <- paste(c(f, "+ (1|Jahr)"), collapse = " ") |>
+# f_dredge <- paste(c(f, "+ (1 | Tage_bis_Neujahr)"), collapse = " ") |>
 #   as.formula()
 # # Das Modell mit dieser Formel ausführen
 # m <- glmer.nb(f_dredge, data = umwelt, na.action = "na.fail")
@@ -763,7 +732,7 @@ cdfcomp(list(f1, f4, f3), legendtext = plot.legend)
 poisson_model <- glmer(Total ~ Jahr + Monat + Ferien + Phase + Wochenende +
                        tre200jx_scaled + rre150j0_scaled + rre150n0_scaled +
                          sremaxdv_scaled +
-                         (1 | KW), family = poisson, data = umwelt)
+                         (1 | Tage_bis_Neujahr), family = poisson, data = umwelt)
 
 summary(poisson_model)
 
@@ -821,7 +790,7 @@ mean(car::vif(poisson_model))
 nb_model <- glmer.nb(Total ~ Jahr + Monat + Ferien + Phase + Wochenende +
                              tre200jx_scaled + rre150j0_scaled +
                              sremaxdv_scaled  +
-                             (1 | KW), data = umwelt)
+                             (1 | Tage_bis_Neujahr), data = umwelt)
 
 summary(nb_model)
 
@@ -856,7 +825,7 @@ mean(car::vif(nb_model))
 nb_quad_model <- glmmTMB(Total ~ Jahr + Monat + Ferien + Phase + Wochenende +
                                   tre200jx_scaled + I(tre200jx_scaled^2) + rre150j0_scaled +
                                   sremaxdv_scaled +
-                                  (1 | KW), family =nbinom1,
+                                  (1 | Tage_bis_Neujahr), family =nbinom1,
                                data = umwelt)
 
 summary(nb_quad_model)
@@ -875,7 +844,7 @@ mean(car::vif(nb_quad_model))
 nb_quad_int_model <- glmmTMB(Total ~  Jahr + Ferien + Phase + Wochenende +
                                    Monat * rre150j0_scaled+ tre200jx_scaled + I(tre200jx_scaled^2)  +
                                    sremaxdv_scaled +
-                                  (1|KW), data = umwelt)
+                                  (1 | Tage_bis_Neujahr), data = umwelt)
 
 summary(nb_quad_int_model)
 # nicht signifikant, darum vernachlaessige
@@ -907,7 +876,7 @@ summary(nb_quad_int_model)
 exp_model <- glmmTMB((Total + 1) ~ Jahr + Monat + Ferien + Phase + Wochenende +
                              tre200jx_scaled + I(tre200jx_scaled^2) + rre150j0_scaled +
                              sremaxdv_scaled +
-                           (1 | KW), 
+                           (1 | Tage_bis_Neujahr), 
                          family = Gamma(link = "log"), data = umwelt)
 
 summary(exp_model, dispersion = 1)
