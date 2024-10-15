@@ -15,10 +15,6 @@ In dieser Demo möchten wir weitere Werkzeuge aus dem Tidyverse vorstellen und m
 Wir können Euch nicht sämtliche Möglichkeiten von tidyverse zeigen. Wir fokussieren uns deshalb auf weitere wichtige Komponenten und zeigen zusätzliche Funktionalitäten, die wir oft verwenden und Euch ggf. noch nicht bekannt sind. Wer sich vertieft mit dem Thema auseinandersetzen möchte, der sollte sich unbedingt das Buch  @wickham2017 beschaffen. Eine umfangreiche, aber nicht ganz vollständige Version gibt es online^[http://r4ds.had.co.nz/] , das vollständige eBook kann über die Bibliothek bezogen werden^[https://ebookcentral.proquest.com/lib/zhaw/detail.action?docID=4770093].
 
 
-```{r}
-
-```
-
 ## Split-Apply-Combine
 
 ### Daten laden
@@ -30,13 +26,12 @@ library("readr")
 
 wetter <- read_delim("datasets/prepro/weather.csv", ",")
 
-library("dplyr")
 
-wetter <- wetter |>
-  mutate(
-    stn = as.factor(stn),
-    time = as.POSIXct(as.character(time), format = "%Y%m%d%H")
-  )
+
+wetter$stn <- as.factor(wetter$stn)
+wetter$time <- as.POSIXct(as.character(wetter$time), format = "%Y%m%d%H")
+
+
 ```
 
 ### Kennwerte berechnen
@@ -68,6 +63,7 @@ wetter$month <- month(wetter$time)
 Mit `dplyr` (siehe ^[@wickham2017, Kapitel 10 / http://r4ds.had.co.nz/transform.html]) sieht der gleiche Befehl folgendermassen aus:
 
 ```{r}
+library("dplyr")
 
 wetter <- mutate(wetter, month = month(time))
 ```
