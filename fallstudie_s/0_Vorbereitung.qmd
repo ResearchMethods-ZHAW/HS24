@@ -20,9 +20,9 @@ ipak <- function(pkg) {
 }
 
 packages <- c(
-  "readr", "ggplot2", "lubridate", "ggpubr", "PerformanceAnalytics",
+  "readr", "ggplot2", "dplyr", "lubridate", "ggpubr", "PerformanceAnalytics",
   "MuMIn", "AICcmodavg", "fitdistrplus", "lme4", "DHARMa", "blmeco", "sjPlot", "lattice",
-  "dplyr", "suncalc", "glmmTMB"
+   "suncalc", "glmmTMB"
 )
 
 ipak(packages)

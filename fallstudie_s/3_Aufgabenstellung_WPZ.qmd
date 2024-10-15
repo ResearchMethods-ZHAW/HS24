@@ -2,7 +2,7 @@
 lesson: Aufgabenstellung
 thema: Abschlussbericht Fallstudie
 execute: 
-  echo: false   # set to true to show musterlösung
+  echo: true   # set to true to show musterlösung
   output: false
 code-fold: true
 code-summary: "Musterlösung"
@@ -58,14 +58,13 @@ Für meine Analysen habe ich untenstehende Fragestellungen formuliert. Ihr könn
 
 -	Diskussion (Diskussion der deskriptiven Analysen und der Modellergebnisse; dieser Abschnitt sollte die eigenen Resultate auch im Zusammenhang mit aktueller Fachliteratur reflektieren.)
 
--	Literaturverzeichnis (Tipp: Das Literaturverzeichnis sollte vollständig sein, sowie formal korrekt und einheitlich daherkommen. Wir erwarten speziell in der Diskussion eine Abstützung auf aktuelle Fachliteratur. Auf Moodle haben wir euch eine Auswahl relevanter Papers bereitgestellt.)
+-	Literaturverzeichnis (Tipp: Das Literaturverzeichnis sollte vollständig sein, sowie formal korrekt und einheitlich daherkommen. Wir erwarten speziell in der Diskussion eine Abstützung auf aktuelle Fachliteratur. Auf Moodle haben wir euch eine Auswahl relevanter Studien bereitgestellt.)
 
 -	Anhang (für alle Auswertungen relevanter R-Code in geeigneter Form) 
 
 2) Gesamtumfang max. 12'000 Zeichen (inkl. Leerzeichen; exkl. Tabellen, Literaturverzeichnis und Anhang)
 
 3) Abgabe am __12.1.2025__ per Mail an hoce@zhaw.ch
-
 
 ## Bewertungskriterien
 
@@ -84,10 +83,10 @@ Für meine Analysen habe ich untenstehende Fragestellungen formuliert. Ihr könn
 -	Zusätzliche bewerten wir die inhaltliche Dichte der Arbeit und die formale Qualität (Sprache, Struktur, Aufbau, Darstellung, Literaturverzeichnis, Umgang mit Literatur im Text)
 
 
-## Zusammensetzung der Fallstudiennote:
+## Zusammensetzung Note Fallstudie:
 
--	Fallstudie-Leistungsnachweis 1 - Forschungsplan: 30 %
+-	Fallstudie-Leistungsnachweis 1 - Forschungsplan: Testatplichtig
 
--	Fallstudie-Leistungsnachweis 2 - Multivariate Analyse: 70 %
+-	Fallstudie-Leistungsnachweis 2 - Multivariate Analyse: 100 %
 
 Die Note der Fallstudie fliesst in die Gesamtbewertung des Moduls Research Methods mit ein.
