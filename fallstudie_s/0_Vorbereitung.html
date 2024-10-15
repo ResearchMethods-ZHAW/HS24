@@ -329,6 +329,11 @@ window.onload = function() {
   <a href="../fallstudie_s/5_Datenverarbeitung.html" class="sidebar-item-text sidebar-link"><span class="chapter-title">Datenverarbeitung</span></a>
   </div>
 </li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../fallstudie_s/6_Deskriptive_Analysen.html" class="sidebar-item-text sidebar-link"><span class="chapter-title">Deskriptive Analysen</span></a>
+  </div>
+</li>
       </ul>
   </li>
         <li class="sidebar-item sidebar-item-section">
@@ -387,7 +392,7 @@ window.onload = function() {
 </header>
 
 
-<p>Im Rahmen der Fallstudie werden wir einige R Packages brauchen. Wir empfehlen, diese bereits <em>vor</em> der ersten Lektion zu installieren. Analog <a href="../prepro/Prepro1_Vorbereitung.html">der Vorbereitungsübung in Prepro1</a> könnt ihr mit nachstehendem Code alle noch nicht installierten packages automatisch installieren.</p>
+<p>Im Rahmen der Fallstudie werden wir einige R Packages brauchen. Wir empfehlen, diese bereits <em>vor</em> der ersten Lektion zu installieren. Analog <a href="../prepro/Prepro1_Vorbereitung.html">der Vorbereitungsübung in Prepro1</a> könnt ihr mit nachstehendem Code alle noch nicht installierten Bibliotheken automatisch installieren.</p>
 <div class="cell">
 <div class="sourceCode cell-code" id="cb1"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb1-1"><a href="#cb1-1" aria-hidden="true" tabindex="-1"></a>ipak <span class="ot">&lt;-</span> <span class="cf">function</span>(pkg) {</span>
 <span id="cb1-2"><a href="#cb1-2" aria-hidden="true" tabindex="-1"></a>  new.pkg <span class="ot">&lt;-</span> pkg[<span class="sc">!</span>(pkg <span class="sc">%in%</span> <span class="fu">installed.packages</span>()[, <span class="st">"Package"</span>])]</span>
@@ -397,14 +402,14 @@ window.onload = function() {
 <span id="cb1-6"><a href="#cb1-6" aria-hidden="true" tabindex="-1"></a>}</span>
 <span id="cb1-7"><a href="#cb1-7" aria-hidden="true" tabindex="-1"></a></span>
 <span id="cb1-8"><a href="#cb1-8" aria-hidden="true" tabindex="-1"></a>packages <span class="ot">&lt;-</span> <span class="fu">c</span>(</span>
-<span id="cb1-9"><a href="#cb1-9" aria-hidden="true" tabindex="-1"></a>  <span class="st">"readr"</span>, <span class="st">"ggplot2"</span>, <span class="st">"lubridate"</span>, <span class="st">"ggpubr"</span>, <span class="st">"PerformanceAnalytics"</span>,</span>
+<span id="cb1-9"><a href="#cb1-9" aria-hidden="true" tabindex="-1"></a>  <span class="st">"readr"</span>, <span class="st">"ggplot2"</span>, <span class="st">"dplyr"</span>, <span class="st">"lubridate"</span>, <span class="st">"ggpubr"</span>, <span class="st">"PerformanceAnalytics"</span>,</span>
 <span id="cb1-10"><a href="#cb1-10" aria-hidden="true" tabindex="-1"></a>  <span class="st">"MuMIn"</span>, <span class="st">"AICcmodavg"</span>, <span class="st">"fitdistrplus"</span>, <span class="st">"lme4"</span>, <span class="st">"DHARMa"</span>, <span class="st">"blmeco"</span>, <span class="st">"sjPlot"</span>, <span class="st">"lattice"</span>,</span>
-<span id="cb1-11"><a href="#cb1-11" aria-hidden="true" tabindex="-1"></a>  <span class="st">"dplyr"</span>, <span class="st">"suncalc"</span>, <span class="st">"glmmTMB"</span></span>
+<span id="cb1-11"><a href="#cb1-11" aria-hidden="true" tabindex="-1"></a>   <span class="st">"suncalc"</span>, <span class="st">"glmmTMB"</span></span>
 <span id="cb1-12"><a href="#cb1-12" aria-hidden="true" tabindex="-1"></a>)</span>
 <span id="cb1-13"><a href="#cb1-13" aria-hidden="true" tabindex="-1"></a></span>
 <span id="cb1-14"><a href="#cb1-14" aria-hidden="true" tabindex="-1"></a><span class="fu">ipak</span>(packages)</span></code><button title="In die Zwischenablage kopieren" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
-<p>Zudem könnt ihr alle für die Fallstudie Profil S benötigten Daten unter folgendem <a href="https://moodle.zhaw.ch/mod/folder/view.php?id=956254">Link</a> herunterladen.</p>
+<p>Zudem könnt ihr alle für die Fallstudie Profil S benötigten Daten unter auf Moodle im Abschnitt Fallstudie “Ecosystems &amp; Biodiversity” herunterladen.</p>
 
 
 
