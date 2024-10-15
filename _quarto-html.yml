@@ -5,15 +5,15 @@ book:
       chapters:
       - prepro/Prepro1_Vorbereitung.qmd
       - --
-      # - prepro/Prepro1_Demo.qmd
-      # - prepro/Prepro1_Uebung.qmd
-      # - --
-      # - prepro/Prepro2_Demo.qmd
-      # - prepro/Prepro2_Uebung_A.qmd
-      # - prepro/Prepro2_Uebung_B.qmd
-      # - --
-      # - prepro/Prepro3_Demo.qmd
-      # - prepro/Prepro3_Uebung.qmd
+      - prepro/Prepro1_Demo.qmd
+      - prepro/Prepro1_Uebung.qmd
+      - --
+      - prepro/Prepro2_Demo.qmd
+      - prepro/Prepro2_Uebung_A.qmd
+      - prepro/Prepro2_Uebung_B.qmd
+      - --
+      - prepro/Prepro3_Demo.qmd
+      - prepro/Prepro3_Uebung.qmd
     # - part: InfoVis.qmd
     #   chapters:
     #   - infovis/Infovis1_Vorbereitung.qmd
@@ -24,24 +24,24 @@ book:
     #   - --
     #   - infovis/Infovis2_Uebung_A.qmd
     #   - infovis/Infovis2_Uebung_B.qmd
-    - part: Statistik.qmd
-      chapters:
-      - statistik/Statistik1_Demo.qmd
-      - statistik/Statistik1_Uebung.qmd            
-      - statistik/Statistik2_Demo.qmd
-      - statistik/Statistik2_Uebung.qmd      
-      - statistik/Statistik3_Demo.qmd
-      - statistik/Statistik3_Uebung.qmd      
-      - statistik/Statistik4_Demo.qmd
-      - statistik/Statistik4_Uebung.qmd      
-      - statistik/Statistik5_Demo.qmd
-      - statistik/Statistik5_Uebung.qmd      
-      - statistik/Statistik6_Demo.qmd
-      - statistik/Statistik6_Uebung.qmd      
-      - statistik/Statistik7_Demo.qmd
-      - statistik/Statistik7_Uebung.qmd      
-      - statistik/Statistik8_Demo.qmd
-      - statistik/Statistik8_Uebung.qmd        
+    # - part: Statistik.qmd
+    #  chapters:
+     # - statistik/Statistik1_Demo.qmd
+     # - statistik/Statistik1_Uebung.qmd            
+     # - statistik/Statistik2_Demo.qmd
+     # - statistik/Statistik2_Uebung.qmd      
+     # - statistik/Statistik3_Demo.qmd
+     # - statistik/Statistik3_Uebung.qmd      
+     # - statistik/Statistik4_Demo.qmd
+     # - statistik/Statistik4_Uebung.qmd      
+     # - statistik/Statistik5_Demo.qmd
+     # - statistik/Statistik5_Uebung.qmd      
+     # - statistik/Statistik6_Demo.qmd
+     # - statistik/Statistik6_Uebung.qmd      
+     # - statistik/Statistik7_Demo.qmd
+     # - statistik/Statistik7_Uebung.qmd      
+     # - statistik/Statistik8_Demo.qmd
+     # - statistik/Statistik8_Uebung.qmd        
     # - part: RaumAn.qmd
     #   chapters:
       # - rauman/Rauman0_Vorbereitung.qmd
@@ -76,7 +76,7 @@ book:
     - part: "Fallstudie N"
       chapters:
       - fallstudie_n/1_Vorbemerkung.qmd
-      # - fallstudie_n/2_Datenverarbeitung.qmd
+      - fallstudie_n/2_Datenverarbeitung.qmd
       # - fallstudie_n/3_Berechnung_Homeranges.qmd
       # - fallstudie_n/4_Multivariate_Modelle.qmd
       # - fallstudie_n/5_Variablenselektion.qmd
