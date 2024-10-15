@@ -460,14 +460,386 @@
     ]
   },
   {
+    "objectID": "InfoVis.html",
+    "href": "InfoVis.html",
+    "title": "InfoVis",
+    "section": "",
+    "text": "Infovis 1\nDie konventionelle schliessende Statistik arbeitet in der Regel konfirmatorisch, sprich aus der bestehenden Theorie heraus werden Hypothesen formuliert, welche sodann durch Experimente geprüft und akzeptiert oder verworfen werden. Die Explorative Datenanalyse (EDA) nimmt dazu eine antagonistische Analyseperspektive ein und will in den Daten zunächst Zusammenhänge aufdecken, welche dann wiederum zur Formulierung von prüfbaren Hypothesen führen kann. Die Einheit stellt dazu den klassischen 5-stufigen EDA-Prozess nach Tukey (1980!) vor. Abschliessend wird dann noch die Brücke geschlagen zur modernen Umsetzung der EDA in Form von Visual Analytics.",
+    "crumbs": [
+      "InfoVis"
+    ]
+  },
+  {
+    "objectID": "InfoVis.html#infovis-2",
+    "href": "InfoVis.html#infovis-2",
+    "title": "InfoVis",
+    "section": "Infovis 2",
+    "text": "Infovis 2\nDie Informationsvisualisierung ist eine vielseitige, effektive und effiziente Methode für die explorative Datenanalyse. Während Scatterplots und Histogramme weitherum bekannt sind, bieten weniger bekannte Informationsvisualisierungs-Typen wie etwa Parallelkoordinatenplots, TreeMaps oder Chorddiagramme originelle alternative Darstellungsformen zur visuellen Analyse von Datensätze, welche stets grösser und komplexer werden. Die Studierenden lernen in dieser lesson eine Reihe von Informationsvisualisierungstypen kennen, lernen diese zielführend zu gestalten und selber zu erstellen.",
+    "crumbs": [
+      "InfoVis"
+    ]
+  },
+  {
+    "objectID": "infovis/Infovis1_Vorbereitung.html",
+    "href": "infovis/Infovis1_Vorbereitung.html",
+    "title": "Vorbereitung",
+    "section": "",
+    "text": "Im Rahmen von InfoVis 1 - 2 werden wir einige R Packages brauchen. Wir empfehlen, diese bereits vor der ersten Lektion zu installieren. Analog Vorbereitung könnt ihr mit nachstehendem Code alle noch nicht installierten packages automatisch installieren.\n\npacman::p_install(\"dplyr\", \"ggplot2\", \"lubridate\", \"readr\", \n  \"scales\", \"tidyr\", character.only = TRUE,  force = FALSE)\n\nZudem könnt ihr die Daten für die Übungen auf Moodle herunterladen.",
+    "crumbs": [
+      "InfoVis",
+      "<span class='chapter-number'>9</span>  <span class='chapter-title'>Vorbereitung</span>"
+    ]
+  },
+  {
+    "objectID": "infovis/Infovis1_Demo.html",
+    "href": "infovis/Infovis1_Demo.html",
+    "title": "Infovis 1: Demo A",
+    "section": "",
+    "text": "Base-plot vs. ggplot\nUm in “base-R” einen Scatterplot zu erstellen, wo Datum der Temperatur gegenübersteht, gehen wir wie folgt vor:\nplot(temperature$time, temperature$SHA, type = \"l\", col = \"red\")\nlines(temperature$time, temperature$ZER, col = \"blue\")\nIn ggplot sieht das etwas anders und auf den ersten Blick etwas komplizierter aus: Ein plot wird durch den Befehl ggplot() initiiert. Hier wird einerseits der Datensatz festgelegt, auf dem der Plot beruht (data =), sowie die Variablen innerhalb des Datensatzes, die Einfluss auf den Plot ausüben (mapping = aes()).\n# Datensatz: \"temperature\" | Beeinflussende Variabeln: \"time\" und \"temp\"\nggplot(data = temperature, mapping = aes(time, SHA))\nWeiter braucht es mindestens ein “Layer”, der beschreibt, wie die Daten dargestellt werden sollen (z.B. geom_point()). Anders als bei “Piping” (|&gt;) wird ein Layer mit + hinzugefügt.\nggplot(data = temperature, mapping = aes(time, SHA)) +\n  # Layer: \"geom_point\" entspricht Punkten in einem Scatterplot\n  geom_point()\nDa ggplot die Eingaben in der Reihenfolge data = und dann mapping = erwartet, können wir diese Spezifizierungen auch weglassen.\nggplot(temperature, aes(time, SHA)) +\n  geom_point()",
+    "crumbs": [
+      "InfoVis",
+      "<span class='chapter-number'>10</span>  <span class='chapter-title'>Infovis 1: Demo A</span>"
+    ]
+  },
+  {
+    "objectID": "infovis/Infovis1_Demo.html#long-vs.-wide",
+    "href": "infovis/Infovis1_Demo.html#long-vs.-wide",
+    "title": "Infovis 1: Demo A",
+    "section": "Long vs. wide",
+    "text": "Long vs. wide\nWie wir in PrePro 2 bereits erwähnt haben, ist ggplot2 auf long tables ausgelegt. Wir überführen deshalb an dieser Stelle die breite in eine lange Tabelle:\n\ntemperature_long &lt;- pivot_longer(temperature, -time, names_to = \"station\", values_to = \"temp\")\n\nNun wollen wir die Stationen unterschiedlich einfärben. Da wir Variablen definieren wollen, welche Einfluss auf die Grafik haben sollen, gehört diese Information in aes().\n\nggplot(temperature_long, aes(time, temp, colour = station)) +\n  geom_point()\n\n\n\n\n\n\n\n\nWir können noch einen Layer mit Linien hinzufügen:\n\nggplot(temperature_long, aes(time, temp, colour = station)) +\n  geom_point() +\n  geom_line()",
+    "crumbs": [
+      "InfoVis",
+      "<span class='chapter-number'>10</span>  <span class='chapter-title'>Infovis 1: Demo A</span>"
+    ]
+  },
+  {
+    "objectID": "infovis/Infovis1_Demo.html#beschriftungen-labels",
+    "href": "infovis/Infovis1_Demo.html#beschriftungen-labels",
+    "title": "Infovis 1: Demo A",
+    "section": "Beschriftungen (labels)",
+    "text": "Beschriftungen (labels)\nWeiter können wir die Achsen beschriften und einen Titel hinzufügen. Zudem lasse ich die Punkte (geom_point()) nun weg, da mir diese nicht gefallen.\n\nggplot(temperature_long, aes(time, temp, colour = station)) +\n  geom_line() +\n  labs(\n    x = \"Zeit\",\n    y = \"Temperatur in Grad C°\",\n    title = \"Temperaturdaten Schweiz\",\n    subtitle = \"2001 bis 2002\",\n    color = \"Station\"\n  )",
+    "crumbs": [
+      "InfoVis",
+      "<span class='chapter-number'>10</span>  <span class='chapter-title'>Infovis 1: Demo A</span>"
+    ]
+  },
+  {
+    "objectID": "infovis/Infovis1_Demo.html#split-apply-combine",
+    "href": "infovis/Infovis1_Demo.html#split-apply-combine",
+    "title": "Infovis 1: Demo A",
+    "section": "Split Apply Combine",
+    "text": "Split Apply Combine\nIm obigen Plot fällt auf, dass stündliche Werte eine zu hohe Auflösung haben, wenn wir die Daten über 2 Jahre visualisieren. Mit Split Apply Combine (PrePro 3) können wir die Auflösung unserer Daten verändern:\n\ntemperature_day &lt;- temperature_long |&gt;\n  mutate(time = as.Date(time))\n\ntemperature_day\n## # A tibble: 35,088 × 3\n##    time       station  temp\n##    &lt;date&gt;     &lt;chr&gt;   &lt;dbl&gt;\n##  1 2000-01-01 SHA       0.2\n##  2 2000-01-01 ZER      -8.8\n##  3 2000-01-01 SHA       0.3\n##  4 2000-01-01 ZER      -8.7\n##  5 2000-01-01 SHA       0.3\n##  6 2000-01-01 ZER      -9  \n##  7 2000-01-01 SHA       0.3\n##  8 2000-01-01 ZER      -8.7\n##  9 2000-01-01 SHA       0.4\n## 10 2000-01-01 ZER      -8.5\n## # ℹ 35,078 more rows\n\ntemperature_day &lt;- temperature_day |&gt;\n  group_by(station, time) |&gt;\n  summarise(temp = mean(temp))\n\ntemperature_day\n## # A tibble: 1,462 × 3\n## # Groups:   station [2]\n##    station time        temp\n##    &lt;chr&gt;   &lt;date&gt;     &lt;dbl&gt;\n##  1 SHA     2000-01-01  1.25\n##  2 SHA     2000-01-02  1.73\n##  3 SHA     2000-01-03  1.59\n##  4 SHA     2000-01-04  1.78\n##  5 SHA     2000-01-05  4.66\n##  6 SHA     2000-01-06  3.49\n##  7 SHA     2000-01-07  3.87\n##  8 SHA     2000-01-08  3.28\n##  9 SHA     2000-01-09  3.24\n## 10 SHA     2000-01-10  3.24\n## # ℹ 1,452 more rows",
+    "crumbs": [
+      "InfoVis",
+      "<span class='chapter-number'>10</span>  <span class='chapter-title'>Infovis 1: Demo A</span>"
+    ]
+  },
+  {
+    "objectID": "infovis/Infovis1_Demo.html#xy-achse-anpassen",
+    "href": "infovis/Infovis1_Demo.html#xy-achse-anpassen",
+    "title": "Infovis 1: Demo A",
+    "section": "X/Y-Achse anpassen",
+    "text": "X/Y-Achse anpassen\nMan kann auch Einfluss auf die x-/y-Achsen nehmen. Dabei muss man zuerst festlegen, was für ein Achsentyp der Plot hat (vorher hat ggplot eine Annahme auf der Basis der Daten getroffen).\nBei unserer y-Achse handelt es sich um numerische Daten, ggplot nennt diese: scale_y_continuous(). Unter ggplot2.tidyverse.org findet man noch andere x/y-Achsentypen (scale_x_irgenwas bzw. scale_y_irgendwas).\n\nggplot(temperature_day, aes(time, temp, colour = station)) +\n  geom_line() +\n  labs(\n    x = \"Zeit\",\n    y = \"Temperatur in Grad C°\",\n    title = \"Temperaturdaten Schweiz\",\n    subtitle = \"2001 bis 2002\",\n    color = \"Station\"\n  ) +\n  scale_y_continuous(limits = c(-30, 30)) # y-Achsenabschnitt bestimmen\n\n\n\n\n\n\n\n\nDas gleiche Spiel kann man für die x-Achse betreiben. Bei unserer x-Achse handelt es sich ja um Datumsangaben. ggplot nennt diese: scale_x_date().\n\nggplot(temperature_day, aes(time, temp, colour = station)) +\n  geom_line() +\n  labs(\n    x = \"Zeit\",\n    y = \"Temperatur in Grad C°\",\n    title = \"Temperaturdaten Schweiz\",\n    subtitle = \"2001 bis 2002\",\n    color = \"Station\"\n  ) +\n  scale_y_continuous(limits = c(-30, 30)) +\n  scale_x_date(\n    date_breaks = \"3 months\",\n    date_labels = \"%b\"\n  )",
+    "crumbs": [
+      "InfoVis",
+      "<span class='chapter-number'>10</span>  <span class='chapter-title'>Infovis 1: Demo A</span>"
+    ]
+  },
+  {
+    "objectID": "infovis/Infovis1_Demo.html#themes",
+    "href": "infovis/Infovis1_Demo.html#themes",
+    "title": "Infovis 1: Demo A",
+    "section": "Themes",
+    "text": "Themes\nMit theme verändert man das allgmeine Layout der Plots. Beispielsweise kann man mit theme_classic() ggplot-Grafiken etwas weniger “poppig” erscheinen lassen: so sind sie besser für Bachelor- / Masterarbeiten sowie Publikationen geeignet. theme_classic() kann man indiviudell pro Plot anwenden oder für die aktuelle Session global setzen (s.u.).\nIndividuell pro Plot:\n\nggplot(temperature_day, aes(time, temp, colour = station)) +\n  geom_line() +\n  theme_classic()\n\nGlobal (für alle nachfolgenden Plots der aktuellen Session):\n\ntheme_set(theme_classic())",
+    "crumbs": [
+      "InfoVis",
+      "<span class='chapter-number'>10</span>  <span class='chapter-title'>Infovis 1: Demo A</span>"
+    ]
+  },
+  {
+    "objectID": "infovis/Infovis1_Demo.html#facets-small-multiples",
+    "href": "infovis/Infovis1_Demo.html#facets-small-multiples",
+    "title": "Infovis 1: Demo A",
+    "section": "Facets / Small Multiples",
+    "text": "Facets / Small Multiples\nSehr praktisch sind auch die Funktionen für “Small multiples”. Dies erreicht man mit facet_wrap() (oder facet_grid(), mehr dazu später). Man muss mit einem Tilde-Symbol “~” nur festlegen, welche Variable für das Aufteilen des Plots in kleinere Subplots verantwortlich sein soll.\n\nggplot(temperature_day, aes(time, temp, colour = station)) +\n  geom_line() +\n  labs(\n    x = \"Zeit\",\n    y = \"Temperatur in Grad C°\",\n    title = \"Temperaturdaten Schweiz\",\n    subtitle = \"2001 bis 2002\",\n    color = \"Station\"\n  ) +\n  scale_y_continuous(limits = c(-30, 30)) +\n  scale_x_date(\n    date_breaks = \"3 months\",\n    date_labels = \"%b\"\n  ) +\n  facet_wrap(station ~ .)\n\n\n\n\n\n\n\n\nAuch facet_wrap kann man auf seine Bedürfnisse anpassen: Beispielweise kann man mit ncol = die Anzahl facets pro Zeile bestimmen.\nZudem brauchen wir die Legende nicht mehr, da der Stationsnamen über jedem Facet steht. Ich setze deshalb theme(legend.position=\"none\")\n\nggplot(temperature_day, aes(time, temp, colour = station)) +\n  geom_line() +\n  labs(\n    x = \"Zeit\",\n    y = \"Temperatur in Grad C°\",\n    title = \"Temperaturdaten Schweiz\",\n    subtitle = \"2001 bis 2002\"\n  ) +\n  scale_y_continuous(limits = c(-30, 30)) +\n  scale_x_date(\n    date_breaks = \"3 months\",\n    date_labels = \"%b\"\n  ) +\n  facet_wrap(~station, ncol = 1) +\n  theme(legend.position = \"none\")",
+    "crumbs": [
+      "InfoVis",
+      "<span class='chapter-number'>10</span>  <span class='chapter-title'>Infovis 1: Demo A</span>"
+    ]
+  },
+  {
+    "objectID": "infovis/Infovis1_Demo.html#in-variabel-abspeichern-und-exportieren",
+    "href": "infovis/Infovis1_Demo.html#in-variabel-abspeichern-und-exportieren",
+    "title": "Infovis 1: Demo A",
+    "section": "In Variabel abspeichern und exportieren",
+    "text": "In Variabel abspeichern und exportieren\nGenau wie data.frames und andere Objekte kann man einen ganzen Plot auch in einer Variabel speichern. Dies kann nützlich sein, um einen Plot zu exportieren (als png, jpg usw.) oder sukzessiv zu erweitern wie in diesem Beispiel.\n\np &lt;- ggplot(temperature_day, aes(time, temp, colour = station)) +\n  geom_line() +\n  labs(\n    x = \"Zeit\",\n    y = \"Temperatur in Grad C°\",\n    title = \"Temperaturdaten Schweiz\",\n    subtitle = \"2001 bis 2002\"\n  ) +\n  scale_y_continuous(limits = c(-30, 30)) +\n  scale_x_date(\n    date_breaks = \"3 months\",\n    date_labels = \"%b\"\n  ) +\n  facet_wrap(~station, ncol = 1)\n# ich habe an dieser Stelle theme(legend.position=\"none\") entfernt\n\nFolgendermassen kann ich den Plot als png-File abspeichern (ohne Angabe von “plot =” wird einfach der letzte Plot gespeichert)\n\nggsave(filename = \"plot.png\", plot = p)\n\n.. und so kann ich einen bestehenden Plot (in einer Variabel) mit einem Layer / einer Option erweitern.\n\np +\n  theme(legend.position = \"none\")\n\nWie üblich wurde diese Änderung nicht gespeichert, sondern nur das Resultat davon ausgegeben. Wenn ich die Änderung in meinem Plot (in der Variabel) abspeichern will, muss ich die Variabel überschreiben:\n\np &lt;- p +\n  theme(legend.position = \"none\")",
+    "crumbs": [
+      "InfoVis",
+      "<span class='chapter-number'>10</span>  <span class='chapter-title'>Infovis 1: Demo A</span>"
+    ]
+  },
+  {
+    "objectID": "infovis/Infovis1_Demo.html#smoothing",
+    "href": "infovis/Infovis1_Demo.html#smoothing",
+    "title": "Infovis 1: Demo A",
+    "section": "Smoothing",
+    "text": "Smoothing\nMit geom_smooth() kann ggplot eine Trendlinie auf der Baiss von Punktdaten berechnen. Die zugrunde liegende statistische Methode kann selbst gewählt werden (ohne Angabe verwendet ggplot bei &lt; 1’000 Messungen stats::loess, ansonsten mgcv::gam)\n\np &lt;- p +\n  geom_smooth(colour = \"black\")\np",
+    "crumbs": [
+      "InfoVis",
+      "<span class='chapter-number'>10</span>  <span class='chapter-title'>Infovis 1: Demo A</span>"
+    ]
+  },
+  {
+    "objectID": "infovis/Infovis1_Uebung.html",
+    "href": "infovis/Infovis1_Uebung.html",
+    "title": "Infovis 1: Übung",
+    "section": "",
+    "text": "Aufgabe 1\nRekonstrukturiere folgenden Plot aus Kovic (2014) mithilfe von ggplot und dem tagi_data_kanton.csv Datensatz:\nTipp:",
+    "crumbs": [
+      "InfoVis",
+      "<span class='chapter-number'>11</span>  <span class='chapter-title'>Infovis 1: Übung</span>"
+    ]
+  },
+  {
+    "objectID": "infovis/Infovis1_Uebung.html#aufgabe-1",
+    "href": "infovis/Infovis1_Uebung.html#aufgabe-1",
+    "title": "Infovis 1: Übung",
+    "section": "",
+    "text": "Nutze ggplot(kanton, aes(auslanderanteil, ja_anteil)), um den ggplot zu initiieren. Füge danach einen Punkte-Layer hinzu (geom_point())\nNutze coord_fixed(), um die beiden Achsen in ein fixes Verhältnis zu setzen (1:1).\nOptional:\n\nSetze die Achsen Start- und Endwerte mittels scale_y_continuous bzw. scale_x_continuous.\nSetze analog Kovic (2014) die breaks (0.0, 0.1…0.7) manuell (innerhalb scale_*_continuous)\nNutze labs() für die Beschriftung der Achsen",
+    "crumbs": [
+      "InfoVis",
+      "<span class='chapter-number'>11</span>  <span class='chapter-title'>Infovis 1: Übung</span>"
+    ]
+  },
+  {
+    "objectID": "infovis/Infovis1_Uebung.html#aufgabe-2",
+    "href": "infovis/Infovis1_Uebung.html#aufgabe-2",
+    "title": "Infovis 1: Übung",
+    "section": "Aufgabe 2",
+    "text": "Aufgabe 2\nRekonstrukturiere folgenden Plot aus Kovic (2014) mithilfe von ggplot:\nTipp:\n\nNutze geom_smooth",
+    "crumbs": [
+      "InfoVis",
+      "<span class='chapter-number'>11</span>  <span class='chapter-title'>Infovis 1: Übung</span>"
+    ]
+  },
+  {
+    "objectID": "infovis/Infovis1_Uebung.html#aufgabe-3",
+    "href": "infovis/Infovis1_Uebung.html#aufgabe-3",
+    "title": "Infovis 1: Übung",
+    "section": "Aufgabe 3",
+    "text": "Aufgabe 3\nImportiere die Gemeindedaten tagi_data_gemeinden.csv.\nRekonstrukturiere folgenden Plot aus Kovic (2014) mithilfe von ggplot und dem tagi_data_gemeinden.csv Datensatz:\nTipp:\n\nNutze geom_point()\nNutze labs()\nNutze coord_fixed()",
+    "crumbs": [
+      "InfoVis",
+      "<span class='chapter-number'>11</span>  <span class='chapter-title'>Infovis 1: Übung</span>"
+    ]
+  },
+  {
+    "objectID": "infovis/Infovis1_Uebung.html#aufgabe-4",
+    "href": "infovis/Infovis1_Uebung.html#aufgabe-4",
+    "title": "Infovis 1: Übung",
+    "section": "Aufgabe 4",
+    "text": "Aufgabe 4\nRekonstrukturiere folgenden Plot aus Kovic (2014) mithilfe von ggplot und dem tagi_data_gemeinden.csv Datensatz:\nTipp:\n\nNutze geom_smooth",
+    "crumbs": [
+      "InfoVis",
+      "<span class='chapter-number'>11</span>  <span class='chapter-title'>Infovis 1: Übung</span>"
+    ]
+  },
+  {
+    "objectID": "infovis/Infovis1_Uebung.html#aufgabe-5",
+    "href": "infovis/Infovis1_Uebung.html#aufgabe-5",
+    "title": "Infovis 1: Übung",
+    "section": "Aufgabe 5",
+    "text": "Aufgabe 5\nRekonstrukturiere folgenden Plot aus Kovic (2014) mithilfe von ggplot und dem tagi_data_gemeinden.csv Datensatz:\nTipp:\n\nNutze facet_wrap um einen Plot pro Kanton darzustellen.",
+    "crumbs": [
+      "InfoVis",
+      "<span class='chapter-number'>11</span>  <span class='chapter-title'>Infovis 1: Übung</span>"
+    ]
+  },
+  {
+    "objectID": "infovis/Infovis1_Uebung.html#aufgabe-6",
+    "href": "infovis/Infovis1_Uebung.html#aufgabe-6",
+    "title": "Infovis 1: Übung",
+    "section": "Aufgabe 6",
+    "text": "Aufgabe 6\nRekonstrukturiere folgenden Plot aus Kovic (2014) mithilfe von ggplot und dem tagi_data_gemeinden.csv Datensatz:\nTipp:\n\nNutze geom_smooth",
+    "crumbs": [
+      "InfoVis",
+      "<span class='chapter-number'>11</span>  <span class='chapter-title'>Infovis 1: Übung</span>"
+    ]
+  },
+  {
+    "objectID": "infovis/Infovis1_Uebung.html#aufgabe-7",
+    "href": "infovis/Infovis1_Uebung.html#aufgabe-7",
+    "title": "Infovis 1: Übung",
+    "section": "Aufgabe 7",
+    "text": "Aufgabe 7\nRekonstrukturieren folgenden Plot aus Kovic (2014) mithilfe von ggplot und dem tagi_data_gemeinden.csv Datensatz:\nTipp:\n\nNutze facet_wrap",
+    "crumbs": [
+      "InfoVis",
+      "<span class='chapter-number'>11</span>  <span class='chapter-title'>Infovis 1: Übung</span>"
+    ]
+  },
+  {
+    "objectID": "infovis/Infovis1_Uebung.html#aufgabe-8",
+    "href": "infovis/Infovis1_Uebung.html#aufgabe-8",
+    "title": "Infovis 1: Übung",
+    "section": "Aufgabe 8",
+    "text": "Aufgabe 8\nRekonstrukturiere folgenden Plot aus Kovic (2014) mithilfe von ggplot und dem tagi_data_gemeinden.csv Datensatz:\nTipp:\n\nNutze geom_smooth\n\n\n\n\n\n\n\n\n\n\n\n\n\n\nKovic, Marko. 2014. „Je weniger Ausländer, desto mehr Ja-Stimmen? Wirklich?“ Tagesanzeiger Datenblog. https://blog.tagesanzeiger.ch/datenblog/index.php/668/je-weniger-auslaender-desto-mehr-ja-stimmen-wirklich.",
+    "crumbs": [
+      "InfoVis",
+      "<span class='chapter-number'>11</span>  <span class='chapter-title'>Infovis 1: Übung</span>"
+    ]
+  },
+  {
+    "objectID": "infovis/Infovis1_Script_eda.html",
+    "href": "infovis/Infovis1_Script_eda.html",
+    "title": "Infovis 1: Script EDA",
+    "section": "",
+    "text": "library(\"ggplot2\")\nlibrary(\"dplyr\")\nlibrary(\"scales\")\n\n# create some data about age and height of people\npeople &lt;- data.frame(\n  ID = c(1:30),\n  age = c(\n    5.0, 7.0, 6.5, 9.0, 8.0, 5.0, 8.6, 7.5, 9.0, 6.0,\n    63.5, 65.7, 57.6, 98.6, 76.5, 78.0, 93.4, 77.5, 256.6, 512.3,\n    15.5, 18.6, 18.5, 22.8, 28.5, 39.5, 55.9, 50.3, 31.9, 41.3\n  ),\n  height = c(\n    0.85, 0.93, 1.1, 1.25, 1.33, 1.17, 1.32, 0.82, 0.89, 1.13,\n    1.62, 1.87, 1.67, 1.76, 1.56, 1.71, 1.65, 1.55, 1.87, 1.69,\n    1.49, 1.68, 1.41, 1.55, 1.84, 1.69, 0.85, 1.65, 1.94, 1.80\n  ),\n  weight = c(\n    45.5, 54.3, 76.5, 60.4, 43.4, 36.4, 50.3, 27.8, 34.7, 47.6,\n    84.3, 90.4, 76.5, 55.6, 54.3, 83.2, 80.7, 55.6, 87.6, 69.5,\n    48.0, 55.6, 47.6, 60.5, 54.3, 59.5, 34.5, 55.4, 100.4, 110.3\n  )\n)\n\n# build a scatterplot for a first inspection\nggplot(people, aes(x = age, y = height)) +\n  geom_point()\n\n\n\n\n\n\n\n\n\nggplot(people, aes(x = age, y = height)) +\n  geom_point() +\n  scale_y_continuous(limits = c(0.75, 2))\n\n\n\n\n\n\n\n# Go to help page: http://docs.ggplot2.org/current/ -&gt; Search for icon of fit-line\n# http://docs.ggplot2.org/current/geom_smooth.html\n\n\n# build a scatterplot for a first inspection, with regression line\nggplot(people, aes(x = age, y = height)) +\n  geom_point() +\n  scale_y_continuous(limits = c(0, 2.0)) +\n  geom_smooth()\n\n\n\n\n\n\n\n\n\n# stem and leaf plot\nstem(people$height)\n## \n##   The decimal point is 1 digit(s) to the left of the |\n## \n##    8 | 25593\n##   10 | 037\n##   12 | 523\n##   14 | 19556\n##   16 | 255789916\n##   18 | 04774\nstem(people$height, scale = 2)\n## \n##   The decimal point is 1 digit(s) to the left of the |\n## \n##    8 | 2559\n##    9 | 3\n##   10 | \n##   11 | 037\n##   12 | 5\n##   13 | 23\n##   14 | 19\n##   15 | 556\n##   16 | 2557899\n##   17 | 16\n##   18 | 0477\n##   19 | 4\n\n\n# explore the two variables with box-whiskerplots\nsummary(people$age)\n##    Min. 1st Qu.  Median    Mean 3rd Qu.    Max. \n##    5.00    8.70   30.20   59.14   65.15  512.30\nboxplot(people$age)\n\n\n\n\n\n\n\n\n\nsummary(people$height)\n##    Min. 1st Qu.  Median    Mean 3rd Qu.    Max. \n##   0.820   1.190   1.555   1.455   1.690   1.940\nboxplot(people$height)\n\n\n\n\n\n\n\n\n\n# explore data with a histgram\nggplot(people, aes(x = age)) +\n  geom_histogram(binwidth = 20)\n\n\n\n\n\n\n\n\n\ndensity(x = people$height)\n## \n## Call:\n##  density.default(x = people$height)\n## \n## Data: people$height (30 obs.);   Bandwidth 'bw' = 0.1576\n## \n##        x                y           \n##  Min.   :0.3472   Min.   :0.001577  \n##  1st Qu.:0.8636   1st Qu.:0.102659  \n##  Median :1.3800   Median :0.510260  \n##  Mean   :1.3800   Mean   :0.483081  \n##  3rd Qu.:1.8964   3rd Qu.:0.721733  \n##  Max.   :2.4128   Max.   :1.215724\n\n# re-expression: use log or sqrt axes\n#\n# Find here guideline about scaling axes\n# http://www.cookbook-r.com/Graphs/Axes_(ggplot2)/\n# http://docs.ggplot2.org/0.9.3.1/scale_continuous.html\n\n\n# logarithmic axis: respond to skewness in the data, e.g. log10\nggplot(people, aes(x = age, y = height)) +\n  geom_point() +\n  scale_y_continuous(limits = c(0, 2.0)) +\n  geom_smooth() +\n  scale_x_log10()\n\n\n\n\n\n\n\n\n\n# outliers: Remove very small and very old people\n\npeopleClean &lt;- people |&gt;\n  filter(ID != 27) |&gt; # Diese Person war zu klein.\n  filter(age &lt; 100) # Fehler in der Erhebung des Alters\n\n\nggplot(peopleClean, aes(x = age)) +\n  geom_histogram(binwidth = 10)\n\n\n\n\n\n\n\n\n\nggplot(peopleClean, aes(x = age, y = height)) +\n  geom_point() +\n  scale_y_continuous(limits = c(0, 2.0)) +\n  geom_smooth()\n\n\n\n\n\n\n\n\n\n# with custom binwidth\nggplot(peopleClean, aes(x = age)) +\n  geom_histogram(binwidth = 10) +\n  theme_bw() # specifying the theme\n\n\n\n\n\n\n\n\n\n# quadratic axis\nggplot(peopleClean, aes(x = age, y = height)) +\n  geom_point() +\n  scale_y_continuous(limits = c(0, 2.0)) +\n  geom_smooth(method = \"lm\", fill = \"lightblue\", size = 0.5, alpha = 0.5) +\n  scale_x_sqrt()\n\n\n\n\n\n\n\n\n\n# filter \"teenies\": No trend\nfilter(peopleClean, age &lt; 15) |&gt;\n  ggplot(aes(x = age, y = height)) +\n  geom_point() +\n  scale_y_continuous(limits = c(0, 2.0)) +\n  geom_smooth(method = \"lm\", fill = \"lightblue\", size = 0.5, alpha = 0.5)\n\n\n\n\n\n\n\n\n\n# filter \"teenies\": No trend\npeopleClean |&gt;\n  filter(age &gt; 55) |&gt;\n  ggplot(aes(x = age, y = height)) +\n  geom_point() +\n  scale_y_continuous(limits = c(0, 2.0)) +\n  geom_smooth(method = \"lm\", fill = \"lightblue\", size = 0.5, alpha = 0.5)\n\n\n\n\n\n\n\n\n\n# Onwards towards multidimensional data\n\n# Finally, make a scatterplot matrix\npairs(peopleClean[, 2:4], panel = panel.smooth)\n\n\n\n\n\n\n\n\n\npairs(peopleClean[, 2:4], panel = panel.smooth)",
+    "crumbs": [
+      "InfoVis",
+      "<span class='chapter-number'>12</span>  <span class='chapter-title'>Infovis 1: Script EDA</span>"
+    ]
+  },
+  {
+    "objectID": "infovis/Infovis2_Uebung_A.html",
+    "href": "infovis/Infovis2_Uebung_A.html",
+    "title": "Infovis 2: Übung A",
+    "section": "",
+    "text": "Aufgabe 1\nMache aus der wide table eine long table, die wie folgt aussieht.\ntime\nstation\ntemperature\n\n\n\n\n2005-01-01\nALT\n1.3\n\n\n2005-01-01\nBUS\n1.5\n\n\n2005-01-01\nGVE\n1.1\n\n\n2005-01-01\nINT\n0.2\n\n\n2005-01-01\nOTL\n2.2\n\n\n2005-01-01\nLUG\n1.7\nImportiere anschliessend den Datensatz temperature_2005_metadata.csv und verbinde die beiden Datensätze mit einem left_join via station (bzw. stn).",
+    "crumbs": [
+      "InfoVis",
+      "<span class='chapter-number'>13</span>  <span class='chapter-title'>Infovis 2: Übung A</span>"
+    ]
+  },
+  {
+    "objectID": "infovis/Infovis2_Uebung_A.html#aufgabe-2",
+    "href": "infovis/Infovis2_Uebung_A.html#aufgabe-2",
+    "title": "Infovis 2: Übung A",
+    "section": "Aufgabe 2",
+    "text": "Aufgabe 2\nErstelle ein Scatterplot (time vs. temperature), wobei die Punkte aufgrund ihrer Meereshöhe eingefärbt werden sollen. Tiefe Werte sollen dabei blau eingefärbt werden und hohe Werte rot (scale_color_gradient). Verkleinere die Punkte, um übermässiges Überplotten der Punkten zu vermeiden (size =). Weiter sollen auf der x-Achse im Abstand von 3 Monaten der jeweilige Monat vermerkt sein (date_breaks bzw. date_labels von scale_x_datetime()).",
+    "crumbs": [
+      "InfoVis",
+      "<span class='chapter-number'>13</span>  <span class='chapter-title'>Infovis 2: Übung A</span>"
+    ]
+  },
+  {
+    "objectID": "infovis/Infovis2_Uebung_A.html#aufgabe-3",
+    "href": "infovis/Infovis2_Uebung_A.html#aufgabe-3",
+    "title": "Infovis 2: Übung A",
+    "section": "Aufgabe 3",
+    "text": "Aufgabe 3\nErstelle eine Zusatzvariabel Date mit dem Datum der jeweiligen Messung ( mit as.Date). Nutze diese Spalte, um die Tagesmitteltemperatur pro Station zu berechnen (mit summarise()).\nUm die Metadaten (Name, Meereshoehe, x, y) nicht zu verlieren, kannst du den Join aus der ersten Übung wieder ausführen. Alternativ (schneller aber auch schwerer zu verstehen) kannst du diese Variabeln innerhalb deines group_by verwenden.",
+    "crumbs": [
+      "InfoVis",
+      "<span class='chapter-number'>13</span>  <span class='chapter-title'>Infovis 2: Übung A</span>"
+    ]
+  },
+  {
+    "objectID": "infovis/Infovis2_Uebung_A.html#aufgabe-4",
+    "href": "infovis/Infovis2_Uebung_A.html#aufgabe-4",
+    "title": "Infovis 2: Übung A",
+    "section": "Aufgabe 4",
+    "text": "Aufgabe 4\nWiederhole nun den Plot aus der ersten Aufgabe mit den aggregierten Daten aus der vorherigen Aufgabe. Um die labels korrekt zu setzen, musst du scale_x_datetime mit scale_x_date ersetzen.",
+    "crumbs": [
+      "InfoVis",
+      "<span class='chapter-number'>13</span>  <span class='chapter-title'>Infovis 2: Übung A</span>"
+    ]
+  },
+  {
+    "objectID": "infovis/Infovis2_Uebung_A.html#aufgabe-5",
+    "href": "infovis/Infovis2_Uebung_A.html#aufgabe-5",
+    "title": "Infovis 2: Übung A",
+    "section": "Aufgabe 5",
+    "text": "Aufgabe 5\nFüge am obigen Plot eine schwarze, gestrichelte Trendlinie hinzu.",
+    "crumbs": [
+      "InfoVis",
+      "<span class='chapter-number'>13</span>  <span class='chapter-title'>Infovis 2: Übung A</span>"
+    ]
+  },
+  {
+    "objectID": "infovis/Infovis2_Uebung_A.html#aufgabe-6",
+    "href": "infovis/Infovis2_Uebung_A.html#aufgabe-6",
+    "title": "Infovis 2: Übung A",
+    "section": "Aufgabe 6",
+    "text": "Aufgabe 6\nPositioniere die Legende oberhalb des Plots (nutze dazu theme() mit legend.position).",
+    "crumbs": [
+      "InfoVis",
+      "<span class='chapter-number'>13</span>  <span class='chapter-title'>Infovis 2: Übung A</span>"
+    ]
+  },
+  {
+    "objectID": "infovis/Infovis2_Uebung_A.html#aufgabe-7-optional-fortgeschritten",
+    "href": "infovis/Infovis2_Uebung_A.html#aufgabe-7-optional-fortgeschritten",
+    "title": "Infovis 2: Übung A",
+    "section": "Aufgabe 7 (optional, fortgeschritten)",
+    "text": "Aufgabe 7 (optional, fortgeschritten)\nFüge den Temperaturwerten auf der y-Ache ein °C hinzu (siehe unten und studiere diesen Tipp zur Hilfe).",
+    "crumbs": [
+      "InfoVis",
+      "<span class='chapter-number'>13</span>  <span class='chapter-title'>Infovis 2: Übung A</span>"
+    ]
+  },
+  {
+    "objectID": "infovis/Infovis2_Uebung_A.html#aufgabe-8",
+    "href": "infovis/Infovis2_Uebung_A.html#aufgabe-8",
+    "title": "Infovis 2: Übung A",
+    "section": "Aufgabe 8",
+    "text": "Aufgabe 8\nJetzt verlassen wir den Scatterplot und machen einen Boxplot mit den Temperaturdaten. Färbe die Boxplots wieder in Abhängigkeit der Meereshöhe ein.\n\nBeachte den Unterschied zwischen colour = und fill =\nBeachte den Unterschied zwischen facet_wrap() und facet_grid()\nfacet_grid() braucht übrigens noch einen Punkt (.) zur Tilde (~).\nBeachte den Unterschied zwischen “.~” und “~.” bei facet_grid()\nverschiebe nach Bedarf die Legende",
+    "crumbs": [
+      "InfoVis",
+      "<span class='chapter-number'>13</span>  <span class='chapter-title'>Infovis 2: Übung A</span>"
+    ]
+  },
+  {
+    "objectID": "infovis/Infovis2_Uebung_A.html#aufgabe-9",
+    "href": "infovis/Infovis2_Uebung_A.html#aufgabe-9",
+    "title": "Infovis 2: Übung A",
+    "section": "Aufgabe 9",
+    "text": "Aufgabe 9\nAls letzter wichtiger Plottyp noch zwei Übungen zum Histogramm. Erstelle ein Histogramm geom_histogram() mit den Temperaturwerten. Teile dazu die Stationen in verschiedene Höhenlagen ein (Tieflage [&lt; 400 m], Mittellage [400 - 600 m] und Hochlage [&gt; 600 m]). Vergleiche die Verteilung der Temperaturwerte in den verschiedenen Lagen mit einem Histogramm.\nTip: Nutze cut um die Stationen in die drei Gruppen aufzuteilen",
+    "crumbs": [
+      "InfoVis",
+      "<span class='chapter-number'>13</span>  <span class='chapter-title'>Infovis 2: Übung A</span>"
+    ]
+  },
+  {
+    "objectID": "infovis/Infovis2_Uebung_B.html",
+    "href": "infovis/Infovis2_Uebung_B.html",
+    "title": "Infovis 2: Übung optional",
+    "section": "",
+    "text": "Aufgabe 1: Parallel coordinate plots\nErstelle einen parallel coordinate plot. Dafür eignet sich der integrierte Datensatz mtcars. Extrahiere die Fahrzeugnamen mit rownames_to_column.\nZudem müssen die Werte jeweiles auf eine gemeinsame Skala normalisiert werden. Hierfür kannst du die Funktion scales::rescale verwenden.\nmpg\ncyl\ndisp\nhp\ndrat\nwt\nqsec\nvs\nam\ngear\ncarb\n\n\n\n\nMazda RX4\n21.0\n6\n160\n110\n3.90\n2.620\n16.46\n0\n1\n4\n4\n\n\nMazda RX4 Wag\n21.0\n6\n160\n110\n3.90\n2.875\n17.02\n0\n1\n4\n4\n\n\nDatsun 710\n22.8\n4\n108\n93\n3.85\n2.320\n18.61\n1\n1\n4\n1\n\n\nHornet 4 Drive\n21.4\n6\n258\n110\n3.08\n3.215\n19.44\n1\n0\n3\n1\n\n\nHornet Sportabout\n18.7\n8\n360\n175\n3.15\n3.440\n17.02\n0\n0\n3\n2\n\n\nValiant\n18.1\n6\n225\n105\n2.76\n3.460\n20.22\n1\n0\n3\n1\nSo sieht der fertige Plot aus:",
+    "crumbs": [
+      "InfoVis",
+      "<span class='chapter-number'>14</span>  <span class='chapter-title'>Infovis 2: Übung optional</span>"
+    ]
+  },
+  {
+    "objectID": "infovis/Infovis2_Uebung_B.html#aufgabe-2-polar-plot-mit-biber-daten",
+    "href": "infovis/Infovis2_Uebung_B.html#aufgabe-2-polar-plot-mit-biber-daten",
+    "title": "Infovis 2: Übung optional",
+    "section": "Aufgabe 2: Polar Plot mit Biber Daten",
+    "text": "Aufgabe 2: Polar Plot mit Biber Daten\nPolar Plots eignen sich unter anderem für Daten, die zyklischer Natur sind, wie zum Beispiel zeitlich geprägte Daten (Tages-, Wochen-, oder Jahresrhythmen). Aus den Beispiels-Datensätzen habe ich zwei Datensätze gefunden, die zeitlich geprägt sind:\n\nbeaver1 und beaver2\nAirPassenger\n\nBeide Datensätze müssen noch etwas umgeformt werden, bevor wir sie für einen Radialplot verwenden können. In Aufgabe 2 verwenden wir die Biber-Datensätze, in der nächsten Aufgabe (3) die Passagier-Daten.\nWenn wir die Daten von beiden Bibern verwenden wollen, müssen wir diese noch zusammenfügen.\nZudem müssen wir die Zeitangabe noch anpassen: Gemäss der Datenbeschreibung handelt es sich bei der Zeitangabe um ein sehr programmier-unfreundliches Format. 3:30 wird als “0330” notiert. Wir müssen diese Zeitangabe, noch in ein Dezimalsystem umwandeln.\nSo sieht der fertige Plot aus:",
+    "crumbs": [
+      "InfoVis",
+      "<span class='chapter-number'>14</span>  <span class='chapter-title'>Infovis 2: Übung optional</span>"
+    ]
+  },
+  {
+    "objectID": "infovis/Infovis2_Uebung_B.html#aufgabe-3-raster-visualisierung-mit-flugpassagieren",
+    "href": "infovis/Infovis2_Uebung_B.html#aufgabe-3-raster-visualisierung-mit-flugpassagieren",
+    "title": "Infovis 2: Übung optional",
+    "section": "Aufgabe 3: Raster Visualisierung mit Flugpassagieren",
+    "text": "Aufgabe 3: Raster Visualisierung mit Flugpassagieren\nAnalog Aufgabe 2, dieses Mal mit dem Datensatz AirPassengers\nAirPassengers kommt in einem Format daher, das ich selbst noch gar nicht kannte. Es sieht zwar aus wie ein data.frame oder eine matrix, ist aber von der Klasse ts.\n\n##      Jan Feb Mar Apr May Jun Jul Aug Sep Oct Nov Dec\n## 1949 112 118 132 129 121 135 148 148 136 119 104 118\n## 1950 115 126 141 135 125 149 170 170 158 133 114 140\n## 1951 145 150 178 163 172 178 199 199 184 162 146 166\n## 1952 171 180 193 181 183 218 230 242 209 191 172 194\n## 1953 196 196 236 235 229 243 264 272 237 211 180 201\n## 1954 204 188 235 227 234 264 302 293 259 229 203 229\n## 1955 242 233 267 269 270 315 364 347 312 274 237 278\n## 1956 284 277 317 313 318 374 413 405 355 306 271 306\n## 1957 315 301 356 348 355 422 465 467 404 347 305 336\n## 1958 340 318 362 348 363 435 491 505 404 359 310 337\n## 1959 360 342 406 396 420 472 548 559 463 407 362 405\n## 1960 417 391 419 461 472 535 622 606 508 461 390 432\n## [1] \"ts\"\n\nDamit wir den Datensatz verwenden können, müssen wir ihn zuerst in eine matrix umwandeln. Wie das geht habe ich hier erfahren.\n\n##       month\n## year   Apr Aug Dec Feb Jan Jul Jun Mar May Nov Oct Sep\n##   1949 129 148 118 118 112 148 135 132 121 104 119 136\n##   1950 135 170 140 126 115 170 149 141 125 114 133 158\n##   1951 163 199 166 150 145 199 178 178 172 146 162 184\n##   1952 181 242 194 180 171 230 218 193 183 172 191 209\n##   1953 235 272 201 196 196 264 243 236 229 180 211 237\n##   1954 227 293 229 188 204 302 264 235 234 203 229 259\n##   1955 269 347 278 233 242 364 315 267 270 237 274 312\n##   1956 313 405 306 277 284 413 374 317 318 271 306 355\n##   1957 348 467 336 301 315 465 422 356 355 305 347 404\n##   1958 348 505 337 318 340 491 435 362 363 310 359 404\n##   1959 396 559 405 342 360 548 472 406 420 362 407 463\n##   1960 461 606 432 391 417 622 535 419 472 390 461 508\n\nAus der matrix muss noch ein Dataframe her, zudem müssen wir aus der breiten Tabelle eine lange Tabelle machen.\nSo sieht der fertige Plot aus:",
+    "crumbs": [
+      "InfoVis",
+      "<span class='chapter-number'>14</span>  <span class='chapter-title'>Infovis 2: Übung optional</span>"
+    ]
+  },
+  {
     "objectID": "fallstudie_s/0_Vorbereitung.html",
     "href": "fallstudie_s/0_Vorbereitung.html",
     "title": "Vorbereitung",
     "section": "",
-    "text": "Im Rahmen der Fallstudie werden wir einige R Packages brauchen. Wir empfehlen, diese bereits vor der ersten Lektion zu installieren. Analog der Vorbereitungsübung in Prepro1 könnt ihr mit nachstehendem Code alle noch nicht installierten Bibliotheken automatisch installieren.\n\nipak &lt;- function(pkg) {\n  new.pkg &lt;- pkg[!(pkg %in% installed.packages()[, \"Package\"])]\n  if (length(new.pkg)) {\n    install.packages(new.pkg, dependencies = TRUE)\n  }\n}\n\npackages &lt;- c(\n  \"readr\", \"ggplot2\", \"dplyr\", \"lubridate\", \"ggpubr\", \"PerformanceAnalytics\",\n  \"MuMIn\", \"AICcmodavg\", \"fitdistrplus\", \"lme4\", \"DHARMa\", \"blmeco\", \"sjPlot\", \"lattice\",\n   \"suncalc\", \"glmmTMB\"\n)\n\nipak(packages)\n\nZudem könnt ihr alle für die Fallstudie Profil S benötigten Daten unter auf Moodle im Abschnitt Fallstudie “Ecosystems & Biodiversity” herunterladen.",
+    "text": "Im Rahmen der Fallstudie werden wir einige R Packages brauchen. Wir empfehlen, diese bereits vor der ersten Lektion zu installieren. Analog der Vorbereitungsübung in Prepro1 könnt ihr mit nachstehendem Code alle noch nicht installierten packages automatisch installieren.\n\nipak &lt;- function(pkg) {\n  new.pkg &lt;- pkg[!(pkg %in% installed.packages()[, \"Package\"])]\n  if (length(new.pkg)) {\n    install.packages(new.pkg, dependencies = TRUE)\n  }\n}\n\npackages &lt;- c(\n  \"readr\", \"ggplot2\", \"lubridate\", \"ggpubr\", \"PerformanceAnalytics\",\n  \"MuMIn\", \"AICcmodavg\", \"fitdistrplus\", \"lme4\", \"DHARMa\", \"blmeco\", \"sjPlot\", \"lattice\",\n  \"dplyr\", \"suncalc\", \"glmmTMB\"\n)\n\nipak(packages)\n\nZudem könnt ihr alle für die Fallstudie Profil S benötigten Daten unter folgendem Link herunterladen.",
     "crumbs": [
       "Fallstudie S",
-      "<span class='chapter-number'>9</span>  <span class='chapter-title'>Vorbereitung</span>"
+      "<span class='chapter-number'>15</span>  <span class='chapter-title'>Vorbereitung</span>"
     ]
   },
   {
@@ -478,7 +850,7 @@
     "text": "Hintergrund\nDas rund 1100 ha grosse Naturschutzgebiet Wildnispark Zürich Sihlwald, welches im periurbanen Raum südlich von Zürich liegt, gilt seit dem 1. Januar 2010 als erster national anerkannter Naturerlebnispark. Er ist Teil des Wildnisparks Zürich und wichtiges Naherholungsgebiet für die Stadt Zürich.\nDas Schutzgebiet befindet sich im Spannungsfeld zwischen Schutz und Nutzen, denn einerseits sollen die Besuchenden den Wald erleben dürfen, andererseits soll sich dieser, in der Kernzone, frei entwickeln dürfen. Im Perimeter gelten darum verschiedene Regeln. So darf z. B. nur auf bestimmten Wegen mit den Velo gefahren werden.\nDas Management braucht solide, empirisch erhobene Daten zur Natur und zu den Besuchenden damit die Ziele von Nutzen und Schürzen erreicht werden können. Das Besuchermonitoring deckt den zweiten Teil dieser notwendigen Daten ab. Im Wildnispark Zürich sind dazu mehrere automatische Zählstellen in Betrieb. Die Zählstellen erfassen stundenweise die Besuchenden auf den Wegen. Einige Zählstellen erfassen richtungsgetrennt und / oder können zwischen verschiedenen Nutzergruppen wie Personen, die zu Fuss gehen, und Velofahrenden unterscheiden.\nIm Rahmen des Moduls Research Methods werden in dieser Fallstudie mehrere dieser automatischen Zählstellen genauer untersucht. Die Daten, welche im Besitz des WPZ sind, wurden bereits kalibriert. Das heisst, Zählungen während Wartungsarbeiten, bei Felhbetrieb o.ä. wurden bereits ausgeschlossen. Dies ist eine zeitintensive Arbeit und wir dürfen hier mit einem sauber aufbereiteten “Datenschatz” arbeiten.\nPerimeter des Wildnispark Zürichs mit den ungefähren Standorten von zwei ausgewählten automatischen Zählstellen.\nHinweis:\nDer Wildnispark wertet die Zahlen auf verschiedene Weise aus. So sind z. B. Jahresgänge (an welchen Monaten herrscht besonders viel Betrieb?) und die absoluten Nutzungszahlen bekannt. Vertiefte Auswertungen, die beispielsweise den Zusammenhang zwischen Besuchszahlen und dem Wetter untersuchen, werden nicht gemacht.\nUnsere Analysen in diesem Modul helfen dem Management, ein besseres Verständnis zum Verhalten der Besuchenden zu erlangen und bilden Grundlagen für Managemententscheide in der Praxis.",
     "crumbs": [
       "Fallstudie S",
-      "<span class='chapter-number'>10</span>  <span class='chapter-title'>Einführung</span>"
+      "<span class='chapter-number'>16</span>  <span class='chapter-title'>Einführung</span>"
     ]
   },
   {
@@ -489,7 +861,7 @@
     "text": "Die Zähler 211 und 502 erfassen sowohl Fussgänger:innen als auch Fahrräder. Die Erfassung erfolgt richtungsgetrennt.",
     "crumbs": [
       "Fallstudie S",
-      "<span class='chapter-number'>10</span>  <span class='chapter-title'>Einführung</span>"
+      "<span class='chapter-number'>16</span>  <span class='chapter-title'>Einführung</span>"
     ]
   },
   {
@@ -500,7 +872,7 @@
     "text": "Ziel\nIn dieser Fallstudie zeigen wir, welche Einflüsse die Covid19-Pandemie im Frühjahr 2020 auf die täglichen Besuchszahlen im Wildnispark Zürich hatte. Dabei setzen wir den Fokus auf die Dämmerung und die Nacht, den in diesen Zeiten sind Wildtiere (u.a. Rehe) besonders sensibel gegenüber Störungen. Wir untersuchen ebenfalls, wie sich die Besuchszhalen seit der Pandemie entwickelt haben und ob sie sich wieder dem Muster von vor der Pandemie annähern. Auch dabei ist die “dunkle” Tageszeit im Fokus.\nIn unsere Analysen ziehen wir auch weitere erklärende Faktoren wie Wetter, Wochentag, Kalenderwoche und Schulferien mit ein. Die statistischen Auswertungen erlauben und somit klare Rückschlüsse auf die Effekte der Faktoren und deren Stärke zu ziehen.",
     "crumbs": [
       "Fallstudie S",
-      "<span class='chapter-number'>10</span>  <span class='chapter-title'>Einführung</span>"
+      "<span class='chapter-number'>16</span>  <span class='chapter-title'>Einführung</span>"
     ]
   },
   {
@@ -511,7 +883,7 @@
     "text": "Grundlagen\nZur Verfügung stehen:\n\ndie stündlichen Zählungen von Fussgänger:innen und Velos an den Zählstellen\nMeteodaten (Temperatur, Sonnenscheindauer, Niederschlagssumme)\nR-Skripte mit Hinweisen zur Auswertung",
     "crumbs": [
       "Fallstudie S",
-      "<span class='chapter-number'>10</span>  <span class='chapter-title'>Einführung</span>"
+      "<span class='chapter-number'>16</span>  <span class='chapter-title'>Einführung</span>"
     ]
   },
   {
@@ -522,7 +894,7 @@
     "text": "Aufbau der Fallstudie\nIn dieser Fallstudie erheben wir zuerst selbst Daten auf dem Grüntal, welche wir dann deskriptiv auswerten. Anschliessend beschäftigen wir uns mit den Daten aus dem Wildnispark Zürich, welche wir ebenfalls deskriptiv auswerten und auch sttistische Modelle damit programmieren. Diese Ergebnisse werden dann im Abschlussbericht dokumentiert.",
     "crumbs": [
       "Fallstudie S",
-      "<span class='chapter-number'>10</span>  <span class='chapter-title'>Einführung</span>"
+      "<span class='chapter-number'>16</span>  <span class='chapter-title'>Einführung</span>"
     ]
   },
   {
@@ -533,7 +905,7 @@
     "text": "Einführung\nEs gibt eine Vielzahl an möglichen Methoden zur Erfassung der Besuchszahlen. Automatische Zählgeräte bieten die Möglichkeit, lange und durchgehende Zeitreihen zu erfassen. Inputs dazu, wie diese ausgewertet werden können, erhält ihr in dieser Aufgabe.",
     "crumbs": [
       "Fallstudie S",
-      "<span class='chapter-number'>11</span>  <span class='chapter-title'>Monitoring</span>"
+      "<span class='chapter-number'>17</span>  <span class='chapter-title'>Monitoring</span>"
     ]
   },
   {
@@ -544,7 +916,7 @@
     "text": "Ziele\n\nIhr könnt das eingesetzte Zählgerät installieren und kennt die Vor- und Nachteile verschiedener Methoden.\nIhr könnt die generierten Daten explorativ und deskriptiv auswerten.",
     "crumbs": [
       "Fallstudie S",
-      "<span class='chapter-number'>11</span>  <span class='chapter-title'>Monitoring</span>"
+      "<span class='chapter-number'>17</span>  <span class='chapter-title'>Monitoring</span>"
     ]
   },
   {
@@ -555,7 +927,7 @@
     "text": "Grundlagen\nDie Geräte werden gemeinsam auf dem Campus Grüntal platziert.\nDatenschutz ist ein wichtiges Thema. Die eingesetzten Geräte erfassen keine Personendaten, sondern nur Bewegungen. Es handelt sich um Pyroelektrische Infrarotsensoren, welche auf den Temperaturunterschied reagieren, wenn sich eine Person vor der Linse bewegt. Insofern handelt es sich, vereinfacht gesagt, um Bewegungsmelder.",
     "crumbs": [
       "Fallstudie S",
-      "<span class='chapter-number'>11</span>  <span class='chapter-title'>Monitoring</span>"
+      "<span class='chapter-number'>17</span>  <span class='chapter-title'>Monitoring</span>"
     ]
   },
   {
@@ -563,10 +935,10 @@
     "href": "fallstudie_s/3_Aufgabenstellung_WPZ.html",
     "title": "Aufgabenstellung Abschlussbericht",
     "section": "",
-    "text": "Ziele\nIhr habt selbst ein (kleines) Besuchermonitoring auf dem Grüental durchgeführt und euch bereits mit dem WPZ beschäftigt. Die Aufgaben im Zusammenhang mit dem Grüental sind abgeschlossen und wir beschäftigen uns ab jetzt ausschliesslich mit dem WPZ.\nIm Rahmen unserer Analyse programmieren wir multivariate Modelle, welche den Zusammenhang zwischen der Anzahl Besuchenden und verschiedenen Einflussfaktoren beschreiben. Dank den Modellen können wir sagen, wie die Besuchenden auf die untersuchten Faktoren reagiert haben (siehe dazu auch euren Forschungsplan sowie [Einführung], Ziele).\nFür meine Analysen habe ich untenstehende Fragestellungen formuliert. Ihr könnt aber auch eure Fragestellungen aus eurem Forschungsplan übernehmen, falls ihr das möchtet und falls diese mit den zur Verügung stehenden Daten bearbeitet werden können.",
+    "text": "Ziele\nIhr habt selbst ein (kleines) Besuchermonitoring auf dem Grüental durchgeführt und euch bereits mit dem WPZ beschäftigt. Die Aufgaben im Zusammenhang mit dem Grüental sind abgeschlossen und wir beschäftigen uns ab jetzt ausschliesslich mit dem WPZ.\nIm Rahmen unserer Analyse programmieren wir multivariate Modelle, welche den Zusammenhang zwischen der Anzahl Besuchenden und verschiedenen Einflussfaktoren beschreiben. Dank den Modellen können wir sagen, wie die Besucher:innen auf die untersuchten Faktoren reagiert haben (siehe dazu auch euren Forschungsplan sowie [Einführung], Ziele).\nKonkret sollen eure Fragestellungen aus dem Forschungsplan untersucht werden.\nFür “meine” Analysen habe ich folgende Fragestellungen formuliert:",
     "crumbs": [
       "Fallstudie S",
-      "<span class='chapter-number'>12</span>  <span class='chapter-title'>Aufgabenstellung Abschlussbericht</span>"
+      "<span class='chapter-number'>18</span>  <span class='chapter-title'>Aufgabenstellung Abschlussbericht</span>"
     ]
   },
   {
@@ -574,10 +946,10 @@
     "href": "fallstudie_s/3_Aufgabenstellung_WPZ.html#ziele",
     "title": "Aufgabenstellung Abschlussbericht",
     "section": "",
-    "text": "Welchen Einfluss haben zeitliche Variablen (Wochentag, Ferien, Monat, Jahr, Phasen der Covid-Pandemie) und Wetterparameter (Sonnenscheindauer, Höchsttemperatur, Niederschlagssumme) auf die Besuchszahlen im WPZ am Tag, in der Dämmerung und in der Nacht?\nWie stark sind die jeweiligen Einflüsse, welche Effektrichtungen sind beobachtbar und welche der untersuchten Parameter sind signifikant?\nGibt es in den Effektrichtungen deutliche Unterschiede zwischen den Tageszeiten und wie können diese erklärt werden?\nWelches sind die mutmasslichen Auswirkungen dieser Nutzung auf das Verhalten der Rege im WPZ?\n\n\n\nJede Gruppe wertet Daten von einem Zählgerät aus. Sprecht miteinander ab, wer welchen Zähler behandelt (211 oder 502; Spezifikationen siehe [Einführung], Hinweis). Die Daten von jeder Zählstelle sollen nur von einer Gruppe ausgewertet werden!\nBezieht in eure Auswertungen den gesamten zur Verfügung stehenden Zeitraum ein.\nFür euren Zähler stehen Zahlen zu Fussgänger:innen und Fahrrädern zur Verfügung (siehe [Einführung], Hinweis). Entscheidet euch selbst, ob ihr Fussgänger:innen ODER Fahrräder auswerten wollt. Die anderen Daten dürft ihr vernachlässigen.\nIm Bericht sollen die Informationen und Erfahrungen aus dem gesamten Verlauf der Fallstudie in geeigneter Weise einfliessen. Bezüglich der Felderhebung Grüental erwarten wir keine Angaben.",
+    "text": "Welchen Einfluss haben zeitliche Variablen (Wochentag, Ferien, Monat, Jahr, Phasen der Covid-Pandemie) und Wetterparameter (Sonnenscheindauer, Höchsttemperatur, Niederschlagssumme) auf die Besuchszahlen im WPZ am Tag, in der Dämmerung und in der Nacht?\nWie stark sind die jeweiligen Einflüsse, welche Effektrichtungen sind beobachtbar und welche der untersuchten Parameter sind signifikant?\nGibt es in den Effektrichtungen deutliche Unterschiede zwischen den Tageszeiten und wie können diese erklärt werden?\nWelches sind die mutmasslichen Auswirkungen dieser Nutzung auf das Verhalten der Rege im WPZ?\n\n\n\nJede Gruppe wertet Daten von einem Zähler aus. Sprecht miteinander ab, wer welchen Zähler behandelt (211 oder 502; Spezifikationen siehe [Einführung], Hinweis). Jeder Zähler soll nur von einer Gruppe ausgewertet werden!\nBezieht in eure Auswertungen den gesamten zur Verfügung stehenden Zeitraum ein.\nFür euren Zähler stehen Zahlen zu Fussgänger:innen und Velos zur Verfügung (siehe [Einführung], Hinweis). Entscheidet euch selbst, ob ihr Fussgänger:innen ODER Velos auswerten wollt. Die anderen Daten dürft ihr vernachlässigen.\nIm Bericht sollen die Informationen und Erfahrungen aus dem gesamten Verlauf der Fallstudie in geeigneter Weise einfliessen. Bezüglich der Felderhebung Grüental erwarten wir keine Angaben.",
     "crumbs": [
       "Fallstudie S",
-      "<span class='chapter-number'>12</span>  <span class='chapter-title'>Aufgabenstellung Abschlussbericht</span>"
+      "<span class='chapter-number'>18</span>  <span class='chapter-title'>Aufgabenstellung Abschlussbericht</span>"
     ]
   },
   {
@@ -585,10 +957,10 @@
     "href": "fallstudie_s/3_Aufgabenstellung_WPZ.html#erwartungen",
     "title": "Aufgabenstellung Abschlussbericht",
     "section": "Erwartungen",
-    "text": "Erwartungen\n\nStruktur / Aufbau\n\n\nAbstract / Zusammenfassung (wenn Bericht auf Deutsch, dann Zusammenfassung auch auf Deutsch). Im Abstract sollen alle Bestandteile des Berichts aufgenommen sein.\nEinleitung (hier können allenfalls Elemente / Teile aus den Forschungsplänen übernommen werden)\nFragestellung (siehe oben; die Fragestellung ist vorgegeben, darf aber für den Bericht geschärft / ausformuliert und konkretisiert werden.)\nMethoden (aufschlussreiches Kapitel mit den statistischen Analysen)\nResultate (deskriptive Statistik, multivariates Modell; kurzer Fliesstext sowie die notwendigen Tabellen und eine Auswahl möglichst informativer Grafiken)\nDiskussion (Diskussion der deskriptiven Analysen und der Modellergebnisse; dieser Abschnitt sollte die eigenen Resultate auch im Zusammenhang mit aktueller Fachliteratur reflektieren.)\nLiteraturverzeichnis (Tipp: Das Literaturverzeichnis sollte vollständig sein, sowie formal korrekt und einheitlich daherkommen. Wir erwarten speziell in der Diskussion eine Abstützung auf aktuelle Fachliteratur. Auf Moodle haben wir euch eine Auswahl relevanter Studien bereitgestellt.)\nAnhang (für alle Auswertungen relevanter R-Code in geeigneter Form)\n\n\nGesamtumfang max. 12’000 Zeichen (inkl. Leerzeichen; exkl. Tabellen, Literaturverzeichnis und Anhang)\nAbgabe am 12.1.2025 per Mail an hoce@zhaw.ch",
+    "text": "Erwartungen\n\nStruktur / Aufbau\n\n\nAbstract / Zusammenfassung (wenn Bericht auf Deutsch, dann Zusammenfassung auch auf Deutsch). Im Abstract sollen alle Bestandteile des Berichts aufgenommen sein.\nEinleitung (hier können allenfalls Elemente / Teile aus den Forschungsplänen übernommen werden)\nFragestellung (siehe oben; die Fragestellung ist vorgegeben, darf aber für den Bericht geschärft / ausformuliert und konkretisiert werden.)\nMethoden (aufschlussreiches Kapitel mit den statistischen Analysen)\nResultate (deskriptive Statistik, multivariates Modell; kurzer Fliesstext sowie die notwendigen Tabellen und eine Auswahl möglichst informativer Grafiken)\nDiskussion (Diskussion der deskriptiven Analysen und der Modellergebnisse; dieser Abschnitt sollte die eigenen Resultate auch im Zusammenhang mit aktueller Fachliteratur reflektieren.)\nLiteraturverzeichnis (Tipp: Das Literaturverzeichnis sollte vollständig sein, sowie formal korrekt und einheitlich daherkommen. Wir erwarten speziell in der Diskussion eine Abstützung auf aktuelle Fachliteratur. Auf Moodle haben wir euch eine Auswahl relevanter Papers bereitgestellt.)\nAnhang (für alle Auswertungen relevanter R-Code in geeigneter Form)\n\n\nGesamtumfang max. 12’000 Zeichen (inkl. Leerzeichen; exkl. Tabellen, Literaturverzeichnis und Anhang)\nAbgabe am 14.1.2024 per Mail an hoce@zhaw.ch",
     "crumbs": [
       "Fallstudie S",
-      "<span class='chapter-number'>12</span>  <span class='chapter-title'>Aufgabenstellung Abschlussbericht</span>"
+      "<span class='chapter-number'>18</span>  <span class='chapter-title'>Aufgabenstellung Abschlussbericht</span>"
     ]
   },
   {
@@ -596,21 +968,10 @@
     "href": "fallstudie_s/3_Aufgabenstellung_WPZ.html#bewertungskriterien",
     "title": "Aufgabenstellung Abschlussbericht",
     "section": "Bewertungskriterien",
-    "text": "Bewertungskriterien\n\nIst die Methode klar und verständlich formuliert?\nSind die deskriptiven Analysen klar beschrieben und geeignet visualisiert?\nIst die Variablenselektion klar beschrieben, plausibel und nachvollziehbar?\nSind die Modellresultate in Text- und Tabellenform korrekt beschrieben und geeignet visualisiert?\nIst die Diskussion klar formuliert und inhaltlich schlüssig?\nWie gut ist die Diskussion auf relevante und aktuelle Fachliteratur abgestützt?\nZusätzliche bewerten wir die inhaltliche Dichte der Arbeit und die formale Qualität (Sprache, Struktur, Aufbau, Darstellung, Literaturverzeichnis, Umgang mit Literatur im Text)",
+    "text": "Bewertungskriterien\n\nIst die Methode klar und verständlich formuliert?\nSind die deskriptiven Analysen klar beschrieben und geeignet visualisiert?\nIst die Variablenselektion klar beschrieben, plausibel und nachvollziehbar?\nSind die Modellresultate in Text- und Tabellenform korrekt beschrieben und geeignet visualisiert?\nIst die Diskussion klar formuliert und inhaltlich schlüssig?\nWie gut ist die Diskussion auf relevante und aktuelle Fachliteratur abgestützt?\nZusätzliche bewerten wir die inhaltliche Dichte der Arbeit und die formale Qualität (Sprache, Struktur, Aufbau, Darstellung, Literaturverzeichnis, Umgang mit Literatur im Text)\n\nZusammensetzung der Fallstudiennote:\n\nFallstudie-Leistungsnachweis 1 - Forschungsplan: 30 %\nFallstudie-Leistungsnachweis 2 - Multivariate Analyse: 70 %",
     "crumbs": [
       "Fallstudie S",
-      "<span class='chapter-number'>12</span>  <span class='chapter-title'>Aufgabenstellung Abschlussbericht</span>"
-    ]
-  },
-  {
-    "objectID": "fallstudie_s/3_Aufgabenstellung_WPZ.html#zusammensetzung-note-fallstudie",
-    "href": "fallstudie_s/3_Aufgabenstellung_WPZ.html#zusammensetzung-note-fallstudie",
-    "title": "Aufgabenstellung Abschlussbericht",
-    "section": "Zusammensetzung Note Fallstudie:",
-    "text": "Zusammensetzung Note Fallstudie:\n\nFallstudie-Leistungsnachweis 1 - Forschungsplan: Testatplichtig\nFallstudie-Leistungsnachweis 2 - Multivariate Analyse: 100 %\n\nDie Note der Fallstudie fliesst in die Gesamtbewertung des Moduls Research Methods mit ein.",
-    "crumbs": [
-      "Fallstudie S",
-      "<span class='chapter-number'>12</span>  <span class='chapter-title'>Aufgabenstellung Abschlussbericht</span>"
+      "<span class='chapter-number'>18</span>  <span class='chapter-title'>Aufgabenstellung Abschlussbericht</span>"
     ]
   },
   {
@@ -621,7 +982,7 @@
     "text": "Vorbereitung\nVor den eigentlichen Auswertungen müssen einige Vorbereitungen unternommen werden. Die Zeit, die man hier investiert, wird in den späteren Phasen um ein Mehrfaches eingespart.\nWie im Unterricht am Morgen empfehle auch ich mit Projekten zu arbeiten, da diese sehr einfach ausgetauscht (auf verschiedene Rechner) und somit auch reproduziert werden können. Wichtig ist, dass es keine absoluten Arbeitspfade sondern nur relative gibt. Der Datenimport (und -export) kann mithilfe dieser relativen Pfade stark vereinfacht werden. –&gt; Kurz gesagt: Projekte helfen alles am richtigen Ort zu behalten (mehr zur Arbeit mit Projekten: Link).\n–&gt; File / New Project",
     "crumbs": [
       "Fallstudie S",
-      "<span class='chapter-number'>13</span>  <span class='chapter-title'>Projek erstellen</span>"
+      "<span class='chapter-number'>19</span>  <span class='chapter-title'>Projek erstellen</span>"
     ]
   },
   {
@@ -632,7 +993,7 @@
     "text": "Erstellt an einem passenden Speicherort (evtl. onedrive für das gemeinsame Arbeiten an einem Projekt) ein neues Projekt mit einem treffenden Namen:",
     "crumbs": [
       "Fallstudie S",
-      "<span class='chapter-number'>13</span>  <span class='chapter-title'>Projek erstellen</span>"
+      "<span class='chapter-number'>19</span>  <span class='chapter-title'>Projek erstellen</span>"
     ]
   },
   {
@@ -640,10 +1001,10 @@
     "href": "fallstudie_s/4_Projektierung.html#aufgabe-1-projektaufbau",
     "title": "Projek erstellen",
     "section": "Aufgabe 1: Projektaufbau",
-    "text": "Aufgabe 1: Projektaufbau\nHinweise:\nNutzt für allen Text, welcher nicht im Code integriert ist, das Symbol #. Wenn ihr den Text als Titel definieren wollt, so dass er in der Übersicht erscheint, können vor dem Wort “#” und nach dem Wort “####” eingefügt werden.\n\n# Texte, vor denen ein # und nach denen #### stehen, sind Überschriften\n\n# Ich bin eine first level Überschrift ####\n\n## Ich bin eine second level Überschrift ####\n\n# Texte, vor denen ein # steht, erklaeren den Ablauf (nicht was, sondern warum)\n\n# Dann folgen die Arbeitsschritte\n1 + 1\n\n# Wenn man auf \"Outline\" klickt (oder CTRL + SHIFT + O),\n# öffnet sich die Übersicht zu den Überschriften\n\nTipps:\n\nAlt + - = &lt;-\nCtrl + Shift + C = # vor der ausgewählten Zeile / den ausgewählten Zeilen hinzufügen oder wieder löschen\n\nAufbau eines Skripts\nZuerst immer den Titel des Projekts sowie den Autor/ die Autorin des Skripts nennen. Hier soll auch die Herkunft der Daten ersichtlich sein und falls externe Daten verwendet werden, sollte geklärt werden, wer Dateneigentümer ist (WPZ und Meteo Schweiz).\nIm Skript soll immer die Ordnerstruktur des Projekts genannt werden. So kann der Arbeitsvorgang auf verschiedenen Rechnern einfach reproduziert werden (ich verwende hier ein Projektordner mit den Unterordnern __scripts, data, results).\nBeschreibt zudem kurz die verwendeten Meteodaten (siehe dazu Metadata Meteodaten, –&gt; order_XXX_legend.txt)\nEin Skript kann in R eigentlich immer (mehr oder weniger) nach dem selbem Schema aufgebaut sein. Dieses Schema enthält bei uns folgende Kapitel:\n\nMetadaten und Definitionen\nDatenimport\nVorbereitung\nDeskriptive Analyse und Visualisierung\nMultifaktorielle Analyse und Visualisierung\n\nBereitet euer Skript mit diesen Kapitel vor.\n\n# .###########################################################################################\n# TITEL ####\n# Fallstudie Modul Research Methods, HS24. Autor/in ####\n# .##########################################################################################\n\n# .##########################################################################################\n# METADATA UND DEFINITIONEN ####\n# .##########################################################################################\n\n# Datenherkunft ####\n# ...\n\n# .##########################################################################################\n# 1. DATENIMPORT #####\n# .##########################################################################################\n\nIn einem professionellen Bericht ist es angebracht, wenn alle Abbildung einheitlich sind. Dafür braucht es u.a. eine Farbpalette. Ich definiere meine Auswahl bereits hier; das hat den Vorteil, dass man die Farbnamen nur einmal schreiben muss und später die selbst definierte Palette unter der Variable “mycolors” abrufen kann.\n\nmycolors &lt;- c(\"orangered\", \"gold\", \"mediumvioletred\", \"darkblue\")",
+    "text": "Aufgabe 1: Projektaufbau\nHinweise:\nNutzt für allen Text, welcher nicht im Code integriert ist, das Symbol #. Wenn ihr den Text als Titel definieren wollt, so dass er in der Übersicht erscheint, können vor dem Wort “#” und nach dem Wort “####” eingefügt werden.\nTipps:\n\nAlt + - = &lt;-\nCtrl + Shift + C = # vor der ausgewählten Zeile / den ausgewählten Zeilen hinzufügen oder wieder löschen\n\nAufbau eines Skripts\nZuerst immer den Titel des Projekts sowie den Autor/ die Autorin des Skripts nennen. Hier soll auch die Herkunft der Daten ersichtlich sein und falls externe Daten verwendet werden, sollte geklärt werden, wer Dateneigentümer ist (WPZ und Meteo Schweiz).\nIm Skript soll immer die Ordnerstruktur des Projekts genannt werden. So kann der Arbeitsvorgang auf verschiedenen Rechnern einfach reproduziert werden (ich verwende hier ein Projektordner mit den Unterordnern __scripts, data, results).\nBeschreibt zudem kurz die verwendeten Meteodaten (siehe dazu Metadata Meteodaten, –&gt; order_XXX_legend.txt)\nEin Skript kann in R eigentlich immer (mehr oder weniger) nach dem selbem Schema aufgebaut sein. Dieses Schema enthält bei uns folgende Kapitel:\n\nMetadaten und Definitionen\nDatenimport\nVorbereitung\nDeskriptive Analyse und Visualisierung\nMultifaktorielle Analyse und Visualisierung\n\nBereitet euer Skript mit diesen Kapitel vor.\nIn einem professionellen Bericht ist es angebracht, wenn alle Abbildung einheitlich sind. Dafür braucht es u.a. eine Farbpalette. Ich definiere meine Auswahl bereits hier; das hat den Vorteil, dass man die Farbnamen nur einmal schreiben muss und später die selbst definierte Palette unter der Variable “mycolors” abrufen kann.",
     "crumbs": [
       "Fallstudie S",
-      "<span class='chapter-number'>13</span>  <span class='chapter-title'>Projek erstellen</span>"
+      "<span class='chapter-number'>19</span>  <span class='chapter-title'>Projek erstellen</span>"
     ]
   },
   {
@@ -651,10 +1012,10 @@
     "href": "fallstudie_s/4_Projektierung.html#aufgabe-2-laden-der-bibliotheken",
     "title": "Projek erstellen",
     "section": "Aufgabe 2: Laden der Bibliotheken",
-    "text": "Aufgabe 2: Laden der Bibliotheken\n\nLädt nun die nachfolgenden, benötigten Bibliotheken.\nDiese habt ihr, falls nötig, im Kapitel Vorbereitung installiert.\n\n\n# Benoetigte Bibliotheken ####\nlibrary(\"readr\") # read data into r\nlibrary(\"ggplot2\") # plot nice graphs\nlibrary(\"dplyr\") # select data\nlibrary(\"lubridate\") # Arbeiten mit Datumsformaten\nlibrary(\"suncalc\") # berechne Tageszeiten abhaengig vom Sonnenstand\nlibrary(\"ggpubr\") # to arrange multiple plots in one graph\nlibrary(\"PerformanceAnalytics\") # Plotte Korrelationsmatrix\nlibrary(\"MuMIn\") # Multi-Model Inference\nlibrary(\"AICcmodavg\") # Modellaverageing\nlibrary(\"fitdistrplus\") # Prueft die Verteilung in Daten\nlibrary(\"lme4\") # Multivariate Modelle\nlibrary(\"DHARMa\") # Modeldiagnostik\nlibrary(\"blmeco\") # Bayesian data analysis using linear models\nlibrary(\"sjPlot\") # Plotten von Modellergebnissen (tab_model)\nlibrary(\"lattice\") # einfaches plotten von Zusammenhängen zwischen Variablen\nlibrary(\"glmmTMB\")# zero-inflated model",
+    "text": "Aufgabe 2: Laden der Bibliotheken\n\nLädt nun die nachfolgenden, benötigten Bibliotheken.\nDiese habt ihr, falls nötig, im Kapitel Vorbereitung installiert.",
     "crumbs": [
       "Fallstudie S",
-      "<span class='chapter-number'>13</span>  <span class='chapter-title'>Projek erstellen</span>"
+      "<span class='chapter-number'>19</span>  <span class='chapter-title'>Projek erstellen</span>"
     ]
   },
   {
@@ -662,10 +1023,10 @@
     "href": "fallstudie_s/4_Projektierung.html#aufgabe-3-zeitliche-definitionen",
     "title": "Projek erstellen",
     "section": "Aufgabe 3: Zeitliche Definitionen",
-    "text": "Aufgabe 3: Zeitliche Definitionen\nWir lesen später zwei verschiedene Datensätze ein. Beide sollen exakt denselben Zeitraum umfassen. Definiert dazu den ersten und letzten Tag gemäss den bei euch vorhandenen Zähldaten (das unterscheidet sich von Gruppe zu Gruppe).\n\ndepo_start &lt;- as.Date(\"2017-01-01\")\ndepo_end &lt;- as.Date(\"2023-12-31\")\n\nEin Teil unserer Auswertungen ist der Einfluss der Corona-Lockdown auf das Besuchsverhalten.\n-Wir müssen also Start und Ende der beiden Lockdowns in der Schweiz definieren:\n\nlock_1_start_2020 &lt;- as.Date(\"2020-03-16\")\nlock_1_end_2020 &lt;- as.Date(\"2020-05-11\")\n\nlock_2_start_2021 &lt;- as.Date(\"2020-12-22\")\nlock_2_end_2021 &lt;- as.Date(\"2021-03-01\")\n\nEbenfalls müssen die erste und letzte Kalenderwoche der Untersuchungsfrist definiert werden. Diese werden bei wochenweisen Analysen ausgeklammert da sie i.d.R. unvollständig sind (das ist ein späterer Arbeitsschritt). Geht wie oben vor. Tipp: der Befehl isoweek() liefert euch die Kalenderwoche.\nFerienzeiten können einen grossen Einfluss auf das Besucheraufkommen haben. Die relevanten Ferienzeiträume müssen daher bekannt sein (heruntergeladen von https://www.schulferien.org/schweiz/ferien/2020/).\nLest das bereitgestellte .csv mit den Ferienzeiträumen ein und speichert es unter schulferien.\n\nschulferien &lt;- read_delim(\"datasets/fallstudie_s/ferien.csv\", \",\")\n\nNun sind alle Vorbereitungen gemacht, die Projektstruktur aufgebaut und die eigentliche Arbeit kann im nächsten Schritt beginnen.",
+    "text": "Aufgabe 3: Zeitliche Definitionen\nWir lesen später zwei verschiedene Datensätze ein. Beide sollen exakt denselben Zeitraum umfassen. Definiert dazu den ersten und letzten Tag gemäss den bei euch vorhandenen Zähldaten (das unterscheidet sich von Gruppe zu Gruppe).\nEin Teil unserer Auswertungen ist der Einfluss der Corona-Lockdown auf das Besuchsverhalten.\n-Wir müssen also Start und Ende der beiden Lockdowns in der Schweiz definieren:\nEbenfalls müssen die erste und letzte Kalenderwoche der Untersuchungsfrist definiert werden. Diese werden bei wochenweisen Analysen ausgeklammert da sie i.d.R. unvollständig sind (das ist ein späterer Arbeitsschritt). Geht wie oben vor. Tipp: der Befehl isoweek() liefert euch die Kalenderwoche.\nFerienzeiten können einen grossen Einfluss auf das Besucheraufkommen haben. Die relevanten Ferienzeiträume müssen daher bekannt sein (heruntergeladen von https://www.schulferien.org/schweiz/ferien/2020/).\nLest das bereitgestellte .csv mit den Ferienzeiträumen ein und speichert es unter schulferien.\nNun sind alle Vorbereitungen gemacht, die Projektstruktur aufgebaut und die eigentliche Arbeit kann im nächsten Schritt beginnen.",
     "crumbs": [
       "Fallstudie S",
-      "<span class='chapter-number'>13</span>  <span class='chapter-title'>Projek erstellen</span>"
+      "<span class='chapter-number'>19</span>  <span class='chapter-title'>Projek erstellen</span>"
     ]
   },
   {
@@ -676,7 +1037,7 @@
     "text": "Aufgabe 1: Zähldaten",
     "crumbs": [
       "Fallstudie S",
-      "<span class='chapter-number'>14</span>  <span class='chapter-title'>Datenverarbeitung</span>"
+      "<span class='chapter-number'>20</span>  <span class='chapter-title'>Datenverarbeitung</span>"
     ]
   },
   {
@@ -684,10 +1045,10 @@
     "href": "fallstudie_s/5_Datenverarbeitung.html#aufgabe-1-zähldaten",
     "title": "Datenverarbeitung",
     "section": "",
-    "text": "1a)\nDie Projektstruktur steht. Nun können die Daten eingelesen und die nötigen Datentypen definiert werden.\nLädt die Daten zuerst von Moodle herunter:\n\nZähldaten zu eurem Standort (211_sihlwaldstrasse_2017_2024.csv, 502_sihluferweg_2016_2024.csv)\nMeteodaten und Legende\n\nHinweis: Siehe [Einführung] für den Standort der Zähler 211 und 502.\nDie Zähldaten des WPZ wurden vorgängig bereinigt (z.B. wurden Stundenwerte entfernt, an denen am Zähler Wartungsarbeiten stattgefunden haben). Das macht es für uns einfach, denn wir können die Daten ohne vorgängige Bereinigung einlesen. Behaltet aber im Hinterkopf, dass die Datenaufbereitung, die Datenbereinigung mit viel Aufwand verbunden ist.\n\nLest die Zählaten ein, speichert ihn unter der Variable depo und sichtet den Datensatz (z.B. str(), head(), view() usw.).\n\n\n\nMusterlösung\n# Speicherort sowie Dateiname anpassen\ndepo &lt;- read_delim(\"./HIER RELATIVEN DATEIPFAD EINGEBEN\", \"HIER SEPERATOR EINGEBEN\")\n\n\nHinweis: Im Stundenformat zeigen die Werte bei 11:00 die Zähldaten zwischen 11:00 bis 12:00 Uhr.\n\n\n1b)\n\nNun muss das Datum als solches definiert werden. Ich nutze dazu as.POSIXct(). Welches Format hat das Datum im csv? Das muss im Code angepasst werden.\n\n\n\nMusterlösung\ndepo &lt;- depo |&gt;\n  mutate(\n    Datetime = as.POSIXct(DatumUhrzeit, format = \"HIER STEHT DAS DATUMSFORMAT\", tz = \"CET\"),\n    # nun schreiben wir uns das Datum in eine seperate Spalte\n    Datum = as.Date(Datetime)\n  )\n\n\n\n\n1c)\nIhr könnt selbst wählen, ob ihr Fussgänger:innen oder Fahrräder untersuchen wollt (je nachdem ob sie in eurem Datensatz vorhanden sind).\n\nEntfernt die überflüssigen Spalten aus dem Datensatz. Ich schlage vor, dass ihr dafür den Befehl dplyr::select() verwendet.\nDamit kann man entweder Spalten behalten oder eben auch Spalten entfernen (-c(SPALTENNAMEN)).\n\nHinweis: mit select() können Spalten gewählt werden, mit filter() Zeilen.\n\n\n1d)\n\nBerechnen des Totals (IN + OUT), da dieses in den Daten nicht vorhanden ist.\n\nTipp: Wenn man R sagt: “addiere mir Spalte x mit Spalte y”, dann macht R das für alle Zeilen in diesen zwei Spalten. Wenn man nun noch sagt: “speichere mir das Ergebnis dieser Addition in einer neuen Spalte namens Total”, dann hat man die Aufgabe bereits gelöst. Arbeitet mit mutate()).\n\nEntfernt nun alle NA-Werte mit na.omit().",
+    "text": "1a)\nDie Projektstruktur steht. Nun können die Daten eingelesen und die nötigen Datentypen definiert werden.\nLädt die Daten zuerst von Moodle herunter:\n\nZähldaten zu eurem Standort (211_sihlwaldstrasse_2017_2024.csv, 502_sihluferweg_2016_2024.csv)\nMeteodaten (order_105742_data.txt) und Legende\n\nHinweis: Siehe [Einführung] für den Standort der Zähler 211 und 502.\nDie Zähldaten des WPZ wurden vorgängig bereinigt (z.B. wurden Stundenwerte entfernt, an denen am Zähler Wartungsarbeiten stattgefunden haben). Das macht es für uns einfach, denn wir können die Daten ohne vorgängige Bereinigung einlesen. Behaltet aber im Hinterkopf, dass die Datenaufbereitung, die Datenbereinigung mit viel Aufwand verbunden ist.\n\nLest die Zählaten ein, speichert ihn unter der Variable depo und sichtet den Datensatz (z.B. str(), head(), view() usw.).\n\n\n\nMusterlösung\n# Speicherort sowie Dateiname anpassen\ndepo &lt;- read_delim(\"./HIER RELATIVEN DATEIPFAD EINGEBEN\", \"HIER SEPERATOR EINGEBEN\")\n\n\nHinweis: Im Stundenformat zeigen die Werte bei 11:00 die Zähldaten zwischen 11:00 bis 12:00 Uhr.\n\n\n1b)\n\nNun muss das Datum als solches definiert werden. Ich nutze dazu as.POSIXct(). Welches Format hat das Datum im csv? Das muss im Code angepasst werden.\n\n\n\nMusterlösung\ndepo &lt;- depo |&gt;\n  mutate(\n    Datetime = as.POSIXct(DatumUhrzeit, format = \"HIER STEHT DAS DATUMSFORMAT\", tz = \"CET\"),\n    # nun schreiben wir uns das Datum in eine seperate Spalte\n    Datum = as.Date(Datetime)\n  )\n\n\n\n\n1c)\nIhr könnt selbst wählen, ob ihr Fussgänger:innen oder Fahrräder untersuchen wollt (je nachdem ob sie in eurem Datensatz vorhanden sind).\n\nEntfernt die überflüssigen Spalten aus dem Datensatz. Ich schlage vor, dass ihr dafür den Befehl dplyr::select() verwendet.\nDamit kann man entweder Spalten behalten oder eben auch Spalten entfernen (-c(SPALTENNAMEN)).\n\nHinweis: mit select() können Spalten gewählt werden, mit filter() Zeilen.\n\n\n1d)\n\nBerechnen des Totals (IN + OUT), da dieses in den Daten nicht vorhanden ist.\n\nTipp: Wenn man R sagt: “addiere mir Spalte x mit Spalte y”, dann macht R das für alle Zeilen in diesen zwei Spalten. Wenn man nun noch sagt: “speichere mir das Ergebnis dieser Addition in einer neuen Spalte namens Total”, dann hat man die Aufgabe bereits gelöst. Arbeitet mit mutate()).\n\nEntfernt nun alle NA-Werte mit na.omit().",
     "crumbs": [
       "Fallstudie S",
-      "<span class='chapter-number'>14</span>  <span class='chapter-title'>Datenverarbeitung</span>"
+      "<span class='chapter-number'>20</span>  <span class='chapter-title'>Datenverarbeitung</span>"
     ]
   },
   {
@@ -695,10 +1056,10 @@
     "href": "fallstudie_s/5_Datenverarbeitung.html#aufgabe-2-meteodaten",
     "title": "Datenverarbeitung",
     "section": "Aufgabe 2: Meteodaten",
-    "text": "Aufgabe 2: Meteodaten\n\n2a)\n\nLest die Meteodaten ein und speichert sie unter meteo.\n\n\n\n2b)\n\nAuch hier müssen die Datentypen manuell gesetzt werden.\n\nTipp: Das Datum wird als Integer erkannt. Zuerst muss es in Text umgewandelt werden aus dem dann das eigentliche Datum herausgelesen werden kann. Das ist mühsam - darum hier der Code.\n\n\nMusterlösung\nmeteo &lt;- mutate(meteo, time = as.Date(as.character(time), \"%Y%m%d\"))\n\n\nHinweise:\nDie Zeitangaben sind in UTC: 00:40 UTC = 02:40 Sommerzeit = 01:40 Winterzeit, Beispiel: 13 = beinhaltet Messperiode von 12:01 bis 13:00\nDa wir mit Tageshöchstwerten oder -summen rechnen, können wir zum Glück ignorieren, dass das nicht mit den Daten der Zählstellen übereinstimmt. Learning: es ist zentral immer die Metadaten zu checken.\nWas ist eigentlich Niederschlag:\nLink Meteo Schweiz\n\nWerden den anderen Spalten die richtigen Typen zugewiesen? Falls nicht, ändert die Datentypen.\nNun schneiden wir den Datensatz auf die Untersuchungsdauer zu.\n\n\n\nMusterlösung\n    ... |&gt;\n    filter(time &gt;= depo_start, time &lt;= depo_end)\n\n\n\nDann müssen auch hier alle nicht verfügbare Werte (NA’s) herausgefiltert werden. Macht das wieder mit na.omit()\nPrüft nun, wie die Struktur des data.frame (df) aussieht und ob alle NA Werte entfernt wurden:\n\n\n\nMusterlösung\nsum(is.na(df$Variable))\n\n\n\nStimmen alle Datentypen? str()",
+    "text": "Aufgabe 2: Meteodaten\n\n2a)\n\nLest die Meteodaten ein und speichert sie unter meteo.\n\n\n\n2b)\n\nAuch hier müssen die Datentypen manuell gesetzt werden.\n\nTipp: Das Datum wird als Integer erkannt. Zuerst muss es in Text umgewandelt werden aus dem dann das eigentliche Datum herausgelesen werden kann. Das ist mühsam - darum hier der Code.\n\n\nMusterlösung\nmeteo &lt;- mutate(meteo, time = as.Date(as.character(time), \"%Y%m%d\"))\n\n\nHinweise:\nDie Zeitangaben sind in UTC: 00:40 UTC = 02:40 Sommerzeit = 01:40 Winterzeit, Beispiel: 13 = beinhaltet Messperiode von 12:01 bis 13:00\nDa wir mit Tageshöchstwerten oder -summen rechnen, können wir zum Glück ignorieren, dass das nicht mit den Daten der Zählstellen übereinstimmt. Learning: es ist zentral immer die Metadaten zu checken.\nWas ist eigentlich Niederschlag:\nLink Meteo Schweiz\n\nWerden den anderen Spalten die richtigen Typen zugewiesen? Falls nicht, ändert die Datentypen.\nNun schneiden wir den Datensatz auf die Untersuchungsdauer zu.\nDann müssen auch hier alle nicht verfügbare Werte (NA’s) herausgefiltert werden.\nPrüft nun, wie die Struktur des data.frame (df) aussieht und ob alle NA Werte entfernt wurden (sum(is.na(df$Variable))). Stimmen alle Datentypen?",
     "crumbs": [
       "Fallstudie S",
-      "<span class='chapter-number'>14</span>  <span class='chapter-title'>Datenverarbeitung</span>"
+      "<span class='chapter-number'>20</span>  <span class='chapter-title'>Datenverarbeitung</span>"
     ]
   },
   {
@@ -706,10 +1067,10 @@
     "href": "fallstudie_s/5_Datenverarbeitung.html#aufgabe-3-datenvorverarbeitung-mutationen",
     "title": "Datenverarbeitung",
     "section": "Aufgabe 3: Datenvorverarbeitung (Mutationen)",
-    "text": "Aufgabe 3: Datenvorverarbeitung (Mutationen)\n\n3a)\nJetzt fügen wir viele Convenience Variablen hinzu. Wir brauchen:\n\nWochentag; der Befehl dazu ist wday(). Danach als Faktor speichern.\nWerktag oder Wochenende, ebebfalls als Faktor.\n\nDer Code dazu könnte so aussehen:\n\n\nMusterlösung\n  ...|&gt;\n  mutate(Wochenende = ifelse(Wochentag %in% c(6,7), \"Wochenende\", \"Werktag\")) |&gt;\n  # 1 means Monday and 7 means Sunday (default)\n  mutate(Wochenende = as.factor(Wochenende)) |&gt;\n  ...\n\n\nje als Faktor:\n\nKalenderwoche: isoweek()\nMonat: month()\nJahr: year()\n\nDies machen wir auch mit dem “meteo” Datensatz. Wiederum bitte Wochentag, Werktag oder Wochenende, Kalenderwoche, Monat und Jahr. Ebenfalls alles als Faktor speichern.\n\nSpäter werden wir nicht nur Analysen pro Tag machen, sondern auch zusammengefasst nach Woche. Dafür müssen wir nun den meteo-Datensaz gruppieren und den mean berechnen. Hier der Code dazu, wie das aussehen könnte:\n\n\n\nMusterlösung\nmeteo_day &lt;- meteo |&gt;\n  group_by(Jahr, Monat, KW, Wochenende) |&gt;\n  summarise(\n    tre200nx = mean(tre200nx),\n    tre200jx = mean(tre200jx),\n    rre150n0 = mean(rre150n0),\n    rre150j0 = mean(rre150j0),\n    sremaxdv= mean(sremaxdv))\n\n\nWieder zurück zum depo-Datensazt.\nIch mache den folgenden Punkt nachgelagert zu den voerherigen Convenience Variablen, da zu viele Operationen in einem Schritt auch schon mal etwas durcheinander erzeugen können.\nPhasen der Covid-Pandemie (Code untenstehend). Wir definieren 5 Phasen:\n\nvon Anfang Untersuchungsperiode bis vor Lockdown 1\nLockdown 1\nzwischen den Lockdowns\nLockdown 2\nEnde 2. Lockdown bis Ende Untersuchungsperiode\nWir packen alle Phasen in eine Spalte –&gt; long-format ist praktischer für das plotten als wide-format.\nSpäter im multivariaten Modell werden die Levels der Variablen per “default” alphabetisch geordnet und die Effektstärken der einzelnen Levels gegenüber dem ersten Level gerechnet. Das macht wenig Sinn, den die Levels sind nicht alphabetisch, sondern gemäss der Liste oben (später mehr dazu). Das passen wir ebenfalls an.\nHier der Code dazu:\n\n\n\nMusterlösung\ndepo &lt;- depo |&gt;\n    mutate(Phase = case_when(\n        Datetime &lt; lock_1_start ~ \"Pre\",\n        Datetime &gt;= lock_1_start & Datetime &lt;= lock_1_end ~ \"Lockdown_1\",\n        Datetime &gt; lock_1_end & Datetime &lt; lock_2_start ~ \"inter\",\n        Datetime &gt;= lock_2_start & Datetime &lt;= lock_2_end ~ \"Lockdown_2\",\n        Datetime &gt; lock_2_end ~ \"Post\"\n    ))\n\n# hat das gepklappt?!\nunique(depo$Phase)\n\ndepo &lt;- depo |&gt;\n    # mit factor() koennen die levels direkt einfach selbst definiert werden.\n    # wichtig: speizfizieren, dass aus R base, ansonsten kommt es zu einem\n    # mix-up mit anderen packages\n    mutate(Phase = base::factor(Phase, levels = c(\"Pre\", \"Lockdown_1\", \"Inter\", \"Lockdown_2\", \"Post\")))\n\nstr(depo)\n\n\nNeben dem Lockdown können auch die Schulferien einen Einfluss auf die Besuchszahlen haben. Wir haben die Schulferien bereits als .csv eingelesen. Allerdings können wir die Schulferien nicht mit der case_when()-Funktion zuweisen, da diese mit dieser Funktion alle Vektoren im Datensatz “schulferien” verglichen werden, und nicht elementweise für jede Zeile im “depo”-Datensatz. Dies führt dazu, dass die Bedingungen nur einmal überprüft werden und dann auf den gesamten Vektor angewendet werden, anstatt Zeile für Zeile.\n\nWeil dies etwas kompliziert ist, hier eine Funktion zur Zuweisung der Ferien, welche ihr kopieren könnt:\n\n\n\nMusterlösung\n# schreibe nun eine Funktion zur zuweisung Ferien. WENN groesser als start UND kleiner als\n# ende, DANN schreibe ein 1\nfor (i in 1:nrow(schulferien)) {\n  depo$Ferien[depo$Datum &gt;= schulferien[i, \"Start\"] & depo$Datum &lt;= schulferien[i, \"Ende\"]] &lt;- 1\n}\ndepo$Ferien[is.na(depo$Ferien)] &lt;- 0\n\n# als faktor speichern\ndepo$Ferien &lt;- factor(depo$Ferien)\n\n\n\n\n3b)\n\nNun soll noch die volle Stunde als Integer im Datensatz stehen. Macht das mit dem Befehl hour()\n\n\n\n3c)\nDie Daten wurden durch den WPZ kalibriert (Nachkommastellen). Unser späteres Modell kann nicht mit Nachkommastellen in der abhängigen Variable umgehen (später dazu mehr).\n\nRundet die Zähldaten in der Spalte “Total” auf 0 Nachkommastellen. Der Befehl lautet round()\nDefiniert sie sicherheitshalber als Integer (= Ganzzahl)\nMacht das nun noch für IN und OUT.\n\n\n\n3d) Tageszeit\nWir setzen den Fokus unserer Untersuchung auf die Veränderung der Besuchszahlen in der Abend- und Morgendämmerung sowie der Nacht. Dafür müssen wir diese tageszeitliche Einteilung der Daten erst machen. Da dies über den Umfang dieser Fallstudie hinaus geht, liefere ich euch hier den Code dazu.\nDie wichtigsten Punkte:\n\nDie Tageslänge wurde für den Standort Zürich (Zeitzone CET) mit dem Package “suncalc” berechnet. Dabei wurden Sommer- und Winterzeit berücksichtigt.\nDie Einteilung der Tageszeit beruht auf dem Start und dem Ende der astronomischen Dämmerung sowie der Golden Hour. Der Morgen und der Abend wurden nach dieser Definition berechnet und um je eine Stunde Richtung Tag verlängert.\nUntenstehenden Code könnt ihr einfach kopieren.\nBeschreibt in eurem Bericht später, dass ihr die Einteilung der Tageszeit gemäss den Dämmerungszeiten in Zürich und gemäss meinem Code gemacht habt.\n\nHinweis: damit case_when() funktioniert, müsst ihr dplyr Version als 1.1.1 oder neuer haben. Das könnt ihr unter “Packages” (neben dem Reiter “Plots”, unten rechts) prüfen.\n\n\nMusterlösung\n# Einteilung Standort Zuerich\nLatitude &lt;- 47.38598\nLongitude &lt;- 8.50806\n\n# Start und das Ende der Sommerzeit:\n# https://www.schulferien.org/schweiz/zeit/zeitumstellung/\n\n\n# Welche Zeitzone haben wir eigentlich?\n# Switzerland uses Central European Time (CET) during the winter as standard time,\n# which is one hour ahead of Coordinated Universal Time (UTC+01:00), and\n# Central European Summer Time (CEST) during the summer as daylight saving time,\n# which is two hours ahead of Coordinated Universal Time (UTC+02:00).\n# https://en.wikipedia.org/wiki/Time_in_Switzerland\n\n# Was sind Astronomische Dämmerung und Golden Hour ueberhaupt?\n# https://sunrisesunset.de/sonne/schweiz/zurich-kreis-1-city/\n# https://www.rdocumentation.org/packages/suncalc/versions/0.5.0/topics/getSunlightTimes\n\n# Wir arbeiten mit folgenden Variablen:\n# \"nightEnd\" : night ends (morning astronomical twilight starts)\n# \"goldenHourEnd\" : morning golden hour (soft light, best time for photography) ends\n# \"goldenHour\" : evening golden hour starts\n# \"night\" : night starts (dark enough for astronomical observations)\n\nlumidata &lt;-\n    getSunlightTimes(\n        date = seq.Date(depo_start, depo_end, by = 1),\n        keep = c(\"nightEnd\", \"goldenHourEnd\", \"goldenHour\", \"night\"),\n        lat = Latitude,\n        lon = Longitude,\n        tz = \"CET\"\n    ) |&gt;\n    as_tibble()\n\n# jetzt haben wir alle noetigen Angaben zu Sonnenaufgang, Tageslaenge usw.\n# diese Angaben koennen wir nun mit unseren Zaehldaten verbinden:\ndepo &lt;- depo |&gt;\n    left_join(lumidata, by = c(Datum = \"date\"))\n\ndepo &lt;- depo |&gt;\n    mutate(Tageszeit = case_when(\n        Datetime &gt;= nightEnd & Datetime &lt;= goldenHourEnd ~ \"Morgen\",\n        Datetime &gt; goldenHourEnd & Datetime &lt; goldenHour ~ \"Tag\",\n        Datetime &gt;= goldenHour & Datetime &lt;= night ~ \"Abend\",\n        .default = \"Nacht\"\n    )) |&gt;\n    mutate(Tageszeit = factor(Tageszeit, levels = c(\"Morgen\", \"Tag\", \"Abend\", \"Nacht\"), ordered = TRUE))\n\n# behalte die relevanten Var\ndepo &lt;- depo |&gt; dplyr::select(-nightEnd, -goldenHourEnd, -goldenHour, -night, -lat, -lon)\n\n# Plotte zum pruefn ob das funktioniert hat\nggplot(depo, aes(y = Datetime, color = Tageszeit, x = Stunde)) +\n    geom_jitter() +\n    scale_color_manual(values = mycolors)\n\nsum(is.na(depo))\n\n# bei mir hat der Zusatz der Tageszeit noch zu einigen NA-Wertren gefueht.\n# Diese loesche ich einfach:\ndepo &lt;- na.omit(depo)\n# hat das funktioniert?\nsum(is.na(depo))",
+    "text": "Aufgabe 3: Datenvorverarbeitung (Mutationen)\n\n3a)\nJetzt fügen wir viele Convenience Variablen hinzu. Wir brauchen:\n\nWochentag; der Befehl dazu ist wday(). Danach als Faktor speichern.\nWerktag oder Wochenende als Faktor.\n\nDer Code dazu könnte so aussehen:\n\n\nMusterlösung\n  ...|&gt;\n  mutate(Wochenende = ifelse(Wochentag %in% c(6,7), \"Wochenende\", \"Werktag\")) |&gt;\n  # 1 means Monday and 7 means Sunday (default)\n  mutate(Wochenende = as.factor(Wochenende)) |&gt;\n  ...\n\n\nje als Faktor: 3. Kalenderwoche: isoweek() 4. Monat: month() 5. Jahr: year()\nDies machen wir auch mit dem “meteo” Datensatz.\n\nWiederum bitte Wochentag, Werktag oder Wochenende, Kalenderwoche, Monat und Jahr. Ebenfalls alles als Faktor speichern.\n\n\nSpäter werden wir nicht nur Analysen pro Tag machen, sondern auch zusammengefasst nach Woche. Dafür müssen wir nun den meteo-Datensaz gruppieren und den mean berechnen. Hier der Code dazu, wie das aussehen könnte:\n\n\n\nMusterlösung\nmeteo_day &lt;- meteo |&gt;\n  group_by(Jahr, Monat, KW, Wochenende) |&gt;\n  summarise(\n    tre200nx = mean(tre200nx),\n    tre200jx = mean(tre200jx),\n    rre150n0 = mean(rre150n0),\n    rre150j0 = mean(rre150j0),\n    sremaxdv= mean(sremaxdv))\n\n\nWieder zurück zum Depo-Datensazt.\nIch mache den folgenden Punkt nachgelagert, da zu viele Operationen in einem Schritt auch schon mal etwas durcheinander erzeugen können.\nPhasen der Covid-Pandemie (Code untenstehend). Wir definieren 5 Phasen:\n\nvon Anfang Untersuchungsperiode bis vor Lockdown 1\nLockdown 1\nzwischen den Lockdowns\nLockdown 2\nEnde 2. Lockdown bis Ende Untersuchungsperiode\nWir packen alle Phasen in eine Spalte –&gt; long-format ist praktischer für das plotten als wide-format.\nSpäter im multivariaten Modell werden die Levels der Variablen per “default” alphabetisch geordnet und die Effektstärken der einzelnen Levels gegenüber dem ersten Level gerechnet. Das macht wenig Sinn, den die Levels sind nicht alphabetisch, sondern gemäss der Liste oben (später mehr dazu). Das passen wir ebenfalls an.\nHier der Code dazu:\n\n\n\nMusterlösung\ndepo &lt;- depo |&gt;\n    mutate(Phase = case_when(\n        Datetime &lt; lock_1_start ~ \"Pre\",\n        Datetime &gt;= lock_1_start & Datetime &lt;= lock_1_end ~ \"Lockdown_1\",\n        Datetime &gt; lock_1_end & Datetime &lt; lock_2_start ~ \"inter\",\n        Datetime &gt;= lock_2_start & Datetime &lt;= lock_2_end ~ \"Lockdown_2\",\n        Datetime &gt; lock_2_end ~ \"Post\"\n    ))\n\n# hat das gepklappt?!\nunique(depo$Phase)\n\ndepo &lt;- depo |&gt;\n    # mit factor() koennen die levels direkt einfach selbst definiert werden.\n    # wichtig: speizfizieren, dass aus R base, ansonsten kommt es zu einem\n    # mix-up mit anderen packages\n    mutate(Phase = base::factor(Phase, levels = c(\"Pre\", \"Lockdown_1\", \"Inter\", \"Lockdown_2\", \"Post\")))\n\nstr(depo)\n\n\nNeben dem Lockdown können auch die Schulferien einen Einfluss auf die Besuchszahlen haben. Wir haben die Schulferien bereits als .csv eingelesen. Allerdings können wir die Schulferien nicht mit der case_when()-Funktion zuweisen, da diese mit dieser Funktion alle Vektoren im Datensatz “schulferien” verglichen werden, und nicht elementweise für jede Zeile im “depo”-Datensatz. Dies führt dazu, dass die Bedingungen nur einmal überprüft werden und dann auf den gesamten Vektor angewendet werden, anstatt Zeile für Zeile.\n\nWeil dies etwas kompliziert ist, hier eine Funktion zur Zuweisung der Ferien, welche ihr kopieren könnt:\n\n\n\nMusterlösung\n# schreibe nun eine Funktion zur zuweisung Ferien. WENN groesser als start UND kleiner als\n# ende, DANN schreibe ein 1\nfor (i in 1:nrow(schulferien)) {\n  depo$Ferien[depo$Datum &gt;= schulferien[i, \"Start\"] & depo$Datum &lt;= schulferien[i, \"Ende\"]] &lt;- 1\n}\ndepo$Ferien[is.na(depo$Ferien)] &lt;- 0\n\n# als faktor speichern\ndepo$Ferien &lt;- factor(depo$Ferien)\n\n\n\n\n3b)\n\nNun soll noch die volle Stunde als Integer im Datensatz stehen. Macht das mit dem Befehl hour()\n\n\n\n3c)\nDie Daten wurden durch den WPZ kalibriert (Nachkommastellen). Unser späteres Modell kann nicht mit Nachkommastellen in der abhängigen Variable umgehen (später dazu mehr).\n\nRundet die Zähldaten in der Spalte “Total” auf 0 Nachkommastellen. Der Befehl lautet round()\nDefiniert sie sicherheitshalber als Integer (= Ganzzahl)\nMacht das nun noch für IN und OUT.\n\n\n\n3d) Tageszeit\nWir setzen den Fokus unserer Untersuchung auf die Veränderung der Besuchszahlen in der Abend- und Morgendämmerung sowie der Nacht. Dafür müssen wir diese tageszeitliche Einteilung der Daten erst machen. Da dies über den Umfang dieser Fallstudie hinaus geht, liefere ich euch hier den Code dazu.\nDie wichtigsten Punkte:\n\nDie Tageslänge wurde für den Standort Zürich (Zeitzone CET) mit dem Package “suncalc” berechnet. Dabei wurden Sommer- und Winterzeit berücksichtigt.\nDie Einteilung der Tageszeit beruht auf dem Start und dem Ende der astronomischen Dämmerung sowie der Golden Hour. Der Morgen und der Abend wurden nach dieser Definition berechnet und um je eine Stunde Richtung Tag verlängert.\nUntenstehenden Code könnt ihr einfach kopieren.\nBeschreibt in eurem Bericht später, dass ihr die Einteilung der Tageszeit gemäss den Dämmerungszeiten in Zürich und gemäss meinem Code gemacht habt.\n\nHinweis: damit case_when() funktioniert, müsst ihr dplyr Version als 1.1.1 oder neuer haben. Das könnt ihr unter “Packages” (neben dem Reiter “Plots”, unten rechts) prüfen.\n\n\nMusterlösung\n# Einteilung Standort Zuerich\nLatitude &lt;- 47.38598\nLongitude &lt;- 8.50806\n\n# Start und das Ende der Sommerzeit:\n# https://www.schulferien.org/schweiz/zeit/zeitumstellung/\n\n\n# Welche Zeitzone haben wir eigentlich?\n# Switzerland uses Central European Time (CET) during the winter as standard time,\n# which is one hour ahead of Coordinated Universal Time (UTC+01:00), and\n# Central European Summer Time (CEST) during the summer as daylight saving time,\n# which is two hours ahead of Coordinated Universal Time (UTC+02:00).\n# https://en.wikipedia.org/wiki/Time_in_Switzerland\n\n# Was sind Astronomische Dämmerung und Golden Hour ueberhaupt?\n# https://sunrisesunset.de/sonne/schweiz/zurich-kreis-1-city/\n# https://www.rdocumentation.org/packages/suncalc/versions/0.5.0/topics/getSunlightTimes\n\n# Wir arbeiten mit folgenden Variablen:\n# \"nightEnd\" : night ends (morning astronomical twilight starts)\n# \"goldenHourEnd\" : morning golden hour (soft light, best time for photography) ends\n# \"goldenHour\" : evening golden hour starts\n# \"night\" : night starts (dark enough for astronomical observations)\n\nlumidata &lt;-\n    getSunlightTimes(\n        date = seq.Date(depo_start, depo_end, by = 1),\n        keep = c(\"nightEnd\", \"goldenHourEnd\", \"goldenHour\", \"night\"),\n        lat = Latitude,\n        lon = Longitude,\n        tz = \"CET\"\n    ) |&gt;\n    as_tibble()\n\n# jetzt haben wir alle noetigen Angaben zu Sonnenaufgang, Tageslaenge usw.\n# diese Angaben koennen wir nun mit unseren Zaehldaten verbinden:\ndepo &lt;- depo |&gt;\n    left_join(lumidata, by = c(Datum = \"date\"))\n\ndepo &lt;- depo |&gt;\n    mutate(Tageszeit = case_when(\n        Datetime &gt;= nightEnd & Datetime &lt;= goldenHourEnd ~ \"Morgen\",\n        Datetime &gt; goldenHourEnd & Datetime &lt; goldenHour ~ \"Tag\",\n        Datetime &gt;= goldenHour & Datetime &lt;= night ~ \"Abend\",\n        .default = \"Nacht\"\n    )) |&gt;\n    mutate(Tageszeit = factor(Tageszeit, levels = c(\"Morgen\", \"Tag\", \"Abend\", \"Nacht\"), ordered = TRUE))\n\n# behalte die relevanten Var\ndepo &lt;- depo |&gt; dplyr::select(-nightEnd, -goldenHourEnd, -goldenHour, -night, -lat, -lon)\n\n# Plotte zum pruefn ob das funktioniert hat\nggplot(depo, aes(y = Datetime, color = Tageszeit, x = Stunde)) +\n    geom_jitter() +\n    scale_color_manual(values = mycolors)\n\nsum(is.na(depo))\n\n# bei mir hat der Zusatz der Tageszeit noch zu einigen NA-Wertren gefueht.\n# Diese loesche ich einfach:\ndepo &lt;- na.omit(depo)\n# hat das funktioniert?\nsum(is.na(depo))",
     "crumbs": [
       "Fallstudie S",
-      "<span class='chapter-number'>14</span>  <span class='chapter-title'>Datenverarbeitung</span>"
+      "<span class='chapter-number'>20</span>  <span class='chapter-title'>Datenverarbeitung</span>"
     ]
   },
   {
@@ -717,65 +1078,10 @@
     "href": "fallstudie_s/5_Datenverarbeitung.html#aufgabe-4-aggregierung-der-stundendaten",
     "title": "Datenverarbeitung",
     "section": "Aufgabe 4: Aggregierung der Stundendaten",
-    "text": "Aufgabe 4: Aggregierung der Stundendaten\n\n4a)\nUnsere Daten liegen, wie ihr wisst, im Stundenformat vor. Für einige Auswertungen müssen wir aber auf ganze Tage zurückgreifen.\n\nDie Stundendaten werden zu ganzen Tagen aggregiert. Bezieht nur die Gruppierung (group_by()) Datum mit ein und speichert das Resultat unter depo_d (“_d” für “day”).\n\nHinweis: Wir gruppieren nur nach Datum, da ich mit den vielen weiteren Gruppierungen hier Probleme hatte, eine korrekte Summe zu erhalten.\n\n\nMusterlösung\ndepo_d &lt;- depo |&gt; \n  group_by(Datum) |&gt;   # Gruppieren nach der Variable Datum\n  summarise(Total = sum(Fuss_IN + Fuss_OUT),# Berechnen der gewünschten Werte\n            Fuss_IN = sum(Fuss_IN),\n            ...\n\n\n\nBerechne die Anzahl Tage bis Neujahr, wir brauchen sie später in den Modellen\n\n\n\nMusterlösung\ndepo_d &lt;- depo_d |&gt; \n  mutate(Tage_bis_Neujahr = as.numeric(difftime(ymd(paste0(year(Datum), \"-12-31\")), Datum, units = \"days\")))\n\n\n\nund füge nochmals alle Convenience Variablen gemäss oben ein:\n\n\n\nMusterlösung\ndepo_d &lt;- depo_d |&gt;\n  mutate(\n  Wochentag = wday(Datum, week_start = 1),\n  Wochentag = factor(Wochentag),\n  # Werktag oder Wochenende hinzufuegen\n  Wochenende = ifelse(Wochentag %in% c(6, 7), \"Wochenende\", \"Werktag\"),\n  Wochenende = as.factor(Wochenende),\n  # Kalenderwoche hinzufuegen\n  KW = isoweek(Datum),\n  KW = factor(KW),\n  # monat und Jahr\n  Monat = month(Datum),\n  Monat = factor(Monat),\n  Jahr = year(Datum),\n  Jahr = factor(Jahr))\n\ndepo_d &lt;- depo_d |&gt;\n  mutate(Phase = case_when(\n    Datum &lt; lock_1_start ~ \"Pre\",\n    Datum &gt;= lock_1_start & Datum &lt;= lock_1_end ~ \"Lockdown_1\",\n    Datum &gt; lock_1_end & Datum &lt; lock_2_start ~ \"Inter\",\n    Datum &gt;= lock_2_start & Datum &lt;= lock_2_end ~ \"Lockdown_2\",\n    Datum &gt; lock_2_end ~ \"Post\"\n  ))\n\ndepo_d &lt;- depo_d |&gt;\n  mutate(Phase = base::factor(Phase, levels = c(\"Pre\", \"Lockdown_1\", \"Inter\", \"Lockdown_2\", \"Post\")))\n\nfor (i in 1:nrow(schulferien)) {\n  depo_d$Ferien[depo_d$Datum &gt;= schulferien[i, \"Start\"] & depo_d$Datum &lt;= schulferien[i, \"Ende\"]] &lt;- 1\n}\ndepo_d$Ferien[is.na(depo_d$Ferien)] &lt;- 0\n\ndepo_d$Ferien &lt;- factor(depo_d$Ferien)\n\n# pruefe das df\nhead(depo_d)\n\n\n\nErstellt nun. ähnlich wie oben, einen Datensatz depo_daytime, in welchem ihr gruppiert nach:\n\n\nJahr\nMonat\nKalenderwoche\nPhase\nFerien\nWochenende oder Werktag\nTageszeit\n\n\nWeiter benötigen wir für das Aufzeigen der Verteilung der Besuchenden über den Tag die durchschnittliche Besucheranzahl pro Stunde (mean), aufgeteilt nach Tageszeit und Phase (group_by Tageszeit, Phase). Speichert das unter “mean_phase_d”.\n\n\n\n4b)\n\nAggregiere die Stundenwerte nach dem Monat (group_by Monat, Jahr). Nun brauchen wir nur noch das Total, keine Richtungstrennung mehr. Speichert das neue df unter depo_m (“_m” für “Monat”).\n\nTipp: Braucht wiederum group_by() und summarise().\n\nFügt dem neu erstellten df depo_m eine Spalte mit Jahr + Monat hinzu.\n\nHier der fertige Code dazu (da etwas umständlich):\n\n\nMusterlösung\ndepo_m &lt;- depo_m |&gt;\n    mutate(\n        Ym = paste(Jahr, Monat), # und mache eine neue Spalte, in der Jahr und Monat sind\n        Ym = lubridate::ym(Ym)\n    ) # formatiere als Datum\n\n\n\nWiederholt diesen Schritt, diesmal aber mit der Gruppierung “Tageszeit” neben “Jahr” und “Monat” (wiederum sollen Jahr und Monat auch in einer Spalte stehen).\nSpeichert das Resultat unter “depo_m_daytime”.\n\n\n\n4c)\nMacht euch mit den Daten vertraut. Plottet sie, seht euch die df’s an, versteht, was sie repräsentieren.\nZ.B. sind folgende Befehle und Plots wichtig:\n\nstr()\nsummarize()\nhead()\nScatterplot, x = Datum, y = Anzahl pro Zeiteinheit\nHistrogram\nusw.\n\nHinweis: Geht noch nicht zu weit mit euren Plots. Die Idee ist, dass man sich einen Überblick über die Daten verschafft und noch keine “analysierenden” Plots erstellt.\nNachdem nun alle Daten vorbereitet sind folgt im nächsten Schritt die deskriptive Analyse.",
+    "text": "Aufgabe 4: Aggregierung der Stundendaten\n\n4a)\nUnsere Daten liegen, wie ihr wisst, im Stundenformat vor. Für einige Auswertungen müssen wir aber auf ganze Tage zurückgreifen.\n\nDie Stundendaten werden zu ganzen Tagen aggregiert. Bezieht folgende Gruppierungen (group_by()) mit ein: Datum, Wochentag, Wochenende, KW, Monat, Jahr, Phase. Summiert die Zählmengen separat (Total, IN, OUT) auf und speichert das Resultat unter depo_d (“_d” für “day”).\n\nTipp: Wenn man die Convenience Variablen als grouping variable einspeisst, dann werden sie in das neue df übernommen und müssen nicht nochmals hinzugefügt werden\n\n\nMusterlösung\ndepo_d &lt;- depo |&gt; \n  group_by(VARIABLE1, VARIABLE2, ...) |&gt;   # Gruppieren nach den Variablen\n  summarise(Total = sum(Fuss_IN + Fuss_OUT),# Berechnen der gewünschten Werte\n            Fuss_IN = sum(Fuss_IN),\n            ...\n\n\n\nBerechne die Anzahl Tage bis Neujahr, wir brauchen sie später in den Modellen\n\n\n\nMusterlösung\ndepo_d &lt;- depo_d |&gt; \n  mutate(Tage_bis_Neujahr = as.numeric(difftime(ymd(paste0(year(Datum), \"-12-31\")), Datum, units = \"days\")))\n\n\n\nund füge nochmals alle Convenience Variablen gemäss oben ein:\n\n\n\nMusterlösung\ndepo_d &lt;- depo_d |&gt;\n  mutate(\n  Wochentag = wday(Datum, week_start = 1),\n  Wochentag = factor(Wochentag),\n  # Werktag oder Wochenende hinzufuegen\n  Wochenende = ifelse(Wochentag %in% c(6, 7), \"Wochenende\", \"Werktag\"),\n  Wochenende = as.factor(Wochenende),\n  # Kalenderwoche hinzufuegen\n  KW = isoweek(Datum),\n  KW = factor(KW),\n  # monat und Jahr\n  Monat = month(Datum),\n  Monat = factor(Monat),\n  Jahr = year(Datum),\n  Jahr = factor(Jahr))\n\ndepo_d &lt;- depo_d |&gt;\n  mutate(Phase = case_when(\n    Datum &lt; lock_1_start ~ \"Pre\",\n    Datum &gt;= lock_1_start & Datum &lt;= lock_1_end ~ \"Lockdown_1\",\n    Datum &gt; lock_1_end & Datum &lt; lock_2_start ~ \"Inter\",\n    Datum &gt;= lock_2_start & Datum &lt;= lock_2_end ~ \"Lockdown_2\",\n    Datum &gt; lock_2_end ~ \"Post\"\n  ))\n\ndepo_d &lt;- depo_d |&gt;\n  mutate(Phase = base::factor(Phase, levels = c(\"Pre\", \"Lockdown_1\", \"Inter\", \"Lockdown_2\", \"Post\")))\n\nfor (i in 1:nrow(schulferien)) {\n  depo_d$Ferien[depo_d$Datum &gt;= schulferien[i, \"Start\"] & depo_d$Datum &lt;= schulferien[i, \"Ende\"]] &lt;- 1\n}\ndepo_d$Ferien[is.na(depo_d$Ferien)] &lt;- 0\n\ndepo_d$Ferien &lt;- factor(depo_d$Ferien)\n\n# pruefe das df\nhead(depo_d)\n\n\n\nErstellt nun. ähnlich wie oben, einen Datensatz depo_daytime, in welchem ihr gruppiert nach:\n\n\nJahr\nMonat\nKalenderwoche\nPhase\nFerien\nWochenende oder Werktag\nTageszeit\n\n\nWeiter benötigen wir für das Aufzeigen der Verteilung der Besuchenden über den Tag die durchschnittliche Besucheranzahl pro Stunde (mean), aufgeteilt nach Tageszeit und Phase (group_by Tageszeit, Phase). Speichert das unter “mean_phase_d”.\n\n\n\n4b)\n\nAggregiere die Stundenwerte nach dem Monat (group_by Monat, Jahr). Nun brauchen wir nur noch das Total, keine Richtungstrennung mehr. Speichert das neue df unter depo_m (“_m” für “Monat”).\n\nTipp: Braucht wiederum group_by() und summarise().\n\nFügt dem neu erstellten df depo_m eine Spalte mit Jahr + Monat hinzu.\n\nHier der fertige Code dazu (da etwas umständlich):\n\n\nMusterlösung\ndepo_m &lt;- depo_m |&gt;\n    mutate(\n        Ym = paste(Jahr, Monat), # und mache eine neue Spalte, in der Jahr und Monat sind\n        Ym = lubridate::ym(Ym)\n    ) # formatiere als Datum\n\n\n\nWiederholt diesen Schritt, diesmal aber mit der Gruppierung “Tageszeit” neben “Jahr” und “Monat” (wiederum sollen Jahr und Monat auch in einer Spalte stehen).\nSpeichert das Resultat unter “depo_m_daytime”.\n\n\n\n4c)\nMacht euch mit den Daten vertraut. Plottet sie, seht euch die df’s an, versteht, was sie repräsentieren.\nZ.B. sind folgende Befehle und Plots wichtig:\n\nstr()\nsummarize()\nhead()\nScatterplot, x = Datum, y = Anzahl pro Zeiteinheit\nHistrogram\nusw.\n\nHinweis: Geht noch nicht zu weit mit euren Plots. Die Idee ist, dass man sich einen Überblick über die Daten verschafft und noch keine “analysierenden” Plots erstellt.\nNachdem nun alle Daten vorbereitet sind folgt im nächsten Schritt die deskriptive Analyse.",
     "crumbs": [
       "Fallstudie S",
-      "<span class='chapter-number'>14</span>  <span class='chapter-title'>Datenverarbeitung</span>"
-    ]
-  },
-  {
-    "objectID": "fallstudie_s/6_Deskriptive_Analysen.html",
-    "href": "fallstudie_s/6_Deskriptive_Analysen.html",
-    "title": "Deskriptive Analysen",
-    "section": "",
-    "text": "Aufgabe 1: Verlauf der Besuchszahlen nach Monat",
-    "crumbs": [
-      "Fallstudie S",
-      "<span class='chapter-number'>15</span>  <span class='chapter-title'>Deskriptive Analysen</span>"
-    ]
-  },
-  {
-    "objectID": "fallstudie_s/6_Deskriptive_Analysen.html#aufgabe-1-verlauf-der-besuchszahlen-nach-monat",
-    "href": "fallstudie_s/6_Deskriptive_Analysen.html#aufgabe-1-verlauf-der-besuchszahlen-nach-monat",
-    "title": "Deskriptive Analysen",
-    "section": "",
-    "text": "1a)\nNachdem wir die Projektstruktur aufgebaut haben und die Daten vorbereitet (inkl. aggregiert) sind, machen wir uns an die deskriptive Analyse. Dies macht immer Sinn. Bevor mach sich an die schliessende Statistik macht, muss man ein “Gefühl” für die Daten bekommen. Dies funktioniert am einfachsten mit explorativen Analysen.\nWir interessieren uns in den Analysen für 5 Zeitabschnitte:\n\nvon Anfang Untersuchungsperiode bis vor dem 1. Lockdown (pre)\nLockdown 1\nZwischen beiden Lockdowns\nLockdown 2\nEnde 2. Lockdown bis Ende Untersuchungsperiode\n\nUnd dabei immer auch für die verschiedenen Tageszeiten (Morgen, Tag, Abend, Nacht).\n\nPlottet den Verlauf der monatlichen Besuchszahlen an eurer Zählstelle.\nAuf der x-Achse steht dabei dabei Jahr und Monat (gespeichert im df depo_m), auf der y-Achse die monatlichen Besuchszahlen.\nZeichnet auch die beiden Lockdown ein (Hinweis: rundet das Start- und Enddatum der Lockdowns auf den Monat, da im Plot die monatlichen Zahlen gezeigt werden).\n\nHaltet euch dabei an untenstehenden Plot:\n\n\n\n\n\n\n\n\n\nHinweis: - Nutzt zum plotten ggplot() - folgende Codeschnipsel helfen euch:\n\n\nMusterlösung\nggplot(data = depo_m, mapping = aes(Ym, Total, group = 1)) + # group 1 braucht R, dass aus den Einzelpunkten ein Zusammenhang hergestellt wird\n    # zeichne Lockdown 1; ein einfaches Rechteck. bestimme mit min und max die Dimensionen\n  geom_rect(\n    mapping = aes(\n      xmin = ym(\"2020-3\"), xmax = ym(\"2020-5\"),\n      ymin = 0, ymax = max(Total + (Total / 100 * 10))\n    ), # das Rechteck soll 10 % grösser als die maximale Besuchszahl sein\n    fill = \"lightskyblue\", alpha = 0.2, colour = NA\n  ) +\n  # zeichne Lockdown 2\n  ... +\n  # zeichne die Linie\n  geom_line(...) +\n  scale_x_date(...)+\n  theme_linedraw(base_size = 15) +\n  ...\n\n\n\nExportiert euren Plot mit ggsave() nach results. Breite = 20, Höhe = 10, Einheiten = cm, dpi = 1000\n\n\n\n1b)\nDer erste Plot zeigt, wie sich die Besuchszahlen allgemein entwickelt haben. Interessant ist aber auch, wie sie während den einzelnen Monaten zueinander stehen (z.B. “Waren im Mai 2020 mehr Menschen unterwegs als im Mai 2017?”). Dies zeigt folgender Plot:\n\n\n\n\n\n\n\n\n\n\nErstellt diesen Plot und speichert ihn.\n\nHinweis: Dieser Plot wird erstellt mit dem Argument group, linetype und color innerhalb des _aes()__ Arguments. geom_line() wiederum zeichnet die Linien.\n\n\n1c)\nUnser Fokus liegt auf der dunklen Tageszeit. Wie verteilen sich die Besuchenden also auf Morgen, Tag, Abend und Nacht?\n\nErstellt und speichert folgenden Plot:\n\n\n\n\n\n\n\n\n\n\nDiese Codeschnipsel helfen euch:\n\n\nMusterlösung\nggplot(depo_m_daytime, aes(Ym, Total, fill = Tageszeit)) +\n  geom_area(...) +\n  scale_x_date(date_labels = \"%b%y\", date_breaks = \"6 months\", \n               limits = c(min(depo_m_daytime$Ym), max = max(depo_m_daytime$Ym)), expand = c(0, 0)) +\n  geom_vline(xintercept = seq(as.Date(min(depo_m_daytime$Ym)), as.Date(max(depo_m_daytime$Ym)), \n                              by = \"6 months\"), linetype = \"dashed\", color = \"black\")+\n  ...",
-    "crumbs": [
-      "Fallstudie S",
-      "<span class='chapter-number'>15</span>  <span class='chapter-title'>Deskriptive Analysen</span>"
-    ]
-  },
-  {
-    "objectID": "fallstudie_s/6_Deskriptive_Analysen.html#aufgabe-2-wochengang",
-    "href": "fallstudie_s/6_Deskriptive_Analysen.html#aufgabe-2-wochengang",
-    "title": "Deskriptive Analysen",
-    "section": "Aufgabe 2: Wochengang",
-    "text": "Aufgabe 2: Wochengang\nNun möchten wir genauer untersuchen, wie sich die Besuchszahlen je nach Phase (Pre, Lockdown 1, Inter, Lockdown 2 und Post) auf die Wochentage und Tageszeiten verteilen.\n\n2a)\n\nErstellt dazu einen Violinplot nach untenstehender Vorgabe. Was sagt uns dieser komplexe Plot?\n\n\n\n\n\n\n\n\n\n\nHinweis:\n\nNutzt zum plotten ggplot()\nfolgende Codeschnipsel helfen euch:\n\n\n\nMusterlösung\nggplot(data = depo, aes(x = Wochentag, y = Total, fill = Tageszeit)) +\n  geom_violin() +\n  facet_grid(cols = vars(...), rows = vars(...))+\n  scale_y_log10()+ \n  ...\n\n\n\nWarum macht es Sinn, hier die y-Achse zu logarithmieren?\nGibt es alternative Darstellungsformen, welche besser geeignet wären?\nExportiert auch diesen Plot mit ggsave(). Welche Breite und Höhe passt hier?",
-    "crumbs": [
-      "Fallstudie S",
-      "<span class='chapter-number'>15</span>  <span class='chapter-title'>Deskriptive Analysen</span>"
-    ]
-  },
-  {
-    "objectID": "fallstudie_s/6_Deskriptive_Analysen.html#aufgabe-3-tagesgang",
-    "href": "fallstudie_s/6_Deskriptive_Analysen.html#aufgabe-3-tagesgang",
-    "title": "Deskriptive Analysen",
-    "section": "Aufgabe 3: Tagesgang",
-    "text": "Aufgabe 3: Tagesgang\nVon der Übersicht ins Detail. Jetzt widmen wir uns dem Tagesgang, das heisst der Verteilung der Besuchenden auf die 24 Tagesstunden je nach Phase.\n\n3a)\n\nBerechnet zuerst den Mittelwert der totalen Besuchszahlen pro Wochentag, pro Stunde pro Phase und speichert das df unter Mean_h.\n\nVergewissert euch vor dem Plotten, dass der Datensatz im long-Format vorliegt.\n\n\n3b)\n\nPlottet den Tagesgang, unterteilt nach den 7 Wochentagen nun für die verschiedenen Phasen.\n\n\n\n\n\n\n\n\n\n\nHinweis: - Nutzt zum plotten ggplot() - folgende Codeschnipsel helfen euch:\n\n\nMusterlösung\nggplot(Mean_h, aes(x = Stunde, y = Total, colour = Wochentag, linetype = Wochentag)) +\n  geom_line(...) +\n  facet_grid(...)\n...",
-    "crumbs": [
-      "Fallstudie S",
-      "<span class='chapter-number'>15</span>  <span class='chapter-title'>Deskriptive Analysen</span>"
-    ]
-  },
-  {
-    "objectID": "fallstudie_s/6_Deskriptive_Analysen.html#aufgabe-4-kennzahlen",
-    "href": "fallstudie_s/6_Deskriptive_Analysen.html#aufgabe-4-kennzahlen",
-    "title": "Deskriptive Analysen",
-    "section": "Aufgabe 4: Kennzahlen",
-    "text": "Aufgabe 4: Kennzahlen\nBis hier hin haben wir in diesem Kapitel v.a. visuell gearbeitet. Für den Bericht kann es aber sinnvoll sein, auch einige Kennzahlen in der Hinterhand zu haben. Wir haben das bereits im Kapitel [Datenverarbeitung] berechnet.\n\nReflektiert, welche Zahlen ihr habt und was für den Bericht spannend sein könnte, resp. eure Abbildungen unterstützen oder ergänzen.",
-    "crumbs": [
-      "Fallstudie S",
-      "<span class='chapter-number'>15</span>  <span class='chapter-title'>Deskriptive Analysen</span>"
+      "<span class='chapter-number'>20</span>  <span class='chapter-title'>Datenverarbeitung</span>"
     ]
   },
   {
@@ -786,7 +1092,7 @@
     "text": "Aktuell dient diese Plattform für die BiEc Fallstudie - Profil N einzig der Bereitstellung von Aufgaben die von euch im Rahmen dieses Fallstudienprojekts erarbeitet werden sollen. Die Aufgaben werden in den meisten Fällen mit Code-Beispielen erläutert oder benötigten Code-snippets resp. Funktionen werden mitgeliefert. Im Laufe des Semesters werden hier ausserdem häppchenweise (mögliche) Lösungen zu den Aufgaben aufgeschaltet. Alles grundlegende Material und alle Unterlagen zu den theoretischen Inputs sind weiterhin und ausschliesslich im Moodlekurs Research Methods - Fallstudie BiEc zu finden. Die für die Aufgaben benötigten Datengrundlagen sind ebenfalls im entsprechenden Abschnitt auf Moodle zu finden. Frohes Schaffen!\n\nIm Rahmen der Fallstudie werden wir einige R Packages brauchen. Wir empfehlen, diese bereits vor der ersten Lektion zu installieren. Analog der Vorbereitungsübung in Prepro1 könnt ihr mit nachstehendem Code alle noch nicht installierten packages automatisch installieren.\n\npacman::p_install(\"adehabitatHR\", \"bbmle\", \"car\", \"cowplot\", \"DHARMa\", \"dplyr\",\n  \"ggeffects\", \"ggplot2\", \"ggspatial\", \"glmmTMB\", \"gstat\", \"kableExtra\", \"lme4\",\n  \"MASS\", \"MuMIn\", \"pastecs\", \"performance\", \"PerformanceAnalytics\", \"psych\",\n  \"readr\", \"rms\", \"ROCR\", \"sf\", \"sjPlot\", \"sjstats\", \"terra\", character.only = TRUE,  force = FALSE)",
     "crumbs": [
       "Fallstudie N",
-      "<span class='chapter-number'>16</span>  <span class='chapter-title'>Vorbemerkung</span>"
+      "<span class='chapter-number'>21</span>  <span class='chapter-title'>Vorbemerkung</span>"
     ]
   },
   {
@@ -797,7 +1103,7 @@
     "text": "Projektaufbau RStudio-Projekte\nVor den eigentlichen Auswertungen müssen einige vorbereitende Arbeiten unternommen werden. Die Zeit, die man hier investiert, wird in der späteren Projektphase um ein vielfaches eingespart. Im Skript soll die Ordnerstruktur des Projekts genannt werden, damit der Arbeitsvorgang auf verschiedenen Rechnern reproduzierbar ist.\nArbeitet mit Projekten, da diese sehr einfach untereinander ausgetauscht und somit auch reproduziert werden können; es gibt keine absoluten Arbeitspfade sondern nur relative. Der Datenimport (und auch der Export) kann mithilfe dieser relativen Pfaden stark vereinfacht werden. Projekte helfen alles am richtigen Ort zu behalten. (mehr zur Arbeit mit Projekten: Link)",
     "crumbs": [
       "Fallstudie N",
-      "<span class='chapter-number'>17</span>  <span class='chapter-title'>Daten(vor)verarbeitung</span>"
+      "<span class='chapter-number'>22</span>  <span class='chapter-title'>Daten(vor)verarbeitung</span>"
     ]
   },
   {
@@ -808,7 +1114,7 @@
     "text": "Aufbau von R-Skripten\nIm Kopf des Skripts zuerst immer den Titel des Projekts sowie die Autor:innen des Skripts nennen. Hier soll auch die Herkunft der Daten ersichtlich sein und falls externe Daten verwendet werden, sollte geklärt werden, wer die Datenherrschaft hat (Rehdaten: Forschungsgruppe WILMA).\n\n# .##################################################################################\n# Daten(vor)verarbeitung Fallstudie WPZ  ####\n# Modul Research Methods, HS24. Autor/in ####\n# .##################################################################################\n\nBeschreibt zudem folgendes:\n\nOrdnerstruktur; ich verwende hier den Projektordner mit den Unterordnern:\n\nSkripts\nData\nResults\nPlots\n\nVerwendete Daten\n\nEin Skript soll in R eigentlich immer nach dem selbem Schema aufgebaut sein. Dieses Schema beinhaltet (nach dem bereits erwähnten Kopf des Skripts) 4 Kapitel:\n\nDatenimport\nDatenvorverarbeitung\nAnalyse\nVisualisierung\n\nBereitet euer Skript also nach dieser Struktur vor. Nutzt für den Text, welcher nicht Code ist, vor dem Text das Symbol #. Wenn ihr den Text als Titel definieren wollt, der die grobe Struktur des Skripts absteckt, baut in wie in folgendem Beispiel auf:\n\n# .###################################################################################\n# METADATA ####\n# .###################################################################################\n# Datenherkunft ####\n# ...\n\n# .###################################################################################\n# 1. DATENIMPORT ####\n# .###################################################################################",
     "crumbs": [
       "Fallstudie N",
-      "<span class='chapter-number'>17</span>  <span class='chapter-title'>Daten(vor)verarbeitung</span>"
+      "<span class='chapter-number'>22</span>  <span class='chapter-title'>Daten(vor)verarbeitung</span>"
     ]
   },
   {
@@ -819,7 +1125,7 @@
     "text": "Libraries laden\n\nlibrary(\"readr\")\nlibrary(\"dplyr\")\nlibrary(\"ggplot2\")\nlibrary(\"purrr\")",
     "crumbs": [
       "Fallstudie N",
-      "<span class='chapter-number'>17</span>  <span class='chapter-title'>Daten(vor)verarbeitung</span>"
+      "<span class='chapter-number'>22</span>  <span class='chapter-title'>Daten(vor)verarbeitung</span>"
     ]
   },
   {
@@ -830,7 +1136,7 @@
     "text": "Daten laden\nHerunterladen der Daten der Feldaufnahmen von Moodle (Aufgabe3_Feldaufnahmen_alle_Gruppen.zip), Einlesen, Sichtung der Datensätze und der Datentypen.\nVerschiedene Dinge funktionierten nicht auf Anhieb:\n\nDaten Gruppe 1: leere Zeilen zwischen jedem Dateneintrag (R ist intelligent genug dies beim Einlesen zu erkennen)\nDaten Gruppe 5: leere Zeilen zwischen jedem Dateneintrag (R ist intelligent genug dies beim Einlesen zu erkennen)\nDaten Gruppe 6:\n\nExcelfile –&gt; csv daraus machen\nKoordinaten fehlen, diese werden benötigt um die Daten über die Kreise eindeutig mit den LIDAR-Daten zusammenzuführen –&gt; einfügen aus Zuteilung_Kreise_Aufnahmen_Landforst_HS24.docx\nKreise als Datentyp character, müssen numeric sein\n\nDaten Gruppe 7: Koordinaten fehlen, diese werden benötigt um die Daten über die Kreise eindeutig mit den LIDAR-Daten zusammenzuführen –&gt; einfügen aus Zuteilung_Kreise_Aufnahmen_Landforst_HS24.docx\n\nVersucht wenn möglich solche Dinge jeweils direkt mit R zu lösen, dies ist vorallem bei grösseren Datensätzen extrem hilfreich, damit die Datensätze zu einem sauberen Gesamtdatensatz zusammengefügt werden können.\n\ndf_team1 &lt;- read_delim(\"datasets/fallstudie_n/Aufgabe3_Feldaufnahmen_alle_Gruppen/Aufgabe_2_Team1.csv\", delim = \";\") \n\ndf_team2 &lt;- read_delim(\"datasets/fallstudie_n/Aufgabe3_Feldaufnahmen_alle_Gruppen/FelderhebungenSilhwaldKreise.csv\", delim = \",\")\n\ndf_team3 &lt;- read_delim(\"datasets/fallstudie_n/Aufgabe3_Feldaufnahmen_alle_Gruppen/Felderhebungen Waldstruktur Team 3 pink (Gruppe 4).csv\", delim = \";\")\n\ndf_team4 &lt;- read_delim(\"datasets/fallstudie_n/Aufgabe3_Feldaufnahmen_alle_Gruppen/Felderhebung_Gruppe 5.csv\", delim = \";\")\n\ndf_team5 &lt;- read_delim(\"datasets/fallstudie_n/Aufgabe3_Feldaufnahmen_alle_Gruppen/TEAM 5 (violett) - Felderhebungen Waldstruktur.csv\", delim = \",\")\n\ndf_team6 &lt;- read_delim(\"datasets/fallstudie_n/Aufgabe3_Feldaufnahmen_alle_Gruppen/Felderhebung_Team6.csv\", \n                       delim = \";\", \n                       locale = locale(encoding = \"latin1\")) %&gt;%\n  mutate(Punkt = parse_number(Punkt)) \n\n\ndf_team7 &lt;- read_delim(\"datasets/fallstudie_n/Aufgabe3_Feldaufnahmen_alle_Gruppen/gr7_ground_thruth_lidar.csv\", delim = \";\")\n\n\n# hier können die Probekreise mit den Angaben zur Anzahl Rehlokalisationen und der\n# LIDAR-basierten Ableitung der Waldstruktur eingelesen werden\n\ndf_lidar &lt;- read_delim(\"datasets/fallstudie_n/Aufgabe3_LIDAR_Waldstruktur_Reh_Kreise_241011.csv\", delim = \";\")\nstr(df_lidar)\n\n# Die eingelesenen Datensätze anschauen und versuchen zu einem Gesamtdatensatz\n# verbinden. Ist der Output zufriedenstellend?\n\ndf_gesamt &lt;- bind_rows(df_team1, df_team2, df_team3, df_team4, df_team5,df_team6,df_team7)\nstr(df_gesamt)",
     "crumbs": [
       "Fallstudie N",
-      "<span class='chapter-number'>17</span>  <span class='chapter-title'>Daten(vor)verarbeitung</span>"
+      "<span class='chapter-number'>22</span>  <span class='chapter-title'>Daten(vor)verarbeitung</span>"
     ]
   },
   {
@@ -841,7 +1147,7 @@
     "text": "Aufgabe 1\n\n1.1 Einfügen zusätzliche Spalte pro Datensatz mit der Gruppenzugehörigkeit (Team1-7)\n1.2 Spaltenumbenennung damit die Bezeichungen in allen Datensätzen gleich sind und der Gesamtdatensatz ohne Probleme zusammengefügt werden kann\n\n→ Befehle mutate und rename, mit pipes (alt: %&gt;%, neu: |&gt;) in einem Schritt möglich\n\n\nDas Learning aus den Vorbereitungen die ich übernommen habe und aus Aufgabe 1 ist, dass beim Erfassen und Dokumentieren von Daten aus verschiedenen Quellen darauf geachtet werden sollte, dies möglichst einheitlich zu tun (Dateiformate, Spalten, Bezeichnungen, Datentypen, usw.), damit kann man sich viel Arbeit ersparen. Hilfreich ist in diesem Zusammenhang immer ein einheitliches Feldprotokoll resp. eine Vorlage für die Erfassung der Daten zu erstellen.",
     "crumbs": [
       "Fallstudie N",
-      "<span class='chapter-number'>17</span>  <span class='chapter-title'>Daten(vor)verarbeitung</span>"
+      "<span class='chapter-number'>22</span>  <span class='chapter-title'>Daten(vor)verarbeitung</span>"
     ]
   },
   {
@@ -852,7 +1158,7 @@
     "text": "Aufgabe 2\nZusammenführen der Teildatensätze zu einem Datensatz",
     "crumbs": [
       "Fallstudie N",
-      "<span class='chapter-number'>17</span>  <span class='chapter-title'>Daten(vor)verarbeitung</span>"
+      "<span class='chapter-number'>22</span>  <span class='chapter-title'>Daten(vor)verarbeitung</span>"
     ]
   },
   {
@@ -863,7 +1169,7 @@
     "text": "Aufgabe 3\nVerbinden (join) des Datensatzes der Felderhebungen mit dem Datensatz der LIDAR Variablen in den Reh-Kreisen (Aufgabe3_LIDAR_Waldstruktur_Reh_Kreise_241011.csv).\nZiel: ein Datensatz mit allen Kreisen der Felderhebung, angereichert mit den Umweltvariablen Understory und Overstory aus den LIDAR-Daten (DG_us_2022, DG_os_2022) aus dem LIDAR-Waldstruktur-Datensatz. –&gt; Welche Art von join? Welche Spalten zum Verbinden (join_by()) der Datensätze",
     "crumbs": [
       "Fallstudie N",
-      "<span class='chapter-number'>17</span>  <span class='chapter-title'>Daten(vor)verarbeitung</span>"
+      "<span class='chapter-number'>22</span>  <span class='chapter-title'>Daten(vor)verarbeitung</span>"
     ]
   },
   {
@@ -874,7 +1180,7 @@
     "text": "Aufgabe 4\nScatterplot der korrespondondierenden Umweltvariablen aus den Felderhebungen gegen die Umweltvariablen aus den LiDAR-Daten (DG_xy_2022) erstellen (zusätzlich Einfärben der Gruppen und Regressionslinie darüberlegen). Korrelieren die Feldaufnahmen und die LiDAR basierte Waldstruktur?\nIm LiDAR Datensatz gibt es dieselben Variablen der Waldstruktur aus der LiDAR-Befliegung 2014. Ihr könnt untersuchen wie sich diese verändert haben und wie gut oder eben auch nicht sie mit euren Feldaufnahmen übereinstimmen.",
     "crumbs": [
       "Fallstudie N",
-      "<span class='chapter-number'>17</span>  <span class='chapter-title'>Daten(vor)verarbeitung</span>"
+      "<span class='chapter-number'>22</span>  <span class='chapter-title'>Daten(vor)verarbeitung</span>"
     ]
   },
   {
@@ -885,7 +1191,7 @@
     "text": "(Zusatz-)Aufgabe 5\nHerunterladen der Felderhebungsdaten von Moodle aus den vergangenen Jahren. Zusammenführen aller Datensätze. Explorative Datenanalyse zu den Veränderungen der Erhebungen ground truth LiDAR über die Zeit und zum Zusammenhang mit den LiDAR-basierten Waldstrukturvariablen aus den zwei Befliegungszeiträumen (2014 und 2022)\n!Achtung! es sind nicht alle Jahre gleich viele Teams an den Erhebungen beteiligt gewesen, daher gib es nicht für alle Teams in allen Jahren Daten.",
     "crumbs": [
       "Fallstudie N",
-      "<span class='chapter-number'>17</span>  <span class='chapter-title'>Daten(vor)verarbeitung</span>"
+      "<span class='chapter-number'>22</span>  <span class='chapter-title'>Daten(vor)verarbeitung</span>"
     ]
   },
   {
@@ -893,9 +1199,9 @@
     "href": "References.html",
     "title": "Literaturverzeichnis",
     "section": "",
-    "text": "Wickham, Hadley, and Garrett Grolemund. 2017. R for Data\nScience. O’Reilly. https://ebookcentral.proquest.com/lib/zhaw/detail.action?docID=4770093.",
+    "text": "Kovic, Marko. 2014. “Je Weniger Ausländer, Desto Mehr Ja-Stimmen?\nWirklich?” Tagesanzeiger Datenblog. https://blog.tagesanzeiger.ch/datenblog/index.php/668/je-weniger-auslaender-desto-mehr-ja-stimmen-wirklich.\n\n\nWickham, Hadley, and Garrett Grolemund. 2017. R for Data\nScience. O’Reilly. https://ebookcentral.proquest.com/lib/zhaw/detail.action?docID=4770093.",
     "crumbs": [
-      "<span class='chapter-number'>18</span>  <span class='chapter-title'>Literaturverzeichnis</span>"
+      "<span class='chapter-number'>23</span>  <span class='chapter-title'>Literaturverzeichnis</span>"
     ]
   }
 ]
