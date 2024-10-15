@@ -585,7 +585,7 @@
     "href": "fallstudie_s/3_Aufgabenstellung_WPZ.html#erwartungen",
     "title": "Aufgabenstellung Abschlussbericht",
     "section": "Erwartungen",
-    "text": "Erwartungen\n\nStruktur / Aufbau\n\n\nAbstract / Zusammenfassung (wenn Bericht auf Deutsch, dann Zusammenfassung auch auf Deutsch). Im Abstract sollen alle Bestandteile des Berichts aufgenommen sein.\nEinleitung (hier können allenfalls Elemente / Teile aus den Forschungsplänen übernommen werden)\nFragestellung (siehe oben; die Fragestellung ist vorgegeben, darf aber für den Bericht geschärft / ausformuliert und konkretisiert werden.)\nMethoden (aufschlussreiches Kapitel mit den statistischen Analysen)\nResultate (deskriptive Statistik, multivariates Modell; kurzer Fliesstext sowie die notwendigen Tabellen und eine Auswahl möglichst informativer Grafiken)\nDiskussion (Diskussion der deskriptiven Analysen und der Modellergebnisse; dieser Abschnitt sollte die eigenen Resultate auch im Zusammenhang mit aktueller Fachliteratur reflektieren.)\nLiteraturverzeichnis (Tipp: Das Literaturverzeichnis sollte vollständig sein, sowie formal korrekt und einheitlich daherkommen. Wir erwarten speziell in der Diskussion eine Abstützung auf aktuelle Fachliteratur. Auf Moodle haben wir euch eine Auswahl relevanter Papers bereitgestellt.)\nAnhang (für alle Auswertungen relevanter R-Code in geeigneter Form)\n\n\nGesamtumfang max. 12’000 Zeichen (inkl. Leerzeichen; exkl. Tabellen, Literaturverzeichnis und Anhang)\nAbgabe am 12.1.2025 per Mail an hoce@zhaw.ch",
+    "text": "Erwartungen\n\nStruktur / Aufbau\n\n\nAbstract / Zusammenfassung (wenn Bericht auf Deutsch, dann Zusammenfassung auch auf Deutsch). Im Abstract sollen alle Bestandteile des Berichts aufgenommen sein.\nEinleitung (hier können allenfalls Elemente / Teile aus den Forschungsplänen übernommen werden)\nFragestellung (siehe oben; die Fragestellung ist vorgegeben, darf aber für den Bericht geschärft / ausformuliert und konkretisiert werden.)\nMethoden (aufschlussreiches Kapitel mit den statistischen Analysen)\nResultate (deskriptive Statistik, multivariates Modell; kurzer Fliesstext sowie die notwendigen Tabellen und eine Auswahl möglichst informativer Grafiken)\nDiskussion (Diskussion der deskriptiven Analysen und der Modellergebnisse; dieser Abschnitt sollte die eigenen Resultate auch im Zusammenhang mit aktueller Fachliteratur reflektieren.)\nLiteraturverzeichnis (Tipp: Das Literaturverzeichnis sollte vollständig sein, sowie formal korrekt und einheitlich daherkommen. Wir erwarten speziell in der Diskussion eine Abstützung auf aktuelle Fachliteratur. Auf Moodle haben wir euch eine Auswahl relevanter Studien bereitgestellt.)\nAnhang (für alle Auswertungen relevanter R-Code in geeigneter Form)\n\n\nGesamtumfang max. 12’000 Zeichen (inkl. Leerzeichen; exkl. Tabellen, Literaturverzeichnis und Anhang)\nAbgabe am 12.1.2025 per Mail an hoce@zhaw.ch",
     "crumbs": [
       "Fallstudie S",
       "<span class='chapter-number'>12</span>  <span class='chapter-title'>Aufgabenstellung Abschlussbericht</span>"
@@ -603,11 +603,11 @@
     ]
   },
   {
-    "objectID": "fallstudie_s/3_Aufgabenstellung_WPZ.html#zusammensetzung-der-fallstudiennote",
-    "href": "fallstudie_s/3_Aufgabenstellung_WPZ.html#zusammensetzung-der-fallstudiennote",
+    "objectID": "fallstudie_s/3_Aufgabenstellung_WPZ.html#zusammensetzung-note-fallstudie",
+    "href": "fallstudie_s/3_Aufgabenstellung_WPZ.html#zusammensetzung-note-fallstudie",
     "title": "Aufgabenstellung Abschlussbericht",
-    "section": "Zusammensetzung der Fallstudiennote:",
-    "text": "Zusammensetzung der Fallstudiennote:\n\nFallstudie-Leistungsnachweis 1 - Forschungsplan: 30 %\nFallstudie-Leistungsnachweis 2 - Multivariate Analyse: 70 %\n\nDie Note der Fallstudie fliesst in die Gesamtbewertung des Moduls Research Methods mit ein.",
+    "section": "Zusammensetzung Note Fallstudie:",
+    "text": "Zusammensetzung Note Fallstudie:\n\nFallstudie-Leistungsnachweis 1 - Forschungsplan: Testatplichtig\nFallstudie-Leistungsnachweis 2 - Multivariate Analyse: 100 %\n\nDie Note der Fallstudie fliesst in die Gesamtbewertung des Moduls Research Methods mit ein.",
     "crumbs": [
       "Fallstudie S",
       "<span class='chapter-number'>12</span>  <span class='chapter-title'>Aufgabenstellung Abschlussbericht</span>"
