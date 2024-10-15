@@ -1,0 +1,11 @@
+---
+lesson: Statistik1
+knitr:
+  opts_chunk: 
+    collapse: true
+---
+
+
+# Statistik 1: Demo
+
+Download dieses Demoscript via "\</\>Code" (oben rechts)

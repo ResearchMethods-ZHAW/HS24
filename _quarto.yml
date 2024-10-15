@@ -1,0 +1,51 @@
+project: 
+  type: book
+  preview: 
+      port: 5678
+  execute-dir: project
+  pre-render: pre-render.r
+
+lang: de
+
+format: 
+  html:
+    theme:
+      dark: [darkly, custom-dark.scss]
+      light: [flatly, custom-light.scss]
+    css: 
+      - custom.css
+      - theme-custom.scss
+      #- presenter-mode.css
+    bibliography: bibliography.bib
+    number-sections: false
+    code-tools:
+      source: false
+    include-in-header:
+      - script.html
+
+execute:
+  freeze: true
+  error: false
+  message: false
+  warning: false
+
+
+
+knitr:
+  opts_chunk: 
+    collapse: true
+    #tidy: true
+    
+book:
+  title: "Research Methods HS24"
+  sidebar: 
+    logo: images/zhaw_sw_neg.png
+    collapse-level: 1
+    style: floating
+  reader-mode: true    
+  # globbing would be cool. Wait for
+  # https://github.com/quarto-dev/quarto-cli/issues/2120 or
+  # https://github.com/quarto-dev/quarto-cli/issues/1917 to be resolved 
+
+profile:
+  default: html

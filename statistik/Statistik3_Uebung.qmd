@@ -1,0 +1,26 @@
+---
+execute: 
+  echo: false   # set to true to show musterlösung
+  output: false # set to true to show musterlösung
+code-fold: true
+code-summary: "Musterlösung"
+knitr:
+  opts_chunk: 
+    collapse: true
+musterloesung: true
+---
+
+# Statistik 3: Übung
+
+Aufgabenbeschreibung
+
+
+:::{.callout-note .content-hidden unless-meta="muesterloesung"}
+
+## Lösung Übung 3
+
+```{r}
+
+```
+
+:::
