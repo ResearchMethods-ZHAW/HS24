@@ -15,7 +15,9 @@ knitr:
 
 ```{r include=FALSE, echo=FALSE}
 # Benoetigte Bibliotheken ####
-library("dplyr") # Data wrangling und piping
+library("readr") # read data into r
+library("ggplot2") # plot nice graphs
+library("dplyr") # select data
 library("lubridate") # Arbeiten mit Datumsformaten
 library("suncalc") # berechne Tageszeiten abhaengig vom Sonnenstand
 library("ggpubr") # to arrange multiple plots in one graph
@@ -24,39 +26,38 @@ library("MuMIn") # Multi-Model Inference
 library("AICcmodavg") # Modellaverageing
 library("fitdistrplus") # Prueft die Verteilung in Daten
 library("lme4") # Multivariate Modelle
+library("DHARMa") # Modeldiagnostik
 library("blmeco") # Bayesian data analysis using linear models
 library("sjPlot") # Plotten von Modellergebnissen (tab_model)
 library("lattice") # einfaches plotten von Zusammenhängen zwischen Variablen
-library("readr")
+library("glmmTMB")# zero-inflated model
 
 # definiere ein farbset zur wiedervewendung
 mycolors <- c("orangered", "gold", "mediumvioletred", "darkblue")
 
 # Start und Ende ####
-# Untersuchungszeitraum, ich waehle hier das Jahr 2019 bis und mit Sommer 2021
+# Untersuchungszeitraum, ich waehle hier alle verfügbaren Daten
 depo_start <- as.Date("2017-01-01")
-depo_end <- as.Date("2022-7-31")
+depo_end <- as.Date("2023-12-31")
 
 # Start und Ende Lockdown
-lockdown <- read_delim("datasets/fallstudie_s/lockdown.csv")
-
+# definieren, wichtig fuer die spaeteren Auswertungen
 lock_1_start <- as.Date("2020-03-16")
 lock_1_end <- as.Date("2020-05-11")
 
 lock_2_start <- as.Date("2020-12-22")
 lock_2_end <- as.Date("2021-03-01")
 
-
 # Ebenfalls muessen die erste und letzte Kalenderwoche der Untersuchungsfrist definiert werden
 # Diese werden bei Wochenweisen Analysen ebenfalls ausgeklammert da sie i.d.R. unvollstaendig sind
 KW_start <- isoweek(depo_start)
 KW_end <- isoweek(depo_end)
 
-
 # Erster und letzter Tag der Ferien
 # je nach Untersuchungsdauer muessen hier weitere oder andere Ferienzeiten ergaenzt werden
 # (https://www.schulferien.org/schweiz/ferien/2020/)
 
+# Rule of thumb: Sobald man viele (>5) Objekte mit sehr ähnlichen Namen erstellt, sollte man besser mit Listen oder DataFrames arbeiten
 schulferien <- read_delim("datasets/fallstudie_s/ferien.csv", ",")
 ```
 
@@ -67,10 +68,11 @@ schulferien <- read_delim("datasets/fallstudie_s/ferien.csv", ",")
 
 Die Projektstruktur steht. Nun können die Daten eingelesen und die nötigen Datentypen definiert werden. 
 
-Lädt die Daten zuerst von Moodle herunter.
+Lädt die Daten zuerst von Moodle herunter:
 
-1. Zähldaten zu eurem Standort (211_sihlwaldstrasse_2017_2024.csv, 502_sihluferweg_2016_2024.csv)
-2. Meteodaten (order_105742_data.txt) und Legende
+- Zähldaten zu eurem Standort (211_sihlwaldstrasse_2017_2024.csv, 502_sihluferweg_2016_2024.csv)
+
+- Meteodaten (order_105742_data.txt) und Legende
 
 Hinweis: Siehe [Einführung] für den Standort der __Zähler 211 und 502__. 
 
@@ -89,7 +91,7 @@ __Hinweis:__ Im Stundenformat zeigen die Werte bei 11:00 die Zähldaten zwischen
 
 ```{r}
 # lese die Daten ein
-depo <- read_delim("datasets/fallstudie_s/WPZ/211_sihlwaldstrasse_2017_2022.csv", ";")
+depo <- read_delim("datasets/fallstudie_s/211_sihlwaldstrasse.csv", ";")
 
 # erstes Sichten und anpassen der Datentypen
 str(depo)
@@ -113,7 +115,7 @@ depo <- depo |>
 # hier der code mit dem richtigen Format
 depo <- depo |>
   mutate(
-    Datetime = as.POSIXct(DatumUhrzeit, format = "%d.%m.%Y %H:%M", tz = "CET"),
+    Datetime = as.POSIXct(as.character(Datetime), format = "%Y%m%d%H", tz = "CET"),
     Datum = as.Date(Datetime)
   )
 ```
@@ -132,7 +134,7 @@ Hinweis: mit select() können Spalten gewählt werden, mit filter() Zeilen.
 # In dieser Auswertung werden nur Personen zu Fuss betrachtet!
 # it select werden spalten ausgewaehlt oder eben fallengelassen
 depo <- depo |>
-  dplyr::select(-c(Velo_IN, Velo_OUT, Zeit, DatumUhrzeit))
+  dplyr::select(-c(Velo_IN, Velo_OUT))
 ```
 
 
@@ -164,7 +166,7 @@ depo <- na.omit(depo)
 
 ```{r}
 # Einlesen
-meteo <- read_delim("datasets/fallstudie_s/WPZ/order_105742_data.txt", ";")
+meteo <- read_delim("datasets/fallstudie_s/order_124839_data.txt", ";")
 ```
 
 ### 2b) 
@@ -494,17 +496,103 @@ depo_d <- depo |>
             ...
 ```
 
+- Berechne die Anzahl Tage bis Neujahr, wir brauchen sie später in den Modellen
+
+```{r eval=FALSE, echo=TRUE}
+depo_d <- depo_d |> 
+  mutate(Tage_bis_Neujahr = as.numeric(difftime(ymd(paste0(year(Datum), "-12-31")), Datum, units = "days")))
+```
+
+- und füge nochmals alle Convenience Variablen gemäss oben ein:
+
+```{r eval=FALSE, echo=TRUE}
+depo_d <- depo_d |>
+  mutate(
+  Wochentag = wday(Datum, week_start = 1),
+  Wochentag = factor(Wochentag),
+  # Werktag oder Wochenende hinzufuegen
+  Wochenende = ifelse(Wochentag %in% c(6, 7), "Wochenende", "Werktag"),
+  Wochenende = as.factor(Wochenende),
+  # Kalenderwoche hinzufuegen
+  KW = isoweek(Datum),
+  KW = factor(KW),
+  # monat und Jahr
+  Monat = month(Datum),
+  Monat = factor(Monat),
+  Jahr = year(Datum),
+  Jahr = factor(Jahr))
+
+depo_d <- depo_d |>
+  mutate(Phase = case_when(
+    Datum < lock_1_start ~ "Pre",
+    Datum >= lock_1_start & Datum <= lock_1_end ~ "Lockdown_1",
+    Datum > lock_1_end & Datum < lock_2_start ~ "Inter",
+    Datum >= lock_2_start & Datum <= lock_2_end ~ "Lockdown_2",
+    Datum > lock_2_end ~ "Post"
+  ))
+
+depo_d <- depo_d |>
+  mutate(Phase = base::factor(Phase, levels = c("Pre", "Lockdown_1", "Inter", "Lockdown_2", "Post")))
+
+for (i in 1:nrow(schulferien)) {
+  depo_d$Ferien[depo_d$Datum >= schulferien[i, "Start"] & depo_d$Datum <= schulferien[i, "Ende"]] <- 1
+}
+depo_d$Ferien[is.na(depo_d$Ferien)] <- 0
+
+depo_d$Ferien <- factor(depo_d$Ferien)
+
+# pruefe das df
+head(depo_d)
+```
+
 ```{r}
 # hier werden also pro Nutzergruppe und Richtung die Stundenwerte pro Tag aufsummiert
 depo_d <- depo |>
-    group_by(Datum, Wochentag, Wochenende, KW, Monat, Jahr, Phase) |>
-    summarise(
-        Total = sum(Fuss_IN + Fuss_OUT),
-        Fuss_IN = sum(Fuss_IN),
-        Fuss_OUT = sum(Fuss_OUT)
-    )
-# Wenn man die Convinience Variablen als grouping variable einspeisst, dann werden sie in
-# das neue df uebernommen und muessen nicht nochmals hinzugefuegt werden
+  group_by(Datum) |>
+  summarise(
+    Total = sum(Fuss_IN + Fuss_OUT),
+    Fuss_IN = sum(Fuss_IN),
+    Fuss_OUT = sum(Fuss_OUT)
+  )|>
+  # Berechne die Anzahl Tage bis Neujahr, wir brauchen sie später in den Modellen
+  mutate(Tage_bis_Neujahr = as.numeric(difftime(ymd(paste0(year(Datum), "-12-31")), Datum, units = "days")))
+
+# und noch die convenience var. gem oben hinzufuegen
+depo_d <- depo_d |>
+  mutate(
+  Wochentag = wday(Datum, week_start = 1),
+  Wochentag = factor(Wochentag),
+  # Werktag oder Wochenende hinzufuegen
+  Wochenende = ifelse(Wochentag %in% c(6, 7), "Wochenende", "Werktag"),
+  Wochenende = as.factor(Wochenende),
+  # Kalenderwoche hinzufuegen
+  KW = isoweek(Datum),
+  KW = factor(KW),
+  # monat und Jahr
+  Monat = month(Datum),
+  Monat = factor(Monat),
+  Jahr = year(Datum),
+  Jahr = factor(Jahr))
+
+depo_d <- depo_d |>
+  mutate(Phase = case_when(
+    Datum < lock_1_start ~ "Pre",
+    Datum >= lock_1_start & Datum <= lock_1_end ~ "Lockdown_1",
+    Datum > lock_1_end & Datum < lock_2_start ~ "Inter",
+    Datum >= lock_2_start & Datum <= lock_2_end ~ "Lockdown_2",
+    Datum > lock_2_end ~ "Post"
+  ))
+
+depo_d <- depo_d |>
+  mutate(Phase = base::factor(Phase, levels = c("Pre", "Lockdown_1", "Inter", "Lockdown_2", "Post")))
+
+for (i in 1:nrow(schulferien)) {
+  depo_d$Ferien[depo_d$Datum >= schulferien[i, "Start"] & depo_d$Datum <= schulferien[i, "Ende"]] <- 1
+}
+depo_d$Ferien[is.na(depo_d$Ferien)] <- 0
+
+depo_d$Ferien <- factor(depo_d$Ferien)
+
 # pruefe das df
 head(depo_d)
 ```

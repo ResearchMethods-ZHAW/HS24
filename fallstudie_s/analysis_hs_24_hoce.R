@@ -353,7 +353,7 @@ depo_d <- depo |>
     Fuss_IN = sum(Fuss_IN),
     Fuss_OUT = sum(Fuss_OUT)
   )|>
-  # Berechne die ANzahl Tage bis Neujahr, wir brauchen sie später in den Modellen
+  # Berechne die Anzahl Tage bis Neujahr, wir brauchen sie später in den Modellen
   mutate(Tage_bis_Neujahr = as.numeric(difftime(ymd(paste0(year(Datum), "-12-31")), Datum, units = "days")))
 
 # und noch die convenience var. gem oben hinzufuegen
@@ -583,24 +583,16 @@ ggsave("Proz_Entwicklung_Zaehlstelle_Phase.png",
 
 
 
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
 # .################################################################################################
 # 4. MULTIFAKTORIELLE ANALYSE UND VISUALISIERUNG #####
 # .################################################################################################
+
+
+
+
+
+
+
 
 
 

@@ -26,9 +26,11 @@ library("MuMIn") # Multi-Model Inference
 library("AICcmodavg") # Modellaverageing
 library("fitdistrplus") # Prueft die Verteilung in Daten
 library("lme4") # Multivariate Modelle
+library("DHARMa") # Modeldiagnostik
 library("blmeco") # Bayesian data analysis using linear models
 library("sjPlot") # Plotten von Modellergebnissen (tab_model)
 library("lattice") # einfaches plotten von Zusammenhängen zwischen Variablen
+library("glmmTMB")# zero-inflated model
 
 
 
@@ -37,9 +39,9 @@ library("lattice") # einfaches plotten von Zusammenhängen zwischen Variablen
 mycolors <- c("orangered", "gold", "mediumvioletred", "darkblue")
 
 # Start und Ende ####
-# Untersuchungszeitraum, ich waehle hier das Jahr 2019 bis und mit Sommer 2021
+# Untersuchungszeitraum, ich waehle hier alle verfügbaren Daten
 depo_start <- as.Date("2017-01-01")
-depo_end <- as.Date("2022-7-31")
+depo_end <- as.Date("2023-12-31")
 
 # Start und Ende Lockdown
 # definieren, wichtig fuer die spaeteren Auswertungen
@@ -74,7 +76,7 @@ schulferien <- read_delim("datasets/fallstudie_s/ferien.csv", ",")
 
 # lese die Daten ein
 # Je nach Bedarf muss der Speicherort sowie der Dateiname angepasst werden
-depo <- read_delim("datasets/fallstudie_s/WPZ/211_sihlwaldstrasse_2017_2022.csv", ";")
+depo <- read_delim("datasets/fallstudie_s/211_sihlwaldstrasse.csv", ";")
 
 # Hinweis zu den Daten:
 # In hourly analysis format, the data at 11:00 am corresponds to the counts saved between
@@ -85,15 +87,16 @@ str(depo)
 
 depo <- depo |>
   mutate(
-    Datetime = as.POSIXct(DatumUhrzeit, format = "%d.%m.%Y %H:%M", tz = "CET"),
+    Datetime = as.POSIXct(as.character(Datetime), format = "%Y%m%d%H", tz = "CET"),
     Datum = as.Date(Datetime)
   )
+
 
 # In dieser Auswertung werden nur Personen zu Fuss betrachtet!
 depo <- depo |>
   # mit select werden spalten ausgewaehlt oder eben fallengelassen
   # (velos interessieren uns in dieser Auswertung nicht und Zeit soll in R immer zusammen mit Datum gespeichert werden)
-  dplyr::select(-c(Velo_IN, Velo_OUT, Zeit, DatumUhrzeit)) |>
+  dplyr::select(-c(Velo_IN, Velo_OUT)) |>
   # Berechnen des Totals, da dieses in den Daten nicht vorhanden ist
   mutate(Total = Fuss_IN + Fuss_OUT)
 
@@ -104,7 +107,7 @@ depo <- na.omit(depo)
 
 # 1.2 Meteodaten ####
 # Einlesen
-meteo <- read_delim("datasets/fallstudie_s/WPZ/order_105742_data.txt", ";")
+meteo <- read_delim("datasets/fallstudie_s/order_124839_data.txt", ";")
 
 # Datentypen setzen
 # Das Datum wird als Integer erkannt. Zuerst muss es in Text umgewaldelt werden aus dem dann
@@ -139,11 +142,43 @@ meteo <- na.omit(meteo)
 str(meteo)
 sum(is.na(meteo)) # zeigt die Anzahl NA's im data.frame an
 
+
 # .################################################################################################
 # 2. VORBEREITUNG DER DATEN #####
 # .################################################################################################
 
 # 2.1 Convenience Variablen ####
+
+
+# Wir gruppieren die Meteodaten noch nach Kalenderwoche und Werktag / Wochenende
+# Dafür brauchen wir zuerst diese als Convenience Variablen
+meteo <- meteo |>
+  # wday sortiert die Wochentage automatisch in der richtigen Reihenfolge
+  mutate(
+    Wochentag = wday(time, week_start = 1),
+    Wochentag = factor(Wochentag),
+    # Werktag oder Wochenende hinzufuegen
+    Wochenende = ifelse(Wochentag %in% c(6, 7), "Wochenende", "Werktag"),
+    Wochenende = as.factor(Wochenende),
+    # Kalenderwoche hinzufuegen
+    KW = isoweek(time),
+    KW = factor(KW),
+    # monat und Jahr
+    Monat = month(time),
+    Monat = factor(Monat),
+    Jahr = year(time),
+    Jahr = factor(Jahr))
+
+# und nun gruppieren und mean berechnen
+meteo_day <- meteo |>
+  group_by(Jahr, Monat, KW, Wochenende) |>
+  summarise(
+    tre200nx = mean(tre200nx),
+    tre200jx = mean(tre200jx),
+    rre150n0 = mean(rre150n0),
+    rre150j0 = mean(rre150j0),
+    sremaxdv= mean(sremaxdv))
+
 
 depo <- depo |>
   # wday sortiert die Wochentage automatisch in der richtigen Reihenfolge
@@ -158,9 +193,9 @@ depo <- depo |>
     KW = factor(KW),
     # monat und Jahr
     Monat = month(Datetime),
+    Monat = factor(Monat),
     Jahr = year(Datetime),
-    Jahr = factor(Jahr)
-  )
+    Jahr = factor(Jahr))
 
 # Lockdown
 # Hinweis: ich mache das nachgelagert, da ich die Erfahrung hatte, dass zu viele
@@ -191,15 +226,27 @@ depo <- depo |>
 
 str(depo)
 
+#Schulferien
+# schreibe nun eine Funktion zur zuweisung Ferien. WENN groesser als start UND kleiner als
+# ende, DANN schreibe ein 1
+for (i in 1:nrow(schulferien)) {
+  depo$Ferien[depo$Datum >= schulferien[i, "Start"] & depo$Datum <= schulferien[i, "Ende"]] <- 1
+}
+depo$Ferien[is.na(depo$Ferien)] <- 0
+
+# als faktor speichern
+depo$Ferien <- factor(depo$Ferien)
+
+
 # Fuer einige Auswertungen muss auf die Stunden als nummerischer Wert zurueckgegriffen werden
 depo$Stunde <- hour(depo$Datetime)
 # hour gibt uns den integer
 typeof(depo$Stunde)
 
 # Die Daten wurden kalibriert. Wir runden sie fuer unserer Analysen auf Ganzzahlen
-depo$Total <- round(depo$Total, digits = 0)
-depo$Fuss_IN <- round(depo$Fuss_IN, digits = 0)
-depo$Fuss_OUT <- round(depo$Fuss_OUT, digits = 0)
+depo$Total <- as.integer(round(depo$Total, digits = 0))
+depo$Fuss_IN <- as.integer(round(depo$Fuss_IN, digits = 0))
+depo$Fuss_OUT <- as.integer(round(depo$Fuss_OUT, digits = 0))
 
 # 2.2 Tageszeit hinzufuegen ####
 
@@ -256,7 +303,7 @@ depo <- depo |>
 
 
 # behalte die relevanten Var
-depo <- depo |> dplyr::select(-nightEnd, -goldenHourEnd, -goldenHour, -night)
+depo <- depo |> dplyr::select(-nightEnd, -goldenHourEnd, -goldenHour, -night, -lat, -lon)
 
 # Plotte zum pruefn ob das funktioniert hat
 ggplot(depo, aes(y = Datetime, color = Tageszeit, x = Stunde)) +
@@ -275,27 +322,70 @@ sum(is.na(depo))
 # 2.4 Aggregierung der Stundendaten zu ganzen Tagen ####
 # Zur Berechnung von Kennwerten ist es hilfreich, wenn neben den Stundendaten auch auf Ganztagesdaten
 # zurueckgegriffen werden kann
-# hier werden also pro Nutzergruppe und Richtung die Stundenwerte pro Tag aufsummiert
+# hier werden also pro Nutzergruppe und Richtung die Stundenwerte pro Tag aufsummiert.
+# Convenience Variablen nehme ich hier bewusst aus der Gruppierung - zu komplexe Operationen
+# könne zu Fehlern in der Gruppierung führen.
 depo_d <- depo |>
-  group_by(Datum, Wochentag, Wochenende, KW, Monat, Jahr, Phase) |>
+  group_by(Datum) |>
   summarise(
     Total = sum(Fuss_IN + Fuss_OUT),
     Fuss_IN = sum(Fuss_IN),
     Fuss_OUT = sum(Fuss_OUT)
-  )
-# Wenn man die Convinience Variablen als grouping variable einspeisst, dann werden sie in
-# das neue df uebernommen und muessen nicht nochmals hinzugefuegt werden
-# pruefe das df
-head(depo_d)
+  )|>
+  # Berechne die Anzahl Tage bis Neujahr, wir brauchen sie später in den Modellen
+  mutate(Tage_bis_Neujahr = as.numeric(difftime(ymd(paste0(year(Datum), "-12-31")), Datum, units = "days")))
 
-# nun gruppieren wir nicht nur nach Tag sondern auch noch nach Tageszeit
+# und noch die convenience var. gem oben hinzufuegen
+depo_d <- depo_d |>
+  mutate(
+  Wochentag = wday(Datum, week_start = 1),
+  Wochentag = factor(Wochentag),
+  # Werktag oder Wochenende hinzufuegen
+  Wochenende = ifelse(Wochentag %in% c(6, 7), "Wochenende", "Werktag"),
+  Wochenende = as.factor(Wochenende),
+  # Kalenderwoche hinzufuegen
+  KW = isoweek(Datum),
+  KW = factor(KW),
+  # monat und Jahr
+  Monat = month(Datum),
+  Monat = factor(Monat),
+  Jahr = year(Datum),
+  Jahr = factor(Jahr))
+
+depo_d <- depo_d |>
+  mutate(Phase = case_when(
+    Datum < lock_1_start ~ "Pre",
+    Datum >= lock_1_start & Datum <= lock_1_end ~ "Lockdown_1",
+    Datum > lock_1_end & Datum < lock_2_start ~ "Inter",
+    Datum >= lock_2_start & Datum <= lock_2_end ~ "Lockdown_2",
+    Datum > lock_2_end ~ "Post"
+  ))
+
+depo_d <- depo_d |>
+  mutate(Phase = base::factor(Phase, levels = c("Pre", "Lockdown_1", "Inter", "Lockdown_2", "Post")))
+
+for (i in 1:nrow(schulferien)) {
+  depo_d$Ferien[depo_d$Datum >= schulferien[i, "Start"] & depo_d$Datum <= schulferien[i, "Ende"]] <- 1
+}
+depo_d$Ferien[is.na(depo_d$Ferien)] <- 0
+
+depo_d$Ferien <- factor(depo_d$Ferien)
+
+
+
+
+
+# nun gruppieren wir nicht nach Tag sondern v.a. nach Tageszeit
+# Das Datum schliessen wir aus dieser Gruppierung aus, denn wenn wir es drin hätten,
+# würde dieselbe "Nacht" jeweils zwei Einträge generieren (da sie über zwei Daten geht).
+# Mit dieser Gruppierung haben wir jeweils eine Summe pro Tageszeit für alle Werktage einer Woche zusammen
+# und beide Wochenendtage
 depo_daytime <- depo |>
-  group_by(Datum, Wochentag, Wochenende, KW, Monat, Jahr, Phase, Tageszeit) |>
+  group_by(Jahr, Monat, KW, Phase, Ferien, Wochenende, Tageszeit) |>
   summarise(
     Total = sum(Fuss_IN + Fuss_OUT),
     Fuss_IN = sum(Fuss_IN),
-    Fuss_OUT = sum(Fuss_OUT)
-  )
+    Fuss_OUT = sum(Fuss_OUT)) 
 
 # mean besser Vergleichbar, da Zeitreihen unterschiedlich lange
 mean_phase_d <- depo_daytime |>
@@ -303,8 +393,7 @@ mean_phase_d <- depo_daytime |>
   summarise(
     Total = mean(Total),
     IN = mean(Fuss_IN),
-    OUT = mean(Fuss_OUT)
-  )
+    OUT = mean(Fuss_OUT))
 
 
 # Gruppiere die Werte nach Monat
@@ -555,7 +644,7 @@ ggplot(data = depo, aes(x = Wochentag, y = Total, fill = Tageszeit)) +
 ```
 
 - Warum macht es Sinn, hier die y-Achse zu logarithmieren?
-- Ginbt es alternaitve Darstellungsformen, welche besser geeignet wären?
+- Gibt es alternative Darstellungsformen, welche besser geeignet wären?
 - Exportiert auch diesen Plot mit __ggsave()__. Welche Breite und Höhe passt hier?
 
 
