@@ -29,7 +29,9 @@ summary(loyn)
 # Korrelationen rechnen details siehe: "?cor"
 cor(loyn[, 2:7]) 
 # oder mit Namen der columns resp. variablen
-cor <- cor(subset(loyn, select = c(AREA: ALT)))
+cor <- loyn |>
+  subset(select = AREA:ALT) |>
+  cor()
 
 # Korrelationen Visualisieren
 p_load("corrplot")
@@ -48,10 +50,6 @@ lm_1 <- lm(ABUND ~ AGE + AREA + DIST + LDIST + GRAZE + ALT, data = loyn)
 
 par(mfrow = c(2, 2))
 plot(lm_1)
-# oder mit funktion "check_model"
-p_load("performance")
-check_model(lm_1, check = c("qq", "homogeneity", "ncv", "outliers") )
-
 ```
 
 -> Plot sieht zwar OK aus, aber mit 6 Prädiktoren für \|\<60\| Beobachtungen ist das Modell wohl "overfitted"
