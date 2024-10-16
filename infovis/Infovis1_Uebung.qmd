@@ -33,7 +33,7 @@ kanton <- read_delim("datasets/infovis/tagi_data_kantone.csv", ",")
 
 ## Aufgabe 1
 
-Rekonstrukturiere folgenden Plot aus @kovic2014 mithilfe von ggplot und dem tagi_data_kanton.csv Datensatz:
+Rekonstruiere folgenden Plot aus @kovic2014 mithilfe von ggplot und dem tagi_data_kanton.csv Datensatz:
 
 Tipp:
 

@@ -17,7 +17,7 @@ knitr:
 
 Gegeben sei ein Datensatz *sensors_combined.csv*, mit den Temperaturwerten von drei verschiedenen Sensoren. Importiere ihn als csv in R (als `sensors_combined`). 
 
-Formatiere die `Datetime` Spalte in `POSIXct` um. Verwende dazu die Funktion `as.POSIXct` (lies mit `?strftime()` nochmal nach, wie du das spezfische Format (die "Schablone") festlegen kannst.
+Formatiere die `Datetime` Spalte in `POSIXct` um. Verwende dazu die Funktion `as.POSIXct` (lies mit `?strftime()` nochmal nach, wie du das spezifische Format (die "Schablone") festlegen kannst.
 
 ```{r}
 library("readr")
