@@ -2,14 +2,14 @@
 lesson: PrePro2
 thema: Piping / Joins
 execute: 
-  echo: false   # set to true to show musterlösung
-  output: false # set to true to show musterlösung
+  echo: true   # set to true to show musterlösung
+  output: true # set to true to show musterlösung
 code-fold: true
 code-summary: "Musterlösung"
 knitr:
   opts_chunk: 
     collapse: true
-musterloesung: true
+musterloesung: false
 ---
 
 # Prepro 2: Übung B
