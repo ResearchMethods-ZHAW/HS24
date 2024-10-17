@@ -422,7 +422,7 @@ window.onload = function() {
 
 <header id="title-block-header" class="quarto-title-block default"><nav class="quarto-page-breadcrumbs quarto-title-breadcrumbs d-none d-lg-block" aria-label="breadcrumb"><ol class="breadcrumb"><li class="breadcrumb-item"><a href="../PrePro.html">Pre-Processing</a></li><li class="breadcrumb-item"><a href="../prepro/Prepro2_Uebung_B.html"><span class="chapter-title">Prepro 2: Übung B</span></a></li></ol></nav>
 <div class="quarto-title">
-<div class="quarto-title-block"><div><h1 class="title"><span class="chapter-title">Prepro 2: Übung B</span></h1><button type="button" class="btn code-tools-button dropdown-toggle" id="quarto-code-tools-menu" data-bs-toggle="dropdown" aria-expanded="false"><i class="bi"></i> Code</button><ul class="dropdown-menu dropdown-menu-end" aria-labelelledby="quarto-code-tools-menu"><li><a id="quarto-show-all-code" class="dropdown-item" href="javascript:void(0)" role="button">Gesamten Code zeigen</a></li><li><a id="quarto-hide-all-code" class="dropdown-item" href="javascript:void(0)" role="button">Gesamten Code verbergen</a></li></ul></div></div>
+<h1 class="title"><span class="chapter-title">Prepro 2: Übung B</span></h1>
 </div>
 
 
@@ -445,25 +445,25 @@ window.onload = function() {
 <section id="aufgabe-1" class="level2">
 <h2 class="anchored" data-anchor-id="aufgabe-1">Aufgabe 1</h2>
 <p>Gegeben sind die Daten von drei Sensoren (<em>sensor1.csv</em>, <em>sensor2.csv</em>, <em>sensor3.csv</em>). Lese die Datensätze ein.</p>
-<div class="content-hidden callout callout-style-default callout-note callout-titled" title="Lösung" data-unless-meta="muesterloesung">
-<div class="callout-header d-flex align-content-center">
+<div class="content-hidden callout callout-style-default callout-note callout-titled" title="Musterlösung" data-unless-meta="muesterloesung">
+<div class="callout-header d-flex align-content-center" data-bs-toggle="collapse" data-bs-target=".callout-1-contents" aria-controls="callout-1" aria-expanded="false" aria-label="Toggle callout">
 <div class="callout-icon-container">
 <i class="callout-icon"></i>
 </div>
 <div class="callout-title-container flex-fill">
-Lösung
+Musterlösung
 </div>
+<div class="callout-btn-toggle d-inline-block border-0 py-1 ps-1 pe-0 float-end"><i class="callout-toggle"></i></div>
 </div>
+<div id="callout-1" class="callout-1-contents callout-collapse collapse">
 <div class="callout-body-container callout-body">
 <div class="cell">
-<details class="code-fold">
-<summary>Musterlösung</summary>
 <div class="sourceCode cell-code" id="cb2"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb2-1"><a href="#cb2-1" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(<span class="st">"readr"</span>)</span>
 <span id="cb2-2"><a href="#cb2-2" aria-hidden="true" tabindex="-1"></a></span>
 <span id="cb2-3"><a href="#cb2-3" aria-hidden="true" tabindex="-1"></a>sensor1 <span class="ot">&lt;-</span> <span class="fu">read_delim</span>(<span class="st">"datasets/prepro/sensor1.csv"</span>, <span class="st">";"</span>)</span>
 <span id="cb2-4"><a href="#cb2-4" aria-hidden="true" tabindex="-1"></a>sensor2 <span class="ot">&lt;-</span> <span class="fu">read_delim</span>(<span class="st">"datasets/prepro/sensor2.csv"</span>, <span class="st">";"</span>)</span>
 <span id="cb2-5"><a href="#cb2-5" aria-hidden="true" tabindex="-1"></a>sensor3 <span class="ot">&lt;-</span> <span class="fu">read_delim</span>(<span class="st">"datasets/prepro/sensor3.csv"</span>, <span class="st">";"</span>)</span></code><button title="In die Zwischenablage kopieren" class="code-copy-button"><i class="bi"></i></button></pre></div>
-</details>
+</div>
 </div>
 </div>
 </div>
@@ -471,19 +471,19 @@ Lösung
 <section id="aufgabe-2" class="level2">
 <h2 class="anchored" data-anchor-id="aufgabe-2">Aufgabe 2</h2>
 <p>Erstelle aus den 3 Dataframes einen einzigen Dataframe, welcher aussieht wie unten dargestellt. Nutze dafür zwei joins aus <code>dplyr</code>, um 3 <code>data.frames</code> miteinander zu verbinden. Bereinige im Anschluss die Spaltennamen (<a href="https://www.statology.org/how-to-rename-data-frame-columns-in-r/">wie geht das?</a>).</p>
-<div class="content-hidden callout callout-style-default callout-note callout-titled" title="Lösung" data-unless-meta="muesterloesung">
-<div class="callout-header d-flex align-content-center">
+<div class="content-hidden callout callout-style-default callout-note callout-titled" title="Musterlösung" data-unless-meta="muesterloesung">
+<div class="callout-header d-flex align-content-center" data-bs-toggle="collapse" data-bs-target=".callout-2-contents" aria-controls="callout-2" aria-expanded="false" aria-label="Toggle callout">
 <div class="callout-icon-container">
 <i class="callout-icon"></i>
 </div>
 <div class="callout-title-container flex-fill">
-Lösung
+Musterlösung
 </div>
+<div class="callout-btn-toggle d-inline-block border-0 py-1 ps-1 pe-0 float-end"><i class="callout-toggle"></i></div>
 </div>
+<div id="callout-2" class="callout-2-contents callout-collapse collapse">
 <div class="callout-body-container callout-body">
 <div class="cell">
-<details class="code-fold">
-<summary>Musterlösung</summary>
 <div class="sourceCode cell-code" id="cb3"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb3-1"><a href="#cb3-1" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(<span class="st">"dplyr"</span>)</span>
 <span id="cb3-2"><a href="#cb3-2" aria-hidden="true" tabindex="-1"></a></span>
 <span id="cb3-3"><a href="#cb3-3" aria-hidden="true" tabindex="-1"></a>sensor1_2 <span class="ot">&lt;-</span> <span class="fu">full_join</span>(sensor1, sensor2, <span class="st">"Datetime"</span>)</span>
@@ -493,7 +493,7 @@ Lösung
 <span id="cb3-7"><a href="#cb3-7" aria-hidden="true" tabindex="-1"></a>sensor_all <span class="ot">&lt;-</span> <span class="fu">full_join</span>(sensor1_2, sensor3, <span class="at">by =</span> <span class="st">"Datetime"</span>)</span>
 <span id="cb3-8"><a href="#cb3-8" aria-hidden="true" tabindex="-1"></a></span>
 <span id="cb3-9"><a href="#cb3-9" aria-hidden="true" tabindex="-1"></a>sensor_all <span class="ot">&lt;-</span> <span class="fu">rename</span>(sensor_all, <span class="at">sensor3 =</span> Temp)</span></code><button title="In die Zwischenablage kopieren" class="code-copy-button"><i class="bi"></i></button></pre></div>
-</details>
+</div>
 </div>
 </div>
 </div>
@@ -554,19 +554,19 @@ Lösung
 <h2 class="anchored" data-anchor-id="aufgabe-3">Aufgabe 3</h2>
 <p>Importiere die Datei <em>sensor_fail.csv</em> in <code>R</code>.</p>
 <p><code>sensor_fail.csv</code> hat eine Variabel <code>SensorStatus</code>: <code>1</code> bedeutet der Sensor misst, <code>0</code> bedeutet der Sensor misst nicht. Fälschlicherweise wurde auch dann der Messwert <code>Temp = 0</code> erfasst, wenn <code>Sensorstatus = 0</code>. Richtig wäre hier <code>NA</code> (not available). Korrigiere den Datensatz entsprechend.</p>
-<div class="content-hidden callout callout-style-default callout-note callout-titled" title="Lösung" data-unless-meta="muesterloesung">
-<div class="callout-header d-flex align-content-center">
+<div class="content-hidden callout callout-style-default callout-note callout-titled" title="Musterlösung" data-unless-meta="muesterloesung">
+<div class="callout-header d-flex align-content-center" data-bs-toggle="collapse" data-bs-target=".callout-3-contents" aria-controls="callout-3" aria-expanded="false" aria-label="Toggle callout">
 <div class="callout-icon-container">
 <i class="callout-icon"></i>
 </div>
 <div class="callout-title-container flex-fill">
-Lösung
+Musterlösung
 </div>
+<div class="callout-btn-toggle d-inline-block border-0 py-1 ps-1 pe-0 float-end"><i class="callout-toggle"></i></div>
 </div>
+<div id="callout-3" class="callout-3-contents callout-collapse collapse">
 <div class="callout-body-container callout-body">
 <div class="cell">
-<details class="code-fold">
-<summary>Musterlösung</summary>
 <div class="sourceCode cell-code" id="cb4"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb4-1"><a href="#cb4-1" aria-hidden="true" tabindex="-1"></a>sensor_fail <span class="ot">&lt;-</span> <span class="fu">read_delim</span>(<span class="st">"datasets/prepro/sensor_fail.csv"</span>, <span class="at">delim =</span> <span class="st">";"</span>)</span>
 <span id="cb4-2"><a href="#cb4-2" aria-hidden="true" tabindex="-1"></a></span>
 <span id="cb4-3"><a href="#cb4-3" aria-hidden="true" tabindex="-1"></a><span class="co"># mit base-R:</span></span>
@@ -576,7 +576,7 @@ Lösung
 <span id="cb4-7"><a href="#cb4-7" aria-hidden="true" tabindex="-1"></a><span class="co"># das gleiche mit dplyr:</span></span>
 <span id="cb4-8"><a href="#cb4-8" aria-hidden="true" tabindex="-1"></a>sensor_fail <span class="ot">&lt;-</span> sensor_fail <span class="sc">|&gt;</span></span>
 <span id="cb4-9"><a href="#cb4-9" aria-hidden="true" tabindex="-1"></a>  <span class="fu">mutate</span>(<span class="at">Temp_correct =</span> <span class="fu">ifelse</span>(SensorStatus <span class="sc">==</span> <span class="dv">0</span>, <span class="cn">NA</span>, Temp))</span></code><button title="In die Zwischenablage kopieren" class="code-copy-button"><i class="bi"></i></button></pre></div>
-</details>
+</div>
 </div>
 </div>
 </div>
@@ -682,19 +682,19 @@ Lösung
 <section id="aufgabe-4" class="level2">
 <h2 class="anchored" data-anchor-id="aufgabe-4">Aufgabe 4</h2>
 <p>Warum spielt es eine Rolle, ob <code>0</code> oder <code>NA</code> erfasst wird? Berechne die Mittlere der Temperatur / Feuchtigkeit nach der Korrektur.</p>
-<div class="content-hidden callout callout-style-default callout-note callout-titled" title="Lösung" data-unless-meta="muesterloesung">
-<div class="callout-header d-flex align-content-center">
+<div class="content-hidden callout callout-style-default callout-note callout-titled" title="Musterlösung" data-unless-meta="muesterloesung">
+<div class="callout-header d-flex align-content-center" data-bs-toggle="collapse" data-bs-target=".callout-4-contents" aria-controls="callout-4" aria-expanded="false" aria-label="Toggle callout">
 <div class="callout-icon-container">
 <i class="callout-icon"></i>
 </div>
 <div class="callout-title-container flex-fill">
-Lösung
+Musterlösung
 </div>
+<div class="callout-btn-toggle d-inline-block border-0 py-1 ps-1 pe-0 float-end"><i class="callout-toggle"></i></div>
 </div>
+<div id="callout-4" class="callout-4-contents callout-collapse collapse">
 <div class="callout-body-container callout-body">
 <div class="cell">
-<details class="code-fold">
-<summary>Musterlösung</summary>
 <div class="sourceCode cell-code" id="cb5"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb5-1"><a href="#cb5-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Mittelwerte der falschen Sensordaten: 0 fliesst in die Berechnung</span></span>
 <span id="cb5-2"><a href="#cb5-2" aria-hidden="true" tabindex="-1"></a><span class="co"># ein und verfälscht den Mittelwert</span></span>
 <span id="cb5-3"><a href="#cb5-3" aria-hidden="true" tabindex="-1"></a><span class="fu">mean</span>(sensor_fail<span class="sc">$</span>Temp)</span>
@@ -704,7 +704,7 @@ Lösung
 <span id="cb5-7"><a href="#cb5-7" aria-hidden="true" tabindex="-1"></a><span class="co"># NA-Werte aus der Berechnung entfernt.</span></span>
 <span id="cb5-8"><a href="#cb5-8" aria-hidden="true" tabindex="-1"></a><span class="fu">mean</span>(sensor_fail<span class="sc">$</span>Temp_correct, <span class="at">na.rm =</span> <span class="cn">TRUE</span>)</span>
 <span id="cb5-9"><a href="#cb5-9" aria-hidden="true" tabindex="-1"></a><span class="do">## [1] -0.1857143</span></span></code><button title="In die Zwischenablage kopieren" class="code-copy-button"><i class="bi"></i></button></pre></div>
-</details>
+</div>
 </div>
 </div>
 </div>
