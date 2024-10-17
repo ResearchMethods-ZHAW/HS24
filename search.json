@@ -233,7 +233,7 @@
     "href": "prepro/Prepro2_Uebung_A.html#aufgabe-1",
     "title": "Prepro 2: Übung A",
     "section": "",
-    "text": "Hinweis",
+    "text": "Hinweis\n\n\n\n\n\nMusterlösung\nlibrary(\"readr\")\n\nwetter &lt;- read_delim(\"datasets/prepro/weather.csv\", \",\")\nwetter$stn &lt;- as.factor(wetter$stn)\nwetter$time &lt;- as.POSIXct(as.character(wetter$time), format = \"%Y%m%d%H\", tz = \"UTC\")",
     "crumbs": [
       "Pre-Processing",
       "<span class='chapter-number'>5</span>  <span class='chapter-title'>Prepro 2: Übung A</span>"
@@ -244,7 +244,7 @@
     "href": "prepro/Prepro2_Uebung_A.html#aufgabe-2",
     "title": "Prepro 2: Übung A",
     "section": "Aufgabe 2",
-    "text": "Aufgabe 2\nLese den Datensatz metadata.csv ebenfalls als csv ein.\n\n\n\n\n\n\nTipp\n\n\n\nWenn Umlaute und Sonderzeichen nicht korrekt dargestellt werden (z.B. das è in Genève), hat das vermutlich mit der Zeichencodierung zu tun. Das File ist aktuell in UTF-8 codiert. Wenn Umlaute nicht korrekt dargestellt werden, hat R diese Codierung nicht erkannt und sie muss in der Import-Funktion spezifitiert werden. Dies wird je nach verwendete import Funktion unterschiedlich gemacht:\n\nFunktionen aus dem Package readr: locale = locale(encoding = \"UTF-8\")\nBase-R Funktionen: fileEncoding = \"UTF-8\"\n\nWenn ihr die Codierung eines Files nicht kennt, könnt ihr wie folgt vorgehen: Anleitung für Windows, für Mac und für Linux.\n\n\n\n\n\n\n\n\nHinweis",
+    "text": "Aufgabe 2\nLese den Datensatz metadata.csv ebenfalls als csv ein.\n\n\n\n\n\n\nTipp\n\n\n\nWenn Umlaute und Sonderzeichen nicht korrekt dargestellt werden (z.B. das è in Genève), hat das vermutlich mit der Zeichencodierung zu tun. Das File ist aktuell in UTF-8 codiert. Wenn Umlaute nicht korrekt dargestellt werden, hat R diese Codierung nicht erkannt und sie muss in der Import-Funktion spezifitiert werden. Dies wird je nach verwendete import Funktion unterschiedlich gemacht:\n\nFunktionen aus dem Package readr: locale = locale(encoding = \"UTF-8\")\nBase-R Funktionen: fileEncoding = \"UTF-8\"\n\nWenn ihr die Codierung eines Files nicht kennt, könnt ihr wie folgt vorgehen: Anleitung für Windows, für Mac und für Linux.\n\n\n\n\n\n\n\n\nHinweis\n\n\n\n\n\nMusterlösung\nmetadata &lt;- read_delim(\"datasets/prepro/metadata.csv\", delim = \";\", locale = locale(encoding = \"UTF-8\"))",
     "crumbs": [
       "Pre-Processing",
       "<span class='chapter-number'>5</span>  <span class='chapter-title'>Prepro 2: Übung A</span>"
@@ -255,7 +255,7 @@
     "href": "prepro/Prepro2_Uebung_A.html#aufgabe-3",
     "title": "Prepro 2: Übung A",
     "section": "Aufgabe 3",
-    "text": "Aufgabe 3\nNun wollen wir den Datensatz wetter mit den Informationen aus metadata anreichern. Uns interessiert aber nur das Stationskürzel, der Name, die x/y Koordinaten sowie die Meereshöhe. Selektiere diese Spalten.\n\n\n\n\n\n\nHinweis",
+    "text": "Aufgabe 3\nNun wollen wir den Datensatz wetter mit den Informationen aus metadata anreichern. Uns interessiert aber nur das Stationskürzel, der Name, die x/y Koordinaten sowie die Meereshöhe. Selektiere diese Spalten.\n\n\n\n\n\n\nHinweis\n\n\n\n\n\nMusterlösung\nmetadata &lt;- metadata[, c(\"stn\", \"Name\", \"x\", \"y\", \"Meereshoehe\")]",
     "crumbs": [
       "Pre-Processing",
       "<span class='chapter-number'>5</span>  <span class='chapter-title'>Prepro 2: Übung A</span>"
@@ -266,7 +266,7 @@
     "href": "prepro/Prepro2_Uebung_A.html#aufgabe-4",
     "title": "Prepro 2: Übung A",
     "section": "Aufgabe 4",
-    "text": "Aufgabe 4\nJetzt kann metadata mit dem Datensatz wetter verbunden werden. Überlege dir, welcher Join dafür sinnvoll ist und mit welchem Attribut wir “joinen” können.\nNutze die Join-Möglichkeiten von dplyr (Hilfe via ?dplyr::join), um die Datensätze wetter und metadata zu verbinden.\n\n\n\n\n\n\nHinweis",
+    "text": "Aufgabe 4\nJetzt kann metadata mit dem Datensatz wetter verbunden werden. Überlege dir, welcher Join dafür sinnvoll ist und mit welchem Attribut wir “joinen” können.\nNutze die Join-Möglichkeiten von dplyr (Hilfe via ?dplyr::join), um die Datensätze wetter und metadata zu verbinden.\n\n\n\n\n\n\nHinweis\n\n\n\n\n\nMusterlösung\nlibrary(\"dplyr\")\nwetter &lt;- left_join(wetter, metadata, by = \"stn\")\n\n# Jointyp: Left-Join auf 'wetter', da uns nur die Stationen im Datensatz 'wetter' interessieren.\n# Attribut: \"stn\"",
     "crumbs": [
       "Pre-Processing",
       "<span class='chapter-number'>5</span>  <span class='chapter-title'>Prepro 2: Übung A</span>"
@@ -277,7 +277,7 @@
     "href": "prepro/Prepro2_Uebung_A.html#aufgabe-5",
     "title": "Prepro 2: Übung A",
     "section": "Aufgabe 5",
-    "text": "Aufgabe 5\nErstelle eine neue Spalte month, welche den jeweiligen Monat (aus time) beinhaltet. Nutze dafür die Funktion lubridate::month().\n\n\n\n\n\n\nHinweis",
+    "text": "Aufgabe 5\nErstelle eine neue Spalte month, welche den jeweiligen Monat (aus time) beinhaltet. Nutze dafür die Funktion lubridate::month().\n\n\n\n\n\n\nHinweis\n\n\n\n\n\nMusterlösung\nlibrary(\"lubridate\")\n\nwetter$month &lt;- month(wetter$time)",
     "crumbs": [
       "Pre-Processing",
       "<span class='chapter-number'>5</span>  <span class='chapter-title'>Prepro 2: Übung A</span>"
@@ -288,7 +288,7 @@
     "href": "prepro/Prepro2_Uebung_A.html#aufgabe-6",
     "title": "Prepro 2: Übung A",
     "section": "Aufgabe 6",
-    "text": "Aufgabe 6\nBerechne mit der Spalte month die Durchschnittstemperatur pro Monat.\n\n\n\n\n\n\nHinweis",
+    "text": "Aufgabe 6\nBerechne mit der Spalte month die Durchschnittstemperatur pro Monat.\n\n\n\n\n\n\nHinweis\n\n\n\n\n\nMusterlösung\nmean(wetter$tre200h0[wetter$month == 1])\n## [1] -1.963239\nmean(wetter$tre200h0[wetter$month == 2])\n## [1] 0.3552632\nmean(wetter$tre200h0[wetter$month == 3])\n## [1] 2.965054\n\n# usw. für alle 12 Monate",
     "crumbs": [
       "Pre-Processing",
       "<span class='chapter-number'>5</span>  <span class='chapter-title'>Prepro 2: Übung A</span>"
@@ -310,7 +310,7 @@
     "href": "prepro/Prepro2_Uebung_B.html#aufgabe-1",
     "title": "Prepro 2: Übung B",
     "section": "",
-    "text": "Hinweis",
+    "text": "Hinweis\n\n\n\n\n\nMusterlösung\nlibrary(\"readr\")\n\nsensor1 &lt;- read_delim(\"datasets/prepro/sensor1.csv\", \";\")\nsensor2 &lt;- read_delim(\"datasets/prepro/sensor2.csv\", \";\")\nsensor3 &lt;- read_delim(\"datasets/prepro/sensor3.csv\", \";\")",
     "crumbs": [
       "Pre-Processing",
       "<span class='chapter-number'>6</span>  <span class='chapter-title'>Prepro 2: Übung B</span>"
@@ -321,7 +321,7 @@
     "href": "prepro/Prepro2_Uebung_B.html#aufgabe-2",
     "title": "Prepro 2: Übung B",
     "section": "Aufgabe 2",
-    "text": "Aufgabe 2\nErstelle aus den 3 Dataframes einen einzigen Dataframe, welcher aussieht wie unten dargestellt. Nutze dafür zwei joins aus dplyr, um 3 data.frames miteinander zu verbinden. Bereinige im Anschluss die Spaltennamen (wie geht das?).\n\n\n\n\n\n\nHinweis\n\n\n\n\n\n\n\n\n\n\n\nDatetime\nsensor1\nsensor2\nsensor3\n\n\n\n\n16102017_1800\n23.5\n13.5\n26.5\n\n\n17102017_1800\n25.4\n24.4\n24.4\n\n\n18102017_1800\n12.4\n22.4\n13.4\n\n\n19102017_1800\n5.4\n12.4\n7.4\n\n\n23102017_1800\n23.5\n13.5\nNA\n\n\n24102017_1800\n21.3\n11.3\nNA",
+    "text": "Aufgabe 2\nErstelle aus den 3 Dataframes einen einzigen Dataframe, welcher aussieht wie unten dargestellt. Nutze dafür zwei joins aus dplyr, um 3 data.frames miteinander zu verbinden. Bereinige im Anschluss die Spaltennamen (wie geht das?).\n\n\n\n\n\n\nHinweis\n\n\n\n\n\nMusterlösung\nlibrary(\"dplyr\")\n\nsensor1_2 &lt;- full_join(sensor1, sensor2, \"Datetime\")\n\nsensor1_2 &lt;- rename(sensor1_2, sensor1 = Temp.x, sensor2 = Temp.y)\n\nsensor_all &lt;- full_join(sensor1_2, sensor3, by = \"Datetime\")\n\nsensor_all &lt;- rename(sensor_all, sensor3 = Temp)\n\n\n\n\n\n\n\n\n\nDatetime\nsensor1\nsensor2\nsensor3\n\n\n\n\n16102017_1800\n23.5\n13.5\n26.5\n\n\n17102017_1800\n25.4\n24.4\n24.4\n\n\n18102017_1800\n12.4\n22.4\n13.4\n\n\n19102017_1800\n5.4\n12.4\n7.4\n\n\n23102017_1800\n23.5\n13.5\nNA\n\n\n24102017_1800\n21.3\n11.3\nNA",
     "crumbs": [
       "Pre-Processing",
       "<span class='chapter-number'>6</span>  <span class='chapter-title'>Prepro 2: Übung B</span>"
@@ -332,7 +332,7 @@
     "href": "prepro/Prepro2_Uebung_B.html#aufgabe-3",
     "title": "Prepro 2: Übung B",
     "section": "Aufgabe 3",
-    "text": "Aufgabe 3\nImportiere die Datei sensor_fail.csv in R.\nsensor_fail.csv hat eine Variabel SensorStatus: 1 bedeutet der Sensor misst, 0 bedeutet der Sensor misst nicht. Fälschlicherweise wurde auch dann der Messwert Temp = 0 erfasst, wenn Sensorstatus = 0. Richtig wäre hier NA (not available). Korrigiere den Datensatz entsprechend.\n\n\n\n\n\n\nHinweis\n\n\n\n\n\n\n\n\n\n\n\nSensor\nTemp\nHum_%\nDatetime\nSensorStatus\nTemp_correct\n\n\n\n\nSen102\n0.6\n98\n16102017_1800\n1\n0.6\n\n\nSen102\n0.3\n96\n17102017_1800\n1\n0.3\n\n\nSen102\n0.0\n87\n18102017_1800\n1\n0.0\n\n\nSen102\n0.0\n86\n19102017_1800\n0\nNA\n\n\nSen102\n0.0\n98\n23102017_1800\n0\nNA\n\n\nSen102\n0.0\n98\n24102017_1800\n0\nNA\n\n\nSen102\n0.0\n96\n25102017_1800\n1\n0.0\n\n\nSen103\n-0.3\n87\n26102017_1800\n1\n-0.3\n\n\nSen103\n-0.7\n98\n27102017_1800\n1\n-0.7\n\n\nSen103\n-1.2\n98\n28102017_1800\n1\n-1.2",
+    "text": "Aufgabe 3\nImportiere die Datei sensor_fail.csv in R.\nsensor_fail.csv hat eine Variabel SensorStatus: 1 bedeutet der Sensor misst, 0 bedeutet der Sensor misst nicht. Fälschlicherweise wurde auch dann der Messwert Temp = 0 erfasst, wenn Sensorstatus = 0. Richtig wäre hier NA (not available). Korrigiere den Datensatz entsprechend.\n\n\n\n\n\n\nHinweis\n\n\n\n\n\nMusterlösung\nsensor_fail &lt;- read_delim(\"datasets/prepro/sensor_fail.csv\", delim = \";\")\n\n# mit base-R:\nsensor_fail$Temp_correct[sensor_fail$SensorStatus == 0] &lt;- NA\nsensor_fail$Temp_correct[sensor_fail$SensorStatus != 0] &lt;- sensor_fail$Temp #Warnmeldung kann ignoriert werden.\n\n# das gleiche mit dplyr:\nsensor_fail &lt;- sensor_fail |&gt;\n  mutate(Temp_correct = ifelse(SensorStatus == 0, NA, Temp))\n\n\n\n\n\n\n\n\n\nSensor\nTemp\nHum_%\nDatetime\nSensorStatus\nTemp_correct\n\n\n\n\nSen102\n0.6\n98\n16102017_1800\n1\n0.6\n\n\nSen102\n0.3\n96\n17102017_1800\n1\n0.3\n\n\nSen102\n0.0\n87\n18102017_1800\n1\n0.0\n\n\nSen102\n0.0\n86\n19102017_1800\n0\nNA\n\n\nSen102\n0.0\n98\n23102017_1800\n0\nNA\n\n\nSen102\n0.0\n98\n24102017_1800\n0\nNA\n\n\nSen102\n0.0\n96\n25102017_1800\n1\n0.0\n\n\nSen103\n-0.3\n87\n26102017_1800\n1\n-0.3\n\n\nSen103\n-0.7\n98\n27102017_1800\n1\n-0.7\n\n\nSen103\n-1.2\n98\n28102017_1800\n1\n-1.2",
     "crumbs": [
       "Pre-Processing",
       "<span class='chapter-number'>6</span>  <span class='chapter-title'>Prepro 2: Übung B</span>"
@@ -343,7 +343,7 @@
     "href": "prepro/Prepro2_Uebung_B.html#aufgabe-4",
     "title": "Prepro 2: Übung B",
     "section": "Aufgabe 4",
-    "text": "Aufgabe 4\nWarum spielt es eine Rolle, ob 0 oder NA erfasst wird? Berechne die Mittlere der Temperatur / Feuchtigkeit nach der Korrektur.\n\n\n\n\n\n\nHinweis",
+    "text": "Aufgabe 4\nWarum spielt es eine Rolle, ob 0 oder NA erfasst wird? Berechne die Mittlere der Temperatur / Feuchtigkeit nach der Korrektur.\n\n\n\n\n\n\nHinweis\n\n\n\n\n\nMusterlösung\n# Mittelwerte der falschen Sensordaten: 0 fliesst in die Berechnung\n# ein und verfälscht den Mittelwert\nmean(sensor_fail$Temp)\n## [1] -0.13\n\n# Mittelwerte der korrigierten Sensordaten: mit na.rm = TRUE werden\n# NA-Werte aus der Berechnung entfernt.\nmean(sensor_fail$Temp_correct, na.rm = TRUE)\n## [1] -0.1857143",
     "crumbs": [
       "Pre-Processing",
       "<span class='chapter-number'>6</span>  <span class='chapter-title'>Prepro 2: Übung B</span>"
