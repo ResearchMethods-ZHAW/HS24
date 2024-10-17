@@ -4,7 +4,7 @@ thema: Split-Apply-Combine
 knitr:
   opts_chunk: 
     collapse: true
-musterloesung: true # set to true to show musterlösung
+musterloesung: false # set to true to show musterlösung
 ---
 
 # Prepro 3: Übung
@@ -119,7 +119,7 @@ weather_summary <- weather |>
 
 Visualisiere im Anschluss das Resultat:
 
-:::{.callout-note title="Musterlösung" collapse="true"" .content-hidden unless-meta="muesterloesung"}
+:::{.callout-note title="Musterlösung" collapse="true" .content-hidden unless-meta="muesterloesung"}
 
 ```{r}
 #| results: asis
@@ -148,6 +148,8 @@ weather_summary2 <- weather |>
   )
 ```
 
+:::
+
 ```{r}
 #| label: fig-baseplot-ex7
 #| fig.cap: baseplot mag keine long tables und macht aus den beiden Jahren eine kontinuierliche Linie
@@ -156,7 +158,7 @@ weather_summary2 <- weather |>
 plot(weather_summary2$week, weather_summary2$temp_mean, type = "l")
 ```
 
-:::
+
 
 ## Aufgabe 8
 
