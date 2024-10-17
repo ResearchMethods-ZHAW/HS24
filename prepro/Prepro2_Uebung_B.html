@@ -2,7 +2,7 @@
 <html xmlns="http://www.w3.org/1999/xhtml" lang="de" xml:lang="de"><head>
 
 <meta charset="utf-8">
-<meta name="generator" content="quarto-1.4.554">
+<meta name="generator" content="quarto-1.4.555">
 
 <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
 
@@ -445,13 +445,39 @@ window.onload = function() {
 <section id="aufgabe-1" class="level2">
 <h2 class="anchored" data-anchor-id="aufgabe-1">Aufgabe 1</h2>
 <p>Gegeben sind die Daten von drei Sensoren (<em>sensor1.csv</em>, <em>sensor2.csv</em>, <em>sensor3.csv</em>). Lese die Datensätze ein.</p>
+<div class="content-hidden callout callout-style-default callout-note callout-titled" data-unless-meta="muesterloesung">
+<div class="callout-header d-flex align-content-center">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<div class="callout-title-container flex-fill">
+Hinweis
+</div>
+</div>
+<div class="callout-body-container callout-body">
+
+</div>
+</div>
 </section>
 <section id="aufgabe-2" class="level2">
 <h2 class="anchored" data-anchor-id="aufgabe-2">Aufgabe 2</h2>
 <p>Erstelle aus den 3 Dataframes einen einzigen Dataframe, welcher aussieht wie unten dargestellt. Nutze dafür zwei joins aus <code>dplyr</code>, um 3 <code>data.frames</code> miteinander zu verbinden. Bereinige im Anschluss die Spaltennamen (<a href="https://www.statology.org/how-to-rename-data-frame-columns-in-r/">wie geht das?</a>).</p>
+<div class="content-hidden callout callout-style-default callout-note callout-titled" data-unless-meta="muesterloesung">
+<div class="callout-header d-flex align-content-center">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<div class="callout-title-container flex-fill">
+Hinweis
+</div>
+</div>
+<div class="callout-body-container callout-body">
+
+</div>
+</div>
 <div class="cell">
 <div class="cell-output-display">
-<table class="table table-sm table-striped small">
+<table class="caption-top table table-sm table-striped small">
 <thead>
 <tr class="header">
 <th style="text-align: left;">Datetime</th>
@@ -506,9 +532,22 @@ window.onload = function() {
 <h2 class="anchored" data-anchor-id="aufgabe-3">Aufgabe 3</h2>
 <p>Importiere die Datei <em>sensor_fail.csv</em> in <code>R</code>.</p>
 <p><code>sensor_fail.csv</code> hat eine Variabel <code>SensorStatus</code>: <code>1</code> bedeutet der Sensor misst, <code>0</code> bedeutet der Sensor misst nicht. Fälschlicherweise wurde auch dann der Messwert <code>Temp = 0</code> erfasst, wenn <code>Sensorstatus = 0</code>. Richtig wäre hier <code>NA</code> (not available). Korrigiere den Datensatz entsprechend.</p>
+<div class="content-hidden callout callout-style-default callout-note callout-titled" data-unless-meta="muesterloesung">
+<div class="callout-header d-flex align-content-center">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<div class="callout-title-container flex-fill">
+Hinweis
+</div>
+</div>
+<div class="callout-body-container callout-body">
+
+</div>
+</div>
 <div class="cell">
 <div class="cell-output-display">
-<table class="table table-sm table-striped small">
+<table class="caption-top table table-sm table-striped small">
 <thead>
 <tr class="header">
 <th style="text-align: left;">Sensor</th>
@@ -516,6 +555,7 @@ window.onload = function() {
 <th style="text-align: right;">Hum_%</th>
 <th style="text-align: left;">Datetime</th>
 <th style="text-align: right;">SensorStatus</th>
+<th style="text-align: right;">Temp_correct</th>
 </tr>
 </thead>
 <tbody>
@@ -525,6 +565,7 @@ window.onload = function() {
 <td style="text-align: right;">98</td>
 <td style="text-align: left;">16102017_1800</td>
 <td style="text-align: right;">1</td>
+<td style="text-align: right;">0.6</td>
 </tr>
 <tr class="even">
 <td style="text-align: left;">Sen102</td>
@@ -532,6 +573,7 @@ window.onload = function() {
 <td style="text-align: right;">96</td>
 <td style="text-align: left;">17102017_1800</td>
 <td style="text-align: right;">1</td>
+<td style="text-align: right;">0.3</td>
 </tr>
 <tr class="odd">
 <td style="text-align: left;">Sen102</td>
@@ -539,6 +581,7 @@ window.onload = function() {
 <td style="text-align: right;">87</td>
 <td style="text-align: left;">18102017_1800</td>
 <td style="text-align: right;">1</td>
+<td style="text-align: right;">0.0</td>
 </tr>
 <tr class="even">
 <td style="text-align: left;">Sen102</td>
@@ -546,6 +589,7 @@ window.onload = function() {
 <td style="text-align: right;">86</td>
 <td style="text-align: left;">19102017_1800</td>
 <td style="text-align: right;">0</td>
+<td style="text-align: right;">NA</td>
 </tr>
 <tr class="odd">
 <td style="text-align: left;">Sen102</td>
@@ -553,6 +597,7 @@ window.onload = function() {
 <td style="text-align: right;">98</td>
 <td style="text-align: left;">23102017_1800</td>
 <td style="text-align: right;">0</td>
+<td style="text-align: right;">NA</td>
 </tr>
 <tr class="even">
 <td style="text-align: left;">Sen102</td>
@@ -560,6 +605,7 @@ window.onload = function() {
 <td style="text-align: right;">98</td>
 <td style="text-align: left;">24102017_1800</td>
 <td style="text-align: right;">0</td>
+<td style="text-align: right;">NA</td>
 </tr>
 <tr class="odd">
 <td style="text-align: left;">Sen102</td>
@@ -567,6 +613,7 @@ window.onload = function() {
 <td style="text-align: right;">96</td>
 <td style="text-align: left;">25102017_1800</td>
 <td style="text-align: right;">1</td>
+<td style="text-align: right;">0.0</td>
 </tr>
 <tr class="even">
 <td style="text-align: left;">Sen103</td>
@@ -574,6 +621,7 @@ window.onload = function() {
 <td style="text-align: right;">87</td>
 <td style="text-align: left;">26102017_1800</td>
 <td style="text-align: right;">1</td>
+<td style="text-align: right;">-0.3</td>
 </tr>
 <tr class="odd">
 <td style="text-align: left;">Sen103</td>
@@ -581,6 +629,7 @@ window.onload = function() {
 <td style="text-align: right;">98</td>
 <td style="text-align: left;">27102017_1800</td>
 <td style="text-align: right;">1</td>
+<td style="text-align: right;">-0.7</td>
 </tr>
 <tr class="even">
 <td style="text-align: left;">Sen103</td>
@@ -588,6 +637,7 @@ window.onload = function() {
 <td style="text-align: right;">98</td>
 <td style="text-align: left;">28102017_1800</td>
 <td style="text-align: right;">1</td>
+<td style="text-align: right;">-1.2</td>
 </tr>
 </tbody>
 </table>
@@ -597,6 +647,19 @@ window.onload = function() {
 <section id="aufgabe-4" class="level2">
 <h2 class="anchored" data-anchor-id="aufgabe-4">Aufgabe 4</h2>
 <p>Warum spielt es eine Rolle, ob <code>0</code> oder <code>NA</code> erfasst wird? Berechne die Mittlere der Temperatur / Feuchtigkeit nach der Korrektur.</p>
+<div class="content-hidden callout callout-style-default callout-note callout-titled" data-unless-meta="muesterloesung">
+<div class="callout-header d-flex align-content-center">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<div class="callout-title-container flex-fill">
+Hinweis
+</div>
+</div>
+<div class="callout-body-container callout-body">
+
+</div>
+</div>
 
 
 </section>
