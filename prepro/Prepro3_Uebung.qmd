@@ -1,12 +1,14 @@
 ---
 lesson: PrePro3
 thema: Split-Apply-Combine
-execute:
-  output: true
+execute: 
+  echo: false   # set to true to show musterlösung
+  output: false
+code-fold: true
+code-summary: "Musterlösung"
 knitr:
   opts_chunk: 
     collapse: true
-musterloesung: false # set to true to show musterlösung
 ---
 
 # Prepro 3: Übung
@@ -17,8 +19,6 @@ Gegeben sei ein Datensatz *sensors_combined.csv*, mit den Temperaturwerten von d
 
 Formatiere die `Datetime` Spalte in `POSIXct` um. Verwende dazu die Funktion `as.POSIXct` (lies mit `?strftime()` nochmal nach, wie du das spezifische Format (die "Schablone") festlegen kannst.
 
-:::{.callout-note title="Musterlösung" collapse="true" .content-hidden unless-meta="muesterloesung"}
-
 ```{r}
 library("readr")
 
@@ -27,7 +27,6 @@ sensors_combined <- read_delim("datasets/prepro/sensors_combined.csv", ",")
 sensors_combined$Datetime <- as.POSIXct(sensors_combined$Datetime, format = "%d%m%Y_%H%M")
 ```
 
-:::
 
 ## Aufgabe 2
 
@@ -39,7 +38,6 @@ Tipp:
 - Alternativ kannst du (mit vorangestelltem Minuszeichen, `-`) die Spalte bezeichnen, die *nicht* pivotiert werden soll. 
 - In beiden Fällen musst du die Spalten weder mit Anführungs- und Schlusszeichen noch mit dem `$`-Zeichen versehen.
 
-:::{.callout-note title="Musterlösung" collapse="true" .content-hidden unless-meta="muesterloesung"}
 
 ```{r}
 library("tidyr")
@@ -51,15 +49,12 @@ sensors_long <- pivot_longer(sensors_combined, -Datetime)
 sensors_long <- pivot_longer(sensors_combined, c(sensor1:sensor3))
 ```
 
-:::
 
 ## Aufgabe 3
 
 Gruppiere `sensors_long` nach der neuen Spalte, wo die Sensor-Information enthalten ist (default: `name`) mit `group_by` und berechne den Mittelwert der Temperatur pro Sensor (`summarise`). Hinweis: Beide Funktionen sind Teil des Packages `dplyr`.
 
 Der Output sieht folgendermassen aus: 
-
-:::{.callout-note title="Musterlösung" collapse="true" .content-hidden unless-meta="muesterloesung"}
 
 ```{r}
 #| output: true
@@ -71,13 +66,10 @@ sensors_long |>
   summarise(temp_mean = mean(value, na.rm = TRUE))
 ```
 
-:::
 
 ## Aufgabe 4
 
 Erstelle für `sensors_long` eine neue *convenience* Variabel `month`, welche den Monat beinhaltet (Tipp: verwende dazu die Funktion `month` aus `lubridate`). Gruppiere nun nach `month` *und* Sensor und berechne den Mittelwert der Temperatur. 
-
-:::{.callout-note title="Musterlösung" collapse="true" .content-hidden unless-meta="muesterloesung"}
 
 ```{r}
 library("lubridate")
@@ -88,25 +80,20 @@ sensors_long |>
   summarise(temp_mean = mean(value, na.rm = TRUE))
 ```
 
-:::
 
 ## Aufgabe 5
 
 Lade jetzt nochmal den Datensatz *weather.csv* (Quelle MeteoSchweiz) herunter und importiere ihn als CSV mit den korrekten Spaltentypen (`stn` als `factor`, `time` als `POSIXct`, `tre200h0` als `double`).
 
-:::{.callout-note title="Musterlösung" collapse="true" .content-hidden unless-meta="muesterloesung"}
-
 ```{r}
 weather <- read_delim("datasets/prepro/weather.csv", col_types = cols(col_factor(), col_datetime("%Y%m%d%H"), col_double()), ",")
 ```
 
-:::
 
 ## Aufgabe 6
 
 Erstelle nun eine *convenience Variable* für die Kalenderwoche pro Messung (`lubridate::week`). Berechne im Anschluss den Mittelwert der Temperatur pro Kalenderwoche.
 
-:::{.callout-note title="Musterlösung" collapse="true" .content-hidden unless-meta="muesterloesung"}
 
 ```{r}
 weather_summary <- weather |>
@@ -117,11 +104,9 @@ weather_summary <- weather |>
   )
 ```
 
-:::
+
 
 Visualisiere im Anschluss das Resultat:
-
-:::{.callout-note title="Musterlösung" collapse="true" .content-hidden unless-meta="muesterloesung"}
 
 ```{r}
 #| results: asis
@@ -130,13 +115,11 @@ Visualisiere im Anschluss das Resultat:
 plot(weather_summary$week, weather_summary$temp_mean, type = "l")
 ```
 
-:::
 
 ## Aufgabe 7
 
 In der vorherigen Aufgabe haben wir den Mittelwert der Temperatur pro Kalenderwoche über *alle Jahre* (2000 und 2001) berechnet. Wenn wir die Jahre aber miteinander vergleichen wollen, müssen wir das Jahr als zusätzliche *convenience Variable* erstellen und danach gruppieren. Versuche dies mit den Wetterdaten und visualisiere den Output anschliessend.
 
-:::{.callout-note title="Musterlösung" collapse="true" .content-hidden unless-meta="muesterloesung"}
 
 ```{r}
 weather_summary2 <- weather |>
@@ -150,7 +133,6 @@ weather_summary2 <- weather |>
   )
 ```
 
-:::
 
 ```{r}
 #| label: fig-baseplot-ex7
@@ -161,12 +143,10 @@ plot(weather_summary2$week, weather_summary2$temp_mean, type = "l")
 ```
 
 
-
 ## Aufgabe 8
 
 Überführe den Output aus der letzten Übung in eine *wide table*. Nun lassen sich die beiden Jahre viel besser miteinander vergleichen.
 
-:::{.callout-note title="Musterlösung" collapse="true" .content-hidden unless-meta="muesterloesung"}
 
 ```{r}
 weather_summary2 <- weather_summary2 |>
@@ -179,5 +159,3 @@ weather_summary2 <- weather_summary2 |>
 plot(weather_summary2$week, weather_summary2$year2000, type = "l",col = "blue")
 lines(weather_summary2$week, weather_summary2$year2001, type = "l",col = "red")
 ```
-
-:::
