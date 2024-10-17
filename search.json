@@ -464,7 +464,7 @@
     "href": "prepro/Prepro3_Uebung.html#aufgabe-6",
     "title": "Prepro 3: Übung",
     "section": "Aufgabe 6",
-    "text": "Aufgabe 6\nErstelle nun eine convenience Variable für die Kalenderwoche pro Messung (lubridate::week). Berechne im Anschluss den Mittelwert der Temperatur pro Kalenderwoche.\n\n\n\n\n\n\nMusterlösung\n\n\n\n\n\n\nweather_summary &lt;- weather |&gt;\n  mutate(week = week(time)) |&gt;\n  group_by(week) |&gt;\n  summarise(\n    temp_mean = mean(tre200h0, na.rm = TRUE)\n  )\n\n\n\n\nVisualisiere im Anschluss das Resultat:\n:::{.callout-note title=“Musterlösung” collapse=“true”” .content-hidden unless-meta=“muesterloesung”}\nplot(weather_summary$week, weather_summary$temp_mean, type = \"l\")\n\n:::",
+    "text": "Aufgabe 6\nErstelle nun eine convenience Variable für die Kalenderwoche pro Messung (lubridate::week). Berechne im Anschluss den Mittelwert der Temperatur pro Kalenderwoche.\n\n\n\n\n\n\nMusterlösung\n\n\n\n\n\n\nweather_summary &lt;- weather |&gt;\n  mutate(week = week(time)) |&gt;\n  group_by(week) |&gt;\n  summarise(\n    temp_mean = mean(tre200h0, na.rm = TRUE)\n  )\n\n\n\n\nVisualisiere im Anschluss das Resultat:\n\n\n\n\n\n\nMusterlösung\n\n\n\n\n\nplot(weather_summary$week, weather_summary$temp_mean, type = \"l\")",
     "crumbs": [
       "Pre-Processing",
       "<span class='chapter-number'>8</span>  <span class='chapter-title'>Prepro 3: Übung</span>"
@@ -475,7 +475,7 @@
     "href": "prepro/Prepro3_Uebung.html#aufgabe-7",
     "title": "Prepro 3: Übung",
     "section": "Aufgabe 7",
-    "text": "Aufgabe 7\nIn der vorherigen Aufgabe haben wir den Mittelwert der Temperatur pro Kalenderwoche über alle Jahre (2000 und 2001) berechnet. Wenn wir die Jahre aber miteinander vergleichen wollen, müssen wir das Jahr als zusätzliche convenience Variable erstellen und danach gruppieren. Versuche dies mit den Wetterdaten und visualisiere den Output anschliessend.\n\n\n\n\n\n\nMusterlösung\n\n\n\n\n\n\nweather_summary2 &lt;- weather |&gt;\n  mutate(\n    week = week(time),\n    year = year(time)\n    ) |&gt;\n  group_by(year, week) |&gt;\n  summarise(\n    temp_mean = mean(tre200h0, na.rm = TRUE)\n  )\n\n\nplot(weather_summary2$week, weather_summary2$temp_mean, type = \"l\")\n\n\n\n\n\n\n\nAbbildung 8.1: baseplot mag keine long tables und macht aus den beiden Jahren eine kontinuierliche Linie",
+    "text": "Aufgabe 7\nIn der vorherigen Aufgabe haben wir den Mittelwert der Temperatur pro Kalenderwoche über alle Jahre (2000 und 2001) berechnet. Wenn wir die Jahre aber miteinander vergleichen wollen, müssen wir das Jahr als zusätzliche convenience Variable erstellen und danach gruppieren. Versuche dies mit den Wetterdaten und visualisiere den Output anschliessend.\n\n\n\n\n\n\nMusterlösung\n\n\n\n\n\n\nweather_summary2 &lt;- weather |&gt;\n  mutate(\n    week = week(time),\n    year = year(time)\n    ) |&gt;\n  group_by(year, week) |&gt;\n  summarise(\n    temp_mean = mean(tre200h0, na.rm = TRUE)\n  )\n\n\n\n\n\nplot(weather_summary2$week, weather_summary2$temp_mean, type = \"l\")\n\n\n\n\n\n\n\nAbbildung 8.1: baseplot mag keine long tables und macht aus den beiden Jahren eine kontinuierliche Linie",
     "crumbs": [
       "Pre-Processing",
       "<span class='chapter-number'>8</span>  <span class='chapter-title'>Prepro 3: Übung</span>"

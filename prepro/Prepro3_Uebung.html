@@ -623,14 +623,6 @@ Musterlösung
 </div>
 </div>
 <p>Visualisiere im Anschluss das Resultat:</p>
-<p>:::{.callout-note title=“Musterlösung” collapse=“true”” .content-hidden unless-meta=“muesterloesung”}</p>
-<div class="sourceCode cell-code" id="cb7"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb7-1"><a href="#cb7-1" aria-hidden="true" tabindex="-1"></a><span class="fu">plot</span>(weather_summary<span class="sc">$</span>week, weather_summary<span class="sc">$</span>temp_mean, <span class="at">type =</span> <span class="st">"l"</span>)</span></code><button title="In die Zwischenablage kopieren" class="code-copy-button"><i class="bi"></i></button></pre></div>
-<p><img src="Prepro3_Uebung_files/figure-html/unnamed-chunk-7-1.png" class="img-fluid" width="672"></p>
-<p>:::</p>
-</section>
-<section id="aufgabe-7" class="level2">
-<h2 class="anchored" data-anchor-id="aufgabe-7">Aufgabe 7</h2>
-<p>In der vorherigen Aufgabe haben wir den Mittelwert der Temperatur pro Kalenderwoche über <em>alle Jahre</em> (2000 und 2001) berechnet. Wenn wir die Jahre aber miteinander vergleichen wollen, müssen wir das Jahr als zusätzliche <em>convenience Variable</em> erstellen und danach gruppieren. Versuche dies mit den Wetterdaten und visualisiere den Output anschliessend.</p>
 <div class="content-hidden callout callout-style-default callout-note callout-titled" title="Musterlösung" data-unless-meta="muesterloesung">
 <div class="callout-header d-flex align-content-center" data-bs-toggle="collapse" data-bs-target=".callout-7-contents" aria-controls="callout-7" aria-expanded="false" aria-label="Toggle callout">
 <div class="callout-icon-container">
@@ -643,6 +635,27 @@ Musterlösung
 </div>
 <div id="callout-7" class="callout-7-contents callout-collapse collapse">
 <div class="callout-body-container callout-body">
+<div class="sourceCode cell-code" id="cb7"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb7-1"><a href="#cb7-1" aria-hidden="true" tabindex="-1"></a><span class="fu">plot</span>(weather_summary<span class="sc">$</span>week, weather_summary<span class="sc">$</span>temp_mean, <span class="at">type =</span> <span class="st">"l"</span>)</span></code><button title="In die Zwischenablage kopieren" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<p><img src="Prepro3_Uebung_files/figure-html/unnamed-chunk-7-1.png" class="img-fluid" width="672"></p>
+</div>
+</div>
+</div>
+</section>
+<section id="aufgabe-7" class="level2">
+<h2 class="anchored" data-anchor-id="aufgabe-7">Aufgabe 7</h2>
+<p>In der vorherigen Aufgabe haben wir den Mittelwert der Temperatur pro Kalenderwoche über <em>alle Jahre</em> (2000 und 2001) berechnet. Wenn wir die Jahre aber miteinander vergleichen wollen, müssen wir das Jahr als zusätzliche <em>convenience Variable</em> erstellen und danach gruppieren. Versuche dies mit den Wetterdaten und visualisiere den Output anschliessend.</p>
+<div class="content-hidden callout callout-style-default callout-note callout-titled" title="Musterlösung" data-unless-meta="muesterloesung">
+<div class="callout-header d-flex align-content-center" data-bs-toggle="collapse" data-bs-target=".callout-8-contents" aria-controls="callout-8" aria-expanded="false" aria-label="Toggle callout">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<div class="callout-title-container flex-fill">
+Musterlösung
+</div>
+<div class="callout-btn-toggle d-inline-block border-0 py-1 ps-1 pe-0 float-end"><i class="callout-toggle"></i></div>
+</div>
+<div id="callout-8" class="callout-8-contents callout-collapse collapse">
+<div class="callout-body-container callout-body">
 <div class="cell">
 <div class="sourceCode cell-code" id="cb8"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb8-1"><a href="#cb8-1" aria-hidden="true" tabindex="-1"></a>weather_summary2 <span class="ot">&lt;-</span> weather <span class="sc">|&gt;</span></span>
 <span id="cb8-2"><a href="#cb8-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">mutate</span>(</span>
@@ -653,6 +666,9 @@ Musterlösung
 <span id="cb8-7"><a href="#cb8-7" aria-hidden="true" tabindex="-1"></a>  <span class="fu">summarise</span>(</span>
 <span id="cb8-8"><a href="#cb8-8" aria-hidden="true" tabindex="-1"></a>    <span class="at">temp_mean =</span> <span class="fu">mean</span>(tre200h0, <span class="at">na.rm =</span> <span class="cn">TRUE</span>)</span>
 <span id="cb8-9"><a href="#cb8-9" aria-hidden="true" tabindex="-1"></a>  )</span></code><button title="In die Zwischenablage kopieren" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+</div>
+</div>
 </div>
 <div class="cell">
 <div class="sourceCode cell-code" id="cb9"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb9-1"><a href="#cb9-1" aria-hidden="true" tabindex="-1"></a><span class="fu">plot</span>(weather_summary2<span class="sc">$</span>week, weather_summary2<span class="sc">$</span>temp_mean, <span class="at">type =</span> <span class="st">"l"</span>)</span></code><button title="In die Zwischenablage kopieren" class="code-copy-button"><i class="bi"></i></button></pre></div>
@@ -669,15 +685,12 @@ Abbildung&nbsp;8.1: baseplot mag keine long tables und macht aus den beiden Jahr
 </div>
 </div>
 </div>
-</div>
-</div>
-</div>
 </section>
 <section id="aufgabe-8" class="level2">
 <h2 class="anchored" data-anchor-id="aufgabe-8">Aufgabe 8</h2>
 <p>Überführe den Output aus der letzten Übung in eine <em>wide table</em>. Nun lassen sich die beiden Jahre viel besser miteinander vergleichen.</p>
 <div class="content-hidden callout callout-style-default callout-note callout-titled" title="Musterlösung" data-unless-meta="muesterloesung">
-<div class="callout-header d-flex align-content-center" data-bs-toggle="collapse" data-bs-target=".callout-8-contents" aria-controls="callout-8" aria-expanded="false" aria-label="Toggle callout">
+<div class="callout-header d-flex align-content-center" data-bs-toggle="collapse" data-bs-target=".callout-9-contents" aria-controls="callout-9" aria-expanded="false" aria-label="Toggle callout">
 <div class="callout-icon-container">
 <i class="callout-icon"></i>
 </div>
@@ -686,7 +699,7 @@ Musterlösung
 </div>
 <div class="callout-btn-toggle d-inline-block border-0 py-1 ps-1 pe-0 float-end"><i class="callout-toggle"></i></div>
 </div>
-<div id="callout-8" class="callout-8-contents callout-collapse collapse">
+<div id="callout-9" class="callout-9-contents callout-collapse collapse">
 <div class="callout-body-container callout-body">
 <div class="cell">
 <div class="sourceCode cell-code" id="cb10"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb10-1"><a href="#cb10-1" aria-hidden="true" tabindex="-1"></a>weather_summary2 <span class="ot">&lt;-</span> weather_summary2 <span class="sc">|&gt;</span></span>
