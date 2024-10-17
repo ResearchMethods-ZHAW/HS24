@@ -1,11 +1,6 @@
 ---
 lesson: PrePro2
 thema: Piping / Joins
-execute: 
-  echo: true
-  output: true
-code-fold: true
-code-summary: "Musterlösung"
 knitr:
   opts_chunk: 
     collapse: true
@@ -25,7 +20,7 @@ musterloesung: true # set to true to show musterlösung
 
 Gegeben sind die Daten von drei Sensoren (*sensor1.csv*, *sensor2.csv*, *sensor3.csv*). Lese die Datensätze ein.
 
-:::{.callout-note title="Lösung" .content-hidden unless-meta="muesterloesung"}
+:::{.callout-note title="Musterlösung" collapse="true" .content-hidden unless-meta="muesterloesung"}
 
 ```{r}
 library("readr")
@@ -41,7 +36,7 @@ sensor3 <- read_delim("datasets/prepro/sensor3.csv", ";")
 
 Erstelle aus den 3 Dataframes einen einzigen Dataframe, welcher aussieht wie unten dargestellt. Nutze dafür zwei joins aus `dplyr`, um 3 `data.frames` miteinander zu verbinden. Bereinige im Anschluss die Spaltennamen ([wie geht das?](https://www.statology.org/how-to-rename-data-frame-columns-in-r/)).
 
-:::{.callout-note title="Lösung" .content-hidden unless-meta="muesterloesung"}
+:::{.callout-note title="Musterlösung" collapse="true" .content-hidden unless-meta="muesterloesung"}
 
 ```{r}
 library("dplyr")
@@ -70,7 +65,7 @@ Importiere die Datei *sensor_fail.csv* in `R`.
 
 `sensor_fail.csv` hat eine Variabel `SensorStatus`: `1` bedeutet der Sensor misst, `0` bedeutet der Sensor misst nicht. Fälschlicherweise wurde auch dann der Messwert `Temp = 0` erfasst, wenn `Sensorstatus = 0`. Richtig wäre hier `NA` (not available). Korrigiere den Datensatz entsprechend.
 
-:::{.callout-note title="Lösung" .content-hidden unless-meta="muesterloesung"}
+:::{.callout-note title="Musterlösung" collapse="true" .content-hidden unless-meta="muesterloesung"}
 
 ```{r}
 sensor_fail <- read_delim("datasets/prepro/sensor_fail.csv", delim = ";")
@@ -97,7 +92,7 @@ knitr::kable(sensor_fail)
 
 Warum spielt es eine Rolle, ob `0` oder `NA` erfasst wird? Berechne die Mittlere der Temperatur / Feuchtigkeit nach der Korrektur. 
 
-:::{.callout-note title="Lösung" .content-hidden unless-meta="muesterloesung"}
+:::{.callout-note title="Musterlösung" collapse="true" .content-hidden unless-meta="muesterloesung"}
 
 ```{r}
 # Mittelwerte der falschen Sensordaten: 0 fliesst in die Berechnung
