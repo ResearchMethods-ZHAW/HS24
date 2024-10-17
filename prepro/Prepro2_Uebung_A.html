@@ -442,20 +442,18 @@ window.onload = function() {
 
 
 <div class="cell">
-<div class="sourceCode cell-code" id="cb1"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb1-1"><a href="#cb1-1" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb1-2"><a href="#cb1-2" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb1-3"><a href="#cb1-3" aria-hidden="true" tabindex="-1"></a><span class="co"># Alternativ kannst du alle tidyverse packages mit library("tidyverse") laden</span></span></code><button title="In die Zwischenablage kopieren" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb1"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb1-1"><a href="#cb1-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Alternativ kannst du alle tidyverse packages mit library("tidyverse") laden</span></span></code><button title="In die Zwischenablage kopieren" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
 <section id="aufgabe-1" class="level2">
 <h2 class="anchored" data-anchor-id="aufgabe-1">Aufgabe 1</h2>
 <p>Lese die Wetterdaten von letzer Woche <em>weather.csv</em> (Quelle MeteoSchweiz) in <code>R</code> ein. Sorge dafür, dass die Spalten korrekt formatiert sind (<code>stn</code> als <code>factor</code>, <code>time</code> als <code>POSIXct</code>, <code>tre200h0</code> als <code>numeric</code>.)</p>
-<div class="content-hidden callout callout-style-default callout-note callout-titled" data-unless-meta="muesterloesung">
+<div class="content-hidden callout callout-style-default callout-note callout-titled" title="Lösung" data-unless-meta="muesterloesung">
 <div class="callout-header d-flex align-content-center">
 <div class="callout-icon-container">
 <i class="callout-icon"></i>
 </div>
 <div class="callout-title-container flex-fill">
-Hinweis
+Lösung
 </div>
 </div>
 <div class="callout-body-container callout-body">
@@ -493,13 +491,13 @@ Tipp
 <p>Wenn ihr die Codierung eines Files <em>nicht</em> kennt, könnt ihr wie folgt vorgehen: Anleitung <a href="https://stackoverflow.com/a/13464816/4139249">für Windows</a>, <a href="https://stackoverflow.com/a/2461193/4139249">für Mac</a> und <a href="https://stackoverflow.com/a/805474/4139249">für Linux</a>.</p>
 </div>
 </div>
-<div class="content-hidden callout callout-style-default callout-note callout-titled" data-unless-meta="muesterloesung">
+<div class="content-hidden callout callout-style-default callout-note callout-titled" title="Lösung" data-unless-meta="muesterloesung">
 <div class="callout-header d-flex align-content-center">
 <div class="callout-icon-container">
 <i class="callout-icon"></i>
 </div>
 <div class="callout-title-container flex-fill">
-Hinweis
+Lösung
 </div>
 </div>
 <div class="callout-body-container callout-body">
@@ -515,13 +513,13 @@ Hinweis
 <section id="aufgabe-3" class="level2">
 <h2 class="anchored" data-anchor-id="aufgabe-3">Aufgabe 3</h2>
 <p>Nun wollen wir den Datensatz <code>wetter</code> mit den Informationen aus <code>metadata</code> anreichern. Uns interessiert aber nur das Stationskürzel, der Name, die x/y Koordinaten sowie die Meereshöhe. Selektiere diese Spalten.</p>
-<div class="content-hidden callout callout-style-default callout-note callout-titled" data-unless-meta="muesterloesung">
+<div class="content-hidden callout callout-style-default callout-note callout-titled" title="Lösung" data-unless-meta="muesterloesung">
 <div class="callout-header d-flex align-content-center">
 <div class="callout-icon-container">
 <i class="callout-icon"></i>
 </div>
 <div class="callout-title-container flex-fill">
-Hinweis
+Lösung
 </div>
 </div>
 <div class="callout-body-container callout-body">
@@ -538,13 +536,13 @@ Hinweis
 <h2 class="anchored" data-anchor-id="aufgabe-4">Aufgabe 4</h2>
 <p>Jetzt kann <code>metadata</code> mit dem Datensatz <code>wetter</code> verbunden werden. Überlege dir, welcher Join dafür sinnvoll ist und mit welchem Attribut wir “joinen” können.</p>
 <p>Nutze die Join-Möglichkeiten von <code>dplyr</code> (Hilfe via <code>?dplyr::join</code>), um die Datensätze <code>wetter</code> und <code>metadata</code> zu verbinden.</p>
-<div class="content-hidden callout callout-style-default callout-note callout-titled" data-unless-meta="muesterloesung">
+<div class="content-hidden callout callout-style-default callout-note callout-titled" title="Lösung" data-unless-meta="muesterloesung">
 <div class="callout-header d-flex align-content-center">
 <div class="callout-icon-container">
 <i class="callout-icon"></i>
 </div>
 <div class="callout-title-container flex-fill">
-Hinweis
+Lösung
 </div>
 </div>
 <div class="callout-body-container callout-body">
@@ -564,13 +562,13 @@ Hinweis
 <section id="aufgabe-5" class="level2">
 <h2 class="anchored" data-anchor-id="aufgabe-5">Aufgabe 5</h2>
 <p>Erstelle eine neue Spalte <code>month</code>, welche den jeweiligen Monat (aus <code>time</code>) beinhaltet. Nutze dafür die Funktion <code>lubridate::month()</code>.</p>
-<div class="content-hidden callout callout-style-default callout-note callout-titled" data-unless-meta="muesterloesung">
+<div class="content-hidden callout callout-style-default callout-note callout-titled" title="Lösung" data-unless-meta="muesterloesung">
 <div class="callout-header d-flex align-content-center">
 <div class="callout-icon-container">
 <i class="callout-icon"></i>
 </div>
 <div class="callout-title-container flex-fill">
-Hinweis
+Lösung
 </div>
 </div>
 <div class="callout-body-container callout-body">
@@ -588,13 +586,13 @@ Hinweis
 <section id="aufgabe-6" class="level2">
 <h2 class="anchored" data-anchor-id="aufgabe-6">Aufgabe 6</h2>
 <p>Berechne mit der Spalte <code>month</code> die Durchschnittstemperatur pro Monat.</p>
-<div class="content-hidden callout callout-style-default callout-note callout-titled" data-unless-meta="muesterloesung">
+<div class="content-hidden callout callout-style-default callout-note callout-titled" title="Lösung" data-unless-meta="muesterloesung">
 <div class="callout-header d-flex align-content-center">
 <div class="callout-icon-container">
 <i class="callout-icon"></i>
 </div>
 <div class="callout-title-container flex-fill">
-Hinweis
+Lösung
 </div>
 </div>
 <div class="callout-body-container callout-body">
