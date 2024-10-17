@@ -1,6 +1,8 @@
 ---
 lesson: PrePro3
 thema: Split-Apply-Combine
+execute:
+  output: true
 knitr:
   opts_chunk: 
     collapse: true
