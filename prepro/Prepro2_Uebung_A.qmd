@@ -1,7 +1,6 @@
 ---
 lesson: PrePro2
 thema: Piping / Joins
-code-fold: true
 knitr:
   opts_chunk: 
     collapse: true
@@ -21,7 +20,7 @@ musterloesung: true # set to true to show musterlösung
 
 Lese die Wetterdaten von letzer Woche *weather.csv* (Quelle MeteoSchweiz) in `R` ein. Sorge dafür, dass die Spalten korrekt formatiert sind (`stn` als `factor`, `time` als `POSIXct`, `tre200h0` als `numeric`.)
 
-:::{.callout-note title="Lösung" collapse="true" .content-hidden unless-meta="muesterloesung"}
+:::{.callout-note title="Musterlösung" collapse="true" .content-hidden unless-meta="muesterloesung"}
 
 ```{r}
 library("readr")
@@ -46,7 +45,7 @@ Wenn Umlaute und Sonderzeichen nicht korrekt dargestellt werden (z.B. das è in 
 Wenn ihr die Codierung eines Files *nicht* kennt, könnt ihr wie folgt vorgehen: Anleitung [für Windows](https://stackoverflow.com/a/13464816/4139249), [für Mac](https://stackoverflow.com/a/2461193/4139249) und [für Linux](https://stackoverflow.com/a/805474/4139249). 
 :::
 
-:::{.callout-note title="Lösung" collapse="true"  .content-hidden unless-meta="muesterloesung"}
+:::{.callout-note title="Musterlösung" collapse="true"  .content-hidden unless-meta="muesterloesung"}
 
 ```{r}
 metadata <- read_delim("datasets/prepro/metadata.csv", delim = ";", locale = locale(encoding = "UTF-8"))
@@ -58,7 +57,7 @@ metadata <- read_delim("datasets/prepro/metadata.csv", delim = ";", locale = loc
 
 Nun wollen wir den Datensatz `wetter` mit den Informationen aus `metadata` anreichern. Uns interessiert aber nur das Stationskürzel, der Name, die x/y Koordinaten sowie die Meereshöhe. Selektiere diese Spalten.
 
-:::{.callout-note title="Lösung" collapse="true"  .content-hidden unless-meta="muesterloesung"}
+:::{.callout-note title="Musterlösung" collapse="true"  .content-hidden unless-meta="muesterloesung"}
 
 ```{r}
 metadata <- metadata[, c("stn", "Name", "x", "y", "Meereshoehe")]
@@ -72,7 +71,7 @@ Jetzt kann `metadata` mit dem Datensatz `wetter` verbunden werden. Überlege dir
 
 Nutze die Join-Möglichkeiten von `dplyr` (Hilfe via `?dplyr::join`), um die Datensätze `wetter` und `metadata` zu verbinden.
 
-:::{.callout-note title="Lösung" collapse="true" .content-hidden unless-meta="muesterloesung"}
+:::{.callout-note title="Musterlösung" collapse="true" .content-hidden unless-meta="muesterloesung"}
 
 ```{r}
 library("dplyr")
@@ -88,7 +87,7 @@ wetter <- left_join(wetter, metadata, by = "stn")
 
 Erstelle eine neue Spalte `month`, welche den jeweiligen Monat (aus `time`) beinhaltet. Nutze dafür die Funktion `lubridate::month()`.
 
-:::{.callout-note title="Lösung" collapse="true"  .content-hidden unless-meta="muesterloesung"}
+:::{.callout-note title="Musterlösung" collapse="true"  .content-hidden unless-meta="muesterloesung"}
 
 ```{r}
 library("lubridate")
@@ -102,7 +101,7 @@ wetter$month <- month(wetter$time)
 
 Berechne mit der Spalte `month` die Durchschnittstemperatur pro Monat.
 
-:::{.callout-note title="Lösung" collapse="true" .content-hidden unless-meta="muesterloesung"}
+:::{.callout-note title="Musterlösung" collapse="true" .content-hidden unless-meta="muesterloesung"}
 
 ```{r}
 mean(wetter$tre200h0[wetter$month == 1])
