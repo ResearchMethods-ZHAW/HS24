@@ -233,7 +233,7 @@
     "href": "prepro/Prepro2_Uebung_A.html#aufgabe-1",
     "title": "Prepro 2: Übung A",
     "section": "",
-    "text": "Lösung\n\n\n\n\n\n\n\nCode\nlibrary(\"readr\")\n\nwetter &lt;- read_delim(\"datasets/prepro/weather.csv\", \",\")\nwetter$stn &lt;- as.factor(wetter$stn)\nwetter$time &lt;- as.POSIXct(as.character(wetter$time), format = \"%Y%m%d%H\", tz = \"UTC\")",
+    "text": "Musterlösung\n\n\n\n\n\n\nlibrary(\"readr\")\n\nwetter &lt;- read_delim(\"datasets/prepro/weather.csv\", \",\")\nwetter$stn &lt;- as.factor(wetter$stn)\nwetter$time &lt;- as.POSIXct(as.character(wetter$time), format = \"%Y%m%d%H\", tz = \"UTC\")",
     "crumbs": [
       "Pre-Processing",
       "<span class='chapter-number'>5</span>  <span class='chapter-title'>Prepro 2: Übung A</span>"
@@ -244,7 +244,7 @@
     "href": "prepro/Prepro2_Uebung_A.html#aufgabe-2",
     "title": "Prepro 2: Übung A",
     "section": "Aufgabe 2",
-    "text": "Aufgabe 2\nLese den Datensatz metadata.csv ebenfalls als csv ein.\n\n\n\n\n\n\nTipp\n\n\n\nWenn Umlaute und Sonderzeichen nicht korrekt dargestellt werden (z.B. das è in Genève), hat das vermutlich mit der Zeichencodierung zu tun. Das File ist aktuell in UTF-8 codiert. Wenn Umlaute nicht korrekt dargestellt werden, hat R diese Codierung nicht erkannt und sie muss in der Import-Funktion spezifitiert werden. Dies wird je nach verwendete import Funktion unterschiedlich gemacht:\n\nFunktionen aus dem Package readr: locale = locale(encoding = \"UTF-8\")\nBase-R Funktionen: fileEncoding = \"UTF-8\"\n\nWenn ihr die Codierung eines Files nicht kennt, könnt ihr wie folgt vorgehen: Anleitung für Windows, für Mac und für Linux.\n\n\n\n\n\n\n\n\nLösung\n\n\n\n\n\n\n\nCode\nmetadata &lt;- read_delim(\"datasets/prepro/metadata.csv\", delim = \";\", locale = locale(encoding = \"UTF-8\"))",
+    "text": "Aufgabe 2\nLese den Datensatz metadata.csv ebenfalls als csv ein.\n\n\n\n\n\n\nTipp\n\n\n\nWenn Umlaute und Sonderzeichen nicht korrekt dargestellt werden (z.B. das è in Genève), hat das vermutlich mit der Zeichencodierung zu tun. Das File ist aktuell in UTF-8 codiert. Wenn Umlaute nicht korrekt dargestellt werden, hat R diese Codierung nicht erkannt und sie muss in der Import-Funktion spezifitiert werden. Dies wird je nach verwendete import Funktion unterschiedlich gemacht:\n\nFunktionen aus dem Package readr: locale = locale(encoding = \"UTF-8\")\nBase-R Funktionen: fileEncoding = \"UTF-8\"\n\nWenn ihr die Codierung eines Files nicht kennt, könnt ihr wie folgt vorgehen: Anleitung für Windows, für Mac und für Linux.\n\n\n\n\n\n\n\n\nMusterlösung\n\n\n\n\n\n\nmetadata &lt;- read_delim(\"datasets/prepro/metadata.csv\", delim = \";\", locale = locale(encoding = \"UTF-8\"))",
     "crumbs": [
       "Pre-Processing",
       "<span class='chapter-number'>5</span>  <span class='chapter-title'>Prepro 2: Übung A</span>"
@@ -255,7 +255,7 @@
     "href": "prepro/Prepro2_Uebung_A.html#aufgabe-3",
     "title": "Prepro 2: Übung A",
     "section": "Aufgabe 3",
-    "text": "Aufgabe 3\nNun wollen wir den Datensatz wetter mit den Informationen aus metadata anreichern. Uns interessiert aber nur das Stationskürzel, der Name, die x/y Koordinaten sowie die Meereshöhe. Selektiere diese Spalten.\n\n\n\n\n\n\nLösung\n\n\n\n\n\n\n\nCode\nmetadata &lt;- metadata[, c(\"stn\", \"Name\", \"x\", \"y\", \"Meereshoehe\")]",
+    "text": "Aufgabe 3\nNun wollen wir den Datensatz wetter mit den Informationen aus metadata anreichern. Uns interessiert aber nur das Stationskürzel, der Name, die x/y Koordinaten sowie die Meereshöhe. Selektiere diese Spalten.\n\n\n\n\n\n\nMusterlösung\n\n\n\n\n\n\nmetadata &lt;- metadata[, c(\"stn\", \"Name\", \"x\", \"y\", \"Meereshoehe\")]",
     "crumbs": [
       "Pre-Processing",
       "<span class='chapter-number'>5</span>  <span class='chapter-title'>Prepro 2: Übung A</span>"
@@ -266,7 +266,7 @@
     "href": "prepro/Prepro2_Uebung_A.html#aufgabe-4",
     "title": "Prepro 2: Übung A",
     "section": "Aufgabe 4",
-    "text": "Aufgabe 4\nJetzt kann metadata mit dem Datensatz wetter verbunden werden. Überlege dir, welcher Join dafür sinnvoll ist und mit welchem Attribut wir “joinen” können.\nNutze die Join-Möglichkeiten von dplyr (Hilfe via ?dplyr::join), um die Datensätze wetter und metadata zu verbinden.\n\n\n\n\n\n\nLösung\n\n\n\n\n\n\n\nCode\nlibrary(\"dplyr\")\nwetter &lt;- left_join(wetter, metadata, by = \"stn\")\n\n# Jointyp: Left-Join auf 'wetter', da uns nur die Stationen im Datensatz 'wetter' interessieren.\n# Attribut: \"stn\"",
+    "text": "Aufgabe 4\nJetzt kann metadata mit dem Datensatz wetter verbunden werden. Überlege dir, welcher Join dafür sinnvoll ist und mit welchem Attribut wir “joinen” können.\nNutze die Join-Möglichkeiten von dplyr (Hilfe via ?dplyr::join), um die Datensätze wetter und metadata zu verbinden.\n\n\n\n\n\n\nMusterlösung\n\n\n\n\n\n\nlibrary(\"dplyr\")\nwetter &lt;- left_join(wetter, metadata, by = \"stn\")\n\n# Jointyp: Left-Join auf 'wetter', da uns nur die Stationen im Datensatz 'wetter' interessieren.\n# Attribut: \"stn\"",
     "crumbs": [
       "Pre-Processing",
       "<span class='chapter-number'>5</span>  <span class='chapter-title'>Prepro 2: Übung A</span>"
@@ -277,7 +277,7 @@
     "href": "prepro/Prepro2_Uebung_A.html#aufgabe-5",
     "title": "Prepro 2: Übung A",
     "section": "Aufgabe 5",
-    "text": "Aufgabe 5\nErstelle eine neue Spalte month, welche den jeweiligen Monat (aus time) beinhaltet. Nutze dafür die Funktion lubridate::month().\n\n\n\n\n\n\nLösung\n\n\n\n\n\n\n\nCode\nlibrary(\"lubridate\")\n\nwetter$month &lt;- month(wetter$time)",
+    "text": "Aufgabe 5\nErstelle eine neue Spalte month, welche den jeweiligen Monat (aus time) beinhaltet. Nutze dafür die Funktion lubridate::month().\n\n\n\n\n\n\nMusterlösung\n\n\n\n\n\n\nlibrary(\"lubridate\")\n\nwetter$month &lt;- month(wetter$time)",
     "crumbs": [
       "Pre-Processing",
       "<span class='chapter-number'>5</span>  <span class='chapter-title'>Prepro 2: Übung A</span>"
@@ -288,7 +288,7 @@
     "href": "prepro/Prepro2_Uebung_A.html#aufgabe-6",
     "title": "Prepro 2: Übung A",
     "section": "Aufgabe 6",
-    "text": "Aufgabe 6\nBerechne mit der Spalte month die Durchschnittstemperatur pro Monat.\n\n\n\n\n\n\nLösung\n\n\n\n\n\n\n\nCode\nmean(wetter$tre200h0[wetter$month == 1])\n## [1] -1.963239\nmean(wetter$tre200h0[wetter$month == 2])\n## [1] 0.3552632\nmean(wetter$tre200h0[wetter$month == 3])\n## [1] 2.965054\n\n# usw. für alle 12 Monate",
+    "text": "Aufgabe 6\nBerechne mit der Spalte month die Durchschnittstemperatur pro Monat.\n\n\n\n\n\n\nMusterlösung\n\n\n\n\n\n\nmean(wetter$tre200h0[wetter$month == 1])\n## [1] -1.963239\nmean(wetter$tre200h0[wetter$month == 2])\n## [1] 0.3552632\nmean(wetter$tre200h0[wetter$month == 3])\n## [1] 2.965054\n\n# usw. für alle 12 Monate",
     "crumbs": [
       "Pre-Processing",
       "<span class='chapter-number'>5</span>  <span class='chapter-title'>Prepro 2: Übung A</span>"
