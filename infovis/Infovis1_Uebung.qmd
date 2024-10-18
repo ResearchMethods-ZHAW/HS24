@@ -62,7 +62,7 @@ plot1
 
 ## Aufgabe 2
 
-Rekonstrukturiere folgenden Plot aus @kovic2014 mithilfe von ggplot:
+Rekonstruiere folgenden Plot aus @kovic2014 mithilfe von ggplot:
 
 Tipp:
 
@@ -81,7 +81,7 @@ plot1 +
 
 Importiere die Gemeindedaten *tagi_data_gemeinden.csv*.
 
-Rekonstrukturiere folgenden Plot aus @kovic2014 mithilfe von ggplot und dem tagi_data_gemeinden.csv Datensatz:
+Rekonstruiere folgenden Plot aus @kovic2014 mithilfe von ggplot und dem tagi_data_gemeinden.csv Datensatz:
 
 Tipp:
 
@@ -107,7 +107,7 @@ plot2
 
 ## Aufgabe 4
 
-Rekonstrukturiere folgenden Plot aus @kovic2014 mithilfe von ggplot und dem tagi_data_gemeinden.csv Datensatz:
+Rekonstruiere folgenden Plot aus @kovic2014 mithilfe von ggplot und dem tagi_data_gemeinden.csv Datensatz:
 
 Tipp:
 
@@ -124,7 +124,7 @@ plot2 +
 
 ## Aufgabe 5
 
-Rekonstrukturiere folgenden Plot aus @kovic2014 mithilfe von ggplot und dem tagi_data_gemeinden.csv Datensatz:
+Rekonstruiere folgenden Plot aus @kovic2014 mithilfe von ggplot und dem tagi_data_gemeinden.csv Datensatz:
 
 Tipp:
 
@@ -142,7 +142,7 @@ plot3
 
 ## Aufgabe 6
 
-Rekonstrukturiere folgenden Plot aus @kovic2014 mithilfe von ggplot und dem tagi_data_gemeinden.csv Datensatz:
+Rekonstruiere folgenden Plot aus @kovic2014 mithilfe von ggplot und dem tagi_data_gemeinden.csv Datensatz:
 
 Tipp:
 
@@ -160,7 +160,7 @@ plot3 +
 
 ## Aufgabe 7
 
-Rekonstrukturieren folgenden Plot aus @kovic2014 mithilfe von ggplot und dem tagi_data_gemeinden.csv Datensatz:
+Rekonstruiere folgenden Plot aus @kovic2014 mithilfe von ggplot und dem tagi_data_gemeinden.csv Datensatz:
 
 Tipp:
 
@@ -178,7 +178,7 @@ plot4
 
 ## Aufgabe 8
 
-Rekonstrukturiere folgenden Plot aus @kovic2014 mithilfe von ggplot und dem tagi_data_gemeinden.csv Datensatz:
+Rekonstruiere folgenden Plot aus @kovic2014 mithilfe von ggplot und dem tagi_data_gemeinden.csv Datensatz:
 
 Tipp:
 
