@@ -9,6 +9,7 @@ knitr:
 # Statistik 4: Demo
 
 Download dieses Demoscript via "\</\>Code" (oben rechts)
+-   Datensatz *loyn.csv*
 
 
 ```{r}
