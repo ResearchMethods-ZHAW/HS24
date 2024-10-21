@@ -170,7 +170,7 @@ ggplot(temperature_day, aes(time, temp, colour = station)) +
     date_breaks = "3 months",
     date_labels = "%b"
   ) +
-  facet_wrap(station ~ .)
+  facet_wrap(~station)
 ```
 
 Auch `facet_wrap` kann man auf seine Bedürfnisse anpassen: Beispielweise kann man mit `ncol = ` die Anzahl facets pro Zeile bestimmen. 
