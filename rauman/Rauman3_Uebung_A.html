@@ -2,7 +2,7 @@
 <html xmlns="http://www.w3.org/1999/xhtml" lang="de" xml:lang="de"><head>
 
 <meta charset="utf-8">
-<meta name="generator" content="quarto-1.4.554">
+<meta name="generator" content="quarto-1.4.549">
 
 <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
 
@@ -126,76 +126,40 @@ div.csl-indent {
 }</script>
 
 
-
-
 <!-- loads fontawesome, so that I can create a fontawesome button (see below) -->
-
 <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.2/css/all.min.css" integrity="sha512-z3gLpd7yknf1YoNbCzqRKc4qyor8gaKU1qmn+CShxbuBusANI9QpRohGBreCFkKxLhei6S9CQXFEbbKuqLg0DA==" crossorigin="anonymous" referrerpolicy="no-referrer">
-
 <script>
 
-
-
 // the following function adds padding to all h2 elements, so that I can 
-
 // easily present the content of the page in a more readable way
-
 function presenter(){
-
     var paragraphs = document.querySelectorAll("h2, h3");
-
     paragraphs.forEach(function (paragraph) {
-
         paragraph.classList.toggle("padding-top-500");
-
     });
-
 }
 
-
-
 // once the page is loaded, the button is injected into the sidebar. This button
-
 // calls the presenter function (see above)
-
 window.onload = function() {
-
     // create the button (similar to the buttons already availables)
-
     const linkElement = document.createElement('a');
 
-
-
     linkElement.classList.add('quarto-navigation-tool');
-
     linkElement.classList.add('px-1');
-
     linkElement.innerHTML = '<i class="fa-solid fa-person-chalkboard"></i>';
-
     linkElement.href = '#';
-
     linkElement.addEventListener('click', function(event) {
-
         event.preventDefault(); // Prevent the default link behavior
-
         presenter();
-
     });
 
-
-
     // Find the target element by its class name
-
     const sidebar_tools = document.querySelector(".sidebar-tools-main")
-
     sidebar_tools.appendChild(linkElement);
-
 };
 
-
-
 </script>
-
 
   <script src="https://polyfill.io/v3/polyfill.min.js?features=es6"></script>
   <script src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-chtml-full.js" type="text/javascript"></script>
@@ -561,11 +525,6 @@ window.Quarto = {
   <a href="../fallstudie_s/1_Einführung.html" class="sidebar-item-text sidebar-link"><span class="chapter-title">Einführung</span></a>
   </div>
 </li>
-          <li class="sidebar-item">
-  <div class="sidebar-item-container"> 
-  <a href="../fallstudie_s/2_Besuchermonitoring.html" class="sidebar-item-text sidebar-link"><span class="chapter-title">Monitoring</span></a>
-  </div>
-</li>
       </ul>
   </li>
         <li class="sidebar-item sidebar-item-section">
@@ -579,7 +538,7 @@ window.Quarto = {
       <ul id="quarto-sidebar-section-6" class="collapse list-unstyled sidebar-section depth1 ">  
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
-  <a href="../fallstudie_n/1_Vorbemerkung.html" class="sidebar-item-text sidebar-link"><span class="chapter-title">Vorbemerkung</span></a>
+  <a href="../fallstudie_n/1_Vorbemerkung.html" class="sidebar-item-text sidebar-link"><span class="chapter-title">BiEc1_N Vorbemerkung</span></a>
   </div>
 </li>
       </ul>
@@ -627,13 +586,13 @@ window.Quarto = {
 </header>
 
 
-<p>Für die heutige Übung benötigen wir folgende Datensätze. Importiere diese in R. Prüfe, ob das CRS korrekt gesetzt wurde und setze es wenn nötig. Mache dich mit den Daten vertraut (visualieren, durchscrollen usw).</p>
+<p>Für die heutige Übung benötigen wir folgende Datensätze. Importiere diese in R. Prüfe, ob das CRS korrekt gesetzt wurde, setze es wenn nötig. Mache dich mit den Daten vertraut (visualieren, durchscrollen usw).</p>
 <ul>
 <li><em>rotmilan.gpkg</em>: Dieser Datensatz stammt aus einem grösseren Forschungsprojekt der <a href="https://www.vogelwarte.ch/de/projekte/oekologische-forschung/mechanismen-der-populationsdynamik-beim-rotmilan">Vogelwarte Sempach</a>, welcher über die die Plattform <a href="http://www.movebank.org/panel_embedded_movebank_webapp?gwt_fragment=page%3Dsearch_map_linked%2CindividualIds%3D676571254%2Clat%3D44.465151013519666%2Clon%3D9.096679687499508%2Cz%3D5">movebank</a> zur Verfügung gestellt wurde (siehe <span class="citation" data-cites="scherler2020">"Scherler (<a href="../References.html#ref-scherler2020" role="doc-biblioref">"2020"</a>)</span>). Es handelt sich dabei um ein einzelnes Individuum, welches seit 2017 mit einem Sender versehen ist und über ganz Mitteleuropa zieht. Wir arbeiten in dieser Übung nur mit denjenigen Datenpunkten, die in der Schweiz erfasst wurden. Wer den ganzen Datensatz analysieren möchte, kann sich diesen über den Movebank-Link runterladen.</li>
 <li><em>luftqualitaet.gpkg</em>: Dieser Datensatz beinhaltet Messungen von Stickstoffdioxid <span class="math inline">\(NO_2\)</span> aus dem Jahr 2015 für 97 Messstellen in der Schweiz. Stickstoffdioxid entstehen beim Verbrennen von Brenn- und Treibstoffen, insbesondere bei hohen Verbrennungstemperaturen, wobei der Strassenverkehr als Hauptquelle gilt. Mehr Informationen dazu findet ihr <a href="https://www.bafu.admin.ch/bafu/de/home/themen/thema-luft/luft--daten--indikatoren-und-karten/luft--indikatoren/indikator-luft.pt.html/aHR0cHM6Ly93d3cuaW5kaWthdG9yZW4uYWRtaW4uY2gvUHVibG/ljL0FlbURldGFpbD9pbmQ9TFUwMjAmbG5nPWRlJlN1Ymo9Tg%3d%3d.html">hier</a>.</li>
 <li><em>schweiz.gpkg</em>: Landesgrenze der Schweiz</li>
 </ul>
-<p>Als erstes wollen wir für die Datensätze <code>luftqualitaet</code> und <code>rotmilan</code> Dichteschätzungen durchführen. Lade vorgängig die dafür notwendigen Packages in deine R-Session.</p>
+<p>Als erstes wollen wir für die Datensätze <code>luftqualitaet</code> und <code>rotmilan</code> Dichteschätzungen durchführen. Lade vorgängig die dafür die notwendigen Packages in deine R-Session.</p>
 <div class="cell">
 <div class="sourceCode cell-code" id="cb1"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb1-1"><a href="#cb1-1" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(<span class="st">"sf"</span>)</span>
 <span id="cb1-2"><a href="#cb1-2" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(<span class="st">"dplyr"</span>)</span>
@@ -658,8 +617,8 @@ window.Quarto = {
 <section id="aufgabe-2-kernel-density-estimation-berechnen" class="level2">
 <h2 class="anchored" data-anchor-id="aufgabe-2-kernel-density-estimation-berechnen">Aufgabe 2: Kernel Density Estimation berechnen</h2>
 <p>In einer ersten Annäherung funktioniert dies, doch wir sehen hier ein klassisches Problem des “Overplotting”. Das heisst, dass wir durch die Überlagerung vieler Punkte in den dichten Regionen nicht abschätzen können, wie viele Punkte dort effektiv liegen und ggf. übereinander liegen. Es gibt hier verschiedene Möglichkeiten, die Punktdichte klarer zu visualisieren. Eine unter Biologen sehr beliebte Methode ist die Dichteverteilung mit einer Kernel Density Estimation (KDE). Dies v.a. darum, weil mit KDE das Habitat (Streifgebiet) eines Tieres abgeschätzt werden kann. Homeranges werden oft mit KDE95 und Core Areas mit KDE50 definiert (<a href="https://besjournals.onlinelibrary.wiley.com/doi/full/10.1111/2041-210X.12673">Fleming C., Calabrese J., 2016</a>).</p>
-<p>Für die Berechnung der Density verwenden wir die Funktion <code>density.ppp</code> aus <code>spatstat</code>. Diese library ist etwas komplex in der Anwendung. Damit wir dieses Verfahren aber dennoch auf unsere Rotmilan-Daten anwenden können, haben wir eine eigene KDE-Funktion erstellt, die wir Euch zur Verfügung stellen.</p>
-<p>Wir ermutigen alle, die dafür Kapazität haben, unsere Funktion eingehend zu studieren und allenfalls ganz auf die Funktion zu verzichten und stattdessen direkt <code>spatstat</code> zu verwenden. Wenn ihr mit unserer Funktion arbeiten möchtet, müsst ihr den unten stehenden Code in euer Skript kopieren und ausführen.</p>
+<p>Für die Berechnung der Density verwenden wir die Funktion <code>density.ppp</code> aus <code>spatstat</code>. Diese library ist etwas komplex in der Anwendung, damit wir dieses Verfahren aber dennoch auf unsere Rotmilan-Daten anwenden können, haben wir eine eigene KDE-Funktion erstellt, die wir Euch zur Verfügung stellen.</p>
+<p>Wir ermutigen alle, die dafür Kapazität haben, unsere Function eingehend zu studieren und allenfalls ganz auf die Funktion zu verzichten und stattdessen direkt <code>spatstat</code> zu verwenden. Wenn ihr mit unserer Funktion arbeiten möchtet, müsst ihr den unten stehenden Code in euer Skript kopieren und ausführen.</p>
 <div class="cell">
 <div class="sourceCode cell-code" id="cb2"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb2-1"><a href="#cb2-1" aria-hidden="true" tabindex="-1"></a>my_kde <span class="ot">&lt;-</span> <span class="cf">function</span>(points, cellsize, bandwith, <span class="at">extent =</span> <span class="cn">NULL</span>){</span>
 <span id="cb2-2"><a href="#cb2-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">library</span>(<span class="st">"spatstat.geom"</span>)    <span class="co"># um sf in ppp zu konvertieren</span></span>
@@ -685,22 +644,22 @@ window.Quarto = {
 <p>Die Parameter der Funktion sollten relativ klar sein:</p>
 <ul>
 <li><code>points</code>: Ein Punktdatensatz aus der Class <code>sf</code></li>
-<li><code>cellsize</code>: Die Zellgrösse des Output-Rasters</li>
+<li><code>cellsize</code>: Die Zellgrösse des output-Rasters</li>
 <li><code>bandwith</code>: Der Suchradius für die Dichteberechnung</li>
 <li><code>extent</code> (optional): Der Perimeter, in dem die Dichteverteilung berechnet werden soll. Wenn kein Perimeter angegeben wird, wird die “bounding box” von <code>points</code> genutzt.</li>
 </ul>
-<p>Wenn wir nun mit <code>my_kde()</code> die Dichteverteilung berechnen, erhalten wir ein <code>data.frame</code> mit X und Y Koordinaten sowie eine Spalte <code>value</code> zurück. Nutzt diese drei Spalten mit <code>geom_raster()</code>, um eure Daten mit <code>ggplot</code> zu visualisieren (<code>aes(x = X, y = Y, fill = value)</code>.</p>
+<p>Wenn wir nun mit <code>my_kde()</code> die Dichteverteilung berechnen, erhalten wir ein <code>data.frame</code> mit X und Y Koordinaten sowie eine Spalte <code>value</code> zurück. Nutzt diese drei Spalten mit <code>geom_raster()</code> um eure Daten mit <code>ggplot</code> zu visualisieren (<code>aes(x = X, y = Y, fill = value)</code>.</p>
 <div class="cell">
 <div class="sourceCode cell-code" id="cb3"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb3-1"><a href="#cb3-1" aria-hidden="true" tabindex="-1"></a>rotmilan_kde <span class="ot">&lt;-</span> <span class="fu">my_kde</span>(<span class="at">points =</span> rotmilan, <span class="at">cellsize =</span> <span class="dv">1000</span>, <span class="at">bandwith =</span> <span class="dv">10000</span>, <span class="at">extent =</span> schweiz)</span>
 <span id="cb3-2"><a href="#cb3-2" aria-hidden="true" tabindex="-1"></a></span>
 <span id="cb3-3"><a href="#cb3-3" aria-hidden="true" tabindex="-1"></a><span class="fu">head</span>(rotmilan_kde)</span>
 <span id="cb3-4"><a href="#cb3-4" aria-hidden="true" tabindex="-1"></a><span class="do">##         x       y        value</span></span>
-<span id="cb3-5"><a href="#cb3-5" aria-hidden="true" tabindex="-1"></a><span class="do">## 1 2485909 1075767 5.706506e-24</span></span>
-<span id="cb3-6"><a href="#cb3-6" aria-hidden="true" tabindex="-1"></a><span class="do">## 2 2485909 1076766 8.289075e-23</span></span>
-<span id="cb3-7"><a href="#cb3-7" aria-hidden="true" tabindex="-1"></a><span class="do">## 3 2485909 1077764 3.029525e-23</span></span>
-<span id="cb3-8"><a href="#cb3-8" aria-hidden="true" tabindex="-1"></a><span class="do">## 4 2485909 1078763 6.521282e-23</span></span>
-<span id="cb3-9"><a href="#cb3-9" aria-hidden="true" tabindex="-1"></a><span class="do">## 5 2485909 1079761 9.598037e-23</span></span>
-<span id="cb3-10"><a href="#cb3-10" aria-hidden="true" tabindex="-1"></a><span class="do">## 6 2485909 1080760 1.182799e-22</span></span></code><button title="In die Zwischenablage kopieren" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<span id="cb3-5"><a href="#cb3-5" aria-hidden="true" tabindex="-1"></a><span class="do">## 1 2485909 1075767 5.632740e-24</span></span>
+<span id="cb3-6"><a href="#cb3-6" aria-hidden="true" tabindex="-1"></a><span class="do">## 2 2485909 1076766 8.290197e-23</span></span>
+<span id="cb3-7"><a href="#cb3-7" aria-hidden="true" tabindex="-1"></a><span class="do">## 3 2485909 1077764 3.032138e-23</span></span>
+<span id="cb3-8"><a href="#cb3-8" aria-hidden="true" tabindex="-1"></a><span class="do">## 4 2485909 1078763 6.522508e-23</span></span>
+<span id="cb3-9"><a href="#cb3-9" aria-hidden="true" tabindex="-1"></a><span class="do">## 5 2485909 1079761 9.599267e-23</span></span>
+<span id="cb3-10"><a href="#cb3-10" aria-hidden="true" tabindex="-1"></a><span class="do">## 6 2485909 1080760 1.183168e-22</span></span></code><button title="In die Zwischenablage kopieren" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
 <div class="cell">
 <div class="cell-output-display">
@@ -711,9 +670,9 @@ window.Quarto = {
 </div>
 </div>
 </div>
-<p>Die Kernel Density Estimation ist nun sehr stark von den tiefen Werten dominiert, da die Dichte in den meisten Zellen unseres Untersuchungsgebiets nahe bei Null liegt. Wie erwähnt sind Wissenschaftler häufig nur an den höchsten 95% der Werte interessiert. Folge folgenden Schritten, um das Resultat etwas besser zu veranschaulichen:</p>
+<p>Die Kernel Density Estimation ist nun sehr stark von den tiefen Werten dominiert, da die Dichte in den meisten Zellen unseres Untersuchungsgebiets nahe bei Null liegt. Wie erwähnt sind Wissenschaftler häufig nur an den höchsten 95% der Werte interessiert. Folge folgende Schritte um das Resultat etwas besser zu verantschaulichen:</p>
 <ol type="1">
-<li>Berechne die 95. Perzentile aller Werte mit der Funktion <code>quantile</code> und bennene diesen <code>q95</code></li>
+<li>Berechne die 95. Perzentile aller Werte mit der Funktion <code>quantile</code> und benne diesen <code>q95</code></li>
 <li>Erstelle eine neue Spalte in <code>rotmilan_kde</code>, wo alle Werte tiefer als <code>q95</code> <code>NA</code> entsprechen</li>
 <li>(Optional): Transformiere die Werte mit log10, um einen differenzierteren Farbverlauf zu erhalten</li>
 </ol>
@@ -731,7 +690,7 @@ window.Quarto = {
 </section>
 <section id="aufgabe-3-dichteverteilung-mit-thiessen-polygonen" class="level2">
 <h2 class="anchored" data-anchor-id="aufgabe-3-dichteverteilung-mit-thiessen-polygonen">Aufgabe 3: Dichteverteilung mit Thiessen Polygonen</h2>
-<p>Thiessen Polygone bieten eine spannende Alternative, um Unterschiede in der Dichteverteilung von Punktdatensätzen zu visualisieren. Wir wollen dies nun ausprobieren und konstruieren zum Schluss die Thiessenpolygone für die Rotmilan-Daten für das Untersuchungsgebiet Schweiz. Nutze die Anleitung für das Erstellen von Thiessenpolygonen aus der Übung B, um Thiessenpolygone für die Rotmilanpositionen zu erstellen.</p>
+<p>Thiessen Polygone bieten eine spannende Alternative um Unterschiede in der Dichteverteilung von Punktdatensätzen zu visualisieren. Wir wollen dies nun ausprobieren und konstruieren zum Schluss die Thiessenpolygone für die Rotmilan-Daten für das Untersuchungsgebiet Schweiz. Nutze die Anleitung für das Erstellen von Thiessenpolygonen aus der Übung B um Thiessenpolygone für die Rotmilanpositionen zu erstellen.</p>
 <div class="cell">
 <div class="cell-output-display">
 <div id="fig-ggplot-ex2-thiessen" class="quarto-figure quarto-figure-center quarto-float anchored">
@@ -1030,24 +989,6 @@ window.document.addEventListener("DOMContentLoaded", function (event) {
   if (showAllCode) {
     showAllCode.addEventListener("click", toggleCodeHandler(true));
   }
-    var localhostRegex = new RegExp(/^(?:http|https):\/\/localhost\:?[0-9]*\//);
-    var mailtoRegex = new RegExp(/^mailto:/);
-      var filterRegex = new RegExp('/' + window.location.host + '/');
-    var isInternal = (href) => {
-        return filterRegex.test(href) || localhostRegex.test(href) || mailtoRegex.test(href);
-    }
-    // Inspect non-navigation links and adorn them if external
- 	var links = window.document.querySelectorAll('a[href]:not(.nav-link):not(.navbar-brand):not(.toc-action):not(.sidebar-link):not(.sidebar-item-toggle):not(.pagination-link):not(.no-external):not([aria-hidden]):not(.dropdown-item):not(.quarto-navigation-tool)');
-    for (var i=0; i<links.length; i++) {
-      const link = links[i];
-      if (!isInternal(link.href)) {
-        // undo the damage that might have been done by quarto-nav.js in the case of
-        // links that we want to consider external
-        if (link.dataset.originalHref !== undefined) {
-          link.href = link.dataset.originalHref;
-        }
-      }
-    }
   function tippyHover(el, contentFn, onTriggerFn, onUntriggerFn) {
     const config = {
       allowHTML: true,
@@ -1082,11 +1023,7 @@ window.document.addEventListener("DOMContentLoaded", function (event) {
       try { href = new URL(href).hash; } catch {}
       const id = href.replace(/^#\/?/, "");
       const note = window.document.getElementById(id);
-      if (note) {
-        return note.innerHTML;
-      } else {
-        return "";
-      }
+      return note.innerHTML;
     });
   }
   const xrefs = window.document.querySelectorAll('a.quarto-xref');
@@ -1362,12 +1299,12 @@ window.document.addEventListener("DOMContentLoaded", function (event) {
 </script>
 <nav class="page-navigation">
   <div class="nav-page nav-page-previous">
-      <a href="../rauman/Rauman2_Uebung_B.html" class="pagination-link" aria-label="Rauman 2: Übung B">
+      <a href="../rauman/Rauman2_Uebung_B.html" class="pagination-link  aria-label=" &lt;span="" 2:="" übung="" b&lt;="" span&gt;"="">
         <i class="bi bi-arrow-left-short"></i> <span class="nav-page-text"><span class="chapter-title">Rauman 2: Übung B</span></span>
       </a>          
   </div>
   <div class="nav-page nav-page-next">
-      <a href="../rauman/Rauman3_Uebung_B.html" class="pagination-link" aria-label="Rauman 3: Übung B">
+      <a href="../rauman/Rauman3_Uebung_B.html" class="pagination-link" aria-label="<span class='chapter-number'>37</span>&nbsp; <span class='chapter-title'>Rauman 3: Übung B</span>">
         <span class="nav-page-text"><span class="chapter-title">Rauman 3: Übung B</span></span> <i class="bi bi-arrow-right-short"></i>
       </a>
   </div>
