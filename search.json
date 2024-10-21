@@ -1287,7 +1287,7 @@
     "href": "fallstudie_n/3_Berechnung_Homeranges.html#aufgabe-1",
     "title": "Berechnung Homeranges",
     "section": "Aufgabe 1",
-    "text": "Aufgabe 1\nIm Datensatz Rehe eine neue Spalte mit Datum und Zeit in einer Spalte kreieren. Beim Format hat sich ein Fehler eingeschlichen. Findet ihr ihn?\n\n\nMusterlösung\n\nRehe &lt;- Rehe |&gt;\n  mutate(UTC_DateTime = as.POSIXct(paste(UTC_Date, UTC_Time),\n                                   format = \"%Y-%m-%d %H:%M:%S\"))",
+    "text": "Aufgabe 1\nIm Datensatz Rehe eine neue Spalte mit Datum und Zeit in einer Spalte kreieren. Beim Format hat sich ein Fehler eingeschlichen. Findet ihr ihn?\n\n\nRehe &lt;- Rehe |&gt;\n  mutate(UTC_DateTime = as.POSIXct(paste(UTC_Date, UTC_Time),\n                                   format = \"%Y-%m-%d %H:%M:%S\"))",
     "crumbs": [
       "Fallstudie N",
       "<span class='chapter-number'>24</span>  <span class='chapter-title'>Berechnung Homeranges</span>"
