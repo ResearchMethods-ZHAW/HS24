@@ -7,6 +7,7 @@ code-summary: "Musterlösung"
 knitr:
   opts_chunk: 
     collapse: true
+musterloesung: true
 ---
 
 # Statistik 7: Übung
@@ -16,7 +17,7 @@ knitr:
 
 Raten von 7 Kriminalitätsformen pro 100000 Einwohner und Jahr für die Bundesstaaten der USA
 
-- **(a)  Führt eine k-means- lusteranalyse durch.**
+- **(a) Führt eine k-means- lusteranalyse durch.**
 - **(b) Überlegt in beiden Fällen, wie viele Cluster sinnvoll sind** 
 - **(c)** Abschliessend entscheidet euch für eine Clusterung und **vergleicht die erhaltenen Cluster bezüglich der Kriminalitätsformen mittels ANOVA und interpretiert die Cluster entsprechend.**
 
@@ -26,7 +27,7 @@ Wegen der sehr ungleichen Varianzen muss auf jeden Fall eine Standardisierung st
 
 
 
-# Stat8: Lösung
+# Stat7: Lösung
 
 - Download dieses Lösungsscript via "\</\>Code" (oben rechts)
 - [Lösungstext als Download](Statistik_Loesungstext_8.pdf)
@@ -35,17 +36,15 @@ Wegen der sehr ungleichen Varianzen muss auf jeden Fall eine Standardisierung st
 
 *(hier so ausführlich formuliert, wie dies auch in der Klausur der Fall sein wird)*
 
-- Ladet den Datensatz crime2.csv. Dieser enthält Raten von 7 Kriminatlitätsformen pro 100000 Einwohner und Jahr für die Bundesstaaten der USA.
-- Führt eine k-means- und eine agglomerative Clusteranalyse eurer Wahl durch. Bitte beachet, dass wegen der sehr ungleichen Varianzen in jedem Fall eine Standardisierung stattfinden muss, damit die Distanzen zwischen den verschiedenen Kriminalitätsraten sinnvoll berechnet werden können.
-- **Überlegt in beiden Fällen, wie viele Cluster sinnvoll sind** (k-means: z. B. visuelle Betrachtung einer PCA, agglomertive Clusteranalyse: z. B. Silhoutte-Plot).
-- Entscheidet euch dann für eine der beiden Clusterungen und vergleicht dann die
-erhaltenen Cluster bezüglich der Kriminalitätsformen und interpretiert die Cluster entsprechend.
 - Bitte erklärt und begründet die einzelnen Schritte, die ihr unternehmt, um zu diesem Ergebnis zu kommen. Dazu erstellt bitte ein Word-Dokument, in das ihr Schritt für Schritt den verwendeten R-Code, die dazu gehörigen Ausgaben von R, eure Interpretation derselben und die sich ergebenden Schlussfolgerungen für das weitere Vorgehen dokumentieren.
 - Formuliert abschliessend einen Methoden- und Ergebnisteil (ggf. incl. adäquaten Abbildungen) zu dieser Untersuchung in der Form einer wissenschaftlichen Arbeit (ausformulierte schriftliche Zusammenfassung, mit je einem Absatz von ca. 60-100 Worten, resp. 3-8 Sätzen für den Methoden- und Ergebnisteil). D. h. alle wichtigen Informationen sollten enthalten sein, unnötige Redundanz dagegen vermieden werden.
 - **Zu erstellen sind (a) Ein lauffähiges R-Skript; (b) begründeter Lösungsweg (Kombination aus R-Code, R Output und dessen Interpretation) und (c) ausformulierter Methoden- und Ergebnisteil (für eine wiss. Arbeit).**
 
 
-### Lösung
+:::{.callout-note .content-hidden unless-meta="muesterloesung"}
+
+## Lösung Übung 7
+
 
 ```{r}
 library("pacman")
@@ -118,7 +117,7 @@ cld_letters <- data.frame(cluster = names(letters$mcletters$Letters),
 f_Murder <-
   ggplot(crime_KM4, aes(x = cluster,  y = Murder)) + 
   geom_boxplot() +
-  geom_text(data = cld_letters, aes(label = letters, x = c(1:4), y = max(crime_KM4$Murder) * 1.1))+
+  geom_text(data = cld_letters, aes(label = letters, x = c(1:4), y = max(crime_KM4$Murder) * 1.1)) +
   ylim(0, max(crime_KM4$Murder) * 1.1) +
   theme_classic()
 #
@@ -142,7 +141,7 @@ cld_letters <- data.frame(cluster = names(letters$mcletters$Letters),
 f_Robbery <-
   ggplot(crime_KM4, aes(x = cluster,  y = Robbery)) + 
   geom_boxplot() +
-  geom_text(data = cld_letters, aes(label = letters, x = c(1:4), y = max(crime_KM4$Robbery) * 1.1))+
+  geom_text(data = cld_letters, aes(label = letters, x = c(1:4), y = max(crime_KM4$Robbery) * 1.1)) +
   ylim(0, max(crime_KM4$Robbery) * 1.1) +
   theme_classic()
 #
@@ -154,7 +153,7 @@ cld_letters <- data.frame(cluster = names(letters$mcletters$Letters),
 f_Ausault <-
   ggplot(crime_KM4, aes(x = cluster,  y = Assault)) + 
   geom_boxplot() +
-  geom_text(data = cld_letters, aes(label = letters, x = c(1:4), y = max(crime_KM4$Assault) * 1.1))+
+  geom_text(data = cld_letters, aes(label = letters, x = c(1:4), y = max(crime_KM4$Assault) * 1.1)) +
   ylim(0, max(crime_KM4$Assault) * 1.1) +
   theme_classic()
 #
@@ -166,7 +165,7 @@ cld_letters <- data.frame(cluster = names(letters$mcletters$Letters),
 f_Burglary <-
   ggplot(crime_KM4, aes(x = cluster,  y = Burglary)) + 
   geom_boxplot() +
-  geom_text(data = cld_letters, aes(label = letters, x = c(1:4), y = max(crime_KM4$Burglary)* 1.1))+
+  geom_text(data = cld_letters, aes(label = letters, x = c(1:4), y = max(crime_KM4$Burglary)* 1.1)) +
   ylim(0, max(crime_KM4$Burglary)*1.1) +
   theme_classic()
 #
@@ -178,7 +177,7 @@ cld_letters <- data.frame(cluster = names(letters$mcletters$Letters),
 f_Theft <-
   ggplot(crime_KM4, aes(x = cluster,  y = Theft)) + 
   geom_boxplot() +
-  geom_text(data = cld_letters, aes(label = letters, x = c(1:4), y = max(crime_KM4$Theft)* 1.1))+
+  geom_text(data = cld_letters, aes(label = letters, x = c(1:4), y = max(crime_KM4$Theft)* 1.1)) +
   ylim(0, max(crime_KM4$Theft)*1.1) +
   theme_classic()
 #
@@ -190,7 +189,7 @@ cld_letters <- data.frame(cluster = names(letters$mcletters$Letters),
 f_Vehicle <-
   ggplot(crime_KM4, aes(x = cluster,  y = Vehicle)) + 
   geom_boxplot() +
-  geom_text(data = cld_letters, aes(label = letters, x = c(1:4), y = max(crime_KM4$Vehicle) * 1.1))+
+  geom_text(data = cld_letters, aes(label = letters, x = c(1:4), y = max(crime_KM4$Vehicle) * 1.1)) +
   ylim(0, max(crime_KM4$Vehicle) * 1.1) +
   theme_classic()
 
@@ -206,3 +205,4 @@ p_load(patchwork)
 Die Boxplots erlauben jetzt auch eine Beurteilung der Modelldiagnostik: 
 Die Residuen sind hinreichen normalverteilt (symmetrisch) 
 
+:::

@@ -14,28 +14,28 @@ book:
       - --
       - prepro/Prepro3_Demo.qmd
       - prepro/Prepro3_Uebung.qmd
-    # - part: InfoVis.qmd
-    #   chapters:
-    #   - infovis/Infovis1_Vorbereitung.qmd
-    #   - --
-    #   - infovis/Infovis1_Demo.qmd
-    #   - infovis/Infovis1_Uebung.qmd
-    #   - infovis/Infovis1_Script_eda.qmd
-    #   - --
-    #   - infovis/Infovis2_Uebung_A.qmd
-    #   - infovis/Infovis2_Uebung_B.qmd
+    - part: InfoVis.qmd
+      chapters:
+      - infovis/Infovis1_Vorbereitung.qmd
+      - --
+      - infovis/Infovis1_Demo.qmd
+      - infovis/Infovis1_Uebung.qmd
+      - infovis/Infovis1_Script_eda.qmd
+      - --
+      - infovis/Infovis2_Uebung_A.qmd
+      - infovis/Infovis2_Uebung_B.qmd
     # - part: Statistik.qmd
-    #  chapters:
+    #   chapters:
      # - statistik/Statistik1_Demo.qmd
      # - statistik/Statistik1_Uebung.qmd            
      # - statistik/Statistik2_Demo.qmd
      # - statistik/Statistik2_Uebung.qmd      
      # - statistik/Statistik3_Demo.qmd
      # - statistik/Statistik3_Uebung.qmd      
-     # - statistik/Statistik4_Demo.qmd
-     # - statistik/Statistik4_Uebung.qmd      
-     # - statistik/Statistik5_Demo.qmd
-     # - statistik/Statistik5_Uebung.qmd      
+      # - statistik/Statistik4_Demo.qmd
+      # - statistik/Statistik4_Uebung.qmd      
+      # - statistik/Statistik5_Demo.qmd
+      # - statistik/Statistik5_Uebung.qmd      
      # - statistik/Statistik6_Demo.qmd
      # - statistik/Statistik6_Uebung.qmd      
      # - statistik/Statistik7_Demo.qmd
@@ -66,12 +66,12 @@ book:
       - --
       - fallstudie_s/1_Einführung.qmd
       - fallstudie_s/2_Besuchermonitoring.qmd
-      # - --
-      # - fallstudie_s/3_Aufgabenstellung_WPZ.qmd
-      # - --
-      # - fallstudie_s/4_Projektierung.qmd
-      # - fallstudie_s/5_Datenverarbeitung.qmd
-      # - fallstudie_s/6_Deskriptive_Analysen.qmd
+      - --
+      - fallstudie_s/3_Aufgabenstellung_WPZ.qmd
+      - --
+      - fallstudie_s/4_Projektierung.qmd
+      - fallstudie_s/5_Datenverarbeitung.qmd
+      - fallstudie_s/6_Deskriptive_Analysen.qmd
       # - fallstudie_s/7_Multivariate_Modelle.qmd
     - part: "Fallstudie N"
       chapters:

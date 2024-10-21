@@ -75,11 +75,11 @@ library("readr") # zum Einlesen von .csv-Dateien mit read_delim
 ## Datensatz einlesen
 
 # dabei speichere ich ihn gleich als Variable ab.
-outdoor <- read_delim("datasets/fallstudie_s/Felderhebungen/outdoor.csv")
+outdoor <- read_delim("datasets/fallstudie_s/Felderhebungen/Besuchszahlen_Gruental.csv")
 
 ## Datum und Uhrzeit
 
-# das Datum und die Uhrzeit sind in einer Spaltegespeichert. 
+# das Datum und die Uhrzeit sind in einer Spalte gespeichert. 
 # R liest das als "Buchstaben" ein. Wir definieren es als Datum mit as.POSIXct aus base R
 # dies ist eine mächtige Funktion, welche auch im späteren Verlauf der Fallstudie noch
 # eine wichtige Rolle spielen wird. 
@@ -120,14 +120,16 @@ sum(outdoor$IN)
 sum(outdoor$IN + outdoor$OUT)
 ```
 
-
 #### 2. Verlauf der Zählungen pro Tag über die gesamte Untersuchungsdauer
 
 ```{r output = TRUE}
 ## Berechnung der Anzahl Passagen / Tag
 
+# zuerst müssen wir noch das Datum in einer eigenen Spalte speichern
+outdoor$Datum <- as.Date(outdoor$DatumUhrzeit, format="%Y-%m-%d")
+
 # mit Base R
-outdoor_d <- aggregate(IN + OUT ~ DatumUhrzeit, data = outdoor, sum)
+outdoor_d <- aggregate(IN + OUT ~ Datum, data = outdoor, sum)
 names(outdoor_d)[2] <- "Passagen_pro_Tag"
 
 # oder dann mit der library dplyr aus dem tidyverse universe
@@ -135,7 +137,7 @@ names(outdoor_d)[2] <- "Passagen_pro_Tag"
 # sehr viel mit tidyverse arbeiten werden. Die Inputs dazu am morgen folgen aber erst später.
 library("dplyr")
 outdoor_d <- outdoor %>%
-  group_by(DatumUhrzeit) %>%
+  group_by(Datum) %>%
   summarise(Passagen_pro_Tag = sum(IN + OUT))
 
 
@@ -146,7 +148,7 @@ outdoor_d <- outdoor %>%
 plot_passages <- function() {
   
   # zeige zuerst outdoor, Punkte und Linien
-  plot(outdoor_d$DatumUhrzeit, outdoor_d$Passagen_pro_Tag, 
+  plot(outdoor_d$Datum, outdoor_d$Passagen_pro_Tag, 
        type = "b", 
        pch = 19, 
        col = "firebrick3", 
@@ -169,7 +171,7 @@ plot_passages()
 ```{r output = TRUE}
 ## Hinzufügen des Wochentags aufgrund Datum
 
-outdoor_d$weekday_status <- weekdays(outdoor_d$DatumUhrzeit) %in% c("Samstag", "Sonntag")
+outdoor_d$weekday_status <- weekdays(outdoor_d$Datum) %in% c("Samstag", "Sonntag")
 
 
 ## Kuchendiagramm der Anzahl Passagen für Werktag und Wochenende
@@ -186,11 +188,6 @@ pie(slieces,
     main = "outdoor",
     col = c("firebrick3", "lightblue"))
 ```
-
-
-
-
-
 
 
 __--> Erklärt dem Plenum nächste Woche was ihr gemacht habt, was eure Daten zeigen und präsentiert eure Daratellungen. __
