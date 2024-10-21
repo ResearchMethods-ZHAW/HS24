@@ -423,6 +423,7 @@ depo_m_daytime <- depo_m_daytime |>
 
 ### 1a)
 
+
 Nachdem wir die Projektstruktur aufgebaut haben und die Daten vorbereitet (inkl. aggregiert) sind, machen wir uns an die deskriptive Analyse. Dies macht immer Sinn. Bevor mach sich an die schliessende Statistik macht, muss man ein "Gefühl" für die Daten bekommen. Dies funktioniert am einfachsten mit explorativen Analysen.
 
 Wir interessieren uns in den Analysen für 5 Zeitabschnitte:

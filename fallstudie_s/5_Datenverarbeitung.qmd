@@ -60,8 +60,6 @@ KW_end <- isoweek(depo_end)
 # Rule of thumb: Sobald man viele (>5) Objekte mit sehr ähnlichen Namen erstellt, sollte man besser mit Listen oder DataFrames arbeiten
 schulferien <- read_delim("datasets/fallstudie_s/ferien.csv", ",")
 ```
-
-
 ## Aufgabe 1: Zähldaten
 
 ### 1a)
