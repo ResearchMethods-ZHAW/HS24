@@ -17,6 +17,8 @@ knitr:
 #| echo: true
 #| code-fold: false
 
+install.packages("adehabitatHR", dependencies = T)
+
 library("sf")
 library("terra")
 library("dplyr")
@@ -36,7 +38,7 @@ Einlesen des Gesamtdatensatzes von Moodle, Sichtung des Datensatzes und der Date
 #| code-fold: false
 #| output: false
 
-Rehe <- read_delim("datasets/fallstudie_n/Aufgabe3_Homeranges_Rehe_landforst_20231023.csv", delim = ";")
+Rehe <- read_delim("datasets/fallstudie_n/Aufgabe3_Homeranges_Rehe_landforst_20241011.csv", delim = ";")
 
 str(Rehe)
 ```
@@ -101,7 +103,7 @@ hr <- st_as_sf(homerange)
 
 st_write(
   hr,
-  dsn = "Results",
+  dsn = "results",
   layer = "HR_RE13",
   driver = "ESRI Shapefile",
   delete_layer = TRUE
@@ -194,7 +196,7 @@ Testen der Variablen der Vegetationsschichten von letzter Woche auf einen linear
 #| echo: true
 #| code-fold: false
 
-df_with_lidar <- read_delim("datasets/fallstudie_n/df_with_lidar.csv", delim = ";")
+df_with_lidar <- read_delim("datasets/fallstudie_n/df_with_lidar_2024.csv", delim = ";")
 
 cor.test(~ DG_Strauchschicht + DG_us_2022, data = df_with_lidar, method = "pearson")
 ```
