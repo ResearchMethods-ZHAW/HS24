@@ -10,16 +10,6 @@
     ]
   },
   {
-    "objectID": "PrePro.html",
-    "href": "PrePro.html",
-    "title": "Pre-Processing",
-    "section": "",
-    "text": "Die Datenkunde 2.0 gibt den Studierenden das Wissen und die Fertigkeiten an die Hand, selbst erhobene und bezogene Daten für Ihre eigenen Analysen vorzubereiten und anzureichern (preprocessing). Die Einheit vermittelt zentrale Datenverarbeitungskompetenzen und thematisiert bekannte Problemzonen der umweltwissenschaftlichen Datenverarbeitung – immer mit einer „hands-on” Perspektive auf die begleitenden R-Übungen. Die Studierenden lernen die Eigenschaften ihrer Datensätze in der Fachsprache korrekt zu beschreiben. Sie lernen ausserdem Metadaten zu verstehen und die Implikationen derselben für ihre eigenen Analyseprojekte kritisch zu beurteilen. Zentrale Konzepte der lesson sind Skalenniveaus, Datentypen, Zeitdaten und Typumwandlungen.\nDie Lesson vermittelt zentralste Fertigkeiten zur Vorverarbeitung von strukturierten Daten in der umweltwissenschaftlichen Forschung: Datensätze verbinden (Joins) und umformen („reshape”, „split-apply-combine”). Im Anwendungskontext haben Daten selten von Anfang an diejenige Struktur, welche für die statistische Auswertung oder für die Informationsvisualisierung erforderlich wäre. In dieser lesson lernen die Studierenden die für diese oft zeitraubenden Preprocessing-Schritte notwendigen Konzepte und R-Werkzeuge kennen und kompetent anzuwenden.",
-    "crumbs": [
-      "Pre-Processing"
-    ]
-  },
-  {
     "objectID": "prepro/Prepro1_Vorbereitung.html",
     "href": "prepro/Prepro1_Vorbereitung.html",
     "title": "Vorbereitung",
@@ -482,26 +472,6 @@
     ]
   },
   {
-    "objectID": "InfoVis.html",
-    "href": "InfoVis.html",
-    "title": "InfoVis",
-    "section": "",
-    "text": "Infovis 1\nDie konventionelle schliessende Statistik arbeitet in der Regel konfirmatorisch, sprich aus der bestehenden Theorie heraus werden Hypothesen formuliert, welche sodann durch Experimente geprüft und akzeptiert oder verworfen werden. Die Explorative Datenanalyse (EDA) nimmt dazu eine antagonistische Analyseperspektive ein und will in den Daten zunächst Zusammenhänge aufdecken, welche dann wiederum zur Formulierung von prüfbaren Hypothesen führen kann. Die Einheit stellt dazu den klassischen 5-stufigen EDA-Prozess nach Tukey (1980!) vor. Abschliessend wird dann noch die Brücke geschlagen zur modernen Umsetzung der EDA in Form von Visual Analytics.",
-    "crumbs": [
-      "InfoVis"
-    ]
-  },
-  {
-    "objectID": "InfoVis.html#infovis-2",
-    "href": "InfoVis.html#infovis-2",
-    "title": "InfoVis",
-    "section": "Infovis 2",
-    "text": "Infovis 2\nDie Informationsvisualisierung ist eine vielseitige, effektive und effiziente Methode für die explorative Datenanalyse. Während Scatterplots und Histogramme weitherum bekannt sind, bieten weniger bekannte Informationsvisualisierungs-Typen wie etwa Parallelkoordinatenplots, TreeMaps oder Chorddiagramme originelle alternative Darstellungsformen zur visuellen Analyse von Datensätze, welche stets grösser und komplexer werden. Die Studierenden lernen in dieser lesson eine Reihe von Informationsvisualisierungstypen kennen, lernen diese zielführend zu gestalten und selber zu erstellen.",
-    "crumbs": [
-      "InfoVis"
-    ]
-  },
-  {
     "objectID": "infovis/Infovis1_Vorbereitung.html",
     "href": "infovis/Infovis1_Vorbereitung.html",
     "title": "Vorbereitung",
@@ -572,7 +542,7 @@
     "href": "infovis/Infovis1_Demo.html#facets-small-multiples",
     "title": "Infovis 1: Demo A",
     "section": "Facets / Small Multiples",
-    "text": "Facets / Small Multiples\nSehr praktisch sind auch die Funktionen für “Small multiples”. Dies erreicht man mit facet_wrap() (oder facet_grid(), mehr dazu später). Man muss mit einem Tilde-Symbol “~” nur festlegen, welche Variable für das Aufteilen des Plots in kleinere Subplots verantwortlich sein soll.\n\nggplot(temperature_day, aes(time, temp, colour = station)) +\n  geom_line() +\n  labs(\n    x = \"Zeit\",\n    y = \"Temperatur in Grad C°\",\n    title = \"Temperaturdaten Schweiz\",\n    subtitle = \"2001 bis 2002\",\n    color = \"Station\"\n  ) +\n  scale_y_continuous(limits = c(-30, 30)) +\n  scale_x_date(\n    date_breaks = \"3 months\",\n    date_labels = \"%b\"\n  ) +\n  facet_wrap(station ~ .)\n\n\n\n\n\n\n\n\nAuch facet_wrap kann man auf seine Bedürfnisse anpassen: Beispielweise kann man mit ncol = die Anzahl facets pro Zeile bestimmen.\nZudem brauchen wir die Legende nicht mehr, da der Stationsnamen über jedem Facet steht. Ich setze deshalb theme(legend.position=\"none\")\n\nggplot(temperature_day, aes(time, temp, colour = station)) +\n  geom_line() +\n  labs(\n    x = \"Zeit\",\n    y = \"Temperatur in Grad C°\",\n    title = \"Temperaturdaten Schweiz\",\n    subtitle = \"2001 bis 2002\"\n  ) +\n  scale_y_continuous(limits = c(-30, 30)) +\n  scale_x_date(\n    date_breaks = \"3 months\",\n    date_labels = \"%b\"\n  ) +\n  facet_wrap(~station, ncol = 1) +\n  theme(legend.position = \"none\")",
+    "text": "Facets / Small Multiples\nSehr praktisch sind auch die Funktionen für “Small multiples”. Dies erreicht man mit facet_wrap() (oder facet_grid(), mehr dazu später). Man muss mit einem Tilde-Symbol “~” nur festlegen, welche Variable für das Aufteilen des Plots in kleinere Subplots verantwortlich sein soll.\n\nggplot(temperature_day, aes(time, temp, colour = station)) +\n  geom_line() +\n  labs(\n    x = \"Zeit\",\n    y = \"Temperatur in Grad C°\",\n    title = \"Temperaturdaten Schweiz\",\n    subtitle = \"2001 bis 2002\",\n    color = \"Station\"\n  ) +\n  scale_y_continuous(limits = c(-30, 30)) +\n  scale_x_date(\n    date_breaks = \"3 months\",\n    date_labels = \"%b\"\n  ) +\n  facet_wrap(~station)\n\n\n\n\n\n\n\n\nAuch facet_wrap kann man auf seine Bedürfnisse anpassen: Beispielweise kann man mit ncol = die Anzahl facets pro Zeile bestimmen.\nZudem brauchen wir die Legende nicht mehr, da der Stationsnamen über jedem Facet steht. Ich setze deshalb theme(legend.position=\"none\")\n\nggplot(temperature_day, aes(time, temp, colour = station)) +\n  geom_line() +\n  labs(\n    x = \"Zeit\",\n    y = \"Temperatur in Grad C°\",\n    title = \"Temperaturdaten Schweiz\",\n    subtitle = \"2001 bis 2002\"\n  ) +\n  scale_y_continuous(limits = c(-30, 30)) +\n  scale_x_date(\n    date_breaks = \"3 months\",\n    date_labels = \"%b\"\n  ) +\n  facet_wrap(~station, ncol = 1) +\n  theme(legend.position = \"none\")",
     "crumbs": [
       "InfoVis",
       "<span class='chapter-number'>10</span>  <span class='chapter-title'>Infovis 1: Demo A</span>"
@@ -1323,6 +1293,36 @@
     "text": "Kovic, Marko. 2014. “Je Weniger Ausländer, Desto Mehr Ja-Stimmen?\nWirklich?” Tagesanzeiger Datenblog. https://blog.tagesanzeiger.ch/datenblog/index.php/668/je-weniger-auslaender-desto-mehr-ja-stimmen-wirklich.\n\n\nWickham, Hadley, Mine Çetinkaya-Rundel, and Garrett Grolemund. 2023.\nR for Data Science. \" O’Reilly Media, Inc.\". https://r4ds.hadley.nz/.\n\n\nWickham, Hadley, and Garrett Grolemund. 2017. R for Data\nScience. O’Reilly. https://ebookcentral.proquest.com/lib/zhaw/detail.action?docID=4770093.",
     "crumbs": [
       "<span class='chapter-number'>25</span>  <span class='chapter-title'>Literaturverzeichnis</span>"
+    ]
+  },
+  {
+    "objectID": "PrePro.html",
+    "href": "PrePro.html",
+    "title": "Pre-Processing",
+    "section": "",
+    "text": "Die Datenkunde 2.0 gibt den Studierenden das Wissen und die Fertigkeiten an die Hand, selbst erhobene und bezogene Daten für Ihre eigenen Analysen vorzubereiten und anzureichern (preprocessing). Die Einheit vermittelt zentrale Datenverarbeitungskompetenzen und thematisiert bekannte Problemzonen der umweltwissenschaftlichen Datenverarbeitung – immer mit einer „hands-on” Perspektive auf die begleitenden R-Übungen. Die Studierenden lernen die Eigenschaften ihrer Datensätze in der Fachsprache korrekt zu beschreiben. Sie lernen ausserdem Metadaten zu verstehen und die Implikationen derselben für ihre eigenen Analyseprojekte kritisch zu beurteilen. Zentrale Konzepte der lesson sind Skalenniveaus, Datentypen, Zeitdaten und Typumwandlungen.\nDie Lesson vermittelt zentralste Fertigkeiten zur Vorverarbeitung von strukturierten Daten in der umweltwissenschaftlichen Forschung: Datensätze verbinden (Joins) und umformen („reshape”, „split-apply-combine”). Im Anwendungskontext haben Daten selten von Anfang an diejenige Struktur, welche für die statistische Auswertung oder für die Informationsvisualisierung erforderlich wäre. In dieser lesson lernen die Studierenden die für diese oft zeitraubenden Preprocessing-Schritte notwendigen Konzepte und R-Werkzeuge kennen und kompetent anzuwenden.",
+    "crumbs": [
+      "Pre-Processing"
+    ]
+  },
+  {
+    "objectID": "InfoVis.html",
+    "href": "InfoVis.html",
+    "title": "InfoVis",
+    "section": "",
+    "text": "Infovis 1\nDie konventionelle schliessende Statistik arbeitet in der Regel konfirmatorisch, sprich aus der bestehenden Theorie heraus werden Hypothesen formuliert, welche sodann durch Experimente geprüft und akzeptiert oder verworfen werden. Die Explorative Datenanalyse (EDA) nimmt dazu eine antagonistische Analyseperspektive ein und will in den Daten zunächst Zusammenhänge aufdecken, welche dann wiederum zur Formulierung von prüfbaren Hypothesen führen kann. Die Einheit stellt dazu den klassischen 5-stufigen EDA-Prozess nach Tukey (1980!) vor. Abschliessend wird dann noch die Brücke geschlagen zur modernen Umsetzung der EDA in Form von Visual Analytics.",
+    "crumbs": [
+      "InfoVis"
+    ]
+  },
+  {
+    "objectID": "InfoVis.html#infovis-2",
+    "href": "InfoVis.html#infovis-2",
+    "title": "InfoVis",
+    "section": "Infovis 2",
+    "text": "Infovis 2\nDie Informationsvisualisierung ist eine vielseitige, effektive und effiziente Methode für die explorative Datenanalyse. Während Scatterplots und Histogramme weitherum bekannt sind, bieten weniger bekannte Informationsvisualisierungs-Typen wie etwa Parallelkoordinatenplots, TreeMaps oder Chorddiagramme originelle alternative Darstellungsformen zur visuellen Analyse von Datensätze, welche stets grösser und komplexer werden. Die Studierenden lernen in dieser lesson eine Reihe von Informationsvisualisierungstypen kennen, lernen diese zielführend zu gestalten und selber zu erstellen.",
+    "crumbs": [
+      "InfoVis"
     ]
   }
 ]
