@@ -16,8 +16,7 @@ knitr:
 ```{r}
 #| echo: true
 #| code-fold: false
-
-install.packages("adehabitatHR", dependencies = T)
+#| output: false
 
 library("sf")
 library("terra")
@@ -36,6 +35,7 @@ Einlesen des Gesamtdatensatzes von Moodle, Sichtung des Datensatzes und der Date
 ```{r}
 #| echo: true
 #| code-fold: false
+#| output: false
 
 
 Rehe <- read_delim("datasets/fallstudie_n/Aufgabe3_Homeranges_Rehe_landforst_20241011.csv", delim = ";")
