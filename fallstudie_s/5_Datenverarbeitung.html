@@ -2,7 +2,7 @@
 <html xmlns="http://www.w3.org/1999/xhtml" lang="de" xml:lang="de"><head>
 
 <meta charset="utf-8">
-<meta name="generator" content="quarto-1.4.549">
+<meta name="generator" content="quarto-1.4.554">
 
 <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
 
@@ -106,40 +106,76 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 }</script>
 
 
+
+
 <!-- loads fontawesome, so that I can create a fontawesome button (see below) -->
+
 <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.2/css/all.min.css" integrity="sha512-z3gLpd7yknf1YoNbCzqRKc4qyor8gaKU1qmn+CShxbuBusANI9QpRohGBreCFkKxLhei6S9CQXFEbbKuqLg0DA==" crossorigin="anonymous" referrerpolicy="no-referrer">
+
 <script>
 
+
+
 // the following function adds padding to all h2 elements, so that I can 
+
 // easily present the content of the page in a more readable way
+
 function presenter(){
+
     var paragraphs = document.querySelectorAll("h2, h3");
+
     paragraphs.forEach(function (paragraph) {
+
         paragraph.classList.toggle("padding-top-500");
+
     });
+
 }
 
+
+
 // once the page is loaded, the button is injected into the sidebar. This button
+
 // calls the presenter function (see above)
+
 window.onload = function() {
+
     // create the button (similar to the buttons already availables)
+
     const linkElement = document.createElement('a');
 
+
+
     linkElement.classList.add('quarto-navigation-tool');
+
     linkElement.classList.add('px-1');
+
     linkElement.innerHTML = '<i class="fa-solid fa-person-chalkboard"></i>';
+
     linkElement.href = '#';
+
     linkElement.addEventListener('click', function(event) {
+
         event.preventDefault(); // Prevent the default link behavior
+
         presenter();
+
     });
 
+
+
     // Find the target element by its class name
+
     const sidebar_tools = document.querySelector(".sidebar-tools-main")
+
     sidebar_tools.appendChild(linkElement);
+
 };
 
+
+
 </script>
+
 
 
 <link rel="stylesheet" href="../custom.css">
@@ -725,7 +761,7 @@ window.onload = function() {
 <span id="cb16-2"><a href="#cb16-2" aria-hidden="true" tabindex="-1"></a>    <span class="fu">mutate</span>(<span class="at">Phase =</span> <span class="fu">case_when</span>(</span>
 <span id="cb16-3"><a href="#cb16-3" aria-hidden="true" tabindex="-1"></a>        Datetime <span class="sc">&lt;</span> lock_1_start <span class="sc">~</span> <span class="st">"Pre"</span>,</span>
 <span id="cb16-4"><a href="#cb16-4" aria-hidden="true" tabindex="-1"></a>        Datetime <span class="sc">&gt;=</span> lock_1_start <span class="sc">&amp;</span> Datetime <span class="sc">&lt;=</span> lock_1_end <span class="sc">~</span> <span class="st">"Lockdown_1"</span>,</span>
-<span id="cb16-5"><a href="#cb16-5" aria-hidden="true" tabindex="-1"></a>        Datetime <span class="sc">&gt;</span> lock_1_end <span class="sc">&amp;</span> Datetime <span class="sc">&lt;</span> lock_2_start <span class="sc">~</span> <span class="st">"inter"</span>,</span>
+<span id="cb16-5"><a href="#cb16-5" aria-hidden="true" tabindex="-1"></a>        Datetime <span class="sc">&gt;</span> lock_1_end <span class="sc">&amp;</span> Datetime <span class="sc">&lt;</span> lock_2_start <span class="sc">~</span> <span class="st">"Inter"</span>,</span>
 <span id="cb16-6"><a href="#cb16-6" aria-hidden="true" tabindex="-1"></a>        Datetime <span class="sc">&gt;=</span> lock_2_start <span class="sc">&amp;</span> Datetime <span class="sc">&lt;=</span> lock_2_end <span class="sc">~</span> <span class="st">"Lockdown_2"</span>,</span>
 <span id="cb16-7"><a href="#cb16-7" aria-hidden="true" tabindex="-1"></a>        Datetime <span class="sc">&gt;</span> lock_2_end <span class="sc">~</span> <span class="st">"Post"</span></span>
 <span id="cb16-8"><a href="#cb16-8" aria-hidden="true" tabindex="-1"></a>    ))</span>
@@ -896,14 +932,27 @@ window.onload = function() {
 <span id="cb21-5"><a href="#cb21-5" aria-hidden="true" tabindex="-1"></a>            ...</span></code><button title="In die Zwischenablage kopieren" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </details>
 </div>
+<div class="cell">
+<details class="code-fold">
+<summary>Musterlösung</summary>
+<div class="sourceCode cell-code" id="cb22"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb22-1"><a href="#cb22-1" aria-hidden="true" tabindex="-1"></a><span class="co"># hier werden also pro Nutzergruppe und Richtung die Stundenwerte pro Tag aufsummiert</span></span>
+<span id="cb22-2"><a href="#cb22-2" aria-hidden="true" tabindex="-1"></a>depo_d <span class="ot">&lt;-</span> depo <span class="sc">|&gt;</span></span>
+<span id="cb22-3"><a href="#cb22-3" aria-hidden="true" tabindex="-1"></a>  <span class="fu">group_by</span>(Datum) <span class="sc">|&gt;</span></span>
+<span id="cb22-4"><a href="#cb22-4" aria-hidden="true" tabindex="-1"></a>  <span class="fu">summarise</span>(</span>
+<span id="cb22-5"><a href="#cb22-5" aria-hidden="true" tabindex="-1"></a>    <span class="at">Total =</span> <span class="fu">sum</span>(Fuss_IN <span class="sc">+</span> Fuss_OUT),</span>
+<span id="cb22-6"><a href="#cb22-6" aria-hidden="true" tabindex="-1"></a>    <span class="at">Fuss_IN =</span> <span class="fu">sum</span>(Fuss_IN),</span>
+<span id="cb22-7"><a href="#cb22-7" aria-hidden="true" tabindex="-1"></a>    <span class="at">Fuss_OUT =</span> <span class="fu">sum</span>(Fuss_OUT)</span>
+<span id="cb22-8"><a href="#cb22-8" aria-hidden="true" tabindex="-1"></a>  )</span></code><button title="In die Zwischenablage kopieren" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</details>
+</div>
 <ul>
 <li>Berechne die Anzahl Tage bis Neujahr, wir brauchen sie später in den Modellen</li>
 </ul>
 <div class="cell">
 <details class="code-fold">
 <summary>Musterlösung</summary>
-<div class="sourceCode cell-code" id="cb22"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb22-1"><a href="#cb22-1" aria-hidden="true" tabindex="-1"></a>depo_d <span class="ot">&lt;-</span> depo_d <span class="sc">|&gt;</span> </span>
-<span id="cb22-2"><a href="#cb22-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">mutate</span>(<span class="at">Tage_bis_Neujahr =</span> <span class="fu">as.numeric</span>(<span class="fu">difftime</span>(<span class="fu">ymd</span>(<span class="fu">paste0</span>(<span class="fu">year</span>(Datum), <span class="st">"-12-31"</span>)), Datum, <span class="at">units =</span> <span class="st">"days"</span>)))</span></code><button title="In die Zwischenablage kopieren" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb23"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb23-1"><a href="#cb23-1" aria-hidden="true" tabindex="-1"></a>depo_d <span class="ot">&lt;-</span> depo_d <span class="sc">|&gt;</span> </span>
+<span id="cb23-2"><a href="#cb23-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">mutate</span>(<span class="at">Tage_bis_Neujahr =</span> <span class="fu">as.numeric</span>(<span class="fu">difftime</span>(<span class="fu">ymd</span>(<span class="fu">paste0</span>(<span class="fu">year</span>(Datum), <span class="st">"-12-31"</span>)), Datum, <span class="at">units =</span> <span class="st">"days"</span>)))</span></code><button title="In die Zwischenablage kopieren" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </details>
 </div>
 <ul>
@@ -912,97 +961,43 @@ window.onload = function() {
 <div class="cell">
 <details class="code-fold">
 <summary>Musterlösung</summary>
-<div class="sourceCode cell-code" id="cb23"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb23-1"><a href="#cb23-1" aria-hidden="true" tabindex="-1"></a>depo_d <span class="ot">&lt;-</span> depo_d <span class="sc">|&gt;</span></span>
-<span id="cb23-2"><a href="#cb23-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">mutate</span>(</span>
-<span id="cb23-3"><a href="#cb23-3" aria-hidden="true" tabindex="-1"></a>  <span class="at">Wochentag =</span> <span class="fu">wday</span>(Datum, <span class="at">week_start =</span> <span class="dv">1</span>),</span>
-<span id="cb23-4"><a href="#cb23-4" aria-hidden="true" tabindex="-1"></a>  <span class="at">Wochentag =</span> <span class="fu">factor</span>(Wochentag),</span>
-<span id="cb23-5"><a href="#cb23-5" aria-hidden="true" tabindex="-1"></a>  <span class="co"># Werktag oder Wochenende hinzufuegen</span></span>
-<span id="cb23-6"><a href="#cb23-6" aria-hidden="true" tabindex="-1"></a>  <span class="at">Wochenende =</span> <span class="fu">ifelse</span>(Wochentag <span class="sc">%in%</span> <span class="fu">c</span>(<span class="dv">6</span>, <span class="dv">7</span>), <span class="st">"Wochenende"</span>, <span class="st">"Werktag"</span>),</span>
-<span id="cb23-7"><a href="#cb23-7" aria-hidden="true" tabindex="-1"></a>  <span class="at">Wochenende =</span> <span class="fu">as.factor</span>(Wochenende),</span>
-<span id="cb23-8"><a href="#cb23-8" aria-hidden="true" tabindex="-1"></a>  <span class="co"># Kalenderwoche hinzufuegen</span></span>
-<span id="cb23-9"><a href="#cb23-9" aria-hidden="true" tabindex="-1"></a>  <span class="at">KW =</span> <span class="fu">isoweek</span>(Datum),</span>
-<span id="cb23-10"><a href="#cb23-10" aria-hidden="true" tabindex="-1"></a>  <span class="at">KW =</span> <span class="fu">factor</span>(KW),</span>
-<span id="cb23-11"><a href="#cb23-11" aria-hidden="true" tabindex="-1"></a>  <span class="co"># monat und Jahr</span></span>
-<span id="cb23-12"><a href="#cb23-12" aria-hidden="true" tabindex="-1"></a>  <span class="at">Monat =</span> <span class="fu">month</span>(Datum),</span>
-<span id="cb23-13"><a href="#cb23-13" aria-hidden="true" tabindex="-1"></a>  <span class="at">Monat =</span> <span class="fu">factor</span>(Monat),</span>
-<span id="cb23-14"><a href="#cb23-14" aria-hidden="true" tabindex="-1"></a>  <span class="at">Jahr =</span> <span class="fu">year</span>(Datum),</span>
-<span id="cb23-15"><a href="#cb23-15" aria-hidden="true" tabindex="-1"></a>  <span class="at">Jahr =</span> <span class="fu">factor</span>(Jahr))</span>
-<span id="cb23-16"><a href="#cb23-16" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb23-17"><a href="#cb23-17" aria-hidden="true" tabindex="-1"></a>depo_d <span class="ot">&lt;-</span> depo_d <span class="sc">|&gt;</span></span>
-<span id="cb23-18"><a href="#cb23-18" aria-hidden="true" tabindex="-1"></a>  <span class="fu">mutate</span>(<span class="at">Phase =</span> <span class="fu">case_when</span>(</span>
-<span id="cb23-19"><a href="#cb23-19" aria-hidden="true" tabindex="-1"></a>    Datum <span class="sc">&lt;</span> lock_1_start <span class="sc">~</span> <span class="st">"Pre"</span>,</span>
-<span id="cb23-20"><a href="#cb23-20" aria-hidden="true" tabindex="-1"></a>    Datum <span class="sc">&gt;=</span> lock_1_start <span class="sc">&amp;</span> Datum <span class="sc">&lt;=</span> lock_1_end <span class="sc">~</span> <span class="st">"Lockdown_1"</span>,</span>
-<span id="cb23-21"><a href="#cb23-21" aria-hidden="true" tabindex="-1"></a>    Datum <span class="sc">&gt;</span> lock_1_end <span class="sc">&amp;</span> Datum <span class="sc">&lt;</span> lock_2_start <span class="sc">~</span> <span class="st">"Inter"</span>,</span>
-<span id="cb23-22"><a href="#cb23-22" aria-hidden="true" tabindex="-1"></a>    Datum <span class="sc">&gt;=</span> lock_2_start <span class="sc">&amp;</span> Datum <span class="sc">&lt;=</span> lock_2_end <span class="sc">~</span> <span class="st">"Lockdown_2"</span>,</span>
-<span id="cb23-23"><a href="#cb23-23" aria-hidden="true" tabindex="-1"></a>    Datum <span class="sc">&gt;</span> lock_2_end <span class="sc">~</span> <span class="st">"Post"</span></span>
-<span id="cb23-24"><a href="#cb23-24" aria-hidden="true" tabindex="-1"></a>  ))</span>
-<span id="cb23-25"><a href="#cb23-25" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb23-26"><a href="#cb23-26" aria-hidden="true" tabindex="-1"></a>depo_d <span class="ot">&lt;-</span> depo_d <span class="sc">|&gt;</span></span>
-<span id="cb23-27"><a href="#cb23-27" aria-hidden="true" tabindex="-1"></a>  <span class="fu">mutate</span>(<span class="at">Phase =</span> base<span class="sc">::</span><span class="fu">factor</span>(Phase, <span class="at">levels =</span> <span class="fu">c</span>(<span class="st">"Pre"</span>, <span class="st">"Lockdown_1"</span>, <span class="st">"Inter"</span>, <span class="st">"Lockdown_2"</span>, <span class="st">"Post"</span>)))</span>
-<span id="cb23-28"><a href="#cb23-28" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb23-29"><a href="#cb23-29" aria-hidden="true" tabindex="-1"></a><span class="cf">for</span> (i <span class="cf">in</span> <span class="dv">1</span><span class="sc">:</span><span class="fu">nrow</span>(schulferien)) {</span>
-<span id="cb23-30"><a href="#cb23-30" aria-hidden="true" tabindex="-1"></a>  depo_d<span class="sc">$</span>Ferien[depo_d<span class="sc">$</span>Datum <span class="sc">&gt;=</span> schulferien[i, <span class="st">"Start"</span>] <span class="sc">&amp;</span> depo_d<span class="sc">$</span>Datum <span class="sc">&lt;=</span> schulferien[i, <span class="st">"Ende"</span>]] <span class="ot">&lt;-</span> <span class="dv">1</span></span>
-<span id="cb23-31"><a href="#cb23-31" aria-hidden="true" tabindex="-1"></a>}</span>
-<span id="cb23-32"><a href="#cb23-32" aria-hidden="true" tabindex="-1"></a>depo_d<span class="sc">$</span>Ferien[<span class="fu">is.na</span>(depo_d<span class="sc">$</span>Ferien)] <span class="ot">&lt;-</span> <span class="dv">0</span></span>
-<span id="cb23-33"><a href="#cb23-33" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb23-34"><a href="#cb23-34" aria-hidden="true" tabindex="-1"></a>depo_d<span class="sc">$</span>Ferien <span class="ot">&lt;-</span> <span class="fu">factor</span>(depo_d<span class="sc">$</span>Ferien)</span>
-<span id="cb23-35"><a href="#cb23-35" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb23-36"><a href="#cb23-36" aria-hidden="true" tabindex="-1"></a><span class="co"># pruefe das df</span></span>
-<span id="cb23-37"><a href="#cb23-37" aria-hidden="true" tabindex="-1"></a><span class="fu">head</span>(depo_d)</span></code><button title="In die Zwischenablage kopieren" class="code-copy-button"><i class="bi"></i></button></pre></div>
-</details>
-</div>
-<div class="cell">
-<details class="code-fold">
-<summary>Musterlösung</summary>
-<div class="sourceCode cell-code" id="cb24"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb24-1"><a href="#cb24-1" aria-hidden="true" tabindex="-1"></a><span class="co"># hier werden also pro Nutzergruppe und Richtung die Stundenwerte pro Tag aufsummiert</span></span>
-<span id="cb24-2"><a href="#cb24-2" aria-hidden="true" tabindex="-1"></a>depo_d <span class="ot">&lt;-</span> depo <span class="sc">|&gt;</span></span>
-<span id="cb24-3"><a href="#cb24-3" aria-hidden="true" tabindex="-1"></a>  <span class="fu">group_by</span>(Datum) <span class="sc">|&gt;</span></span>
-<span id="cb24-4"><a href="#cb24-4" aria-hidden="true" tabindex="-1"></a>  <span class="fu">summarise</span>(</span>
-<span id="cb24-5"><a href="#cb24-5" aria-hidden="true" tabindex="-1"></a>    <span class="at">Total =</span> <span class="fu">sum</span>(Fuss_IN <span class="sc">+</span> Fuss_OUT),</span>
-<span id="cb24-6"><a href="#cb24-6" aria-hidden="true" tabindex="-1"></a>    <span class="at">Fuss_IN =</span> <span class="fu">sum</span>(Fuss_IN),</span>
-<span id="cb24-7"><a href="#cb24-7" aria-hidden="true" tabindex="-1"></a>    <span class="at">Fuss_OUT =</span> <span class="fu">sum</span>(Fuss_OUT)</span>
-<span id="cb24-8"><a href="#cb24-8" aria-hidden="true" tabindex="-1"></a>  )<span class="sc">|&gt;</span></span>
-<span id="cb24-9"><a href="#cb24-9" aria-hidden="true" tabindex="-1"></a>  <span class="co"># Berechne die Anzahl Tage bis Neujahr, wir brauchen sie später in den Modellen</span></span>
-<span id="cb24-10"><a href="#cb24-10" aria-hidden="true" tabindex="-1"></a>  <span class="fu">mutate</span>(<span class="at">Tage_bis_Neujahr =</span> <span class="fu">as.numeric</span>(<span class="fu">difftime</span>(<span class="fu">ymd</span>(<span class="fu">paste0</span>(<span class="fu">year</span>(Datum), <span class="st">"-12-31"</span>)), Datum, <span class="at">units =</span> <span class="st">"days"</span>)))</span>
-<span id="cb24-11"><a href="#cb24-11" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb24-12"><a href="#cb24-12" aria-hidden="true" tabindex="-1"></a><span class="co"># und noch die convenience var. gem oben hinzufuegen</span></span>
-<span id="cb24-13"><a href="#cb24-13" aria-hidden="true" tabindex="-1"></a>depo_d <span class="ot">&lt;-</span> depo_d <span class="sc">|&gt;</span></span>
-<span id="cb24-14"><a href="#cb24-14" aria-hidden="true" tabindex="-1"></a>  <span class="fu">mutate</span>(</span>
-<span id="cb24-15"><a href="#cb24-15" aria-hidden="true" tabindex="-1"></a>  <span class="at">Wochentag =</span> <span class="fu">wday</span>(Datum, <span class="at">week_start =</span> <span class="dv">1</span>),</span>
-<span id="cb24-16"><a href="#cb24-16" aria-hidden="true" tabindex="-1"></a>  <span class="at">Wochentag =</span> <span class="fu">factor</span>(Wochentag),</span>
-<span id="cb24-17"><a href="#cb24-17" aria-hidden="true" tabindex="-1"></a>  <span class="co"># Werktag oder Wochenende hinzufuegen</span></span>
-<span id="cb24-18"><a href="#cb24-18" aria-hidden="true" tabindex="-1"></a>  <span class="at">Wochenende =</span> <span class="fu">ifelse</span>(Wochentag <span class="sc">%in%</span> <span class="fu">c</span>(<span class="dv">6</span>, <span class="dv">7</span>), <span class="st">"Wochenende"</span>, <span class="st">"Werktag"</span>),</span>
-<span id="cb24-19"><a href="#cb24-19" aria-hidden="true" tabindex="-1"></a>  <span class="at">Wochenende =</span> <span class="fu">as.factor</span>(Wochenende),</span>
-<span id="cb24-20"><a href="#cb24-20" aria-hidden="true" tabindex="-1"></a>  <span class="co"># Kalenderwoche hinzufuegen</span></span>
-<span id="cb24-21"><a href="#cb24-21" aria-hidden="true" tabindex="-1"></a>  <span class="at">KW =</span> <span class="fu">isoweek</span>(Datum),</span>
-<span id="cb24-22"><a href="#cb24-22" aria-hidden="true" tabindex="-1"></a>  <span class="at">KW =</span> <span class="fu">factor</span>(KW),</span>
-<span id="cb24-23"><a href="#cb24-23" aria-hidden="true" tabindex="-1"></a>  <span class="co"># monat und Jahr</span></span>
-<span id="cb24-24"><a href="#cb24-24" aria-hidden="true" tabindex="-1"></a>  <span class="at">Monat =</span> <span class="fu">month</span>(Datum),</span>
-<span id="cb24-25"><a href="#cb24-25" aria-hidden="true" tabindex="-1"></a>  <span class="at">Monat =</span> <span class="fu">factor</span>(Monat),</span>
-<span id="cb24-26"><a href="#cb24-26" aria-hidden="true" tabindex="-1"></a>  <span class="at">Jahr =</span> <span class="fu">year</span>(Datum),</span>
-<span id="cb24-27"><a href="#cb24-27" aria-hidden="true" tabindex="-1"></a>  <span class="at">Jahr =</span> <span class="fu">factor</span>(Jahr))</span>
+<div class="sourceCode cell-code" id="cb24"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb24-1"><a href="#cb24-1" aria-hidden="true" tabindex="-1"></a>depo_d <span class="ot">&lt;-</span> depo_d <span class="sc">|&gt;</span></span>
+<span id="cb24-2"><a href="#cb24-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">mutate</span>(</span>
+<span id="cb24-3"><a href="#cb24-3" aria-hidden="true" tabindex="-1"></a>  <span class="at">Wochentag =</span> <span class="fu">wday</span>(Datum, <span class="at">week_start =</span> <span class="dv">1</span>),</span>
+<span id="cb24-4"><a href="#cb24-4" aria-hidden="true" tabindex="-1"></a>  <span class="at">Wochentag =</span> <span class="fu">factor</span>(Wochentag),</span>
+<span id="cb24-5"><a href="#cb24-5" aria-hidden="true" tabindex="-1"></a>  <span class="co"># Werktag oder Wochenende hinzufuegen</span></span>
+<span id="cb24-6"><a href="#cb24-6" aria-hidden="true" tabindex="-1"></a>  <span class="at">Wochenende =</span> <span class="fu">ifelse</span>(Wochentag <span class="sc">%in%</span> <span class="fu">c</span>(<span class="dv">6</span>, <span class="dv">7</span>), <span class="st">"Wochenende"</span>, <span class="st">"Werktag"</span>),</span>
+<span id="cb24-7"><a href="#cb24-7" aria-hidden="true" tabindex="-1"></a>  <span class="at">Wochenende =</span> <span class="fu">as.factor</span>(Wochenende),</span>
+<span id="cb24-8"><a href="#cb24-8" aria-hidden="true" tabindex="-1"></a>  <span class="co"># Kalenderwoche hinzufuegen</span></span>
+<span id="cb24-9"><a href="#cb24-9" aria-hidden="true" tabindex="-1"></a>  <span class="at">KW =</span> <span class="fu">isoweek</span>(Datum),</span>
+<span id="cb24-10"><a href="#cb24-10" aria-hidden="true" tabindex="-1"></a>  <span class="at">KW =</span> <span class="fu">factor</span>(KW),</span>
+<span id="cb24-11"><a href="#cb24-11" aria-hidden="true" tabindex="-1"></a>  <span class="co"># monat und Jahr</span></span>
+<span id="cb24-12"><a href="#cb24-12" aria-hidden="true" tabindex="-1"></a>  <span class="at">Monat =</span> <span class="fu">month</span>(Datum),</span>
+<span id="cb24-13"><a href="#cb24-13" aria-hidden="true" tabindex="-1"></a>  <span class="at">Monat =</span> <span class="fu">factor</span>(Monat),</span>
+<span id="cb24-14"><a href="#cb24-14" aria-hidden="true" tabindex="-1"></a>  <span class="at">Jahr =</span> <span class="fu">year</span>(Datum),</span>
+<span id="cb24-15"><a href="#cb24-15" aria-hidden="true" tabindex="-1"></a>  <span class="at">Jahr =</span> <span class="fu">factor</span>(Jahr))</span>
+<span id="cb24-16"><a href="#cb24-16" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb24-17"><a href="#cb24-17" aria-hidden="true" tabindex="-1"></a>depo_d <span class="ot">&lt;-</span> depo_d <span class="sc">|&gt;</span></span>
+<span id="cb24-18"><a href="#cb24-18" aria-hidden="true" tabindex="-1"></a>  <span class="fu">mutate</span>(<span class="at">Phase =</span> <span class="fu">case_when</span>(</span>
+<span id="cb24-19"><a href="#cb24-19" aria-hidden="true" tabindex="-1"></a>    Datum <span class="sc">&lt;</span> lock_1_start <span class="sc">~</span> <span class="st">"Pre"</span>,</span>
+<span id="cb24-20"><a href="#cb24-20" aria-hidden="true" tabindex="-1"></a>    Datum <span class="sc">&gt;=</span> lock_1_start <span class="sc">&amp;</span> Datum <span class="sc">&lt;=</span> lock_1_end <span class="sc">~</span> <span class="st">"Lockdown_1"</span>,</span>
+<span id="cb24-21"><a href="#cb24-21" aria-hidden="true" tabindex="-1"></a>    Datum <span class="sc">&gt;</span> lock_1_end <span class="sc">&amp;</span> Datum <span class="sc">&lt;</span> lock_2_start <span class="sc">~</span> <span class="st">"Inter"</span>,</span>
+<span id="cb24-22"><a href="#cb24-22" aria-hidden="true" tabindex="-1"></a>    Datum <span class="sc">&gt;=</span> lock_2_start <span class="sc">&amp;</span> Datum <span class="sc">&lt;=</span> lock_2_end <span class="sc">~</span> <span class="st">"Lockdown_2"</span>,</span>
+<span id="cb24-23"><a href="#cb24-23" aria-hidden="true" tabindex="-1"></a>    Datum <span class="sc">&gt;</span> lock_2_end <span class="sc">~</span> <span class="st">"Post"</span></span>
+<span id="cb24-24"><a href="#cb24-24" aria-hidden="true" tabindex="-1"></a>  ))</span>
+<span id="cb24-25"><a href="#cb24-25" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb24-26"><a href="#cb24-26" aria-hidden="true" tabindex="-1"></a>depo_d <span class="ot">&lt;-</span> depo_d <span class="sc">|&gt;</span></span>
+<span id="cb24-27"><a href="#cb24-27" aria-hidden="true" tabindex="-1"></a>  <span class="fu">mutate</span>(<span class="at">Phase =</span> base<span class="sc">::</span><span class="fu">factor</span>(Phase, <span class="at">levels =</span> <span class="fu">c</span>(<span class="st">"Pre"</span>, <span class="st">"Lockdown_1"</span>, <span class="st">"Inter"</span>, <span class="st">"Lockdown_2"</span>, <span class="st">"Post"</span>)))</span>
 <span id="cb24-28"><a href="#cb24-28" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb24-29"><a href="#cb24-29" aria-hidden="true" tabindex="-1"></a>depo_d <span class="ot">&lt;-</span> depo_d <span class="sc">|&gt;</span></span>
-<span id="cb24-30"><a href="#cb24-30" aria-hidden="true" tabindex="-1"></a>  <span class="fu">mutate</span>(<span class="at">Phase =</span> <span class="fu">case_when</span>(</span>
-<span id="cb24-31"><a href="#cb24-31" aria-hidden="true" tabindex="-1"></a>    Datum <span class="sc">&lt;</span> lock_1_start <span class="sc">~</span> <span class="st">"Pre"</span>,</span>
-<span id="cb24-32"><a href="#cb24-32" aria-hidden="true" tabindex="-1"></a>    Datum <span class="sc">&gt;=</span> lock_1_start <span class="sc">&amp;</span> Datum <span class="sc">&lt;=</span> lock_1_end <span class="sc">~</span> <span class="st">"Lockdown_1"</span>,</span>
-<span id="cb24-33"><a href="#cb24-33" aria-hidden="true" tabindex="-1"></a>    Datum <span class="sc">&gt;</span> lock_1_end <span class="sc">&amp;</span> Datum <span class="sc">&lt;</span> lock_2_start <span class="sc">~</span> <span class="st">"Inter"</span>,</span>
-<span id="cb24-34"><a href="#cb24-34" aria-hidden="true" tabindex="-1"></a>    Datum <span class="sc">&gt;=</span> lock_2_start <span class="sc">&amp;</span> Datum <span class="sc">&lt;=</span> lock_2_end <span class="sc">~</span> <span class="st">"Lockdown_2"</span>,</span>
-<span id="cb24-35"><a href="#cb24-35" aria-hidden="true" tabindex="-1"></a>    Datum <span class="sc">&gt;</span> lock_2_end <span class="sc">~</span> <span class="st">"Post"</span></span>
-<span id="cb24-36"><a href="#cb24-36" aria-hidden="true" tabindex="-1"></a>  ))</span>
-<span id="cb24-37"><a href="#cb24-37" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb24-38"><a href="#cb24-38" aria-hidden="true" tabindex="-1"></a>depo_d <span class="ot">&lt;-</span> depo_d <span class="sc">|&gt;</span></span>
-<span id="cb24-39"><a href="#cb24-39" aria-hidden="true" tabindex="-1"></a>  <span class="fu">mutate</span>(<span class="at">Phase =</span> base<span class="sc">::</span><span class="fu">factor</span>(Phase, <span class="at">levels =</span> <span class="fu">c</span>(<span class="st">"Pre"</span>, <span class="st">"Lockdown_1"</span>, <span class="st">"Inter"</span>, <span class="st">"Lockdown_2"</span>, <span class="st">"Post"</span>)))</span>
-<span id="cb24-40"><a href="#cb24-40" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb24-41"><a href="#cb24-41" aria-hidden="true" tabindex="-1"></a><span class="cf">for</span> (i <span class="cf">in</span> <span class="dv">1</span><span class="sc">:</span><span class="fu">nrow</span>(schulferien)) {</span>
-<span id="cb24-42"><a href="#cb24-42" aria-hidden="true" tabindex="-1"></a>  depo_d<span class="sc">$</span>Ferien[depo_d<span class="sc">$</span>Datum <span class="sc">&gt;=</span> schulferien[i, <span class="st">"Start"</span>] <span class="sc">&amp;</span> depo_d<span class="sc">$</span>Datum <span class="sc">&lt;=</span> schulferien[i, <span class="st">"Ende"</span>]] <span class="ot">&lt;-</span> <span class="dv">1</span></span>
-<span id="cb24-43"><a href="#cb24-43" aria-hidden="true" tabindex="-1"></a>}</span>
-<span id="cb24-44"><a href="#cb24-44" aria-hidden="true" tabindex="-1"></a>depo_d<span class="sc">$</span>Ferien[<span class="fu">is.na</span>(depo_d<span class="sc">$</span>Ferien)] <span class="ot">&lt;-</span> <span class="dv">0</span></span>
-<span id="cb24-45"><a href="#cb24-45" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb24-46"><a href="#cb24-46" aria-hidden="true" tabindex="-1"></a>depo_d<span class="sc">$</span>Ferien <span class="ot">&lt;-</span> <span class="fu">factor</span>(depo_d<span class="sc">$</span>Ferien)</span>
-<span id="cb24-47"><a href="#cb24-47" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb24-48"><a href="#cb24-48" aria-hidden="true" tabindex="-1"></a><span class="co"># pruefe das df</span></span>
-<span id="cb24-49"><a href="#cb24-49" aria-hidden="true" tabindex="-1"></a><span class="fu">head</span>(depo_d)</span></code><button title="In die Zwischenablage kopieren" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<span id="cb24-29"><a href="#cb24-29" aria-hidden="true" tabindex="-1"></a><span class="cf">for</span> (i <span class="cf">in</span> <span class="dv">1</span><span class="sc">:</span><span class="fu">nrow</span>(schulferien)) {</span>
+<span id="cb24-30"><a href="#cb24-30" aria-hidden="true" tabindex="-1"></a>  depo_d<span class="sc">$</span>Ferien[depo_d<span class="sc">$</span>Datum <span class="sc">&gt;=</span> schulferien[i, <span class="st">"Start"</span>] <span class="sc">&amp;</span> depo_d<span class="sc">$</span>Datum <span class="sc">&lt;=</span> schulferien[i, <span class="st">"Ende"</span>]] <span class="ot">&lt;-</span> <span class="dv">1</span></span>
+<span id="cb24-31"><a href="#cb24-31" aria-hidden="true" tabindex="-1"></a>}</span>
+<span id="cb24-32"><a href="#cb24-32" aria-hidden="true" tabindex="-1"></a>depo_d<span class="sc">$</span>Ferien[<span class="fu">is.na</span>(depo_d<span class="sc">$</span>Ferien)] <span class="ot">&lt;-</span> <span class="dv">0</span></span>
+<span id="cb24-33"><a href="#cb24-33" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb24-34"><a href="#cb24-34" aria-hidden="true" tabindex="-1"></a>depo_d<span class="sc">$</span>Ferien <span class="ot">&lt;-</span> <span class="fu">factor</span>(depo_d<span class="sc">$</span>Ferien)</span>
+<span id="cb24-35"><a href="#cb24-35" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb24-36"><a href="#cb24-36" aria-hidden="true" tabindex="-1"></a><span class="co"># pruefe das df</span></span>
+<span id="cb24-37"><a href="#cb24-37" aria-hidden="true" tabindex="-1"></a><span class="fu">head</span>(depo_d)</span></code><button title="In die Zwischenablage kopieren" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </details>
 </div>
 <ul>
@@ -1386,6 +1381,24 @@ window.document.addEventListener("DOMContentLoaded", function (event) {
   if (showAllCode) {
     showAllCode.addEventListener("click", toggleCodeHandler(true));
   }
+    var localhostRegex = new RegExp(/^(?:http|https):\/\/localhost\:?[0-9]*\//);
+    var mailtoRegex = new RegExp(/^mailto:/);
+      var filterRegex = new RegExp('/' + window.location.host + '/');
+    var isInternal = (href) => {
+        return filterRegex.test(href) || localhostRegex.test(href) || mailtoRegex.test(href);
+    }
+    // Inspect non-navigation links and adorn them if external
+ 	var links = window.document.querySelectorAll('a[href]:not(.nav-link):not(.navbar-brand):not(.toc-action):not(.sidebar-link):not(.sidebar-item-toggle):not(.pagination-link):not(.no-external):not([aria-hidden]):not(.dropdown-item):not(.quarto-navigation-tool)');
+    for (var i=0; i<links.length; i++) {
+      const link = links[i];
+      if (!isInternal(link.href)) {
+        // undo the damage that might have been done by quarto-nav.js in the case of
+        // links that we want to consider external
+        if (link.dataset.originalHref !== undefined) {
+          link.href = link.dataset.originalHref;
+        }
+      }
+    }
   function tippyHover(el, contentFn, onTriggerFn, onUntriggerFn) {
     const config = {
       allowHTML: true,
@@ -1420,7 +1433,11 @@ window.document.addEventListener("DOMContentLoaded", function (event) {
       try { href = new URL(href).hash; } catch {}
       const id = href.replace(/^#\/?/, "");
       const note = window.document.getElementById(id);
-      return note.innerHTML;
+      if (note) {
+        return note.innerHTML;
+      } else {
+        return "";
+      }
     });
   }
   const xrefs = window.document.querySelectorAll('a.quarto-xref');
@@ -1696,12 +1713,12 @@ window.document.addEventListener("DOMContentLoaded", function (event) {
 </script>
 <nav class="page-navigation">
   <div class="nav-page nav-page-previous">
-      <a href="../fallstudie_s/4_Projektierung.html" class="pagination-link  aria-label=" &lt;span="" erstellen&lt;="" span&gt;"="">
+      <a href="../fallstudie_s/4_Projektierung.html" class="pagination-link" aria-label="Projek erstellen">
         <i class="bi bi-arrow-left-short"></i> <span class="nav-page-text"><span class="chapter-title">Projek erstellen</span></span>
       </a>          
   </div>
   <div class="nav-page nav-page-next">
-      <a href="../fallstudie_s/6_Deskriptive_Analysen.html" class="pagination-link" aria-label="<span class='chapter-number'>21</span>&nbsp; <span class='chapter-title'>Deskriptive Analysen</span>">
+      <a href="../fallstudie_s/6_Deskriptive_Analysen.html" class="pagination-link" aria-label="Deskriptive Analysen">
         <span class="nav-page-text"><span class="chapter-title">Deskriptive Analysen</span></span> <i class="bi bi-arrow-right-short"></i>
       </a>
   </div>
