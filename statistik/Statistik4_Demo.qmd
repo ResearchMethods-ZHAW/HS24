@@ -55,7 +55,6 @@ plot(lm_1)
 
 -> Plot sieht zwar OK aus, aber mit 6 Prädiktoren für \|\<60\| Beobachtungen ist das Modell wohl "overfitted"
 
-
 ```{r}
 # Andere Vatiante, um korrelierte Prädiktoren zu finden (üblicher Schwellenwert VIF = 5)
 p_load("car")
