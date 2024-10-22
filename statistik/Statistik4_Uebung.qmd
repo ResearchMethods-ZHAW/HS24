@@ -1,4 +1,5 @@
 ---
+lesson: Statistik 4
 execute: 
   echo: false   # set to true to show musterlösung
   output: false # set to true to show musterlösung
@@ -9,6 +10,7 @@ knitr:
     collapse: true
 musterloesung: false
 ---
+
 
 # Statistik 4: Übung
 
