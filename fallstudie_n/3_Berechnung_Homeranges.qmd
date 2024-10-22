@@ -9,13 +9,14 @@ knitr:
     collapse: true
 ---
 
-# BiEc3_N Homeranges
+# Berechnung Homeranges
 
 ## Libraries laden
 
 ```{r}
 #| echo: true
 #| code-fold: false
+#| output: false
 
 library("sf")
 library("terra")
@@ -36,7 +37,8 @@ Einlesen des Gesamtdatensatzes von Moodle, Sichtung des Datensatzes und der Date
 #| code-fold: false
 #| output: false
 
-Rehe <- read_delim("datasets/fallstudie_n/Aufgabe3_Homeranges_Rehe_landforst_20231023.csv", delim = ";")
+
+Rehe <- read_delim("datasets/fallstudie_n/Aufgabe3_Homeranges_Rehe_landforst_20241011.csv", delim = ";")
 
 str(Rehe)
 ```
@@ -47,7 +49,7 @@ Im Datensatz Rehe eine neue Spalte mit Datum und Zeit in einer Spalte kreieren. 
 
 ```{r}
 #| echo: true
-#| code-fold: false
+
 
 Rehe <- Rehe |>
   mutate(UTC_DateTime = as.POSIXct(paste(UTC_Date, UTC_Time),
@@ -61,6 +63,7 @@ Mit den folgenden Zeilen können die GPS-Punkte visualisiert werden
 ```{r}
 #| echo: true
 #| code-fold: false
+
 
 Rehe_sf <- st_as_sf(Rehe, coords = c("X", "Y"), crs = 21781)
 
@@ -78,6 +81,7 @@ Herumschrauben an der Ausdehnung, resp. prozentualer Anteil Punkte in der HR (Fu
 ```{r}
 #| echo: true
 #| code-fold: false
+
 
 RE13_xy <- st_coordinates(RE13)
 
@@ -101,7 +105,7 @@ hr <- st_as_sf(homerange)
 
 st_write(
   hr,
-  dsn = "Results",
+  dsn = "results",
   layer = "HR_RE13",
   driver = "ESRI Shapefile",
   delete_layer = TRUE
@@ -111,6 +115,7 @@ st_write(
 ```{r}
 #| echo: true
 #| code-fold: false
+
 
 # mit diesem Befehl kann die HR geplottet werden
 
@@ -144,6 +149,7 @@ Code um die Homerange auf der Landeskarte 1:25000 zu plotten. Transparenz kann m
 #| echo: true
 #| code-fold: false
 
+
 pk25_wpz <- rast("datasets/fallstudie_n/pk25_wpz.tif")
 
 ggplot(hr, aes(color = "red", fill = "red")) +
@@ -168,6 +174,7 @@ Nachbauen des Sampling Grids mit den Kreisen (Wird als Grundlage für Extraktion
 #| echo: true
 #| code-fold: false
 
+
 x25 <- st_make_grid(hr, 25, what = "centers")
 grid_plot <- st_buffer(x25, 12.5)
 
@@ -186,15 +193,16 @@ ggplot(grid_plot, color = "black", fill = NA) +
 
 ## Aufgabe 3
 
-Testen der Variablen der Vegetationsschichten von letzter Woche auf einen linearen Zusammenhang (Korrelation; Funktion cor.test). DG_Baumschicht vs. DG_os / DG_Strauchschicht vs. DG_us aus dem Datensatz df_with_lidar den wir letzte Woche erstellt haben
+Testen der Variablen der Vegetationsschichten von letzter Woche auf einen linearen Zusammenhang (Korrelation; Funktion cor.test). DG_Baumschicht vs. DG_os / DG_Strauchschicht vs. DG_us aus dem Datensatz df_with_lidar_2024 den wir letzte Woche erstellt haben
 
-**Die Theorie zu Korrelation folgt erst ab 31.10.**
+**Die Theorie in den Vormittagslektionen zu Korrelation folgt erst ab 29.10.**
 
 ```{r}
 #| echo: true
 #| code-fold: false
 
-df_with_lidar <- read_delim("datasets/fallstudie_n/df_with_lidar.csv", delim = ";")
+
+df_with_lidar <- read_delim("datasets/fallstudie_n/df_with_lidar_2024.csv", delim = ";")
 
 cor.test(~ DG_Strauchschicht + DG_us_2022, data = df_with_lidar, method = "pearson")
 ```

@@ -7,7 +7,7 @@ code-summary: "Musterlösung"
 knitr:
   opts_chunk: 
     collapse: true
-musterloesung: true
+musterloesung: false
 ---
 
 # Statistik 5: Übung

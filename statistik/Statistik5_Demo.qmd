@@ -14,15 +14,15 @@ knitr:
 
 ```{r}
 library("pacman")
+p_load("tidyverse")
 
 # Daten erstellen und anschauen
-temp <- c(10, 12, 16, 20, 24, 25, 30, 33, 37)
-besucher <- c(40, 12, 50, 500, 400, 900, 1500, 900, 2000)
-strand <- data.frame("Temperatur" = temp, "Besucher" = besucher)
+strand <- tibble(
+  Temperatur = c(10, 12, 16, 20, 24, 25, 30, 33, 37),
+  Besucher = c(40, 12, 50, 500, 400, 900, 1500, 900, 2000)
+)
 
-p_load("ggplot2")
-
-ggplot(data = strand, aes(x = temp, y = besucher)) +
+ggplot(strand, aes(x = Temperatur, y = Besucher)) +
   geom_point() +
   xlim(0, 40) +
   theme_classic()
@@ -39,7 +39,7 @@ plot(lm_strand)
 ```
 
 ```{r}
-ggplot(data = strand, aes(x = temp, y = besucher)) +
+ggplot(strand, aes(x = Temperatur, y = Besucher)) +
   geom_point() +
   xlim(0, 40) +    
   stat_smooth(method = "lm") +
@@ -96,7 +96,7 @@ plot(glm_quasipoisson, main = "glm_quasipoisson")
 -> Die Outputs von glm_poisson und glm_quasipoisson sind bis auf die p-Werte identisch.
 
 ```{r}
-ggplot(data = strand, aes(x = temp, y = besucher)) +
+ggplot(data = strand, aes(x = Temperature, y = Besucher)) +
   geom_point() +
   xlim(0, 40) +    
   stat_smooth(method = "lm", color = "blue") +
@@ -110,12 +110,12 @@ ggplot(data = strand, aes(x = temp, y = besucher)) +
 ## Logistische Regression
 
 ```{r}
-bathing <- data.frame(
-  "temperatur" = c(1, 2, 5, 9, 14, 14, 15, 19, 22, 24, 25, 26, 27, 28, 29),
-  "badend" = c(0, 0, 0, 0, 0, 1, 0, 0, 1, 0, 1, 1, 1, 1, 1)
+bathing <- tibble(
+  temperatur = c(1, 2, 5, 9, 14, 14, 15, 19, 22, 24, 25, 26, 27, 28, 29),
+  badend = c(0, 0, 0, 0, 0, 1, 0, 0, 1, 0, 1, 1, 1, 1, 1)
 )
 
-ggplot(data = bathing, aes(x = temperatur, y = badend)) +
+ggplot(bathing, aes(x = temperatur, y = badend)) +
   geom_point() +
   xlim(0, 30) +
   theme_classic()
@@ -220,7 +220,7 @@ ld50_male <- -(glm_binomial_2$coefficients[1] + glm_binomial_2$coefficients[2] )
 # Visualisierung
 ggplot(budworm, aes(x = ldose, y = ndead / 20, color = sex)) +
   geom_point() +
-  geom_smooth(method = "glm", method.args = list(family = "binomial"), se = FALSE)+
+  geom_smooth(method = "glm", method.args = list(family = "binomial"), se = FALSE) +
   labs(x = "log2(dose)", y = "probability dead") +
   theme_classic()
 ```

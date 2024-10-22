@@ -1,7 +1,7 @@
 ---
 execute:
-  echo: false   # set to true to show musterlösung
-  output: false # set to true to show musterlösung
+  echo: true   # set to true to show musterlösung
+  output: true # set to true to show musterlösung
 code-fold: true
 code-summary: "Musterlösung"
 knitr:
@@ -204,7 +204,7 @@ df_team7 <- df_team7 |>
 
 ```
 
-Das Learning aus den Vorbereitungen die ich übernommen habe und aus Aufgabe 1 ist, dass beim Erfassen und Dokumentieren von Daten aus verschiedenen Quellen darauf geachtet werden sollte, dies möglichst einheitlich zu tun (Dateiformate, Spalten, Bezeichnungen, Datentypen, usw.), damit kann man sich viel Arbeit ersparen. Hilfreich ist in diesem Zusammenhang immer ein einheitliches Feldprotokoll resp. eine Vorlage für die Erfassung der Daten zu erstellen.
+Das Learning aus den Vorverarbeitungen die ich für euch übernommen habe und aus Aufgabe 1 ist, dass beim Erfassen und Dokumentieren von Daten aus verschiedenen Quellen darauf geachtet werden sollte, dies möglichst einheitlich zu tun (Dateiformate, Spalten, Bezeichnungen, Datentypen, usw.), damit kann man sich viel Arbeit ersparen. Hilfreich ist in diesem Zusammenhang immer ein einheitliches Feldprotokoll resp. eine Vorlage für die Erfassung der Daten zu erstellen.
 
 
 ## Aufgabe 2

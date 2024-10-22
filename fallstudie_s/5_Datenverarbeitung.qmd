@@ -2,7 +2,7 @@
 lesson: Datenvorverarbeitung
 thema: Daten so aufbereiten, dass Analysen durchgeführt werden können
 execute: 
-  echo: false   # set to true to show musterlösung
+  echo: true   # set to true to show musterlösung
   output: false
 code-fold: true # set false to show all code
 code-summary: "Musterlösung"
@@ -60,8 +60,6 @@ KW_end <- isoweek(depo_end)
 # Rule of thumb: Sobald man viele (>5) Objekte mit sehr ähnlichen Namen erstellt, sollte man besser mit Listen oder DataFrames arbeiten
 schulferien <- read_delim("datasets/fallstudie_s/ferien.csv", ",")
 ```
-
-
 ## Aufgabe 1: Zähldaten
 
 ### 1a)
@@ -342,7 +340,7 @@ depo <- depo |>
     mutate(Phase = case_when(
         Datetime < lock_1_start ~ "Pre",
         Datetime >= lock_1_start & Datetime <= lock_1_end ~ "Lockdown_1",
-        Datetime > lock_1_end & Datetime < lock_2_start ~ "inter",
+        Datetime > lock_1_end & Datetime < lock_2_start ~ "Inter",
         Datetime >= lock_2_start & Datetime <= lock_2_end ~ "Lockdown_2",
         Datetime > lock_2_end ~ "Post"
     ))
@@ -499,62 +497,12 @@ Unsere Daten liegen, wie ihr wisst, im Stundenformat vor. Für einige Auswertung
 
 Hinweis: Wir gruppieren nur nach Datum, da ich mit den vielen weiteren Gruppierungen hier Probleme hatte, eine korrekte Summe zu erhalten.
 
-
 ```{r eval=FALSE, echo=TRUE}
 depo_d <- depo |> 
   group_by(Datum) |>   # Gruppieren nach der Variable Datum
   summarise(Total = sum(Fuss_IN + Fuss_OUT),# Berechnen der gewünschten Werte
             Fuss_IN = sum(Fuss_IN),
             ...
-```
-
-- Berechne die Anzahl Tage bis Neujahr, wir brauchen sie später in den Modellen
-
-```{r eval=FALSE, echo=TRUE}
-depo_d <- depo_d |> 
-  mutate(Tage_bis_Neujahr = as.numeric(difftime(ymd(paste0(year(Datum), "-12-31")), Datum, units = "days")))
-```
-
-- und füge nochmals alle Convenience Variablen gemäss oben ein:
-
-```{r eval=FALSE, echo=TRUE}
-depo_d <- depo_d |>
-  mutate(
-  Wochentag = wday(Datum, week_start = 1),
-  Wochentag = factor(Wochentag),
-  # Werktag oder Wochenende hinzufuegen
-  Wochenende = ifelse(Wochentag %in% c(6, 7), "Wochenende", "Werktag"),
-  Wochenende = as.factor(Wochenende),
-  # Kalenderwoche hinzufuegen
-  KW = isoweek(Datum),
-  KW = factor(KW),
-  # monat und Jahr
-  Monat = month(Datum),
-  Monat = factor(Monat),
-  Jahr = year(Datum),
-  Jahr = factor(Jahr))
-
-depo_d <- depo_d |>
-  mutate(Phase = case_when(
-    Datum < lock_1_start ~ "Pre",
-    Datum >= lock_1_start & Datum <= lock_1_end ~ "Lockdown_1",
-    Datum > lock_1_end & Datum < lock_2_start ~ "Inter",
-    Datum >= lock_2_start & Datum <= lock_2_end ~ "Lockdown_2",
-    Datum > lock_2_end ~ "Post"
-  ))
-
-depo_d <- depo_d |>
-  mutate(Phase = base::factor(Phase, levels = c("Pre", "Lockdown_1", "Inter", "Lockdown_2", "Post")))
-
-for (i in 1:nrow(schulferien)) {
-  depo_d$Ferien[depo_d$Datum >= schulferien[i, "Start"] & depo_d$Datum <= schulferien[i, "Ende"]] <- 1
-}
-depo_d$Ferien[is.na(depo_d$Ferien)] <- 0
-
-depo_d$Ferien <- factor(depo_d$Ferien)
-
-# pruefe das df
-head(depo_d)
 ```
 
 ```{r}
@@ -565,11 +513,19 @@ depo_d <- depo |>
     Total = sum(Fuss_IN + Fuss_OUT),
     Fuss_IN = sum(Fuss_IN),
     Fuss_OUT = sum(Fuss_OUT)
-  )|>
-  # Berechne die Anzahl Tage bis Neujahr, wir brauchen sie später in den Modellen
-  mutate(Tage_bis_Neujahr = as.numeric(difftime(ymd(paste0(year(Datum), "-12-31")), Datum, units = "days")))
+  )
+```
 
-# und noch die convenience var. gem oben hinzufuegen
+- Berechne die Anzahl Tage bis Neujahr, wir brauchen sie später in den Modellen
+
+```{r eval=T, echo=TRUE}
+depo_d <- depo_d |> 
+  mutate(Tage_bis_Neujahr = as.numeric(difftime(ymd(paste0(year(Datum), "-12-31")), Datum, units = "days")))
+```
+
+- und füge nochmals alle Convenience Variablen gemäss oben ein:
+
+```{r eval=TRUE, echo=TRUE}
 depo_d <- depo_d |>
   mutate(
   Wochentag = wday(Datum, week_start = 1),
@@ -608,7 +564,6 @@ depo_d$Ferien <- factor(depo_d$Ferien)
 # pruefe das df
 head(depo_d)
 ```
-
 
 - Erstellt nun. ähnlich wie oben, einen Datensatz depo_daytime, in welchem ihr gruppiert nach:
 
@@ -640,7 +595,6 @@ mean_phase_d <- depo_daytime |>
     IN = mean(Fuss_IN),
     OUT = mean(Fuss_OUT))
 ```
-
 
 ### 4b)
 
