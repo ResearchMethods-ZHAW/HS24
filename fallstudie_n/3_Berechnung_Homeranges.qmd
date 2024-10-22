@@ -16,8 +16,7 @@ knitr:
 ```{r}
 #| echo: true
 #| code-fold: false
-
-install.packages("adehabitatHR", dependencies = T)
+#| output: false
 
 library("sf")
 library("terra")
@@ -38,6 +37,7 @@ Einlesen des Gesamtdatensatzes von Moodle, Sichtung des Datensatzes und der Date
 #| code-fold: false
 #| output: false
 
+
 Rehe <- read_delim("datasets/fallstudie_n/Aufgabe3_Homeranges_Rehe_landforst_20241011.csv", delim = ";")
 
 str(Rehe)
@@ -49,7 +49,7 @@ Im Datensatz Rehe eine neue Spalte mit Datum und Zeit in einer Spalte kreieren. 
 
 ```{r}
 #| echo: true
-#| code-fold: false
+
 
 Rehe <- Rehe |>
   mutate(UTC_DateTime = as.POSIXct(paste(UTC_Date, UTC_Time),
@@ -63,7 +63,7 @@ Mit den folgenden Zeilen können die GPS-Punkte visualisiert werden
 ```{r}
 #| echo: true
 #| code-fold: false
-#| output: false
+
 
 Rehe_sf <- st_as_sf(Rehe, coords = c("X", "Y"), crs = 21781)
 
@@ -81,7 +81,7 @@ Herumschrauben an der Ausdehnung, resp. prozentualer Anteil Punkte in der HR (Fu
 ```{r}
 #| echo: true
 #| code-fold: false
-#| output: false
+
 
 RE13_xy <- st_coordinates(RE13)
 
@@ -115,7 +115,7 @@ st_write(
 ```{r}
 #| echo: true
 #| code-fold: false
-#| output: false
+
 
 # mit diesem Befehl kann die HR geplottet werden
 
@@ -148,7 +148,7 @@ Code um die Homerange auf der Landeskarte 1:25000 zu plotten. Transparenz kann m
 ```{r}
 #| echo: true
 #| code-fold: false
-#| output: false
+
 
 pk25_wpz <- rast("datasets/fallstudie_n/pk25_wpz.tif")
 
@@ -173,7 +173,7 @@ Nachbauen des Sampling Grids mit den Kreisen (Wird als Grundlage für Extraktion
 ```{r}
 #| echo: true
 #| code-fold: false
-#| output: false
+
 
 x25 <- st_make_grid(hr, 25, what = "centers")
 grid_plot <- st_buffer(x25, 12.5)
@@ -200,7 +200,7 @@ Testen der Variablen der Vegetationsschichten von letzter Woche auf einen linear
 ```{r}
 #| echo: true
 #| code-fold: false
-#| output: false
+
 
 df_with_lidar <- read_delim("datasets/fallstudie_n/df_with_lidar_2024.csv", delim = ";")
 

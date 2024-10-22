@@ -22,7 +22,7 @@ Im Rahmen unserer Analyse programmieren wir multivariate Modelle, welche den Zus
 
 Für meine Analysen habe ich untenstehende Fragestellungen formuliert. Ihr könnt aber auch eure Fragestellungen aus eurem Forschungsplan übernehmen, falls ihr das möchtet und falls diese mit den zur Verügung stehenden Daten bearbeitet werden können.
 
->1) Welchen Einfluss haben zeitliche Variablen (Wochentag, Ferien, Monat, Jahr, Phasen der Covid-Pandemie) und Wetterparameter (Sonnenscheindauer, Höchsttemperatur, Niederschlagssumme) auf die Besuchszahlen im WPZ __am Tag, in der Dämmerung und in der Nacht__?
+>1) Welchen Einfluss haben zeitliche Variablen (Wochentag, Ferien, Monat, Jahr, Phasen der Covid-Pandemie) und Wetterparameter (Sonnenscheindauer, Höchsttemperatur, Niederschlagssumme) auf die Besuchszahlen im WPZ?
 >
 >2) Wie stark sind die jeweiligen Einflüsse, welche Effektrichtungen sind beobachtbar und welche der untersuchten Parameter sind signifikant?
 >
@@ -30,6 +30,7 @@ Für meine Analysen habe ich untenstehende Fragestellungen formuliert. Ihr könn
 >
 >4)	Welches sind die mutmasslichen Auswirkungen dieser Nutzung auf das Verhalten der Rege im WPZ?
 >
+
 
 - Jede Gruppe wertet __Daten von einem Zählgerät__ aus. Sprecht miteinander ab, wer welchen Zähler behandelt (211 oder 502; Spezifikationen siehe [Einführung], Hinweis). Die Daten von jeder Zählstelle sollen nur von einer Gruppe ausgewertet werden!
 
