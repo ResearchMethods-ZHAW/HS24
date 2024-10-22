@@ -25,9 +25,9 @@ Gegeben sind die Daten von drei Sensoren (*sensor1.csv*, *sensor2.csv*, *sensor3
 ```{r}
 library("readr")
 
-sensor1 <- read_delim("datasets/prepro/sensor1.csv", ";")
-sensor2 <- read_delim("datasets/prepro/sensor2.csv", ";")
-sensor3 <- read_delim("datasets/prepro/sensor3.csv", ";")
+sensor1 <- read_delim("datasets/prepro/sensor1.csv")
+sensor2 <- read_delim("datasets/prepro/sensor2.csv")
+sensor3 <- read_delim("datasets/prepro/sensor3.csv")
 ```
 
 :::
@@ -68,7 +68,7 @@ Importiere die Datei *sensor_fail.csv* in `R`.
 :::{.callout-note title="Musterlösung" collapse="true" .content-hidden unless-meta="musterloesung"}
 
 ```{r}
-sensor_fail <- read_delim("datasets/prepro/sensor_fail.csv", delim = ";")
+sensor_fail <- read_delim("datasets/prepro/sensor_fail.csv")
 
 # mit base-R:
 sensor_fail$Temp_correct[sensor_fail$SensorStatus == 0] <- NA

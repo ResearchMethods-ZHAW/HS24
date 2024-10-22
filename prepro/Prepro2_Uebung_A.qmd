@@ -48,7 +48,7 @@ Wenn ihr die Codierung eines Files *nicht* kennt, könnt ihr wie folgt vorgehen:
 :::{.callout-note title="Musterlösung" collapse="true"  .content-hidden unless-meta="musterloesung"}
 
 ```{r}
-metadata <- read_delim("datasets/prepro/metadata.csv", delim = ";", locale = locale(encoding = "UTF-8"))
+metadata <- read_delim("datasets/prepro/metadata.csv", locale = locale(encoding = "UTF-8"))
 ```
 
 :::
