@@ -1,8 +1,5 @@
 ---
 lesson: Statistik4
-knitr:
-  opts_chunk: 
-    collapse: true
 ---
 
 
