@@ -146,7 +146,7 @@ $H_1$: Es gibt einen Unterschied in den Verkaufszahlen zwischen den Basis- und d
 
 ```{r}
 # lade Daten
-df <- read_delim("datasets/Novanimal_Weeks.csv", delim = ";")
+df <- read_delim("datasets/stat/Novanimal_Weeks.csv", delim = ";")
 df # Daten anschauen
 
 # überprüft die Voraussetzungen für einen t-Test
