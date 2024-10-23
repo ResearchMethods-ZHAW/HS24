@@ -20,7 +20,7 @@ knitr:
 library(readr)
 library(ggplot2)
 
-df <- read_delim("datasets/Nitrogen.csv", ";")
+df <- read_delim("datasets/stat/Nitrogen.csv", ";")
 
 summary(df)
 
@@ -136,7 +136,7 @@ Experiment zur Fruchtproduktion ("Fruit") von Ipomopsis sp. in Abhängigkeit von
 # Daten einlesen und anschauen
 library("readr")
 
-compensation <- read_delim("datasets/ipomopsis.csv")
+compensation <- read_delim("datasets/stat/ipomopsis.csv")
 compensation$Grazing <- as.factor(compensation$Grazing)
 
 head(compensation)
