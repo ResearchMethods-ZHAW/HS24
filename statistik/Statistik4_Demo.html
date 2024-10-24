@@ -501,7 +501,10 @@ window.onload = function() {
 </header>
 
 
-<p>Download dieses Demoscript via “&lt;/&gt;Code” (oben rechts) - Datensatz <em>loyn.csv</em></p>
+<p><a href="../purl/Statistik4_Demo.R">Download dieses Demoscript</a> (rechtsklick → speichern unter)</p>
+<ul>
+<li>Datensatz <em>loyn.csv</em></li>
+</ul>
 <div class="cell">
 <div class="sourceCode cell-code" id="cb1"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb1-1"><a href="#cb1-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Daten einlesen und anschauen</span></span>
 <span id="cb1-2"><a href="#cb1-2" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(pacman)</span>
@@ -509,63 +512,69 @@ window.onload = function() {
 <span id="cb1-4"><a href="#cb1-4" aria-hidden="true" tabindex="-1"></a></span>
 <span id="cb1-5"><a href="#cb1-5" aria-hidden="true" tabindex="-1"></a>loyn <span class="ot">&lt;-</span> <span class="fu">read_delim</span>(<span class="st">"datasets/stat/loyn.csv"</span>, <span class="at">delim =</span> <span class="st">";"</span>)</span>
 <span id="cb1-6"><a href="#cb1-6" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb1-7"><a href="#cb1-7" aria-hidden="true" tabindex="-1"></a><span class="fu">str</span>(loyn)</span>
-<span id="cb1-8"><a href="#cb1-8" aria-hidden="true" tabindex="-1"></a><span class="do">## spc_tbl_ [54 × 7] (S3: spec_tbl_df/tbl_df/tbl/data.frame)</span></span>
-<span id="cb1-9"><a href="#cb1-9" aria-hidden="true" tabindex="-1"></a><span class="do">##  $ ABUND: num [1:54] 5.3 2 1.5 17.1 13.8 14.1 3.8 2.2 3.3 3 ...</span></span>
-<span id="cb1-10"><a href="#cb1-10" aria-hidden="true" tabindex="-1"></a><span class="do">##  $ AREA : num [1:54] 0.1 0.5 0.5 1 1 1 1 1 1 1 ...</span></span>
-<span id="cb1-11"><a href="#cb1-11" aria-hidden="true" tabindex="-1"></a><span class="do">##  $ AGE  : num [1:54] 16 64 84 18 66 19 29 64 19 84 ...</span></span>
-<span id="cb1-12"><a href="#cb1-12" aria-hidden="true" tabindex="-1"></a><span class="do">##  $ DIST : num [1:54] 39 234 104 66 246 234 467 284 156 311 ...</span></span>
-<span id="cb1-13"><a href="#cb1-13" aria-hidden="true" tabindex="-1"></a><span class="do">##  $ LDIST: num [1:54] 39 234 311 66 246 ...</span></span>
-<span id="cb1-14"><a href="#cb1-14" aria-hidden="true" tabindex="-1"></a><span class="do">##  $ GRAZE: num [1:54] 2 5 5 3 5 3 5 5 4 5 ...</span></span>
-<span id="cb1-15"><a href="#cb1-15" aria-hidden="true" tabindex="-1"></a><span class="do">##  $ ALT  : num [1:54] 160 60 140 160 140 130 90 60 130 130 ...</span></span>
-<span id="cb1-16"><a href="#cb1-16" aria-hidden="true" tabindex="-1"></a><span class="do">##  - attr(*, "spec")=</span></span>
-<span id="cb1-17"><a href="#cb1-17" aria-hidden="true" tabindex="-1"></a><span class="do">##   .. cols(</span></span>
-<span id="cb1-18"><a href="#cb1-18" aria-hidden="true" tabindex="-1"></a><span class="do">##   ..   ABUND = col_double(),</span></span>
-<span id="cb1-19"><a href="#cb1-19" aria-hidden="true" tabindex="-1"></a><span class="do">##   ..   AREA = col_double(),</span></span>
-<span id="cb1-20"><a href="#cb1-20" aria-hidden="true" tabindex="-1"></a><span class="do">##   ..   AGE = col_double(),</span></span>
-<span id="cb1-21"><a href="#cb1-21" aria-hidden="true" tabindex="-1"></a><span class="do">##   ..   DIST = col_double(),</span></span>
-<span id="cb1-22"><a href="#cb1-22" aria-hidden="true" tabindex="-1"></a><span class="do">##   ..   LDIST = col_double(),</span></span>
-<span id="cb1-23"><a href="#cb1-23" aria-hidden="true" tabindex="-1"></a><span class="do">##   ..   GRAZE = col_double(),</span></span>
-<span id="cb1-24"><a href="#cb1-24" aria-hidden="true" tabindex="-1"></a><span class="do">##   ..   ALT = col_double()</span></span>
-<span id="cb1-25"><a href="#cb1-25" aria-hidden="true" tabindex="-1"></a><span class="do">##   .. )</span></span>
-<span id="cb1-26"><a href="#cb1-26" aria-hidden="true" tabindex="-1"></a><span class="do">##  - attr(*, "problems")=&lt;externalptr&gt;</span></span>
-<span id="cb1-27"><a href="#cb1-27" aria-hidden="true" tabindex="-1"></a><span class="fu">summary</span>(loyn)</span>
-<span id="cb1-28"><a href="#cb1-28" aria-hidden="true" tabindex="-1"></a><span class="do">##      ABUND            AREA             AGE             DIST       </span></span>
-<span id="cb1-29"><a href="#cb1-29" aria-hidden="true" tabindex="-1"></a><span class="do">##  Min.   : 1.50   Min.   :  0.10   Min.   : 8.00   Min.   :  26.0  </span></span>
-<span id="cb1-30"><a href="#cb1-30" aria-hidden="true" tabindex="-1"></a><span class="do">##  1st Qu.:11.80   1st Qu.:  2.00   1st Qu.:18.00   1st Qu.:  93.0  </span></span>
-<span id="cb1-31"><a href="#cb1-31" aria-hidden="true" tabindex="-1"></a><span class="do">##  Median :20.40   Median :  7.00   Median :21.50   Median : 221.0  </span></span>
-<span id="cb1-32"><a href="#cb1-32" aria-hidden="true" tabindex="-1"></a><span class="do">##  Mean   :19.12   Mean   : 21.02   Mean   :34.31   Mean   : 236.9  </span></span>
-<span id="cb1-33"><a href="#cb1-33" aria-hidden="true" tabindex="-1"></a><span class="do">##  3rd Qu.:27.75   3rd Qu.: 25.00   3rd Qu.:57.50   3rd Qu.: 311.0  </span></span>
-<span id="cb1-34"><a href="#cb1-34" aria-hidden="true" tabindex="-1"></a><span class="do">##  Max.   :39.60   Max.   :144.00   Max.   :94.00   Max.   :1427.0  </span></span>
-<span id="cb1-35"><a href="#cb1-35" aria-hidden="true" tabindex="-1"></a><span class="do">##      LDIST            GRAZE            ALT       </span></span>
-<span id="cb1-36"><a href="#cb1-36" aria-hidden="true" tabindex="-1"></a><span class="do">##  Min.   :  26.0   Min.   :1.000   Min.   : 60.0  </span></span>
-<span id="cb1-37"><a href="#cb1-37" aria-hidden="true" tabindex="-1"></a><span class="do">##  1st Qu.: 156.8   1st Qu.:2.000   1st Qu.:120.0  </span></span>
-<span id="cb1-38"><a href="#cb1-38" aria-hidden="true" tabindex="-1"></a><span class="do">##  Median : 338.5   Median :3.000   Median :140.0  </span></span>
-<span id="cb1-39"><a href="#cb1-39" aria-hidden="true" tabindex="-1"></a><span class="do">##  Mean   : 729.8   Mean   :3.056   Mean   :143.3  </span></span>
-<span id="cb1-40"><a href="#cb1-40" aria-hidden="true" tabindex="-1"></a><span class="do">##  3rd Qu.: 854.0   3rd Qu.:4.000   3rd Qu.:175.0  </span></span>
-<span id="cb1-41"><a href="#cb1-41" aria-hidden="true" tabindex="-1"></a><span class="do">##  Max.   :4426.0   Max.   :5.000   Max.   :220.0</span></span></code><button title="In die Zwischenablage kopieren" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<span id="cb1-7"><a href="#cb1-7" aria-hidden="true" tabindex="-1"></a><span class="fu">str</span>(loyn)</span></code><button title="In die Zwischenablage kopieren" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>spc_tbl_ [54 × 7] (S3: spec_tbl_df/tbl_df/tbl/data.frame)
+ $ ABUND: num [1:54] 5.3 2 1.5 17.1 13.8 14.1 3.8 2.2 3.3 3 ...
+ $ AREA : num [1:54] 0.1 0.5 0.5 1 1 1 1 1 1 1 ...
+ $ AGE  : num [1:54] 16 64 84 18 66 19 29 64 19 84 ...
+ $ DIST : num [1:54] 39 234 104 66 246 234 467 284 156 311 ...
+ $ LDIST: num [1:54] 39 234 311 66 246 ...
+ $ GRAZE: num [1:54] 2 5 5 3 5 3 5 5 4 5 ...
+ $ ALT  : num [1:54] 160 60 140 160 140 130 90 60 130 130 ...
+ - attr(*, "spec")=
+  .. cols(
+  ..   ABUND = col_double(),
+  ..   AREA = col_double(),
+  ..   AGE = col_double(),
+  ..   DIST = col_double(),
+  ..   LDIST = col_double(),
+  ..   GRAZE = col_double(),
+  ..   ALT = col_double()
+  .. )
+ - attr(*, "problems")=&lt;externalptr&gt; </code></pre>
+</div>
+<div class="sourceCode cell-code" id="cb3"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb3-1"><a href="#cb3-1" aria-hidden="true" tabindex="-1"></a><span class="fu">summary</span>(loyn)</span></code><button title="In die Zwischenablage kopieren" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>     ABUND            AREA             AGE             DIST       
+ Min.   : 1.50   Min.   :  0.10   Min.   : 8.00   Min.   :  26.0  
+ 1st Qu.:11.80   1st Qu.:  2.00   1st Qu.:18.00   1st Qu.:  93.0  
+ Median :20.40   Median :  7.00   Median :21.50   Median : 221.0  
+ Mean   :19.12   Mean   : 21.02   Mean   :34.31   Mean   : 236.9  
+ 3rd Qu.:27.75   3rd Qu.: 25.00   3rd Qu.:57.50   3rd Qu.: 311.0  
+ Max.   :39.60   Max.   :144.00   Max.   :94.00   Max.   :1427.0  
+     LDIST            GRAZE            ALT       
+ Min.   :  26.0   Min.   :1.000   Min.   : 60.0  
+ 1st Qu.: 156.8   1st Qu.:2.000   1st Qu.:120.0  
+ Median : 338.5   Median :3.000   Median :140.0  
+ Mean   : 729.8   Mean   :3.056   Mean   :143.3  
+ 3rd Qu.: 854.0   3rd Qu.:4.000   3rd Qu.:175.0  
+ Max.   :4426.0   Max.   :5.000   Max.   :220.0  </code></pre>
+</div>
 </div>
 <section id="korrelation-zwischen-den-prädiktoren" class="level3">
 <h3 class="anchored" data-anchor-id="korrelation-zwischen-den-prädiktoren">Korrelation zwischen den Prädiktoren</h3>
 <div class="cell">
-<div class="sourceCode cell-code" id="cb2"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb2-1"><a href="#cb2-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Wir setzen die Schwelle bei |0.7|</span></span>
-<span id="cb2-2"><a href="#cb2-2" aria-hidden="true" tabindex="-1"></a><span class="co"># Korrelationen rechnen details siehe: "?cor"</span></span>
-<span id="cb2-3"><a href="#cb2-3" aria-hidden="true" tabindex="-1"></a><span class="fu">cor</span>(loyn[, <span class="dv">2</span><span class="sc">:</span><span class="dv">7</span>]) </span>
-<span id="cb2-4"><a href="#cb2-4" aria-hidden="true" tabindex="-1"></a><span class="do">##              AREA         AGE       DIST       LDIST       GRAZE         ALT</span></span>
-<span id="cb2-5"><a href="#cb2-5" aria-hidden="true" tabindex="-1"></a><span class="do">## AREA   1.00000000 -0.21265343  0.2475258  0.37733668 -0.53118408  0.08935845</span></span>
-<span id="cb2-6"><a href="#cb2-6" aria-hidden="true" tabindex="-1"></a><span class="do">## AGE   -0.21265343  1.00000000 -0.1132931  0.09930812  0.66129235 -0.27242916</span></span>
-<span id="cb2-7"><a href="#cb2-7" aria-hidden="true" tabindex="-1"></a><span class="do">## DIST   0.24752583 -0.11329311  1.0000000  0.31814676 -0.24330458 -0.15112326</span></span>
-<span id="cb2-8"><a href="#cb2-8" aria-hidden="true" tabindex="-1"></a><span class="do">## LDIST  0.37733668  0.09930812  0.3181468  1.00000000 -0.02373893 -0.32359264</span></span>
-<span id="cb2-9"><a href="#cb2-9" aria-hidden="true" tabindex="-1"></a><span class="do">## GRAZE -0.53118408  0.66129235 -0.2433046 -0.02373893  1.00000000 -0.35362007</span></span>
-<span id="cb2-10"><a href="#cb2-10" aria-hidden="true" tabindex="-1"></a><span class="do">## ALT    0.08935845 -0.27242916 -0.1511233 -0.32359264 -0.35362007  1.00000000</span></span>
-<span id="cb2-11"><a href="#cb2-11" aria-hidden="true" tabindex="-1"></a><span class="co"># oder mit Namen der columns resp. variablen</span></span>
-<span id="cb2-12"><a href="#cb2-12" aria-hidden="true" tabindex="-1"></a>cor <span class="ot">&lt;-</span> loyn <span class="sc">|&gt;</span></span>
-<span id="cb2-13"><a href="#cb2-13" aria-hidden="true" tabindex="-1"></a>  <span class="fu">subset</span>(<span class="at">select =</span> AREA<span class="sc">:</span>ALT) <span class="sc">|&gt;</span></span>
-<span id="cb2-14"><a href="#cb2-14" aria-hidden="true" tabindex="-1"></a>  <span class="fu">cor</span>()</span>
-<span id="cb2-15"><a href="#cb2-15" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb2-16"><a href="#cb2-16" aria-hidden="true" tabindex="-1"></a><span class="co"># Korrelationen Visualisieren</span></span>
-<span id="cb2-17"><a href="#cb2-17" aria-hidden="true" tabindex="-1"></a><span class="fu">p_load</span>(<span class="st">"corrplot"</span>)</span>
-<span id="cb2-18"><a href="#cb2-18" aria-hidden="true" tabindex="-1"></a><span class="fu">corrplot.mixed</span>(cor, <span class="at">lower =</span> <span class="st">"ellipse"</span>, <span class="at">upper =</span> <span class="st">"number"</span>, <span class="at">order =</span> <span class="st">"AOE"</span>)</span></code><button title="In die Zwischenablage kopieren" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb5"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb5-1"><a href="#cb5-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Wir setzen die Schwelle bei |0.7|</span></span>
+<span id="cb5-2"><a href="#cb5-2" aria-hidden="true" tabindex="-1"></a><span class="co"># Korrelationen rechnen details siehe: "?cor"</span></span>
+<span id="cb5-3"><a href="#cb5-3" aria-hidden="true" tabindex="-1"></a><span class="fu">cor</span>(loyn[, <span class="dv">2</span><span class="sc">:</span><span class="dv">7</span>]) </span></code><button title="In die Zwischenablage kopieren" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>             AREA         AGE       DIST       LDIST       GRAZE         ALT
+AREA   1.00000000 -0.21265343  0.2475258  0.37733668 -0.53118408  0.08935845
+AGE   -0.21265343  1.00000000 -0.1132931  0.09930812  0.66129235 -0.27242916
+DIST   0.24752583 -0.11329311  1.0000000  0.31814676 -0.24330458 -0.15112326
+LDIST  0.37733668  0.09930812  0.3181468  1.00000000 -0.02373893 -0.32359264
+GRAZE -0.53118408  0.66129235 -0.2433046 -0.02373893  1.00000000 -0.35362007
+ALT    0.08935845 -0.27242916 -0.1511233 -0.32359264 -0.35362007  1.00000000</code></pre>
+</div>
+<div class="sourceCode cell-code" id="cb7"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb7-1"><a href="#cb7-1" aria-hidden="true" tabindex="-1"></a><span class="co"># oder mit Namen der columns resp. variablen</span></span>
+<span id="cb7-2"><a href="#cb7-2" aria-hidden="true" tabindex="-1"></a>cor <span class="ot">&lt;-</span> loyn <span class="sc">|&gt;</span></span>
+<span id="cb7-3"><a href="#cb7-3" aria-hidden="true" tabindex="-1"></a>  <span class="fu">subset</span>(<span class="at">select =</span> AREA<span class="sc">:</span>ALT) <span class="sc">|&gt;</span></span>
+<span id="cb7-4"><a href="#cb7-4" aria-hidden="true" tabindex="-1"></a>  <span class="fu">cor</span>()</span>
+<span id="cb7-5"><a href="#cb7-5" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb7-6"><a href="#cb7-6" aria-hidden="true" tabindex="-1"></a><span class="co"># Korrelationen Visualisieren</span></span>
+<span id="cb7-7"><a href="#cb7-7" aria-hidden="true" tabindex="-1"></a><span class="fu">p_load</span>(<span class="st">"corrplot"</span>)</span>
+<span id="cb7-8"><a href="#cb7-8" aria-hidden="true" tabindex="-1"></a><span class="fu">corrplot.mixed</span>(cor, <span class="at">lower =</span> <span class="st">"ellipse"</span>, <span class="at">upper =</span> <span class="st">"number"</span>, <span class="at">order =</span> <span class="st">"AOE"</span>)</span></code><button title="In die Zwischenablage kopieren" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output-display">
 <div>
 <figure class="figure">
@@ -573,26 +582,29 @@ window.onload = function() {
 </figure>
 </div>
 </div>
-<div class="sourceCode cell-code" id="cb3"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb3-1"><a href="#cb3-1" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb3-2"><a href="#cb3-2" aria-hidden="true" tabindex="-1"></a>cor[<span class="fu">abs</span>(cor)<span class="sc">&lt;</span><span class="fl">0.7</span>] <span class="ot">&lt;-</span> <span class="dv">0</span></span>
-<span id="cb3-3"><a href="#cb3-3" aria-hidden="true" tabindex="-1"></a>cor</span>
-<span id="cb3-4"><a href="#cb3-4" aria-hidden="true" tabindex="-1"></a><span class="do">##       AREA AGE DIST LDIST GRAZE ALT</span></span>
-<span id="cb3-5"><a href="#cb3-5" aria-hidden="true" tabindex="-1"></a><span class="do">## AREA     1   0    0     0     0   0</span></span>
-<span id="cb3-6"><a href="#cb3-6" aria-hidden="true" tabindex="-1"></a><span class="do">## AGE      0   1    0     0     0   0</span></span>
-<span id="cb3-7"><a href="#cb3-7" aria-hidden="true" tabindex="-1"></a><span class="do">## DIST     0   0    1     0     0   0</span></span>
-<span id="cb3-8"><a href="#cb3-8" aria-hidden="true" tabindex="-1"></a><span class="do">## LDIST    0   0    0     1     0   0</span></span>
-<span id="cb3-9"><a href="#cb3-9" aria-hidden="true" tabindex="-1"></a><span class="do">## GRAZE    0   0    0     0     1   0</span></span>
-<span id="cb3-10"><a href="#cb3-10" aria-hidden="true" tabindex="-1"></a><span class="do">## ALT      0   0    0     0     0   1</span></span></code><button title="In die Zwischenablage kopieren" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb8"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb8-1"><a href="#cb8-1" aria-hidden="true" tabindex="-1"></a>cor[<span class="fu">abs</span>(cor)<span class="sc">&lt;</span><span class="fl">0.7</span>] <span class="ot">&lt;-</span> <span class="dv">0</span></span>
+<span id="cb8-2"><a href="#cb8-2" aria-hidden="true" tabindex="-1"></a>cor</span></code><button title="In die Zwischenablage kopieren" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>      AREA AGE DIST LDIST GRAZE ALT
+AREA     1   0    0     0     0   0
+AGE      0   1    0     0     0   0
+DIST     0   0    1     0     0   0
+LDIST    0   0    0     1     0   0
+GRAZE    0   0    0     0     1   0
+ALT      0   0    0     0     0   1</code></pre>
+</div>
 </div>
 <p>-&gt; Keine Korrelation ist &gt;|0.7|, so können wir alle Prädiktoren “behalten”. Aber es gilt zu beachten, dass GRAZE ziemlich stark |&gt;0.6| mit AGE korreliert ist</p>
 <div class="cell">
-<div class="sourceCode cell-code" id="cb4"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb4-1"><a href="#cb4-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Volles Modell definieren</span></span>
-<span id="cb4-2"><a href="#cb4-2" aria-hidden="true" tabindex="-1"></a><span class="fu">names</span>(loyn)</span>
-<span id="cb4-3"><a href="#cb4-3" aria-hidden="true" tabindex="-1"></a><span class="do">## [1] "ABUND" "AREA"  "AGE"   "DIST"  "LDIST" "GRAZE" "ALT"</span></span>
-<span id="cb4-4"><a href="#cb4-4" aria-hidden="true" tabindex="-1"></a>lm_1 <span class="ot">&lt;-</span> <span class="fu">lm</span>(ABUND <span class="sc">~</span> AGE <span class="sc">+</span> AREA <span class="sc">+</span> DIST <span class="sc">+</span> LDIST <span class="sc">+</span> GRAZE <span class="sc">+</span> ALT, <span class="at">data =</span> loyn)</span>
-<span id="cb4-5"><a href="#cb4-5" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb4-6"><a href="#cb4-6" aria-hidden="true" tabindex="-1"></a><span class="fu">par</span>(<span class="at">mfrow =</span> <span class="fu">c</span>(<span class="dv">2</span>, <span class="dv">2</span>))</span>
-<span id="cb4-7"><a href="#cb4-7" aria-hidden="true" tabindex="-1"></a><span class="fu">plot</span>(lm_1)</span></code><button title="In die Zwischenablage kopieren" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb10"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb10-1"><a href="#cb10-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Volles Modell definieren</span></span>
+<span id="cb10-2"><a href="#cb10-2" aria-hidden="true" tabindex="-1"></a><span class="fu">names</span>(loyn)</span></code><button title="In die Zwischenablage kopieren" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>[1] "ABUND" "AREA"  "AGE"   "DIST"  "LDIST" "GRAZE" "ALT"  </code></pre>
+</div>
+<div class="sourceCode cell-code" id="cb12"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb12-1"><a href="#cb12-1" aria-hidden="true" tabindex="-1"></a>lm_1 <span class="ot">&lt;-</span> <span class="fu">lm</span>(ABUND <span class="sc">~</span> AGE <span class="sc">+</span> AREA <span class="sc">+</span> DIST <span class="sc">+</span> LDIST <span class="sc">+</span> GRAZE <span class="sc">+</span> ALT, <span class="at">data =</span> loyn)</span>
+<span id="cb12-2"><a href="#cb12-2" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb12-3"><a href="#cb12-3" aria-hidden="true" tabindex="-1"></a><span class="fu">par</span>(<span class="at">mfrow =</span> <span class="fu">c</span>(<span class="dv">2</span>, <span class="dv">2</span>))</span>
+<span id="cb12-4"><a href="#cb12-4" aria-hidden="true" tabindex="-1"></a><span class="fu">plot</span>(lm_1)</span></code><button title="In die Zwischenablage kopieren" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output-display">
 <div>
 <figure class="figure">
@@ -603,143 +615,156 @@ window.onload = function() {
 </div>
 <p>-&gt; Plot sieht zwar OK aus, aber mit 6 Prädiktoren für |&lt;60| Beobachtungen ist das Modell wohl “overfitted”</p>
 <div class="cell">
-<div class="sourceCode cell-code" id="cb5"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb5-1"><a href="#cb5-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Andere Vatiante, um korrelierte Prädiktoren zu finden (üblicher Schwellenwert VIF = 5)</span></span>
-<span id="cb5-2"><a href="#cb5-2" aria-hidden="true" tabindex="-1"></a><span class="fu">p_load</span>(<span class="st">"car"</span>)</span>
-<span id="cb5-3"><a href="#cb5-3" aria-hidden="true" tabindex="-1"></a><span class="fu">vif</span>(lm_1)</span>
-<span id="cb5-4"><a href="#cb5-4" aria-hidden="true" tabindex="-1"></a><span class="do">##      AGE     AREA     DIST    LDIST    GRAZE      ALT </span></span>
-<span id="cb5-5"><a href="#cb5-5" aria-hidden="true" tabindex="-1"></a><span class="do">## 1.874993 1.763605 1.220125 1.465810 2.784577 1.346572</span></span></code><button title="In die Zwischenablage kopieren" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb13"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb13-1"><a href="#cb13-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Andere Vatiante, um korrelierte Prädiktoren zu finden (üblicher Schwellenwert VIF = 5)</span></span>
+<span id="cb13-2"><a href="#cb13-2" aria-hidden="true" tabindex="-1"></a><span class="fu">p_load</span>(<span class="st">"car"</span>)</span>
+<span id="cb13-3"><a href="#cb13-3" aria-hidden="true" tabindex="-1"></a><span class="fu">vif</span>(lm_1)</span></code><button title="In die Zwischenablage kopieren" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>     AGE     AREA     DIST    LDIST    GRAZE      ALT 
+1.874993 1.763605 1.220125 1.465810 2.784577 1.346572 </code></pre>
+</div>
 </div>
 </section>
 <section id="modellselektion" class="level3">
 <h3 class="anchored" data-anchor-id="modellselektion">Modellselektion</h3>
 <div class="cell">
-<div class="sourceCode cell-code" id="cb6"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb6-1"><a href="#cb6-1" aria-hidden="true" tabindex="-1"></a><span class="fu">summary</span>(lm_1)</span>
-<span id="cb6-2"><a href="#cb6-2" aria-hidden="true" tabindex="-1"></a><span class="do">## </span></span>
-<span id="cb6-3"><a href="#cb6-3" aria-hidden="true" tabindex="-1"></a><span class="do">## Call:</span></span>
-<span id="cb6-4"><a href="#cb6-4" aria-hidden="true" tabindex="-1"></a><span class="do">## lm(formula = ABUND ~ AGE + AREA + DIST + LDIST + GRAZE + ALT, </span></span>
-<span id="cb6-5"><a href="#cb6-5" aria-hidden="true" tabindex="-1"></a><span class="do">##     data = loyn)</span></span>
-<span id="cb6-6"><a href="#cb6-6" aria-hidden="true" tabindex="-1"></a><span class="do">## </span></span>
-<span id="cb6-7"><a href="#cb6-7" aria-hidden="true" tabindex="-1"></a><span class="do">## Residuals:</span></span>
-<span id="cb6-8"><a href="#cb6-8" aria-hidden="true" tabindex="-1"></a><span class="do">##      Min       1Q   Median       3Q      Max </span></span>
-<span id="cb6-9"><a href="#cb6-9" aria-hidden="true" tabindex="-1"></a><span class="do">## -14.8828  -4.4751   0.5753   4.5738  18.1946 </span></span>
-<span id="cb6-10"><a href="#cb6-10" aria-hidden="true" tabindex="-1"></a><span class="do">## </span></span>
-<span id="cb6-11"><a href="#cb6-11" aria-hidden="true" tabindex="-1"></a><span class="do">## Coefficients:</span></span>
-<span id="cb6-12"><a href="#cb6-12" aria-hidden="true" tabindex="-1"></a><span class="do">##               Estimate Std. Error t value Pr(&gt;|t|)   </span></span>
-<span id="cb6-13"><a href="#cb6-13" aria-hidden="true" tabindex="-1"></a><span class="do">## (Intercept)  1.749e+01  6.599e+00   2.650   0.0109 * </span></span>
-<span id="cb6-14"><a href="#cb6-14" aria-hidden="true" tabindex="-1"></a><span class="do">## AGE         -9.155e-02  5.430e-02  -1.686   0.0985 . </span></span>
-<span id="cb6-15"><a href="#cb6-15" aria-hidden="true" tabindex="-1"></a><span class="do">## AREA         1.232e-01  4.173e-02   2.953   0.0049 **</span></span>
-<span id="cb6-16"><a href="#cb6-16" aria-hidden="true" tabindex="-1"></a><span class="do">## DIST         3.751e-03  5.083e-03   0.738   0.4642   </span></span>
-<span id="cb6-17"><a href="#cb6-17" aria-hidden="true" tabindex="-1"></a><span class="do">## LDIST       -5.331e-05  1.335e-03  -0.040   0.9683   </span></span>
-<span id="cb6-18"><a href="#cb6-18" aria-hidden="true" tabindex="-1"></a><span class="do">## GRAZE       -1.783e+00  1.181e+00  -1.510   0.1378   </span></span>
-<span id="cb6-19"><a href="#cb6-19" aria-hidden="true" tabindex="-1"></a><span class="do">## ALT          4.731e-02  2.900e-02   1.631   0.1095   </span></span>
-<span id="cb6-20"><a href="#cb6-20" aria-hidden="true" tabindex="-1"></a><span class="do">## ---</span></span>
-<span id="cb6-21"><a href="#cb6-21" aria-hidden="true" tabindex="-1"></a><span class="do">## Signif. codes:  0 '***' 0.001 '**' 0.01 '*' 0.05 '.' 0.1 ' ' 1</span></span>
-<span id="cb6-22"><a href="#cb6-22" aria-hidden="true" tabindex="-1"></a><span class="do">## </span></span>
-<span id="cb6-23"><a href="#cb6-23" aria-hidden="true" tabindex="-1"></a><span class="do">## Residual standard error: 7.451 on 47 degrees of freedom</span></span>
-<span id="cb6-24"><a href="#cb6-24" aria-hidden="true" tabindex="-1"></a><span class="do">## Multiple R-squared:  0.5722, Adjusted R-squared:  0.5176 </span></span>
-<span id="cb6-25"><a href="#cb6-25" aria-hidden="true" tabindex="-1"></a><span class="do">## F-statistic: 10.48 on 6 and 47 DF,  p-value: 2.344e-07</span></span>
-<span id="cb6-26"><a href="#cb6-26" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb6-27"><a href="#cb6-27" aria-hidden="true" tabindex="-1"></a><span class="fu">drop1</span>(lm_1, <span class="at">test =</span> <span class="st">"F"</span>)</span>
-<span id="cb6-28"><a href="#cb6-28" aria-hidden="true" tabindex="-1"></a><span class="do">## Single term deletions</span></span>
-<span id="cb6-29"><a href="#cb6-29" aria-hidden="true" tabindex="-1"></a><span class="do">## </span></span>
-<span id="cb6-30"><a href="#cb6-30" aria-hidden="true" tabindex="-1"></a><span class="do">## Model:</span></span>
-<span id="cb6-31"><a href="#cb6-31" aria-hidden="true" tabindex="-1"></a><span class="do">## ABUND ~ AGE + AREA + DIST + LDIST + GRAZE + ALT</span></span>
-<span id="cb6-32"><a href="#cb6-32" aria-hidden="true" tabindex="-1"></a><span class="do">##        Df Sum of Sq    RSS    AIC F value   Pr(&gt;F)   </span></span>
-<span id="cb6-33"><a href="#cb6-33" aria-hidden="true" tabindex="-1"></a><span class="do">## &lt;none&gt;              2609.5 223.41                    </span></span>
-<span id="cb6-34"><a href="#cb6-34" aria-hidden="true" tabindex="-1"></a><span class="do">## AGE     1    157.79 2767.3 224.58  2.8419 0.098466 . </span></span>
-<span id="cb6-35"><a href="#cb6-35" aria-hidden="true" tabindex="-1"></a><span class="do">## AREA    1    484.08 3093.6 230.60  8.7187 0.004904 **</span></span>
-<span id="cb6-36"><a href="#cb6-36" aria-hidden="true" tabindex="-1"></a><span class="do">## DIST    1     30.24 2639.8 222.03  0.5447 0.464169   </span></span>
-<span id="cb6-37"><a href="#cb6-37" aria-hidden="true" tabindex="-1"></a><span class="do">## LDIST   1      0.09 2609.6 221.41  0.0016 0.968322   </span></span>
-<span id="cb6-38"><a href="#cb6-38" aria-hidden="true" tabindex="-1"></a><span class="do">## GRAZE   1    126.56 2736.1 223.97  2.2794 0.137794   </span></span>
-<span id="cb6-39"><a href="#cb6-39" aria-hidden="true" tabindex="-1"></a><span class="do">## ALT     1    147.76 2757.3 224.38  2.6612 0.109504   </span></span>
-<span id="cb6-40"><a href="#cb6-40" aria-hidden="true" tabindex="-1"></a><span class="do">## ---</span></span>
-<span id="cb6-41"><a href="#cb6-41" aria-hidden="true" tabindex="-1"></a><span class="do">## Signif. codes:  0 '***' 0.001 '**' 0.01 '*' 0.05 '.' 0.1 ' ' 1</span></span>
-<span id="cb6-42"><a href="#cb6-42" aria-hidden="true" tabindex="-1"></a><span class="co"># Prädiktor mit grösstem p-Wert entfernen</span></span>
-<span id="cb6-43"><a href="#cb6-43" aria-hidden="true" tabindex="-1"></a>lm_2 <span class="ot">&lt;-</span> <span class="fu">lm</span>(ABUND <span class="sc">~</span> AGE <span class="sc">+</span> AREA <span class="sc">+</span> DIST  <span class="sc">+</span> GRAZE <span class="sc">+</span> ALT, <span class="at">data =</span> loyn)</span>
-<span id="cb6-44"><a href="#cb6-44" aria-hidden="true" tabindex="-1"></a><span class="co"># oder</span></span>
-<span id="cb6-45"><a href="#cb6-45" aria-hidden="true" tabindex="-1"></a>lm_2 <span class="ot">&lt;-</span> <span class="fu">update</span>(lm_1, <span class="sc">~</span> . <span class="sc">-</span> LDIST) </span>
-<span id="cb6-46"><a href="#cb6-46" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb6-47"><a href="#cb6-47" aria-hidden="true" tabindex="-1"></a><span class="co"># Oben beschriebener Schritt wiederholten bis nur noch signifikante Prädiktoren im Modell sind</span></span>
-<span id="cb6-48"><a href="#cb6-48" aria-hidden="true" tabindex="-1"></a><span class="fu">drop1</span>(lm_2, <span class="at">test =</span> <span class="st">"F"</span>) </span>
-<span id="cb6-49"><a href="#cb6-49" aria-hidden="true" tabindex="-1"></a><span class="do">## Single term deletions</span></span>
-<span id="cb6-50"><a href="#cb6-50" aria-hidden="true" tabindex="-1"></a><span class="do">## </span></span>
-<span id="cb6-51"><a href="#cb6-51" aria-hidden="true" tabindex="-1"></a><span class="do">## Model:</span></span>
-<span id="cb6-52"><a href="#cb6-52" aria-hidden="true" tabindex="-1"></a><span class="do">## ABUND ~ AGE + AREA + DIST + GRAZE + ALT</span></span>
-<span id="cb6-53"><a href="#cb6-53" aria-hidden="true" tabindex="-1"></a><span class="do">##        Df Sum of Sq    RSS    AIC F value   Pr(&gt;F)   </span></span>
-<span id="cb6-54"><a href="#cb6-54" aria-hidden="true" tabindex="-1"></a><span class="do">## &lt;none&gt;              2609.6 221.41                    </span></span>
-<span id="cb6-55"><a href="#cb6-55" aria-hidden="true" tabindex="-1"></a><span class="do">## AGE     1    158.71 2768.3 222.60  2.9192 0.093989 . </span></span>
-<span id="cb6-56"><a href="#cb6-56" aria-hidden="true" tabindex="-1"></a><span class="do">## AREA    1    563.32 3172.9 229.97 10.3614 0.002309 **</span></span>
-<span id="cb6-57"><a href="#cb6-57" aria-hidden="true" tabindex="-1"></a><span class="do">## DIST    1     31.10 2640.7 220.05  0.5721 0.453139   </span></span>
-<span id="cb6-58"><a href="#cb6-58" aria-hidden="true" tabindex="-1"></a><span class="do">## GRAZE   1    127.97 2737.6 222.00  2.3539 0.131535   </span></span>
-<span id="cb6-59"><a href="#cb6-59" aria-hidden="true" tabindex="-1"></a><span class="do">## ALT     1    163.04 2772.6 222.68  2.9988 0.089749 . </span></span>
-<span id="cb6-60"><a href="#cb6-60" aria-hidden="true" tabindex="-1"></a><span class="do">## ---</span></span>
-<span id="cb6-61"><a href="#cb6-61" aria-hidden="true" tabindex="-1"></a><span class="do">## Signif. codes:  0 '***' 0.001 '**' 0.01 '*' 0.05 '.' 0.1 ' ' 1</span></span>
-<span id="cb6-62"><a href="#cb6-62" aria-hidden="true" tabindex="-1"></a>lm_3 <span class="ot">&lt;-</span> <span class="fu">update</span>(lm_2, <span class="sc">~</span> . <span class="sc">-</span> DIST)</span>
-<span id="cb6-63"><a href="#cb6-63" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb6-64"><a href="#cb6-64" aria-hidden="true" tabindex="-1"></a><span class="fu">drop1</span>(lm_3, <span class="at">test =</span> <span class="st">"F"</span>) </span>
-<span id="cb6-65"><a href="#cb6-65" aria-hidden="true" tabindex="-1"></a><span class="do">## Single term deletions</span></span>
-<span id="cb6-66"><a href="#cb6-66" aria-hidden="true" tabindex="-1"></a><span class="do">## </span></span>
-<span id="cb6-67"><a href="#cb6-67" aria-hidden="true" tabindex="-1"></a><span class="do">## Model:</span></span>
-<span id="cb6-68"><a href="#cb6-68" aria-hidden="true" tabindex="-1"></a><span class="do">## ABUND ~ AGE + AREA + GRAZE + ALT</span></span>
-<span id="cb6-69"><a href="#cb6-69" aria-hidden="true" tabindex="-1"></a><span class="do">##        Df Sum of Sq    RSS    AIC F value   Pr(&gt;F)   </span></span>
-<span id="cb6-70"><a href="#cb6-70" aria-hidden="true" tabindex="-1"></a><span class="do">## &lt;none&gt;              2640.7 220.05                    </span></span>
-<span id="cb6-71"><a href="#cb6-71" aria-hidden="true" tabindex="-1"></a><span class="do">## AGE     1    154.79 2795.5 221.13  2.8722 0.096468 . </span></span>
-<span id="cb6-72"><a href="#cb6-72" aria-hidden="true" tabindex="-1"></a><span class="do">## AREA    1    599.14 3239.8 229.09 11.1174 0.001635 **</span></span>
-<span id="cb6-73"><a href="#cb6-73" aria-hidden="true" tabindex="-1"></a><span class="do">## GRAZE   1    158.71 2799.4 221.20  2.9449 0.092467 . </span></span>
-<span id="cb6-74"><a href="#cb6-74" aria-hidden="true" tabindex="-1"></a><span class="do">## ALT     1    138.17 2778.9 220.80  2.5639 0.115759   </span></span>
-<span id="cb6-75"><a href="#cb6-75" aria-hidden="true" tabindex="-1"></a><span class="do">## ---</span></span>
-<span id="cb6-76"><a href="#cb6-76" aria-hidden="true" tabindex="-1"></a><span class="do">## Signif. codes:  0 '***' 0.001 '**' 0.01 '*' 0.05 '.' 0.1 ' ' 1</span></span>
-<span id="cb6-77"><a href="#cb6-77" aria-hidden="true" tabindex="-1"></a>lm_4 <span class="ot">&lt;-</span> <span class="fu">update</span>(lm_3, <span class="sc">~</span> . <span class="sc">-</span> ALT)</span>
-<span id="cb6-78"><a href="#cb6-78" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb6-79"><a href="#cb6-79" aria-hidden="true" tabindex="-1"></a><span class="fu">drop1</span>(lm_4, <span class="at">test =</span> <span class="st">"F"</span>) </span>
-<span id="cb6-80"><a href="#cb6-80" aria-hidden="true" tabindex="-1"></a><span class="do">## Single term deletions</span></span>
-<span id="cb6-81"><a href="#cb6-81" aria-hidden="true" tabindex="-1"></a><span class="do">## </span></span>
-<span id="cb6-82"><a href="#cb6-82" aria-hidden="true" tabindex="-1"></a><span class="do">## Model:</span></span>
-<span id="cb6-83"><a href="#cb6-83" aria-hidden="true" tabindex="-1"></a><span class="do">## ABUND ~ AGE + AREA + GRAZE</span></span>
-<span id="cb6-84"><a href="#cb6-84" aria-hidden="true" tabindex="-1"></a><span class="do">##        Df Sum of Sq    RSS    AIC F value  Pr(&gt;F)   </span></span>
-<span id="cb6-85"><a href="#cb6-85" aria-hidden="true" tabindex="-1"></a><span class="do">## &lt;none&gt;              2778.9 220.80                   </span></span>
-<span id="cb6-86"><a href="#cb6-86" aria-hidden="true" tabindex="-1"></a><span class="do">## AGE     1    163.46 2942.3 221.89  2.9412 0.09254 . </span></span>
-<span id="cb6-87"><a href="#cb6-87" aria-hidden="true" tabindex="-1"></a><span class="do">## AREA    1    541.87 3320.8 228.42  9.7497 0.00298 **</span></span>
-<span id="cb6-88"><a href="#cb6-88" aria-hidden="true" tabindex="-1"></a><span class="do">## GRAZE   1    264.51 3043.4 223.71  4.7593 0.03387 * </span></span>
-<span id="cb6-89"><a href="#cb6-89" aria-hidden="true" tabindex="-1"></a><span class="do">## ---</span></span>
-<span id="cb6-90"><a href="#cb6-90" aria-hidden="true" tabindex="-1"></a><span class="do">## Signif. codes:  0 '***' 0.001 '**' 0.01 '*' 0.05 '.' 0.1 ' ' 1</span></span>
-<span id="cb6-91"><a href="#cb6-91" aria-hidden="true" tabindex="-1"></a>lm_5 <span class="ot">&lt;-</span> <span class="fu">update</span>(lm_4, <span class="sc">~</span> . <span class="sc">-</span> AGE)</span>
-<span id="cb6-92"><a href="#cb6-92" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb6-93"><a href="#cb6-93" aria-hidden="true" tabindex="-1"></a><span class="fu">drop1</span>(lm_5, <span class="at">test =</span> <span class="st">"F"</span>)</span>
-<span id="cb6-94"><a href="#cb6-94" aria-hidden="true" tabindex="-1"></a><span class="do">## Single term deletions</span></span>
-<span id="cb6-95"><a href="#cb6-95" aria-hidden="true" tabindex="-1"></a><span class="do">## </span></span>
-<span id="cb6-96"><a href="#cb6-96" aria-hidden="true" tabindex="-1"></a><span class="do">## Model:</span></span>
-<span id="cb6-97"><a href="#cb6-97" aria-hidden="true" tabindex="-1"></a><span class="do">## ABUND ~ AREA + GRAZE</span></span>
-<span id="cb6-98"><a href="#cb6-98" aria-hidden="true" tabindex="-1"></a><span class="do">##        Df Sum of Sq    RSS    AIC F value    Pr(&gt;F)    </span></span>
-<span id="cb6-99"><a href="#cb6-99" aria-hidden="true" tabindex="-1"></a><span class="do">## &lt;none&gt;              2942.3 221.89                      </span></span>
-<span id="cb6-100"><a href="#cb6-100" aria-hidden="true" tabindex="-1"></a><span class="do">## AREA    1    440.79 3383.1 227.43  7.6403  0.007923 ** </span></span>
-<span id="cb6-101"><a href="#cb6-101" aria-hidden="true" tabindex="-1"></a><span class="do">## GRAZE   1   1089.71 4032.1 236.91 18.8881 6.622e-05 ***</span></span>
-<span id="cb6-102"><a href="#cb6-102" aria-hidden="true" tabindex="-1"></a><span class="do">## ---</span></span>
-<span id="cb6-103"><a href="#cb6-103" aria-hidden="true" tabindex="-1"></a><span class="do">## Signif. codes:  0 '***' 0.001 '**' 0.01 '*' 0.05 '.' 0.1 ' ' 1</span></span>
-<span id="cb6-104"><a href="#cb6-104" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb6-105"><a href="#cb6-105" aria-hidden="true" tabindex="-1"></a><span class="fu">summary</span>(lm_5) </span>
-<span id="cb6-106"><a href="#cb6-106" aria-hidden="true" tabindex="-1"></a><span class="do">## </span></span>
-<span id="cb6-107"><a href="#cb6-107" aria-hidden="true" tabindex="-1"></a><span class="do">## Call:</span></span>
-<span id="cb6-108"><a href="#cb6-108" aria-hidden="true" tabindex="-1"></a><span class="do">## lm(formula = ABUND ~ AREA + GRAZE, data = loyn)</span></span>
-<span id="cb6-109"><a href="#cb6-109" aria-hidden="true" tabindex="-1"></a><span class="do">## </span></span>
-<span id="cb6-110"><a href="#cb6-110" aria-hidden="true" tabindex="-1"></a><span class="do">## Residuals:</span></span>
-<span id="cb6-111"><a href="#cb6-111" aria-hidden="true" tabindex="-1"></a><span class="do">##      Min       1Q   Median       3Q      Max </span></span>
-<span id="cb6-112"><a href="#cb6-112" aria-hidden="true" tabindex="-1"></a><span class="do">## -15.5390  -6.3337   0.1902   4.4737  15.5567 </span></span>
-<span id="cb6-113"><a href="#cb6-113" aria-hidden="true" tabindex="-1"></a><span class="do">## </span></span>
-<span id="cb6-114"><a href="#cb6-114" aria-hidden="true" tabindex="-1"></a><span class="do">## Coefficients:</span></span>
-<span id="cb6-115"><a href="#cb6-115" aria-hidden="true" tabindex="-1"></a><span class="do">##             Estimate Std. Error t value Pr(&gt;|t|)    </span></span>
-<span id="cb6-116"><a href="#cb6-116" aria-hidden="true" tabindex="-1"></a><span class="do">## (Intercept)  28.2303     3.2660   8.644 1.45e-11 ***</span></span>
-<span id="cb6-117"><a href="#cb6-117" aria-hidden="true" tabindex="-1"></a><span class="do">## AREA          0.1045     0.0378   2.764  0.00792 ** </span></span>
-<span id="cb6-118"><a href="#cb6-118" aria-hidden="true" tabindex="-1"></a><span class="do">## GRAZE        -3.7009     0.8516  -4.346 6.62e-05 ***</span></span>
-<span id="cb6-119"><a href="#cb6-119" aria-hidden="true" tabindex="-1"></a><span class="do">## ---</span></span>
-<span id="cb6-120"><a href="#cb6-120" aria-hidden="true" tabindex="-1"></a><span class="do">## Signif. codes:  0 '***' 0.001 '**' 0.01 '*' 0.05 '.' 0.1 ' ' 1</span></span>
-<span id="cb6-121"><a href="#cb6-121" aria-hidden="true" tabindex="-1"></a><span class="do">## </span></span>
-<span id="cb6-122"><a href="#cb6-122" aria-hidden="true" tabindex="-1"></a><span class="do">## Residual standard error: 7.596 on 51 degrees of freedom</span></span>
-<span id="cb6-123"><a href="#cb6-123" aria-hidden="true" tabindex="-1"></a><span class="do">## Multiple R-squared:  0.5177, Adjusted R-squared:  0.4987 </span></span>
-<span id="cb6-124"><a href="#cb6-124" aria-hidden="true" tabindex="-1"></a><span class="do">## F-statistic: 27.37 on 2 and 51 DF,  p-value: 8.425e-09</span></span>
-<span id="cb6-125"><a href="#cb6-125" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb6-126"><a href="#cb6-126" aria-hidden="true" tabindex="-1"></a><span class="fu">par</span>(<span class="at">mfrow =</span> <span class="fu">c</span>(<span class="dv">2</span>, <span class="dv">2</span>))</span>
-<span id="cb6-127"><a href="#cb6-127" aria-hidden="true" tabindex="-1"></a><span class="fu">plot</span>(lm_5)</span></code><button title="In die Zwischenablage kopieren" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb15"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb15-1"><a href="#cb15-1" aria-hidden="true" tabindex="-1"></a><span class="fu">summary</span>(lm_1)</span></code><button title="In die Zwischenablage kopieren" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>
+Call:
+lm(formula = ABUND ~ AGE + AREA + DIST + LDIST + GRAZE + ALT, 
+    data = loyn)
+
+Residuals:
+     Min       1Q   Median       3Q      Max 
+-14.8828  -4.4751   0.5753   4.5738  18.1946 
+
+Coefficients:
+              Estimate Std. Error t value Pr(&gt;|t|)   
+(Intercept)  1.749e+01  6.599e+00   2.650   0.0109 * 
+AGE         -9.155e-02  5.430e-02  -1.686   0.0985 . 
+AREA         1.232e-01  4.173e-02   2.953   0.0049 **
+DIST         3.751e-03  5.083e-03   0.738   0.4642   
+LDIST       -5.331e-05  1.335e-03  -0.040   0.9683   
+GRAZE       -1.783e+00  1.181e+00  -1.510   0.1378   
+ALT          4.731e-02  2.900e-02   1.631   0.1095   
+---
+Signif. codes:  0 '***' 0.001 '**' 0.01 '*' 0.05 '.' 0.1 ' ' 1
+
+Residual standard error: 7.451 on 47 degrees of freedom
+Multiple R-squared:  0.5722,    Adjusted R-squared:  0.5176 
+F-statistic: 10.48 on 6 and 47 DF,  p-value: 2.344e-07</code></pre>
+</div>
+<div class="sourceCode cell-code" id="cb17"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb17-1"><a href="#cb17-1" aria-hidden="true" tabindex="-1"></a><span class="fu">drop1</span>(lm_1, <span class="at">test =</span> <span class="st">"F"</span>)</span></code><button title="In die Zwischenablage kopieren" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>Single term deletions
+
+Model:
+ABUND ~ AGE + AREA + DIST + LDIST + GRAZE + ALT
+       Df Sum of Sq    RSS    AIC F value   Pr(&gt;F)   
+&lt;none&gt;              2609.5 223.41                    
+AGE     1    157.79 2767.3 224.58  2.8419 0.098466 . 
+AREA    1    484.08 3093.6 230.60  8.7187 0.004904 **
+DIST    1     30.24 2639.8 222.03  0.5447 0.464169   
+LDIST   1      0.09 2609.6 221.41  0.0016 0.968322   
+GRAZE   1    126.56 2736.1 223.97  2.2794 0.137794   
+ALT     1    147.76 2757.3 224.38  2.6612 0.109504   
+---
+Signif. codes:  0 '***' 0.001 '**' 0.01 '*' 0.05 '.' 0.1 ' ' 1</code></pre>
+</div>
+<div class="sourceCode cell-code" id="cb19"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb19-1"><a href="#cb19-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Prädiktor mit grösstem p-Wert entfernen</span></span>
+<span id="cb19-2"><a href="#cb19-2" aria-hidden="true" tabindex="-1"></a>lm_2 <span class="ot">&lt;-</span> <span class="fu">lm</span>(ABUND <span class="sc">~</span> AGE <span class="sc">+</span> AREA <span class="sc">+</span> DIST  <span class="sc">+</span> GRAZE <span class="sc">+</span> ALT, <span class="at">data =</span> loyn)</span>
+<span id="cb19-3"><a href="#cb19-3" aria-hidden="true" tabindex="-1"></a><span class="co"># oder</span></span>
+<span id="cb19-4"><a href="#cb19-4" aria-hidden="true" tabindex="-1"></a>lm_2 <span class="ot">&lt;-</span> <span class="fu">update</span>(lm_1, <span class="sc">~</span> . <span class="sc">-</span> LDIST) </span>
+<span id="cb19-5"><a href="#cb19-5" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb19-6"><a href="#cb19-6" aria-hidden="true" tabindex="-1"></a><span class="co"># Oben beschriebener Schritt wiederholten bis nur noch signifikante Prädiktoren im Modell sind</span></span>
+<span id="cb19-7"><a href="#cb19-7" aria-hidden="true" tabindex="-1"></a><span class="fu">drop1</span>(lm_2, <span class="at">test =</span> <span class="st">"F"</span>) </span></code><button title="In die Zwischenablage kopieren" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>Single term deletions
+
+Model:
+ABUND ~ AGE + AREA + DIST + GRAZE + ALT
+       Df Sum of Sq    RSS    AIC F value   Pr(&gt;F)   
+&lt;none&gt;              2609.6 221.41                    
+AGE     1    158.71 2768.3 222.60  2.9192 0.093989 . 
+AREA    1    563.32 3172.9 229.97 10.3614 0.002309 **
+DIST    1     31.10 2640.7 220.05  0.5721 0.453139   
+GRAZE   1    127.97 2737.6 222.00  2.3539 0.131535   
+ALT     1    163.04 2772.6 222.68  2.9988 0.089749 . 
+---
+Signif. codes:  0 '***' 0.001 '**' 0.01 '*' 0.05 '.' 0.1 ' ' 1</code></pre>
+</div>
+<div class="sourceCode cell-code" id="cb21"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb21-1"><a href="#cb21-1" aria-hidden="true" tabindex="-1"></a>lm_3 <span class="ot">&lt;-</span> <span class="fu">update</span>(lm_2, <span class="sc">~</span> . <span class="sc">-</span> DIST)</span>
+<span id="cb21-2"><a href="#cb21-2" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb21-3"><a href="#cb21-3" aria-hidden="true" tabindex="-1"></a><span class="fu">drop1</span>(lm_3, <span class="at">test =</span> <span class="st">"F"</span>) </span></code><button title="In die Zwischenablage kopieren" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>Single term deletions
+
+Model:
+ABUND ~ AGE + AREA + GRAZE + ALT
+       Df Sum of Sq    RSS    AIC F value   Pr(&gt;F)   
+&lt;none&gt;              2640.7 220.05                    
+AGE     1    154.79 2795.5 221.13  2.8722 0.096468 . 
+AREA    1    599.14 3239.8 229.09 11.1174 0.001635 **
+GRAZE   1    158.71 2799.4 221.20  2.9449 0.092467 . 
+ALT     1    138.17 2778.9 220.80  2.5639 0.115759   
+---
+Signif. codes:  0 '***' 0.001 '**' 0.01 '*' 0.05 '.' 0.1 ' ' 1</code></pre>
+</div>
+<div class="sourceCode cell-code" id="cb23"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb23-1"><a href="#cb23-1" aria-hidden="true" tabindex="-1"></a>lm_4 <span class="ot">&lt;-</span> <span class="fu">update</span>(lm_3, <span class="sc">~</span> . <span class="sc">-</span> ALT)</span>
+<span id="cb23-2"><a href="#cb23-2" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb23-3"><a href="#cb23-3" aria-hidden="true" tabindex="-1"></a><span class="fu">drop1</span>(lm_4, <span class="at">test =</span> <span class="st">"F"</span>) </span></code><button title="In die Zwischenablage kopieren" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>Single term deletions
+
+Model:
+ABUND ~ AGE + AREA + GRAZE
+       Df Sum of Sq    RSS    AIC F value  Pr(&gt;F)   
+&lt;none&gt;              2778.9 220.80                   
+AGE     1    163.46 2942.3 221.89  2.9412 0.09254 . 
+AREA    1    541.87 3320.8 228.42  9.7497 0.00298 **
+GRAZE   1    264.51 3043.4 223.71  4.7593 0.03387 * 
+---
+Signif. codes:  0 '***' 0.001 '**' 0.01 '*' 0.05 '.' 0.1 ' ' 1</code></pre>
+</div>
+<div class="sourceCode cell-code" id="cb25"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb25-1"><a href="#cb25-1" aria-hidden="true" tabindex="-1"></a>lm_5 <span class="ot">&lt;-</span> <span class="fu">update</span>(lm_4, <span class="sc">~</span> . <span class="sc">-</span> AGE)</span>
+<span id="cb25-2"><a href="#cb25-2" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb25-3"><a href="#cb25-3" aria-hidden="true" tabindex="-1"></a><span class="fu">drop1</span>(lm_5, <span class="at">test =</span> <span class="st">"F"</span>)</span></code><button title="In die Zwischenablage kopieren" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>Single term deletions
+
+Model:
+ABUND ~ AREA + GRAZE
+       Df Sum of Sq    RSS    AIC F value    Pr(&gt;F)    
+&lt;none&gt;              2942.3 221.89                      
+AREA    1    440.79 3383.1 227.43  7.6403  0.007923 ** 
+GRAZE   1   1089.71 4032.1 236.91 18.8881 6.622e-05 ***
+---
+Signif. codes:  0 '***' 0.001 '**' 0.01 '*' 0.05 '.' 0.1 ' ' 1</code></pre>
+</div>
+<div class="sourceCode cell-code" id="cb27"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb27-1"><a href="#cb27-1" aria-hidden="true" tabindex="-1"></a><span class="fu">summary</span>(lm_5) </span></code><button title="In die Zwischenablage kopieren" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>
+Call:
+lm(formula = ABUND ~ AREA + GRAZE, data = loyn)
+
+Residuals:
+     Min       1Q   Median       3Q      Max 
+-15.5390  -6.3337   0.1902   4.4737  15.5567 
+
+Coefficients:
+            Estimate Std. Error t value Pr(&gt;|t|)    
+(Intercept)  28.2303     3.2660   8.644 1.45e-11 ***
+AREA          0.1045     0.0378   2.764  0.00792 ** 
+GRAZE        -3.7009     0.8516  -4.346 6.62e-05 ***
+---
+Signif. codes:  0 '***' 0.001 '**' 0.01 '*' 0.05 '.' 0.1 ' ' 1
+
+Residual standard error: 7.596 on 51 degrees of freedom
+Multiple R-squared:  0.5177,    Adjusted R-squared:  0.4987 
+F-statistic: 27.37 on 2 and 51 DF,  p-value: 8.425e-09</code></pre>
+</div>
+<div class="sourceCode cell-code" id="cb29"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb29-1"><a href="#cb29-1" aria-hidden="true" tabindex="-1"></a><span class="fu">par</span>(<span class="at">mfrow =</span> <span class="fu">c</span>(<span class="dv">2</span>, <span class="dv">2</span>))</span>
+<span id="cb29-2"><a href="#cb29-2" aria-hidden="true" tabindex="-1"></a><span class="fu">plot</span>(lm_5)</span></code><button title="In die Zwischenablage kopieren" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output-display">
 <div>
 <figure class="figure">
@@ -754,39 +779,41 @@ window.onload = function() {
 <h3 class="anchored" data-anchor-id="hierarchical-partitioning">Hierarchical partitioning</h3>
 <p>Wir können auch schauen wie bedeutsam die einzelnen Variablen sind:</p>
 <div class="cell">
-<div class="sourceCode cell-code" id="cb7"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb7-1"><a href="#cb7-1" aria-hidden="true" tabindex="-1"></a><span class="fu">p_load</span>(<span class="st">"relaimpo"</span>)</span>
-<span id="cb7-2"><a href="#cb7-2" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb7-3"><a href="#cb7-3" aria-hidden="true" tabindex="-1"></a><span class="co"># Berechnen</span></span>
-<span id="cb7-4"><a href="#cb7-4" aria-hidden="true" tabindex="-1"></a>metrics <span class="ot">&lt;-</span> <span class="fu">calc.relimp</span>(lm_1, <span class="at">type =</span> <span class="fu">c</span>(<span class="st">"lmg"</span>, <span class="st">"first"</span>))</span>
-<span id="cb7-5"><a href="#cb7-5" aria-hidden="true" tabindex="-1"></a><span class="fu">cbind</span>(<span class="at">I =</span> metrics<span class="sc">$</span>lmg, <span class="at">J =</span> metrics<span class="sc">$</span>first <span class="sc">-</span> metrics<span class="sc">$</span>lmg, <span class="at">Total =</span> metrics<span class="sc">$</span>first)</span>
-<span id="cb7-6"><a href="#cb7-6" aria-hidden="true" tabindex="-1"></a><span class="do">##                I             J       Total</span></span>
-<span id="cb7-7"><a href="#cb7-7" aria-hidden="true" tabindex="-1"></a><span class="do">## AGE   0.11351597  0.1539730784 0.267489048</span></span>
-<span id="cb7-8"><a href="#cb7-8" aria-hidden="true" tabindex="-1"></a><span class="do">## AREA  0.17941694  0.1596031200 0.339020063</span></span>
-<span id="cb7-9"><a href="#cb7-9" aria-hidden="true" tabindex="-1"></a><span class="do">## DIST  0.01986977  0.0307746481 0.050644413</span></span>
-<span id="cb7-10"><a href="#cb7-10" aria-hidden="true" tabindex="-1"></a><span class="do">## LDIST 0.00827103 -0.0007561283 0.007514902</span></span>
-<span id="cb7-11"><a href="#cb7-11" aria-hidden="true" tabindex="-1"></a><span class="do">## GRAZE 0.19052943  0.2548693094 0.445398737</span></span>
-<span id="cb7-12"><a href="#cb7-12" aria-hidden="true" tabindex="-1"></a><span class="do">## ALT   0.06061495  0.0610176713 0.121632624</span></span></code><button title="In die Zwischenablage kopieren" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb30"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb30-1"><a href="#cb30-1" aria-hidden="true" tabindex="-1"></a><span class="fu">p_load</span>(<span class="st">"relaimpo"</span>)</span>
+<span id="cb30-2"><a href="#cb30-2" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb30-3"><a href="#cb30-3" aria-hidden="true" tabindex="-1"></a><span class="co"># Berechnen</span></span>
+<span id="cb30-4"><a href="#cb30-4" aria-hidden="true" tabindex="-1"></a>metrics <span class="ot">&lt;-</span> <span class="fu">calc.relimp</span>(lm_1, <span class="at">type =</span> <span class="fu">c</span>(<span class="st">"lmg"</span>, <span class="st">"first"</span>))</span>
+<span id="cb30-5"><a href="#cb30-5" aria-hidden="true" tabindex="-1"></a><span class="fu">cbind</span>(<span class="at">I =</span> metrics<span class="sc">$</span>lmg, <span class="at">J =</span> metrics<span class="sc">$</span>first <span class="sc">-</span> metrics<span class="sc">$</span>lmg, <span class="at">Total =</span> metrics<span class="sc">$</span>first)</span></code><button title="In die Zwischenablage kopieren" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>               I             J       Total
+AGE   0.11351597  0.1539730784 0.267489048
+AREA  0.17941694  0.1596031200 0.339020063
+DIST  0.01986977  0.0307746481 0.050644413
+LDIST 0.00827103 -0.0007561283 0.007514902
+GRAZE 0.19052943  0.2548693094 0.445398737
+ALT   0.06061495  0.0610176713 0.121632624</code></pre>
+</div>
 </div>
 <p>-&gt; auch hier haben AREA und GRAZE die höchsten Werte (und an dritter Stelle AGE, der mit GRAZE am stärksten korreliert ist)</p>
 </section>
 <section id="plot-partielle-regressionen" class="level3">
 <h3 class="anchored" data-anchor-id="plot-partielle-regressionen">Plot partielle regressionen</h3>
 <div class="cell">
-<div class="sourceCode cell-code" id="cb8"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb8-1"><a href="#cb8-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Beispiel GRAZE</span></span>
-<span id="cb8-2"><a href="#cb8-2" aria-hidden="true" tabindex="-1"></a>lm_abund <span class="ot">&lt;-</span> <span class="fu">lm</span>(ABUND <span class="sc">~</span> AREA, <span class="at">data =</span> loyn)</span>
-<span id="cb8-3"><a href="#cb8-3" aria-hidden="true" tabindex="-1"></a>lm_graze <span class="ot">&lt;-</span> <span class="fu">lm</span>(GRAZE <span class="sc">~</span> AREA, <span class="at">data =</span> loyn)</span>
-<span id="cb8-4"><a href="#cb8-4" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb8-5"><a href="#cb8-5" aria-hidden="true" tabindex="-1"></a>abundance_resid <span class="ot">&lt;-</span> <span class="fu">resid</span>(lm_abund)</span>
-<span id="cb8-6"><a href="#cb8-6" aria-hidden="true" tabindex="-1"></a>graze_resid <span class="ot">&lt;-</span> <span class="fu">resid</span>(lm_graze)</span>
-<span id="cb8-7"><a href="#cb8-7" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb8-8"><a href="#cb8-8" aria-hidden="true" tabindex="-1"></a><span class="fu">p_load</span>(ggplot2)</span>
-<span id="cb8-9"><a href="#cb8-9" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb8-10"><a href="#cb8-10" aria-hidden="true" tabindex="-1"></a><span class="fu">ggplot</span>(<span class="at">data =</span> <span class="cn">NULL</span>, <span class="fu">aes</span>(<span class="at">x =</span> graze_resid, <span class="at">y =</span> abundance_resid)) <span class="sc">+</span></span>
-<span id="cb8-11"><a href="#cb8-11" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_point</span>() <span class="sc">+</span></span>
-<span id="cb8-12"><a href="#cb8-12" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_smooth</span>(<span class="at">method =</span> <span class="st">"lm"</span>, <span class="at">se =</span> <span class="cn">FALSE</span>, <span class="at">color =</span> <span class="st">"blue"</span>) <span class="sc">+</span></span>
-<span id="cb8-13"><a href="#cb8-13" aria-hidden="true" tabindex="-1"></a>  <span class="fu">labs</span>(<span class="at">x =</span> <span class="st">"Graze | others"</span>, <span class="at">y =</span> <span class="st">"Abund | others"</span>,</span>
-<span id="cb8-14"><a href="#cb8-14" aria-hidden="true" tabindex="-1"></a>       <span class="at">title =</span> <span class="st">"Partial Regression Plot with Quadratic Term and Regression Line"</span>) <span class="sc">+</span></span>
-<span id="cb8-15"><a href="#cb8-15" aria-hidden="true" tabindex="-1"></a>  <span class="fu">theme_minimal</span>()</span></code><button title="In die Zwischenablage kopieren" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb32"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb32-1"><a href="#cb32-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Beispiel GRAZE</span></span>
+<span id="cb32-2"><a href="#cb32-2" aria-hidden="true" tabindex="-1"></a>lm_abund <span class="ot">&lt;-</span> <span class="fu">lm</span>(ABUND <span class="sc">~</span> AREA, <span class="at">data =</span> loyn)</span>
+<span id="cb32-3"><a href="#cb32-3" aria-hidden="true" tabindex="-1"></a>lm_graze <span class="ot">&lt;-</span> <span class="fu">lm</span>(GRAZE <span class="sc">~</span> AREA, <span class="at">data =</span> loyn)</span>
+<span id="cb32-4"><a href="#cb32-4" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb32-5"><a href="#cb32-5" aria-hidden="true" tabindex="-1"></a>abundance_resid <span class="ot">&lt;-</span> <span class="fu">resid</span>(lm_abund)</span>
+<span id="cb32-6"><a href="#cb32-6" aria-hidden="true" tabindex="-1"></a>graze_resid <span class="ot">&lt;-</span> <span class="fu">resid</span>(lm_graze)</span>
+<span id="cb32-7"><a href="#cb32-7" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb32-8"><a href="#cb32-8" aria-hidden="true" tabindex="-1"></a><span class="fu">p_load</span>(ggplot2)</span>
+<span id="cb32-9"><a href="#cb32-9" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb32-10"><a href="#cb32-10" aria-hidden="true" tabindex="-1"></a><span class="fu">ggplot</span>(<span class="at">data =</span> <span class="cn">NULL</span>, <span class="fu">aes</span>(<span class="at">x =</span> graze_resid, <span class="at">y =</span> abundance_resid)) <span class="sc">+</span></span>
+<span id="cb32-11"><a href="#cb32-11" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_point</span>() <span class="sc">+</span></span>
+<span id="cb32-12"><a href="#cb32-12" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_smooth</span>(<span class="at">method =</span> <span class="st">"lm"</span>, <span class="at">se =</span> <span class="cn">FALSE</span>, <span class="at">color =</span> <span class="st">"blue"</span>) <span class="sc">+</span></span>
+<span id="cb32-13"><a href="#cb32-13" aria-hidden="true" tabindex="-1"></a>  <span class="fu">labs</span>(<span class="at">x =</span> <span class="st">"Graze | others"</span>, <span class="at">y =</span> <span class="st">"Abund | others"</span>,</span>
+<span id="cb32-14"><a href="#cb32-14" aria-hidden="true" tabindex="-1"></a>       <span class="at">title =</span> <span class="st">"Partial Regression Plot with Quadratic Term and Regression Line"</span>) <span class="sc">+</span></span>
+<span id="cb32-15"><a href="#cb32-15" aria-hidden="true" tabindex="-1"></a>  <span class="fu">theme_minimal</span>()</span></code><button title="In die Zwischenablage kopieren" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output-display">
 <div>
 <figure class="figure">
@@ -794,11 +821,10 @@ window.onload = function() {
 </figure>
 </div>
 </div>
-<div class="sourceCode cell-code" id="cb9"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb9-1"><a href="#cb9-1" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb9-2"><a href="#cb9-2" aria-hidden="true" tabindex="-1"></a><span class="co"># Einfacher geht es mit der function avPlots (package "car"). Nachteil ist, dass mit der funktion anders als mit der Methode oben, keine quadratische prädiktoren dargestellt werden können </span></span>
-<span id="cb9-3"><a href="#cb9-3" aria-hidden="true" tabindex="-1"></a> </span>
-<span id="cb9-4"><a href="#cb9-4" aria-hidden="true" tabindex="-1"></a><span class="fu">par</span>(<span class="at">mfrow =</span> <span class="fu">c</span>(<span class="dv">1</span>, <span class="dv">1</span>))</span>
-<span id="cb9-5"><a href="#cb9-5" aria-hidden="true" tabindex="-1"></a><span class="fu">avPlots</span>(lm_5, <span class="sc">~</span>GRAZE, <span class="at">ask =</span> F)</span></code><button title="In die Zwischenablage kopieren" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb33"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb33-1"><a href="#cb33-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Einfacher geht es mit der function avPlots (package "car"). Nachteil ist, dass mit der funktion anders als mit der Methode oben, keine quadratische prädiktoren dargestellt werden können </span></span>
+<span id="cb33-2"><a href="#cb33-2" aria-hidden="true" tabindex="-1"></a> </span>
+<span id="cb33-3"><a href="#cb33-3" aria-hidden="true" tabindex="-1"></a><span class="fu">par</span>(<span class="at">mfrow =</span> <span class="fu">c</span>(<span class="dv">1</span>, <span class="dv">1</span>))</span>
+<span id="cb33-4"><a href="#cb33-4" aria-hidden="true" tabindex="-1"></a><span class="fu">avPlots</span>(lm_5, <span class="sc">~</span>GRAZE, <span class="at">ask =</span> F)</span></code><button title="In die Zwischenablage kopieren" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output-display">
 <div>
 <figure class="figure">
@@ -806,9 +832,8 @@ window.onload = function() {
 </figure>
 </div>
 </div>
-<div class="sourceCode cell-code" id="cb10"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb10-1"><a href="#cb10-1" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb10-2"><a href="#cb10-2" aria-hidden="true" tabindex="-1"></a><span class="co">#Für alle prädktoren im Modell</span></span>
-<span id="cb10-3"><a href="#cb10-3" aria-hidden="true" tabindex="-1"></a><span class="fu">avPlots</span>(lm_5, <span class="at">layout =</span> <span class="fu">c</span>(<span class="dv">1</span>, <span class="dv">2</span>) )</span></code><button title="In die Zwischenablage kopieren" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb34"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb34-1"><a href="#cb34-1" aria-hidden="true" tabindex="-1"></a><span class="co">#Für alle prädktoren im Modell</span></span>
+<span id="cb34-2"><a href="#cb34-2" aria-hidden="true" tabindex="-1"></a><span class="fu">avPlots</span>(lm_5, <span class="at">layout =</span> <span class="fu">c</span>(<span class="dv">1</span>, <span class="dv">2</span>) )</span></code><button title="In die Zwischenablage kopieren" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output-display">
 <div>
 <figure class="figure">
@@ -821,279 +846,289 @@ window.onload = function() {
 <section id="multimodel-inference" class="level2">
 <h2 class="anchored" data-anchor-id="multimodel-inference">Multimodel inference</h2>
 <div class="cell">
-<div class="sourceCode cell-code" id="cb11"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb11-1"><a href="#cb11-1" aria-hidden="true" tabindex="-1"></a><span class="fu">p_load</span>(<span class="st">"MuMIn"</span>)</span>
-<span id="cb11-2"><a href="#cb11-2" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb11-3"><a href="#cb11-3" aria-hidden="true" tabindex="-1"></a>global_model <span class="ot">&lt;-</span> <span class="fu">lm</span>(ABUND <span class="sc">~</span> AGE <span class="sc">+</span> AREA <span class="sc">+</span> DIST <span class="sc">+</span> LDIST <span class="sc">+</span> GRAZE <span class="sc">+</span> ALT, <span class="at">data =</span> loyn)</span>
-<span id="cb11-4"><a href="#cb11-4" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb11-5"><a href="#cb11-5" aria-hidden="true" tabindex="-1"></a><span class="fu">options</span>(<span class="at">na.action =</span> <span class="st">"na.fail"</span>)</span>
-<span id="cb11-6"><a href="#cb11-6" aria-hidden="true" tabindex="-1"></a>allmodels <span class="ot">&lt;-</span> <span class="fu">dredge</span>(global_model)</span>
-<span id="cb11-7"><a href="#cb11-7" aria-hidden="true" tabindex="-1"></a>allmodels</span>
-<span id="cb11-8"><a href="#cb11-8" aria-hidden="true" tabindex="-1"></a><span class="do">## Global model call: lm(formula = ABUND ~ AGE + AREA + DIST + LDIST + GRAZE + ALT, </span></span>
-<span id="cb11-9"><a href="#cb11-9" aria-hidden="true" tabindex="-1"></a><span class="do">##     data = loyn)</span></span>
-<span id="cb11-10"><a href="#cb11-10" aria-hidden="true" tabindex="-1"></a><span class="do">## ---</span></span>
-<span id="cb11-11"><a href="#cb11-11" aria-hidden="true" tabindex="-1"></a><span class="do">## Model selection table </span></span>
-<span id="cb11-12"><a href="#cb11-12" aria-hidden="true" tabindex="-1"></a><span class="do">##    (Intrc)      AGE     ALT   AREA     DIST  GRAZE      LDIST df   logLik  AICc</span></span>
-<span id="cb11-13"><a href="#cb11-13" aria-hidden="true" tabindex="-1"></a><span class="do">## 24  19.460 -0.09049 0.04249 0.1257          -1.954             6 -181.648 377.1</span></span>
-<span id="cb11-14"><a href="#cb11-14" aria-hidden="true" tabindex="-1"></a><span class="do">## 22  27.250 -0.09295         0.1187          -2.434             5 -183.025 377.3</span></span>
-<span id="cb11-15"><a href="#cb11-15" aria-hidden="true" tabindex="-1"></a><span class="do">## 23  20.180          0.04379 0.1120          -3.172             5 -183.186 377.6</span></span>
-<span id="cb11-16"><a href="#cb11-16" aria-hidden="true" tabindex="-1"></a><span class="do">## 8   13.020 -0.14830 0.05448 0.1607                             5 -183.224 377.7</span></span>
-<span id="cb11-17"><a href="#cb11-17" aria-hidden="true" tabindex="-1"></a><span class="do">## 21  28.230                  0.1045          -3.701             4 -184.568 378.0</span></span>
-<span id="cb11-18"><a href="#cb11-18" aria-hidden="true" tabindex="-1"></a><span class="do">## 16  10.990 -0.14310 0.06018 0.1522 0.005130                    6 -182.621 379.0</span></span>
-<span id="cb11-19"><a href="#cb11-19" aria-hidden="true" tabindex="-1"></a><span class="do">## 32  17.440 -0.09167 0.04764 0.1226 0.003705 -1.787             7 -181.328 379.1</span></span>
-<span id="cb11-20"><a href="#cb11-20" aria-hidden="true" tabindex="-1"></a><span class="do">## 31  18.300          0.04861 0.1090 0.003463 -3.031             6 -182.922 379.6</span></span>
-<span id="cb11-21"><a href="#cb11-21" aria-hidden="true" tabindex="-1"></a><span class="do">## 54  27.240 -0.09146         0.1257          -2.375 -4.979e-04  6 -182.936 379.7</span></span>
-<span id="cb11-22"><a href="#cb11-22" aria-hidden="true" tabindex="-1"></a><span class="do">## 56  19.240 -0.09093 0.04375 0.1235          -1.960  1.699e-04  7 -181.638 379.7</span></span>
-<span id="cb11-23"><a href="#cb11-23" aria-hidden="true" tabindex="-1"></a><span class="do">## 30  26.780 -0.09359         0.1170 0.001608 -2.386             6 -182.964 379.7</span></span>
-<span id="cb11-24"><a href="#cb11-24" aria-hidden="true" tabindex="-1"></a><span class="do">## 6   21.570 -0.17130         0.1629                             4 -185.480 379.8</span></span>
-<span id="cb11-25"><a href="#cb11-25" aria-hidden="true" tabindex="-1"></a><span class="do">## 53  28.190                  0.1137          -3.600 -6.372e-04  5 -184.429 380.1</span></span>
-<span id="cb11-26"><a href="#cb11-26" aria-hidden="true" tabindex="-1"></a><span class="do">## 55  20.130          0.04406 0.1116          -3.174  3.620e-05  6 -183.185 380.2</span></span>
-<span id="cb11-27"><a href="#cb11-27" aria-hidden="true" tabindex="-1"></a><span class="do">## 40  12.900 -0.14860 0.05513 0.1596                  8.597e-05  6 -183.221 380.2</span></span>
-<span id="cb11-28"><a href="#cb11-28" aria-hidden="true" tabindex="-1"></a><span class="do">## 29  27.850                  0.1030 0.001316 -3.669             5 -184.530 380.3</span></span>
-<span id="cb11-29"><a href="#cb11-29" aria-hidden="true" tabindex="-1"></a><span class="do">## 48  11.230 -0.14210 0.05871 0.1546 0.005306        -2.191e-04  7 -182.606 381.6</span></span>
-<span id="cb11-30"><a href="#cb11-30" aria-hidden="true" tabindex="-1"></a><span class="do">## 38  21.780 -0.16570         0.1728                 -8.285e-04  5 -185.250 381.7</span></span>
-<span id="cb11-31"><a href="#cb11-31" aria-hidden="true" tabindex="-1"></a><span class="do">## 14  20.930 -0.16970         0.1583 0.002886                    5 -185.298 381.8</span></span>
-<span id="cb11-32"><a href="#cb11-32" aria-hidden="true" tabindex="-1"></a><span class="do">## 64  17.490 -0.09155 0.04731 0.1232 0.003751 -1.783 -5.331e-05  8 -181.327 381.9</span></span>
-<span id="cb11-33"><a href="#cb11-33" aria-hidden="true" tabindex="-1"></a><span class="do">## 62  26.540 -0.09188         0.1256 0.002372 -2.285 -6.734e-04  7 -182.814 382.1</span></span>
-<span id="cb11-34"><a href="#cb11-34" aria-hidden="true" tabindex="-1"></a><span class="do">## 63  18.450          0.04749 0.1112 0.003619 -3.012 -1.800e-04  7 -182.912 382.3</span></span>
-<span id="cb11-35"><a href="#cb11-35" aria-hidden="true" tabindex="-1"></a><span class="do">## 61  27.540                  0.1136 0.002233 -3.521 -8.030e-04  6 -184.327 382.4</span></span>
-<span id="cb11-36"><a href="#cb11-36" aria-hidden="true" tabindex="-1"></a><span class="do">## 17  34.250                                  -4.951             3 -188.337 383.2</span></span>
-<span id="cb11-37"><a href="#cb11-37" aria-hidden="true" tabindex="-1"></a><span class="do">## 46  20.950 -0.16160         0.1696 0.004052        -1.107e-03  6 -184.914 383.6</span></span>
-<span id="cb11-38"><a href="#cb11-38" aria-hidden="true" tabindex="-1"></a><span class="do">## 19  28.380          0.03376                 -4.613             4 -187.620 384.1</span></span>
-<span id="cb11-39"><a href="#cb11-39" aria-hidden="true" tabindex="-1"></a><span class="do">## 18  34.150 -0.05604                         -4.290             4 -187.835 384.5</span></span>
-<span id="cb11-40"><a href="#cb11-40" aria-hidden="true" tabindex="-1"></a><span class="do">## 51  24.960          0.04669                 -4.461  1.504e-03  5 -186.871 385.0</span></span>
-<span id="cb11-41"><a href="#cb11-41" aria-hidden="true" tabindex="-1"></a><span class="do">## 49  33.610                                  -4.939  8.194e-04  4 -188.092 385.0</span></span>
-<span id="cb11-42"><a href="#cb11-42" aria-hidden="true" tabindex="-1"></a><span class="do">## 25  33.120                         0.003213 -4.831             4 -188.133 385.1</span></span>
-<span id="cb11-43"><a href="#cb11-43" aria-hidden="true" tabindex="-1"></a><span class="do">## 27  25.260          0.04131        0.005130 -4.345             5 -187.120 385.5</span></span>
-<span id="cb11-44"><a href="#cb11-44" aria-hidden="true" tabindex="-1"></a><span class="do">## 20  28.540 -0.05253 0.03230                 -4.008             5 -187.169 385.6</span></span>
-<span id="cb11-45"><a href="#cb11-45" aria-hidden="true" tabindex="-1"></a><span class="do">## 50  33.340 -0.06356                         -4.185  1.023e-03  5 -187.453 386.2</span></span>
-<span id="cb11-46"><a href="#cb11-46" aria-hidden="true" tabindex="-1"></a><span class="do">## 52  24.690 -0.06351 0.04667                 -3.708  1.707e-03  6 -186.204 386.2</span></span>
-<span id="cb11-47"><a href="#cb11-47" aria-hidden="true" tabindex="-1"></a><span class="do">## 26  32.900 -0.05863                0.003557 -4.126             5 -187.581 386.4</span></span>
-<span id="cb11-48"><a href="#cb11-48" aria-hidden="true" tabindex="-1"></a><span class="do">## 28  25.270 -0.05561 0.04017        0.005404 -3.690             6 -186.605 387.0</span></span>
-<span id="cb11-49"><a href="#cb11-49" aria-hidden="true" tabindex="-1"></a><span class="do">## 59  23.190          0.05027        0.003783 -4.287  1.273e-03  6 -186.611 387.0</span></span>
-<span id="cb11-50"><a href="#cb11-50" aria-hidden="true" tabindex="-1"></a><span class="do">## 7    4.042          0.07835 0.1830                             4 -189.182 387.2</span></span>
-<span id="cb11-51"><a href="#cb11-51" aria-hidden="true" tabindex="-1"></a><span class="do">## 57  32.930                         0.002318 -4.855  6.458e-04  5 -187.996 387.2</span></span>
-<span id="cb11-52"><a href="#cb11-52" aria-hidden="true" tabindex="-1"></a><span class="do">## 15   1.681          0.08504 0.1703 0.007048                    5 -188.251 387.8</span></span>
-<span id="cb11-53"><a href="#cb11-53" aria-hidden="true" tabindex="-1"></a><span class="do">## 60  22.870 -0.06421 0.05035        0.003888 -3.521  1.472e-03  7 -185.922 388.3</span></span>
-<span id="cb11-54"><a href="#cb11-54" aria-hidden="true" tabindex="-1"></a><span class="do">## 58  32.630 -0.06400                0.002421 -4.092  8.429e-04  6 -187.346 388.5</span></span>
-<span id="cb11-55"><a href="#cb11-55" aria-hidden="true" tabindex="-1"></a><span class="do">## 39   4.728          0.07497 0.1878                 -4.146e-04  5 -189.137 389.5</span></span>
-<span id="cb11-56"><a href="#cb11-56" aria-hidden="true" tabindex="-1"></a><span class="do">## 47   2.837          0.07890 0.1788 0.007662        -8.235e-04  6 -188.077 389.9</span></span>
-<span id="cb11-57"><a href="#cb11-57" aria-hidden="true" tabindex="-1"></a><span class="do">## 5   15.090                  0.1918                             3 -193.075 392.6</span></span>
-<span id="cb11-58"><a href="#cb11-58" aria-hidden="true" tabindex="-1"></a><span class="do">## 37  15.990                  0.2110                 -1.793e-03  4 -192.219 393.3</span></span>
-<span id="cb11-59"><a href="#cb11-59" aria-hidden="true" tabindex="-1"></a><span class="do">## 45  14.910                  0.2046 0.006347        -2.192e-03  5 -191.569 394.4</span></span>
-<span id="cb11-60"><a href="#cb11-60" aria-hidden="true" tabindex="-1"></a><span class="do">## 13  14.250                  0.1847 0.004158                    4 -192.789 394.4</span></span>
-<span id="cb11-61"><a href="#cb11-61" aria-hidden="true" tabindex="-1"></a><span class="do">## 36  12.550 -0.19070 0.07799                         2.643e-03  5 -192.165 395.6</span></span>
-<span id="cb11-62"><a href="#cb11-62" aria-hidden="true" tabindex="-1"></a><span class="do">## 12  12.580 -0.17450 0.07003        0.010510                    5 -192.232 395.7</span></span>
-<span id="cb11-63"><a href="#cb11-63" aria-hidden="true" tabindex="-1"></a><span class="do">## 44  10.040 -0.17890 0.08236        0.008064         2.057e-03  6 -191.118 396.0</span></span>
-<span id="cb11-64"><a href="#cb11-64" aria-hidden="true" tabindex="-1"></a><span class="do">## 4   17.190 -0.18960 0.05881                                    4 -194.072 397.0</span></span>
-<span id="cb11-65"><a href="#cb11-65" aria-hidden="true" tabindex="-1"></a><span class="do">## 2   26.500 -0.21500                                            3 -195.849 398.2</span></span>
-<span id="cb11-66"><a href="#cb11-66" aria-hidden="true" tabindex="-1"></a><span class="do">## 10  24.300 -0.20710                0.008133                    4 -194.795 398.4</span></span>
-<span id="cb11-67"><a href="#cb11-67" aria-hidden="true" tabindex="-1"></a><span class="do">## 34  25.520 -0.22070                                 1.612e-03  4 -195.130 399.1</span></span>
-<span id="cb11-68"><a href="#cb11-68" aria-hidden="true" tabindex="-1"></a><span class="do">## 42  24.050 -0.21240                0.006624         1.084e-03  5 -194.496 400.2</span></span>
-<span id="cb11-69"><a href="#cb11-69" aria-hidden="true" tabindex="-1"></a><span class="do">## 11   1.164          0.10260        0.013710                    4 -198.209 405.2</span></span>
-<span id="cb11-70"><a href="#cb11-70" aria-hidden="true" tabindex="-1"></a><span class="do">## 43  -1.215          0.11370        0.011720         1.732e-03  5 -197.580 406.4</span></span>
-<span id="cb11-71"><a href="#cb11-71" aria-hidden="true" tabindex="-1"></a><span class="do">## 35   1.436          0.11030                         2.577e-03  4 -199.349 407.5</span></span>
-<span id="cb11-72"><a href="#cb11-72" aria-hidden="true" tabindex="-1"></a><span class="do">## 3    6.024          0.09136                                    3 -200.752 408.0</span></span>
-<span id="cb11-73"><a href="#cb11-73" aria-hidden="true" tabindex="-1"></a><span class="do">## 9   16.550                         0.010850                    3 -202.851 412.2</span></span>
-<span id="cb11-74"><a href="#cb11-74" aria-hidden="true" tabindex="-1"></a><span class="do">## 1   19.120                                                     2 -204.254 412.7</span></span>
-<span id="cb11-75"><a href="#cb11-75" aria-hidden="true" tabindex="-1"></a><span class="do">## 41  16.470                         0.010600         1.941e-04  4 -202.843 414.5</span></span>
-<span id="cb11-76"><a href="#cb11-76" aria-hidden="true" tabindex="-1"></a><span class="do">## 33  18.390                                          1.002e-03  3 -204.050 414.6</span></span>
-<span id="cb11-77"><a href="#cb11-77" aria-hidden="true" tabindex="-1"></a><span class="do">##    delta weight</span></span>
-<span id="cb11-78"><a href="#cb11-78" aria-hidden="true" tabindex="-1"></a><span class="do">## 24  0.00  0.127</span></span>
-<span id="cb11-79"><a href="#cb11-79" aria-hidden="true" tabindex="-1"></a><span class="do">## 22  0.22  0.114</span></span>
-<span id="cb11-80"><a href="#cb11-80" aria-hidden="true" tabindex="-1"></a><span class="do">## 23  0.54  0.097</span></span>
-<span id="cb11-81"><a href="#cb11-81" aria-hidden="true" tabindex="-1"></a><span class="do">## 8   0.61  0.093</span></span>
-<span id="cb11-82"><a href="#cb11-82" aria-hidden="true" tabindex="-1"></a><span class="do">## 21  0.87  0.082</span></span>
-<span id="cb11-83"><a href="#cb11-83" aria-hidden="true" tabindex="-1"></a><span class="do">## 16  1.95  0.048</span></span>
-<span id="cb11-84"><a href="#cb11-84" aria-hidden="true" tabindex="-1"></a><span class="do">## 32  2.01  0.046</span></span>
-<span id="cb11-85"><a href="#cb11-85" aria-hidden="true" tabindex="-1"></a><span class="do">## 31  2.55  0.035</span></span>
-<span id="cb11-86"><a href="#cb11-86" aria-hidden="true" tabindex="-1"></a><span class="do">## 54  2.58  0.035</span></span>
-<span id="cb11-87"><a href="#cb11-87" aria-hidden="true" tabindex="-1"></a><span class="do">## 56  2.63  0.034</span></span>
-<span id="cb11-88"><a href="#cb11-88" aria-hidden="true" tabindex="-1"></a><span class="do">## 30  2.63  0.034</span></span>
-<span id="cb11-89"><a href="#cb11-89" aria-hidden="true" tabindex="-1"></a><span class="do">## 6   2.69  0.033</span></span>
-<span id="cb11-90"><a href="#cb11-90" aria-hidden="true" tabindex="-1"></a><span class="do">## 53  3.03  0.028</span></span>
-<span id="cb11-91"><a href="#cb11-91" aria-hidden="true" tabindex="-1"></a><span class="do">## 55  3.08  0.027</span></span>
-<span id="cb11-92"><a href="#cb11-92" aria-hidden="true" tabindex="-1"></a><span class="do">## 40  3.15  0.026</span></span>
-<span id="cb11-93"><a href="#cb11-93" aria-hidden="true" tabindex="-1"></a><span class="do">## 29  3.23  0.025</span></span>
-<span id="cb11-94"><a href="#cb11-94" aria-hidden="true" tabindex="-1"></a><span class="do">## 48  4.56  0.013</span></span>
-<span id="cb11-95"><a href="#cb11-95" aria-hidden="true" tabindex="-1"></a><span class="do">## 38  4.67  0.012</span></span>
-<span id="cb11-96"><a href="#cb11-96" aria-hidden="true" tabindex="-1"></a><span class="do">## 14  4.76  0.012</span></span>
-<span id="cb11-97"><a href="#cb11-97" aria-hidden="true" tabindex="-1"></a><span class="do">## 64  4.77  0.012</span></span>
-<span id="cb11-98"><a href="#cb11-98" aria-hidden="true" tabindex="-1"></a><span class="do">## 62  4.98  0.011</span></span>
-<span id="cb11-99"><a href="#cb11-99" aria-hidden="true" tabindex="-1"></a><span class="do">## 63  5.18  0.010</span></span>
-<span id="cb11-100"><a href="#cb11-100" aria-hidden="true" tabindex="-1"></a><span class="do">## 61  5.36  0.009</span></span>
-<span id="cb11-101"><a href="#cb11-101" aria-hidden="true" tabindex="-1"></a><span class="do">## 17  6.07  0.006</span></span>
-<span id="cb11-102"><a href="#cb11-102" aria-hidden="true" tabindex="-1"></a><span class="do">## 46  6.53  0.005</span></span>
-<span id="cb11-103"><a href="#cb11-103" aria-hidden="true" tabindex="-1"></a><span class="do">## 19  6.97  0.004</span></span>
-<span id="cb11-104"><a href="#cb11-104" aria-hidden="true" tabindex="-1"></a><span class="do">## 18  7.40  0.003</span></span>
-<span id="cb11-105"><a href="#cb11-105" aria-hidden="true" tabindex="-1"></a><span class="do">## 51  7.91  0.002</span></span>
-<span id="cb11-106"><a href="#cb11-106" aria-hidden="true" tabindex="-1"></a><span class="do">## 49  7.92  0.002</span></span>
-<span id="cb11-107"><a href="#cb11-107" aria-hidden="true" tabindex="-1"></a><span class="do">## 25  8.00  0.002</span></span>
-<span id="cb11-108"><a href="#cb11-108" aria-hidden="true" tabindex="-1"></a><span class="do">## 27  8.41  0.002</span></span>
-<span id="cb11-109"><a href="#cb11-109" aria-hidden="true" tabindex="-1"></a><span class="do">## 20  8.50  0.002</span></span>
-<span id="cb11-110"><a href="#cb11-110" aria-hidden="true" tabindex="-1"></a><span class="do">## 50  9.07  0.001</span></span>
-<span id="cb11-111"><a href="#cb11-111" aria-hidden="true" tabindex="-1"></a><span class="do">## 52  9.11  0.001</span></span>
-<span id="cb11-112"><a href="#cb11-112" aria-hidden="true" tabindex="-1"></a><span class="do">## 26  9.33  0.001</span></span>
-<span id="cb11-113"><a href="#cb11-113" aria-hidden="true" tabindex="-1"></a><span class="do">## 28  9.91  0.001</span></span>
-<span id="cb11-114"><a href="#cb11-114" aria-hidden="true" tabindex="-1"></a><span class="do">## 59  9.93  0.001</span></span>
-<span id="cb11-115"><a href="#cb11-115" aria-hidden="true" tabindex="-1"></a><span class="do">## 7  10.10  0.001</span></span>
-<span id="cb11-116"><a href="#cb11-116" aria-hidden="true" tabindex="-1"></a><span class="do">## 57 10.16  0.001</span></span>
-<span id="cb11-117"><a href="#cb11-117" aria-hidden="true" tabindex="-1"></a><span class="do">## 15 10.67  0.001</span></span>
-<span id="cb11-118"><a href="#cb11-118" aria-hidden="true" tabindex="-1"></a><span class="do">## 60 11.20  0.000</span></span>
-<span id="cb11-119"><a href="#cb11-119" aria-hidden="true" tabindex="-1"></a><span class="do">## 58 11.40  0.000</span></span>
-<span id="cb11-120"><a href="#cb11-120" aria-hidden="true" tabindex="-1"></a><span class="do">## 39 12.44  0.000</span></span>
-<span id="cb11-121"><a href="#cb11-121" aria-hidden="true" tabindex="-1"></a><span class="do">## 47 12.86  0.000</span></span>
-<span id="cb11-122"><a href="#cb11-122" aria-hidden="true" tabindex="-1"></a><span class="do">## 5  15.55  0.000</span></span>
-<span id="cb11-123"><a href="#cb11-123" aria-hidden="true" tabindex="-1"></a><span class="do">## 37 16.17  0.000</span></span>
-<span id="cb11-124"><a href="#cb11-124" aria-hidden="true" tabindex="-1"></a><span class="do">## 45 17.30  0.000</span></span>
-<span id="cb11-125"><a href="#cb11-125" aria-hidden="true" tabindex="-1"></a><span class="do">## 13 17.31  0.000</span></span>
-<span id="cb11-126"><a href="#cb11-126" aria-hidden="true" tabindex="-1"></a><span class="do">## 36 18.50  0.000</span></span>
-<span id="cb11-127"><a href="#cb11-127" aria-hidden="true" tabindex="-1"></a><span class="do">## 12 18.63  0.000</span></span>
-<span id="cb11-128"><a href="#cb11-128" aria-hidden="true" tabindex="-1"></a><span class="do">## 44 18.94  0.000</span></span>
-<span id="cb11-129"><a href="#cb11-129" aria-hidden="true" tabindex="-1"></a><span class="do">## 4  19.88  0.000</span></span>
-<span id="cb11-130"><a href="#cb11-130" aria-hidden="true" tabindex="-1"></a><span class="do">## 2  21.10  0.000</span></span>
-<span id="cb11-131"><a href="#cb11-131" aria-hidden="true" tabindex="-1"></a><span class="do">## 10 21.32  0.000</span></span>
-<span id="cb11-132"><a href="#cb11-132" aria-hidden="true" tabindex="-1"></a><span class="do">## 34 21.99  0.000</span></span>
-<span id="cb11-133"><a href="#cb11-133" aria-hidden="true" tabindex="-1"></a><span class="do">## 42 23.16  0.000</span></span>
-<span id="cb11-134"><a href="#cb11-134" aria-hidden="true" tabindex="-1"></a><span class="do">## 11 28.15  0.000</span></span>
-<span id="cb11-135"><a href="#cb11-135" aria-hidden="true" tabindex="-1"></a><span class="do">## 43 29.33  0.000</span></span>
-<span id="cb11-136"><a href="#cb11-136" aria-hidden="true" tabindex="-1"></a><span class="do">## 35 30.43  0.000</span></span>
-<span id="cb11-137"><a href="#cb11-137" aria-hidden="true" tabindex="-1"></a><span class="do">## 3  30.90  0.000</span></span>
-<span id="cb11-138"><a href="#cb11-138" aria-hidden="true" tabindex="-1"></a><span class="do">## 9  35.10  0.000</span></span>
-<span id="cb11-139"><a href="#cb11-139" aria-hidden="true" tabindex="-1"></a><span class="do">## 1  35.66  0.000</span></span>
-<span id="cb11-140"><a href="#cb11-140" aria-hidden="true" tabindex="-1"></a><span class="do">## 41 37.42  0.000</span></span>
-<span id="cb11-141"><a href="#cb11-141" aria-hidden="true" tabindex="-1"></a><span class="do">## 33 37.50  0.000</span></span>
-<span id="cb11-142"><a href="#cb11-142" aria-hidden="true" tabindex="-1"></a><span class="do">## Models ranked by AICc(x)</span></span>
-<span id="cb11-143"><a href="#cb11-143" aria-hidden="true" tabindex="-1"></a><span class="co"># Wir haben mehre Modelle mit einem delta AICc &lt;2, das heisst wir haben nicht ein eindeutig bestes Modell (welches wir mit der funktion "get.models" selektieren könnten)</span></span>
-<span id="cb11-144"><a href="#cb11-144" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb11-145"><a href="#cb11-145" aria-hidden="true" tabindex="-1"></a><span class="co"># Variable importance</span></span>
-<span id="cb11-146"><a href="#cb11-146" aria-hidden="true" tabindex="-1"></a><span class="fu">sw</span>(allmodels)</span>
-<span id="cb11-147"><a href="#cb11-147" aria-hidden="true" tabindex="-1"></a><span class="do">##                      AREA GRAZE AGE  ALT  DIST LDIST</span></span>
-<span id="cb11-148"><a href="#cb11-148" aria-hidden="true" tabindex="-1"></a><span class="do">## Sum of weights:      0.97 0.76  0.66 0.58 0.27 0.23 </span></span>
-<span id="cb11-149"><a href="#cb11-149" aria-hidden="true" tabindex="-1"></a><span class="do">## N containing models:   32   32    32   32   32   32</span></span></code><button title="In die Zwischenablage kopieren" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb35"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb35-1"><a href="#cb35-1" aria-hidden="true" tabindex="-1"></a><span class="fu">p_load</span>(<span class="st">"MuMIn"</span>)</span>
+<span id="cb35-2"><a href="#cb35-2" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb35-3"><a href="#cb35-3" aria-hidden="true" tabindex="-1"></a>global_model <span class="ot">&lt;-</span> <span class="fu">lm</span>(ABUND <span class="sc">~</span> AGE <span class="sc">+</span> AREA <span class="sc">+</span> DIST <span class="sc">+</span> LDIST <span class="sc">+</span> GRAZE <span class="sc">+</span> ALT, <span class="at">data =</span> loyn)</span>
+<span id="cb35-4"><a href="#cb35-4" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb35-5"><a href="#cb35-5" aria-hidden="true" tabindex="-1"></a><span class="fu">options</span>(<span class="at">na.action =</span> <span class="st">"na.fail"</span>)</span>
+<span id="cb35-6"><a href="#cb35-6" aria-hidden="true" tabindex="-1"></a>allmodels <span class="ot">&lt;-</span> <span class="fu">dredge</span>(global_model)</span>
+<span id="cb35-7"><a href="#cb35-7" aria-hidden="true" tabindex="-1"></a>allmodels</span></code><button title="In die Zwischenablage kopieren" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>Global model call: lm(formula = ABUND ~ AGE + AREA + DIST + LDIST + GRAZE + ALT, 
+    data = loyn)
+---
+Model selection table 
+   (Intrc)      AGE     ALT   AREA     DIST  GRAZE      LDIST df   logLik  AICc
+24  19.460 -0.09049 0.04249 0.1257          -1.954             6 -181.648 377.1
+22  27.250 -0.09295         0.1187          -2.434             5 -183.025 377.3
+23  20.180          0.04379 0.1120          -3.172             5 -183.186 377.6
+8   13.020 -0.14830 0.05448 0.1607                             5 -183.224 377.7
+21  28.230                  0.1045          -3.701             4 -184.568 378.0
+16  10.990 -0.14310 0.06018 0.1522 0.005130                    6 -182.621 379.0
+32  17.440 -0.09167 0.04764 0.1226 0.003705 -1.787             7 -181.328 379.1
+31  18.300          0.04861 0.1090 0.003463 -3.031             6 -182.922 379.6
+54  27.240 -0.09146         0.1257          -2.375 -4.979e-04  6 -182.936 379.7
+56  19.240 -0.09093 0.04375 0.1235          -1.960  1.699e-04  7 -181.638 379.7
+30  26.780 -0.09359         0.1170 0.001608 -2.386             6 -182.964 379.7
+6   21.570 -0.17130         0.1629                             4 -185.480 379.8
+53  28.190                  0.1137          -3.600 -6.372e-04  5 -184.429 380.1
+55  20.130          0.04406 0.1116          -3.174  3.620e-05  6 -183.185 380.2
+40  12.900 -0.14860 0.05513 0.1596                  8.597e-05  6 -183.221 380.2
+29  27.850                  0.1030 0.001316 -3.669             5 -184.530 380.3
+48  11.230 -0.14210 0.05871 0.1546 0.005306        -2.191e-04  7 -182.606 381.6
+38  21.780 -0.16570         0.1728                 -8.285e-04  5 -185.250 381.7
+14  20.930 -0.16970         0.1583 0.002886                    5 -185.298 381.8
+64  17.490 -0.09155 0.04731 0.1232 0.003751 -1.783 -5.331e-05  8 -181.327 381.9
+62  26.540 -0.09188         0.1256 0.002372 -2.285 -6.734e-04  7 -182.814 382.1
+63  18.450          0.04749 0.1112 0.003619 -3.012 -1.800e-04  7 -182.912 382.3
+61  27.540                  0.1136 0.002233 -3.521 -8.030e-04  6 -184.327 382.4
+17  34.250                                  -4.951             3 -188.337 383.2
+46  20.950 -0.16160         0.1696 0.004052        -1.107e-03  6 -184.914 383.6
+19  28.380          0.03376                 -4.613             4 -187.620 384.1
+18  34.150 -0.05604                         -4.290             4 -187.835 384.5
+51  24.960          0.04669                 -4.461  1.504e-03  5 -186.871 385.0
+49  33.610                                  -4.939  8.194e-04  4 -188.092 385.0
+25  33.120                         0.003213 -4.831             4 -188.133 385.1
+27  25.260          0.04131        0.005130 -4.345             5 -187.120 385.5
+20  28.540 -0.05253 0.03230                 -4.008             5 -187.169 385.6
+50  33.340 -0.06356                         -4.185  1.023e-03  5 -187.453 386.2
+52  24.690 -0.06351 0.04667                 -3.708  1.707e-03  6 -186.204 386.2
+26  32.900 -0.05863                0.003557 -4.126             5 -187.581 386.4
+28  25.270 -0.05561 0.04017        0.005404 -3.690             6 -186.605 387.0
+59  23.190          0.05027        0.003783 -4.287  1.273e-03  6 -186.611 387.0
+7    4.042          0.07835 0.1830                             4 -189.182 387.2
+57  32.930                         0.002318 -4.855  6.458e-04  5 -187.996 387.2
+15   1.681          0.08504 0.1703 0.007048                    5 -188.251 387.8
+60  22.870 -0.06421 0.05035        0.003888 -3.521  1.472e-03  7 -185.922 388.3
+58  32.630 -0.06400                0.002421 -4.092  8.429e-04  6 -187.346 388.5
+39   4.728          0.07497 0.1878                 -4.146e-04  5 -189.137 389.5
+47   2.837          0.07890 0.1788 0.007662        -8.235e-04  6 -188.077 389.9
+5   15.090                  0.1918                             3 -193.075 392.6
+37  15.990                  0.2110                 -1.793e-03  4 -192.219 393.3
+45  14.910                  0.2046 0.006347        -2.192e-03  5 -191.569 394.4
+13  14.250                  0.1847 0.004158                    4 -192.789 394.4
+36  12.550 -0.19070 0.07799                         2.643e-03  5 -192.165 395.6
+12  12.580 -0.17450 0.07003        0.010510                    5 -192.232 395.7
+44  10.040 -0.17890 0.08236        0.008064         2.057e-03  6 -191.118 396.0
+4   17.190 -0.18960 0.05881                                    4 -194.072 397.0
+2   26.500 -0.21500                                            3 -195.849 398.2
+10  24.300 -0.20710                0.008133                    4 -194.795 398.4
+34  25.520 -0.22070                                 1.612e-03  4 -195.130 399.1
+42  24.050 -0.21240                0.006624         1.084e-03  5 -194.496 400.2
+11   1.164          0.10260        0.013710                    4 -198.209 405.2
+43  -1.215          0.11370        0.011720         1.732e-03  5 -197.580 406.4
+35   1.436          0.11030                         2.577e-03  4 -199.349 407.5
+3    6.024          0.09136                                    3 -200.752 408.0
+9   16.550                         0.010850                    3 -202.851 412.2
+1   19.120                                                     2 -204.254 412.7
+41  16.470                         0.010600         1.941e-04  4 -202.843 414.5
+33  18.390                                          1.002e-03  3 -204.050 414.6
+   delta weight
+24  0.00  0.127
+22  0.22  0.114
+23  0.54  0.097
+8   0.61  0.093
+21  0.87  0.082
+16  1.95  0.048
+32  2.01  0.046
+31  2.55  0.035
+54  2.58  0.035
+56  2.63  0.034
+30  2.63  0.034
+6   2.69  0.033
+53  3.03  0.028
+55  3.08  0.027
+40  3.15  0.026
+29  3.23  0.025
+48  4.56  0.013
+38  4.67  0.012
+14  4.76  0.012
+64  4.77  0.012
+62  4.98  0.011
+63  5.18  0.010
+61  5.36  0.009
+17  6.07  0.006
+46  6.53  0.005
+19  6.97  0.004
+18  7.40  0.003
+51  7.91  0.002
+49  7.92  0.002
+25  8.00  0.002
+27  8.41  0.002
+20  8.50  0.002
+50  9.07  0.001
+52  9.11  0.001
+26  9.33  0.001
+28  9.91  0.001
+59  9.93  0.001
+7  10.10  0.001
+57 10.16  0.001
+15 10.67  0.001
+60 11.20  0.000
+58 11.40  0.000
+39 12.44  0.000
+47 12.86  0.000
+5  15.55  0.000
+37 16.17  0.000
+45 17.30  0.000
+13 17.31  0.000
+36 18.50  0.000
+12 18.63  0.000
+44 18.94  0.000
+4  19.88  0.000
+2  21.10  0.000
+10 21.32  0.000
+34 21.99  0.000
+42 23.16  0.000
+11 28.15  0.000
+43 29.33  0.000
+35 30.43  0.000
+3  30.90  0.000
+9  35.10  0.000
+1  35.66  0.000
+41 37.42  0.000
+33 37.50  0.000
+Models ranked by AICc(x) </code></pre>
+</div>
+<div class="sourceCode cell-code" id="cb37"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb37-1"><a href="#cb37-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Wir haben mehre Modelle mit einem delta AICc &lt;2, das heisst wir haben nicht ein eindeutig bestes Modell (welches wir mit der funktion "get.models" selektieren könnten)</span></span>
+<span id="cb37-2"><a href="#cb37-2" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb37-3"><a href="#cb37-3" aria-hidden="true" tabindex="-1"></a><span class="co"># Variable importance</span></span>
+<span id="cb37-4"><a href="#cb37-4" aria-hidden="true" tabindex="-1"></a><span class="fu">sw</span>(allmodels)</span></code><button title="In die Zwischenablage kopieren" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>                     AREA GRAZE AGE  ALT  DIST LDIST
+Sum of weights:      0.97 0.76  0.66 0.58 0.27 0.23 
+N containing models:   32   32    32   32   32   32 </code></pre>
+</div>
 </div>
 <p>-&gt; Auch mit dieser Sichtweise sind AREA und GRAZE die wichtigste Prädiktoren</p>
 <div class="cell">
-<div class="sourceCode cell-code" id="cb12"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb12-1"><a href="#cb12-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Model averaging</span></span>
-<span id="cb12-2"><a href="#cb12-2" aria-hidden="true" tabindex="-1"></a>avgmodel <span class="ot">&lt;-</span> <span class="fu">model.avg</span>(allmodels)</span>
-<span id="cb12-3"><a href="#cb12-3" aria-hidden="true" tabindex="-1"></a><span class="fu">summary</span>(avgmodel)</span>
-<span id="cb12-4"><a href="#cb12-4" aria-hidden="true" tabindex="-1"></a><span class="do">## </span></span>
-<span id="cb12-5"><a href="#cb12-5" aria-hidden="true" tabindex="-1"></a><span class="do">## Call:</span></span>
-<span id="cb12-6"><a href="#cb12-6" aria-hidden="true" tabindex="-1"></a><span class="do">## model.avg(object = allmodels)</span></span>
-<span id="cb12-7"><a href="#cb12-7" aria-hidden="true" tabindex="-1"></a><span class="do">## </span></span>
-<span id="cb12-8"><a href="#cb12-8" aria-hidden="true" tabindex="-1"></a><span class="do">## Component model call: </span></span>
-<span id="cb12-9"><a href="#cb12-9" aria-hidden="true" tabindex="-1"></a><span class="do">## lm(formula = ABUND ~ &lt;64 unique rhs&gt;, data = loyn)</span></span>
-<span id="cb12-10"><a href="#cb12-10" aria-hidden="true" tabindex="-1"></a><span class="do">## </span></span>
-<span id="cb12-11"><a href="#cb12-11" aria-hidden="true" tabindex="-1"></a><span class="do">## Component models: </span></span>
-<span id="cb12-12"><a href="#cb12-12" aria-hidden="true" tabindex="-1"></a><span class="do">##        df  logLik   AICc delta weight</span></span>
-<span id="cb12-13"><a href="#cb12-13" aria-hidden="true" tabindex="-1"></a><span class="do">## 1235    6 -181.65 377.08  0.00   0.13</span></span>
-<span id="cb12-14"><a href="#cb12-14" aria-hidden="true" tabindex="-1"></a><span class="do">## 135     5 -183.02 377.30  0.22   0.11</span></span>
-<span id="cb12-15"><a href="#cb12-15" aria-hidden="true" tabindex="-1"></a><span class="do">## 235     5 -183.19 377.62  0.54   0.10</span></span>
-<span id="cb12-16"><a href="#cb12-16" aria-hidden="true" tabindex="-1"></a><span class="do">## 123     5 -183.22 377.70  0.61   0.09</span></span>
-<span id="cb12-17"><a href="#cb12-17" aria-hidden="true" tabindex="-1"></a><span class="do">## 35      4 -184.57 377.95  0.87   0.08</span></span>
-<span id="cb12-18"><a href="#cb12-18" aria-hidden="true" tabindex="-1"></a><span class="do">## 1234    6 -182.62 379.03  1.95   0.05</span></span>
-<span id="cb12-19"><a href="#cb12-19" aria-hidden="true" tabindex="-1"></a><span class="do">## 12345   7 -181.33 379.09  2.01   0.05</span></span>
-<span id="cb12-20"><a href="#cb12-20" aria-hidden="true" tabindex="-1"></a><span class="do">## 2345    6 -182.92 379.63  2.55   0.04</span></span>
-<span id="cb12-21"><a href="#cb12-21" aria-hidden="true" tabindex="-1"></a><span class="do">## 1356    6 -182.94 379.66  2.58   0.03</span></span>
-<span id="cb12-22"><a href="#cb12-22" aria-hidden="true" tabindex="-1"></a><span class="do">## 12356   7 -181.64 379.71  2.63   0.03</span></span>
-<span id="cb12-23"><a href="#cb12-23" aria-hidden="true" tabindex="-1"></a><span class="do">## 1345    6 -182.96 379.72  2.63   0.03</span></span>
-<span id="cb12-24"><a href="#cb12-24" aria-hidden="true" tabindex="-1"></a><span class="do">## 13      4 -185.48 379.78  2.69   0.03</span></span>
-<span id="cb12-25"><a href="#cb12-25" aria-hidden="true" tabindex="-1"></a><span class="do">## 356     5 -184.43 380.11  3.03   0.03</span></span>
-<span id="cb12-26"><a href="#cb12-26" aria-hidden="true" tabindex="-1"></a><span class="do">## 2356    6 -183.19 380.16  3.08   0.03</span></span>
-<span id="cb12-27"><a href="#cb12-27" aria-hidden="true" tabindex="-1"></a><span class="do">## 1236    6 -183.22 380.23  3.15   0.03</span></span>
-<span id="cb12-28"><a href="#cb12-28" aria-hidden="true" tabindex="-1"></a><span class="do">## 345     5 -184.53 380.31  3.23   0.03</span></span>
-<span id="cb12-29"><a href="#cb12-29" aria-hidden="true" tabindex="-1"></a><span class="do">## 12346   7 -182.61 381.65  4.56   0.01</span></span>
-<span id="cb12-30"><a href="#cb12-30" aria-hidden="true" tabindex="-1"></a><span class="do">## 136     5 -185.25 381.75  4.67   0.01</span></span>
-<span id="cb12-31"><a href="#cb12-31" aria-hidden="true" tabindex="-1"></a><span class="do">## 134     5 -185.30 381.85  4.76   0.01</span></span>
-<span id="cb12-32"><a href="#cb12-32" aria-hidden="true" tabindex="-1"></a><span class="do">## 123456  8 -181.33 381.85  4.77   0.01</span></span>
-<span id="cb12-33"><a href="#cb12-33" aria-hidden="true" tabindex="-1"></a><span class="do">## 13456   7 -182.81 382.06  4.98   0.01</span></span>
-<span id="cb12-34"><a href="#cb12-34" aria-hidden="true" tabindex="-1"></a><span class="do">## 23456   7 -182.91 382.26  5.18   0.01</span></span>
-<span id="cb12-35"><a href="#cb12-35" aria-hidden="true" tabindex="-1"></a><span class="do">## 3456    6 -184.33 382.44  5.36   0.01</span></span>
-<span id="cb12-36"><a href="#cb12-36" aria-hidden="true" tabindex="-1"></a><span class="do">## 5       3 -188.34 383.15  6.07   0.01</span></span>
-<span id="cb12-37"><a href="#cb12-37" aria-hidden="true" tabindex="-1"></a><span class="do">## 1346    6 -184.91 383.61  6.53   0.00</span></span>
-<span id="cb12-38"><a href="#cb12-38" aria-hidden="true" tabindex="-1"></a><span class="do">## 25      4 -187.62 384.06  6.97   0.00</span></span>
-<span id="cb12-39"><a href="#cb12-39" aria-hidden="true" tabindex="-1"></a><span class="do">## 15      4 -187.83 384.49  7.40   0.00</span></span>
-<span id="cb12-40"><a href="#cb12-40" aria-hidden="true" tabindex="-1"></a><span class="do">## 256     5 -186.87 384.99  7.91   0.00</span></span>
-<span id="cb12-41"><a href="#cb12-41" aria-hidden="true" tabindex="-1"></a><span class="do">## 56      4 -188.09 385.00  7.92   0.00</span></span>
-<span id="cb12-42"><a href="#cb12-42" aria-hidden="true" tabindex="-1"></a><span class="do">## 45      4 -188.13 385.08  8.00   0.00</span></span>
-<span id="cb12-43"><a href="#cb12-43" aria-hidden="true" tabindex="-1"></a><span class="do">## 245     5 -187.12 385.49  8.41   0.00</span></span>
-<span id="cb12-44"><a href="#cb12-44" aria-hidden="true" tabindex="-1"></a><span class="do">## 125     5 -187.17 385.59  8.50   0.00</span></span>
-<span id="cb12-45"><a href="#cb12-45" aria-hidden="true" tabindex="-1"></a><span class="do">## 156     5 -187.45 386.16  9.07   0.00</span></span>
-<span id="cb12-46"><a href="#cb12-46" aria-hidden="true" tabindex="-1"></a><span class="do">## 1256    6 -186.20 386.19  9.11   0.00</span></span>
-<span id="cb12-47"><a href="#cb12-47" aria-hidden="true" tabindex="-1"></a><span class="do">## 145     5 -187.58 386.41  9.33   0.00</span></span>
-<span id="cb12-48"><a href="#cb12-48" aria-hidden="true" tabindex="-1"></a><span class="do">## 1245    6 -186.61 387.00  9.91   0.00</span></span>
-<span id="cb12-49"><a href="#cb12-49" aria-hidden="true" tabindex="-1"></a><span class="do">## 2456    6 -186.61 387.01  9.93   0.00</span></span>
-<span id="cb12-50"><a href="#cb12-50" aria-hidden="true" tabindex="-1"></a><span class="do">## 23      4 -189.18 387.18 10.10   0.00</span></span>
-<span id="cb12-51"><a href="#cb12-51" aria-hidden="true" tabindex="-1"></a><span class="do">## 456     5 -188.00 387.24 10.16   0.00</span></span>
-<span id="cb12-52"><a href="#cb12-52" aria-hidden="true" tabindex="-1"></a><span class="do">## 234     5 -188.25 387.75 10.67   0.00</span></span>
-<span id="cb12-53"><a href="#cb12-53" aria-hidden="true" tabindex="-1"></a><span class="do">## 12456   7 -185.92 388.28 11.20   0.00</span></span>
-<span id="cb12-54"><a href="#cb12-54" aria-hidden="true" tabindex="-1"></a><span class="do">## 1456    6 -187.35 388.48 11.40   0.00</span></span>
-<span id="cb12-55"><a href="#cb12-55" aria-hidden="true" tabindex="-1"></a><span class="do">## 236     5 -189.14 389.52 12.44   0.00</span></span>
-<span id="cb12-56"><a href="#cb12-56" aria-hidden="true" tabindex="-1"></a><span class="do">## 2346    6 -188.08 389.94 12.86   0.00</span></span>
-<span id="cb12-57"><a href="#cb12-57" aria-hidden="true" tabindex="-1"></a><span class="do">## 3       3 -193.07 392.63 15.55   0.00</span></span>
-<span id="cb12-58"><a href="#cb12-58" aria-hidden="true" tabindex="-1"></a><span class="do">## 36      4 -192.22 393.25 16.17   0.00</span></span>
-<span id="cb12-59"><a href="#cb12-59" aria-hidden="true" tabindex="-1"></a><span class="do">## 346     5 -191.57 394.39 17.30   0.00</span></span>
-<span id="cb12-60"><a href="#cb12-60" aria-hidden="true" tabindex="-1"></a><span class="do">## 34      4 -192.79 394.39 17.31   0.00</span></span>
-<span id="cb12-61"><a href="#cb12-61" aria-hidden="true" tabindex="-1"></a><span class="do">## 126     5 -192.16 395.58 18.50   0.00</span></span>
-<span id="cb12-62"><a href="#cb12-62" aria-hidden="true" tabindex="-1"></a><span class="do">## 124     5 -192.23 395.71 18.63   0.00</span></span>
-<span id="cb12-63"><a href="#cb12-63" aria-hidden="true" tabindex="-1"></a><span class="do">## 1246    6 -191.12 396.02 18.94   0.00</span></span>
-<span id="cb12-64"><a href="#cb12-64" aria-hidden="true" tabindex="-1"></a><span class="do">## 12      4 -194.07 396.96 19.88   0.00</span></span>
-<span id="cb12-65"><a href="#cb12-65" aria-hidden="true" tabindex="-1"></a><span class="do">## 1       3 -195.85 398.18 21.10   0.00</span></span>
-<span id="cb12-66"><a href="#cb12-66" aria-hidden="true" tabindex="-1"></a><span class="do">## 14      4 -194.79 398.41 21.32   0.00</span></span>
-<span id="cb12-67"><a href="#cb12-67" aria-hidden="true" tabindex="-1"></a><span class="do">## 16      4 -195.13 399.08 21.99   0.00</span></span>
-<span id="cb12-68"><a href="#cb12-68" aria-hidden="true" tabindex="-1"></a><span class="do">## 146     5 -194.50 400.24 23.16   0.00</span></span>
-<span id="cb12-69"><a href="#cb12-69" aria-hidden="true" tabindex="-1"></a><span class="do">## 24      4 -198.21 405.24 28.15   0.00</span></span>
-<span id="cb12-70"><a href="#cb12-70" aria-hidden="true" tabindex="-1"></a><span class="do">## 246     5 -197.58 406.41 29.33   0.00</span></span>
-<span id="cb12-71"><a href="#cb12-71" aria-hidden="true" tabindex="-1"></a><span class="do">## 26      4 -199.35 407.51 30.43   0.00</span></span>
-<span id="cb12-72"><a href="#cb12-72" aria-hidden="true" tabindex="-1"></a><span class="do">## 2       3 -200.75 407.98 30.90   0.00</span></span>
-<span id="cb12-73"><a href="#cb12-73" aria-hidden="true" tabindex="-1"></a><span class="do">## 4       3 -202.85 412.18 35.10   0.00</span></span>
-<span id="cb12-74"><a href="#cb12-74" aria-hidden="true" tabindex="-1"></a><span class="do">## (Null)  2 -204.25 412.74 35.66   0.00</span></span>
-<span id="cb12-75"><a href="#cb12-75" aria-hidden="true" tabindex="-1"></a><span class="do">## 46      4 -202.84 414.50 37.42   0.00</span></span>
-<span id="cb12-76"><a href="#cb12-76" aria-hidden="true" tabindex="-1"></a><span class="do">## 6       3 -204.05 414.58 37.50   0.00</span></span>
-<span id="cb12-77"><a href="#cb12-77" aria-hidden="true" tabindex="-1"></a><span class="do">## </span></span>
-<span id="cb12-78"><a href="#cb12-78" aria-hidden="true" tabindex="-1"></a><span class="do">## Term codes: </span></span>
-<span id="cb12-79"><a href="#cb12-79" aria-hidden="true" tabindex="-1"></a><span class="do">##   AGE   ALT  AREA  DIST GRAZE LDIST </span></span>
-<span id="cb12-80"><a href="#cb12-80" aria-hidden="true" tabindex="-1"></a><span class="do">##     1     2     3     4     5     6 </span></span>
-<span id="cb12-81"><a href="#cb12-81" aria-hidden="true" tabindex="-1"></a><span class="do">## </span></span>
-<span id="cb12-82"><a href="#cb12-82" aria-hidden="true" tabindex="-1"></a><span class="do">## Model-averaged coefficients:  </span></span>
-<span id="cb12-83"><a href="#cb12-83" aria-hidden="true" tabindex="-1"></a><span class="do">## (full average) </span></span>
-<span id="cb12-84"><a href="#cb12-84" aria-hidden="true" tabindex="-1"></a><span class="do">##               Estimate Std. Error Adjusted SE z value Pr(&gt;|z|)   </span></span>
-<span id="cb12-85"><a href="#cb12-85" aria-hidden="true" tabindex="-1"></a><span class="do">## (Intercept)  2.125e+01  7.540e+00   7.618e+00   2.790  0.00528 **</span></span>
-<span id="cb12-86"><a href="#cb12-86" aria-hidden="true" tabindex="-1"></a><span class="do">## AGE         -7.527e-02  7.177e-02   7.236e-02   1.040  0.29823   </span></span>
-<span id="cb12-87"><a href="#cb12-87" aria-hidden="true" tabindex="-1"></a><span class="do">## ALT          2.811e-02  3.196e-02   3.231e-02   0.870  0.38427   </span></span>
-<span id="cb12-88"><a href="#cb12-88" aria-hidden="true" tabindex="-1"></a><span class="do">## AREA         1.235e-01  4.745e-02   4.818e-02   2.564  0.01035 * </span></span>
-<span id="cb12-89"><a href="#cb12-89" aria-hidden="true" tabindex="-1"></a><span class="do">## GRAZE       -2.080e+00  1.621e+00   1.633e+00   1.273  0.20292   </span></span>
-<span id="cb12-90"><a href="#cb12-90" aria-hidden="true" tabindex="-1"></a><span class="do">## DIST         9.132e-04  3.061e-03   3.117e-03   0.293  0.76950   </span></span>
-<span id="cb12-91"><a href="#cb12-91" aria-hidden="true" tabindex="-1"></a><span class="do">## LDIST       -4.925e-05  6.691e-04   6.839e-04   0.072  0.94259   </span></span>
-<span id="cb12-92"><a href="#cb12-92" aria-hidden="true" tabindex="-1"></a><span class="do">##  </span></span>
-<span id="cb12-93"><a href="#cb12-93" aria-hidden="true" tabindex="-1"></a><span class="do">## (conditional average) </span></span>
-<span id="cb12-94"><a href="#cb12-94" aria-hidden="true" tabindex="-1"></a><span class="do">##               Estimate Std. Error Adjusted SE z value Pr(&gt;|z|)   </span></span>
-<span id="cb12-95"><a href="#cb12-95" aria-hidden="true" tabindex="-1"></a><span class="do">## (Intercept) 21.2504039  7.5395494   7.6177190   2.790  0.00528 **</span></span>
-<span id="cb12-96"><a href="#cb12-96" aria-hidden="true" tabindex="-1"></a><span class="do">## AGE         -0.1132699  0.0587077   0.0597924   1.894  0.05817 . </span></span>
-<span id="cb12-97"><a href="#cb12-97" aria-hidden="true" tabindex="-1"></a><span class="do">## ALT          0.0481783  0.0280034   0.0286744   1.680  0.09292 . </span></span>
-<span id="cb12-98"><a href="#cb12-98" aria-hidden="true" tabindex="-1"></a><span class="do">## AREA         0.1275241  0.0425967   0.0434334   2.936  0.00332 **</span></span>
-<span id="cb12-99"><a href="#cb12-99" aria-hidden="true" tabindex="-1"></a><span class="do">## GRAZE       -2.7514534  1.2757684   1.2968574   2.122  0.03387 * </span></span>
-<span id="cb12-100"><a href="#cb12-100" aria-hidden="true" tabindex="-1"></a><span class="do">## DIST         0.0034010  0.0051418   0.0052641   0.646  0.51823   </span></span>
-<span id="cb12-101"><a href="#cb12-101" aria-hidden="true" tabindex="-1"></a><span class="do">## LDIST       -0.0002128  0.0013783   0.0014092   0.151  0.87997   </span></span>
-<span id="cb12-102"><a href="#cb12-102" aria-hidden="true" tabindex="-1"></a><span class="do">## ---</span></span>
-<span id="cb12-103"><a href="#cb12-103" aria-hidden="true" tabindex="-1"></a><span class="do">## Signif. codes:  0 '***' 0.001 '**' 0.01 '*' 0.05 '.' 0.1 ' ' 1</span></span>
-<span id="cb12-104"><a href="#cb12-104" aria-hidden="true" tabindex="-1"></a><span class="co"># Nur Esimates</span></span>
-<span id="cb12-105"><a href="#cb12-105" aria-hidden="true" tabindex="-1"></a><span class="fu">summary</span>(avgmodel)<span class="sc">$</span>coefficients</span>
-<span id="cb12-106"><a href="#cb12-106" aria-hidden="true" tabindex="-1"></a><span class="do">##        (Intercept)         AGE        ALT      AREA     GRAZE         DIST</span></span>
-<span id="cb12-107"><a href="#cb12-107" aria-hidden="true" tabindex="-1"></a><span class="do">## full       21.2504 -0.07527122 0.02811021 0.1235275 -2.079840 0.0009132418</span></span>
-<span id="cb12-108"><a href="#cb12-108" aria-hidden="true" tabindex="-1"></a><span class="do">## subset     21.2504 -0.11326991 0.04817829 0.1275241 -2.751453 0.0034009585</span></span>
-<span id="cb12-109"><a href="#cb12-109" aria-hidden="true" tabindex="-1"></a><span class="do">##                LDIST</span></span>
-<span id="cb12-110"><a href="#cb12-110" aria-hidden="true" tabindex="-1"></a><span class="do">## full   -4.925166e-05</span></span>
-<span id="cb12-111"><a href="#cb12-111" aria-hidden="true" tabindex="-1"></a><span class="do">## subset -2.128051e-04</span></span>
-<span id="cb12-112"><a href="#cb12-112" aria-hidden="true" tabindex="-1"></a><span class="co"># Confindence intervals</span></span>
-<span id="cb12-113"><a href="#cb12-113" aria-hidden="true" tabindex="-1"></a><span class="fu">confint</span>(avgmodel)</span>
-<span id="cb12-114"><a href="#cb12-114" aria-hidden="true" tabindex="-1"></a><span class="do">##                    2.5 %       97.5 %</span></span>
-<span id="cb12-115"><a href="#cb12-115" aria-hidden="true" tabindex="-1"></a><span class="do">## (Intercept)  6.319949053 36.180858723</span></span>
-<span id="cb12-116"><a href="#cb12-116" aria-hidden="true" tabindex="-1"></a><span class="do">## AGE         -0.230460847  0.003921031</span></span>
-<span id="cb12-117"><a href="#cb12-117" aria-hidden="true" tabindex="-1"></a><span class="do">## ALT         -0.008022574  0.104379146</span></span>
-<span id="cb12-118"><a href="#cb12-118" aria-hidden="true" tabindex="-1"></a><span class="do">## AREA         0.042396229  0.212651977</span></span>
-<span id="cb12-119"><a href="#cb12-119" aria-hidden="true" tabindex="-1"></a><span class="do">## GRAZE       -5.293247097 -0.209659662</span></span>
-<span id="cb12-120"><a href="#cb12-120" aria-hidden="true" tabindex="-1"></a><span class="do">## DIST        -0.006916400  0.013718317</span></span>
-<span id="cb12-121"><a href="#cb12-121" aria-hidden="true" tabindex="-1"></a><span class="do">## LDIST       -0.002974830  0.002549220</span></span></code><button title="In die Zwischenablage kopieren" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb39"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb39-1"><a href="#cb39-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Model averaging</span></span>
+<span id="cb39-2"><a href="#cb39-2" aria-hidden="true" tabindex="-1"></a>avgmodel <span class="ot">&lt;-</span> <span class="fu">model.avg</span>(allmodels)</span>
+<span id="cb39-3"><a href="#cb39-3" aria-hidden="true" tabindex="-1"></a><span class="fu">summary</span>(avgmodel)</span></code><button title="In die Zwischenablage kopieren" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>
+Call:
+model.avg(object = allmodels)
+
+Component model call: 
+lm(formula = ABUND ~ &lt;64 unique rhs&gt;, data = loyn)
+
+Component models: 
+       df  logLik   AICc delta weight
+1235    6 -181.65 377.08  0.00   0.13
+135     5 -183.02 377.30  0.22   0.11
+235     5 -183.19 377.62  0.54   0.10
+123     5 -183.22 377.70  0.61   0.09
+35      4 -184.57 377.95  0.87   0.08
+1234    6 -182.62 379.03  1.95   0.05
+12345   7 -181.33 379.09  2.01   0.05
+2345    6 -182.92 379.63  2.55   0.04
+1356    6 -182.94 379.66  2.58   0.03
+12356   7 -181.64 379.71  2.63   0.03
+1345    6 -182.96 379.72  2.63   0.03
+13      4 -185.48 379.78  2.69   0.03
+356     5 -184.43 380.11  3.03   0.03
+2356    6 -183.19 380.16  3.08   0.03
+1236    6 -183.22 380.23  3.15   0.03
+345     5 -184.53 380.31  3.23   0.03
+12346   7 -182.61 381.65  4.56   0.01
+136     5 -185.25 381.75  4.67   0.01
+134     5 -185.30 381.85  4.76   0.01
+123456  8 -181.33 381.85  4.77   0.01
+13456   7 -182.81 382.06  4.98   0.01
+23456   7 -182.91 382.26  5.18   0.01
+3456    6 -184.33 382.44  5.36   0.01
+5       3 -188.34 383.15  6.07   0.01
+1346    6 -184.91 383.61  6.53   0.00
+25      4 -187.62 384.06  6.97   0.00
+15      4 -187.83 384.49  7.40   0.00
+256     5 -186.87 384.99  7.91   0.00
+56      4 -188.09 385.00  7.92   0.00
+45      4 -188.13 385.08  8.00   0.00
+245     5 -187.12 385.49  8.41   0.00
+125     5 -187.17 385.59  8.50   0.00
+156     5 -187.45 386.16  9.07   0.00
+1256    6 -186.20 386.19  9.11   0.00
+145     5 -187.58 386.41  9.33   0.00
+1245    6 -186.61 387.00  9.91   0.00
+2456    6 -186.61 387.01  9.93   0.00
+23      4 -189.18 387.18 10.10   0.00
+456     5 -188.00 387.24 10.16   0.00
+234     5 -188.25 387.75 10.67   0.00
+12456   7 -185.92 388.28 11.20   0.00
+1456    6 -187.35 388.48 11.40   0.00
+236     5 -189.14 389.52 12.44   0.00
+2346    6 -188.08 389.94 12.86   0.00
+3       3 -193.07 392.63 15.55   0.00
+36      4 -192.22 393.25 16.17   0.00
+346     5 -191.57 394.39 17.30   0.00
+34      4 -192.79 394.39 17.31   0.00
+126     5 -192.16 395.58 18.50   0.00
+124     5 -192.23 395.71 18.63   0.00
+1246    6 -191.12 396.02 18.94   0.00
+12      4 -194.07 396.96 19.88   0.00
+1       3 -195.85 398.18 21.10   0.00
+14      4 -194.79 398.41 21.32   0.00
+16      4 -195.13 399.08 21.99   0.00
+146     5 -194.50 400.24 23.16   0.00
+24      4 -198.21 405.24 28.15   0.00
+246     5 -197.58 406.41 29.33   0.00
+26      4 -199.35 407.51 30.43   0.00
+2       3 -200.75 407.98 30.90   0.00
+4       3 -202.85 412.18 35.10   0.00
+(Null)  2 -204.25 412.74 35.66   0.00
+46      4 -202.84 414.50 37.42   0.00
+6       3 -204.05 414.58 37.50   0.00
+
+Term codes: 
+  AGE   ALT  AREA  DIST GRAZE LDIST 
+    1     2     3     4     5     6 
+
+Model-averaged coefficients:  
+(full average) 
+              Estimate Std. Error Adjusted SE z value Pr(&gt;|z|)   
+(Intercept)  2.125e+01  7.540e+00   7.618e+00   2.790  0.00528 **
+AGE         -7.527e-02  7.177e-02   7.236e-02   1.040  0.29823   
+ALT          2.811e-02  3.196e-02   3.231e-02   0.870  0.38427   
+AREA         1.235e-01  4.745e-02   4.818e-02   2.564  0.01035 * 
+GRAZE       -2.080e+00  1.621e+00   1.633e+00   1.273  0.20292   
+DIST         9.132e-04  3.061e-03   3.117e-03   0.293  0.76950   
+LDIST       -4.925e-05  6.691e-04   6.839e-04   0.072  0.94259   
+ 
+(conditional average) 
+              Estimate Std. Error Adjusted SE z value Pr(&gt;|z|)   
+(Intercept) 21.2504039  7.5395494   7.6177190   2.790  0.00528 **
+AGE         -0.1132699  0.0587077   0.0597924   1.894  0.05817 . 
+ALT          0.0481783  0.0280034   0.0286744   1.680  0.09292 . 
+AREA         0.1275241  0.0425967   0.0434334   2.936  0.00332 **
+GRAZE       -2.7514534  1.2757684   1.2968574   2.122  0.03387 * 
+DIST         0.0034010  0.0051418   0.0052641   0.646  0.51823   
+LDIST       -0.0002128  0.0013783   0.0014092   0.151  0.87997   
+---
+Signif. codes:  0 '***' 0.001 '**' 0.01 '*' 0.05 '.' 0.1 ' ' 1</code></pre>
+</div>
+<div class="sourceCode cell-code" id="cb41"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb41-1"><a href="#cb41-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Nur Esimates</span></span>
+<span id="cb41-2"><a href="#cb41-2" aria-hidden="true" tabindex="-1"></a><span class="fu">summary</span>(avgmodel)<span class="sc">$</span>coefficients</span></code><button title="In die Zwischenablage kopieren" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>       (Intercept)         AGE        ALT      AREA     GRAZE         DIST
+full       21.2504 -0.07527122 0.02811021 0.1235275 -2.079840 0.0009132418
+subset     21.2504 -0.11326991 0.04817829 0.1275241 -2.751453 0.0034009585
+               LDIST
+full   -4.925166e-05
+subset -2.128051e-04</code></pre>
+</div>
+<div class="sourceCode cell-code" id="cb43"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb43-1"><a href="#cb43-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Confindence intervals</span></span>
+<span id="cb43-2"><a href="#cb43-2" aria-hidden="true" tabindex="-1"></a><span class="fu">confint</span>(avgmodel)</span></code><button title="In die Zwischenablage kopieren" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>                   2.5 %       97.5 %
+(Intercept)  6.319949053 36.180858723
+AGE         -0.230460847  0.003921031
+ALT         -0.008022574  0.104379146
+AREA         0.042396229  0.212651977
+GRAZE       -5.293247097 -0.209659662
+DIST        -0.006916400  0.013718317
+LDIST       -0.002974830  0.002549220</code></pre>
+</div>
 </div>
 
 
