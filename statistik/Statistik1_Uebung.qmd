@@ -63,9 +63,9 @@ Wurden in den Basis- und Interventionswochen unterschiedlich viele Gerichte verk
 
 
 
-# Stat1: Lösung
+# Statistik 1: Lösung
 
-- Download dieses Lösungsscript via "\</\>Code" (oben rechts)
+[Download dieses Demoscript ](../purStatistik1_Uebung.R) (rechtsklick → speichern unter)
 
 ## Vorebreitung R-Session
 

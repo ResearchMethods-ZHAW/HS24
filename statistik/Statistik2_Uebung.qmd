@@ -9,7 +9,7 @@ musterloesung: false
 # Statistik 2: Übung
 
 
-### Aufgabe 2.1 ANOVA mit Kormoran-Daten
+### Aufgabe ANOVA mit Kormoran-Daten
 
 **Übungsaufgabe (hier so ausführlich formuliert, wie dies auch in der Klausur der Fall sein wird)**
 
@@ -31,9 +31,12 @@ musterloesung: false
 
 :::{.callout-note}
 
-# Stat2: Lösung
+# Statistik: Lösung
 
-- Download dieses Lösungsscript via "\</\>Code" (oben rechts)
+[Download dieses Demoscript ](../purl/Statistik2_Uebung.R) (rechtsklick → speichern unter)
+
+
+
 - [Lösungstext als Download](Statistik_Loesung_2.3N.pdf)
 
 ## Kommentierter Lösungsweg

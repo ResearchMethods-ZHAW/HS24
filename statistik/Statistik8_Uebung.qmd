@@ -17,6 +17,9 @@ Aufgabenbeschreibung
 
 ## Lösung Übung 8
 
+[Download dieses Demoscript ](../purl/Statistik8_Uebung.R) (rechtsklick → speichern unter)
+
+
 ```{r}
 
 ```
