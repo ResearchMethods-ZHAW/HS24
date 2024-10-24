@@ -1,7 +1,8 @@
 ---
-lesson: Statistik4
+lesson: Statistik4knitr:
+  opts_chunk: 
+    collapse: false 
 ---
-
 
 # Statistik 4: Demo
 
