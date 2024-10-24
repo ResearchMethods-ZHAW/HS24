@@ -8,7 +8,7 @@ knitr:
 
 # Statistik 1: Demo
 
-Download dieses Demoscript via "\</\>Code" (oben rechts)
+[Download dieses Demoscript ](../purl/Statistik1_Demo.R) (rechtsklick → speichern unter)
 
 ## t-Test
 
