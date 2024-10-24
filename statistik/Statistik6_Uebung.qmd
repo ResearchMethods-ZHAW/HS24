@@ -1,14 +1,11 @@
 ---
-execute: 
-  echo: false   # set to true to show musterlösung
-  output: false # set to true to show musterlösung
-code-fold: true
-code-summary: "Musterlösung"
+lesson: Statistik 6
 knitr:
   opts_chunk: 
-    collapse: true
-musterloesung: true
+    collapse: false
+musterloesung: false
 ---
+
 
 # Statistik 6: Übung
 
@@ -35,15 +32,18 @@ Führt mit dem novanimal Datensatz (inviduelle Daten) eine logistische Regressio
 
 -   Download dieses Lösungsscript via "\</\>Code" (oben rechts)
 
+::::{.content-hidden unless-meta="musterloesung"}
+
+:::{.callout-note}
+
 ## Musterlösung Übung 6: GLMM
 
-:::{.callout-note .content-hidden unless-meta="muesterloesung"}
+-   Download dieses Lösungsscript via "\</\>Code" (oben rechts)
 
 
 ```{r}
 #| echo: false
 #| results: hide
-
 
 library("pacman")
 p_load("tidyverse", "glmmTMB", "performance", "DHARMa")
@@ -150,3 +150,4 @@ odsr
 Die Chance, dass Männer ein fleischhaltiges Gericht kaufen ist 2.5 mal (+157%) höher als bei Frauen. Die Chance, dass Studierende ein fleischhaltiges Gericht kaufen ist kleiner (-18%) als bei den Mitarbeitern
 
 :::
+:::: 

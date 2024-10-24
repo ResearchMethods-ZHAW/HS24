@@ -1,13 +1,9 @@
 ---
-execute: 
-  echo: false   # set to true to show musterlösung
-  output: false # set to true to show musterlösung
-code-fold: true
-code-summary: "Musterlösung"
+lesson: Statistik 2
 knitr:
   opts_chunk: 
-    collapse: true
-musterloesung: true
+    collapse: false
+musterloesung: false
 ---
 
 # Statistik 2: Übung
@@ -31,8 +27,9 @@ musterloesung: true
 
 
 
-:::{.callout-note .content-hidden unless-meta="muesterloesung"}
+::::{.content-hidden unless-meta="musterloesung"}
 
+:::{.callout-note}
 
 # Stat2: Lösung
 
@@ -166,4 +163,5 @@ summary(lm(Tauchzeit ~ Unterart, data = kormoran))
 ```
 
 :::
+:::: 
 

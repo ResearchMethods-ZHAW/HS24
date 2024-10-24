@@ -1,16 +1,10 @@
 ---
 lesson: Statistik 4
-execute: 
-  echo: false   # set to true to show musterlösung
-  output: false # set to true to show musterlösung
-code-fold: true
-code-summary: "Musterlösung"
 knitr:
   opts_chunk: 
-    collapse: true
+    collapse: false
 musterloesung: false
 ---
-
 
 # Statistik 4: Übung
 
@@ -40,15 +34,14 @@ musterloesung: false
     ausformulierter Methoden- und Ergebnisteil (für eine wiss. Arbeit).**
 
 
+::::{.content-hidden unless-meta="musterloesung"}
 
-- Download dieses Lösungsscript via "\</\>Code" (oben rechts)
-
-
+:::{.callout-note}
 
 ## Lösung Übung 4
 
-::::{.content-hidden unless-meta="muesterloesung"}
-:::{.callout-note}
+- Download dieses Lösungsscript via "\</\>Code" (oben rechts)
+
 - [Lösungstext als Download](Statistik_Loesung_4.pdf)
 
 ```{r}
@@ -98,7 +91,7 @@ cor
 ```{r}
 #| include: false
 
-write.table(cor, file = "stat/Correlation.csv", sep = ";", dec = ".", col.names = NA)
+# write.table(cor, file = "stat/Correlation.csv", sep = ";", dec = ".", col.names = NA)
 ```
 
 Entsprechend „werfen“ wir auch noch die folgenden Variablen „raus“: Temperature.range (positiv mit Temperature), Precipitation (negativ mit Temperature) sowie Conductivity (positiv mit pH).

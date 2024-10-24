@@ -1,14 +1,11 @@
 ---
-execute: 
-  echo: false   # set to true to show musterlösung
-  output: false # set to true to show musterlösung
-code-fold: true
-code-summary: "Musterlösung"
+lesson: Statistik 5
 knitr:
   opts_chunk: 
-    collapse: true
+    collapse: false
 musterloesung: false
 ---
+
 
 # Statistik 5: Übung
 
@@ -18,10 +15,15 @@ Der Datensatz polis.csv beschreibt für 19 Inseln im Golf von Kalifornien, ob Ei
 
 Bitte prüft mit einer logistischen Regression, ob und ggf. wie die Inselform die Präsenz der Eidechsen beinflusst
 
+
+::::{.content-hidden unless-meta="musterloesung"}
+
+:::{.callout-note}
+
 - Download dieses Lösungsscript via "\</\>Code" (oben rechts)
 - [Lösungstext als Download](Statistik_Loesung_5.pdf)
 
-:::{.callout-note .content-hidden unless-meta="muesterloesung"}
+
 
 ## Musterlösung Aufgabe 5: Multiple logistische Regression
 
@@ -102,3 +104,4 @@ ggplot(data = polis, aes(x = RATIO, y = PA)) +
 ```
 
 :::
+:::: 

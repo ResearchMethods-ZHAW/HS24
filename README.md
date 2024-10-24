@@ -111,7 +111,7 @@ Um die Änderungen an den Source Files zu veröffentlichen müsst ihr diese via 
 -   `push`: Click auf den button "Push" (im Terminal mit `git push`)
 -   
 
-Um Änderungen an den Output Files zu Veröffentlichen muss (TBD)
+Um Änderungen an den Output Files zu Veröffentlichen muss folgender Befehl ausgeführt werden:
 
 ```sh
 quarto publish gh-pages --no-prompt 

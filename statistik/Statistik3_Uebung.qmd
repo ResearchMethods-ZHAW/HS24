@@ -1,13 +1,9 @@
 ---
-execute: 
-  echo: false   # set to true to show musterlösung
-  output: false # set to true to show musterlösung
-code-fold: true
-code-summary: "Musterlösung"
+lesson: Statistik 3
 knitr:
   opts_chunk: 
-    collapse: true
-musterloesung: true
+    collapse: false
+musterloesung: false
 ---
 
 # Statistik 3: Übung
@@ -15,7 +11,10 @@ musterloesung: true
 Aufgabenbeschreibung
 
 
-:::{.callout-note .content-hidden unless-meta="muesterloesung"}
+
+::::{.content-hidden unless-meta="musterloesung"}
+
+:::{.callout-note}
 
 ## Lösung Übung 3
 
@@ -24,3 +23,4 @@ Aufgabenbeschreibung
 ```
 
 :::
+:::: 

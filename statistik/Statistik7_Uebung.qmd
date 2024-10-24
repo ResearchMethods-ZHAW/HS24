@@ -1,14 +1,11 @@
 ---
-execute: 
-  echo: false   # set to true to show musterlösung
-  output: false # set to true to show musterlösung
-code-fold: true
-code-summary: "Musterlösung"
+lesson: Statistik 7
 knitr:
   opts_chunk: 
-    collapse: true
-musterloesung: true
+    collapse: false
+musterloesung: false
 ---
+
 
 # Statistik 7: Übung
   
@@ -24,24 +21,19 @@ Raten von 7 Kriminalitätsformen pro 100000 Einwohner und Jahr für die Bundesst
 **Hinweis:**
 Wegen der sehr ungleichen Varianzen muss auf jeden Fall eine Standardisierung stattfinden, damit Distanzen zwischen den verschiedenen Kriminalitätsraten sinnvoll berechnet werden können
 
-
-
-
-# Stat7: Lösung
-
-- Download dieses Lösungsscript via "\</\>Code" (oben rechts)
-- [Lösungstext als Download](Statistik_Loesungstext_8.pdf)
-
-### Übungsaufgabe 
-
-*(hier so ausführlich formuliert, wie dies auch in der Klausur der Fall sein wird)*
-
 - Bitte erklärt und begründet die einzelnen Schritte, die ihr unternehmt, um zu diesem Ergebnis zu kommen. Dazu erstellt bitte ein Word-Dokument, in das ihr Schritt für Schritt den verwendeten R-Code, die dazu gehörigen Ausgaben von R, eure Interpretation derselben und die sich ergebenden Schlussfolgerungen für das weitere Vorgehen dokumentieren.
 - Formuliert abschliessend einen Methoden- und Ergebnisteil (ggf. incl. adäquaten Abbildungen) zu dieser Untersuchung in der Form einer wissenschaftlichen Arbeit (ausformulierte schriftliche Zusammenfassung, mit je einem Absatz von ca. 60-100 Worten, resp. 3-8 Sätzen für den Methoden- und Ergebnisteil). D. h. alle wichtigen Informationen sollten enthalten sein, unnötige Redundanz dagegen vermieden werden.
 - **Zu erstellen sind (a) Ein lauffähiges R-Skript; (b) begründeter Lösungsweg (Kombination aus R-Code, R Output und dessen Interpretation) und (c) ausformulierter Methoden- und Ergebnisteil (für eine wiss. Arbeit).**
 
 
-:::{.callout-note .content-hidden unless-meta="muesterloesung"}
+
+::::{.content-hidden unless-meta="musterloesung"}
+
+:::{.callout-note}
+
+- Download dieses Lösungsscript via "\</\>Code" (oben rechts)
+- [Lösungstext als Download](Statistik_Loesungstext_7.pdf)
+
 
 ## Lösung Übung 7
 
@@ -206,3 +198,4 @@ Die Boxplots erlauben jetzt auch eine Beurteilung der Modelldiagnostik:
 Die Residuen sind hinreichen normalverteilt (symmetrisch) 
 
 :::
+:::: 

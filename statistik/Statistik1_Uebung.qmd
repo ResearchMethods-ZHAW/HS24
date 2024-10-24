@@ -1,13 +1,9 @@
 ---
-execute: 
-  echo: false   # set to true to show musterlösung
-  output: false # set to true to show musterlösung
-code-fold: true
-code-summary: "Musterlösung"
+lesson: Statistik 1
 knitr:
   opts_chunk: 
-    collapse: true
-musterloesung: true
+    collapse: false
+musterloesung: false
 ---
 
 # Statistik 1: Übung
@@ -58,7 +54,9 @@ Wurden in den Basis- und Interventionswochen unterschiedlich viele Gerichte verk
 
 
 
-:::{.callout-note .content-hidden unless-meta="muesterloesung"}
+::::{.content-hidden unless-meta="musterloesung"}
+
+:::{.callout-note}
 
 ## Lösung Übung 1
 
@@ -207,3 +205,4 @@ print(p)
 ```
 
 :::
+:::: 
