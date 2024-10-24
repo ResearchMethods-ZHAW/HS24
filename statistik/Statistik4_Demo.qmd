@@ -1,8 +1,5 @@
 ---
 lesson: Statistik4
-knitr:
-  opts_chunk: 
-    collapse: true
 ---
 
 
@@ -17,7 +14,7 @@ Download dieses Demoscript via "\</\>Code" (oben rechts)
 library(pacman)
 p_load("readr")
 
-loyn <- read_delim("datasets/stat1-4/loyn.csv", delim = ";")
+loyn <- read_delim("datasets/stat/loyn.csv", delim = ";")
 
 str(loyn)
 summary(loyn)

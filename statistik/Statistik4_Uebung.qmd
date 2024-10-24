@@ -1,4 +1,5 @@
 ---
+lesson: Statistik 4
 execute: 
   echo: false   # set to true to show musterlösung
   output: false # set to true to show musterlösung
@@ -9,6 +10,7 @@ knitr:
     collapse: true
 musterloesung: false
 ---
+
 
 # Statistik 4: Übung
 
@@ -40,13 +42,14 @@ musterloesung: false
 
 
 - Download dieses Lösungsscript via "\</\>Code" (oben rechts)
-- [Lösungstext als Download](Statistik_Loesung_4.pdf)
 
 
-:::{.callout-note .content-hidden unless-meta="muesterloesung"}
 
 ## Lösung Übung 4
 
+::::{.content-hidden unless-meta="muesterloesung"}
+:::{.callout-note}
+- [Lösungstext als Download](Statistik_Loesung_4.pdf)
 
 ```{r}
 library(pacman)
@@ -155,3 +158,4 @@ plot(lm(Species_richness ~ Heat_index + Litter + CaCO3 + CN_ratio + Grazing_inte
 Wie immer kommt am Ende die Modelldiagnostik. Wir können uns entweder das globale Modell oder das Modell mit den 5 Variablen mit importance > 50% anschauen. Das Bild sieht fast identisch aus und zeigt keinerlei problematische Abweichungen, d. h. links oben weder ein Keil, noch eine Banane, rechts oben eine nahezu perfekte Gerade. 
 
 :::
+:::: 

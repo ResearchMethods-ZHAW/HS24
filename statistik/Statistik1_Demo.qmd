@@ -2,7 +2,7 @@
 lesson: Statistik1
 knitr:
   opts_chunk: 
-    collapse: true
+    collapse: false 
 ---
 
 
@@ -16,7 +16,7 @@ Download dieses Demoscript via "\</\>Code" (oben rechts)
 
 ```{r}
 
-# Je 10 Messwerte für Sorte a und b zu einem Data Frame im long-Format verbinden
+# Je 10 Messwerte für Sorte a und b zu einem Data Frame im long-Format verbinden 
 Messwerte_a <- c(20, 19, 25, 10, 8, 15, 13, 18, 11, 14) # Messwerte von Cultivar a
 Messwerte_b <- c(12, 15, 16, 7, 8, 10, 12, 11, 13, 10) # Messwerte von Cultivar b
 cultivar <- as.factor( c(rep("a", 10), rep("b", 10))) # Bezeichnug der Cultivare in der Tabelle
