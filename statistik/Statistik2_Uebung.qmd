@@ -60,8 +60,6 @@ Die Sortierung der Jahreszeiten (default: alphabetisch) ist inhaltlich aber nich
 # Umsortieren der Faktoren, damit sie in den Boxplots eine sinnvolle Reihung haben
 kormoran$Jahreszeit <- ordered(kormoran$Jahreszeit, levels = c("F", "S", "H", "W"))
 kormoran$Jahreszeit
-
-
 ```
 
 
@@ -69,9 +67,6 @@ kormoran$Jahreszeit
 # Explorative Datenanalyse
 # (Check auf Normalverteilung der Residuen und Varianzhomogenitaet)
 boxplot(Tauchzeit ~ Jahreszeit * Unterart, data = kormoran)
-
-
-
 ```
 
 Wegen der Asymmetrie der Boxen könnte man eine log-Transformation ausprobieren.
