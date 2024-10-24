@@ -7,7 +7,8 @@ knitr:
 
 # Statistik 7: Demo
 
--   Download dieses Demoscript via "\</\>Code" (oben rechts)
+[Download dieses Demoscript ](../purl/Statistik7_Demo.R) (rechtsklick → speichern unter)
+
 -   Datensatz *Doubs_spe* von  @borcard2011
 
 

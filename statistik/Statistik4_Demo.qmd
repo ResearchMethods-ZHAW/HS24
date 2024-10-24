@@ -5,7 +5,9 @@ lesson: Statistik4
 
 # Statistik 4: Demo
 
-Download dieses Demoscript via "\</\>Code" (oben rechts)
+[Download dieses Demoscript ](../purl/Statistik4_Demo.R) (rechtsklick → speichern unter)
+
+
 -   Datensatz *loyn.csv*
 
 

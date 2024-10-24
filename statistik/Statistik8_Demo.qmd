@@ -1,1 +1,4 @@
 # Statistik 8: Demo
+
+[Download dieses Demoscript ](../purl/Statistik8_Demo.R) (rechtsklick → speichern unter)
+
