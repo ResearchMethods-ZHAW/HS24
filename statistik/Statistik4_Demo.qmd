@@ -7,7 +7,6 @@ lesson: Statistik4
 
 [Download dieses Demoscript ](../purl/Statistik4_Demo.R) (rechtsklick → speichern unter)
 
-
 -   Datensatz *loyn.csv*
 
 
