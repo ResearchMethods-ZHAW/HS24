@@ -18,6 +18,9 @@ Aufgabenbeschreibung
 
 ## Lösung Übung 3
 
+[Download dieses Demoscript ](../purl/Statistik3_Uebung.R) (rechtsklick → speichern unter)
+
+
 ```{r}
 
 ```

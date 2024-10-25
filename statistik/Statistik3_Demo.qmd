@@ -6,9 +6,10 @@ knitr:
 ---
 
 
-# Stat3: Demo
+# Statistik 3: Demo
 
--   Download dieses Demoscript via "\</\>Code" (oben rechts)
+[Download dieses Demoscript ](../purl/Statistik3_Demo.R) (rechtsklick → speichern unter)
+
 
 
 ## Korrelation vs. Regression

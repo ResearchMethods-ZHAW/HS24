@@ -1,11 +1,14 @@
 ---
 lesson: Statistik4
+knitr:
+  opts_chunk: 
+    collapse: false 
 ---
-
 
 # Statistik 4: Demo
 
-Download dieses Demoscript via "\</\>Code" (oben rechts)
+[Download dieses Demoscript ](../purl/Statistik4_Demo.R) (rechtsklick → speichern unter)
+
 -   Datensatz *loyn.csv*
 
 

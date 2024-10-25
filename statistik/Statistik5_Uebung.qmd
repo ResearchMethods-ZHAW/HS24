@@ -17,10 +17,12 @@ Bitte prüft mit einer logistischen Regression, ob und ggf. wie die Inselform di
 
 
 ::::{.content-hidden unless-meta="musterloesung"}
-
 :::{.callout-note}
 
-- Download dieses Lösungsscript via "\</\>Code" (oben rechts)
+[Download dieses Demoscript ](../purl/Statistik5_Uebung.R) (rechtsklick → speichern unter)
+
+
+
 - [Lösungstext als Download](Statistik_Loesung_5.pdf)
 
 

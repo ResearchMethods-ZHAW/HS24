@@ -6,9 +6,9 @@ knitr:
 ---
 
 
-# Stat2: Demo
+# Statistik 2: Demo
 
-- Download dieses Demoscript via "\</\>Code" (oben rechts)
+[Download dieses Demoscript ](../purl/Statistik2_Demo.R) (rechtsklick → speichern unter)
 
 ## ANOVA
 
