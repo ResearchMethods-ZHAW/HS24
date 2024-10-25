@@ -23,3 +23,18 @@ details > summary{
 .presenter-btn{
     background-color: gray;
 }
+
+.dld{
+  /*background-color: gray;*/
+  padding: 2px;
+  radius: 2px;
+}
+
+.dld::before{
+  content: "🖫 ";
+}
+
+.dld::after{
+  content: " (rechtsclick→speichern unter)";
+  font-size: smaller;
+}
