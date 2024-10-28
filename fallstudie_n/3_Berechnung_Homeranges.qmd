@@ -1,7 +1,7 @@
 ---
 execute:
-  echo: false   # set to true to show musterlösung
-  output: false # set to true to show musterlösung
+  echo: true   # set to true to show musterlösung
+  output: true # set to true to show musterlösung
 code-fold: true
 code-summary: "Musterlösung"
 knitr:
@@ -16,7 +16,6 @@ knitr:
 ```{r}
 #| echo: true
 #| code-fold: false
-#| output: false
 
 library("sf")
 library("terra")
@@ -49,6 +48,7 @@ Im Datensatz Rehe eine neue Spalte mit Datum und Zeit in einer Spalte kreieren. 
 
 ```{r}
 #| echo: true
+#| code-fold: false
 
 
 Rehe <- Rehe |>
@@ -89,15 +89,11 @@ RE13_sp <- as(RE13["TierID"], "Spatial")
 
 sigma <- 0.5 * (sd(RE13_xy[, 1]) + sd(RE13_xy[, 2]))
 n <- nrow(RE13)
-href <- sigma * n ^ (-1 / 6) * 0.9
+href <- sigma * n ^ (-1 / 6) * 0.9 # scaled reference: href * 0.9
 
-# scaled reference: href * 0.9
+kud <- kernelUD(RE13_sp, h = href, grid = 25) 
 
-kud <- kernelUD(RE13_sp, h = href, grid = 25)
-
-# Berechnung der Home Range (95% Isopleth)
-
-homerange <- getverticeshr(kud, percent = 95)
+homerange <- getverticeshr(kud, percent = 95) # Berechnung der Home Range (95% Isopleth)
 
 # Schreibt HR in den oben beschriebenen Ordner (als Shapefile)
 
