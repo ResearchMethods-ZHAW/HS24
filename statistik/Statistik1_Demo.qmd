@@ -18,17 +18,14 @@ knitr:
 ### Daten generieren und anschauen
 
 ```{r}
-
 # Je 10 Messwerte für Sorte a und b zu einem Data Frame im long-Format verbinden 
 Messwerte_a <- c(20, 19, 25, 10, 8, 15, 13, 18, 11, 14) # Messwerte von Cultivar a
 Messwerte_b <- c(12, 15, 16, 7, 8, 10, 12, 11, 13, 10) # Messwerte von Cultivar b
 cultivar <- as.factor( c(rep("a", 10), rep("b", 10))) # Bezeichnug der Cultivare in der Tabelle
 blume <- data.frame("cultivar" = cultivar, "size" = c(Messwerte_a, Messwerte_b)) # Data frame erstellen 
-
 ```
 
 ```{r}
-
 # Boxplots
 
 library(ggplot2)
@@ -36,38 +33,31 @@ library(ggplot2)
 ggplot(blume, aes(x = cultivar, y = size, fill = cultivar)) +
   geom_boxplot() + # Boxplots
   geom_dotplot(binaxis = "y", stackdir = "center", alpha = 0.5) # Datenpunkte darstellen
-
 ```
 
 ```{r}
-
 # Histogramme
 
 ggplot(blume, aes(x = size, fill = cultivar)) +
   geom_histogram(binwidth = 2) +
   facet_wrap(~ cultivar)
-
 ```
 
 ### Zweiseitiger t-Test
 
 ```{r}
-
 # Links der Tilde ("~") steht immer die abhängige Variable, rechsts die erklärende(n) Variable(n)
 # Alternativ kann man die Werte auch direkt in die t.test()-Funktion eigeben:
 # t.test(Messwerte_a, Messwerte_b)
 
 t.test(size ~ cultivar, data = blume) # Zweiseitig "Test auf a ≠ b" (default)
-
 ```
 
 ### Einseitiger t-Test
 
 ```{r}
-
 t.test(size ~ cultivar, alternative = "greater",  data = blume) # Einseitig "Test auf a > b"
 t.test(size ~ cultivar, alternative = "less",  data = blume) # Einseitig "Test auf a < b"
-
 ```
 
 ### Klassischer t-Test vs. Welch Test
@@ -87,7 +77,6 @@ t.test(size ~ cultivar, data = blume) # dasselbe wie var.equal = FALSE
 # b gepaart, zweiter Wert von a mit zweitem von b ect.
 
 t.test(Messwerte_a, Messwerte_b, paired = TRUE) # für gepaarten t-Test funktioniert Notation "size ~ cultivar" nicht
-
 ```
 
 ## Binomialtest
