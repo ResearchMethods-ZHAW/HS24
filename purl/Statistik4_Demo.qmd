@@ -1,20 +1,18 @@
-#' ---
-#' lesson: Statistik4
-#' knitr:
-#'   opts_chunk: 
-#'     collapse: false 
-#' ---
-#' 
-#' # Statistik 4: Demo
-#' 
-#' [Demoscript herunterladen (.R)](../purl/Statistik4_Demo.R){.dld}
-#' 
-#' [Demoscript herunterladen (.qmd)](../purl/Statistik4_Demo.qmd){.dld}
-#' 
-#' -   Datensatz *loyn.csv*
-#' 
-#' 
-## -----------------------------------------------------------------------------
+---
+lesson: Statistik4
+knitr:
+  opts_chunk: 
+    collapse: false 
+---
+
+# Statistik 4: Demo
+
+[Download dieses Demoscript ](../purl/Statistik4_Demo.R) (rechtsklick → speichern unter)
+
+-   Datensatz *loyn.csv*
+
+
+```{r}
 # Daten einlesen und anschauen
 library(pacman)
 p_load("readr")
@@ -23,11 +21,11 @@ loyn <- read_delim("datasets/stat/loyn.csv", delim = ";")
 
 str(loyn)
 summary(loyn)
+```
 
-#' 
-#' ### Korrelation zwischen den Prädiktoren
-#' 
-## -----------------------------------------------------------------------------
+### Korrelation zwischen den Prädiktoren
+
+```{r}
 # Wir setzen die Schwelle bei |0.7|
 # Korrelationen rechnen details siehe: "?cor"
 cor(loyn[, 2:7]) 
@@ -42,30 +40,30 @@ corrplot.mixed(cor, lower = "ellipse", upper = "number", order = "AOE")
 
 cor[abs(cor)<0.7] <- 0
 cor
+```
 
-#' 
-#' -> Keine Korrelation ist \>\|0.7\|, so können wir alle Prädiktoren "behalten". Aber es gilt zu beachten, dass GRAZE ziemlich stark \|\>0.6\| mit AGE korreliert ist
-#' 
-## -----------------------------------------------------------------------------
+-> Keine Korrelation ist \>\|0.7\|, so können wir alle Prädiktoren "behalten". Aber es gilt zu beachten, dass GRAZE ziemlich stark \|\>0.6\| mit AGE korreliert ist
+
+```{r}
 # Volles Modell definieren
 names(loyn)
 lm_1 <- lm(ABUND ~ AGE + AREA + DIST + LDIST + GRAZE + ALT, data = loyn)
 
 par(mfrow = c(2, 2))
 plot(lm_1)
+```
 
-#' 
-#' -> Plot sieht zwar OK aus, aber mit 6 Prädiktoren für \|\<60\| Beobachtungen ist das Modell wohl "overfitted"
-#' 
-## -----------------------------------------------------------------------------
+-> Plot sieht zwar OK aus, aber mit 6 Prädiktoren für \|\<60\| Beobachtungen ist das Modell wohl "overfitted"
+
+```{r}
 # Andere Vatiante, um korrelierte Prädiktoren zu finden (üblicher Schwellenwert VIF = 5)
 p_load("car")
 vif(lm_1)
+```
 
-#' 
-#' ### Modellselektion
-#' 
-## -----------------------------------------------------------------------------
+### Modellselektion
+
+```{r}
 summary(lm_1)
 
 drop1(lm_1, test = "F")
@@ -90,27 +88,27 @@ summary(lm_5)
 
 par(mfrow = c(2, 2))
 plot(lm_5)
+```
 
-#' 
-#' -> das minimal adäquate Modell enthält noch zwei Prädiktoren (AREA; GRAZE) und dessen Residualplots sehen ok aus.
-#' 
-#' ### Hierarchical partitioning 
-#' 
-#' Wir können auch schauen wie bedeutsam die einzelnen Variablen sind:
-#' 
-## -----------------------------------------------------------------------------
+-> das minimal adäquate Modell enthält noch zwei Prädiktoren (AREA; GRAZE) und dessen Residualplots sehen ok aus.
+
+### Hierarchical partitioning 
+
+Wir können auch schauen wie bedeutsam die einzelnen Variablen sind:
+
+```{r}
 p_load("relaimpo")
 
 # Berechnen
 metrics <- calc.relimp(lm_1, type = c("lmg", "first"))
 cbind(I = metrics$lmg, J = metrics$first - metrics$lmg, Total = metrics$first)
+```
 
-#' 
-#' -> auch hier haben AREA und GRAZE die höchsten Werte (und an dritter Stelle AGE, der mit GRAZE am stärksten korreliert ist)
-#' 
-#' ### Plot partielle regressionen
-#' 
-## -----------------------------------------------------------------------------
+-> auch hier haben AREA und GRAZE die höchsten Werte (und an dritter Stelle AGE, der mit GRAZE am stärksten korreliert ist)
+
+### Plot partielle regressionen
+
+```{r}
 # Beispiel GRAZE
 lm_abund <- lm(ABUND ~ AREA, data = loyn)
 lm_graze <- lm(GRAZE ~ AREA, data = loyn)
@@ -134,11 +132,11 @@ avPlots(lm_5, ~GRAZE, ask = F)
 
 #Für alle prädktoren im Modell
 avPlots(lm_5, layout = c(1, 2) )
+```
 
-#' 
-#' ## Multimodel inference
-#' 
-## -----------------------------------------------------------------------------
+## Multimodel inference
+
+```{r}
 p_load("MuMIn")
 
 global_model <- lm(ABUND ~ AGE + AREA + DIST + LDIST + GRAZE + ALT, data = loyn)
@@ -150,10 +148,10 @@ allmodels
 
 # Variable importance
 sw(allmodels)
+```
+-> Auch mit dieser Sichtweise sind AREA und GRAZE die wichtigste Prädiktoren
 
-#' -> Auch mit dieser Sichtweise sind AREA und GRAZE die wichtigste Prädiktoren
-#' 
-## -----------------------------------------------------------------------------
+```{r}
 # Model averaging
 avgmodel <- model.avg(allmodels)
 summary(avgmodel)
@@ -161,5 +159,5 @@ summary(avgmodel)
 summary(avgmodel)$coefficients
 # Confindence intervals
 confint(avgmodel)
+```
 
-#' 

@@ -1,22 +1,20 @@
-#' ---
-#' lesson: Statistik3
-#' knitr:
-#'   opts_chunk: 
-#'     collapse: false 
-#' ---
-#' 
-#' 
-#' # Statistik 3: Demo
-#' 
-#' [Demoscript herunterladen (.R)](../purl/Statistik3_Demo.R){.dld}
-#' 
-#' [Demoscript herunterladen (.qmd)](../purl/Statistik3_Demo.qmd){.dld}
-#' 
-#' 
-#' 
-#' ## Korrelation vs. Regression
-#' 
-## -----------------------------------------------------------------------------
+---
+lesson: Statistik3
+knitr:
+  opts_chunk: 
+    collapse: false 
+---
+
+
+# Statistik 3: Demo
+
+[Download dieses Demoscript ](../purl/Statistik3_Demo.R) (rechtsklick → speichern unter)
+
+
+
+## Korrelation vs. Regression
+
+```{r}
 ## Korrelationen und Regressionen
 
 # Datensatz zum Einfluss von Stickstoffdepositionen auf den Pflanzenartenreichtum
@@ -31,9 +29,9 @@ summary(df)
 ggplot(df, aes(x = N_deposition, y = Species_richness)) +
   geom_point()
 
+```
 
-#' 
-## -----------------------------------------------------------------------------
+```{r}
 
 # Pearson Korrelation
 # zuerst Species_richness dann N_deposition
@@ -67,12 +65,12 @@ ggplot(df, aes(x = N_deposition, y = Species_richness)) +
 
 #BaseR Variante plot(Species_richness ~ N_deposition, data = df) + abline(lm1)
 
+```
 
-#' 
-#' 
-#' ## Einfache und Polynomische Regression
-#' 
-## -----------------------------------------------------------------------------
+
+## Einfache und Polynomische Regression
+
+```{r}
 # Daten generieren 
 pred <- c(20, 19, 25, 10, 8, 15, 13, 18, 11, 14, 25, 39, 38, 28, 24) # "pred" sei unsere unabhängige Variable
 resp <- c(12, 15, 10, 7, 2, 10, 12, 11, 13, 10, 9, 2, 4, 7, 13) # "resp" sei unsere abhängige Variable
@@ -82,28 +80,28 @@ data <- data.frame(pred, resp) # Dataframe erstellen
 ggplot(data, aes(x = pred, y = resp)) +
   geom_point()
 
+```
 
-#' 
-#' 
-## -----------------------------------------------------------------------------
+
+```{r}
 # Modell definieren ud anschauen
 lm_1 <- lm(resp ~ pred) # Einfaches lineares Modell
 summary(lm_1) # Modell anschauen
+```
+-> kein signifikanter Zusammenhang im einfachen linearen Modell und entsprechend kleines Bestimmtheitsmass (adj. R^2^ = 0.07)
 
-#' -> kein signifikanter Zusammenhang im einfachen linearen Modell und entsprechend kleines Bestimmtheitsmass (adj. R^2^ = 0.07)
-#' 
-#' 
-## -----------------------------------------------------------------------------
+
+```{r}
 # Polynomische Regression Modell definieren und anschauen
 lm_quad <- lm(resp ~ pred + I(pred^2)) # lineares Modell mit quadratischem Termsummary
 
 summary(lm_quad) # lineares Modell mit quadratischem Term anschauen
 
+```
 
-#' 
-#' -> Signifikanter Zusammenhang und viel besseres Bestimmtheitsmass (adj. R^2^ = 0.60)
-#' 
-## -----------------------------------------------------------------------------
+-> Signifikanter Zusammenhang und viel besseres Bestimmtheitsmass (adj. R^2^ = 0.60)
+
+```{r}
 # Modelle darstellen
 
 # Vorhersagen der Modelle generieren
@@ -119,23 +117,23 @@ ggplot(data, aes(x = pred, y = resp)) +
   geom_line(data = ModPred, aes(x = xv, y = y_lm1), color = "red", linetype = "dashed") + 
   geom_line(data = ModPred, aes(x = xv, y = y_lm_quad), color = "blue")
 
+```
 
-#' 
-## -----------------------------------------------------------------------------
+```{r}
 # Residualplots
 par(mfrow = c(2, 2))
 plot(lm_1, main = "Lineares Modell")
 plot(lm_quad, main = "Quadratisches  Modell")
 
+```
 
-#' 
-#' -> Die Plots sehen beim Modell mit quadratischem Term besser aus
-#' 
-#' ## ANCOVA
-#' 
-#' Experiment zur Fruchtproduktion ("Fruit") von Ipomopsis sp. in Abhängigkeit von der Beweidung ("Grazing" mit 2 Levels: "Grazed", "Ungrazed") und korrigiert für die Pflanzengrösse vor der Beweidung (hier ausgedrückt als Durchmesser an der Spitze des Wurzelstock: "Root")
-#' 
-## -----------------------------------------------------------------------------
+-> Die Plots sehen beim Modell mit quadratischem Term besser aus
+
+## ANCOVA
+
+Experiment zur Fruchtproduktion ("Fruit") von Ipomopsis sp. in Abhängigkeit von der Beweidung ("Grazing" mit 2 Levels: "Grazed", "Ungrazed") und korrigiert für die Pflanzengrösse vor der Beweidung (hier ausgedrückt als Durchmesser an der Spitze des Wurzelstock: "Root")
+
+```{r}
 # Daten einlesen und anschauen
 library("readr")
 
@@ -150,12 +148,12 @@ library("ggplot2")
 ggplot(compensation, aes(x = Root, y = Fruit, color = Grazing)) +
   geom_point()
 
+```
 
-#' 
-#' -> Je grösser die Pflanze, desto grösser ihre Fruchtproduktion.
-#' -> Die grössere Fruchtproduktion innerhalb der beweideten Gruppe scheint ein Resultat von unterschiedlichen Pflanzengrössen zwischen den Gruppen zu sein.
-#' 
-## -----------------------------------------------------------------------------
+-> Je grösser die Pflanze, desto grösser ihre Fruchtproduktion.
+-> Die grössere Fruchtproduktion innerhalb der beweideten Gruppe scheint ein Resultat von unterschiedlichen Pflanzengrössen zwischen den Gruppen zu sein.
+
+```{r}
 # Lineare Modelle definieren und anschauen
 
 aoc_1 <- lm(Fruit ~ Root * Grazing, data = compensation) # Volles Modell mit Interaktion
@@ -170,7 +168,7 @@ par(mfrow = c(2, 2)) # 2x2 Plots pro Grafik
 plot(aoc_2)
 par(mfrow = c(1, 1)) # Grafik zurücksetzen
 
+```
 
-#' 
-#' -> Das ANCOVA-Modell widerspiegelt die Zusammenhänge wie sie aufgrund der grafisch dargestellten Daten zu vermuten sind gut. Die Residual-Plots zeigen 3 Ausreisser (Beobachtungen 27, 34 und 37), welche "aus der Reihe tanzen".
-#' 
+-> Das ANCOVA-Modell widerspiegelt die Zusammenhänge wie sie aufgrund der grafisch dargestellten Daten zu vermuten sind gut. Die Residual-Plots zeigen 3 Ausreisser (Beobachtungen 27, 34 und 37), welche "aus der Reihe tanzen".
+
