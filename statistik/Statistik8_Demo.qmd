@@ -1,1 +1,5 @@
 # Statistik 8: Demo
+
+[Demoscript herunterladen (.R)](../purl/Statistik8_Demo.R){.dld}
+
+[Demoscript herunterladen (.qmd)](../purl/Statistik8_Demo.qmd){.dld}

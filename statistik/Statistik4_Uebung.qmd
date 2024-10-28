@@ -1,12 +1,8 @@
 ---
-execute: 
-  echo: false   # set to true to show musterlösung
-  output: false # set to true to show musterlösung
-code-fold: true
-code-summary: "Musterlösung"
+lesson: Statistik 4
 knitr:
   opts_chunk: 
-    collapse: true
+    collapse: false
 musterloesung: false
 ---
 
@@ -38,15 +34,16 @@ musterloesung: false
     ausformulierter Methoden- und Ergebnisteil (für eine wiss. Arbeit).**
 
 
+::::{.content-hidden unless-meta="musterloesung"}
 
-- Download dieses Lösungsscript via "\</\>Code" (oben rechts)
-- [Lösungstext als Download](Statistik_Loesung_4.pdf)
-
-
-:::{.callout-note .content-hidden unless-meta="muesterloesung"}
+:::{.callout-note}
 
 ## Lösung Übung 4
 
+[Download dieses Demoscript ](../purl/Statistik4_Uebung.R) (rechtsklick → speichern unter)
+
+
+- [Lösungstext als Download](Statistik_Loesung_4.pdf)
 
 ```{r}
 library(pacman)
@@ -95,7 +92,7 @@ cor
 ```{r}
 #| include: false
 
-write.table(cor, file = "stat/Correlation.csv", sep = ";", dec = ".", col.names = NA)
+# write.table(cor, file = "stat/Correlation.csv", sep = ";", dec = ".", col.names = NA)
 ```
 
 Entsprechend „werfen“ wir auch noch die folgenden Variablen „raus“: Temperature.range (positiv mit Temperature), Precipitation (negativ mit Temperature) sowie Conductivity (positiv mit pH).
@@ -155,3 +152,4 @@ plot(lm(Species_richness ~ Heat_index + Litter + CaCO3 + CN_ratio + Grazing_inte
 Wie immer kommt am Ende die Modelldiagnostik. Wir können uns entweder das globale Modell oder das Modell mit den 5 Variablen mit importance > 50% anschauen. Das Bild sieht fast identisch aus und zeigt keinerlei problematische Abweichungen, d. h. links oben weder ein Keil, noch eine Banane, rechts oben eine nahezu perfekte Gerade. 
 
 :::
+:::: 

@@ -7,8 +7,10 @@ knitr:
 
 # Statistik 6: Demo
 
+[Demoscript herunterladen (.R)](../purl/Statistik6_Demo.R){.dld}
 
--   Download dieses Demoscript via "\</\>Code" (oben rechts)
+[Demoscript herunterladen (.qmd)](../purl/Statistik6_Demo.qmd){.dld}
+
 
 -   Datensatz *rm_plants.csv*
 -   Datensatz *DeerEcervi.csv*

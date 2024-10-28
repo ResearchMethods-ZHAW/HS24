@@ -86,7 +86,11 @@ sensors_long |>
 Lade jetzt nochmal den Datensatz *weather.csv* (Quelle MeteoSchweiz) herunter und importiere ihn als CSV mit den korrekten Spaltentypen (`stn` als `factor`, `time` als `POSIXct`, `tre200h0` als `double`).
 
 ```{r}
-weather <- read_delim("datasets/prepro/weather.csv", col_types = cols(col_factor(), col_datetime("%Y%m%d%H"), col_double()), ",")
+weather <- read_delim("datasets/prepro/weather.csv")
+
+weather$stn <- as.factor(weather$stn)
+
+weather$time <- as.POSIXct(as.character(weather$time), format = "%Y%m%d%H")
 ```
 
 

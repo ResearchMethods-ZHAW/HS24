@@ -2,7 +2,7 @@
 .Rhistory
 .RData
 .Ruserdata
-<<<<<<< HEAD
+
 .DS_Store
 .config/
 .local/
@@ -32,8 +32,6 @@ presenter-mode.css
 Results
 
 # temporarily ignore _book and _freeze
-=======
 
 /.quarto/
 _book
->>>>>>> 6b1c1f6ea92d83ad5a0f9ee83c30994a101620ca

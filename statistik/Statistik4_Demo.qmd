@@ -2,13 +2,15 @@
 lesson: Statistik4
 knitr:
   opts_chunk: 
-    collapse: true
+    collapse: false 
 ---
-
 
 # Statistik 4: Demo
 
-Download dieses Demoscript via "\</\>Code" (oben rechts)
+[Demoscript herunterladen (.R)](../purl/Statistik4_Demo.R){.dld}
+
+[Demoscript herunterladen (.qmd)](../purl/Statistik4_Demo.qmd){.dld}
+
 -   Datensatz *loyn.csv*
 
 
@@ -17,7 +19,7 @@ Download dieses Demoscript via "\</\>Code" (oben rechts)
 library(pacman)
 p_load("readr")
 
-loyn <- read_delim("datasets/stat1-4/loyn.csv", delim = ";")
+loyn <- read_delim("datasets/stat/loyn.csv", delim = ";")
 
 str(loyn)
 summary(loyn)
@@ -54,7 +56,6 @@ plot(lm_1)
 ```
 
 -> Plot sieht zwar OK aus, aber mit 6 Prädiktoren für \|\<60\| Beobachtungen ist das Modell wohl "overfitted"
-
 
 ```{r}
 # Andere Vatiante, um korrelierte Prädiktoren zu finden (üblicher Schwellenwert VIF = 5)

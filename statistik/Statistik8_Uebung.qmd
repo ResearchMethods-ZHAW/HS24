@@ -1,26 +1,28 @@
 ---
-execute: 
-  echo: false   # set to true to show musterlösung
-  output: false # set to true to show musterlösung
-code-fold: true
-code-summary: "Musterlösung"
+lesson: Statistik 8
 knitr:
   opts_chunk: 
-    collapse: true
-musterloesung: true
+    collapse: false
+musterloesung: false
 ---
+
 
 # Statistik 8: Übung
 
 Aufgabenbeschreibung
 
+::::{.content-hidden unless-meta="musterloesung"}
 
-:::{.callout-note .content-hidden unless-meta="muesterloesung"}
+:::{.callout-note}
 
 ## Lösung Übung 8
+
+[Download dieses Demoscript ](../purl/Statistik8_Uebung.R) (rechtsklick → speichern unter)
+
 
 ```{r}
 
 ```
 
 :::
+:::: 
