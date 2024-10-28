@@ -38,8 +38,9 @@ Führt mit dem novanimal Datensatz (inviduelle Daten) eine logistische Regressio
 
 ## Musterlösung Übung 6: GLMM
 
-[Download dieses Demoscript ](../purl/Statistik6_Uebung.R) (rechtsklick → speichern unter)
+[Demoscript herunterladen (.R)](../purl/Statistik6_Uebung.R){.dld}
 
+[Demoscript herunterladen (.qmd)](../purl/Statistik6_Uebung.qmd){.dld}
 
 ```{r}
 #| echo: false

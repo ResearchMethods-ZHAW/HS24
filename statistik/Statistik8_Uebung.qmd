@@ -17,7 +17,9 @@ Aufgabenbeschreibung
 
 ## Lösung Übung 8
 
-[Download dieses Demoscript ](../purl/Statistik8_Uebung.R) (rechtsklick → speichern unter)
+[Demoscript herunterladen (.R)](../purl/Statistik8_Uebung.R){.dld}
+
+[Demoscript herunterladen (.qmd)](../purl/Statistik8_Uebung.qmd){.dld}
 
 
 ```{r}
