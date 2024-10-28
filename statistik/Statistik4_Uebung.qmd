@@ -40,7 +40,9 @@ musterloesung: false
 
 ## Lösung Übung 4
 
-[Download dieses Demoscript ](../purl/Statistik4_Uebung.R) (rechtsklick → speichern unter)
+[Demoscript herunterladen (.R)](../purl/Statistik4_Uebung.R){.dld}
+
+[Demoscript herunterladen (.qmd)](../purl/Statistik4_Uebung.qmd){.dld}
 
 
 - [Lösungstext als Download](Statistik_Loesung_4.pdf)
