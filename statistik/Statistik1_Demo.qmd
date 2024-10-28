@@ -5,9 +5,13 @@ knitr:
     collapse: false 
 ---
 
+
 # Statistik 1: Demo
 
-[Download dieses Demoscript ](../purl/Statistik1_Demo.R) (rechtsklick → speichern unter)
+[Demoscript herunterladen (.R)](../purl/Statistik1_Demo.R){.dld}
+
+[Demoscript herunterladen (.qmd)](../purl/Statistik1_Demo.qmd){.dld}
+
 
 ## t-Test
 
