@@ -35,8 +35,10 @@ Wegen der sehr ungleichen Varianzen muss auf jeden Fall eine Standardisierung st
 ## Lösung Übung 7
 
 - [Lösungstext als Download](Statistik_Loesungstext_7.pdf)
-[Download dieses Demoscript ](../purl/Statistik7_Uebung.R) (rechtsklick → speichern unter)
 
+[Demoscript herunterladen (.R)](../purl/Statistik7_Uebung.R){.dld}
+
+[Demoscript herunterladen (.qmd)](../purl/Statistik7_Uebung.qmd){.dld}
 
 
 
