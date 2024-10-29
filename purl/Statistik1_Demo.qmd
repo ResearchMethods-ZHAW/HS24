@@ -93,10 +93,6 @@ binom.test(3, 7) # Anzahl Frauen im Bundesrat (≙ 42.9 %; Stand 2019)
 
 Ermitteln des kritischen Wertes
 
-```{r}
-qchisq(0.95, 1)
-```
-
 ### Direkter Test in R (dazu Werte als Matrix nötig)
 
 ```{r}
