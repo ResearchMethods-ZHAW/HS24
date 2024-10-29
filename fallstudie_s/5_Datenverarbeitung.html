@@ -755,22 +755,6 @@ window.onload = function() {
 <span id="cb14-18"><a href="#cb14-18" aria-hidden="true" tabindex="-1"></a>    <span class="at">Jahr =</span> <span class="fu">factor</span>(Jahr))</span></code><button title="In die Zwischenablage kopieren" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </details>
 </div>
-<ul>
-<li>Später werden wir nicht nur Analysen pro Tag machen, sondern auch zusammengefasst nach Woche. Dafür müssen wir nun den meteo-Datensaz gruppieren und den mean berechnen. Hier der Code dazu, wie das aussehen könnte:</li>
-</ul>
-<div class="cell">
-<details class="code-fold">
-<summary>Musterlösung</summary>
-<div class="sourceCode cell-code" id="cb15"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb15-1"><a href="#cb15-1" aria-hidden="true" tabindex="-1"></a>meteo_day <span class="ot">&lt;-</span> meteo <span class="sc">|&gt;</span></span>
-<span id="cb15-2"><a href="#cb15-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">group_by</span>(Jahr, Monat, KW, Wochenende) <span class="sc">|&gt;</span></span>
-<span id="cb15-3"><a href="#cb15-3" aria-hidden="true" tabindex="-1"></a>  <span class="fu">summarise</span>(</span>
-<span id="cb15-4"><a href="#cb15-4" aria-hidden="true" tabindex="-1"></a>    <span class="at">tre200nx =</span> <span class="fu">mean</span>(tre200nx),</span>
-<span id="cb15-5"><a href="#cb15-5" aria-hidden="true" tabindex="-1"></a>    <span class="at">tre200jx =</span> <span class="fu">mean</span>(tre200jx),</span>
-<span id="cb15-6"><a href="#cb15-6" aria-hidden="true" tabindex="-1"></a>    <span class="at">rre150n0 =</span> <span class="fu">mean</span>(rre150n0),</span>
-<span id="cb15-7"><a href="#cb15-7" aria-hidden="true" tabindex="-1"></a>    <span class="at">rre150j0 =</span> <span class="fu">mean</span>(rre150j0),</span>
-<span id="cb15-8"><a href="#cb15-8" aria-hidden="true" tabindex="-1"></a>    <span class="at">sremaxdv=</span> <span class="fu">mean</span>(sremaxdv))</span></code><button title="In die Zwischenablage kopieren" class="code-copy-button"><i class="bi"></i></button></pre></div>
-</details>
-</div>
 <p>Wieder zurück zum depo-Datensazt.</p>
 <p>Ich mache den folgenden Punkt nachgelagert zu den voerherigen Convenience Variablen, da zu viele Operationen in einem Schritt auch schon mal etwas durcheinander erzeugen können.</p>
 <p>Phasen der Covid-Pandemie (Code untenstehend). Wir definieren 5 Phasen:</p>
@@ -787,25 +771,25 @@ window.onload = function() {
 <div class="cell">
 <details class="code-fold">
 <summary>Musterlösung</summary>
-<div class="sourceCode cell-code" id="cb16"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb16-1"><a href="#cb16-1" aria-hidden="true" tabindex="-1"></a>depo <span class="ot">&lt;-</span> depo <span class="sc">|&gt;</span></span>
-<span id="cb16-2"><a href="#cb16-2" aria-hidden="true" tabindex="-1"></a>    <span class="fu">mutate</span>(<span class="at">Phase =</span> <span class="fu">case_when</span>(</span>
-<span id="cb16-3"><a href="#cb16-3" aria-hidden="true" tabindex="-1"></a>        Datetime <span class="sc">&lt;</span> lock_1_start <span class="sc">~</span> <span class="st">"Pre"</span>,</span>
-<span id="cb16-4"><a href="#cb16-4" aria-hidden="true" tabindex="-1"></a>        Datetime <span class="sc">&gt;=</span> lock_1_start <span class="sc">&amp;</span> Datetime <span class="sc">&lt;=</span> lock_1_end <span class="sc">~</span> <span class="st">"Lockdown_1"</span>,</span>
-<span id="cb16-5"><a href="#cb16-5" aria-hidden="true" tabindex="-1"></a>        Datetime <span class="sc">&gt;</span> lock_1_end <span class="sc">&amp;</span> Datetime <span class="sc">&lt;</span> lock_2_start <span class="sc">~</span> <span class="st">"Inter"</span>,</span>
-<span id="cb16-6"><a href="#cb16-6" aria-hidden="true" tabindex="-1"></a>        Datetime <span class="sc">&gt;=</span> lock_2_start <span class="sc">&amp;</span> Datetime <span class="sc">&lt;=</span> lock_2_end <span class="sc">~</span> <span class="st">"Lockdown_2"</span>,</span>
-<span id="cb16-7"><a href="#cb16-7" aria-hidden="true" tabindex="-1"></a>        Datetime <span class="sc">&gt;</span> lock_2_end <span class="sc">~</span> <span class="st">"Post"</span></span>
-<span id="cb16-8"><a href="#cb16-8" aria-hidden="true" tabindex="-1"></a>    ))</span>
-<span id="cb16-9"><a href="#cb16-9" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb16-10"><a href="#cb16-10" aria-hidden="true" tabindex="-1"></a><span class="co"># hat das gepklappt?!</span></span>
-<span id="cb16-11"><a href="#cb16-11" aria-hidden="true" tabindex="-1"></a><span class="fu">unique</span>(depo<span class="sc">$</span>Phase)</span>
-<span id="cb16-12"><a href="#cb16-12" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb16-13"><a href="#cb16-13" aria-hidden="true" tabindex="-1"></a>depo <span class="ot">&lt;-</span> depo <span class="sc">|&gt;</span></span>
-<span id="cb16-14"><a href="#cb16-14" aria-hidden="true" tabindex="-1"></a>    <span class="co"># mit factor() koennen die levels direkt einfach selbst definiert werden.</span></span>
-<span id="cb16-15"><a href="#cb16-15" aria-hidden="true" tabindex="-1"></a>    <span class="co"># wichtig: speizfizieren, dass aus R base, ansonsten kommt es zu einem</span></span>
-<span id="cb16-16"><a href="#cb16-16" aria-hidden="true" tabindex="-1"></a>    <span class="co"># mix-up mit anderen packages</span></span>
-<span id="cb16-17"><a href="#cb16-17" aria-hidden="true" tabindex="-1"></a>    <span class="fu">mutate</span>(<span class="at">Phase =</span> base<span class="sc">::</span><span class="fu">factor</span>(Phase, <span class="at">levels =</span> <span class="fu">c</span>(<span class="st">"Pre"</span>, <span class="st">"Lockdown_1"</span>, <span class="st">"Inter"</span>, <span class="st">"Lockdown_2"</span>, <span class="st">"Post"</span>)))</span>
-<span id="cb16-18"><a href="#cb16-18" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb16-19"><a href="#cb16-19" aria-hidden="true" tabindex="-1"></a><span class="fu">str</span>(depo)</span></code><button title="In die Zwischenablage kopieren" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb15"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb15-1"><a href="#cb15-1" aria-hidden="true" tabindex="-1"></a>depo <span class="ot">&lt;-</span> depo <span class="sc">|&gt;</span></span>
+<span id="cb15-2"><a href="#cb15-2" aria-hidden="true" tabindex="-1"></a>    <span class="fu">mutate</span>(<span class="at">Phase =</span> <span class="fu">case_when</span>(</span>
+<span id="cb15-3"><a href="#cb15-3" aria-hidden="true" tabindex="-1"></a>        Datetime <span class="sc">&lt;</span> lock_1_start <span class="sc">~</span> <span class="st">"Pre"</span>,</span>
+<span id="cb15-4"><a href="#cb15-4" aria-hidden="true" tabindex="-1"></a>        Datetime <span class="sc">&gt;=</span> lock_1_start <span class="sc">&amp;</span> Datetime <span class="sc">&lt;=</span> lock_1_end <span class="sc">~</span> <span class="st">"Lockdown_1"</span>,</span>
+<span id="cb15-5"><a href="#cb15-5" aria-hidden="true" tabindex="-1"></a>        Datetime <span class="sc">&gt;</span> lock_1_end <span class="sc">&amp;</span> Datetime <span class="sc">&lt;</span> lock_2_start <span class="sc">~</span> <span class="st">"Inter"</span>,</span>
+<span id="cb15-6"><a href="#cb15-6" aria-hidden="true" tabindex="-1"></a>        Datetime <span class="sc">&gt;=</span> lock_2_start <span class="sc">&amp;</span> Datetime <span class="sc">&lt;=</span> lock_2_end <span class="sc">~</span> <span class="st">"Lockdown_2"</span>,</span>
+<span id="cb15-7"><a href="#cb15-7" aria-hidden="true" tabindex="-1"></a>        Datetime <span class="sc">&gt;</span> lock_2_end <span class="sc">~</span> <span class="st">"Post"</span></span>
+<span id="cb15-8"><a href="#cb15-8" aria-hidden="true" tabindex="-1"></a>    ))</span>
+<span id="cb15-9"><a href="#cb15-9" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb15-10"><a href="#cb15-10" aria-hidden="true" tabindex="-1"></a><span class="co"># hat das gepklappt?!</span></span>
+<span id="cb15-11"><a href="#cb15-11" aria-hidden="true" tabindex="-1"></a><span class="fu">unique</span>(depo<span class="sc">$</span>Phase)</span>
+<span id="cb15-12"><a href="#cb15-12" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb15-13"><a href="#cb15-13" aria-hidden="true" tabindex="-1"></a>depo <span class="ot">&lt;-</span> depo <span class="sc">|&gt;</span></span>
+<span id="cb15-14"><a href="#cb15-14" aria-hidden="true" tabindex="-1"></a>    <span class="co"># mit factor() koennen die levels direkt einfach selbst definiert werden.</span></span>
+<span id="cb15-15"><a href="#cb15-15" aria-hidden="true" tabindex="-1"></a>    <span class="co"># wichtig: speizfizieren, dass aus R base, ansonsten kommt es zu einem</span></span>
+<span id="cb15-16"><a href="#cb15-16" aria-hidden="true" tabindex="-1"></a>    <span class="co"># mix-up mit anderen packages</span></span>
+<span id="cb15-17"><a href="#cb15-17" aria-hidden="true" tabindex="-1"></a>    <span class="fu">mutate</span>(<span class="at">Phase =</span> base<span class="sc">::</span><span class="fu">factor</span>(Phase, <span class="at">levels =</span> <span class="fu">c</span>(<span class="st">"Pre"</span>, <span class="st">"Lockdown_1"</span>, <span class="st">"Inter"</span>, <span class="st">"Lockdown_2"</span>, <span class="st">"Post"</span>)))</span>
+<span id="cb15-18"><a href="#cb15-18" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb15-19"><a href="#cb15-19" aria-hidden="true" tabindex="-1"></a><span class="fu">str</span>(depo)</span></code><button title="In die Zwischenablage kopieren" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </details>
 </div>
 <p>Neben dem Lockdown können auch die Schulferien einen Einfluss auf die Besuchszahlen haben. Wir haben die Schulferien bereits als .csv eingelesen. Allerdings können wir die Schulferien nicht mit der case_when()-Funktion zuweisen, da diese mit dieser Funktion alle Vektoren im Datensatz “schulferien” verglichen werden, und nicht elementweise für jede Zeile im “depo”-Datensatz. Dies führt dazu, dass die Bedingungen nur einmal überprüft werden und dann auf den gesamten Vektor angewendet werden, anstatt Zeile für Zeile.</p>
@@ -815,15 +799,15 @@ window.onload = function() {
 <div class="cell">
 <details class="code-fold">
 <summary>Musterlösung</summary>
-<div class="sourceCode cell-code" id="cb17"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb17-1"><a href="#cb17-1" aria-hidden="true" tabindex="-1"></a><span class="co"># schreibe nun eine Funktion zur zuweisung Ferien. WENN groesser als start UND kleiner als</span></span>
-<span id="cb17-2"><a href="#cb17-2" aria-hidden="true" tabindex="-1"></a><span class="co"># ende, DANN schreibe ein 1</span></span>
-<span id="cb17-3"><a href="#cb17-3" aria-hidden="true" tabindex="-1"></a><span class="cf">for</span> (i <span class="cf">in</span> <span class="dv">1</span><span class="sc">:</span><span class="fu">nrow</span>(schulferien)) {</span>
-<span id="cb17-4"><a href="#cb17-4" aria-hidden="true" tabindex="-1"></a>  depo<span class="sc">$</span>Ferien[depo<span class="sc">$</span>Datum <span class="sc">&gt;=</span> schulferien[i, <span class="st">"Start"</span>] <span class="sc">&amp;</span> depo<span class="sc">$</span>Datum <span class="sc">&lt;=</span> schulferien[i, <span class="st">"Ende"</span>]] <span class="ot">&lt;-</span> <span class="dv">1</span></span>
-<span id="cb17-5"><a href="#cb17-5" aria-hidden="true" tabindex="-1"></a>}</span>
-<span id="cb17-6"><a href="#cb17-6" aria-hidden="true" tabindex="-1"></a>depo<span class="sc">$</span>Ferien[<span class="fu">is.na</span>(depo<span class="sc">$</span>Ferien)] <span class="ot">&lt;-</span> <span class="dv">0</span></span>
-<span id="cb17-7"><a href="#cb17-7" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb17-8"><a href="#cb17-8" aria-hidden="true" tabindex="-1"></a><span class="co"># als faktor speichern</span></span>
-<span id="cb17-9"><a href="#cb17-9" aria-hidden="true" tabindex="-1"></a>depo<span class="sc">$</span>Ferien <span class="ot">&lt;-</span> <span class="fu">factor</span>(depo<span class="sc">$</span>Ferien)</span></code><button title="In die Zwischenablage kopieren" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb16"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb16-1"><a href="#cb16-1" aria-hidden="true" tabindex="-1"></a><span class="co"># schreibe nun eine Funktion zur zuweisung Ferien. WENN groesser als start UND kleiner als</span></span>
+<span id="cb16-2"><a href="#cb16-2" aria-hidden="true" tabindex="-1"></a><span class="co"># ende, DANN schreibe ein 1</span></span>
+<span id="cb16-3"><a href="#cb16-3" aria-hidden="true" tabindex="-1"></a><span class="cf">for</span> (i <span class="cf">in</span> <span class="dv">1</span><span class="sc">:</span><span class="fu">nrow</span>(schulferien)) {</span>
+<span id="cb16-4"><a href="#cb16-4" aria-hidden="true" tabindex="-1"></a>  depo<span class="sc">$</span>Ferien[depo<span class="sc">$</span>Datum <span class="sc">&gt;=</span> schulferien[i, <span class="st">"Start"</span>] <span class="sc">&amp;</span> depo<span class="sc">$</span>Datum <span class="sc">&lt;=</span> schulferien[i, <span class="st">"Ende"</span>]] <span class="ot">&lt;-</span> <span class="dv">1</span></span>
+<span id="cb16-5"><a href="#cb16-5" aria-hidden="true" tabindex="-1"></a>}</span>
+<span id="cb16-6"><a href="#cb16-6" aria-hidden="true" tabindex="-1"></a>depo<span class="sc">$</span>Ferien[<span class="fu">is.na</span>(depo<span class="sc">$</span>Ferien)] <span class="ot">&lt;-</span> <span class="dv">0</span></span>
+<span id="cb16-7"><a href="#cb16-7" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb16-8"><a href="#cb16-8" aria-hidden="true" tabindex="-1"></a><span class="co"># als faktor speichern</span></span>
+<span id="cb16-9"><a href="#cb16-9" aria-hidden="true" tabindex="-1"></a>depo<span class="sc">$</span>Ferien <span class="ot">&lt;-</span> <span class="fu">factor</span>(depo<span class="sc">$</span>Ferien)</span></code><button title="In die Zwischenablage kopieren" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </details>
 </div>
 </section>
@@ -835,10 +819,10 @@ window.onload = function() {
 <div class="cell">
 <details class="code-fold">
 <summary>Musterlösung</summary>
-<div class="sourceCode cell-code" id="cb18"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb18-1"><a href="#cb18-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Fuer einige Auswertungen muss auf die Stunden als nummerischer Wert zurueckgegriffen werden</span></span>
-<span id="cb18-2"><a href="#cb18-2" aria-hidden="true" tabindex="-1"></a>depo<span class="sc">$</span>Stunde <span class="ot">&lt;-</span> <span class="fu">hour</span>(depo<span class="sc">$</span>Datetime)</span>
-<span id="cb18-3"><a href="#cb18-3" aria-hidden="true" tabindex="-1"></a><span class="co"># hour gibt uns den integer</span></span>
-<span id="cb18-4"><a href="#cb18-4" aria-hidden="true" tabindex="-1"></a><span class="fu">typeof</span>(depo<span class="sc">$</span>Stunde)</span></code><button title="In die Zwischenablage kopieren" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb17"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb17-1"><a href="#cb17-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Fuer einige Auswertungen muss auf die Stunden als nummerischer Wert zurueckgegriffen werden</span></span>
+<span id="cb17-2"><a href="#cb17-2" aria-hidden="true" tabindex="-1"></a>depo<span class="sc">$</span>Stunde <span class="ot">&lt;-</span> <span class="fu">hour</span>(depo<span class="sc">$</span>Datetime)</span>
+<span id="cb17-3"><a href="#cb17-3" aria-hidden="true" tabindex="-1"></a><span class="co"># hour gibt uns den integer</span></span>
+<span id="cb17-4"><a href="#cb17-4" aria-hidden="true" tabindex="-1"></a><span class="fu">typeof</span>(depo<span class="sc">$</span>Stunde)</span></code><button title="In die Zwischenablage kopieren" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </details>
 </div>
 </section>
@@ -853,11 +837,11 @@ window.onload = function() {
 <div class="cell">
 <details class="code-fold">
 <summary>Musterlösung</summary>
-<div class="sourceCode cell-code" id="cb19"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb19-1"><a href="#cb19-1" aria-hidden="true" tabindex="-1"></a>depo<span class="sc">$</span>Total <span class="ot">&lt;-</span> <span class="fu">as.integer</span>(<span class="fu">round</span>(depo<span class="sc">$</span>Total, <span class="at">digits =</span> <span class="dv">0</span>))</span>
-<span id="cb19-2"><a href="#cb19-2" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb19-3"><a href="#cb19-3" aria-hidden="true" tabindex="-1"></a>depo<span class="sc">$</span>Fuss_IN <span class="ot">&lt;-</span> <span class="fu">as.integer</span>(<span class="fu">round</span>(depo<span class="sc">$</span>Fuss_IN, <span class="at">digits =</span> <span class="dv">0</span>))</span>
-<span id="cb19-4"><a href="#cb19-4" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb19-5"><a href="#cb19-5" aria-hidden="true" tabindex="-1"></a>depo<span class="sc">$</span>Fuss_OUT <span class="ot">&lt;-</span> <span class="fu">as.integer</span>(<span class="fu">round</span>(depo<span class="sc">$</span>Fuss_OUT, <span class="at">digits =</span> <span class="dv">0</span>))</span></code><button title="In die Zwischenablage kopieren" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb18"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb18-1"><a href="#cb18-1" aria-hidden="true" tabindex="-1"></a>depo<span class="sc">$</span>Total <span class="ot">&lt;-</span> <span class="fu">as.integer</span>(<span class="fu">round</span>(depo<span class="sc">$</span>Total, <span class="at">digits =</span> <span class="dv">0</span>))</span>
+<span id="cb18-2"><a href="#cb18-2" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb18-3"><a href="#cb18-3" aria-hidden="true" tabindex="-1"></a>depo<span class="sc">$</span>Fuss_IN <span class="ot">&lt;-</span> <span class="fu">as.integer</span>(<span class="fu">round</span>(depo<span class="sc">$</span>Fuss_IN, <span class="at">digits =</span> <span class="dv">0</span>))</span>
+<span id="cb18-4"><a href="#cb18-4" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb18-5"><a href="#cb18-5" aria-hidden="true" tabindex="-1"></a>depo<span class="sc">$</span>Fuss_OUT <span class="ot">&lt;-</span> <span class="fu">as.integer</span>(<span class="fu">round</span>(depo<span class="sc">$</span>Fuss_OUT, <span class="at">digits =</span> <span class="dv">0</span>))</span></code><button title="In die Zwischenablage kopieren" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </details>
 </div>
 </section>
@@ -875,70 +859,70 @@ window.onload = function() {
 <div class="cell">
 <details class="code-fold">
 <summary>Musterlösung</summary>
-<div class="sourceCode cell-code" id="cb20"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb20-1"><a href="#cb20-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Einteilung Standort Zuerich</span></span>
-<span id="cb20-2"><a href="#cb20-2" aria-hidden="true" tabindex="-1"></a>Latitude <span class="ot">&lt;-</span> <span class="fl">47.38598</span></span>
-<span id="cb20-3"><a href="#cb20-3" aria-hidden="true" tabindex="-1"></a>Longitude <span class="ot">&lt;-</span> <span class="fl">8.50806</span></span>
-<span id="cb20-4"><a href="#cb20-4" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb20-5"><a href="#cb20-5" aria-hidden="true" tabindex="-1"></a><span class="co"># Start und das Ende der Sommerzeit:</span></span>
-<span id="cb20-6"><a href="#cb20-6" aria-hidden="true" tabindex="-1"></a><span class="co"># https://www.schulferien.org/schweiz/zeit/zeitumstellung/</span></span>
-<span id="cb20-7"><a href="#cb20-7" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb20-8"><a href="#cb20-8" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb20-9"><a href="#cb20-9" aria-hidden="true" tabindex="-1"></a><span class="co"># Welche Zeitzone haben wir eigentlich?</span></span>
-<span id="cb20-10"><a href="#cb20-10" aria-hidden="true" tabindex="-1"></a><span class="co"># Switzerland uses Central European Time (CET) during the winter as standard time,</span></span>
-<span id="cb20-11"><a href="#cb20-11" aria-hidden="true" tabindex="-1"></a><span class="co"># which is one hour ahead of Coordinated Universal Time (UTC+01:00), and</span></span>
-<span id="cb20-12"><a href="#cb20-12" aria-hidden="true" tabindex="-1"></a><span class="co"># Central European Summer Time (CEST) during the summer as daylight saving time,</span></span>
-<span id="cb20-13"><a href="#cb20-13" aria-hidden="true" tabindex="-1"></a><span class="co"># which is two hours ahead of Coordinated Universal Time (UTC+02:00).</span></span>
-<span id="cb20-14"><a href="#cb20-14" aria-hidden="true" tabindex="-1"></a><span class="co"># https://en.wikipedia.org/wiki/Time_in_Switzerland</span></span>
-<span id="cb20-15"><a href="#cb20-15" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb20-16"><a href="#cb20-16" aria-hidden="true" tabindex="-1"></a><span class="co"># Was sind Astronomische Dämmerung und Golden Hour ueberhaupt?</span></span>
-<span id="cb20-17"><a href="#cb20-17" aria-hidden="true" tabindex="-1"></a><span class="co"># https://sunrisesunset.de/sonne/schweiz/zurich-kreis-1-city/</span></span>
-<span id="cb20-18"><a href="#cb20-18" aria-hidden="true" tabindex="-1"></a><span class="co"># https://www.rdocumentation.org/packages/suncalc/versions/0.5.0/topics/getSunlightTimes</span></span>
-<span id="cb20-19"><a href="#cb20-19" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb20-20"><a href="#cb20-20" aria-hidden="true" tabindex="-1"></a><span class="co"># Wir arbeiten mit folgenden Variablen:</span></span>
-<span id="cb20-21"><a href="#cb20-21" aria-hidden="true" tabindex="-1"></a><span class="co"># "nightEnd" : night ends (morning astronomical twilight starts)</span></span>
-<span id="cb20-22"><a href="#cb20-22" aria-hidden="true" tabindex="-1"></a><span class="co"># "goldenHourEnd" : morning golden hour (soft light, best time for photography) ends</span></span>
-<span id="cb20-23"><a href="#cb20-23" aria-hidden="true" tabindex="-1"></a><span class="co"># "goldenHour" : evening golden hour starts</span></span>
-<span id="cb20-24"><a href="#cb20-24" aria-hidden="true" tabindex="-1"></a><span class="co"># "night" : night starts (dark enough for astronomical observations)</span></span>
-<span id="cb20-25"><a href="#cb20-25" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb20-26"><a href="#cb20-26" aria-hidden="true" tabindex="-1"></a>lumidata <span class="ot">&lt;-</span></span>
-<span id="cb20-27"><a href="#cb20-27" aria-hidden="true" tabindex="-1"></a>    <span class="fu">getSunlightTimes</span>(</span>
-<span id="cb20-28"><a href="#cb20-28" aria-hidden="true" tabindex="-1"></a>        <span class="at">date =</span> <span class="fu">seq.Date</span>(depo_start, depo_end, <span class="at">by =</span> <span class="dv">1</span>),</span>
-<span id="cb20-29"><a href="#cb20-29" aria-hidden="true" tabindex="-1"></a>        <span class="at">keep =</span> <span class="fu">c</span>(<span class="st">"nightEnd"</span>, <span class="st">"goldenHourEnd"</span>, <span class="st">"goldenHour"</span>, <span class="st">"night"</span>),</span>
-<span id="cb20-30"><a href="#cb20-30" aria-hidden="true" tabindex="-1"></a>        <span class="at">lat =</span> Latitude,</span>
-<span id="cb20-31"><a href="#cb20-31" aria-hidden="true" tabindex="-1"></a>        <span class="at">lon =</span> Longitude,</span>
-<span id="cb20-32"><a href="#cb20-32" aria-hidden="true" tabindex="-1"></a>        <span class="at">tz =</span> <span class="st">"CET"</span></span>
-<span id="cb20-33"><a href="#cb20-33" aria-hidden="true" tabindex="-1"></a>    ) <span class="sc">|&gt;</span></span>
-<span id="cb20-34"><a href="#cb20-34" aria-hidden="true" tabindex="-1"></a>    <span class="fu">as_tibble</span>()</span>
-<span id="cb20-35"><a href="#cb20-35" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb20-36"><a href="#cb20-36" aria-hidden="true" tabindex="-1"></a><span class="co"># jetzt haben wir alle noetigen Angaben zu Sonnenaufgang, Tageslaenge usw.</span></span>
-<span id="cb20-37"><a href="#cb20-37" aria-hidden="true" tabindex="-1"></a><span class="co"># diese Angaben koennen wir nun mit unseren Zaehldaten verbinden:</span></span>
-<span id="cb20-38"><a href="#cb20-38" aria-hidden="true" tabindex="-1"></a>depo <span class="ot">&lt;-</span> depo <span class="sc">|&gt;</span></span>
-<span id="cb20-39"><a href="#cb20-39" aria-hidden="true" tabindex="-1"></a>    <span class="fu">left_join</span>(lumidata, <span class="at">by =</span> <span class="fu">c</span>(<span class="at">Datum =</span> <span class="st">"date"</span>))</span>
-<span id="cb20-40"><a href="#cb20-40" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb20-41"><a href="#cb20-41" aria-hidden="true" tabindex="-1"></a>depo <span class="ot">&lt;-</span> depo <span class="sc">|&gt;</span></span>
-<span id="cb20-42"><a href="#cb20-42" aria-hidden="true" tabindex="-1"></a>    <span class="fu">mutate</span>(<span class="at">Tageszeit =</span> <span class="fu">case_when</span>(</span>
-<span id="cb20-43"><a href="#cb20-43" aria-hidden="true" tabindex="-1"></a>        Datetime <span class="sc">&gt;=</span> nightEnd <span class="sc">&amp;</span> Datetime <span class="sc">&lt;=</span> goldenHourEnd <span class="sc">~</span> <span class="st">"Morgen"</span>,</span>
-<span id="cb20-44"><a href="#cb20-44" aria-hidden="true" tabindex="-1"></a>        Datetime <span class="sc">&gt;</span> goldenHourEnd <span class="sc">&amp;</span> Datetime <span class="sc">&lt;</span> goldenHour <span class="sc">~</span> <span class="st">"Tag"</span>,</span>
-<span id="cb20-45"><a href="#cb20-45" aria-hidden="true" tabindex="-1"></a>        Datetime <span class="sc">&gt;=</span> goldenHour <span class="sc">&amp;</span> Datetime <span class="sc">&lt;=</span> night <span class="sc">~</span> <span class="st">"Abend"</span>,</span>
-<span id="cb20-46"><a href="#cb20-46" aria-hidden="true" tabindex="-1"></a>        <span class="at">.default =</span> <span class="st">"Nacht"</span></span>
-<span id="cb20-47"><a href="#cb20-47" aria-hidden="true" tabindex="-1"></a>    )) <span class="sc">|&gt;</span></span>
-<span id="cb20-48"><a href="#cb20-48" aria-hidden="true" tabindex="-1"></a>    <span class="fu">mutate</span>(<span class="at">Tageszeit =</span> <span class="fu">factor</span>(Tageszeit, <span class="at">levels =</span> <span class="fu">c</span>(<span class="st">"Morgen"</span>, <span class="st">"Tag"</span>, <span class="st">"Abend"</span>, <span class="st">"Nacht"</span>), <span class="at">ordered =</span> <span class="cn">TRUE</span>))</span>
-<span id="cb20-49"><a href="#cb20-49" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb20-50"><a href="#cb20-50" aria-hidden="true" tabindex="-1"></a><span class="co"># behalte die relevanten Var</span></span>
-<span id="cb20-51"><a href="#cb20-51" aria-hidden="true" tabindex="-1"></a>depo <span class="ot">&lt;-</span> depo <span class="sc">|&gt;</span> dplyr<span class="sc">::</span><span class="fu">select</span>(<span class="sc">-</span>nightEnd, <span class="sc">-</span>goldenHourEnd, <span class="sc">-</span>goldenHour, <span class="sc">-</span>night, <span class="sc">-</span>lat, <span class="sc">-</span>lon)</span>
-<span id="cb20-52"><a href="#cb20-52" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb20-53"><a href="#cb20-53" aria-hidden="true" tabindex="-1"></a><span class="co"># Plotte zum pruefn ob das funktioniert hat</span></span>
-<span id="cb20-54"><a href="#cb20-54" aria-hidden="true" tabindex="-1"></a><span class="fu">ggplot</span>(depo, <span class="fu">aes</span>(<span class="at">y =</span> Datetime, <span class="at">color =</span> Tageszeit, <span class="at">x =</span> Stunde)) <span class="sc">+</span></span>
-<span id="cb20-55"><a href="#cb20-55" aria-hidden="true" tabindex="-1"></a>    <span class="fu">geom_jitter</span>() <span class="sc">+</span></span>
-<span id="cb20-56"><a href="#cb20-56" aria-hidden="true" tabindex="-1"></a>    <span class="fu">scale_color_manual</span>(<span class="at">values =</span> mycolors)</span>
-<span id="cb20-57"><a href="#cb20-57" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb20-58"><a href="#cb20-58" aria-hidden="true" tabindex="-1"></a><span class="fu">sum</span>(<span class="fu">is.na</span>(depo))</span>
-<span id="cb20-59"><a href="#cb20-59" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb20-60"><a href="#cb20-60" aria-hidden="true" tabindex="-1"></a><span class="co"># bei mir hat der Zusatz der Tageszeit noch zu einigen NA-Wertren gefueht.</span></span>
-<span id="cb20-61"><a href="#cb20-61" aria-hidden="true" tabindex="-1"></a><span class="co"># Diese loesche ich einfach:</span></span>
-<span id="cb20-62"><a href="#cb20-62" aria-hidden="true" tabindex="-1"></a>depo <span class="ot">&lt;-</span> <span class="fu">na.omit</span>(depo)</span>
-<span id="cb20-63"><a href="#cb20-63" aria-hidden="true" tabindex="-1"></a><span class="co"># hat das funktioniert?</span></span>
-<span id="cb20-64"><a href="#cb20-64" aria-hidden="true" tabindex="-1"></a><span class="fu">sum</span>(<span class="fu">is.na</span>(depo))</span></code><button title="In die Zwischenablage kopieren" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb19"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb19-1"><a href="#cb19-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Einteilung Standort Zuerich</span></span>
+<span id="cb19-2"><a href="#cb19-2" aria-hidden="true" tabindex="-1"></a>Latitude <span class="ot">&lt;-</span> <span class="fl">47.38598</span></span>
+<span id="cb19-3"><a href="#cb19-3" aria-hidden="true" tabindex="-1"></a>Longitude <span class="ot">&lt;-</span> <span class="fl">8.50806</span></span>
+<span id="cb19-4"><a href="#cb19-4" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb19-5"><a href="#cb19-5" aria-hidden="true" tabindex="-1"></a><span class="co"># Start und das Ende der Sommerzeit:</span></span>
+<span id="cb19-6"><a href="#cb19-6" aria-hidden="true" tabindex="-1"></a><span class="co"># https://www.schulferien.org/schweiz/zeit/zeitumstellung/</span></span>
+<span id="cb19-7"><a href="#cb19-7" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb19-8"><a href="#cb19-8" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb19-9"><a href="#cb19-9" aria-hidden="true" tabindex="-1"></a><span class="co"># Welche Zeitzone haben wir eigentlich?</span></span>
+<span id="cb19-10"><a href="#cb19-10" aria-hidden="true" tabindex="-1"></a><span class="co"># Switzerland uses Central European Time (CET) during the winter as standard time,</span></span>
+<span id="cb19-11"><a href="#cb19-11" aria-hidden="true" tabindex="-1"></a><span class="co"># which is one hour ahead of Coordinated Universal Time (UTC+01:00), and</span></span>
+<span id="cb19-12"><a href="#cb19-12" aria-hidden="true" tabindex="-1"></a><span class="co"># Central European Summer Time (CEST) during the summer as daylight saving time,</span></span>
+<span id="cb19-13"><a href="#cb19-13" aria-hidden="true" tabindex="-1"></a><span class="co"># which is two hours ahead of Coordinated Universal Time (UTC+02:00).</span></span>
+<span id="cb19-14"><a href="#cb19-14" aria-hidden="true" tabindex="-1"></a><span class="co"># https://en.wikipedia.org/wiki/Time_in_Switzerland</span></span>
+<span id="cb19-15"><a href="#cb19-15" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb19-16"><a href="#cb19-16" aria-hidden="true" tabindex="-1"></a><span class="co"># Was sind Astronomische Dämmerung und Golden Hour ueberhaupt?</span></span>
+<span id="cb19-17"><a href="#cb19-17" aria-hidden="true" tabindex="-1"></a><span class="co"># https://sunrisesunset.de/sonne/schweiz/zurich-kreis-1-city/</span></span>
+<span id="cb19-18"><a href="#cb19-18" aria-hidden="true" tabindex="-1"></a><span class="co"># https://www.rdocumentation.org/packages/suncalc/versions/0.5.0/topics/getSunlightTimes</span></span>
+<span id="cb19-19"><a href="#cb19-19" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb19-20"><a href="#cb19-20" aria-hidden="true" tabindex="-1"></a><span class="co"># Wir arbeiten mit folgenden Variablen:</span></span>
+<span id="cb19-21"><a href="#cb19-21" aria-hidden="true" tabindex="-1"></a><span class="co"># "nightEnd" : night ends (morning astronomical twilight starts)</span></span>
+<span id="cb19-22"><a href="#cb19-22" aria-hidden="true" tabindex="-1"></a><span class="co"># "goldenHourEnd" : morning golden hour (soft light, best time for photography) ends</span></span>
+<span id="cb19-23"><a href="#cb19-23" aria-hidden="true" tabindex="-1"></a><span class="co"># "goldenHour" : evening golden hour starts</span></span>
+<span id="cb19-24"><a href="#cb19-24" aria-hidden="true" tabindex="-1"></a><span class="co"># "night" : night starts (dark enough for astronomical observations)</span></span>
+<span id="cb19-25"><a href="#cb19-25" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb19-26"><a href="#cb19-26" aria-hidden="true" tabindex="-1"></a>lumidata <span class="ot">&lt;-</span></span>
+<span id="cb19-27"><a href="#cb19-27" aria-hidden="true" tabindex="-1"></a>    <span class="fu">getSunlightTimes</span>(</span>
+<span id="cb19-28"><a href="#cb19-28" aria-hidden="true" tabindex="-1"></a>        <span class="at">date =</span> <span class="fu">seq.Date</span>(depo_start, depo_end, <span class="at">by =</span> <span class="dv">1</span>),</span>
+<span id="cb19-29"><a href="#cb19-29" aria-hidden="true" tabindex="-1"></a>        <span class="at">keep =</span> <span class="fu">c</span>(<span class="st">"nightEnd"</span>, <span class="st">"goldenHourEnd"</span>, <span class="st">"goldenHour"</span>, <span class="st">"night"</span>),</span>
+<span id="cb19-30"><a href="#cb19-30" aria-hidden="true" tabindex="-1"></a>        <span class="at">lat =</span> Latitude,</span>
+<span id="cb19-31"><a href="#cb19-31" aria-hidden="true" tabindex="-1"></a>        <span class="at">lon =</span> Longitude,</span>
+<span id="cb19-32"><a href="#cb19-32" aria-hidden="true" tabindex="-1"></a>        <span class="at">tz =</span> <span class="st">"CET"</span></span>
+<span id="cb19-33"><a href="#cb19-33" aria-hidden="true" tabindex="-1"></a>    ) <span class="sc">|&gt;</span></span>
+<span id="cb19-34"><a href="#cb19-34" aria-hidden="true" tabindex="-1"></a>    <span class="fu">as_tibble</span>()</span>
+<span id="cb19-35"><a href="#cb19-35" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb19-36"><a href="#cb19-36" aria-hidden="true" tabindex="-1"></a><span class="co"># jetzt haben wir alle noetigen Angaben zu Sonnenaufgang, Tageslaenge usw.</span></span>
+<span id="cb19-37"><a href="#cb19-37" aria-hidden="true" tabindex="-1"></a><span class="co"># diese Angaben koennen wir nun mit unseren Zaehldaten verbinden:</span></span>
+<span id="cb19-38"><a href="#cb19-38" aria-hidden="true" tabindex="-1"></a>depo <span class="ot">&lt;-</span> depo <span class="sc">|&gt;</span></span>
+<span id="cb19-39"><a href="#cb19-39" aria-hidden="true" tabindex="-1"></a>    <span class="fu">left_join</span>(lumidata, <span class="at">by =</span> <span class="fu">c</span>(<span class="at">Datum =</span> <span class="st">"date"</span>))</span>
+<span id="cb19-40"><a href="#cb19-40" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb19-41"><a href="#cb19-41" aria-hidden="true" tabindex="-1"></a>depo <span class="ot">&lt;-</span> depo <span class="sc">|&gt;</span></span>
+<span id="cb19-42"><a href="#cb19-42" aria-hidden="true" tabindex="-1"></a>    <span class="fu">mutate</span>(<span class="at">Tageszeit =</span> <span class="fu">case_when</span>(</span>
+<span id="cb19-43"><a href="#cb19-43" aria-hidden="true" tabindex="-1"></a>        Datetime <span class="sc">&gt;=</span> nightEnd <span class="sc">&amp;</span> Datetime <span class="sc">&lt;=</span> goldenHourEnd <span class="sc">~</span> <span class="st">"Morgen"</span>,</span>
+<span id="cb19-44"><a href="#cb19-44" aria-hidden="true" tabindex="-1"></a>        Datetime <span class="sc">&gt;</span> goldenHourEnd <span class="sc">&amp;</span> Datetime <span class="sc">&lt;</span> goldenHour <span class="sc">~</span> <span class="st">"Tag"</span>,</span>
+<span id="cb19-45"><a href="#cb19-45" aria-hidden="true" tabindex="-1"></a>        Datetime <span class="sc">&gt;=</span> goldenHour <span class="sc">&amp;</span> Datetime <span class="sc">&lt;=</span> night <span class="sc">~</span> <span class="st">"Abend"</span>,</span>
+<span id="cb19-46"><a href="#cb19-46" aria-hidden="true" tabindex="-1"></a>        <span class="at">.default =</span> <span class="st">"Nacht"</span></span>
+<span id="cb19-47"><a href="#cb19-47" aria-hidden="true" tabindex="-1"></a>    )) <span class="sc">|&gt;</span></span>
+<span id="cb19-48"><a href="#cb19-48" aria-hidden="true" tabindex="-1"></a>    <span class="fu">mutate</span>(<span class="at">Tageszeit =</span> <span class="fu">factor</span>(Tageszeit, <span class="at">levels =</span> <span class="fu">c</span>(<span class="st">"Morgen"</span>, <span class="st">"Tag"</span>, <span class="st">"Abend"</span>, <span class="st">"Nacht"</span>), <span class="at">ordered =</span> <span class="cn">TRUE</span>))</span>
+<span id="cb19-49"><a href="#cb19-49" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb19-50"><a href="#cb19-50" aria-hidden="true" tabindex="-1"></a><span class="co"># behalte die relevanten Var</span></span>
+<span id="cb19-51"><a href="#cb19-51" aria-hidden="true" tabindex="-1"></a>depo <span class="ot">&lt;-</span> depo <span class="sc">|&gt;</span> dplyr<span class="sc">::</span><span class="fu">select</span>(<span class="sc">-</span>nightEnd, <span class="sc">-</span>goldenHourEnd, <span class="sc">-</span>goldenHour, <span class="sc">-</span>night, <span class="sc">-</span>lat, <span class="sc">-</span>lon)</span>
+<span id="cb19-52"><a href="#cb19-52" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb19-53"><a href="#cb19-53" aria-hidden="true" tabindex="-1"></a><span class="co"># Plotte zum pruefn ob das funktioniert hat</span></span>
+<span id="cb19-54"><a href="#cb19-54" aria-hidden="true" tabindex="-1"></a><span class="fu">ggplot</span>(depo, <span class="fu">aes</span>(<span class="at">y =</span> Datetime, <span class="at">color =</span> Tageszeit, <span class="at">x =</span> Stunde)) <span class="sc">+</span></span>
+<span id="cb19-55"><a href="#cb19-55" aria-hidden="true" tabindex="-1"></a>    <span class="fu">geom_jitter</span>() <span class="sc">+</span></span>
+<span id="cb19-56"><a href="#cb19-56" aria-hidden="true" tabindex="-1"></a>    <span class="fu">scale_color_manual</span>(<span class="at">values =</span> mycolors)</span>
+<span id="cb19-57"><a href="#cb19-57" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb19-58"><a href="#cb19-58" aria-hidden="true" tabindex="-1"></a><span class="fu">sum</span>(<span class="fu">is.na</span>(depo))</span>
+<span id="cb19-59"><a href="#cb19-59" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb19-60"><a href="#cb19-60" aria-hidden="true" tabindex="-1"></a><span class="co"># bei mir hat der Zusatz der Tageszeit noch zu einigen NA-Wertren gefueht.</span></span>
+<span id="cb19-61"><a href="#cb19-61" aria-hidden="true" tabindex="-1"></a><span class="co"># Diese loesche ich einfach:</span></span>
+<span id="cb19-62"><a href="#cb19-62" aria-hidden="true" tabindex="-1"></a>depo <span class="ot">&lt;-</span> <span class="fu">na.omit</span>(depo)</span>
+<span id="cb19-63"><a href="#cb19-63" aria-hidden="true" tabindex="-1"></a><span class="co"># hat das funktioniert?</span></span>
+<span id="cb19-64"><a href="#cb19-64" aria-hidden="true" tabindex="-1"></a><span class="fu">sum</span>(<span class="fu">is.na</span>(depo))</span></code><button title="In die Zwischenablage kopieren" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </details>
 </div>
 </section>
@@ -955,24 +939,24 @@ window.onload = function() {
 <div class="cell">
 <details class="code-fold">
 <summary>Musterlösung</summary>
-<div class="sourceCode cell-code" id="cb21"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb21-1"><a href="#cb21-1" aria-hidden="true" tabindex="-1"></a>depo_d <span class="ot">&lt;-</span> depo <span class="sc">|&gt;</span> </span>
-<span id="cb21-2"><a href="#cb21-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">group_by</span>(Datum) <span class="sc">|&gt;</span>   <span class="co"># Gruppieren nach der Variable Datum</span></span>
-<span id="cb21-3"><a href="#cb21-3" aria-hidden="true" tabindex="-1"></a>  <span class="fu">summarise</span>(<span class="at">Total =</span> <span class="fu">sum</span>(Fuss_IN <span class="sc">+</span> Fuss_OUT),<span class="co"># Berechnen der gewünschten Werte</span></span>
-<span id="cb21-4"><a href="#cb21-4" aria-hidden="true" tabindex="-1"></a>            <span class="at">Fuss_IN =</span> <span class="fu">sum</span>(Fuss_IN),</span>
-<span id="cb21-5"><a href="#cb21-5" aria-hidden="true" tabindex="-1"></a>            ...</span></code><button title="In die Zwischenablage kopieren" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb20"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb20-1"><a href="#cb20-1" aria-hidden="true" tabindex="-1"></a>depo_d <span class="ot">&lt;-</span> depo <span class="sc">|&gt;</span> </span>
+<span id="cb20-2"><a href="#cb20-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">group_by</span>(Datum) <span class="sc">|&gt;</span>   <span class="co"># Gruppieren nach der Variable Datum</span></span>
+<span id="cb20-3"><a href="#cb20-3" aria-hidden="true" tabindex="-1"></a>  <span class="fu">summarise</span>(<span class="at">Total =</span> <span class="fu">sum</span>(Fuss_IN <span class="sc">+</span> Fuss_OUT),<span class="co"># Berechnen der gewünschten Werte</span></span>
+<span id="cb20-4"><a href="#cb20-4" aria-hidden="true" tabindex="-1"></a>            <span class="at">Fuss_IN =</span> <span class="fu">sum</span>(Fuss_IN),</span>
+<span id="cb20-5"><a href="#cb20-5" aria-hidden="true" tabindex="-1"></a>            ...</span></code><button title="In die Zwischenablage kopieren" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </details>
 </div>
 <div class="cell">
 <details class="code-fold">
 <summary>Musterlösung</summary>
-<div class="sourceCode cell-code" id="cb22"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb22-1"><a href="#cb22-1" aria-hidden="true" tabindex="-1"></a><span class="co"># hier werden also pro Nutzergruppe und Richtung die Stundenwerte pro Tag aufsummiert</span></span>
-<span id="cb22-2"><a href="#cb22-2" aria-hidden="true" tabindex="-1"></a>depo_d <span class="ot">&lt;-</span> depo <span class="sc">|&gt;</span></span>
-<span id="cb22-3"><a href="#cb22-3" aria-hidden="true" tabindex="-1"></a>  <span class="fu">group_by</span>(Datum) <span class="sc">|&gt;</span></span>
-<span id="cb22-4"><a href="#cb22-4" aria-hidden="true" tabindex="-1"></a>  <span class="fu">summarise</span>(</span>
-<span id="cb22-5"><a href="#cb22-5" aria-hidden="true" tabindex="-1"></a>    <span class="at">Total =</span> <span class="fu">sum</span>(Fuss_IN <span class="sc">+</span> Fuss_OUT),</span>
-<span id="cb22-6"><a href="#cb22-6" aria-hidden="true" tabindex="-1"></a>    <span class="at">Fuss_IN =</span> <span class="fu">sum</span>(Fuss_IN),</span>
-<span id="cb22-7"><a href="#cb22-7" aria-hidden="true" tabindex="-1"></a>    <span class="at">Fuss_OUT =</span> <span class="fu">sum</span>(Fuss_OUT)</span>
-<span id="cb22-8"><a href="#cb22-8" aria-hidden="true" tabindex="-1"></a>  )</span></code><button title="In die Zwischenablage kopieren" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb21"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb21-1"><a href="#cb21-1" aria-hidden="true" tabindex="-1"></a><span class="co"># hier werden also pro Nutzergruppe und Richtung die Stundenwerte pro Tag aufsummiert</span></span>
+<span id="cb21-2"><a href="#cb21-2" aria-hidden="true" tabindex="-1"></a>depo_d <span class="ot">&lt;-</span> depo <span class="sc">|&gt;</span></span>
+<span id="cb21-3"><a href="#cb21-3" aria-hidden="true" tabindex="-1"></a>  <span class="fu">group_by</span>(Datum) <span class="sc">|&gt;</span></span>
+<span id="cb21-4"><a href="#cb21-4" aria-hidden="true" tabindex="-1"></a>  <span class="fu">summarise</span>(</span>
+<span id="cb21-5"><a href="#cb21-5" aria-hidden="true" tabindex="-1"></a>    <span class="at">Total =</span> <span class="fu">sum</span>(Fuss_IN <span class="sc">+</span> Fuss_OUT),</span>
+<span id="cb21-6"><a href="#cb21-6" aria-hidden="true" tabindex="-1"></a>    <span class="at">Fuss_IN =</span> <span class="fu">sum</span>(Fuss_IN),</span>
+<span id="cb21-7"><a href="#cb21-7" aria-hidden="true" tabindex="-1"></a>    <span class="at">Fuss_OUT =</span> <span class="fu">sum</span>(Fuss_OUT)</span>
+<span id="cb21-8"><a href="#cb21-8" aria-hidden="true" tabindex="-1"></a>  )</span></code><button title="In die Zwischenablage kopieren" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </details>
 </div>
 <ul>
@@ -981,8 +965,8 @@ window.onload = function() {
 <div class="cell">
 <details class="code-fold">
 <summary>Musterlösung</summary>
-<div class="sourceCode cell-code" id="cb23"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb23-1"><a href="#cb23-1" aria-hidden="true" tabindex="-1"></a>depo_d <span class="ot">&lt;-</span> depo_d <span class="sc">|&gt;</span> </span>
-<span id="cb23-2"><a href="#cb23-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">mutate</span>(<span class="at">Tage_bis_Neujahr =</span> <span class="fu">as.numeric</span>(<span class="fu">difftime</span>(<span class="fu">ymd</span>(<span class="fu">paste0</span>(<span class="fu">year</span>(Datum), <span class="st">"-12-31"</span>)), Datum, <span class="at">units =</span> <span class="st">"days"</span>)))</span></code><button title="In die Zwischenablage kopieren" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb22"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb22-1"><a href="#cb22-1" aria-hidden="true" tabindex="-1"></a>depo_d <span class="ot">&lt;-</span> depo_d <span class="sc">|&gt;</span> </span>
+<span id="cb22-2"><a href="#cb22-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">mutate</span>(<span class="at">Tage_bis_Neujahr =</span> <span class="fu">as.numeric</span>(<span class="fu">difftime</span>(<span class="fu">ymd</span>(<span class="fu">paste0</span>(<span class="fu">year</span>(Datum), <span class="st">"-12-31"</span>)), Datum, <span class="at">units =</span> <span class="st">"days"</span>)))</span></code><button title="In die Zwischenablage kopieren" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </details>
 </div>
 <ul>
@@ -991,43 +975,43 @@ window.onload = function() {
 <div class="cell">
 <details class="code-fold">
 <summary>Musterlösung</summary>
-<div class="sourceCode cell-code" id="cb24"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb24-1"><a href="#cb24-1" aria-hidden="true" tabindex="-1"></a>depo_d <span class="ot">&lt;-</span> depo_d <span class="sc">|&gt;</span></span>
-<span id="cb24-2"><a href="#cb24-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">mutate</span>(</span>
-<span id="cb24-3"><a href="#cb24-3" aria-hidden="true" tabindex="-1"></a>  <span class="at">Wochentag =</span> <span class="fu">wday</span>(Datum, <span class="at">week_start =</span> <span class="dv">1</span>),</span>
-<span id="cb24-4"><a href="#cb24-4" aria-hidden="true" tabindex="-1"></a>  <span class="at">Wochentag =</span> <span class="fu">factor</span>(Wochentag),</span>
-<span id="cb24-5"><a href="#cb24-5" aria-hidden="true" tabindex="-1"></a>  <span class="co"># Werktag oder Wochenende hinzufuegen</span></span>
-<span id="cb24-6"><a href="#cb24-6" aria-hidden="true" tabindex="-1"></a>  <span class="at">Wochenende =</span> <span class="fu">ifelse</span>(Wochentag <span class="sc">%in%</span> <span class="fu">c</span>(<span class="dv">6</span>, <span class="dv">7</span>), <span class="st">"Wochenende"</span>, <span class="st">"Werktag"</span>),</span>
-<span id="cb24-7"><a href="#cb24-7" aria-hidden="true" tabindex="-1"></a>  <span class="at">Wochenende =</span> <span class="fu">as.factor</span>(Wochenende),</span>
-<span id="cb24-8"><a href="#cb24-8" aria-hidden="true" tabindex="-1"></a>  <span class="co"># Kalenderwoche hinzufuegen</span></span>
-<span id="cb24-9"><a href="#cb24-9" aria-hidden="true" tabindex="-1"></a>  <span class="at">KW =</span> <span class="fu">isoweek</span>(Datum),</span>
-<span id="cb24-10"><a href="#cb24-10" aria-hidden="true" tabindex="-1"></a>  <span class="at">KW =</span> <span class="fu">factor</span>(KW),</span>
-<span id="cb24-11"><a href="#cb24-11" aria-hidden="true" tabindex="-1"></a>  <span class="co"># monat und Jahr</span></span>
-<span id="cb24-12"><a href="#cb24-12" aria-hidden="true" tabindex="-1"></a>  <span class="at">Monat =</span> <span class="fu">month</span>(Datum),</span>
-<span id="cb24-13"><a href="#cb24-13" aria-hidden="true" tabindex="-1"></a>  <span class="at">Monat =</span> <span class="fu">factor</span>(Monat),</span>
-<span id="cb24-14"><a href="#cb24-14" aria-hidden="true" tabindex="-1"></a>  <span class="at">Jahr =</span> <span class="fu">year</span>(Datum),</span>
-<span id="cb24-15"><a href="#cb24-15" aria-hidden="true" tabindex="-1"></a>  <span class="at">Jahr =</span> <span class="fu">factor</span>(Jahr))</span>
-<span id="cb24-16"><a href="#cb24-16" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb24-17"><a href="#cb24-17" aria-hidden="true" tabindex="-1"></a>depo_d <span class="ot">&lt;-</span> depo_d <span class="sc">|&gt;</span></span>
-<span id="cb24-18"><a href="#cb24-18" aria-hidden="true" tabindex="-1"></a>  <span class="fu">mutate</span>(<span class="at">Phase =</span> <span class="fu">case_when</span>(</span>
-<span id="cb24-19"><a href="#cb24-19" aria-hidden="true" tabindex="-1"></a>    Datum <span class="sc">&lt;</span> lock_1_start <span class="sc">~</span> <span class="st">"Pre"</span>,</span>
-<span id="cb24-20"><a href="#cb24-20" aria-hidden="true" tabindex="-1"></a>    Datum <span class="sc">&gt;=</span> lock_1_start <span class="sc">&amp;</span> Datum <span class="sc">&lt;=</span> lock_1_end <span class="sc">~</span> <span class="st">"Lockdown_1"</span>,</span>
-<span id="cb24-21"><a href="#cb24-21" aria-hidden="true" tabindex="-1"></a>    Datum <span class="sc">&gt;</span> lock_1_end <span class="sc">&amp;</span> Datum <span class="sc">&lt;</span> lock_2_start <span class="sc">~</span> <span class="st">"Inter"</span>,</span>
-<span id="cb24-22"><a href="#cb24-22" aria-hidden="true" tabindex="-1"></a>    Datum <span class="sc">&gt;=</span> lock_2_start <span class="sc">&amp;</span> Datum <span class="sc">&lt;=</span> lock_2_end <span class="sc">~</span> <span class="st">"Lockdown_2"</span>,</span>
-<span id="cb24-23"><a href="#cb24-23" aria-hidden="true" tabindex="-1"></a>    Datum <span class="sc">&gt;</span> lock_2_end <span class="sc">~</span> <span class="st">"Post"</span></span>
-<span id="cb24-24"><a href="#cb24-24" aria-hidden="true" tabindex="-1"></a>  ))</span>
-<span id="cb24-25"><a href="#cb24-25" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb24-26"><a href="#cb24-26" aria-hidden="true" tabindex="-1"></a>depo_d <span class="ot">&lt;-</span> depo_d <span class="sc">|&gt;</span></span>
-<span id="cb24-27"><a href="#cb24-27" aria-hidden="true" tabindex="-1"></a>  <span class="fu">mutate</span>(<span class="at">Phase =</span> base<span class="sc">::</span><span class="fu">factor</span>(Phase, <span class="at">levels =</span> <span class="fu">c</span>(<span class="st">"Pre"</span>, <span class="st">"Lockdown_1"</span>, <span class="st">"Inter"</span>, <span class="st">"Lockdown_2"</span>, <span class="st">"Post"</span>)))</span>
-<span id="cb24-28"><a href="#cb24-28" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb24-29"><a href="#cb24-29" aria-hidden="true" tabindex="-1"></a><span class="cf">for</span> (i <span class="cf">in</span> <span class="dv">1</span><span class="sc">:</span><span class="fu">nrow</span>(schulferien)) {</span>
-<span id="cb24-30"><a href="#cb24-30" aria-hidden="true" tabindex="-1"></a>  depo_d<span class="sc">$</span>Ferien[depo_d<span class="sc">$</span>Datum <span class="sc">&gt;=</span> schulferien[i, <span class="st">"Start"</span>] <span class="sc">&amp;</span> depo_d<span class="sc">$</span>Datum <span class="sc">&lt;=</span> schulferien[i, <span class="st">"Ende"</span>]] <span class="ot">&lt;-</span> <span class="dv">1</span></span>
-<span id="cb24-31"><a href="#cb24-31" aria-hidden="true" tabindex="-1"></a>}</span>
-<span id="cb24-32"><a href="#cb24-32" aria-hidden="true" tabindex="-1"></a>depo_d<span class="sc">$</span>Ferien[<span class="fu">is.na</span>(depo_d<span class="sc">$</span>Ferien)] <span class="ot">&lt;-</span> <span class="dv">0</span></span>
-<span id="cb24-33"><a href="#cb24-33" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb24-34"><a href="#cb24-34" aria-hidden="true" tabindex="-1"></a>depo_d<span class="sc">$</span>Ferien <span class="ot">&lt;-</span> <span class="fu">factor</span>(depo_d<span class="sc">$</span>Ferien)</span>
-<span id="cb24-35"><a href="#cb24-35" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb24-36"><a href="#cb24-36" aria-hidden="true" tabindex="-1"></a><span class="co"># pruefe das df</span></span>
-<span id="cb24-37"><a href="#cb24-37" aria-hidden="true" tabindex="-1"></a><span class="fu">head</span>(depo_d)</span></code><button title="In die Zwischenablage kopieren" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb23"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb23-1"><a href="#cb23-1" aria-hidden="true" tabindex="-1"></a>depo_d <span class="ot">&lt;-</span> depo_d <span class="sc">|&gt;</span></span>
+<span id="cb23-2"><a href="#cb23-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">mutate</span>(</span>
+<span id="cb23-3"><a href="#cb23-3" aria-hidden="true" tabindex="-1"></a>  <span class="at">Wochentag =</span> <span class="fu">wday</span>(Datum, <span class="at">week_start =</span> <span class="dv">1</span>),</span>
+<span id="cb23-4"><a href="#cb23-4" aria-hidden="true" tabindex="-1"></a>  <span class="at">Wochentag =</span> <span class="fu">factor</span>(Wochentag),</span>
+<span id="cb23-5"><a href="#cb23-5" aria-hidden="true" tabindex="-1"></a>  <span class="co"># Werktag oder Wochenende hinzufuegen</span></span>
+<span id="cb23-6"><a href="#cb23-6" aria-hidden="true" tabindex="-1"></a>  <span class="at">Wochenende =</span> <span class="fu">ifelse</span>(Wochentag <span class="sc">%in%</span> <span class="fu">c</span>(<span class="dv">6</span>, <span class="dv">7</span>), <span class="st">"Wochenende"</span>, <span class="st">"Werktag"</span>),</span>
+<span id="cb23-7"><a href="#cb23-7" aria-hidden="true" tabindex="-1"></a>  <span class="at">Wochenende =</span> <span class="fu">as.factor</span>(Wochenende),</span>
+<span id="cb23-8"><a href="#cb23-8" aria-hidden="true" tabindex="-1"></a>  <span class="co"># Kalenderwoche hinzufuegen</span></span>
+<span id="cb23-9"><a href="#cb23-9" aria-hidden="true" tabindex="-1"></a>  <span class="at">KW =</span> <span class="fu">isoweek</span>(Datum),</span>
+<span id="cb23-10"><a href="#cb23-10" aria-hidden="true" tabindex="-1"></a>  <span class="at">KW =</span> <span class="fu">factor</span>(KW),</span>
+<span id="cb23-11"><a href="#cb23-11" aria-hidden="true" tabindex="-1"></a>  <span class="co"># monat und Jahr</span></span>
+<span id="cb23-12"><a href="#cb23-12" aria-hidden="true" tabindex="-1"></a>  <span class="at">Monat =</span> <span class="fu">month</span>(Datum),</span>
+<span id="cb23-13"><a href="#cb23-13" aria-hidden="true" tabindex="-1"></a>  <span class="at">Monat =</span> <span class="fu">factor</span>(Monat),</span>
+<span id="cb23-14"><a href="#cb23-14" aria-hidden="true" tabindex="-1"></a>  <span class="at">Jahr =</span> <span class="fu">year</span>(Datum),</span>
+<span id="cb23-15"><a href="#cb23-15" aria-hidden="true" tabindex="-1"></a>  <span class="at">Jahr =</span> <span class="fu">factor</span>(Jahr))</span>
+<span id="cb23-16"><a href="#cb23-16" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb23-17"><a href="#cb23-17" aria-hidden="true" tabindex="-1"></a>depo_d <span class="ot">&lt;-</span> depo_d <span class="sc">|&gt;</span></span>
+<span id="cb23-18"><a href="#cb23-18" aria-hidden="true" tabindex="-1"></a>  <span class="fu">mutate</span>(<span class="at">Phase =</span> <span class="fu">case_when</span>(</span>
+<span id="cb23-19"><a href="#cb23-19" aria-hidden="true" tabindex="-1"></a>    Datum <span class="sc">&lt;</span> lock_1_start <span class="sc">~</span> <span class="st">"Pre"</span>,</span>
+<span id="cb23-20"><a href="#cb23-20" aria-hidden="true" tabindex="-1"></a>    Datum <span class="sc">&gt;=</span> lock_1_start <span class="sc">&amp;</span> Datum <span class="sc">&lt;=</span> lock_1_end <span class="sc">~</span> <span class="st">"Lockdown_1"</span>,</span>
+<span id="cb23-21"><a href="#cb23-21" aria-hidden="true" tabindex="-1"></a>    Datum <span class="sc">&gt;</span> lock_1_end <span class="sc">&amp;</span> Datum <span class="sc">&lt;</span> lock_2_start <span class="sc">~</span> <span class="st">"Inter"</span>,</span>
+<span id="cb23-22"><a href="#cb23-22" aria-hidden="true" tabindex="-1"></a>    Datum <span class="sc">&gt;=</span> lock_2_start <span class="sc">&amp;</span> Datum <span class="sc">&lt;=</span> lock_2_end <span class="sc">~</span> <span class="st">"Lockdown_2"</span>,</span>
+<span id="cb23-23"><a href="#cb23-23" aria-hidden="true" tabindex="-1"></a>    Datum <span class="sc">&gt;</span> lock_2_end <span class="sc">~</span> <span class="st">"Post"</span></span>
+<span id="cb23-24"><a href="#cb23-24" aria-hidden="true" tabindex="-1"></a>  ))</span>
+<span id="cb23-25"><a href="#cb23-25" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb23-26"><a href="#cb23-26" aria-hidden="true" tabindex="-1"></a>depo_d <span class="ot">&lt;-</span> depo_d <span class="sc">|&gt;</span></span>
+<span id="cb23-27"><a href="#cb23-27" aria-hidden="true" tabindex="-1"></a>  <span class="fu">mutate</span>(<span class="at">Phase =</span> base<span class="sc">::</span><span class="fu">factor</span>(Phase, <span class="at">levels =</span> <span class="fu">c</span>(<span class="st">"Pre"</span>, <span class="st">"Lockdown_1"</span>, <span class="st">"Inter"</span>, <span class="st">"Lockdown_2"</span>, <span class="st">"Post"</span>)))</span>
+<span id="cb23-28"><a href="#cb23-28" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb23-29"><a href="#cb23-29" aria-hidden="true" tabindex="-1"></a><span class="cf">for</span> (i <span class="cf">in</span> <span class="dv">1</span><span class="sc">:</span><span class="fu">nrow</span>(schulferien)) {</span>
+<span id="cb23-30"><a href="#cb23-30" aria-hidden="true" tabindex="-1"></a>  depo_d<span class="sc">$</span>Ferien[depo_d<span class="sc">$</span>Datum <span class="sc">&gt;=</span> schulferien[i, <span class="st">"Start"</span>] <span class="sc">&amp;</span> depo_d<span class="sc">$</span>Datum <span class="sc">&lt;=</span> schulferien[i, <span class="st">"Ende"</span>]] <span class="ot">&lt;-</span> <span class="dv">1</span></span>
+<span id="cb23-31"><a href="#cb23-31" aria-hidden="true" tabindex="-1"></a>}</span>
+<span id="cb23-32"><a href="#cb23-32" aria-hidden="true" tabindex="-1"></a>depo_d<span class="sc">$</span>Ferien[<span class="fu">is.na</span>(depo_d<span class="sc">$</span>Ferien)] <span class="ot">&lt;-</span> <span class="dv">0</span></span>
+<span id="cb23-33"><a href="#cb23-33" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb23-34"><a href="#cb23-34" aria-hidden="true" tabindex="-1"></a>depo_d<span class="sc">$</span>Ferien <span class="ot">&lt;-</span> <span class="fu">factor</span>(depo_d<span class="sc">$</span>Ferien)</span>
+<span id="cb23-35"><a href="#cb23-35" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb23-36"><a href="#cb23-36" aria-hidden="true" tabindex="-1"></a><span class="co"># pruefe das df</span></span>
+<span id="cb23-37"><a href="#cb23-37" aria-hidden="true" tabindex="-1"></a><span class="fu">head</span>(depo_d)</span></code><button title="In die Zwischenablage kopieren" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </details>
 </div>
 <ul>
@@ -1045,12 +1029,12 @@ window.onload = function() {
 <div class="cell">
 <details class="code-fold">
 <summary>Musterlösung</summary>
-<div class="sourceCode cell-code" id="cb25"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb25-1"><a href="#cb25-1" aria-hidden="true" tabindex="-1"></a>depo_daytime <span class="ot">&lt;-</span> depo <span class="sc">|&gt;</span></span>
-<span id="cb25-2"><a href="#cb25-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">group_by</span>(Jahr, Monat, KW, Phase, Ferien, Wochenende, Tageszeit) <span class="sc">|&gt;</span></span>
-<span id="cb25-3"><a href="#cb25-3" aria-hidden="true" tabindex="-1"></a>  <span class="fu">summarise</span>(</span>
-<span id="cb25-4"><a href="#cb25-4" aria-hidden="true" tabindex="-1"></a>    <span class="at">Total =</span> <span class="fu">sum</span>(Fuss_IN <span class="sc">+</span> Fuss_OUT),</span>
-<span id="cb25-5"><a href="#cb25-5" aria-hidden="true" tabindex="-1"></a>    <span class="at">Fuss_IN =</span> <span class="fu">sum</span>(Fuss_IN),</span>
-<span id="cb25-6"><a href="#cb25-6" aria-hidden="true" tabindex="-1"></a>    <span class="at">Fuss_OUT =</span> <span class="fu">sum</span>(Fuss_OUT))</span></code><button title="In die Zwischenablage kopieren" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb24"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb24-1"><a href="#cb24-1" aria-hidden="true" tabindex="-1"></a>depo_daytime <span class="ot">&lt;-</span> depo <span class="sc">|&gt;</span></span>
+<span id="cb24-2"><a href="#cb24-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">group_by</span>(Jahr, Monat, KW, Phase, Ferien, Wochenende, Tageszeit) <span class="sc">|&gt;</span></span>
+<span id="cb24-3"><a href="#cb24-3" aria-hidden="true" tabindex="-1"></a>  <span class="fu">summarise</span>(</span>
+<span id="cb24-4"><a href="#cb24-4" aria-hidden="true" tabindex="-1"></a>    <span class="at">Total =</span> <span class="fu">sum</span>(Fuss_IN <span class="sc">+</span> Fuss_OUT),</span>
+<span id="cb24-5"><a href="#cb24-5" aria-hidden="true" tabindex="-1"></a>    <span class="at">Fuss_IN =</span> <span class="fu">sum</span>(Fuss_IN),</span>
+<span id="cb24-6"><a href="#cb24-6" aria-hidden="true" tabindex="-1"></a>    <span class="at">Fuss_OUT =</span> <span class="fu">sum</span>(Fuss_OUT))</span></code><button title="In die Zwischenablage kopieren" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </details>
 </div>
 <ul>
@@ -1059,12 +1043,12 @@ window.onload = function() {
 <div class="cell">
 <details class="code-fold">
 <summary>Musterlösung</summary>
-<div class="sourceCode cell-code" id="cb26"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb26-1"><a href="#cb26-1" aria-hidden="true" tabindex="-1"></a>mean_phase_d <span class="ot">&lt;-</span> depo_daytime <span class="sc">|&gt;</span></span>
-<span id="cb26-2"><a href="#cb26-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">group_by</span>(Phase, Tageszeit) <span class="sc">|&gt;</span></span>
-<span id="cb26-3"><a href="#cb26-3" aria-hidden="true" tabindex="-1"></a>  <span class="fu">summarise</span>(</span>
-<span id="cb26-4"><a href="#cb26-4" aria-hidden="true" tabindex="-1"></a>    <span class="at">Total =</span> <span class="fu">mean</span>(Total),</span>
-<span id="cb26-5"><a href="#cb26-5" aria-hidden="true" tabindex="-1"></a>    <span class="at">IN =</span> <span class="fu">mean</span>(Fuss_IN),</span>
-<span id="cb26-6"><a href="#cb26-6" aria-hidden="true" tabindex="-1"></a>    <span class="at">OUT =</span> <span class="fu">mean</span>(Fuss_OUT))</span></code><button title="In die Zwischenablage kopieren" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb25"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb25-1"><a href="#cb25-1" aria-hidden="true" tabindex="-1"></a>mean_phase_d <span class="ot">&lt;-</span> depo_daytime <span class="sc">|&gt;</span></span>
+<span id="cb25-2"><a href="#cb25-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">group_by</span>(Phase, Tageszeit) <span class="sc">|&gt;</span></span>
+<span id="cb25-3"><a href="#cb25-3" aria-hidden="true" tabindex="-1"></a>  <span class="fu">summarise</span>(</span>
+<span id="cb25-4"><a href="#cb25-4" aria-hidden="true" tabindex="-1"></a>    <span class="at">Total =</span> <span class="fu">mean</span>(Total),</span>
+<span id="cb25-5"><a href="#cb25-5" aria-hidden="true" tabindex="-1"></a>    <span class="at">IN =</span> <span class="fu">mean</span>(Fuss_IN),</span>
+<span id="cb25-6"><a href="#cb25-6" aria-hidden="true" tabindex="-1"></a>    <span class="at">OUT =</span> <span class="fu">mean</span>(Fuss_OUT))</span></code><button title="In die Zwischenablage kopieren" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </details>
 </div>
 </section>
@@ -1077,9 +1061,9 @@ window.onload = function() {
 <div class="cell">
 <details class="code-fold">
 <summary>Musterlösung</summary>
-<div class="sourceCode cell-code" id="cb27"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb27-1"><a href="#cb27-1" aria-hidden="true" tabindex="-1"></a>depo_m <span class="ot">&lt;-</span> depo <span class="sc">|&gt;</span></span>
-<span id="cb27-2"><a href="#cb27-2" aria-hidden="true" tabindex="-1"></a>    <span class="fu">group_by</span>(Jahr, Monat) <span class="sc">|&gt;</span></span>
-<span id="cb27-3"><a href="#cb27-3" aria-hidden="true" tabindex="-1"></a>    <span class="fu">summarise</span>(<span class="at">Total =</span> <span class="fu">sum</span>(Total))</span></code><button title="In die Zwischenablage kopieren" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb26"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb26-1"><a href="#cb26-1" aria-hidden="true" tabindex="-1"></a>depo_m <span class="ot">&lt;-</span> depo <span class="sc">|&gt;</span></span>
+<span id="cb26-2"><a href="#cb26-2" aria-hidden="true" tabindex="-1"></a>    <span class="fu">group_by</span>(Jahr, Monat) <span class="sc">|&gt;</span></span>
+<span id="cb26-3"><a href="#cb26-3" aria-hidden="true" tabindex="-1"></a>    <span class="fu">summarise</span>(<span class="at">Total =</span> <span class="fu">sum</span>(Total))</span></code><button title="In die Zwischenablage kopieren" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </details>
 </div>
 <ul>
@@ -1089,11 +1073,11 @@ window.onload = function() {
 <div class="cell">
 <details class="code-fold">
 <summary>Musterlösung</summary>
-<div class="sourceCode cell-code" id="cb28"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb28-1"><a href="#cb28-1" aria-hidden="true" tabindex="-1"></a>depo_m <span class="ot">&lt;-</span> depo_m <span class="sc">|&gt;</span></span>
-<span id="cb28-2"><a href="#cb28-2" aria-hidden="true" tabindex="-1"></a>    <span class="fu">mutate</span>(</span>
-<span id="cb28-3"><a href="#cb28-3" aria-hidden="true" tabindex="-1"></a>        <span class="at">Ym =</span> <span class="fu">paste</span>(Jahr, Monat), <span class="co"># und mache eine neue Spalte, in der Jahr und Monat sind</span></span>
-<span id="cb28-4"><a href="#cb28-4" aria-hidden="true" tabindex="-1"></a>        <span class="at">Ym =</span> lubridate<span class="sc">::</span><span class="fu">ym</span>(Ym)</span>
-<span id="cb28-5"><a href="#cb28-5" aria-hidden="true" tabindex="-1"></a>    ) <span class="co"># formatiere als Datum</span></span></code><button title="In die Zwischenablage kopieren" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb27"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb27-1"><a href="#cb27-1" aria-hidden="true" tabindex="-1"></a>depo_m <span class="ot">&lt;-</span> depo_m <span class="sc">|&gt;</span></span>
+<span id="cb27-2"><a href="#cb27-2" aria-hidden="true" tabindex="-1"></a>    <span class="fu">mutate</span>(</span>
+<span id="cb27-3"><a href="#cb27-3" aria-hidden="true" tabindex="-1"></a>        <span class="at">Ym =</span> <span class="fu">paste</span>(Jahr, Monat), <span class="co"># und mache eine neue Spalte, in der Jahr und Monat sind</span></span>
+<span id="cb27-4"><a href="#cb27-4" aria-hidden="true" tabindex="-1"></a>        <span class="at">Ym =</span> lubridate<span class="sc">::</span><span class="fu">ym</span>(Ym)</span>
+<span id="cb27-5"><a href="#cb27-5" aria-hidden="true" tabindex="-1"></a>    ) <span class="co"># formatiere als Datum</span></span></code><button title="In die Zwischenablage kopieren" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </details>
 </div>
 <ul>
@@ -1103,17 +1087,17 @@ window.onload = function() {
 <div class="cell">
 <details class="code-fold">
 <summary>Musterlösung</summary>
-<div class="sourceCode cell-code" id="cb29"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb29-1"><a href="#cb29-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Gruppiere die Werte nach Monat und TAGESZEIT</span></span>
-<span id="cb29-2"><a href="#cb29-2" aria-hidden="true" tabindex="-1"></a>depo_m_daytime <span class="ot">&lt;-</span> depo <span class="sc">|&gt;</span></span>
-<span id="cb29-3"><a href="#cb29-3" aria-hidden="true" tabindex="-1"></a>    <span class="fu">group_by</span>(Jahr, Monat, Tageszeit) <span class="sc">|&gt;</span></span>
-<span id="cb29-4"><a href="#cb29-4" aria-hidden="true" tabindex="-1"></a>    <span class="fu">summarise</span>(<span class="at">Total =</span> <span class="fu">sum</span>(Total))</span>
-<span id="cb29-5"><a href="#cb29-5" aria-hidden="true" tabindex="-1"></a><span class="co"># sortiere das df aufsteigend (nur das es sicher stimmt)</span></span>
-<span id="cb29-6"><a href="#cb29-6" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb29-7"><a href="#cb29-7" aria-hidden="true" tabindex="-1"></a>depo_m_daytime <span class="ot">&lt;-</span> depo_m_daytime <span class="sc">|&gt;</span></span>
-<span id="cb29-8"><a href="#cb29-8" aria-hidden="true" tabindex="-1"></a>    <span class="fu">mutate</span>(</span>
-<span id="cb29-9"><a href="#cb29-9" aria-hidden="true" tabindex="-1"></a>        <span class="at">Ym =</span> <span class="fu">paste</span>(Jahr, Monat), <span class="co"># und mache eine neue Spalte, in der Jahr und Monat sind</span></span>
-<span id="cb29-10"><a href="#cb29-10" aria-hidden="true" tabindex="-1"></a>        <span class="at">Ym =</span> lubridate<span class="sc">::</span><span class="fu">ym</span>(Ym)</span>
-<span id="cb29-11"><a href="#cb29-11" aria-hidden="true" tabindex="-1"></a>    ) <span class="co"># formatiere als Datum</span></span></code><button title="In die Zwischenablage kopieren" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb28"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb28-1"><a href="#cb28-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Gruppiere die Werte nach Monat und TAGESZEIT</span></span>
+<span id="cb28-2"><a href="#cb28-2" aria-hidden="true" tabindex="-1"></a>depo_m_daytime <span class="ot">&lt;-</span> depo <span class="sc">|&gt;</span></span>
+<span id="cb28-3"><a href="#cb28-3" aria-hidden="true" tabindex="-1"></a>    <span class="fu">group_by</span>(Jahr, Monat, Tageszeit) <span class="sc">|&gt;</span></span>
+<span id="cb28-4"><a href="#cb28-4" aria-hidden="true" tabindex="-1"></a>    <span class="fu">summarise</span>(<span class="at">Total =</span> <span class="fu">sum</span>(Total))</span>
+<span id="cb28-5"><a href="#cb28-5" aria-hidden="true" tabindex="-1"></a><span class="co"># sortiere das df aufsteigend (nur das es sicher stimmt)</span></span>
+<span id="cb28-6"><a href="#cb28-6" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb28-7"><a href="#cb28-7" aria-hidden="true" tabindex="-1"></a>depo_m_daytime <span class="ot">&lt;-</span> depo_m_daytime <span class="sc">|&gt;</span></span>
+<span id="cb28-8"><a href="#cb28-8" aria-hidden="true" tabindex="-1"></a>    <span class="fu">mutate</span>(</span>
+<span id="cb28-9"><a href="#cb28-9" aria-hidden="true" tabindex="-1"></a>        <span class="at">Ym =</span> <span class="fu">paste</span>(Jahr, Monat), <span class="co"># und mache eine neue Spalte, in der Jahr und Monat sind</span></span>
+<span id="cb28-10"><a href="#cb28-10" aria-hidden="true" tabindex="-1"></a>        <span class="at">Ym =</span> lubridate<span class="sc">::</span><span class="fu">ym</span>(Ym)</span>
+<span id="cb28-11"><a href="#cb28-11" aria-hidden="true" tabindex="-1"></a>    ) <span class="co"># formatiere als Datum</span></span></code><button title="In die Zwischenablage kopieren" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </details>
 </div>
 </section>
