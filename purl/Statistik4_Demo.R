@@ -14,6 +14,8 @@
 #' -   Datensatz *loyn.csv*
 #' 
 #' 
+#' ## Multiple lineare Regression
+#' 
 ## -----------------------------------------------------------------------------
 # Daten einlesen und anschauen
 library(pacman)
