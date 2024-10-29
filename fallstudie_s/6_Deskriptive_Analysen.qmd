@@ -169,15 +169,6 @@ meteo <- meteo |>
     Jahr = year(time),
     Jahr = factor(Jahr))
 
-# und nun gruppieren und mean berechnen
-meteo_day <- meteo |>
-  group_by(Jahr, Monat, KW, Wochenende) |>
-  summarise(
-    tre200nx = mean(tre200nx),
-    tre200jx = mean(tre200jx),
-    rre150n0 = mean(rre150n0),
-    rre150j0 = mean(rre150j0),
-    sremaxdv= mean(sremaxdv))
 
 
 depo <- depo |>
