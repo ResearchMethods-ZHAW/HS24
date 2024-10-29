@@ -13,9 +13,9 @@ musterloesung: false
 
 **Zu erstellen sind:**
 
-a.  ein lauffähiges R-Skript
-b.  ein begründeter Lösungsweg (Kombination aus R-Code, R Output und dessen Interpretation)
-c.  ein ausformulierter Methoden- und Ergebnisteil (für eine wiss.Arbeit).
+1. Ein quarto generiertes html-Dokument mit dem begründeten Lösungsweg (R-Code, R Output und dessen Interpretation)
+
+2.  ein ausformulierter Methoden- und Ergebnisteil (für eine wiss.Arbeit).
 
 **Wichtige Hinweise zur Ausgestaltung:**
 

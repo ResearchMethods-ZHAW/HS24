@@ -7,7 +7,6 @@ musterloesung: false
 ---
 
 
-
 # Statistik 4: Übung
 
 - Lesen Sie den Datensatz *steprasen_ukraine.csv* in R  ein. Dieser enthält Pflanzenartenzahlen (Species.richness) von 199
@@ -31,9 +30,7 @@ musterloesung: false
     einem Absatz von ca. 60-100 Worten, resp. 3-8 Sätzen für den Methoden- und
     Ergebnisteil). D. h. alle wichtigen Informationen sollten enthalten sein, unnötige
     Redundanz dagegen vermieden werden.
-  - **Zu erstellen sind (a) Ein lauffähiges R-Skript; (b) begründeter Lösungsweg
-    (Kombination aus R-Code, R Output und dessen Interpretation) und (c)
-    ausformulierter Methoden- und Ergebnisteil (für eine wiss. Arbeit).**
+    - **Zu erstellen sind (1) Ein quarto generiertes html-Dokument mit begründetem Lösungsweg (Kombination aus R-Code, R Output und dessen Interpretation) und (2) ausformulierter Methoden- und Ergebnisteil (für eine wiss. Arbeit).**
 
 
 ::::{.content-hidden unless-meta="musterloesung"}
