@@ -5,7 +5,6 @@
 #'     collapse: false 
 #' ---
 #' 
-#' 
 #' # Statistik 1: Demo
 #' 
 #' [Demoscript herunterladen (.R)](../purl/Statistik1_Demo.R){.dld}
