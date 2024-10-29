@@ -7,6 +7,7 @@ musterloesung: false
 ---
 
 
+
 # Statistik 4: Übung
 
 - Lesen Sie den Datensatz *steprasen_ukraine.csv* in R  ein. Dieser enthält Pflanzenartenzahlen (Species.richness) von 199
