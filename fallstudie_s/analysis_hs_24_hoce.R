@@ -594,8 +594,8 @@ ggsave("Proz_Entwicklung_Zaehlstelle_Phase.png",
 
 
 # 4.1 Einflussfaktoren Besucherzahl ####
-# Erstelle ein df indem die Zaehldaten / Tageszeit und Meteodaten vereint sind
-umwelt <- inner_join(depo_d, meteo_day, by = c("Jahr", "Monat", "KW", "Wochenende"))
+# Erstelle ein df indem die Zaehldaten und Meteodaten vereint sind
+umwelt <- inner_join(depo_d, meteo, by = c("Datum" = "time", "Wochentag", "Wochenende", "KW", "Monat", "Jahr"))
 
 
 # Faktor und integer

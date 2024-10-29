@@ -169,16 +169,6 @@ meteo <- meteo |>
     Jahr = year(time),
     Jahr = factor(Jahr))
 
-# und nun gruppieren und mean berechnen
-meteo_day <- meteo |>
-  group_by(Jahr, Monat, KW, Wochenende) |>
-  summarise(
-    tre200nx = mean(tre200nx),
-    tre200jx = mean(tre200jx),
-    rre150n0 = mean(rre150n0),
-    rre150j0 = mean(rre150j0),
-    sremaxdv= mean(sremaxdv))
-
 
 depo <- depo |>
   # wday sortiert die Wochentage automatisch in der richtigen Reihenfolge
@@ -450,14 +440,14 @@ Aktuell haben wir noch zwei verschiedene Datensätze von Interesse:
 
 1) Einen mit den Besuchszahlen pro Tag von Besucher:innen mit den dazugehörigen Convenience Variablen (Datensatz "depo_d" - zu Tagen aggregierte Stunden und Convenience Variablen ) 
 
-2) und einen mit den Wetterparametern pro Tag ("meteo_day"). 
+2) und einen mit den Wetterparametern pro Tag ("meteo"). 
 
 - Diese beiden Datensätze müssen miteinander verbunden werden. __Ziel__: Ein Datensatz mit den __Zähldaten__ und Convenience Variablen wie Phase Covid, Ferien Ja oder Nein, Jahr, Monat, KW, Wochenendtag oder Werktag, angereichert mit __Meteodaten__. Welcher join-Befehl eignet sich dazu?
 
 - Der neue Datensatz soll " __umwelt__ " heissen.
 
 ```{r}
-umwelt <- inner_join(depo_d, meteo_day, by = c("Jahr", "Monat", "KW", "Wochenende"))
+umwelt <- inner_join(depo_d, meteo, by = c("Datum" = "time", "Wochentag", "Wochenende", "KW", "Monat", "Jahr"))
 ```
 
 - Sind durch das Zusammenführen NA's entstanden? Falls ja, müssen __alle__ für die weiteren Auswertungen ausgeschlossen werden.

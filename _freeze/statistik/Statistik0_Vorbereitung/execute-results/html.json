@@ -1,8 +1,8 @@
 {
-  "hash": "0fb4f878f8a365a077325ddd65e13c17",
+  "hash": "07d204d6b7bbb9dd929d52ecea3be572",
   "result": {
     "engine": "knitr",
-    "markdown": "---\nlesson: InfoVis1\nknitr:\n  opts_chunk: \n    collapse: true\n---\n\n\n## Vorbereitung {#sec-infovis-vorbereitung}\n\nIm Rahmen von Statistik 1 - 8 werden wir einige R Packages brauchen. Wir empfehlen, diese bereits *vor* der ersten Lektion zu installieren. Analog @sec-prepro-vorbereitung könnt ihr mit nachstehendem Code alle noch nicht installierten packages automatisch installieren.\n\n\n::: {.cell}\n\n```{.r .cell-code}\npacman::p_load(\"agricolae\", \"car\", \"corrplot\", \"DHARMa\", \"doBy\", \"factoextra\",\n\"FSA\", \"glmmTMB\", \"labdsv\", \"lme4\", \"MASS\", \"MuMIn\", \"pacman\", \"performance\",\n\"performance\", \"relaimpo\", \"sjPlot\", \"tidyverse\", \"vegan\",\"FSA\",\ncharacter.only = TRUE)\n```\n:::\n",
+    "markdown": "---\nlesson: InfoVis1\nknitr:\n  opts_chunk: \n    collapse: true\n---\n\n\n## Vorbereitung {#sec-infovis-vorbereitung}\n\nIm Rahmen von Statistik 1 - 8 werden wir einige R Packages brauchen. Wir empfehlen, diese bereits *vor* der ersten Lektion zu installieren. Analog @sec-prepro-vorbereitung könnt ihr mit nachstehendem Code alle noch nicht installierten packages automatisch installieren.\n\n\n::: {.cell}\n\n```{.r .cell-code}\npacman::p_load(\"agricolae\", \"car\", \"corrplot\", \"DHARMa\", \"doBy\", \"factoextra\",\n\"FSA\", \"glmmTMB\", \"labdsv\", \"lme4\", \"MASS\", \"MuMIn\", \"pacman\", \"performance\",\n\"performance\", \"relaimpo\", \"sjPlot\", \"tidyverse\", \"vegan\",\"FSA\")\n```\n:::\n",
     "supporting": [],
     "filters": [
       "rmarkdown/pagebreak.lua"
