@@ -8,9 +8,7 @@ knitr:
 
 # Statistik 3: Demo
 
-[Demoscript herunterladen (.R)](../purl/Statistik3_Demo.R){.dld}
-
-[Demoscript herunterladen (.qmd)](../purl/Statistik3_Demo.qmd){.dld}
+[Download dieses Demoscript ](../purl/Statistik3_Demo.R) (rechtsklick → speichern unter)
 
 
 
