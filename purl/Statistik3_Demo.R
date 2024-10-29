@@ -120,6 +120,12 @@ ggplot(data, aes(x = pred, y = resp)) +
   geom_line(data = ModPred, aes(x = xv, y = y_lm_quad), color = "blue")
 
 
+# Alternativ kann man die Modelle Modellvorhersagen auch direkt in ggplot rechnen
+# + geom_smooth(method = "lm", formula = y ~ x, se = FALSE) # Einfache Lineare Regression
+# + geom_smooth(method = "lm", formula = y ~ x + I(x^2), se = FALSE) # Mit quadratischem Term
+
+
+
 #' 
 ## -----------------------------------------------------------------------------
 # Residualplots
