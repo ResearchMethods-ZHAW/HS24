@@ -8,10 +8,9 @@ knitr:
 
 # Statistik 2: Demo
 
-[Demoscript herunterladen](../purl/Statistik1_Demo.R){.dld}
+[Demoscript herunterladen (.R)](../purl/Statistik2_Demo.R){.dld}
 
-[Demoscript herunterladen](../purl/Statistik1_Demo.qmd){.dld} # ← für qmds
-
+[Demoscript herunterladen (.qmd)](../purl/Statistik2_Demo.qmd){.dld}
 
 
 ## ANOVA

@@ -2,7 +2,7 @@
 <html xmlns="http://www.w3.org/1999/xhtml" lang="de" xml:lang="de"><head>
 
 <meta charset="utf-8">
-<meta name="generator" content="quarto-1.4.555">
+<meta name="generator" content="quarto-1.4.549">
 
 <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
 
@@ -72,76 +72,40 @@ ul.task-list li input[type="checkbox"] {
 }</script>
 
 
-
-
 <!-- loads fontawesome, so that I can create a fontawesome button (see below) -->
-
 <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.2/css/all.min.css" integrity="sha512-z3gLpd7yknf1YoNbCzqRKc4qyor8gaKU1qmn+CShxbuBusANI9QpRohGBreCFkKxLhei6S9CQXFEbbKuqLg0DA==" crossorigin="anonymous" referrerpolicy="no-referrer">
-
 <script>
 
-
-
 // the following function adds padding to all h2 elements, so that I can 
-
 // easily present the content of the page in a more readable way
-
 function presenter(){
-
     var paragraphs = document.querySelectorAll("h2, h3");
-
     paragraphs.forEach(function (paragraph) {
-
         paragraph.classList.toggle("padding-top-500");
-
     });
-
 }
 
-
-
 // once the page is loaded, the button is injected into the sidebar. This button
-
 // calls the presenter function (see above)
-
 window.onload = function() {
-
     // create the button (similar to the buttons already availables)
-
     const linkElement = document.createElement('a');
 
-
-
     linkElement.classList.add('quarto-navigation-tool');
-
     linkElement.classList.add('px-1');
-
     linkElement.innerHTML = '<i class="fa-solid fa-person-chalkboard"></i>';
-
     linkElement.href = '#';
-
     linkElement.addEventListener('click', function(event) {
-
         event.preventDefault(); // Prevent the default link behavior
-
         presenter();
-
     });
 
-
-
     // Find the target element by its class name
-
     const sidebar_tools = document.querySelector(".sidebar-tools-main")
-
     sidebar_tools.appendChild(linkElement);
-
 };
 
-
-
 </script>
-
 
 
 <link rel="stylesheet" href="custom.css">
@@ -333,6 +297,11 @@ window.onload = function() {
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
   <a href="./statistik/Statistik3_Demo.html" class="sidebar-item-text sidebar-link"><span class="chapter-title">Statistik 3: Demo</span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./statistik/Statistik3_Uebung.html" class="sidebar-item-text sidebar-link"><span class="chapter-title">Statistik 3: Übung</span></a>
   </div>
 </li>
           <li class="sidebar-item">
@@ -760,24 +729,6 @@ window.document.addEventListener("DOMContentLoaded", function (event) {
   if (showAllCode) {
     showAllCode.addEventListener("click", toggleCodeHandler(true));
   }
-    var localhostRegex = new RegExp(/^(?:http|https):\/\/localhost\:?[0-9]*\//);
-    var mailtoRegex = new RegExp(/^mailto:/);
-      var filterRegex = new RegExp('/' + window.location.host + '/');
-    var isInternal = (href) => {
-        return filterRegex.test(href) || localhostRegex.test(href) || mailtoRegex.test(href);
-    }
-    // Inspect non-navigation links and adorn them if external
- 	var links = window.document.querySelectorAll('a[href]:not(.nav-link):not(.navbar-brand):not(.toc-action):not(.sidebar-link):not(.sidebar-item-toggle):not(.pagination-link):not(.no-external):not([aria-hidden]):not(.dropdown-item):not(.quarto-navigation-tool)');
-    for (var i=0; i<links.length; i++) {
-      const link = links[i];
-      if (!isInternal(link.href)) {
-        // undo the damage that might have been done by quarto-nav.js in the case of
-        // links that we want to consider external
-        if (link.dataset.originalHref !== undefined) {
-          link.href = link.dataset.originalHref;
-        }
-      }
-    }
   function tippyHover(el, contentFn, onTriggerFn, onUntriggerFn) {
     const config = {
       allowHTML: true,
@@ -812,11 +763,7 @@ window.document.addEventListener("DOMContentLoaded", function (event) {
       try { href = new URL(href).hash; } catch {}
       const id = href.replace(/^#\/?/, "");
       const note = window.document.getElementById(id);
-      if (note) {
-        return note.innerHTML;
-      } else {
-        return "";
-      }
+      return note.innerHTML;
     });
   }
   const xrefs = window.document.querySelectorAll('a.quarto-xref');
@@ -1092,12 +1039,12 @@ window.document.addEventListener("DOMContentLoaded", function (event) {
 </script>
 <nav class="page-navigation">
   <div class="nav-page nav-page-previous">
-      <a href="./prepro/Prepro3_Uebung.html" class="pagination-link" aria-label="Prepro 3: Übung">
+      <a href="./prepro/Prepro3_Uebung.html" class="pagination-link  aria-label=" &lt;span="" 3:="" übung&lt;="" span&gt;"="">
         <i class="bi bi-arrow-left-short"></i> <span class="nav-page-text"><span class="chapter-title">Prepro 3: Übung</span></span>
       </a>          
   </div>
   <div class="nav-page nav-page-next">
-      <a href="./infovis/Infovis1_Vorbereitung.html" class="pagination-link" aria-label="Vorbereitung">
+      <a href="./infovis/Infovis1_Vorbereitung.html" class="pagination-link" aria-label="<span class='chapter-number'>9</span>&nbsp; <span class='chapter-title'>Vorbereitung</span>">
         <span class="nav-page-text"><span class="chapter-title">Vorbereitung</span></span> <i class="bi bi-arrow-right-short"></i>
       </a>
   </div>
