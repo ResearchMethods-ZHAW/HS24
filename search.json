@@ -1125,7 +1125,7 @@
     "href": "statistik/Statistik3_Uebung.html",
     "title": "Statistik 3: Übung",
     "section": "",
-    "text": "Lineare und polynomische Regression\nAufgabenbeschreibung\nIn R gibt es zahlreiche eingebaute Datensätze. Diese sind direkt in R verfügbar und können ohne zusätzliche Downloads oder Installationen genutzt werden. In dieser Übung verwenden wir den Datensatz LifeCycleSavings\nDer Datensatz enthält Informationen über die Sparquoten in 50 Ländern:\nDu sollst nun untersuchen, ob und wie Sparquote von den anderen drei Variablen abhängt. Teste auf lineare und quadratische Zusammenhänge, stelle die Ergebnisse grafisch dar und verfasse einen ausformulierten Methoden- und Ergebnisteil.",
+    "text": "Lineare und polynomische Regression\nAufgabenbeschreibung\nIn R gibt es zahlreiche eingebaute Datensätze. Diese sind direkt in R verfügbar und können ohne zusätzliche Downloads oder Installationen genutzt werden. In dieser Übung verwenden wir den Datensatz LifeCycleSavings. Du kannst den Datensatz z.B. mit folgendem Befehl als Objekt laden:\nDataUebung3 &lt;- LifeCycleSavings\nDer Datensatz enthält Informationen über die Sparquoten in 50 Ländern:\nDu sollst nun untersuchen, ob und wie Sparquote von den anderen drei Variablen abhängt. Teste für jede erklärende Variable einzeln auf lineare und quadratische Zusammenhänge. Stelle die Ergebnisse grafisch dar und verfasse einen ausformulierten Methoden- und Ergebnisteil.",
     "crumbs": [
       "Statistik",
       "<span class='chapter-number'>21</span>  <span class='chapter-title'>Statistik 3: Übung</span>"

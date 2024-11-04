@@ -20,6 +20,40 @@ ul.task-list li input[type="checkbox"] {
   margin: 0 0.8em 0.2em -1em; /* quarto-specific, see https://github.com/quarto-dev/quarto-cli/issues/4556 */ 
   vertical-align: middle;
 }
+/* CSS for syntax highlighting */
+pre > code.sourceCode { white-space: pre; position: relative; }
+pre > code.sourceCode > span { line-height: 1.25; }
+pre > code.sourceCode > span:empty { height: 1.2em; }
+.sourceCode { overflow: visible; }
+code.sourceCode > span { color: inherit; text-decoration: inherit; }
+div.sourceCode { margin: 1em 0; }
+pre.sourceCode { margin: 0; }
+@media screen {
+div.sourceCode { overflow: auto; }
+}
+@media print {
+pre > code.sourceCode { white-space: pre-wrap; }
+pre > code.sourceCode > span { text-indent: -5em; padding-left: 5em; }
+}
+pre.numberSource code
+  { counter-reset: source-line 0; }
+pre.numberSource code > span
+  { position: relative; left: -4em; counter-increment: source-line; }
+pre.numberSource code > span > a:first-child::before
+  { content: counter(source-line);
+    position: relative; left: -1em; text-align: right; vertical-align: baseline;
+    border: none; display: inline-block;
+    -webkit-touch-callout: none; -webkit-user-select: none;
+    -khtml-user-select: none; -moz-user-select: none;
+    -ms-user-select: none; user-select: none;
+    padding: 0 4px; width: 4em;
+  }
+pre.numberSource { margin-left: 3em;  padding-left: 4px; }
+div.sourceCode
+  {   }
+@media screen {
+pre > code.sourceCode > span > a:first-child::before { text-decoration: underline; }
+}
 </style>
 
 
@@ -450,7 +484,10 @@ window.onload = function() {
 <section id="lineare-und-polynomische-regression" class="level2">
 <h2 class="anchored" data-anchor-id="lineare-und-polynomische-regression">Lineare und polynomische Regression</h2>
 <p><em>Aufgabenbeschreibung</em></p>
-<p>In R gibt es zahlreiche eingebaute Datensätze. Diese sind direkt in R verfügbar und können ohne zusätzliche Downloads oder Installationen genutzt werden. In dieser Übung verwenden wir den Datensatz <code>LifeCycleSavings</code></p>
+<p>In R gibt es zahlreiche eingebaute Datensätze. Diese sind direkt in R verfügbar und können ohne zusätzliche Downloads oder Installationen genutzt werden. In dieser Übung verwenden wir den Datensatz <code>LifeCycleSavings</code>. Du kannst den Datensatz z.B. mit folgendem Befehl als Objekt laden:</p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb1"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb1-1"><a href="#cb1-1" aria-hidden="true" tabindex="-1"></a>DataUebung3 <span class="ot">&lt;-</span> LifeCycleSavings</span></code><button title="In die Zwischenablage kopieren" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
 <p>Der Datensatz enthält Informationen über die Sparquoten in 50 Ländern:</p>
 <ul>
 <li><p><code>sr</code> Sparquote (<em>Savings Ratio</em>; Anteil des Einkommens der gespart wird in Prozent)</p></li>
@@ -458,7 +495,7 @@ window.onload = function() {
 <li><p><code>pop75</code> Prozentsatz der Bevölkerung über 75 Jahren</p></li>
 <li><p><code>dpi</code> Pro-Kopf-Einkommen</p></li>
 </ul>
-<p>Du sollst nun untersuchen, ob und wie Sparquote von den anderen drei Variablen abhängt. Teste auf lineare und quadratische Zusammenhänge, stelle die Ergebnisse grafisch dar und verfasse einen ausformulierten Methoden- und Ergebnisteil.</p>
+<p>Du sollst nun untersuchen, ob und wie Sparquote von den anderen drei Variablen abhängt. Teste für jede erklärende Variable einzeln auf lineare und quadratische Zusammenhänge. Stelle die Ergebnisse grafisch dar und verfasse einen ausformulierten Methoden- und Ergebnisteil.</p>
 
 
 </section>
