@@ -303,19 +303,6 @@ meteo <- meteo |>
 
 ```
 
-- Später werden wir nicht nur Analysen pro Tag machen, sondern auch zusammengefasst nach Woche. Dafür müssen wir nun den meteo-Datensaz gruppieren und den mean berechnen. Hier der Code dazu, wie das aussehen könnte:
-
-```{r echo=TRUE}
-meteo_day <- meteo |>
-  group_by(Jahr, Monat, KW, Wochenende) |>
-  summarise(
-    tre200nx = mean(tre200nx),
-    tre200jx = mean(tre200jx),
-    rre150n0 = mean(rre150n0),
-    rre150j0 = mean(rre150j0),
-    sremaxdv= mean(sremaxdv))
-```
-
 
 Wieder zurück zum depo-Datensazt.
 
