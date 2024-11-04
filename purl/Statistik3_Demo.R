@@ -106,7 +106,7 @@ summary(lm_quad) # lineares Modell mit quadratischem Term anschauen
 ## -----------------------------------------------------------------------------
 # Modelle darstellen
 
-# Vorhersagen der Modelle generieren
+# Vorhersagen der Modelle generieren 
 xv <- seq(min(pred), max(pred), length = 100) # 100 x-Werte, mit denen man die Modelle "füttern" kann 
 y_lm1 <- predict(lm_1, data.frame(pred = xv)) # Vorhersagen des quadratischen Modells für die y-Werte
 y_lm_quad <- predict(lm_quad, data.frame(pred = xv)) # Vorhersagen des quadratischen Modells für die y-Werte
