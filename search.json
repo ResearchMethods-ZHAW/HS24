@@ -10,6 +10,16 @@
     ]
   },
   {
+    "objectID": "PrePro.html",
+    "href": "PrePro.html",
+    "title": "Pre-Processing",
+    "section": "",
+    "text": "Die Datenkunde 2.0 gibt den Studierenden das Wissen und die Fertigkeiten an die Hand, selbst erhobene und bezogene Daten für Ihre eigenen Analysen vorzubereiten und anzureichern (preprocessing). Die Einheit vermittelt zentrale Datenverarbeitungskompetenzen und thematisiert bekannte Problemzonen der umweltwissenschaftlichen Datenverarbeitung – immer mit einer „hands-on” Perspektive auf die begleitenden R-Übungen. Die Studierenden lernen die Eigenschaften ihrer Datensätze in der Fachsprache korrekt zu beschreiben. Sie lernen ausserdem Metadaten zu verstehen und die Implikationen derselben für ihre eigenen Analyseprojekte kritisch zu beurteilen. Zentrale Konzepte der lesson sind Skalenniveaus, Datentypen, Zeitdaten und Typumwandlungen.\nDie Lesson vermittelt zentralste Fertigkeiten zur Vorverarbeitung von strukturierten Daten in der umweltwissenschaftlichen Forschung: Datensätze verbinden (Joins) und umformen („reshape”, „split-apply-combine”). Im Anwendungskontext haben Daten selten von Anfang an diejenige Struktur, welche für die statistische Auswertung oder für die Informationsvisualisierung erforderlich wäre. In dieser lesson lernen die Studierenden die für diese oft zeitraubenden Preprocessing-Schritte notwendigen Konzepte und R-Werkzeuge kennen und kompetent anzuwenden.",
+    "crumbs": [
+      "Pre-Processing"
+    ]
+  },
+  {
     "objectID": "prepro/Prepro1_Vorbereitung.html",
     "href": "prepro/Prepro1_Vorbereitung.html",
     "title": "Vorbereitung",
@@ -450,6 +460,26 @@
     ]
   },
   {
+    "objectID": "InfoVis.html",
+    "href": "InfoVis.html",
+    "title": "InfoVis",
+    "section": "",
+    "text": "Infovis 1\nDie konventionelle schliessende Statistik arbeitet in der Regel konfirmatorisch, sprich aus der bestehenden Theorie heraus werden Hypothesen formuliert, welche sodann durch Experimente geprüft und akzeptiert oder verworfen werden. Die Explorative Datenanalyse (EDA) nimmt dazu eine antagonistische Analyseperspektive ein und will in den Daten zunächst Zusammenhänge aufdecken, welche dann wiederum zur Formulierung von prüfbaren Hypothesen führen kann. Die Einheit stellt dazu den klassischen 5-stufigen EDA-Prozess nach Tukey (1980!) vor. Abschliessend wird dann noch die Brücke geschlagen zur modernen Umsetzung der EDA in Form von Visual Analytics.",
+    "crumbs": [
+      "InfoVis"
+    ]
+  },
+  {
+    "objectID": "InfoVis.html#infovis-2",
+    "href": "InfoVis.html#infovis-2",
+    "title": "InfoVis",
+    "section": "Infovis 2",
+    "text": "Infovis 2\nDie Informationsvisualisierung ist eine vielseitige, effektive und effiziente Methode für die explorative Datenanalyse. Während Scatterplots und Histogramme weitherum bekannt sind, bieten weniger bekannte Informationsvisualisierungs-Typen wie etwa Parallelkoordinatenplots, TreeMaps oder Chorddiagramme originelle alternative Darstellungsformen zur visuellen Analyse von Datensätze, welche stets grösser und komplexer werden. Die Studierenden lernen in dieser lesson eine Reihe von Informationsvisualisierungstypen kennen, lernen diese zielführend zu gestalten und selber zu erstellen.",
+    "crumbs": [
+      "InfoVis"
+    ]
+  },
+  {
     "objectID": "infovis/Infovis1_Vorbereitung.html",
     "href": "infovis/Infovis1_Vorbereitung.html",
     "title": "Vorbereitung",
@@ -777,6 +807,86 @@
     "crumbs": [
       "InfoVis",
       "<span class='chapter-number'>14</span>  <span class='chapter-title'>Infovis 2: Übung optional</span>"
+    ]
+  },
+  {
+    "objectID": "Statistik.html",
+    "href": "Statistik.html",
+    "title": "Statistik",
+    "section": "",
+    "text": "Statistik 1\nIn Statistik 1 lernen die Studierenden, was (Inferenz-) Statistik im Kern leistet und warum sie für wissenschaftliche Erkenntnis (in den meisten Disziplinen) unentbehrlich ist. Nach einer Wiederholung der Rolle von Hypothesen wird erläutert, wie Hypothesentests in der frequentist-Statistik umgesetzt werden, einschliesslich p-Werten und Signifikanz-Levels. Die praktische Statistik beginnt mit den beiden einfachsten Fällen, dem Chi-Quadrat-Test für die Assoziation zwischen zwei kategorialen Variablen und dem t-Test auf Unterschiede in Mittelwerten zwischen zwei Gruppen. Abschliessend beschäftigen wir uns damit, wie man Ergebnisse statistischer Analysen am besten in Abbildungen, Tabellen und Text darstellt.",
+    "crumbs": [
+      "Statistik"
+    ]
+  },
+  {
+    "objectID": "Statistik.html#statistik-2",
+    "href": "Statistik.html#statistik-2",
+    "title": "Statistik",
+    "section": "Statistik 2",
+    "text": "Statistik 2\nIn Statistik 2 lernen die Studierenden die Voraussetzungen und die praktische Anwendung “einfacher” linearer Modelle in R (sowie teilweise ihrer “nicht-parametrischen” bzw. “robusten” Äquivalente). Am Anfang steht die Varianzanalyse (ANOVA) als Verallgemeinerung des t-Tests, einschliesslich post-hoc-Tests und mehrfaktorieller ANOVA. Dann geht es um die Voraussetzungen parametrischer (und nicht-parametrischer) Tests und Optionen, wenn diese verletzt sind.",
+    "crumbs": [
+      "Statistik"
+    ]
+  },
+  {
+    "objectID": "Statistik.html#statistik-3",
+    "href": "Statistik.html#statistik-3",
+    "title": "Statistik",
+    "section": "Statistik 3",
+    "text": "Statistik 3\nIn Statistik 3 beschäftigen wir uns mit Korrelationen, die auf einen linearen Zusammenhang zwischen zwei metrischen Variablen testen, ohne Annahme einer Kausalität. Es folgen einfache lineare Regressionen, die im Prinzip das Gleiche bei klarer Kausalität leisten. Dann wird die ANCOVA als eine Technik vorgestellt, die eine ANOVA mit einer linearen Regression verbindet. Danach geht es um komplexere Versionen linearer Regressionen. Hier betrachten wir polynomiale Regressionen, die z. B. einen Test auf unimodale Beziehungen erlauben, indem man dieselbe Prädiktorvariable linear und quadriert einspeist. Dann besprechen wir, was die grosse Gruppe linearer Modelle (Befehl lm in R) auszeichnet. Abschliessend fassen wir zu Beginn den generellen Ablauf inferenzstatistischer Analysen in einem Flussdiagramm zusammen.",
+    "crumbs": [
+      "Statistik"
+    ]
+  },
+  {
+    "objectID": "Statistik.html#statistik-4",
+    "href": "Statistik.html#statistik-4",
+    "title": "Statistik",
+    "section": "Statistik 4",
+    "text": "Statistik 4\nIn Statistik 4 geht es um multiple Regressionen, die versuchen, eine abhängige Variable durch zwei oder mehr verschieden Prädiktorvariablen zu erklären. Wir thematisieren verschiedene dabei auftretende Probleme und ihre Lösung, insbesondere den Umgang mit korrelierten Prädiktoren und das Aufspüren des besten unter mehreren möglichen statistischen Modellen. Hieran wird auch der informatian theoretician-Ansatz der Statistik und die multimodel inference eingeführt.",
+    "crumbs": [
+      "Statistik"
+    ]
+  },
+  {
+    "objectID": "Statistik.html#statistik-5",
+    "href": "Statistik.html#statistik-5",
+    "title": "Statistik",
+    "section": "Statistik 5",
+    "text": "Statistik 5\nIn Statistik 5 geht es um generalized linear models (GLMs), die einige wesentliche Limitierungen von linearen Modellen überwinden. Indem sie Fehler- und Varianzstrukturen explizit modellieren, ist man nicht mehr an Normalverteilung der Residuen und Varianzhomogenität gebunden. Bei generalized linear regressions muss man sich zwischen verschiedenen Verteilungen und link-Strukturen entscheiden.",
+    "crumbs": [
+      "Statistik"
+    ]
+  },
+  {
+    "objectID": "Statistik.html#statistik-6",
+    "href": "Statistik.html#statistik-6",
+    "title": "Statistik",
+    "section": "Statistik 6",
+    "text": "Statistik 6\nIn Statistik 6 lernen die Studierenden Lösungen kennen, welche die diversen Limitierungen von linearen Modellen überwinden. Während generalized linear models (GLMs) aus Statistik 4 bekannt sind, geht es jetzt um linear mixed effect models (LMMs) und generalized linear mixed effect models (GLMMs). Dabei bezeichnet generalized die explizite Modellierung anderer Fehler- und Varianzstrukturen und mixed die Berücksichtigung von Abhängigkeiten bzw. Schachtelungen unter den Beobachtungen. Einfachere Fälle von LMMs, wie split-plot und repeated-measures ANOVAs, lassen sich noch mit dem aov-Befehl in Base R bewältigen, für komplexere Versuchsdesigns/Analysen gibt es spezielle R packages. Abschliessend gibt es eine kurze Einführung in GLMMs, die eine Analyse komplexerer Beobachtungsdaten z. B. mit räumlichen Abhängigkeiten, erlauben.",
+    "crumbs": [
+      "Statistik"
+    ]
+  },
+  {
+    "objectID": "Statistik.html#statistik-7",
+    "href": "Statistik.html#statistik-7",
+    "title": "Statistik",
+    "section": "Statistik 7",
+    "text": "Statistik 7\nStatistik 7 führt in multivariat-deskriptive Methoden ein, die dazu dienen Datensätze mit mehreren abhängigen und mehrenen unabhängigen Variablen zu analysieren. Dabei betonen Ordinationen kontinuierliche Gradienten und fokussieren auf zusammengehörende Variablen, während Cluster-Analysen Diskontinuitäten betonen und auf zusammengehörende Beobachtungen fokussieren.",
+    "crumbs": [
+      "Statistik"
+    ]
+  },
+  {
+    "objectID": "Statistik.html#statistik-8",
+    "href": "Statistik.html#statistik-8",
+    "title": "Statistik",
+    "section": "Statistik 8",
+    "text": "Statistik 8\nStatistik 8 beinhaltet eine konzeptionelle Einführung in die Idee von Ordinationen als einer Technik der deskriptiven Statistik, die Strukturen in multivariaten Datensätzen via Dimensionsreduktion visualisiert. Das Prinzip und die praktische Implementierung wird detailliert am Beispiel der Hauptkomponentenanalyse (PCA) erklärt. Neben der Beschreibung der Datenstruktur in komplexen Datensätzen kann eine PCA auch dazu dienen, aus diesen unabhängie Variablen zu generieren, die anschliessend in einer multiplen Regression als Prädiktoren genutzt werden können Im Abschluss von Statistik 8 werden wir dann die an den acht Statistiktagen behandelten Verfahren noch einmal rückblickend betrachten und thematisieren, welches Verfahren wann gewählt werden sollte. Ebenfalls ist Platz, um den adäquaten Ablauf statistischer Analysen vom Einlesen der Daten bis zur Verschriftlichung der Ergebnisse, einschliesslich der verschiedenen zu treffenden Entscheidungen, zu thematisieren.",
+    "crumbs": [
+      "Statistik"
     ]
   },
   {
@@ -1700,116 +1810,6 @@
     "text": "Kovic, Marko. 2014. “Je Weniger Ausländer, Desto Mehr Ja-Stimmen?\nWirklich?” Tagesanzeiger Datenblog. https://blog.tagesanzeiger.ch/datenblog/index.php/668/je-weniger-auslaender-desto-mehr-ja-stimmen-wirklich.\n\n\nLo, Steson, and Sally Andrews. 2015. “To Transform or Not to\nTransform: Using Generalized Linear Mixed Models to Analyse Reaction\nTime Data.” Frontiers in Psychology 6. https://doi.org/10.3389/fpsyg.2015.01171.\n\n\nSchielzeth, Holger, Niels J Dingemanse, Shinichi Nakagawa, David F\nWestneat, Hassen Allegue, Céline Teplitsky, Denis Réale, Ned A\nDochtermann, László Zsolt Garamszegi, and Yimen G Araya-Ajoy. 2020.\n“Robustness of Linear Mixed-Effects Models to Violations of\nDistributional Assumptions.” Methods in Ecology and\nEvolution 11 (9): 1141–52.\n\n\nWickham, Hadley, Mine Çetinkaya-Rundel, and Garrett Grolemund. 2023.\nR for Data Science. \" O’Reilly Media, Inc.\". https://r4ds.hadley.nz/.\n\n\nWickham, Hadley, and Garrett Grolemund. 2017. R for Data\nScience. O’Reilly. https://ebookcentral.proquest.com/lib/zhaw/detail.action?docID=4770093.",
     "crumbs": [
       "<span class='chapter-number'>36</span>  <span class='chapter-title'>Literaturverzeichnis</span>"
-    ]
-  },
-  {
-    "objectID": "PrePro.html",
-    "href": "PrePro.html",
-    "title": "Pre-Processing",
-    "section": "",
-    "text": "Die Datenkunde 2.0 gibt den Studierenden das Wissen und die Fertigkeiten an die Hand, selbst erhobene und bezogene Daten für Ihre eigenen Analysen vorzubereiten und anzureichern (preprocessing). Die Einheit vermittelt zentrale Datenverarbeitungskompetenzen und thematisiert bekannte Problemzonen der umweltwissenschaftlichen Datenverarbeitung – immer mit einer „hands-on” Perspektive auf die begleitenden R-Übungen. Die Studierenden lernen die Eigenschaften ihrer Datensätze in der Fachsprache korrekt zu beschreiben. Sie lernen ausserdem Metadaten zu verstehen und die Implikationen derselben für ihre eigenen Analyseprojekte kritisch zu beurteilen. Zentrale Konzepte der lesson sind Skalenniveaus, Datentypen, Zeitdaten und Typumwandlungen.\nDie Lesson vermittelt zentralste Fertigkeiten zur Vorverarbeitung von strukturierten Daten in der umweltwissenschaftlichen Forschung: Datensätze verbinden (Joins) und umformen („reshape”, „split-apply-combine”). Im Anwendungskontext haben Daten selten von Anfang an diejenige Struktur, welche für die statistische Auswertung oder für die Informationsvisualisierung erforderlich wäre. In dieser lesson lernen die Studierenden die für diese oft zeitraubenden Preprocessing-Schritte notwendigen Konzepte und R-Werkzeuge kennen und kompetent anzuwenden.",
-    "crumbs": [
-      "Pre-Processing"
-    ]
-  },
-  {
-    "objectID": "InfoVis.html",
-    "href": "InfoVis.html",
-    "title": "InfoVis",
-    "section": "",
-    "text": "Infovis 1\nDie konventionelle schliessende Statistik arbeitet in der Regel konfirmatorisch, sprich aus der bestehenden Theorie heraus werden Hypothesen formuliert, welche sodann durch Experimente geprüft und akzeptiert oder verworfen werden. Die Explorative Datenanalyse (EDA) nimmt dazu eine antagonistische Analyseperspektive ein und will in den Daten zunächst Zusammenhänge aufdecken, welche dann wiederum zur Formulierung von prüfbaren Hypothesen führen kann. Die Einheit stellt dazu den klassischen 5-stufigen EDA-Prozess nach Tukey (1980!) vor. Abschliessend wird dann noch die Brücke geschlagen zur modernen Umsetzung der EDA in Form von Visual Analytics.",
-    "crumbs": [
-      "InfoVis"
-    ]
-  },
-  {
-    "objectID": "InfoVis.html#infovis-2",
-    "href": "InfoVis.html#infovis-2",
-    "title": "InfoVis",
-    "section": "Infovis 2",
-    "text": "Infovis 2\nDie Informationsvisualisierung ist eine vielseitige, effektive und effiziente Methode für die explorative Datenanalyse. Während Scatterplots und Histogramme weitherum bekannt sind, bieten weniger bekannte Informationsvisualisierungs-Typen wie etwa Parallelkoordinatenplots, TreeMaps oder Chorddiagramme originelle alternative Darstellungsformen zur visuellen Analyse von Datensätze, welche stets grösser und komplexer werden. Die Studierenden lernen in dieser lesson eine Reihe von Informationsvisualisierungstypen kennen, lernen diese zielführend zu gestalten und selber zu erstellen.",
-    "crumbs": [
-      "InfoVis"
-    ]
-  },
-  {
-    "objectID": "Statistik.html",
-    "href": "Statistik.html",
-    "title": "Statistik",
-    "section": "",
-    "text": "Statistik 1\nIn Statistik 1 lernen die Studierenden, was (Inferenz-) Statistik im Kern leistet und warum sie für wissenschaftliche Erkenntnis (in den meisten Disziplinen) unentbehrlich ist. Nach einer Wiederholung der Rolle von Hypothesen wird erläutert, wie Hypothesentests in der frequentist-Statistik umgesetzt werden, einschliesslich p-Werten und Signifikanz-Levels. Die praktische Statistik beginnt mit den beiden einfachsten Fällen, dem Chi-Quadrat-Test für die Assoziation zwischen zwei kategorialen Variablen und dem t-Test auf Unterschiede in Mittelwerten zwischen zwei Gruppen. Abschliessend beschäftigen wir uns damit, wie man Ergebnisse statistischer Analysen am besten in Abbildungen, Tabellen und Text darstellt.",
-    "crumbs": [
-      "Statistik"
-    ]
-  },
-  {
-    "objectID": "Statistik.html#statistik-2",
-    "href": "Statistik.html#statistik-2",
-    "title": "Statistik",
-    "section": "Statistik 2",
-    "text": "Statistik 2\nIn Statistik 2 lernen die Studierenden die Voraussetzungen und die praktische Anwendung “einfacher” linearer Modelle in R (sowie teilweise ihrer “nicht-parametrischen” bzw. “robusten” Äquivalente). Am Anfang steht die Varianzanalyse (ANOVA) als Verallgemeinerung des t-Tests, einschliesslich post-hoc-Tests und mehrfaktorieller ANOVA. Dann geht es um die Voraussetzungen parametrischer (und nicht-parametrischer) Tests und Optionen, wenn diese verletzt sind.",
-    "crumbs": [
-      "Statistik"
-    ]
-  },
-  {
-    "objectID": "Statistik.html#statistik-3",
-    "href": "Statistik.html#statistik-3",
-    "title": "Statistik",
-    "section": "Statistik 3",
-    "text": "Statistik 3\nIn Statistik 3 beschäftigen wir uns mit Korrelationen, die auf einen linearen Zusammenhang zwischen zwei metrischen Variablen testen, ohne Annahme einer Kausalität. Es folgen einfache lineare Regressionen, die im Prinzip das Gleiche bei klarer Kausalität leisten. Dann wird die ANCOVA als eine Technik vorgestellt, die eine ANOVA mit einer linearen Regression verbindet. Danach geht es um komplexere Versionen linearer Regressionen. Hier betrachten wir polynomiale Regressionen, die z. B. einen Test auf unimodale Beziehungen erlauben, indem man dieselbe Prädiktorvariable linear und quadriert einspeist. Dann besprechen wir, was die grosse Gruppe linearer Modelle (Befehl lm in R) auszeichnet. Abschliessend fassen wir zu Beginn den generellen Ablauf inferenzstatistischer Analysen in einem Flussdiagramm zusammen.",
-    "crumbs": [
-      "Statistik"
-    ]
-  },
-  {
-    "objectID": "Statistik.html#statistik-4",
-    "href": "Statistik.html#statistik-4",
-    "title": "Statistik",
-    "section": "Statistik 4",
-    "text": "Statistik 4\nIn Statistik 4 geht es um multiple Regressionen, die versuchen, eine abhängige Variable durch zwei oder mehr verschieden Prädiktorvariablen zu erklären. Wir thematisieren verschiedene dabei auftretende Probleme und ihre Lösung, insbesondere den Umgang mit korrelierten Prädiktoren und das Aufspüren des besten unter mehreren möglichen statistischen Modellen. Hieran wird auch der informatian theoretician-Ansatz der Statistik und die multimodel inference eingeführt.",
-    "crumbs": [
-      "Statistik"
-    ]
-  },
-  {
-    "objectID": "Statistik.html#statistik-5",
-    "href": "Statistik.html#statistik-5",
-    "title": "Statistik",
-    "section": "Statistik 5",
-    "text": "Statistik 5\nIn Statistik 5 geht es um generalized linear models (GLMs), die einige wesentliche Limitierungen von linearen Modellen überwinden. Indem sie Fehler- und Varianzstrukturen explizit modellieren, ist man nicht mehr an Normalverteilung der Residuen und Varianzhomogenität gebunden. Bei generalized linear regressions muss man sich zwischen verschiedenen Verteilungen und link-Strukturen entscheiden.",
-    "crumbs": [
-      "Statistik"
-    ]
-  },
-  {
-    "objectID": "Statistik.html#statistik-6",
-    "href": "Statistik.html#statistik-6",
-    "title": "Statistik",
-    "section": "Statistik 6",
-    "text": "Statistik 6\nIn Statistik 6 lernen die Studierenden Lösungen kennen, welche die diversen Limitierungen von linearen Modellen überwinden. Während generalized linear models (GLMs) aus Statistik 4 bekannt sind, geht es jetzt um linear mixed effect models (LMMs) und generalized linear mixed effect models (GLMMs). Dabei bezeichnet generalized die explizite Modellierung anderer Fehler- und Varianzstrukturen und mixed die Berücksichtigung von Abhängigkeiten bzw. Schachtelungen unter den Beobachtungen. Einfachere Fälle von LMMs, wie split-plot und repeated-measures ANOVAs, lassen sich noch mit dem aov-Befehl in Base R bewältigen, für komplexere Versuchsdesigns/Analysen gibt es spezielle R packages. Abschliessend gibt es eine kurze Einführung in GLMMs, die eine Analyse komplexerer Beobachtungsdaten z. B. mit räumlichen Abhängigkeiten, erlauben.",
-    "crumbs": [
-      "Statistik"
-    ]
-  },
-  {
-    "objectID": "Statistik.html#statistik-7",
-    "href": "Statistik.html#statistik-7",
-    "title": "Statistik",
-    "section": "Statistik 7",
-    "text": "Statistik 7\nStatistik 7 führt in multivariat-deskriptive Methoden ein, die dazu dienen Datensätze mit mehreren abhängigen und mehrenen unabhängigen Variablen zu analysieren. Dabei betonen Ordinationen kontinuierliche Gradienten und fokussieren auf zusammengehörende Variablen, während Cluster-Analysen Diskontinuitäten betonen und auf zusammengehörende Beobachtungen fokussieren.",
-    "crumbs": [
-      "Statistik"
-    ]
-  },
-  {
-    "objectID": "Statistik.html#statistik-8",
-    "href": "Statistik.html#statistik-8",
-    "title": "Statistik",
-    "section": "Statistik 8",
-    "text": "Statistik 8\nStatistik 8 beinhaltet eine konzeptionelle Einführung in die Idee von Ordinationen als einer Technik der deskriptiven Statistik, die Strukturen in multivariaten Datensätzen via Dimensionsreduktion visualisiert. Das Prinzip und die praktische Implementierung wird detailliert am Beispiel der Hauptkomponentenanalyse (PCA) erklärt. Neben der Beschreibung der Datenstruktur in komplexen Datensätzen kann eine PCA auch dazu dienen, aus diesen unabhängie Variablen zu generieren, die anschliessend in einer multiplen Regression als Prädiktoren genutzt werden können Im Abschluss von Statistik 8 werden wir dann die an den acht Statistiktagen behandelten Verfahren noch einmal rückblickend betrachten und thematisieren, welches Verfahren wann gewählt werden sollte. Ebenfalls ist Platz, um den adäquaten Ablauf statistischer Analysen vom Einlesen der Daten bis zur Verschriftlichung der Ergebnisse, einschliesslich der verschiedenen zu treffenden Entscheidungen, zu thematisieren.",
-    "crumbs": [
-      "Statistik"
     ]
   }
 ]
