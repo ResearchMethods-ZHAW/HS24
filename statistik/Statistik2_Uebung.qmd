@@ -38,7 +38,7 @@ musterloesung: false
 [Demoscript herunterladen (.qmd)](../purl/Statistik2_Uebung.qmd){.dld}
 
 
-- [Lösungstext als Download](Statistik2_Loesung.pdf)
+- [Lösungstext als Download](Statistik2_Lösung.pdf)
 
 ## Kommentierter Lösungsweg
 
@@ -85,6 +85,7 @@ Das Gesamtbild ist noch OK für parametrische Verfahren (Box ziemlich symmetrisc
 aov_1 <- aov(Tauchzeit ~ Unterart * Jahreszeit, data = kormoran)
 aov_1
 summary(aov_1)
+summary.lm(aov)
 # p-Wert der Interaktion ist 0.266
 ```
 
