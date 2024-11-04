@@ -17,8 +17,7 @@ musterloesung: false
   - Überprüfen der Datenstruktur nach dem Einlesen: welches sind die abhängige(n)
     und welches die unabängige(n) Variablen, sind alle Variablen für die Analyse
     geeignet?
-  - Explorative Datenanalyse, um zu sehen, ob die abhängige Variable in der
-    vorliegenden Form für die Analyse geeignet ist
+  - Explorative Datenanalyse
   - Definition eines globalen Modelles und dessen Reduktion zu einem minimal
     adäquaten Modell
   - Durchführen der Modelldiagnostik für dieses
