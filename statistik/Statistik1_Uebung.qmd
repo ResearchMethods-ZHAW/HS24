@@ -3,7 +3,7 @@ lesson: Statistik 1
 knitr:
   opts_chunk: 
     collapse: false
-musterloesung: false
+musterloesung: true
 ---
 
 # Statistik 1: Übung
@@ -34,7 +34,7 @@ musterloesung: false
 
 ## Aufgabe 1.1: Assoziationstest
 
-Führt einen Assoziationstest zweier kategorialer Variablen (mit je zwei Ausprägungen) mit Chi-Quadrat und Fishers exaktem Test durch. Dazu erhebt ihr selbst die Daten (wozu ihr euch auch in Teams zusammenschliessen könnt). Ihr könnt z.B. eine Datenerhebung unter Mitstudierenden durchführen (etwa Nutzung Mac/Windows vs. männlich/weiblich). Bitte formuliert vor der Datenerhebung eine Hypothese, d.h. eine Erwartungshaltung, ob und welche Assoziation vorliegt und wenn ja warum. Beachtet, dass ihr für diese Form des Assoziationstests genau zwei binäre Variablen benötigt. Wenn ihr also kategoriale Variablen mit mehr als zwei Ausprägungen habt, so könnt ihr entweder Ausprägungen sinnvoll zusammenfassen oder seltene Ausprägungen im Test unberücksichtigt lassen.
+Führt einen Assoziationstest zweier kategorialer Variablen (mit je zwei Ausprägungen) durch. Dazu erhebt ihr selbst die Daten (wozu ihr euch auch in Teams zusammenschliessen könnt). Ihr könnt z.B. eine Datenerhebung unter Mitstudierenden durchführen (etwa Nutzung Mac/Windows vs. männlich/weiblich). Bitte formuliert vor der Datenerhebung eine Hypothese, d.h. eine Erwartungshaltung, ob und welche Assoziation vorliegt und wenn ja warum. Beachtet, dass ihr für diese Form des Assoziationstests genau zwei binäre Variablen benötigt. Wenn ihr also kategoriale Variablen mit mehr als zwei Ausprägungen habt, so könnt ihr entweder Ausprägungen sinnvoll zusammenfassen oder seltene Ausprägungen im Test unberücksichtigt lassen.
 
 ## Aufgabe 1.2: t-Test
 
