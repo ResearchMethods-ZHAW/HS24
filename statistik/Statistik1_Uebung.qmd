@@ -165,7 +165,7 @@ ggplot(df, aes(x = condit, y = tot_sold)) + # achtung 0 Punkt fehlt
 # es wird angenommen, dass die Verkaufszahlen zwischen den Bedingungen
 # unabhängig sind
 
-t_test <- t.test(tot_sold ~ condit, data = df, var.equl = T)
+t_test <- t.test(tot_sold ~ condit, data = df)
 t_test
 
 # alternative Formulierung
