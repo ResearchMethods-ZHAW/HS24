@@ -7,7 +7,7 @@
 <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
 
 
-<title>Research Methods HS24 - Statistik 1: Übung</title>
+<title>Research Methods HS24 - Variablenselektion Multivariate Modelle</title>
 <style>
 code{white-space: pre-wrap;}
 span.smallcaps{font-variant: small-caps;}
@@ -54,7 +54,27 @@ div.sourceCode
 @media screen {
 pre > code.sourceCode > span > a:first-child::before { text-decoration: underline; }
 }
-</style>
+/* CSS for citations */
+div.csl-bib-body { }
+div.csl-entry {
+  clear: both;
+  margin-bottom: 0em;
+}
+.hanging-indent div.csl-entry {
+  margin-left:2em;
+  text-indent:-2em;
+}
+div.csl-left-margin {
+  min-width:2em;
+  float:left;
+}
+div.csl-right-inline {
+  margin-left:2em;
+  padding-left:1em;
+}
+div.csl-indent {
+  margin-left: 2em;
+}</style>
 
 
 <script src="../site_libs/quarto-nav/quarto-nav.js"></script>
@@ -64,8 +84,8 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <script src="../site_libs/quarto-search/fuse.min.js"></script>
 <script src="../site_libs/quarto-search/quarto-search.js"></script>
 <meta name="quarto:offset" content="../">
-<link href="../statistik/Statistik2_Demo.html" rel="next">
-<link href="../statistik/Statistik1_Demo.html" rel="prev">
+<link href="../References.html" rel="next">
+<link href="../fallstudie_n/4_Multivariate_Modelle.html" rel="prev">
 <script src="../site_libs/quarto-html/quarto.js"></script>
 <script src="../site_libs/quarto-html/popper.min.js"></script>
 <script src="../site_libs/quarto-html/tippy.umd.min.js"></script>
@@ -141,35 +161,6 @@ window.onload = function() {
 
 </script>
 
-  <script src="https://polyfill.io/v3/polyfill.min.js?features=es6"></script>
-  <script src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-chtml-full.js" type="text/javascript"></script>
-
-<script type="text/javascript">
-const typesetMath = (el) => {
-  if (window.MathJax) {
-    // MathJax Typeset
-    window.MathJax.typeset([el]);
-  } else if (window.katex) {
-    // KaTeX Render
-    var mathElements = el.getElementsByClassName("math");
-    var macros = [];
-    for (var i = 0; i < mathElements.length; i++) {
-      var texText = mathElements[i].firstChild;
-      if (mathElements[i].tagName == "SPAN") {
-        window.katex.render(texText.data, mathElements[i], {
-          displayMode: mathElements[i].classList.contains('display'),
-          throwOnError: false,
-          macros: macros,
-          fleqn: false
-        });
-      }
-    }
-  }
-}
-window.Quarto = {
-  typesetMath
-};
-</script>
 
 <link rel="stylesheet" href="../custom.css">
 <link rel="stylesheet" href="../theme-custom.scss">
@@ -184,7 +175,7 @@ window.Quarto = {
       <button type="button" class="quarto-btn-toggle btn" data-bs-toggle="collapse" data-bs-target=".quarto-sidebar-collapse-item" aria-controls="quarto-sidebar" aria-expanded="false" aria-label="Seitenleiste umschalten" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">
         <i class="bi bi-layout-text-sidebar-reverse"></i>
       </button>
-        <nav class="quarto-page-breadcrumbs" aria-label="breadcrumb"><ol class="breadcrumb"><li class="breadcrumb-item"><a href="../Statistik.html">Statistik</a></li><li class="breadcrumb-item"><a href="../statistik/Statistik1_Uebung.html"><span class="chapter-title">Statistik 1: Übung</span></a></li></ol></nav>
+        <nav class="quarto-page-breadcrumbs" aria-label="breadcrumb"><ol class="breadcrumb"><li class="breadcrumb-item"><a href="../fallstudie_n/1_Vorbemerkung.html">Fallstudie N</a></li><li class="breadcrumb-item"><a href="../fallstudie_n/5_Variablenselektion.html"><span class="chapter-title">Variablenselektion Multivariate Modelle</span></a></li></ol></nav>
         <a class="flex-grow-1" role="button" data-bs-toggle="collapse" data-bs-target=".quarto-sidebar-collapse-item" aria-controls="quarto-sidebar" aria-expanded="false" aria-label="Seitenleiste umschalten" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">      
         </a>
       <button type="button" class="btn quarto-search-button" aria-label="" onclick="window.quartoOpenSearch();">
@@ -327,11 +318,11 @@ window.Quarto = {
       <div class="sidebar-item-container"> 
             <a href="../Statistik.html" class="sidebar-item-text sidebar-link">
  <span class="menu-text">Statistik</span></a>
-          <a class="sidebar-item-toggle text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-3" aria-expanded="true" aria-label="Abschnitt umschalten">
+          <a class="sidebar-item-toggle text-start collapsed" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-3" aria-expanded="false" aria-label="Abschnitt umschalten">
             <i class="bi bi-chevron-right ms-2"></i>
           </a> 
       </div>
-      <ul id="quarto-sidebar-section-3" class="collapse list-unstyled sidebar-section depth1 show">  
+      <ul id="quarto-sidebar-section-3" class="collapse list-unstyled sidebar-section depth1 ">  
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
   <a href="../statistik/Statistik0_Vorbereitung.html" class="sidebar-item-text sidebar-link"><span class="chapter-title">Vorbereitung</span></a>
@@ -344,7 +335,7 @@ window.Quarto = {
 </li>
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
-  <a href="../statistik/Statistik1_Uebung.html" class="sidebar-item-text sidebar-link active"><span class="chapter-title">Statistik 1: Übung</span></a>
+  <a href="../statistik/Statistik1_Uebung.html" class="sidebar-item-text sidebar-link"><span class="chapter-title">Statistik 1: Übung</span></a>
   </div>
 </li>
           <li class="sidebar-item">
@@ -435,13 +426,13 @@ window.Quarto = {
   </li>
         <li class="sidebar-item sidebar-item-section">
       <div class="sidebar-item-container"> 
-            <a class="sidebar-item-text sidebar-link text-start collapsed" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-5" aria-expanded="false">
+            <a class="sidebar-item-text sidebar-link text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-5" aria-expanded="true">
  <span class="menu-text">Fallstudie N</span></a>
-          <a class="sidebar-item-toggle text-start collapsed" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-5" aria-expanded="false" aria-label="Abschnitt umschalten">
+          <a class="sidebar-item-toggle text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-5" aria-expanded="true" aria-label="Abschnitt umschalten">
             <i class="bi bi-chevron-right ms-2"></i>
           </a> 
       </div>
-      <ul id="quarto-sidebar-section-5" class="collapse list-unstyled sidebar-section depth1 ">  
+      <ul id="quarto-sidebar-section-5" class="collapse list-unstyled sidebar-section depth1 show">  
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
   <a href="../fallstudie_n/1_Vorbemerkung.html" class="sidebar-item-text sidebar-link"><span class="chapter-title">Vorbemerkung</span></a>
@@ -464,7 +455,7 @@ window.Quarto = {
 </li>
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
-  <a href="../fallstudie_n/5_Variablenselektion.html" class="sidebar-item-text sidebar-link"><span class="chapter-title">Variablenselektion Multivariate Modelle</span></a>
+  <a href="../fallstudie_n/5_Variablenselektion.html" class="sidebar-item-text sidebar-link active"><span class="chapter-title">Variablenselektion Multivariate Modelle</span></a>
   </div>
 </li>
       </ul>
@@ -484,21 +475,22 @@ window.Quarto = {
     <h2 id="toc-title">Inhaltsverzeichnis</h2>
    
   <ul>
-  <li><a href="#anleitung-zu-den-übungen" id="toc-anleitung-zu-den-übungen" class="nav-link active" data-scroll-target="#anleitung-zu-den-übungen">Anleitung zu den Übungen</a></li>
-  <li><a href="#stat1-übung" id="toc-stat1-übung" class="nav-link" data-scroll-target="#stat1-übung">Stat1: Übung</a>
-  <ul class="collapse">
-  <li><a href="#aufgabe-1.1-assoziationstest" id="toc-aufgabe-1.1-assoziationstest" class="nav-link" data-scroll-target="#aufgabe-1.1-assoziationstest">Aufgabe 1.1: Assoziationstest</a></li>
-  <li><a href="#aufgabe-1.2-t-test" id="toc-aufgabe-1.2-t-test" class="nav-link" data-scroll-target="#aufgabe-1.2-t-test">Aufgabe 1.2: t-Test</a></li>
-  </ul></li>
+  <li><a href="#libraries-laden" id="toc-libraries-laden" class="nav-link active" data-scroll-target="#libraries-laden">Libraries laden</a></li>
+  <li><a href="#variablenselektion" id="toc-variablenselektion" class="nav-link" data-scroll-target="#variablenselektion">Variablenselektion</a></li>
+  <li><a href="#aufgabe-1" id="toc-aufgabe-1" class="nav-link" data-scroll-target="#aufgabe-1">Aufgabe 1</a></li>
+  <li><a href="#aufgabe-2" id="toc-aufgabe-2" class="nav-link" data-scroll-target="#aufgabe-2">Aufgabe 2</a></li>
+  <li><a href="#aufgabe-3" id="toc-aufgabe-3" class="nav-link" data-scroll-target="#aufgabe-3">Aufgabe 3</a></li>
+  <li><a href="#aufgabe-4" id="toc-aufgabe-4" class="nav-link" data-scroll-target="#aufgabe-4">Aufgabe 4</a></li>
+  <li><a href="#aufgabe-5" id="toc-aufgabe-5" class="nav-link" data-scroll-target="#aufgabe-5">Aufgabe 5</a></li>
   </ul>
 </nav>
     </div>
 <!-- main -->
 <main class="content" id="quarto-document-content">
 
-<header id="title-block-header" class="quarto-title-block default"><nav class="quarto-page-breadcrumbs quarto-title-breadcrumbs d-none d-lg-block" aria-label="breadcrumb"><ol class="breadcrumb"><li class="breadcrumb-item"><a href="../Statistik.html">Statistik</a></li><li class="breadcrumb-item"><a href="../statistik/Statistik1_Uebung.html"><span class="chapter-title">Statistik 1: Übung</span></a></li></ol></nav>
+<header id="title-block-header" class="quarto-title-block default"><nav class="quarto-page-breadcrumbs quarto-title-breadcrumbs d-none d-lg-block" aria-label="breadcrumb"><ol class="breadcrumb"><li class="breadcrumb-item"><a href="../fallstudie_n/1_Vorbemerkung.html">Fallstudie N</a></li><li class="breadcrumb-item"><a href="../fallstudie_n/5_Variablenselektion.html"><span class="chapter-title">Variablenselektion Multivariate Modelle</span></a></li></ol></nav>
 <div class="quarto-title">
-<h1 class="title"><span class="chapter-title">Statistik 1: Übung</span></h1>
+<h1 class="title"><span class="chapter-title">Variablenselektion Multivariate Modelle</span></h1>
 </div>
 
 
@@ -515,266 +507,182 @@ window.Quarto = {
 </header>
 
 
-<section id="anleitung-zu-den-übungen" class="level1">
-<h1>Anleitung zu den Übungen</h1>
-<p><strong>Zu erstellen sind:</strong></p>
-<ol type="1">
-<li><p>Ein quarto generiertes html-Dokument mit dem begründeten Lösungsweg (R-Code, R Output und dessen Interpretation)</p></li>
-<li><p>ein ausformulierter Methoden- und Ergebnisteil (für eine wiss.Arbeit).</p></li>
-</ol>
-<p><strong>Wichtige Hinweise zur Ausgestaltung:</strong></p>
-<ul>
-<li>Bitte <strong>erklärt und begründet die einzelnen Schritte,</strong> die ihr unternehmt, um zu eurem Ergebnis zu kommen. Dazu erstellt bitte ein mit Quarto generiertes html-Dokument (oder Word-Dokument), in dem ihr Schritt für Schritt den verwendeten <strong>R-Code</strong>, die dazu gehörigen <strong>Ausgaben von R</strong>, eure <strong>Interpretation</strong> derselben und die sich ergebenden <strong>Schlussfolgerungen</strong> für das weitere Vorgehen dokumentiert.</li>
-<li>Dieser <strong>Ablauf</strong> sollte insbesondere beinhalten:
-<ul>
-<li>Überprüfen der Datenstruktur nach dem Einlesen, welches sind die abhängige(n) und welches die unabängige(n) Variablen etc.</li>
-<li>Explorative Datenanalyse, um zu sehen, ob evtl. Dateneingabefehler vorliegen oder Datentransformationen vorgenommen werden sollten</li>
-<li>Auswahl und Begründung eines statistischen Verfahrens</li>
-<li>Bestimmung des vollständigen/maximalen Models</li>
-<li>Selektion des/der besten Models/Modelle</li>
-<li>Durchführen der Modelldiagnostik für dieses</li>
-<li>Generieren aller Zahlen, Statistiken und Tabellen, die für eine wiss. Ergebnisdarstellung benötigt werden</li>
-</ul></li>
-<li>Formuliert abschliessend einen <strong>Methoden- und Ergebnisteil</strong> (ggf. incl.&nbsp;adäquaten Abbildungen/Tabellen) zu dieser Untersuchung in der Form einer wissenschaftlichen Arbeit (je einen ausformulierten Absatz von ca. 60-100 Worten bzw. 3-8 Sätzen). Alle wichtigen Informationen sollten enthalten sein, unnötige Redundanz dagegen vermieden werden.</li>
-</ul>
-</section>
-<section id="stat1-übung" class="level1">
-<h1>Stat1: Übung</h1>
-<section id="aufgabe-1.1-assoziationstest" class="level2">
-<h2 class="anchored" data-anchor-id="aufgabe-1.1-assoziationstest">Aufgabe 1.1: Assoziationstest</h2>
-<p>Führt einen Assoziationstest zweier kategorialer Variablen (mit je zwei Ausprägungen) durch. Dazu erhebt ihr selbst die Daten (wozu ihr euch auch in Teams zusammenschliessen könnt). Ihr könnt z.B. eine Datenerhebung unter Mitstudierenden durchführen (etwa Nutzung Mac/Windows vs.&nbsp;männlich/weiblich). Bitte formuliert vor der Datenerhebung eine Hypothese, d.h. eine Erwartungshaltung, ob und welche Assoziation vorliegt und wenn ja warum. Beachtet, dass ihr für diese Form des Assoziationstests genau zwei binäre Variablen benötigt. Wenn ihr also kategoriale Variablen mit mehr als zwei Ausprägungen habt, so könnt ihr entweder Ausprägungen sinnvoll zusammenfassen oder seltene Ausprägungen im Test unberücksichtigt lassen.</p>
-</section>
-<section id="aufgabe-1.2-t-test" class="level2">
-<h2 class="anchored" data-anchor-id="aufgabe-1.2-t-test">Aufgabe 1.2: t-Test</h2>
-<p>**T-Test mit Datensatz *Novanimal_Weeks.csv**</p>
-<p>Im Forschungsprojekt <a href="https://www.novanimal.ch">NOVANIMAL</a> wurde u.a. in der ZHAW-Mensa untersucht, was es braucht, damit Menschen freiwillig weniger tierische Produkte konsumieren. Dazu wurden in sogenannten Interventionswochen mehr vegane und vegetarische Gerichte (zu Lasten kleinerer Fleischgerichtsauswahl) angeboten. Eine erste grundsätzliche Frage war, ob die unterschiedliche Gerichtsauswahl zu unterschiedlichen Verkaufszahlen führten. Beantwortet dazu mit dem Datensatz und geeigneten Tests folgende Frage:</p>
-<p>Wurden in den Basis- und Interventionswochen unterschiedlich viele Gerichte verkauft?</p>
-<ul>
-<li>Schau die Daten an: Verstehen und ggf. plotten.</li>
-<li>Definiere die Null- (<span class="math inline">\(H_0\)</span>) und die Alternativhypothese (<span class="math inline">\(H_1\)</span>).</li>
-<li>Welche Form von t-Test musst Du anwenden: einseitig/zweiseitig resp. gepaart/ungepaart?</li>
-<li>Führe einen t-Test durch.</li>
-<li>Wie gut sind die Voraussetzungen für einen t-Test erfüllt (z.B. Normalverteilung der Residuen und Varianzhomogenität)?</li>
-<li>Stelle deine Ergebnisse angemessen dar, d.h. Text mit Abbildung und/oder Tabelle</li>
-</ul>
-<div class="callout callout-style-default callout-note callout-titled">
-<div class="callout-header d-flex align-content-center">
-<div class="callout-icon-container">
-<i class="callout-icon"></i>
-</div>
-<div class="callout-title-container flex-fill">
-Statistik 1: Lösung
-</div>
-</div>
-<div class="callout-body-container callout-body">
-<p><a href="../purl/Statistik1_Uebung.R" class="dld">Demoscript herunterladen (.R)</a></p>
-<p><a href="../purl/Statistik1_Uebung.qmd" class="dld">Demoscript herunterladen (.qmd)</a></p>
-<ul>
-<li><a href="Statistik1_Lösung.pdf">Lösungstext als Download</a></li>
-</ul>
-<section id="vorebreitung-r-session" class="level2">
-<h2 class="anchored" data-anchor-id="vorebreitung-r-session">Vorebreitung R-Session</h2>
+<section id="libraries-laden" class="level2">
+<h2 class="anchored" data-anchor-id="libraries-laden">Libraries laden</h2>
 <div class="cell">
-<div class="sourceCode cell-code" id="cb1"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb1-1"><a href="#cb1-1" aria-hidden="true" tabindex="-1"></a><span class="co"># lade Packages</span></span>
-<span id="cb1-2"><a href="#cb1-2" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(<span class="st">"ggplot2"</span>)</span>
+<div class="sourceCode cell-code" id="cb1"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb1-1"><a href="#cb1-1" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(<span class="st">"sf"</span>)</span>
+<span id="cb1-2"><a href="#cb1-2" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(<span class="st">"terra"</span>)</span>
 <span id="cb1-3"><a href="#cb1-3" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(<span class="st">"dplyr"</span>)</span>
 <span id="cb1-4"><a href="#cb1-4" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(<span class="st">"readr"</span>)</span>
-<span id="cb1-5"><a href="#cb1-5" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb1-6"><a href="#cb1-6" aria-hidden="true" tabindex="-1"></a><span class="do">## definiert mytheme für ggplot2 (verwendet dabei theme_classic())</span></span>
-<span id="cb1-7"><a href="#cb1-7" aria-hidden="true" tabindex="-1"></a>mytheme <span class="ot">&lt;-</span></span>
-<span id="cb1-8"><a href="#cb1-8" aria-hidden="true" tabindex="-1"></a>  <span class="fu">theme_classic</span>() <span class="sc">+</span></span>
-<span id="cb1-9"><a href="#cb1-9" aria-hidden="true" tabindex="-1"></a>  <span class="fu">theme</span>(</span>
-<span id="cb1-10"><a href="#cb1-10" aria-hidden="true" tabindex="-1"></a>    <span class="at">axis.line =</span> <span class="fu">element_line</span>(<span class="at">color =</span> <span class="st">"black"</span>),</span>
-<span id="cb1-11"><a href="#cb1-11" aria-hidden="true" tabindex="-1"></a>    <span class="at">axis.text =</span> <span class="fu">element_text</span>(<span class="at">size =</span> <span class="dv">12</span>, <span class="at">color =</span> <span class="st">"black"</span>),</span>
-<span id="cb1-12"><a href="#cb1-12" aria-hidden="true" tabindex="-1"></a>    <span class="at">axis.title =</span> <span class="fu">element_text</span>(<span class="at">size =</span> <span class="dv">12</span>, <span class="at">color =</span> <span class="st">"black"</span>),</span>
-<span id="cb1-13"><a href="#cb1-13" aria-hidden="true" tabindex="-1"></a>    <span class="at">axis.ticks =</span> <span class="fu">element_line</span>(<span class="at">size =</span> .<span class="dv">75</span>, <span class="at">color =</span> <span class="st">"black"</span>),</span>
-<span id="cb1-14"><a href="#cb1-14" aria-hidden="true" tabindex="-1"></a>    <span class="at">axis.ticks.length =</span> <span class="fu">unit</span>(.<span class="dv">5</span>, <span class="st">"cm"</span>)</span>
-<span id="cb1-15"><a href="#cb1-15" aria-hidden="true" tabindex="-1"></a>  )</span></code><button title="In die Zwischenablage kopieren" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<span id="cb1-5"><a href="#cb1-5" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(<span class="st">"ggplot2"</span>)</span>
+<span id="cb1-6"><a href="#cb1-6" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(<span class="st">"PerformanceAnalytics"</span>)</span>
+<span id="cb1-7"><a href="#cb1-7" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(<span class="st">"pastecs"</span>)</span>
+<span id="cb1-8"><a href="#cb1-8" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(<span class="st">"lme4"</span>)</span>
+<span id="cb1-9"><a href="#cb1-9" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(<span class="st">"bbmle"</span>)</span>
+<span id="cb1-10"><a href="#cb1-10" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(<span class="st">"MuMIn"</span>)</span>
+<span id="cb1-11"><a href="#cb1-11" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(<span class="st">"MASS"</span>)</span></code><button title="In die Zwischenablage kopieren" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
 </section>
-<section id="musterlösung-übung-1.1-assoziationstest" class="level2">
-<h2 class="anchored" data-anchor-id="musterlösung-übung-1.1-assoziationstest">Musterlösung Übung 1.1: Assoziationstest</h2>
-<p>In diesem Beispiel soll einem Klischee auf den Grund gegagen werden: <strong>Sind Aargauer überdurchschnittlich mit weissen Socken assoziiert?</strong> Die Datenerhebung basiert auf männlichen Studenten bei denen folgende beiden binären Variablen erhoben wurden:</p>
-<ul>
-<li>Sockenfarbe: weiss, nicht-weiss</li>
-<li>Selbstdeklarierte Kantonsangehörigkeit: AG, nicht-AG</li>
-</ul>
-<p>Die Hypothese ist: Das Klischee trifft zu, weisse Socken sind überdurchschnittlich häufig mit Aargauer Studenten assoziiert.</p>
-<p>Die Datenerhebung unter 35 Studenten ergab folgende Datengrundlage:</p>
-<ul>
-<li>Weisssockige Aargauer: 4</li>
-<li>Nicht-weisssockige Aargauer: 2</li>
-<li>Weissockige nicht-Aargauer: 7</li>
-<li>Nicht-weisssockige nicht-Aargauer: 22</li>
-</ul>
+<section id="variablenselektion" class="level2">
+<h2 class="anchored" data-anchor-id="variablenselektion">Variablenselektion</h2>
+<p>→ Vorgehen analog <span class="citation" data-cites="coppes2017">Coppes u.&nbsp;a. (<a href="../References.html#ref-coppes2017" role="doc-biblioref">2017</a>)</span></p>
+</section>
+<section id="aufgabe-1" class="level2">
+<h2 class="anchored" data-anchor-id="aufgabe-1">Aufgabe 1</h2>
+<p>Mit dem folgenden Code kann eine simple Korrelationsmatrix aufgebaut werden, vergl. Aufgabe 5 vorangehende Woche</p>
 <div class="cell">
-<div class="sourceCode cell-code" id="cb2"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb2-1"><a href="#cb2-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Matrix erstellen</span></span>
-<span id="cb2-2"><a href="#cb2-2" aria-hidden="true" tabindex="-1"></a>Aargauer <span class="ot">&lt;-</span> <span class="fu">c</span>(<span class="dv">4</span>, <span class="dv">2</span>)</span>
-<span id="cb2-3"><a href="#cb2-3" aria-hidden="true" tabindex="-1"></a><span class="fu">names</span>(Aargauer) <span class="ot">&lt;-</span> <span class="fu">c</span>(<span class="st">"Weiss"</span>, <span class="st">"NotWeiss"</span>)</span>
-<span id="cb2-4"><a href="#cb2-4" aria-hidden="true" tabindex="-1"></a>NotAargauer <span class="ot">&lt;-</span> <span class="fu">c</span>(<span class="dv">7</span>, <span class="dv">22</span>)</span>
-<span id="cb2-5"><a href="#cb2-5" aria-hidden="true" tabindex="-1"></a><span class="fu">names</span>(NotAargauer) <span class="ot">&lt;-</span> <span class="fu">c</span>(<span class="st">"Weiss"</span>, <span class="st">"NotWeiss"</span>)</span>
-<span id="cb2-6"><a href="#cb2-6" aria-hidden="true" tabindex="-1"></a>AGsocks <span class="ot">&lt;-</span> <span class="fu">data.frame</span>(Aargauer, NotAargauer)</span>
-<span id="cb2-7"><a href="#cb2-7" aria-hidden="true" tabindex="-1"></a>AGsocks <span class="ot">&lt;-</span> <span class="fu">as.matrix</span>(AGsocks)</span>
-<span id="cb2-8"><a href="#cb2-8" aria-hidden="true" tabindex="-1"></a>AGsocks</span></code><button title="In die Zwischenablage kopieren" class="code-copy-button"><i class="bi"></i></button></pre></div>
-<div class="cell-output cell-output-stdout">
-<pre><code>         Aargauer NotAargauer
-Weiss           4           7
-NotWeiss        2          22</code></pre>
+<div class="sourceCode cell-code" id="cb2"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb2-1"><a href="#cb2-1" aria-hidden="true" tabindex="-1"></a>DF_mod <span class="ot">&lt;-</span> <span class="fu">read_delim</span>(<span class="st">"datasets/fallstudie_n/Aufgabe4_Datensatz_Habitatnutzung_Modelle_241028.csv"</span>, <span class="at">delim =</span> <span class="st">";"</span>)</span>
+<span id="cb2-2"><a href="#cb2-2" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb2-3"><a href="#cb2-3" aria-hidden="true" tabindex="-1"></a>DF_mod_day <span class="ot">&lt;-</span> DF_mod <span class="sc">|&gt;</span></span>
+<span id="cb2-4"><a href="#cb2-4" aria-hidden="true" tabindex="-1"></a>  <span class="fu">filter</span>(time_of_day <span class="sc">==</span> <span class="st">"day"</span>)</span>
+<span id="cb2-5"><a href="#cb2-5" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb2-6"><a href="#cb2-6" aria-hidden="true" tabindex="-1"></a><span class="fu">round</span>(<span class="fu">cor</span>(DF_mod_day[, <span class="dv">5</span><span class="sc">:</span><span class="dv">12</span>], <span class="at">method =</span> <span class="st">"pearson"</span>), <span class="dv">2</span>)</span>
+<span id="cb2-7"><a href="#cb2-7" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb2-8"><a href="#cb2-8" aria-hidden="true" tabindex="-1"></a><span class="co"># hier kann die Schwelle für die Korrelation gesetzt werden, 0.7 ist eher liberal /</span></span>
+<span id="cb2-9"><a href="#cb2-9" aria-hidden="true" tabindex="-1"></a><span class="co"># 0.5 konservativ</span></span>
+<span id="cb2-10"><a href="#cb2-10" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb2-11"><a href="#cb2-11" aria-hidden="true" tabindex="-1"></a>cor <span class="ot">&lt;-</span> <span class="fu">round</span>(<span class="fu">cor</span>(DF_mod_day[, <span class="dv">5</span><span class="sc">:</span><span class="dv">12</span>], <span class="at">method =</span> <span class="st">"pearson"</span>), <span class="dv">2</span>)</span>
+<span id="cb2-12"><a href="#cb2-12" aria-hidden="true" tabindex="-1"></a>cor[<span class="fu">abs</span>(cor) <span class="sc">&lt;</span> <span class="fl">0.7</span>] <span class="ot">&lt;-</span> <span class="dv">0</span></span>
+<span id="cb2-13"><a href="#cb2-13" aria-hidden="true" tabindex="-1"></a>cor</span></code><button title="In die Zwischenablage kopieren" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
-<div class="sourceCode cell-code" id="cb4"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb4-1"><a href="#cb4-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Daten anschauen mit erstem Google-Ergebnis für "Assoziation Plot r"</span></span>
-<span id="cb4-2"><a href="#cb4-2" aria-hidden="true" tabindex="-1"></a><span class="fu">assocplot</span>(AGsocks) <span class="co"># Interpretation des Plots mit dem Befehl ?assocplot</span></span></code><button title="In die Zwischenablage kopieren" class="code-copy-button"><i class="bi"></i></button></pre></div>
-<div class="cell-output-display">
-<div>
-<figure class="figure">
-<p><img src="Statistik1_Uebung_files/figure-html/unnamed-chunk-2-1.png" class="img-fluid figure-img" width="672"></p>
-</figure>
-</div>
-</div>
-</div>
-<p>Der Assoziationsplot zeigt, dass in den Daten weisse Socken bei den Aargauern überverterten und bei den Nicht-Aargauern untervertreten sind.</p>
-<p>Für kleine Erwartungswerte in den Zellen (&lt; 5) ist der Chi-Quadrat-Test nicht zuverlässig (siehe “Warning message”). Darum wird mit Fishers exaktem Test gearbeitet.</p>
+</section>
+<section id="aufgabe-2" class="level2">
+<h2 class="anchored" data-anchor-id="aufgabe-2">Aufgabe 2</h2>
+<p>Skalieren der Variablen, damit ihr Einfluss vergleichbar wird (Befehl scale(); Problem verschiedene Skalen der Variablen (bspw. Neigung in Grad, Distanz in Metern)); Umwandeln der Reh-ID in einen Faktor, damit dieser als Random Factor ins Model eingespiesen werden kann.</p>
 <div class="cell">
-<div class="sourceCode cell-code" id="cb5"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb5-1"><a href="#cb5-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Tests durchführen</span></span>
-<span id="cb5-2"><a href="#cb5-2" aria-hidden="true" tabindex="-1"></a><span class="fu">chisq.test</span>(AGsocks) <span class="co"># Chi-Quadrat-Test nur zum anschauen.</span></span></code><button title="In die Zwischenablage kopieren" class="code-copy-button"><i class="bi"></i></button></pre></div>
-<div class="cell-output cell-output-stdout">
-<pre><code>
-    Pearson's Chi-squared test with Yates' continuity correction
-
-data:  AGsocks
-X-squared = 2.4323, df = 1, p-value = 0.1189</code></pre>
+<div class="sourceCode cell-code" id="cb3"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb3-1"><a href="#cb3-1" aria-hidden="true" tabindex="-1"></a>DF_mod_day <span class="ot">&lt;-</span> DF_mod_day <span class="sc">|&gt;</span></span>
+<span id="cb3-2"><a href="#cb3-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">mutate</span>(</span>
+<span id="cb3-3"><a href="#cb3-3" aria-hidden="true" tabindex="-1"></a>    <span class="at">slope_scaled =</span> <span class="fu">scale</span>(slope),</span>
+<span id="cb3-4"><a href="#cb3-4" aria-hidden="true" tabindex="-1"></a>    <span class="at">topo_pos_scaled =</span> <span class="fu">scale</span>(topo_pos),</span>
+<span id="cb3-5"><a href="#cb3-5" aria-hidden="true" tabindex="-1"></a>    <span class="at">us_scaled =</span> <span class="fu">scale</span>(us_2014),</span>
+<span id="cb3-6"><a href="#cb3-6" aria-hidden="true" tabindex="-1"></a>    <span class="at">os_scaled =</span> <span class="fu">scale</span>(os_2014),</span>
+<span id="cb3-7"><a href="#cb3-7" aria-hidden="true" tabindex="-1"></a>    <span class="at">forest_prop_scaled =</span> <span class="fu">scale</span>(forest_prop),</span>
+<span id="cb3-8"><a href="#cb3-8" aria-hidden="true" tabindex="-1"></a>    <span class="at">dist_road_trails_scaled =</span> <span class="fu">scale</span>(dist_road_trails),</span>
+<span id="cb3-9"><a href="#cb3-9" aria-hidden="true" tabindex="-1"></a>    <span class="at">dist_road_only_scaled =</span> <span class="fu">scale</span>(dist_road_only),</span>
+<span id="cb3-10"><a href="#cb3-10" aria-hidden="true" tabindex="-1"></a>    <span class="at">dist_sett_scaled =</span> <span class="fu">scale</span>(dist_sett),</span>
+<span id="cb3-11"><a href="#cb3-11" aria-hidden="true" tabindex="-1"></a>    <span class="at">id =</span> <span class="fu">as.factor</span>(id)</span>
+<span id="cb3-12"><a href="#cb3-12" aria-hidden="true" tabindex="-1"></a>  )</span></code><button title="In die Zwischenablage kopieren" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
-<div class="sourceCode cell-code" id="cb7"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb7-1"><a href="#cb7-1" aria-hidden="true" tabindex="-1"></a><span class="fu">fisher.test</span>(AGsocks) <span class="co"># "Fisher's Exact Test for Count Data"</span></span></code><button title="In die Zwischenablage kopieren" class="code-copy-button"><i class="bi"></i></button></pre></div>
-<div class="cell-output cell-output-stdout">
-<pre><code>
-    Fisher's Exact Test for Count Data
-
-data:  AGsocks
-p-value = 0.06323
-alternative hypothesis: true odds ratio is not equal to 1
-95 percent confidence interval:
-  0.6811227 78.4336189
-sample estimates:
-odds ratio 
-  5.897263 </code></pre>
-</div>
-</div>
-<section id="ergebnisse" class="level3">
-<h3 class="anchored" data-anchor-id="ergebnisse">Ergebnisse</h3>
-<p>In den erhobenen Daten konnte keine signifikante Assoziation zwischen Kantonangehörigkeit (AG, nicht-AG) und Sockenfarbe (weiss, nicht-weiss) festgestellt werden. Der <em>p</em>-Wert von Fishers exaktem Test war nur marginal signifikant (<em>p</em> = 0.063). Das nicht-signfikante Resultat überrascht auf den ersten Blick, denn der “odds ratio” im Datensatz ist mit 5.9 relativ hoch und 67 % der Aargauer trugen weisse Socken während nur 24 % der Nicht-Aargauer weisse Socken trugen. Doch war der Anteil von nur 6 Aargauer in der nur 35 Männer umfassenden Stichprobe relativ klein, um ein verlässliches Bild der Sockenpräferenzen der Aargauer zu machen. Insofern leuchtet es ein, das bei dieser kleinen und unausgewogenen Stichprobe die “Power” des satistischen Tests (um die Nullhypothese zu verwerfen) relativ klein ist.</p>
 </section>
-</section>
-<section id="musterlösung-übung-1.2-t-test" class="level2">
-<h2 class="anchored" data-anchor-id="musterlösung-übung-1.2-t-test">Musterlösung Übung 1.2: t-Test</h2>
-<section id="null--und-alternativhypothese" class="level3">
-<h3 class="anchored" data-anchor-id="null--und-alternativhypothese">Null- und Alternativhypothese</h3>
-<p><span class="math inline">\(H_0\)</span>: Es gibt keinen Unterschied in den Verkaufszahlen zwischen den Basis- und den Interventionswochen.</p>
-<p><span class="math inline">\(H_1\)</span>: Es gibt einen Unterschied in den Verkaufszahlen zwischen den Basis- und den Interventionswochen.</p>
+<section id="aufgabe-3" class="level2">
+<h2 class="anchored" data-anchor-id="aufgabe-3">Aufgabe 3</h2>
+<p><strong>Selektion der Variablen in einem univariaten Model</strong></p>
+<p>Ein erstes GLMM (Generalized Linear Mixed Effects Modell) aufbauen: Funktion und Modelformel</p>
+<blockquote class="blockquote">
+<p>wichtige <a href="https://bbolker.github.io/mixedmodels-misc/glmmFAQ.html">Seite</a> auf der man viele Hilfestellungen zu GLMM’s finden kann.</p>
+</blockquote>
 <div class="cell">
-<div class="sourceCode cell-code" id="cb9"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb9-1"><a href="#cb9-1" aria-hidden="true" tabindex="-1"></a><span class="co"># lade Daten</span></span>
-<span id="cb9-2"><a href="#cb9-2" aria-hidden="true" tabindex="-1"></a>df <span class="ot">&lt;-</span> <span class="fu">read_delim</span>(<span class="st">"datasets/stat/Novanimal_Weeks.csv"</span>, <span class="at">delim =</span> <span class="st">";"</span>)</span>
-<span id="cb9-3"><a href="#cb9-3" aria-hidden="true" tabindex="-1"></a>df <span class="co"># Daten anschauen</span></span></code><button title="In die Zwischenablage kopieren" class="code-copy-button"><i class="bi"></i></button></pre></div>
-<div class="cell-output cell-output-stdout">
-<pre><code># A tibble: 12 × 3
-    week condit       tot_sold
-   &lt;dbl&gt; &lt;chr&gt;           &lt;dbl&gt;
- 1    40 Basis            2188
- 2    41 Intervention     2004
- 3    42 Basis            2113
- 4    43 Intervention     2160
- 5    44 Basis            2290
- 6    45 Intervention     2165
- 7    46 Intervention     2272
- 8    47 Basis            2198
- 9    48 Intervention     2293
-10    49 Basis            2343
-11    50 Intervention     2228
-12    51 Basis            2086</code></pre>
+<div class="sourceCode cell-code" id="cb4"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb4-1"><a href="#cb4-1" aria-hidden="true" tabindex="-1"></a><span class="co"># wir werden das package lme4 mit der Funktion glmer verwenden</span></span>
+<span id="cb4-2"><a href="#cb4-2" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb4-3"><a href="#cb4-3" aria-hidden="true" tabindex="-1"></a><span class="co"># die Hilfe von glmer aufrufen: ?glmer</span></span>
+<span id="cb4-4"><a href="#cb4-4" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb4-5"><a href="#cb4-5" aria-hidden="true" tabindex="-1"></a><span class="co"># glmer(formula, data = , family = binomial)</span></span>
+<span id="cb4-6"><a href="#cb4-6" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb4-7"><a href="#cb4-7" aria-hidden="true" tabindex="-1"></a><span class="co"># 1) formula:</span></span>
+<span id="cb4-8"><a href="#cb4-8" aria-hidden="true" tabindex="-1"></a><span class="co"># Abhängige Variable ~ Erklärende Variable + Random Factor</span></span>
+<span id="cb4-9"><a href="#cb4-9" aria-hidden="true" tabindex="-1"></a><span class="co"># In unseren Modellen kontrollieren wir für individuelle Unterschiede bei den Rehen</span></span>
+<span id="cb4-10"><a href="#cb4-10" aria-hidden="true" tabindex="-1"></a><span class="co"># indem wir einen Random Factor definieren =&gt; (1 | id)</span></span>
+<span id="cb4-11"><a href="#cb4-11" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb4-12"><a href="#cb4-12" aria-hidden="true" tabindex="-1"></a><span class="co"># 2) data:</span></span>
+<span id="cb4-13"><a href="#cb4-13" aria-hidden="true" tabindex="-1"></a><span class="co"># euer Datensatz</span></span>
+<span id="cb4-14"><a href="#cb4-14" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb4-15"><a href="#cb4-15" aria-hidden="true" tabindex="-1"></a><span class="co"># 3) family:</span></span>
+<span id="cb4-16"><a href="#cb4-16" aria-hidden="true" tabindex="-1"></a><span class="co"># hier binomial</span></span>
+<span id="cb4-17"><a href="#cb4-17" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb4-18"><a href="#cb4-18" aria-hidden="true" tabindex="-1"></a><span class="co"># warum binomial? Verteilung Daten der abhängigen Variable Präsenz/Absenz</span></span>
+<span id="cb4-19"><a href="#cb4-19" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb4-20"><a href="#cb4-20" aria-hidden="true" tabindex="-1"></a><span class="fu">ggplot</span>(DF_mod_day, <span class="fu">aes</span>(pres_abs)) <span class="sc">+</span></span>
+<span id="cb4-21"><a href="#cb4-21" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_histogram</span>()</span>
+<span id="cb4-22"><a href="#cb4-22" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb4-23"><a href="#cb4-23" aria-hidden="true" tabindex="-1"></a><span class="co"># --&gt; Binäre Verteilung =&gt; Binomiale Verteilung mit n = 1</span></span>
+<span id="cb4-24"><a href="#cb4-24" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb4-25"><a href="#cb4-25" aria-hidden="true" tabindex="-1"></a><span class="co"># und wie schaut die Verteilung der Daten der abhängigen Variable Nutzungsintensität</span></span>
+<span id="cb4-26"><a href="#cb4-26" aria-hidden="true" tabindex="-1"></a><span class="co"># (nmb, werden wir in diesem Kurs aber nicht genauer anschauen) aus?</span></span></code><button title="In die Zwischenablage kopieren" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
-<div class="sourceCode cell-code" id="cb11"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb11-1"><a href="#cb11-1" aria-hidden="true" tabindex="-1"></a><span class="co"># überprüft die Voraussetzungen für einen t-Test</span></span>
-<span id="cb11-2"><a href="#cb11-2" aria-hidden="true" tabindex="-1"></a><span class="fu">ggplot</span>(df, <span class="fu">aes</span>(<span class="at">x =</span> condit, <span class="at">y =</span> tot_sold)) <span class="sc">+</span> <span class="co"># achtung 0 Punkt fehlt</span></span>
-<span id="cb11-3"><a href="#cb11-3" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_boxplot</span>(<span class="at">fill =</span> <span class="st">"white"</span>, <span class="at">color =</span> <span class="st">"black"</span>, <span class="at">size =</span> <span class="dv">1</span>) <span class="sc">+</span></span>
-<span id="cb11-4"><a href="#cb11-4" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_dotplot</span>(<span class="at">binaxis =</span> <span class="st">"y"</span>, <span class="at">stackdir =</span> <span class="st">"center"</span>, <span class="at">alpha =</span> <span class="fl">0.3</span>) <span class="sc">+</span></span>
-<span id="cb11-5"><a href="#cb11-5" aria-hidden="true" tabindex="-1"></a>  <span class="fu">labs</span>(<span class="at">x =</span> <span class="st">"</span><span class="sc">\n</span><span class="st">Bedingungen"</span>, <span class="at">y =</span> <span class="st">"Durchschnittlich verkaufte Gerichte pro Woche</span><span class="sc">\n</span><span class="st">"</span>) <span class="sc">+</span></span>
-<span id="cb11-6"><a href="#cb11-6" aria-hidden="true" tabindex="-1"></a>  mytheme</span></code><button title="In die Zwischenablage kopieren" class="code-copy-button"><i class="bi"></i></button></pre></div>
-<div class="cell-output-display">
-<div>
-<figure class="figure">
-<p><img src="Statistik1_Uebung_files/figure-html/unnamed-chunk-4-1.png" class="img-fluid figure-img" width="672"></p>
-</figure>
-</div>
-</div>
-<div class="sourceCode cell-code" id="cb12"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb12-1"><a href="#cb12-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Auf den ersten Blick scheint es keine starken Abweichungen zu einer</span></span>
-<span id="cb12-2"><a href="#cb12-2" aria-hidden="true" tabindex="-1"></a><span class="co"># Normalverteilung zu geben resp. es sind keine extremen schiefen Verteilungen</span></span>
-<span id="cb12-3"><a href="#cb12-3" aria-hidden="true" tabindex="-1"></a><span class="co"># ersichtlich</span></span></code><button title="In die Zwischenablage kopieren" class="code-copy-button"><i class="bi"></i></button></pre></div>
-</div>
+</section>
+<section id="aufgabe-4" class="level2">
+<h2 class="anchored" data-anchor-id="aufgabe-4">Aufgabe 4</h2>
+<p>Mit der GLMM Formel bauen wir in einem ersten Schritt eine univariate Variablenselektion auf.</p>
+<p><strong><em>Als abhängige Variable verwenden wir die Präsenz/Absenz der Rehe in den Kreisen</em></strong></p>
 <div class="cell">
-<div class="sourceCode cell-code" id="cb13"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb13-1"><a href="#cb13-1" aria-hidden="true" tabindex="-1"></a><span class="co"># führt einen t-Tests durch;</span></span>
-<span id="cb13-2"><a href="#cb13-2" aria-hidden="true" tabindex="-1"></a><span class="co"># es wird angenommen, dass die Verkaufszahlen zwischen den Bedingungen</span></span>
-<span id="cb13-3"><a href="#cb13-3" aria-hidden="true" tabindex="-1"></a><span class="co"># unabhängig sind</span></span>
-<span id="cb13-4"><a href="#cb13-4" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb13-5"><a href="#cb13-5" aria-hidden="true" tabindex="-1"></a>t_test <span class="ot">&lt;-</span> <span class="fu">t.test</span>(tot_sold <span class="sc">~</span> condit, <span class="at">data =</span> df, <span class="at">var.equl =</span> T)</span>
-<span id="cb13-6"><a href="#cb13-6" aria-hidden="true" tabindex="-1"></a>t_test</span></code><button title="In die Zwischenablage kopieren" class="code-copy-button"><i class="bi"></i></button></pre></div>
-<div class="cell-output cell-output-stdout">
-<pre><code>
-    Welch Two Sample t-test
-
-data:  tot_sold by condit
-t = 0.27168, df = 9.9707, p-value = 0.7914
-alternative hypothesis: true difference in means between group Basis and group Intervention is not equal to 0
-95 percent confidence interval:
- -115.2743  147.2743
-sample estimates:
-       mean in group Basis mean in group Intervention 
-                      2203                       2187 </code></pre>
-</div>
-<div class="sourceCode cell-code" id="cb15"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb15-1"><a href="#cb15-1" aria-hidden="true" tabindex="-1"></a><span class="co"># alternative Formulierung</span></span>
-<span id="cb15-2"><a href="#cb15-2" aria-hidden="true" tabindex="-1"></a><span class="fu">t.test</span>(</span>
-<span id="cb15-3"><a href="#cb15-3" aria-hidden="true" tabindex="-1"></a>  df[df<span class="sc">$</span>condit <span class="sc">==</span> <span class="st">"Basis"</span>, ]<span class="sc">$</span>tot_sold,</span>
-<span id="cb15-4"><a href="#cb15-4" aria-hidden="true" tabindex="-1"></a>  df[df<span class="sc">$</span>condit <span class="sc">==</span> <span class="st">"Intervention"</span>, ]<span class="sc">$</span>tot_sold</span>
-<span id="cb15-5"><a href="#cb15-5" aria-hidden="true" tabindex="-1"></a>)</span></code><button title="In die Zwischenablage kopieren" class="code-copy-button"><i class="bi"></i></button></pre></div>
-<div class="cell-output cell-output-stdout">
-<pre><code>
-    Welch Two Sample t-test
-
-data:  df[df$condit == "Basis", ]$tot_sold and df[df$condit == "Intervention", ]$tot_sold
-t = 0.27168, df = 9.9707, p-value = 0.7914
-alternative hypothesis: true difference in means is not equal to 0
-95 percent confidence interval:
- -115.2743  147.2743
-sample estimates:
-mean of x mean of y 
-     2203      2187 </code></pre>
-</div>
+<div class="sourceCode cell-code" id="cb5"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb5-1"><a href="#cb5-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Die erklärende Variable in m1 ist die erste Variable der korrelierenden Variablen</span></span>
+<span id="cb5-2"><a href="#cb5-2" aria-hidden="true" tabindex="-1"></a><span class="co"># Die erklärende Variable in m2 ist die zweite Variable der korrelierenden Variablen</span></span>
+<span id="cb5-3"><a href="#cb5-3" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb5-4"><a href="#cb5-4" aria-hidden="true" tabindex="-1"></a>m1 <span class="ot">&lt;-</span> <span class="fu">glmer</span>(Abhaengige_Variable <span class="sc">~</span> Erklaerende_Variable <span class="sc">+</span> (<span class="dv">1</span> <span class="sc">|</span> id),</span>
+<span id="cb5-5"><a href="#cb5-5" aria-hidden="true" tabindex="-1"></a>  <span class="at">data =</span> DF_mod_day,</span>
+<span id="cb5-6"><a href="#cb5-6" aria-hidden="true" tabindex="-1"></a>  <span class="at">family =</span> binomial</span>
+<span id="cb5-7"><a href="#cb5-7" aria-hidden="true" tabindex="-1"></a>)</span>
+<span id="cb5-8"><a href="#cb5-8" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb5-9"><a href="#cb5-9" aria-hidden="true" tabindex="-1"></a>m2 <span class="ot">&lt;-</span> <span class="fu">glmer</span>(Abhaengige_Variable <span class="sc">~</span> Erklaerende_Variable <span class="sc">+</span> (<span class="dv">1</span> <span class="sc">|</span> id),</span>
+<span id="cb5-10"><a href="#cb5-10" aria-hidden="true" tabindex="-1"></a>  <span class="at">data =</span> DF_mod_day,</span>
+<span id="cb5-11"><a href="#cb5-11" aria-hidden="true" tabindex="-1"></a>  <span class="at">family =</span> binomial</span>
+<span id="cb5-12"><a href="#cb5-12" aria-hidden="true" tabindex="-1"></a>)</span>
+<span id="cb5-13"><a href="#cb5-13" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb5-14"><a href="#cb5-14" aria-hidden="true" tabindex="-1"></a><span class="co"># mit dieser Funktion können die Modellergebnisse inspiziert werden</span></span>
+<span id="cb5-15"><a href="#cb5-15" aria-hidden="true" tabindex="-1"></a><span class="fu">summary</span>(m1)</span>
+<span id="cb5-16"><a href="#cb5-16" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb5-17"><a href="#cb5-17" aria-hidden="true" tabindex="-1"></a><span class="co"># Mit dieser Funktion kann der Informationgehalt der beiden Modelle gegeneinander</span></span>
+<span id="cb5-18"><a href="#cb5-18" aria-hidden="true" tabindex="-1"></a><span class="co"># abgeschätzt werden</span></span>
+<span id="cb5-19"><a href="#cb5-19" aria-hidden="true" tabindex="-1"></a>bbmle<span class="sc">::</span><span class="fu">AICtab</span>(m1, m2)</span>
+<span id="cb5-20"><a href="#cb5-20" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb5-21"><a href="#cb5-21" aria-hidden="true" tabindex="-1"></a><span class="co"># tieferer AIC -&gt; besser (AIC = Akaike information criterion)</span></span>
+<span id="cb5-22"><a href="#cb5-22" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb5-23"><a href="#cb5-23" aria-hidden="true" tabindex="-1"></a><span class="co"># ==&gt; dieses Vorgehen muss nun für alle korrelierten Variablen für jeden Teildatensatz</span></span>
+<span id="cb5-24"><a href="#cb5-24" aria-hidden="true" tabindex="-1"></a><span class="co"># (Tag/Nacht) durchgeführt werden, um nur noch nicht (R &lt; 0.7) korrelierte Variablen</span></span>
+<span id="cb5-25"><a href="#cb5-25" aria-hidden="true" tabindex="-1"></a><span class="co"># in das Modell einfliessen zu lassen</span></span></code><button title="In die Zwischenablage kopieren" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
 </section>
-<section id="methoden" class="level3">
-<h3 class="anchored" data-anchor-id="methoden">Methoden</h3>
-<p>Unser Ziel bestand darin, einen Vergleich der aggregierten Verkaufszahlen zwischen den Interventions- und Basiswochen durchzuführen. Wir gingen davon aus, dass die wöchentlichen Verkaufszahlen unabhängig voneinander sind, weshalb wir die Unterschiede zwischen den Verkaufszahlen pro Woche in den beiden Bedingungen mittels eines t-Tests untersuchten. Obwohl bei der visuellen Prüfung der Modellvoraussetzungen keine schwerwiegenden Verletzungen festgestellt wurden (abgesehen von einem Ausreißer), entschieden wir uns dennoch für einen Welch t-Test. Es sei angemerkt, dass die Gruppengröße mit jeweils n = 6 Wochen eher klein war. Trotzdem erzielten die T-Tests verlässliche Ergebnisse. Für weitere Informationen zu diesem Thema verweisen wir auf die verlinkte <a href="https://scholarworks.umass.edu/cgi/viewcontent.cgi?article=1307&amp;context=pare">Studie</a>.</p>
-</section>
-<section id="ergebnisse-1" class="level3">
-<h3 class="anchored" data-anchor-id="ergebnisse-1">Ergebnisse</h3>
-<p>In den Basiswochen werden wöchentlich mehr Gerichte verkauft als in den Interventionswochen, wie in Abbildung 1 ersichtlich ist. Allerdings ergab der Welch t-Test, dass es keine signifikanten Unterschiede in den wöchentlichen Verkaufszahlen zwischen den beiden Bedingungen (<em>t</em>(10) = 0.272 , <em>p</em> = 0.791). m die Ergebnisse weiter zu bestätigen, könnte eine <span class="math inline">\(\chi^2\)</span>-Test durchgeführt werden, da die Gruppengröße mit n = 6 als eher klein betrachtet werden kann.</p>
+<section id="aufgabe-5" class="level2">
+<h2 class="anchored" data-anchor-id="aufgabe-5">Aufgabe 5</h2>
+<p><strong>Selektion der Variablen in einem multivariaten Model</strong></p>
+<p>Mit folgendem Code kann eine automatisierte Variablenselektion (dredge-Funktion) und ein Modelaveraging aufgebaut werden (siehe auch Stats-Skript von J.Dengler &amp; Team)</p>
 <div class="cell">
-<div class="cell-output-display">
-<div id="fig-ggplot-boxplot-final" class="quarto-figure quarto-figure-center quarto-float anchored">
-<figure class="quarto-float quarto-float-fig figure">
-<div aria-describedby="fig-ggplot-boxplot-final-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
-<img src="Statistik1_Uebung_files/figure-html/fig-ggplot-boxplot-final-1.png" class="img-fluid figure-img" style="width:80.0%">
-</div>
-<figcaption class="quarto-float-caption-bottom quarto-float-caption quarto-float-fig" id="fig-ggplot-boxplot-final-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
-Abbildung&nbsp;19.1: Die wöchentlichen Verkaufszahlen für die Interventions- und Basiswochen unterscheiden sich nicht signifikant.
-</figcaption>
-</figure>
-</div>
-</div>
-</div>
-</section>
-</section>
-</div>
+<div class="sourceCode cell-code" id="cb6"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb6-1"><a href="#cb6-1" aria-hidden="true" tabindex="-1"></a><span class="co"># hier wird die Formel für die dredge-Funktion vorbereitet (die Variablen V1-V8</span></span>
+<span id="cb6-2"><a href="#cb6-2" aria-hidden="true" tabindex="-1"></a><span class="co"># sind jene welche nach der univariaten Variablenselektion noch übrig bleiben)</span></span>
+<span id="cb6-3"><a href="#cb6-3" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb6-4"><a href="#cb6-4" aria-hidden="true" tabindex="-1"></a>f <span class="ot">&lt;-</span> pres_abs <span class="sc">~</span></span>
+<span id="cb6-5"><a href="#cb6-5" aria-hidden="true" tabindex="-1"></a>  V1 <span class="sc">+</span></span>
+<span id="cb6-6"><a href="#cb6-6" aria-hidden="true" tabindex="-1"></a>  V2 <span class="sc">+</span></span>
+<span id="cb6-7"><a href="#cb6-7" aria-hidden="true" tabindex="-1"></a>  V3 <span class="sc">+</span></span>
+<span id="cb6-8"><a href="#cb6-8" aria-hidden="true" tabindex="-1"></a>  V4 <span class="sc">+</span></span>
+<span id="cb6-9"><a href="#cb6-9" aria-hidden="true" tabindex="-1"></a>  V5 <span class="sc">+</span></span>
+<span id="cb6-10"><a href="#cb6-10" aria-hidden="true" tabindex="-1"></a>  V6 <span class="sc">+</span></span>
+<span id="cb6-11"><a href="#cb6-11" aria-hidden="true" tabindex="-1"></a>  V7 <span class="sc">+</span></span>
+<span id="cb6-12"><a href="#cb6-12" aria-hidden="true" tabindex="-1"></a>  V8</span>
+<span id="cb6-13"><a href="#cb6-13" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb6-14"><a href="#cb6-14" aria-hidden="true" tabindex="-1"></a><span class="co"># in diesem Befehl kommt der Random-Factor (das Reh) hinzu und es wird eine Formel</span></span>
+<span id="cb6-15"><a href="#cb6-15" aria-hidden="true" tabindex="-1"></a><span class="co"># daraus gemacht</span></span>
+<span id="cb6-16"><a href="#cb6-16" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb6-17"><a href="#cb6-17" aria-hidden="true" tabindex="-1"></a>f_dredge <span class="ot">&lt;-</span> <span class="fu">paste</span>(<span class="fu">c</span>(f, <span class="st">"+ (1 | id)"</span>), <span class="at">collapse =</span> <span class="st">" "</span>) <span class="sc">|&gt;</span> <span class="fu">as.formula</span>()</span>
+<span id="cb6-18"><a href="#cb6-18" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb6-19"><a href="#cb6-19" aria-hidden="true" tabindex="-1"></a><span class="co"># Das Modell mit dieser Formel ausführen</span></span>
+<span id="cb6-20"><a href="#cb6-20" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb6-21"><a href="#cb6-21" aria-hidden="true" tabindex="-1"></a>m <span class="ot">&lt;-</span> <span class="fu">glmer</span>(f_dredge, <span class="at">data =</span> DF_mod_day, <span class="at">family =</span> binomial, <span class="at">na.action =</span> <span class="st">"na.fail"</span>)</span>
+<span id="cb6-22"><a href="#cb6-22" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb6-23"><a href="#cb6-23" aria-hidden="true" tabindex="-1"></a><span class="co"># Das Modell in die dredge-Funktion einfügen (siehe auch unbedingt ?dredge)</span></span>
+<span id="cb6-24"><a href="#cb6-24" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb6-25"><a href="#cb6-25" aria-hidden="true" tabindex="-1"></a>all_m <span class="ot">&lt;-</span> <span class="fu">dredge</span>(m)</span>
+<span id="cb6-26"><a href="#cb6-26" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb6-27"><a href="#cb6-27" aria-hidden="true" tabindex="-1"></a><span class="co"># Importance values der einzelnen Variablen (Gibt an, wie bedeutsam eine bestimmte</span></span>
+<span id="cb6-28"><a href="#cb6-28" aria-hidden="true" tabindex="-1"></a><span class="co"># Variable ist, wenn man viele verschiedene Modelle vergleicht (multimodel inference))</span></span>
+<span id="cb6-29"><a href="#cb6-29" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb6-30"><a href="#cb6-30" aria-hidden="true" tabindex="-1"></a><span class="fu">sw</span>(all_m)</span>
+<span id="cb6-31"><a href="#cb6-31" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb6-32"><a href="#cb6-32" aria-hidden="true" tabindex="-1"></a><span class="co"># Schlussendlich wird ein Modelaverage durchgeführt (Schwellenwert für das delta-AIC = 2)</span></span>
+<span id="cb6-33"><a href="#cb6-33" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb6-34"><a href="#cb6-34" aria-hidden="true" tabindex="-1"></a>avgmodel <span class="ot">&lt;-</span> <span class="fu">model.avg</span>(all_m, <span class="at">rank =</span> <span class="st">"AICc"</span>, <span class="at">subset =</span> delta <span class="sc">&lt;</span> <span class="dv">2</span>)</span>
+<span id="cb6-35"><a href="#cb6-35" aria-hidden="true" tabindex="-1"></a><span class="fu">summary</span>(avgmodel)</span>
+<span id="cb6-36"><a href="#cb6-36" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb6-37"><a href="#cb6-37" aria-hidden="true" tabindex="-1"></a><span class="co"># ==&gt; für den Nachtdatensatz muss der gleiche Prozess der Variablenselektion</span></span>
+<span id="cb6-38"><a href="#cb6-38" aria-hidden="true" tabindex="-1"></a><span class="co"># durchgespielt werden.</span></span></code><button title="In die Zwischenablage kopieren" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
 
 
-</section>
+<div id="refs" class="references csl-bib-body hanging-indent" data-entry-spacing="0" role="list" style="display: none">
+<div id="ref-coppes2017" class="csl-entry" role="listitem">
+Coppes, Joy, Judith Ehrlacher, Dominik Thiel, Rudi Suchant, und Veronika Braunisch. 2017. <span>„Outdoor recreation causes effective habitat reduction in capercaillie Tetrao urogallus: a major threat for geographically restricted populations“</span>. <em>Journal of avian biology</em> 48 (12): 1583–94.
+</div>
+</div>
 </section>
 
 </main> <!-- /main -->
@@ -1362,13 +1270,13 @@ window.document.addEventListener("DOMContentLoaded", function (event) {
 </script>
 <nav class="page-navigation">
   <div class="nav-page nav-page-previous">
-      <a href="../statistik/Statistik1_Demo.html" class="pagination-link  aria-label=" &lt;span="" 1:="" demo&lt;="" span&gt;"="">
-        <i class="bi bi-arrow-left-short"></i> <span class="nav-page-text"><span class="chapter-title">Statistik 1: Demo</span></span>
+      <a href="../fallstudie_n/4_Multivariate_Modelle.html" class="pagination-link  aria-label=" &lt;span="" modelle&lt;="" span&gt;"="">
+        <i class="bi bi-arrow-left-short"></i> <span class="nav-page-text"><span class="chapter-title">Multivariate Modelle</span></span>
       </a>          
   </div>
   <div class="nav-page nav-page-next">
-      <a href="../statistik/Statistik2_Demo.html" class="pagination-link" aria-label="<span class='chapter-number'>18</span>&nbsp; <span class='chapter-title'>Statistik 2: Demo</span>">
-        <span class="nav-page-text"><span class="chapter-title">Statistik 2: Demo</span></span> <i class="bi bi-arrow-right-short"></i>
+      <a href="../References.html" class="pagination-link" aria-label="<span class='chapter-number'>37</span>&nbsp; <span class='chapter-title'>Literaturverzeichnis</span>">
+        <span class="nav-page-text"><span class="chapter-title">Literaturverzeichnis</span></span> <i class="bi bi-arrow-right-short"></i>
       </a>
   </div>
 </nav>
