@@ -168,6 +168,7 @@ ggplot(df, aes(x = condit, y = tot_sold)) + # achtung 0 Punkt fehlt
 t_test <- t.test(tot_sold ~ condit, data = df)
 t_test
 
+
 # alternative Formulierung
 t.test(
   df[df$condit == "Basis", ]$tot_sold,
@@ -178,7 +179,6 @@ t.test(
 #' ### Methoden
 #' 
 #' Unser Ziel bestand darin, einen Vergleich der aggregierten Verkaufszahlen zwischen den Interventions- und Basiswochen durchzuführen. Wir gingen davon aus, dass die wöchentlichen Verkaufszahlen unabhängig voneinander sind, weshalb wir die Unterschiede zwischen den Verkaufszahlen pro Woche in den beiden Bedingungen mittels eines t-Tests untersuchten. Obwohl bei der visuellen Prüfung der Modellvoraussetzungen keine schwerwiegenden Verletzungen festgestellt wurden (abgesehen von einem Ausreißer), entschieden wir uns dennoch für einen Welch t-Test. Es sei angemerkt, dass die Gruppengröße mit jeweils n = 6 Wochen eher klein war. Trotzdem erzielten die T-Tests verlässliche Ergebnisse. Für weitere Informationen zu diesem Thema verweisen wir auf die verlinkte [Studie](https://scholarworks.umass.edu/cgi/viewcontent.cgi?article=1307&context=pare).
-#' 
 #' 
 #' 
 #' 
