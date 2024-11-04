@@ -62,7 +62,7 @@ plot(lm_1)
 -> Plot sieht zwar OK aus, aber mit 6 Prädiktoren für \|\<60\| Beobachtungen ist das Modell wohl "overfitted"
 
 ```{r}
-# Andere Vatiante, um korrelierte Prädiktoren zu finden (üblicher Schwellenwert VIF = 5)
+# Andere Variante, um korrelierte Prädiktoren zu finden (üblicher Schwellenwert VIF = 5)
 p_load("car")
 vif(lm_1)
 ```
@@ -127,8 +127,7 @@ p_load(ggplot2)
 ggplot(data = NULL, aes(x = graze_resid, y = abundance_resid)) +
   geom_point() +
   geom_smooth(method = "lm", se = FALSE, color = "blue") +
-  labs(x = "Graze | others", y = "Abund | others",
-       title = "Partial Regression Plot with Quadratic Term and Regression Line") +
+  labs(x = "Graze | others", y = "Abund | others") +
   theme_minimal()
 
 # Einfacher geht es mit der function avPlots (package "car"). Nachteil ist, dass mit der funktion anders als mit der Methode oben, keine quadratische prädiktoren dargestellt werden können 
