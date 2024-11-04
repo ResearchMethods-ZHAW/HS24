@@ -98,7 +98,7 @@ plot(glm_quasipoisson, main = "glm_quasipoisson")
 -> Die Outputs von glm_poisson und glm_quasipoisson sind bis auf die p-Werte identisch.
 
 ```{r}
-ggplot(data = strand, aes(x = Temperature, y = Besucher)) +
+ggplot(data = strand, aes(x = Temperatur, y = Besucher)) +
   geom_point() +
   xlim(0, 40) +    
   stat_smooth(method = "lm", color = "blue") +

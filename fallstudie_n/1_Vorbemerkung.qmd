@@ -8,9 +8,20 @@ Im Rahmen der Fallstudie werden wir einige R Packages brauchen. Wir empfehlen, d
 ```{r}
 #| eval: false
 
-pacman::p_install("adehabitatHR", "bbmle", "car", "cowplot", "DHARMa", "dplyr",
+ipak <- function(pkg) {
+  new.pkg <- pkg[!(pkg %in% installed.packages()[, "Package"])]
+  if (length(new.pkg)) {
+    install.packages(new.pkg, dependencies = TRUE)
+  }
+}
+
+packages <- c(
+  "adehabitatHR", "bbmle", "car", "cowplot", "DHARMa", "dplyr",
   "ggeffects", "ggplot2", "ggspatial", "glmmTMB", "gstat", "kableExtra", "lme4",
   "MASS", "MuMIn", "pastecs", "performance", "PerformanceAnalytics", "psych",
-  "readr", "rms", "ROCR", "sf", "sjPlot", "sjstats", "terra", character.only = TRUE,  force = FALSE)
+  "readr", "rms", "ROCR", "sf", "sjPlot", "sjstats", "terra"
+)
+
+ipak(packages)
 
 ```
