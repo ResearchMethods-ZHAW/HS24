@@ -14,6 +14,7 @@
 #' -   Datensatz *loyn.csv*
 #' 
 #' 
+#' 
 #' ## Multiple lineare Regression
 #' 
 ## -----------------------------------------------------------------------------
@@ -34,16 +35,17 @@ summary(loyn)
 # Korrelationen rechnen details siehe: "?cor"
 cor(loyn[, 2:7]) 
 # oder mit Namen der columns resp. variablen
-cor <- loyn |>
+cor1 <- 
+  loyn |>
   subset(select = AREA:ALT) |>
   cor()
 
 # Korrelationen Visualisieren
 p_load("corrplot")
-corrplot.mixed(cor, lower = "ellipse", upper = "number", order = "AOE")
+corrplot.mixed(cor1, lower = "ellipse", upper = "number", order = "AOE")
 
-cor[abs(cor)<0.7] <- 0
-cor
+cor1[abs(cor1)<0.7] <- 0
+cor1
 
 #' 
 #' -> Keine Korrelation ist \>\|0.7\|, so können wir alle Prädiktoren "behalten". Aber es gilt zu beachten, dass GRAZE ziemlich stark \|\>0.6\| mit AGE korreliert ist

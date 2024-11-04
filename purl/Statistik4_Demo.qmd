@@ -7,9 +7,7 @@ knitr:
 
 # Statistik 4: Demo
 
-[Demoscript herunterladen (.R)](../purl/Statistik4_Demo.R){.dld}
-
-[Demoscript herunterladen (.qmd)](../purl/Statistik4_Demo.qmd){.dld}
+[Download dieses Demoscript ](../purl/Statistik4_Demo.R) (rechtsklick → speichern unter)
 
 -   Datensatz *loyn.csv*
 
