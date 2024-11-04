@@ -90,8 +90,6 @@ binom.test(3, 7) # Anzahl Frauen im Bundesrat (≙ 42.9 %; Stand 2019)
 
 ## Chi-Quadrat-Test & Fishers Test
 
-Ermitteln des kritischen Wertes
-
 ### Direkter Test in R (dazu Werte als Matrix nötig)
 
 ```{r}
