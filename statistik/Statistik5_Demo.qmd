@@ -101,7 +101,7 @@ plot(glm_quasipoisson, main = "glm_quasipoisson")
 ggplot(data = strand, aes(x = Temperatur, y = Besucher)) +
   geom_point() +
   xlim(0, 40) +    
-  stat_smooth(method = "lm", color = "blue") +
+  stat_smooth(method = "lm", color = "blue", se = FALSE) +
   stat_smooth(method = "glm", method.args = list(family = "poisson"), 
                 color = "red", se = FALSE) +
   stat_smooth(method = "glm", method.args = list(family = "quasipoisson"), 
@@ -146,7 +146,7 @@ exp(glm_logistic$coefficients[2])
 -glm_logistic$coefficients[1] / glm_logistic$coefficients[2]
 
 # oder
-p_load(MASS)
+p_load("MASS")
 dose.p(glm_logistic, p = 0.5)
 
 # Vorhersagen
@@ -170,7 +170,7 @@ ggplot(data = bathing, aes(x = temperatur, y = badend)) +
 
 ## Binominale Regression
 ```{r}
-p_load(doBy)
+p_load("doBy")
 ?budworm
 
 data(budworm)
