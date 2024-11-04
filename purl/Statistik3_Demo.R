@@ -94,7 +94,7 @@ summary(lm_1) # Modell anschauen
 #' 
 #' 
 ## -----------------------------------------------------------------------------
-# Polynomische Regression Modell definieren und anschauen
+# Polynomische Regression Modell definieren und anschauen 
 lm_quad <- lm(resp ~ pred + I(pred^2)) # lineares Modell mit quadratischem Termsummary
 
 summary(lm_quad) # lineares Modell mit quadratischem Term anschauen
