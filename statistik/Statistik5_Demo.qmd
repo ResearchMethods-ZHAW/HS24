@@ -79,6 +79,7 @@ check_overdispersion(glm_poisson)
 ```{r}
 glm_quasipoisson <- glm(Besucher ~ Temperatur, family = "quasipoisson", data = strand)
 summary(glm_quasipoisson)
+r2(glm_quasipoisson)
 ```
 
 ```{r}
@@ -201,8 +202,10 @@ drop1(glm_binomial_2, test = "Chisq")
 check_overdispersion(glm_binomial_2)
 check_model(glm_binomial_2)
 
-# Resultat udn Visualisierung
+# Resultat und Visualisierung
 summary(glm_binomial_2)
+# Modellgüte (pseudo-R²)
+1 - (glm_binomial_2$dev / glm_binomial_2$null)
 
 # ld 50 Female (cf = c(1, 3) = Intercept und dosis)
 ( ld50_feamle <- dose.p(glm_binomial_2, cf = c(1, 3)) ) 
