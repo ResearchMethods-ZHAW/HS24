@@ -17,7 +17,7 @@ musterloesung: true
 - **Ihre Gesamtaufgabe ist es, aus diesen Daten ein minimal adäquates Modell zu ermitteln, das dies Abhängikeit der Tauchzeit von der Jahreszeit und Unterart beschreibt.**
 - Bitte erklären und begründen Sie die einzelnen Schritte, die Sie unternehmen, um zu diesem Ergebnis zu kommen. Dazu erstellen Sie bitte ein  mit Quarto generiertes html-Dokument, in das Sie Schritt für Schritt den verwendeten R-Code, die dazu gehörigen Ausgaben von R, Ihre Interpretation derselben und die sich ergebenden Schlussfolgerungen für das weitere Vorgehen dokumentieren.
 - Dieser Ablauf sollte insbesondere beinhalten:
-  - Überprüfen der Datenstruktur nach dem Einlesen, welches sind die abhängige(n) und welches die unabängige(n) Variablen, welches statistische Verfahren wenden Sie an?
+  - Überprüfen der Datenstruktur nach dem Einlesen, welches sind die abhängige(n) und welches die unabängige(n) Variablen, welches statistische Verfahren wenden Sie an? 
   - Explorative Datenanalyse, um ein Eindruck der Daten zu bekommen und zu kontrollieren ob es NAs in den Daten hat
   - Definition eines vollen Modelles, das nach statistischen Kritierien zum minimal adäquaten Modell reduziert wird
   - Durchführen der Modelldiagnostik, um zu entscheiden, ob das gewählte Vorgehen korrekt war oder ggf. angepasst werden muss
@@ -85,7 +85,7 @@ Das Gesamtbild ist noch OK für parametrische Verfahren (Box ziemlich symmetrisc
 aov_1 <- aov(Tauchzeit ~ Unterart * Jahreszeit, data = kormoran)
 aov_1
 summary(aov_1)
-summary.lm(aov)
+summary.lm(aov_1)
 # p-Wert der Interaktion ist 0.266
 ```
 
