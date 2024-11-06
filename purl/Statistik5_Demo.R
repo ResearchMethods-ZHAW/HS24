@@ -48,16 +48,22 @@ ggplot(strand, aes(x = Temperatur, y = Besucher)) +
   theme_classic()
 
 #' 
+#' 
 ## -----------------------------------------------------------------------------
 # GLMs definieren und anschauen
 
 # ist dasselbe wie ein LM
 glm_gaussian <- glm(Besucher ~ Temperatur, family = "gaussian", data = strand) 
+summary(glm_gaussian)
 
+#' 
+#' 
+#' ## Poisson Regression
+#' 
+## -----------------------------------------------------------------------------
 # Poisson passt besser zu den Daten 
 glm_poisson <- glm(Besucher ~ Temperatur, family = "poisson", data = strand) 
 
-summary(glm_gaussian)
 summary(glm_poisson)
 
 #' 
