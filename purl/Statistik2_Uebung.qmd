@@ -31,11 +31,10 @@ musterloesung: false
 
 :::{.callout-note}
 
-# Statistik 2: Lösung
+# Statistik: Lösung
 
-[Demoscript herunterladen (.R)](../purl/Statistik2_Uebung.R){.dld}
+[Download dieses Demoscript ](../purl/Statistik2_Uebung.R) (rechtsklick → speichern unter)
 
-[Demoscript herunterladen (.qmd)](../purl/Statistik2_Uebung.qmd){.dld}
 
 
 - [Lösungstext als Download](Statistik_Loesung_2.3N.pdf)
