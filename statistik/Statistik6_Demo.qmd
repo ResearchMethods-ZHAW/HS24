@@ -208,7 +208,7 @@ DeerEcervi$Lengt_std <-  Std(DeerEcervi$Length)
 DeerEcervi$Length_std <- as.vector( scale(DeerEcervi$Length, center = TRUE))
 
 # Model fitten
-glmm_1 <- glmmTMB(Ecervi ~ Length_std * Sex + (1 | Farm), 
+glmm_1 <- glmmTMB(Ecervi ~ scale(Length) * Sex + (1 | Farm), 
                   family = binomial, 
                   data = DeerEcervi)
 
@@ -233,11 +233,12 @@ plotResiduals(simulationOutput, form = DeerEcervi$Sex)
 plotResiduals(simulationOutput, form = DeerEcervi$Length_std) 
 ```
 
+
 ```{r}
 # Visualisierung
 plot_model(glmm_1, 
            type = "pred", pred.type = "re", 
-           terms = c("Length_std[all]", "Sex"),  
+           terms = c("Length[all]", "Sex"),  
            show.data = TRUE) +
   theme_classic()
 ```
