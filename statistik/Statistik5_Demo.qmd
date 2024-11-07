@@ -2,7 +2,7 @@
 lesson: Statistik5
 knitr:
   opts_chunk: 
-    collapse: true
+    collapse: false
 ---
 
 
@@ -171,7 +171,7 @@ ggplot(data = bathing, aes(x = temperatur, y = badend)) +
   geom_point() +
   xlim(0, 30) +
   labs(x = "Temperature (°C)", y = "% Bathing") +
-  stat_smooth(method = "glm", method.args = list(family = "binomial")) +
+  stat_smooth(method = "glm", method.args = list(family = "binomial"), se = FALSE) +
   theme_classic()
 ```
 

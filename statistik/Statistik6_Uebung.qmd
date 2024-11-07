@@ -30,8 +30,6 @@ Führt mit dem novanimal Datensatz (inviduelle Daten) eine logistische Regressio
 -   Stellt die Ergebnisse dar
 
 
--   Download dieses Lösungsscript via "\</\>Code" (oben rechts)
-
 ::::{.content-hidden unless-meta="musterloesung"}
 
 :::{.callout-note}
@@ -47,7 +45,7 @@ Führt mit dem novanimal Datensatz (inviduelle Daten) eine logistische Regressio
 #| results: hide
 
 library("pacman")
-p_load("tidyverse", "glmmTMB", "performance", "DHARMa")
+p_load("tidyverse", "glmmTMB", "performance", "DHARMa", "car")
 ```
 
 ```{r}
