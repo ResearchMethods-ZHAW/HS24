@@ -564,7 +564,7 @@ window.onload = function() {
 <div class="cell-output cell-output-stdout">
 <pre><code>tibble [72 × 4] (S3: tbl_df/tbl/data.frame)
  $ PlantHeight: num [1:72] 5 7 9 11 6 9 12 15 7 8 ...
- $ Treatment  : Factor w/ 3 levels "Nitrogen","Phosporhus",..: 3 3 3 3 1 1 1 1 2 2 ...
+ $ Treatment  : Factor w/ 3 levels "Nitrogen","Phosphorus",..: 3 3 3 3 1 1 1 1 2 2 ...
  $ Time       : Factor w/ 4 levels "T0","T1","T2",..: 1 2 3 4 1 2 3 4 1 2 ...
  $ PlantID    : Factor w/ 18 levels "P01","P02","P03",..: 1 1 1 1 2 2 2 2 3 3 ...</code></pre>
 </div>
@@ -572,8 +572,8 @@ window.onload = function() {
 <div class="cell-output cell-output-stdout">
 <pre><code>  PlantHeight          Treatment  Time       PlantID  
  Min.   : 4.000   Nitrogen  :24   T0:18   P01    : 4  
- 1st Qu.: 6.000   Phosporhus:24   T1:18   P02    : 4  
- Median : 9.000   Watter    :24   T2:18   P03    : 4  
+ 1st Qu.: 6.000   Phosphorus:24   T1:18   P02    : 4  
+ Median : 9.000   Water     :24   T2:18   P03    : 4  
  Mean   : 9.306                   T3:18   P04    : 4  
  3rd Qu.:11.000                           P05    : 4  
  Max.   :18.000                           P06    : 4  
@@ -584,13 +584,13 @@ window.onload = function() {
 <pre><code>            
              P01 P02 P03 P04 P05 P06 P07 P08 P09 P10 P11 P12 P13 P14 P15 P16
   Nitrogen     0   4   0   0   4   0   0   4   0   0   4   0   0   4   0   0
-  Phosporhus   0   0   4   0   0   4   0   0   4   0   0   4   0   0   4   0
-  Watter       4   0   0   4   0   0   4   0   0   4   0   0   4   0   0   4
+  Phosphorus   0   0   4   0   0   4   0   0   4   0   0   4   0   0   4   0
+  Water        4   0   0   4   0   0   4   0   0   4   0   0   4   0   0   4
             
              P17 P18
   Nitrogen     4   0
-  Phosporhus   0   4
-  Watter       0   0</code></pre>
+  Phosphorus   0   4
+  Water        0   0</code></pre>
 </div>
 <div class="sourceCode cell-code" id="cb8"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb8-1"><a href="#cb8-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Mit aov</span></span>
 <span id="cb8-2"><a href="#cb8-2" aria-hidden="true" tabindex="-1"></a>pf_eaov <span class="ot">&lt;-</span> <span class="fu">aov</span>(PlantHeight <span class="sc">~</span> Treatment <span class="sc">*</span> Time  <span class="sc">+</span> <span class="fu">Error</span>(PlantID), <span class="at">data =</span> plantf)</span>
@@ -652,17 +652,17 @@ Dispersion estimate for gaussian family (sigma^2): 0.513
 Conditional model:
                            Estimate Std. Error z value Pr(&gt;|z|)    
 (Intercept)                  5.1667     0.4183  12.351  &lt; 2e-16 ***
-TreatmentPhosporhus          0.6667     0.5916   1.127 0.259796    
-TreatmentWatter              0.1667     0.5916   0.282 0.778160    
+TreatmentPhosphorus          0.6667     0.5916   1.127 0.259796    
+TreatmentWater               0.1667     0.5916   0.282 0.778160    
 TimeT1                       4.3333     0.4135  10.479  &lt; 2e-16 ***
 TimeT2                       7.6667     0.4135  18.541  &lt; 2e-16 ***
 TimeT3                      11.3333     0.4135  27.408  &lt; 2e-16 ***
-TreatmentPhosporhus:TimeT1  -2.1667     0.5848  -3.705 0.000211 ***
-TreatmentWatter:TimeT1      -2.8333     0.5848  -4.845 1.27e-06 ***
-TreatmentPhosporhus:TimeT2  -3.6667     0.5848  -6.270 3.61e-10 ***
-TreatmentWatter:TimeT2      -4.1667     0.5848  -7.125 1.04e-12 ***
-TreatmentPhosporhus:TimeT3  -5.0000     0.5848  -8.550  &lt; 2e-16 ***
-TreatmentWatter:TimeT3      -5.8333     0.5848  -9.975  &lt; 2e-16 ***
+TreatmentPhosphorus:TimeT1  -2.1667     0.5848  -3.705 0.000211 ***
+TreatmentWater:TimeT1       -2.8333     0.5848  -4.845 1.27e-06 ***
+TreatmentPhosphorus:TimeT2  -3.6667     0.5848  -6.270 3.61e-10 ***
+TreatmentWater:TimeT2       -4.1667     0.5848  -7.125 1.04e-12 ***
+TreatmentPhosphorus:TimeT3  -5.0000     0.5848  -8.550  &lt; 2e-16 ***
+TreatmentWater:TimeT3       -5.8333     0.5848  -9.975  &lt; 2e-16 ***
 ---
 Signif. codes:  0 '***' 0.001 '**' 0.01 '*' 0.05 '.' 0.1 ' ' 1</code></pre>
 </div>
