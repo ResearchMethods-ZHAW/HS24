@@ -49,6 +49,8 @@ Anova(pf_lmm)
 summary(pf_lmm)
 r2(pf_lmm)
 
+
+
 # Modellvalidierung mit DHARMa
 set.seed(123)
 simulationOutput <- simulateResiduals(fittedModel = pf_lmm, plot = TRUE, n = 1000)
