@@ -22,6 +22,7 @@ library("pacman")
 p_load("tidyverse", "sjPlot", "car", "lme4", "glmmTMB", "performance", "DHARMa")
 ```
 
+
 ## Repeated measurement
 
 Es handelt sich um einen Düngeversuch (Daten aus Lepš & Šmilauer 2020). 18 Pflanzenindividuen wurden zufällig einer von drei Düngevarianten zugewiesen und dabei zu vier Zeitpunkten ihre Wuchshöhe gemessen. Abhängigkeiten sind hier in zwei Aspekten vorhanden: einerseits wurde jedes Pflanzenindividuum mehrfach gemessen, andererseits hat es nur jeweils eine Düngervariante erhalten
@@ -85,7 +86,8 @@ table(glex$site_code, glex$treatment, glex$plot_type, glex$year)
 # balanced Design
 ```
 
-## 2. Fit LMM with random interecept
+
+## LMM with random interecept
 
 ```{r}
 # REML = TRUE : (Restricted maximum likelihood) v.s 
