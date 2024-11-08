@@ -37,13 +37,13 @@ p_load("tidyverse")
 env <- read_delim("./datasets/stat/Doubs_env.csv", delim = ";") |>
   column_to_rownames(var = "Site")
 
-names(env)
+str(env)
+summary(env)
 ```
 
 ```{r}
 # Berechnen der PCA
 pca_1 <- prcomp(env, scale = TRUE)
-pca_1 <- prcomp(env)
 ```
 
 Wir verwenden hier «scale = TRUE» weil wir Umweltvariablen mit unterschiedliche Masseinheiten verwenden die variierende Skalen aufweisen. 

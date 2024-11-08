@@ -9,7 +9,14 @@ musterloesung: false
 
 # Statistik 8: Übung
 
-Aufgabenbeschreibung
+
+- Datensatz *crime.csv*
+
+Raten von 7 Kriminalitätsformen pro 100000 Einwohner und Jahr für die Bundesstaaten der USA
+
+-Führt mit den Datensatz crime eine pca aus und visualisiert das Resultat in einem Biplot. Da einzelnen Kriminalitätsformen verwenden zwar alle die selbe Masseinheit, unterscheiden sich aber sehr stark in ihrer Anzahl. Wir möchten visualisieren welche Vebrechensarten mit welchen Bundestaat aossziert sind, ohne einen Schwerpunkt auf die 
+Häufigkeit der Vebrechen zu legen verwende deshalb scale = TRUE 
+
 
 ::::{.content-hidden unless-meta="musterloesung"}
 
@@ -23,8 +30,48 @@ Aufgabenbeschreibung
 
 
 ```{r}
+# Daten importieren
+library("pacman")
+p_load("tidyverse", "vegan", "factoextra")
 
+crime <- read_delim("./datasets/stat/crime.csv", delim = ";", col_names = TRUE) |>
+  column_to_rownames(var = "State")
+
+str(crime)
+summary(crime)
 ```
+
+
+```{r}
+# PCA durchführen
+pca_1 <- prcomp(crime, scale = TRUE)
+summary(pca_1)
+
+screeplot(pca_1, bstick = TRUE)
+```
+
+Wie wir in der Summary und im Screeplot sehen, wird ein sehr grosser Anteil der Varianz (65.3 %) durch die erste Achse erklärt. Die zweite Achse erklärt noch einen Anteil von 13.8 % während der dritten Achse nur noch 8.8% Anteil der Varianz erklärt. Wir beschränken uns deshalb darauf die ersten beiden Achsen zu visualisieren.
+
+
+```{r}
+# Visualisierung
+fviz_pca_biplot(pca_1, repel = TRUE, 
+                col.var = "blue",  col.ind = "black") +
+    ggtitle(NULL) +
+  theme_classic()
+```
+
+```{r}
+# Zum Vergleich unskaliert
+pca_2 <- prcomp(crime, scale = FALSE)
+summary(pca_2)
+
+fviz_pca_biplot(pca_2, repel = TRUE, 
+                col.var = "blue",  col.ind = "black") +
+    ggtitle(NULL) +
+  theme_classic()
+```
+
 
 :::
 :::: 
