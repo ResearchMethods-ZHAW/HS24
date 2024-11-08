@@ -13,12 +13,16 @@ knitr:
 
 -   Datensatz *Doubs_spe* von  @borcard2011
 
+# Datenbeschreibung
+
+Der Datensatz enthält Daten zum Vorkommen von Fischarten und den zugehörigen Umweltvariablen im Fluss Doubs (Jura). Es gibt 29 Probestellen (sites), an denen jeweils die Abundanzen von 27 Fischarten (auf einer Skalen von 0 bis 5) erhoben wurden. In dieser Demo verwenden wir mit den Artdaten
+
 
 ```{r}
 library("pacman")
 p_load("tidyverse")
 
-spe <- read_delim("./datasets/stat/Doubs_species.csv", delim = ";", col_names = TRUE) |>
+spe <- read_delim("./datasets/stat/Doubs_species.csv", delim = ";") |>
   column_to_rownames(var = "Site")
 
 str(spe)
