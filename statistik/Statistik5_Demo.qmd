@@ -213,8 +213,8 @@ summary(glm_binomial_2)
 # Modellgüte (pseudo-R²)
 1 - (glm_binomial_2$dev / glm_binomial_2$null)
 
-# ld 50 Female (cf = c(1, 3) = Intercept und dosis)
-( ld50_feamle <- dose.p(glm_binomial_2, cf = c(1, 3)) ) 
+# ld 50 Female (cf = c(1, 2) = Intercept und dosis)
+( ld50_feamle <- dose.p(glm_binomial_2, cf = c(1, 2)) ) 
 
 # Zurücktransformieren
 2^ld50_feamle
