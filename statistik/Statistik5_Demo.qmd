@@ -119,6 +119,7 @@ ggplot(data = strand, aes(x = Temperatur, y = Besucher)) +
   theme_classic()
 ```
 
+
 ## Logistische Regression
 
 ```{r}
