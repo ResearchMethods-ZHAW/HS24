@@ -113,6 +113,9 @@ ggplot(data = strand, aes(x = Temperatur, y = Besucher)) +
                 color = "red", se = FALSE) +
   stat_smooth(method = "glm", method.args = list(family = "quasipoisson"), 
                   color = "green", linetype = "dashed", se = FALSE) +
+    annotate(geom="text", x = 4, y = 2000, label = "gaussian", color = "blue") +
+    annotate(geom="text", x = 4, y = 1800, label = "poisson", color = "red") +
+    annotate(geom="text", x = 4, y = 1600, label = "quasipoisson", color = "green") +
   theme_classic()
 
 #' 
