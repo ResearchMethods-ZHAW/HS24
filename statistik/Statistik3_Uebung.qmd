@@ -12,7 +12,13 @@ musterloesung: false
 
 *Aufgabenbeschreibung*
 
-In R gibt es zahlreiche eingebaute Datensätze. Diese sind direkt in R verfügbar und können ohne zusätzliche Downloads oder Installationen genutzt werden. In dieser Übung verwenden wir den Datensatz `LifeCycleSavings`
+In R gibt es zahlreiche eingebaute Datensätze. Diese sind direkt in R verfügbar und können ohne zusätzliche Downloads oder Installationen genutzt werden. In dieser Übung verwenden wir den Datensatz `LifeCycleSavings`.
+Du kannst den Datensatz z.B. mit folgendem Befehl als Objekt laden:
+
+```{r}
+DataUebung3 <- LifeCycleSavings
+```
+
 
 Der Datensatz enthält Informationen über die Sparquoten in 50 Ländern:
 
@@ -24,7 +30,7 @@ Der Datensatz enthält Informationen über die Sparquoten in 50 Ländern:
 
 -   `dpi` Pro-Kopf-Einkommen
 
-Du sollst nun untersuchen, ob und wie Sparquote von den anderen drei Variablen abhängt. Teste auf lineare und quadratische Zusammenhänge, stelle die Ergebnisse grafisch dar und verfasse einen ausformulierten Methoden- und Ergebnisteil.
+Du sollst nun untersuchen, ob und wie Sparquote von den anderen drei Variablen abhängt. Teste für jede erklärende Variable einzeln auf lineare und quadratische Zusammenhänge. Stelle die Ergebnisse grafisch dar und verfasse einen ausformulierten Methoden- und Ergebnisteil.
 
 :::: {.content-hidden unless-meta="musterloesung"}
 ::: callout-note

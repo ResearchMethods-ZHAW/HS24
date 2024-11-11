@@ -14,6 +14,7 @@ knitr:
 -   Datensatz *loyn.csv*
 
 
+
 ## Multiple lineare Regression
 
 ```{r}
@@ -34,16 +35,17 @@ summary(loyn)
 # Korrelationen rechnen details siehe: "?cor"
 cor(loyn[, 2:7]) 
 # oder mit Namen der columns resp. variablen
-cor <- loyn |>
+cor1 <- 
+  loyn |>
   subset(select = AREA:ALT) |>
   cor()
 
 # Korrelationen Visualisieren
 p_load("corrplot")
-corrplot.mixed(cor, lower = "ellipse", upper = "number", order = "AOE")
+corrplot.mixed(cor1, lower = "ellipse", upper = "number", order = "AOE")
 
-cor[abs(cor)<0.7] <- 0
-cor
+cor1[abs(cor1)<0.7] <- 0
+cor1
 ```
 
 -> Keine Korrelation ist \>\|0.7\|, so können wir alle Prädiktoren "behalten". Aber es gilt zu beachten, dass GRAZE ziemlich stark \|\>0.6\| mit AGE korreliert ist
@@ -60,7 +62,7 @@ plot(lm_1)
 -> Plot sieht zwar OK aus, aber mit 6 Prädiktoren für \|\<60\| Beobachtungen ist das Modell wohl "overfitted"
 
 ```{r}
-# Andere Vatiante, um korrelierte Prädiktoren zu finden (üblicher Schwellenwert VIF = 5)
+# Andere Variante, um korrelierte Prädiktoren zu finden (üblicher Schwellenwert VIF = 5)
 p_load("car")
 vif(lm_1)
 ```
@@ -125,8 +127,7 @@ p_load(ggplot2)
 ggplot(data = NULL, aes(x = graze_resid, y = abundance_resid)) +
   geom_point() +
   geom_smooth(method = "lm", se = FALSE, color = "blue") +
-  labs(x = "Graze | others", y = "Abund | others",
-       title = "Partial Regression Plot with Quadratic Term and Regression Line") +
+  labs(x = "Graze | others", y = "Abund | others") +
   theme_minimal()
 
 # Einfacher geht es mit der function avPlots (package "car"). Nachteil ist, dass mit der funktion anders als mit der Methode oben, keine quadratische prädiktoren dargestellt werden können 

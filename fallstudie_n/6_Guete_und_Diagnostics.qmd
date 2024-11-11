@@ -103,8 +103,6 @@ Für die Berechnung des AUC findet ihr weiterführende Informationen unter: [Lin
 prob <- predict(m_day, type = c("response"))
 pred <- prediction(prob, DF_mod_day$pres_abs)
 
-?prediction
-
 # AUC
 
 auc <- performance(pred, measure = "auc")@y.values[[1]]

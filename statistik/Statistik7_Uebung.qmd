@@ -48,9 +48,7 @@ p_load("tidyverse")
 
 crime <- read_delim("./datasets/stat/crime.csv", delim = ";", col_names = TRUE) |>
   column_to_rownames(var = "State")
-```
 
-```{r}
 str(crime)
 summary(crime)
 ```

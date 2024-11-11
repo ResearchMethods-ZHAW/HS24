@@ -54,12 +54,12 @@ Modell ist signifikant (p-Wert in Zeile RATIO ist < 0.05). Jetzt müssen wir noc
 
 ```{r}
 # Test Overdispersion
+p_load("performance")
 check_overdispersion(glm_1)
 
 # Modelldiagnostik für das gewählte Modell (wenn nicht signifikant, dann OK)
 1 - pchisq(glm_1$deviance, glm_1$df.resid)
 
-p_load("performance")
 check_model(glm_1)
 ```
 

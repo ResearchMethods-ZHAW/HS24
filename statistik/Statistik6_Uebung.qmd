@@ -21,16 +21,15 @@ Dazu wurde u.a. ein Experiment in zwei Hochschulmensen durchgeführt. Forschungs
 
 Mehr Informationen über das Forschungsprojekt NOVANIMAL findet ihr auf der [Webpage](https://www.novanimal.ch).
 
+
 ### Aufgaben
 
-Führt mit dem novanimal Datensatz (inviduelle Daten) eine logistische Regression durch, wobei ihr die einzelnen Käufer (single campus_card holder) als weitere randomisierte Variable mitberücksichtigt. Kann der Fleischkonsum durch das Geschlecht, die Hochschulzugehörigkeit und das Alter erklärt werden? Berüchsicht auch möglich Interaktionen zwischen dem Geschlecht und dem Alter sowie dem Geshchlecht und der Hochschulzugehörigkeit
+Führt mit dem novanimal Datensatz (inviduelle Daten) eine logistische Regression durch, wobei ihr die einzelnen Käufer (single campus_card holder "ccrs") als randomisierte Variable mitberücksichtigt. Kann der Fleischkonsum durch das Geschlecht, die Hochschulzugehörigkeit und das Alter erklärt werden? Berücksichtigt auch mögliche Interaktionen zwischen dem Geschlecht und dem Alter sowie dem Geshchlecht und der Hochschulzugehörigkeit
 
 
 -   Bestimmt das minimal adäquate Modell
 -   Stellt die Ergebnisse dar
 
-
--   Download dieses Lösungsscript via "\</\>Code" (oben rechts)
 
 ::::{.content-hidden unless-meta="musterloesung"}
 
@@ -47,7 +46,7 @@ Führt mit dem novanimal Datensatz (inviduelle Daten) eine logistische Regressio
 #| results: hide
 
 library("pacman")
-p_load("tidyverse", "glmmTMB", "performance", "DHARMa")
+p_load("tidyverse", "glmmTMB", "performance", "DHARMa", "car")
 ```
 
 ```{r}
