@@ -8,9 +8,8 @@ knitr:
 
 # Statistik 5: Demo
 
-[Demoscript herunterladen (.R)](../purl/Statistik5_Demo.R){.dld}
+[Download dieses Demoscript ](../purl/Statistik5_Demo.R) (rechtsklick → speichern unter)
 
-[Demoscript herunterladen (.qmd)](../purl/Statistik5_Demo.qmd){.dld}
 
 ## von LMs zu GLMs
 

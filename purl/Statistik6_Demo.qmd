@@ -7,9 +7,7 @@ knitr:
 
 # Statistik 6: Demo
 
-[Demoscript herunterladen (.R)](../purl/Statistik6_Demo.R){.dld}
-
-[Demoscript herunterladen (.qmd)](../purl/Statistik6_Demo.qmd){.dld}
+[Download dieses Demoscript ](../purl/Statistik6_Demo.R) (rechtsklick → speichern unter)
 
 
 -   Datensatz *rm_plants.csv*

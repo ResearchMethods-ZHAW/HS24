@@ -1,0 +1,29 @@
+---
+lesson: Statistik 3
+knitr:
+  opts_chunk: 
+    collapse: false
+musterloesung: false
+---
+
+# Statistik 3: Übung
+
+Aufgabenbeschreibung
+
+
+
+::::{.content-hidden unless-meta="musterloesung"}
+
+:::{.callout-note}
+
+## Lösung Übung 3
+
+[Download dieses Demoscript ](../purl/Statistik3_Uebung.R) (rechtsklick → speichern unter)
+
+
+```{r}
+
+```
+
+:::
+:::: 
