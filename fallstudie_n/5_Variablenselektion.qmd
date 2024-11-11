@@ -1,7 +1,7 @@
 ---
 execute:
-  echo: false  # set to true to show musterlösung
-  output: false # set to true to show musterlösung
+  echo: true  # set to true to show musterlösung
+  output: true # set to true to show musterlösung
 code-fold: true
 code-summary: "Musterlösung"
 knitr:
@@ -135,22 +135,23 @@ Mit der GLMM Formel bauen wir in einem ersten Schritt eine univariate Variablens
 # Die erklärende Variable in m1 ist die erste Variable der korrelierenden Variablen
 # Die erklärende Variable in m2 ist die zweite Variable der korrelierenden Variablen
 
-m1 <- glmer(Abhaengige_Variable ~ Erklaerende_Variable + (1 | id),
+modell_1 <- glmer(Abhaengige_Variable ~ Erklaerende_Variable + (1 | id),
   data = DF_mod_day,
   family = binomial
 )
 
-m2 <- glmer(Abhaengige_Variable ~ Erklaerende_Variable + (1 | id),
+modell_2 <- glmer(Abhaengige_Variable ~ Erklaerende_Variable + (1 | id),
   data = DF_mod_day,
   family = binomial
 )
 
 # mit dieser Funktion können die Modellergebnisse inspiziert werden
-summary(m1)
+summary(modell_1)
+summary(modell_2)
 
 # Mit dieser Funktion kann der Informationgehalt der beiden Modelle gegeneinander
 # abgeschätzt werden
-bbmle::AICtab(m1, m2)
+bbmle::AICtab(modell_1, modell_2)
 
 # tieferer AIC -> besser (AIC = Akaike information criterion)
 
@@ -161,20 +162,29 @@ bbmle::AICtab(m1, m2)
 
 ```{r}
 
-m1 <- glmer(pres_abs ~ dist_road_trails_scaled + (1 | id), data = DF_mod_day, family = binomial)
-m2 <- glmer(pres_abs ~ dist_road_only_scaled + (1 | id), data = DF_mod_day, family = binomial)
+modell_1 <- glmer(pres_abs ~ dist_road_trails_scaled + (1 | id), data = DF_mod_day, family = binomial)
+modell_2 <- glmer(pres_abs ~ dist_road_only_scaled + (1 | id), data = DF_mod_day, family = binomial)
 
-summary(m1)
+summary(modell_1)
+summary(modell_2)
 
-bbmle::AICtab(m1, m2)
+bbmle::AICtab(modell_1, modell_2)
 
-# tieferer AIC -> besser (AIC = Akaike information criterion) -> als deltaAIC
-# ausgewiesen besser == Distanz zu Strassen
+# tieferer AIC -> besser (AIC = Akaike information criterion) -> als deltaAIC ausgewiesen 
+# Distanz zu Strassen (dist_road_only) = besser
 
-# ==> dieses Vorgehen muss nun für alle korrelierten Variablen für jeden
-# Teildatensatz (geringe Störung/starke Störung) durchgeführt werden, um nur
-# noch nicht (R < 0.7) korrelierte Variablen in das Modell einfliessen zu
-# lassen
+
+modell_3 <- glmer(pres_abs ~ forest_prop_scaled + (1 | id), data = DF_mod_day, family = binomial)
+modell_4 <- glmer(pres_abs ~ os_scaled + (1 | id), data = DF_mod_day, family = binomial)
+
+summary(modell_3)
+summary(modell_4)
+
+bbmle::AICtab(modell_3, modell_4)
+
+# tieferer AIC -> besser (AIC = Akaike information criterion) -> als deltaAIC ausgewiesen 
+# Distanz zu Strassen (dist_road_only) = besser
+
 ```
 
 ## Aufgabe 5
@@ -189,7 +199,7 @@ Mit folgendem Code kann eine automatisierte Variablenselektion (dredge-Funktion)
 #| echo: true
 #| code-fold: false
 
-# hier wird die Formel für die dredge-Funktion vorbereitet (die Variablen V1-V8
+# hier wird die Formel für die dredge-Funktion vorbereitet (die Variablen V1-V6
 # sind jene welche nach der univariaten Variablenselektion noch übrig bleiben)
 
 f <- pres_abs ~
@@ -198,9 +208,7 @@ f <- pres_abs ~
   V3 +
   V4 +
   V5 +
-  V6 +
-  V7 +
-  V8
+  V6 
 
 # in diesem Befehl kommt der Random-Factor (das Reh) hinzu und es wird eine Formel
 # daraus gemacht
@@ -230,14 +238,13 @@ summary(avgmodel)
 ```
 
 ```{r}
-# hier wird die Formel für die dredge-Funktion vorbereitet (die Variablen V1-V8
+# hier wird die Formel für die dredge-Funktion vorbereitet (die Variablen V1-V6
 # sind jene welche nach der univariaten Variablenselektion noch übrig bleiben)
 
 f <- pres_abs ~
   slope_scaled +
   topo_pos_scaled +
   us_scaled +
-  os_scaled +
   forest_prop_scaled +
   dist_road_only_scaled +
   dist_sett_scaled 
