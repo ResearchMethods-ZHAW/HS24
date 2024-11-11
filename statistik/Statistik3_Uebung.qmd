@@ -41,6 +41,9 @@ Du sollst nun untersuchen, ob und wie Sparquote von den anderen drei Variablen a
 
 [Demoscript herunterladen (.qmd)](../purl/Statistik3_Uebung.qmd){.dld}
 
+- [Lösungstext als Download](Statistik3_Loesung.pdf)
+
+
 ### R-Session vorbereiten
 
 ```{r}
@@ -48,6 +51,7 @@ library(ggplot2)
 library(patchwork)
 
 ```
+
 
 # Daten anschauen
 
