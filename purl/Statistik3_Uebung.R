@@ -41,6 +41,9 @@ DataUebung3 <- LifeCycleSavings
 #' 
 #' [Demoscript herunterladen (.qmd)](../purl/Statistik3_Uebung.qmd){.dld}
 #' 
+#' - [Lösungstext als Download](Statistik3_Loesung.pdf)
+#' 
+#' 
 #' ### R-Session vorbereiten
 #' 
 ## -----------------------------------------------------------------------------
@@ -48,6 +51,7 @@ library(ggplot2)
 library(patchwork)
 
 
+#' 
 #' 
 #' # Daten anschauen
 #' 
