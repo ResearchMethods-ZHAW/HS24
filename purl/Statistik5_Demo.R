@@ -136,18 +136,22 @@ ggplot(bathing, aes(x = temperatur, y = badend)) +
 # Logistisches Modell definieren
 glm_logistic <- glm(badend ~ temperatur, family = "binomial", data = bathing)
 summary(glm_logistic)
-glm_logistic
 
 # Test Overdispersion
 check_overdispersion(glm_logistic)
 
-# Modeldiagnostik (wenn nicht signifikant, dann OK)
+# Modeldiagnostik (godness of fit test, wenn nicht signifikant, dann OK)
 1 - pchisq(glm_logistic$deviance, glm_logistic$df.resid)
 
-# Using function "check_model"
+# Modeldiagnostik mit funktion "check_model"
 check_model(glm_logistic)
 
-# Modellgüte (pseudo-R²)
+#' 
+#' 
+## -----------------------------------------------------------------------------
+# Modelresultate
+
+# pseudo-R²
 r2(glm_logistic)
 
 # Steilheit der Beziehung (relative Änderung der odds bei x + 1 vs. x)
@@ -159,6 +163,7 @@ exp(glm_logistic$coefficients[2])
 # oder
 p_load("MASS")
 dose.p(glm_logistic, p = 0.5)
+
 
 # Vorhersagen
 predicted <- predict(glm_logistic, type = "response")
