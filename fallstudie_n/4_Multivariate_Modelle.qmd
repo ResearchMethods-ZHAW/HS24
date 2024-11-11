@@ -135,10 +135,6 @@ Explorative Analysen der Variablen mit Scatterplots / Scatterplotmatrizen
 2) Testen der Korrelation zwischen den Variablen (Parametrisch oder nicht-parametrische Methode? Ausserdem: gewisse Scatterplotmatrizen zeigen euch die Koeffizenten direkt an)
 
 ```{r}
-chart.Correlation(DF_mod_day[5:12], histogram = TRUE, pch = 19, method = "pearson")
-
-# ?chart.Correlation
-
 pairs.panels(DF_mod_day[5:12],
   method = "pearson", # correlation method
   hist.col = "#00AFBB",

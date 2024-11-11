@@ -20,7 +20,6 @@ DataUebung3 <- LifeCycleSavings
 ```
 
 
-
 Der Datensatz enthält Informationen über die Sparquoten in 50 Ländern:
 
 -   `sr` Sparquote (*Savings Ratio*; Anteil des Einkommens der gespart wird in Prozent)
