@@ -99,6 +99,7 @@ Für die Berechnung des AUC findet ihr weiterführende Informationen unter: [Lin
 ```{r}
 #| echo: true
 #| output: false
+#| code-fold: false
 
 prob <- predict(m_day, type = c("response"))
 pred <- prediction(prob, DF_mod_day$pres_abs)
@@ -120,6 +121,7 @@ Interpretieren der Modell-Residuen mittels Tests auf verschiedene Aspekte
 #| eval: false
 #| output: false
 #| echo: true
+#| code-fold: false
 
 # Residuals werden über eine Simulation auf eine Standard-Skala transformiert und
 # können anschliessend getestet werden. Dabei kann die Anzahl Simulationen eingestellt
@@ -175,6 +177,7 @@ Graphische Darstellung der Modellresultate
 #| eval: false
 #| output: false
 #| echo: true
+#| code-fold: false
 
 # graphische Darstellung der gesamten Modellresultate
 
