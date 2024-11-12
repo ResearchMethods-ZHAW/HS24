@@ -85,7 +85,6 @@ check_overdispersion(glm_poisson)
 ## -----------------------------------------------------------------------------
 glm_quasipoisson <- glm(Besucher ~ Temperatur, family = "quasipoisson", data = strand)
 summary(glm_quasipoisson)
-r2(glm_quasipoisson)
 
 #' 
 ## -----------------------------------------------------------------------------
