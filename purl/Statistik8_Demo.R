@@ -11,8 +11,8 @@
 #' 
 #' [Demoscript herunterladen (.qmd)](../purl/Statistik8_Demo.qmd){.dld}
 #' 
-#' 
 #' -   Datensatz *Doubs_spe* von  @borcard2011
+#' 
 #' 
 #' 
 #' ## Cluster-Analyse k-means
@@ -26,6 +26,7 @@
 library("pacman")
 p_load("tidyverse")
 
+# Daten importieren
 spe <- read_delim("./datasets/stat/Doubs_species.csv", delim = ";") |>
   column_to_rownames(var = "Site")
 
@@ -44,7 +45,7 @@ spe_norm <- decostand(spe, "normalize")
 #' ### k-means clustering mit Artdaten
 #' 
 ## -----------------------------------------------------------------------------
-# k-means-Clustering mit 4 Gruppen durchführen
+# k-means-clustering mit 4 Gruppen durchführen
 set.seed(123)
 kmeans_1 <- kmeans(spe_norm, centers = 4, nstart = 100)
 kmeans_1$cluster

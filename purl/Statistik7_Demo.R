@@ -44,6 +44,8 @@ str(env)
 summary(env)
 
 #' 
+#' ### PCA durchführen
+#' 
 ## -----------------------------------------------------------------------------
 # Berechnen der PCA
 pca_1 <- prcomp(env, scale = TRUE)
@@ -72,7 +74,7 @@ p_load("vegan")
 screeplot(pca_1, bstick = TRUE)
 
 #' 
-#' # Visualisierung
+#' ### PCA visualisieren
 #' 
 ## -----------------------------------------------------------------------------
 # Mit biplot von base R
