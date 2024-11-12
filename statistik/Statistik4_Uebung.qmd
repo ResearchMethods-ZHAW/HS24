@@ -3,7 +3,7 @@ lesson: Statistik 4
 knitr:
   opts_chunk: 
     collapse: false
-musterloesung: false
+musterloesung: true
 ---
 
 
@@ -42,8 +42,7 @@ musterloesung: false
 
 [Demoscript herunterladen (.qmd)](../purl/Statistik4_Uebung.qmd){.dld}
 
-
-- [Lösungstext als Download](Statistik_Loesung_4.pdf)
+- [Lösungstext als Download](Statistik4_Loesung.pdf)
 
 ```{r}
 library(pacman)
