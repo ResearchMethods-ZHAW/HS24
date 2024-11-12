@@ -15,7 +15,7 @@ knitr:
 -   Datensatz *Doubs_spe* von  @borcard2011
 
 
-## Cluster-Analysen k-means
+## Cluster-Analyse k-means
 
 ### Datenbeschreibung
 
