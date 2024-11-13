@@ -38,7 +38,7 @@ summary(spe)
 #' die Randsumme der Quadrate gleich eins machen
 #' 
 ## -----------------------------------------------------------------------------
-p_load(vegan)
+p_load("vegan")
 spe_norm <- decostand(spe, "normalize")
 
 #' 
@@ -51,7 +51,7 @@ kmeans_1 <- kmeans(spe_norm, centers = 4, nstart = 100)
 kmeans_1$cluster
 
 #  Visualisierung
-p_load(factoextra)
+p_load("factoextra")
 
 fviz_cluster(kmeans_1, main = "", data = spe) +
   theme_classic()
