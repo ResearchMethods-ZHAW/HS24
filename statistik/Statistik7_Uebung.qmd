@@ -6,6 +6,7 @@ knitr:
 musterloesung: false
 ---
 
+
 # Statistik 7: Übung
 
 -   Datensatz *USstates* vom package "HSAUR3"
