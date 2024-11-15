@@ -18,7 +18,7 @@
 #' 
 #' ### Datenbeschreibung
 #' 
-#' Der Datensatz enthält Daten zum Vorkommen von Fischarten und den zugehörigen Umweltvariablen im Fluss Doubs (Jura). Es gibt 29 Probestellen (sites), an denen jeweils die Abundanzen von 27 Fischarten (auf einer Skalen von 0 bis 5) sowie 10 Umweltvariablen erhoben wurden. In dieser Demo verwenden wir mit den Umweltdaten:
+#' Der Datensatz enthält Daten zum Vorkommen von Fischarten und den zugehörigen Umweltvariablen im Fluss Doubs (Jura). Es gibt 29 Probestellen (sites), an denen jeweils die Abundanzen von 27 Fischarten (auf einer Skalen von 0 bis 5) sowie 10 Umweltvariablen erhoben wurden. In dieser Demo verwenden wir die Umweltdaten:
 #' 
 #' - ele = Elevation (m a.s.l.)
 #' - slo = Slope (‰)

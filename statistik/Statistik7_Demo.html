@@ -539,8 +539,9 @@ window.onload = function() {
   <li><a href="#ordination-hauptkomponentenanalyse-pca" id="toc-ordination-hauptkomponentenanalyse-pca" class="nav-link active" data-scroll-target="#ordination-hauptkomponentenanalyse-pca">Ordination Hauptkomponentenanalyse (PCA)</a>
   <ul class="collapse">
   <li><a href="#datenbeschreibung" id="toc-datenbeschreibung" class="nav-link" data-scroll-target="#datenbeschreibung">Datenbeschreibung</a></li>
+  <li><a href="#pca-durchführen" id="toc-pca-durchführen" class="nav-link" data-scroll-target="#pca-durchführen">PCA durchführen</a></li>
+  <li><a href="#pca-visualisieren" id="toc-pca-visualisieren" class="nav-link" data-scroll-target="#pca-visualisieren">PCA visualisieren</a></li>
   </ul></li>
-  <li><a href="#visualisierung" id="toc-visualisierung" class="nav-link" data-scroll-target="#visualisierung">Visualisierung</a></li>
   </ul>
 </nav>
     </div>
@@ -575,7 +576,7 @@ window.onload = function() {
 <h2 class="anchored" data-anchor-id="ordination-hauptkomponentenanalyse-pca">Ordination Hauptkomponentenanalyse (PCA)</h2>
 <section id="datenbeschreibung" class="level3">
 <h3 class="anchored" data-anchor-id="datenbeschreibung">Datenbeschreibung</h3>
-<p>Der Datensatz enthält Daten zum Vorkommen von Fischarten und den zugehörigen Umweltvariablen im Fluss Doubs (Jura). Es gibt 29 Probestellen (sites), an denen jeweils die Abundanzen von 27 Fischarten (auf einer Skalen von 0 bis 5) sowie 10 Umweltvariablen erhoben wurden. In dieser Demo verwenden wir mit den Umweltdaten:</p>
+<p>Der Datensatz enthält Daten zum Vorkommen von Fischarten und den zugehörigen Umweltvariablen im Fluss Doubs (Jura). Es gibt 29 Probestellen (sites), an denen jeweils die Abundanzen von 27 Fischarten (auf einer Skalen von 0 bis 5) sowie 10 Umweltvariablen erhoben wurden. In dieser Demo verwenden wir die Umweltdaten:</p>
 <ul>
 <li>ele = Elevation (m a.s.l.)</li>
 <li>slo = Slope (‰)</li>
@@ -635,6 +636,9 @@ window.onload = function() {
  Max.   :12.400   Max.   :16.700  </code></pre>
 </div>
 </div>
+</section>
+<section id="pca-durchführen" class="level3">
+<h3 class="anchored" data-anchor-id="pca-durchführen">PCA durchführen</h3>
 <div class="cell">
 <div class="sourceCode cell-code" id="cb5"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb5-1"><a href="#cb5-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Berechnen der PCA</span></span>
 <span id="cb5-2"><a href="#cb5-2" aria-hidden="true" tabindex="-1"></a>pca_1 <span class="ot">&lt;-</span> <span class="fu">prcomp</span>(env, <span class="at">scale =</span> <span class="cn">TRUE</span>)</span></code><button title="In die Zwischenablage kopieren" class="code-copy-button"><i class="bi"></i></button></pre></div>
@@ -759,9 +763,8 @@ S29  0.73515615  0.31027906 -0.0028221033 -0.066796286</code></pre>
 </div>
 </div>
 </section>
-</section>
-<section id="visualisierung" class="level1">
-<h1>Visualisierung</h1>
+<section id="pca-visualisieren" class="level3">
+<h3 class="anchored" data-anchor-id="pca-visualisieren">PCA visualisieren</h3>
 <div class="cell">
 <div class="sourceCode cell-code" id="cb13"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb13-1"><a href="#cb13-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Mit biplot von base R</span></span>
 <span id="cb13-2"><a href="#cb13-2" aria-hidden="true" tabindex="-1"></a><span class="fu">biplot</span>(pca_1)</span></code><button title="In die Zwischenablage kopieren" class="code-copy-button"><i class="bi"></i></button></pre></div>
@@ -829,6 +832,7 @@ S29  0.73515615  0.31027906 -0.0028221033 -0.066796286</code></pre>
 </div>
 
 
+</section>
 </section>
 
 </main> <!-- /main -->
