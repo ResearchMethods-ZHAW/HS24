@@ -34,8 +34,8 @@ str(spe)
 summary(spe)
 
 #' 
-#' k-means ist eine lineare Methode und daher nicht für Artdaten geeignet), darum müssen wir unsere Daten transformieren (für die meisten anderen Daten ist die Funktion „scale“, welche jede Variable so skaliert, dass sie einen Mittelwert von 0 und einen Standardabweichungswert von 1 hat, besser geeignet)
-#' die Randsumme der Quadrate gleich eins machen
+#' k-means ist eine lineare Methode und daher nicht für Artdaten geeignet, darum müssen wir unsere Daten transformieren (für die meisten anderen Daten ist die Funktion „scale“, welche jede Variable so skaliert, dass sie einen Mittelwert von 0 und einen Standardabweichungswert von 1 hat, besser geeignet)
+#' 
 #' 
 ## -----------------------------------------------------------------------------
 p_load("vegan")
