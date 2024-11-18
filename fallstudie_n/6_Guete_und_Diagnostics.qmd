@@ -1,7 +1,7 @@
 ---
 execute:
-  echo: false   # set to true to show musterlösung
-  output: false # set to true to show musterlösung
+  echo: true   # set to true to show musterlösung
+  output: true # set to true to show musterlösung
 code-fold: true
 code-summary: "Musterlösung"
 knitr:
@@ -73,6 +73,7 @@ f <- paste(c(f, "+ (1 | id)"), collapse = " ") |> as.formula()
 m_day <- glmer(f, data = DF_mod_day, family = binomial, na.action = "na.fail")
 
 all_m <- dredge(m_day)
+all_m
 
 avgmodel <- model.avg(all_m, rank = "AICc", subset = delta < 2)
 summary(avgmodel)

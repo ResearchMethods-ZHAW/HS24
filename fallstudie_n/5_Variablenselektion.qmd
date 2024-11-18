@@ -222,6 +222,7 @@ m <- glmer(f_dredge, data = DF_mod_day, family = binomial, na.action = "na.fail"
 # Das Modell in die dredge-Funktion einfügen (siehe auch unbedingt ?dredge)
 
 all_m <- dredge(m)
+all_m
 
 # Importance values der einzelnen Variablen (Gibt an, wie bedeutsam eine bestimmte
 # Variable ist, wenn man viele verschiedene Modelle vergleicht (multimodel inference))
