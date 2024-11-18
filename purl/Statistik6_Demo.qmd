@@ -156,8 +156,8 @@ table(sleepstudy_2$Subject)
 # Visualisierung
 ggplot(sleepstudy_2, aes(y = Reaction, x = Days)) +
   geom_point() +
-  xlab("Average reaction time (ms)") +
-  ylab("Number of days of sleep deprivation") +
+  xlab("Number of days of sleep deprivation") +
+  ylab("Average reaction time (ms)") +
   geom_smooth(method = "lm", formula = 'y ~ x', se = F, fullrange = T) +
   theme_classic() +
   facet_wrap(~Subject)
