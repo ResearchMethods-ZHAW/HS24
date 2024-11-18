@@ -86,7 +86,7 @@ glmm_3 <- update(glmm_2,~. -gender:member)
 drop1(glmm_3, test = "Chi")
 glmm_4 <- update(glmm_3,~. -age_group)
 
-drop1(glmm_4, test="Chi")
+drop1(glmm_4, test = "Chi")
 
 # Model validierung
 # Test overdisepersion
@@ -114,34 +114,28 @@ r2(glmm_1)
 # (mit fixen und variablen Effekten): hier 34% 
 
 
-# zusätzliche Informationen, welche für die Interpretation gut sein kann
-# berechnet den Standardfehler (mehr infos: https://mgimond.github.io/Stats-in-R/CI.html)
-# weitere info: https://stats.stackexchange.com/questions/26650/how-do-i-reference-a-regression-models-coefficients-standard-errors
-( conf_intervals <- confint(glmm_4, level = 0.95) )
-# zeigt eine Tabelle der Schätzer mit 95% Konfidenzintervall (KI)
-# => Faustregel: falls 0 im KI enthalten ist, dann ist der Unterschied statistisch NICHT signifikant
+# Odds Ratios
+
+# Extrahiere Estimates
+estimates <- fixef(glmm_4)
+
+# Berechne Odds Ratios
+odsr <- rbind( 
+  "Mitarbeiterinnen" = exp( estimates$cond["(Intercept)"] ), 
+  "Mitarbeiter" = exp( estimates$cond["(Intercept)"] + estimates$cond["genderM"]),
+  "Studentinnen" =  exp( estimates$cond["(Intercept)"] + estimates$cond["memberStudierende"]),
+  "Studenten" = exp( estimates$cond["(Intercept)"] + estimates$cond["genderM"] + estimates$cond["memberStudierende"])
+                 )
+colnames(odsr) <- c("Odds_ratios")
+odsr <- as.data.frame(odsr)
 
 
-# erzeugt die Odds Ratios
-( odsr <- exp(conf_intervals) )
-```
-
-### Methoden
-
-Die Responsevariable “Fleischkonsum” ist eine binäre Variable. Demnach wird eine multiple logistische Regression mit den Prädiktoren “Alter (Gruppen)”, “Geschlecht” und “Hochschulzugehörigkeit” gerechnet. Da in den Daten gewisse Individuen mehrmals vorkommen, wird das Individuum (Variable ccrs) als variabler Effekt in das Modell aufgenommen.
-
-### Ergebnisse
-
-Das Geschlecht und die Hochschulzugehörigkeit (Mitarbeiter oder Student) nehmen einen signifikanten Einfluss auf den Fleischkonsum (siehe Table 1): Männer kaufen signifikant häufiger ein fleischhaltiges Gericht als Frauen; Mitarbeiter kaufen signifikant häufiger ein fleischhaltiges Gericht als Studenten in der Mensa. 
-
-```{r}
-conf_intervals
-
-# Achtung wir sind hier im log Raum
+# Wahrscheinlichkeiten in %
+odsr$Wahrscheinlichkeit <- ( odsr$Odds_ratios / (odsr$Odds_ratios + 1 ) )
 odsr
 ```
 
-Die Chance, dass Männer ein fleischhaltiges Gericht kaufen ist 2.5 mal (+157%) höher als bei Frauen. Die Chance, dass Studierende ein fleischhaltiges Gericht kaufen ist kleiner (-18%) als bei den Mitarbeitern
+
 
 :::
 :::: 
