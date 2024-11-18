@@ -3,7 +3,7 @@ lesson: Statistik 5
 knitr:
   opts_chunk: 
     collapse: false
-musterloesung: false
+musterloesung: true
 ---
 
 
@@ -24,11 +24,11 @@ Bitte prüft mit einer logistischen Regression, ob und ggf. wie die Inselform di
 [Demoscript herunterladen (.qmd)](../purl/Statistik5_Uebung.qmd){.dld}
 
 
-- [Lösungstext als Download](Statistik_Loesung_5.pdf)
+- [Lösungstext als Download](Statistik5_Loesung.pdf)
 
 
 
-## Musterlösung Aufgabe 5: Multiple logistische Regression
+## Musterlösung Übung 5
 
 ```{r}
 library("pacman")
