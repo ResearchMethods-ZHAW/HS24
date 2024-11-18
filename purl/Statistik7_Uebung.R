@@ -1,0 +1,72 @@
+#' ---
+#' lesson: Statistik 7
+#' knitr:
+#'   opts_chunk: 
+#'     collapse: false
+#' musterloesung: true
+#' ---
+#' 
+#' 
+#' # Statistik 7: Übung
+#'   
+#' 
+#' - Datensatz *USstates* vom package "HSAUR3"
+#' - Beschreibung des Datensets mit command:
+#' ?USstates
+#' 
+#' -Führt mit den Datensatz "USstates" vom package "HSAUR3" eine PCA aus und visualisiert das Resultat mit einem Biplot. 
+#' 
+#' 
+#' 
+#' ::::{.content-hidden unless-meta="musterloesung"}
+#' 
+#' :::{.callout-note}
+#' 
+#' 
+#' ## Lösung Übung 7
+#' 
+#' - [Lösungstext als Download](Statistik_Loesungstext_7.pdf)
+#' 
+#' [Demoscript herunterladen (.R)](../purl/Statistik7_Uebung.R){.dld}
+#' 
+#' [Demoscript herunterladen (.qmd)](../purl/Statistik7_Uebung.qmd){.dld}
+#' 
+#' 
+## -----------------------------------------------------------------------------
+# Packete laden
+library("pacman")
+p_load("tidyverse", "vegan", "factoextra")
+
+#' 
+#' 
+## -----------------------------------------------------------------------------
+# Daten laden
+p_load("HSAUR3")
+data(USstates)
+?USstates
+str(USstates)
+summary(USstates)
+
+#' 
+#' 
+## -----------------------------------------------------------------------------
+# PCA durchführen
+pca_1 <- prcomp(USstates, scale = TRUE)
+summary(pca_1)
+
+screeplot(pca_1, bstick = TRUE)
+
+#' 
+#' Wie wir in der Summary und im Screeplot sehen, wird ein sehr grosser Anteil der Varianz (63.2 %) durch die erste Achse erklärt. Die zweite Achse erklärt noch einen Anteil von 27.6 % während der dritten Achse nur noch 6.0 % Anteil der Varianz erklärt. Wir beschränken uns deshalb darauf, die ersten beiden Achsen zu visualisieren.
+#' 
+#' 
+## -----------------------------------------------------------------------------
+# Visualisierung
+fviz_pca_biplot(pca_1, repel = TRUE, 
+                col.var = "blue",  col.ind = "black") +
+    ggtitle(NULL) +
+  theme_classic()
+
+#' 
+#' :::
+#' :::: 
