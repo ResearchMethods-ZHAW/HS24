@@ -5,6 +5,7 @@ knitr:
     collapse: false 
 ---
 
+
 # Statistik 1: Demo
 
 [Demoscript herunterladen (.R)](../purl/Statistik1_Demo.R){.dld}
@@ -89,6 +90,12 @@ binom.test(3, 7) # Anzahl Frauen im Bundesrat (≙ 42.9 %; Stand 2019)
 ```
 
 ## Chi-Quadrat-Test & Fishers Test
+
+Ermitteln des kritischen Wertes
+
+```{r}
+qchisq(0.95, 1)
+```
 
 ### Direkter Test in R (dazu Werte als Matrix nötig)
 

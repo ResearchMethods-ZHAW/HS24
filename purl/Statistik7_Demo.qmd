@@ -2,7 +2,7 @@
 lesson: Statistik7
 knitr:
   opts_chunk: 
-    collapse: false
+    collapse: true
 ---
 
 # Statistik 7: Demo
@@ -11,99 +11,101 @@ knitr:
 
 [Demoscript herunterladen (.qmd)](../purl/Statistik7_Demo.qmd){.dld}
 
--   Datensatz *Doubs_env*
-
-
-## Ordination Hauptkomponentenanalyse (PCA)
-
-### Datenbeschreibung
-
-Der Datensatz enthält Daten zum Vorkommen von Fischarten und den zugehörigen Umweltvariablen im Fluss Doubs (Jura). Es gibt 29 Probestellen (sites), an denen jeweils die Abundanzen von 27 Fischarten (auf einer Skalen von 0 bis 5) sowie 10 Umweltvariablen erhoben wurden. In dieser Demo verwenden wir die Umweltdaten:
-
-- ele = Elevation (m a.s.l.)
-- slo = Slope (‰)
-- dis = Mean annual discharge (m3 s-1)
-- pH = pH of water
-- har = Hardness (Ca concentration) (mg L-1)
-- pho = Phosphate concentration (mg L-1)
-- nit = Nitrate concentration (mg L-1)
-- amm = Ammonium concentration (mg L-1)
-- oxy = Dissolved oxygen (mg L-1)
-- bod = Biological oxygen demand (mg L-1)
+-   Datensatz *Doubs_spe* von  @borcard2011
 
 
 ```{r}
 library("pacman")
 p_load("tidyverse")
 
-# Daten importieren
-env <- read_delim("./datasets/stat/Doubs_env.csv", delim = ";") |>
+spe <- read_delim("./datasets/stat/Doubs_species.csv", delim = ";", col_names = TRUE) |>
   column_to_rownames(var = "Site")
 
-str(env)
-summary(env)
+str(spe)
+summary(spe)
 ```
 
-### PCA durchführen
+k-means ist eine lineare Methode und daher nicht für Artdaten geeignet), darum müssen wir unsere Daten transformieren (für die meisten anderen Daten ist die Funktion „scale“, welche jede Variable so skaliert, dass sie einen Mittelwert von 0 und einen Standardabweichungswert von 1 hat, besser geeignet)
+die Randsumme der Quadrate gleich eins machen
 
 ```{r}
-# Berechnen der PCA
-pca_1 <- prcomp(env, scale = TRUE)
+p_load(vegan)
+spe_norm <- decostand(spe, "normalize")
 ```
 
-Wir verwenden hier «scale = TRUE» weil wir Umweltvariablen mit unterschiedliche Masseinheiten verwenden die variierende Skalen aufweisen. 
-Eine unskalierte PCA (default: scale = FALSE ) ist sinnvoll, wenn alle Variablen ähnliche Skalen haben oder die Skalenunterschiede von Interesse sind.
-
+### k-means clustering mit Artdaten
 
 ```{r}
-# Erklärte Varianzen der einzelnen Achsen (Principle Components)
-summary(pca_1)
+# k-means-Clustering mit 4 Gruppen durchführen
+set.seed(123)
+kmeans_1 <- kmeans(spe_norm, centers = 4, nstart = 100)
+kmeans_1$cluster
 
-# Korrelationen der Variablen mit den Ordinationsachsen (Loadings)
-pca_1$rotation
-
-# # Koordinaten Sites im Ordinationsraum (Scores)
-pca_1$x
-
+#  Visualisierung
+p_load(factoextra)
+fviz_cluster(kmeans_1, 
+             data = spe, 
+             ggtheme = theme_classic(), main = "" )
 ```
 
-```{r}
-p_load("vegan")
-
-# Visualisierung der Anteile erklärter Varianz, im Vergleich zu einem Broken-Stick-Modell
-screeplot(pca_1, bstick = TRUE)
-```
-
-### PCA visualisieren
+Wie viele Cluster (Gruppen) sollen definiert werden? Oft haben wir eine Vorstelung über den 
+Range der Anzahl Cluster. Value criterions wie der Simple Structure Index (ssi) können
+eine zusätzliche Hilfe sein, um die geeignete Anzahl von Clustern zu finden.
 
 ```{r}
-# Mit biplot von base R
-biplot(pca_1)
+# k-means partionierung, 2 bis 10 Gruppen
+set.seed(123)
+km_cascade <- cascadeKM(spe_norm,  inf.gr = 2, sup.gr = 10, iter = 100, criterion = "ssi")
+km_cascade$results
+km_cascade$partition
 
-# Mit package factoextra 
-p_load("factoextra")
+# Visualisierung citerion Simple Structure Index
+plot(km_cascade, sortg = TRUE)
 
-# Biplot
-fviz_pca_biplot(pca_1)
-
-# Biplot der 1 und 3 Achse
-fviz_pca_biplot(pca_1,  axes = c(1, 3) )
-
-# Biplot mit angepasssten Grafikparametern
-# repl = TRUE verhindert die Überlagerung der Textlabels
-fviz_pca_biplot(pca_1, repel = TRUE, 
-                col.var = "red",  col.ind = "black") +
-    ggtitle(NULL) +
-    theme_classic()
+# k-means-Clustering mit 3 Gruppen durchführen
+set.seed(123)
+kmeans_2 <- kmeans(spe_norm, centers = 3, nstart = 100)
 
 
-# Nur Inidviudals (hier Sites)
-fviz_pca_ind(pca_1, repel = TRUE) +
+#  Clustering-Resultat in Ordinationsplots darstellen
+fviz_cluster(kmeans_2, data = spe, 
+             ggtheme = theme_classic(), main = "" )
+
+# Resultat intepretieren
+kmeans_2
+
+# Zuordnung Sites zu den Clustern (separat)
+kmeans_2$cluster
+
+# Anzahl Sites pro Cluster
+kmeans_2$size
+
+# Mittlere Abundance für jede Variable (Fischart) in jedem Cluster (mit untransformierten Daten)
+aggregate(spe, by = list(cluster = kmeans_2$cluster), mean)
+
+# Mittlere Fisch-Artenzahl in jedem Cluster
+aggregate( specnumber(spe), by = list(cluster = kmeans_2$cluster), mean)
+
+
+# Unterschiede Mittlere Fisch-Artenzahl pro Cluster testen
+
+# File for Anova erstellen
+spe_2 <- data.frame(spe, 
+                    "cluster" = as.factor(kmeans_2$cluster), 
+                    "species_richness" = specnumber(spe))
+str(spe_2)
+
+aov_1 <- aov(species_richness~cluster, data = spe_2)
+summary(aov_1)
+
+p_load(agricolae)
+( Tukey <- HSD.test(aov_1, "cluster") )
+
+sig_letters <- Tukey$groups[order(row.names(Tukey$groups)), ]
+
+ggplot(spe_2, aes(x = cluster,  y = species_richness)) + 
+  geom_boxplot() +
+  geom_text(data = sig_letters, 
+            aes(label = groups, x = c(1:3), y = max(spe_2$species_richness) * 1.1)) +
   theme_classic()
-
-
-# Nur Variables (hier Umweltparameter)
-fviz_pca_var(pca_1, repel = TRUE) +
-  theme_classic()
 ```
-

@@ -2,7 +2,7 @@
 <html xmlns="http://www.w3.org/1999/xhtml" lang="de" xml:lang="de"><head>
 
 <meta charset="utf-8">
-<meta name="generator" content="quarto-1.4.555">
+<meta name="generator" content="quarto-1.4.549">
 
 <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
 
@@ -126,76 +126,40 @@ div.csl-indent {
 }</script>
 
 
-
-
 <!-- loads fontawesome, so that I can create a fontawesome button (see below) -->
-
 <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.2/css/all.min.css" integrity="sha512-z3gLpd7yknf1YoNbCzqRKc4qyor8gaKU1qmn+CShxbuBusANI9QpRohGBreCFkKxLhei6S9CQXFEbbKuqLg0DA==" crossorigin="anonymous" referrerpolicy="no-referrer">
-
 <script>
 
-
-
 // the following function adds padding to all h2 elements, so that I can 
-
 // easily present the content of the page in a more readable way
-
 function presenter(){
-
     var paragraphs = document.querySelectorAll("h2, h3");
-
     paragraphs.forEach(function (paragraph) {
-
         paragraph.classList.toggle("padding-top-500");
-
     });
-
 }
 
-
-
 // once the page is loaded, the button is injected into the sidebar. This button
-
 // calls the presenter function (see above)
-
 window.onload = function() {
-
     // create the button (similar to the buttons already availables)
-
     const linkElement = document.createElement('a');
 
-
-
     linkElement.classList.add('quarto-navigation-tool');
-
     linkElement.classList.add('px-1');
-
     linkElement.innerHTML = '<i class="fa-solid fa-person-chalkboard"></i>';
-
     linkElement.href = '#';
-
     linkElement.addEventListener('click', function(event) {
-
         event.preventDefault(); // Prevent the default link behavior
-
         presenter();
-
     });
 
-
-
     // Find the target element by its class name
-
     const sidebar_tools = document.querySelector(".sidebar-tools-main")
-
     sidebar_tools.appendChild(linkElement);
-
 };
 
-
-
 </script>
-
 
 
 <link rel="stylesheet" href="../custom.css">
@@ -571,7 +535,7 @@ window.onload = function() {
 
 <header id="title-block-header" class="quarto-title-block default"><nav class="quarto-page-breadcrumbs quarto-title-breadcrumbs d-none d-lg-block" aria-label="breadcrumb"><ol class="breadcrumb"><li class="breadcrumb-item"><a href="../fallstudie_n/1_Vorbemerkung.html">Fallstudie N</a></li><li class="breadcrumb-item"><a href="../fallstudie_n/6_Guete_und_Diagnostics.html"><span class="chapter-title">Modellgüte und -diagnostics MM</span></a></li></ol></nav>
 <div class="quarto-title">
-<h1 class="title"><span class="chapter-title">Modellgüte und -diagnostics MM</span></h1>
+<div class="quarto-title-block"><div><h1 class="title"><span class="chapter-title">Modellgüte und -diagnostics MM</span></h1><button type="button" class="btn code-tools-button dropdown-toggle" id="quarto-code-tools-menu" data-bs-toggle="dropdown" aria-expanded="false"><i class="bi"></i> Code</button><ul class="dropdown-menu dropdown-menu-end" aria-labelelledby="quarto-code-tools-menu"><li><a id="quarto-show-all-code" class="dropdown-item" href="javascript:void(0)" role="button">Gesamten Code zeigen</a></li><li><a id="quarto-hide-all-code" class="dropdown-item" href="javascript:void(0)" role="button">Gesamten Code verbergen</a></li></ul></div></div>
 </div>
 
 
@@ -644,9 +608,192 @@ window.onload = function() {
 <span id="cb2-25"><a href="#cb2-25" aria-hidden="true" tabindex="-1"></a>m_day <span class="ot">&lt;-</span> <span class="fu">glmer</span>(f, <span class="at">data =</span> DF_mod_day, <span class="at">family =</span> binomial, <span class="at">na.action =</span> <span class="st">"na.fail"</span>)</span>
 <span id="cb2-26"><a href="#cb2-26" aria-hidden="true" tabindex="-1"></a></span>
 <span id="cb2-27"><a href="#cb2-27" aria-hidden="true" tabindex="-1"></a>all_m <span class="ot">&lt;-</span> <span class="fu">dredge</span>(m_day)</span>
-<span id="cb2-28"><a href="#cb2-28" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb2-29"><a href="#cb2-29" aria-hidden="true" tabindex="-1"></a>avgmodel <span class="ot">&lt;-</span> <span class="fu">model.avg</span>(all_m, <span class="at">rank =</span> <span class="st">"AICc"</span>, <span class="at">subset =</span> delta <span class="sc">&lt;</span> <span class="dv">2</span>)</span>
-<span id="cb2-30"><a href="#cb2-30" aria-hidden="true" tabindex="-1"></a><span class="fu">summary</span>(avgmodel)</span></code><button title="In die Zwischenablage kopieren" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<span id="cb2-28"><a href="#cb2-28" aria-hidden="true" tabindex="-1"></a>all_m</span>
+<span id="cb2-29"><a href="#cb2-29" aria-hidden="true" tabindex="-1"></a><span class="do">## Global model call: glmer(formula = pres_abs ~ slope_scaled + topo_pos_scaled + us_scaled + </span></span>
+<span id="cb2-30"><a href="#cb2-30" aria-hidden="true" tabindex="-1"></a><span class="do">##     forest_prop_scaled + dist_road_only_scaled + dist_sett_scaled + </span></span>
+<span id="cb2-31"><a href="#cb2-31" aria-hidden="true" tabindex="-1"></a><span class="do">##     (1 | id), data = DF_mod_day, family = binomial, na.action = "na.fail")</span></span>
+<span id="cb2-32"><a href="#cb2-32" aria-hidden="true" tabindex="-1"></a><span class="do">## ---</span></span>
+<span id="cb2-33"><a href="#cb2-33" aria-hidden="true" tabindex="-1"></a><span class="do">## Model selection table </span></span>
+<span id="cb2-34"><a href="#cb2-34" aria-hidden="true" tabindex="-1"></a><span class="do">##      (Int) dst_rod_onl_scl dst_stt_scl frs_prp_scl  slp_scl top_pos_scl us_scl</span></span>
+<span id="cb2-35"><a href="#cb2-35" aria-hidden="true" tabindex="-1"></a><span class="do">## 46 -0.4277          0.4145                  0.8012 -0.15640             0.3920</span></span>
+<span id="cb2-36"><a href="#cb2-36" aria-hidden="true" tabindex="-1"></a><span class="do">## 48 -0.4369          0.4226   -0.079960      0.8387 -0.15920             0.3887</span></span>
+<span id="cb2-37"><a href="#cb2-37" aria-hidden="true" tabindex="-1"></a><span class="do">## 62 -0.4285          0.4090                  0.8022 -0.15950   0.0213600 0.3931</span></span>
+<span id="cb2-38"><a href="#cb2-38" aria-hidden="true" tabindex="-1"></a><span class="do">## 64 -0.4379          0.4170   -0.081080      0.8403 -0.16250   0.0226900 0.3898</span></span>
+<span id="cb2-39"><a href="#cb2-39" aria-hidden="true" tabindex="-1"></a><span class="do">## 38 -0.4117          0.3804                  0.7412                      0.3627</span></span>
+<span id="cb2-40"><a href="#cb2-40" aria-hidden="true" tabindex="-1"></a><span class="do">## 40 -0.4197          0.3869   -0.071040      0.7737                      0.3593</span></span>
+<span id="cb2-41"><a href="#cb2-41" aria-hidden="true" tabindex="-1"></a><span class="do">## 54 -0.4119          0.3781                  0.7411            0.0084000 0.3629</span></span>
+<span id="cb2-42"><a href="#cb2-42" aria-hidden="true" tabindex="-1"></a><span class="do">## 56 -0.4199          0.3843   -0.071390      0.7737            0.0092950 0.3596</span></span>
+<span id="cb2-43"><a href="#cb2-43" aria-hidden="true" tabindex="-1"></a><span class="do">## 61 -0.4341                                  0.7850 -0.07165   0.0831200 0.3920</span></span>
+<span id="cb2-44"><a href="#cb2-44" aria-hidden="true" tabindex="-1"></a><span class="do">## 53 -0.4255                                  0.7552            0.0742700 0.3787</span></span>
+<span id="cb2-45"><a href="#cb2-45" aria-hidden="true" tabindex="-1"></a><span class="do">## 63 -0.4339                    0.001142      0.7845 -0.07165   0.0830900 0.3920</span></span>
+<span id="cb2-46"><a href="#cb2-46" aria-hidden="true" tabindex="-1"></a><span class="do">## 55 -0.4254                    0.001146      0.7547            0.0742400 0.3787</span></span>
+<span id="cb2-47"><a href="#cb2-47" aria-hidden="true" tabindex="-1"></a><span class="do">## 37 -0.4239                                  0.7540                      0.3761</span></span>
+<span id="cb2-48"><a href="#cb2-48" aria-hidden="true" tabindex="-1"></a><span class="do">## 45 -0.4299                                  0.7760 -0.05319             0.3858</span></span>
+<span id="cb2-49"><a href="#cb2-49" aria-hidden="true" tabindex="-1"></a><span class="do">## 39 -0.4231                    0.006821      0.7509                      0.3764</span></span>
+<span id="cb2-50"><a href="#cb2-50" aria-hidden="true" tabindex="-1"></a><span class="do">## 47 -0.4291                    0.007447      0.7727 -0.05324             0.3861</span></span>
+<span id="cb2-51"><a href="#cb2-51" aria-hidden="true" tabindex="-1"></a><span class="do">## 8  -0.4390          0.4070   -0.112600      0.9136                            </span></span>
+<span id="cb2-52"><a href="#cb2-52" aria-hidden="true" tabindex="-1"></a><span class="do">## 16 -0.4463          0.4204   -0.117100      0.9414 -0.05910                   </span></span>
+<span id="cb2-53"><a href="#cb2-53" aria-hidden="true" tabindex="-1"></a><span class="do">## 6  -0.4262          0.3966                  0.8639                            </span></span>
+<span id="cb2-54"><a href="#cb2-54" aria-hidden="true" tabindex="-1"></a><span class="do">## 24 -0.4390          0.4067   -0.112700      0.9136            0.0011510       </span></span>
+<span id="cb2-55"><a href="#cb2-55" aria-hidden="true" tabindex="-1"></a><span class="do">## 14 -0.4324          0.4083                  0.8876 -0.05398                   </span></span>
+<span id="cb2-56"><a href="#cb2-56" aria-hidden="true" tabindex="-1"></a><span class="do">## 32 -0.4466          0.4191   -0.117500      0.9420 -0.05996   0.0061540       </span></span>
+<span id="cb2-57"><a href="#cb2-57" aria-hidden="true" tabindex="-1"></a><span class="do">## 22 -0.4262          0.3968                  0.8639           -0.0007422       </span></span>
+<span id="cb2-58"><a href="#cb2-58" aria-hidden="true" tabindex="-1"></a><span class="do">## 30 -0.4326          0.4075                  0.8878 -0.05449   0.0036870       </span></span>
+<span id="cb2-59"><a href="#cb2-59" aria-hidden="true" tabindex="-1"></a><span class="do">## 21 -0.4374                                  0.8824            0.0638700       </span></span>
+<span id="cb2-60"><a href="#cb2-60" aria-hidden="true" tabindex="-1"></a><span class="do">## 5  -0.4351                                  0.8805                            </span></span>
+<span id="cb2-61"><a href="#cb2-61" aria-hidden="true" tabindex="-1"></a><span class="do">## 29 -0.4334                                  0.8678  0.03079   0.0601800       </span></span>
+<span id="cb2-62"><a href="#cb2-62" aria-hidden="true" tabindex="-1"></a><span class="do">## 23 -0.4412                   -0.034380      0.8972            0.0648100       </span></span>
+<span id="cb2-63"><a href="#cb2-63" aria-hidden="true" tabindex="-1"></a><span class="do">## 13 -0.4298                                  0.8603  0.04319                   </span></span>
+<span id="cb2-64"><a href="#cb2-64" aria-hidden="true" tabindex="-1"></a><span class="do">## 7  -0.4383                   -0.028830      0.8930                            </span></span>
+<span id="cb2-65"><a href="#cb2-65" aria-hidden="true" tabindex="-1"></a><span class="do">## 31 -0.4373                   -0.033890      0.8826  0.03050   0.0611400       </span></span>
+<span id="cb2-66"><a href="#cb2-66" aria-hidden="true" tabindex="-1"></a><span class="do">## 15 -0.4330                   -0.028670      0.8727  0.04314                   </span></span>
+<span id="cb2-67"><a href="#cb2-67" aria-hidden="true" tabindex="-1"></a><span class="do">## 44 -0.2756          0.3214    0.389700              0.10970             0.5118</span></span>
+<span id="cb2-68"><a href="#cb2-68" aria-hidden="true" tabindex="-1"></a><span class="do">## 60 -0.2756          0.3213    0.389700              0.10960   0.0005417 0.5119</span></span>
+<span id="cb2-69"><a href="#cb2-69" aria-hidden="true" tabindex="-1"></a><span class="do">## 36 -0.2822          0.3431    0.411700                                  0.5425</span></span>
+<span id="cb2-70"><a href="#cb2-70" aria-hidden="true" tabindex="-1"></a><span class="do">## 52 -0.2824          0.3407    0.411300                        0.0102700 0.5428</span></span>
+<span id="cb2-71"><a href="#cb2-71" aria-hidden="true" tabindex="-1"></a><span class="do">## 43 -0.2764                    0.424900              0.17800             0.4999</span></span>
+<span id="cb2-72"><a href="#cb2-72" aria-hidden="true" tabindex="-1"></a><span class="do">## 59 -0.2773                    0.424200              0.17050   0.0421400 0.5038</span></span>
+<span id="cb2-73"><a href="#cb2-73" aria-hidden="true" tabindex="-1"></a><span class="do">## 42 -0.2855          0.3410                          0.17340             0.5253</span></span>
+<span id="cb2-74"><a href="#cb2-74" aria-hidden="true" tabindex="-1"></a><span class="do">## 58 -0.2855          0.3402                          0.17280   0.0042270 0.5256</span></span>
+<span id="cb2-75"><a href="#cb2-75" aria-hidden="true" tabindex="-1"></a><span class="do">## 51 -0.2874                    0.465000                        0.0623500 0.5514</span></span>
+<span id="cb2-76"><a href="#cb2-76" aria-hidden="true" tabindex="-1"></a><span class="do">## 34 -0.2978          0.3782                                              0.5763</span></span>
+<span id="cb2-77"><a href="#cb2-77" aria-hidden="true" tabindex="-1"></a><span class="do">## 35 -0.2866                    0.468800                                  0.5488</span></span>
+<span id="cb2-78"><a href="#cb2-78" aria-hidden="true" tabindex="-1"></a><span class="do">## 50 -0.2980          0.3737                                    0.0209100 0.5767</span></span>
+<span id="cb2-79"><a href="#cb2-79" aria-hidden="true" tabindex="-1"></a><span class="do">## 41 -0.2860                                          0.25420             0.5137</span></span>
+<span id="cb2-80"><a href="#cb2-80" aria-hidden="true" tabindex="-1"></a><span class="do">## 57 -0.2868                                          0.24550   0.0463100 0.5178</span></span>
+<span id="cb2-81"><a href="#cb2-81" aria-hidden="true" tabindex="-1"></a><span class="do">## 49 -0.3036                                                    0.0779400 0.5905</span></span>
+<span id="cb2-82"><a href="#cb2-82" aria-hidden="true" tabindex="-1"></a><span class="do">## 33 -0.3032                                                              0.5879</span></span>
+<span id="cb2-83"><a href="#cb2-83" aria-hidden="true" tabindex="-1"></a><span class="do">## 12 -0.2624          0.2999    0.421000              0.29320                   </span></span>
+<span id="cb2-84"><a href="#cb2-84" aria-hidden="true" tabindex="-1"></a><span class="do">## 28 -0.2615          0.3051    0.421200              0.29670  -0.0298900       </span></span>
+<span id="cb2-85"><a href="#cb2-85" aria-hidden="true" tabindex="-1"></a><span class="do">## 4  -0.2835          0.3525    0.490900                                        </span></span>
+<span id="cb2-86"><a href="#cb2-86" aria-hidden="true" tabindex="-1"></a><span class="do">## 20 -0.2834          0.3533    0.491100                       -0.0043180       </span></span>
+<span id="cb2-87"><a href="#cb2-87" aria-hidden="true" tabindex="-1"></a><span class="do">## 11 -0.2604                    0.453400              0.34800                   </span></span>
+<span id="cb2-88"><a href="#cb2-88" aria-hidden="true" tabindex="-1"></a><span class="do">## 27 -0.2606                    0.453400              0.34720   0.0059370       </span></span>
+<span id="cb2-89"><a href="#cb2-89" aria-hidden="true" tabindex="-1"></a><span class="do">## 10 -0.2714          0.3218                          0.36790                   </span></span>
+<span id="cb2-90"><a href="#cb2-90" aria-hidden="true" tabindex="-1"></a><span class="do">## 26 -0.2707          0.3261                          0.37140  -0.0270500       </span></span>
+<span id="cb2-91"><a href="#cb2-91" aria-hidden="true" tabindex="-1"></a><span class="do">## 3  -0.2827                    0.552500                                        </span></span>
+<span id="cb2-92"><a href="#cb2-92" aria-hidden="true" tabindex="-1"></a><span class="do">## 19 -0.2839                    0.549900                        0.0434200       </span></span>
+<span id="cb2-93"><a href="#cb2-93" aria-hidden="true" tabindex="-1"></a><span class="do">## 9  -0.2701                                          0.43490                   </span></span>
+<span id="cb2-94"><a href="#cb2-94" aria-hidden="true" tabindex="-1"></a><span class="do">## 25 -0.2704                                          0.43330   0.0098340       </span></span>
+<span id="cb2-95"><a href="#cb2-95" aria-hidden="true" tabindex="-1"></a><span class="do">## 2  -0.3024          0.3950                                                    </span></span>
+<span id="cb2-96"><a href="#cb2-96" aria-hidden="true" tabindex="-1"></a><span class="do">## 18 -0.3026          0.3935                                    0.0082640       </span></span>
+<span id="cb2-97"><a href="#cb2-97" aria-hidden="true" tabindex="-1"></a><span class="do">## 17 -0.3050                                                    0.0618200       </span></span>
+<span id="cb2-98"><a href="#cb2-98" aria-hidden="true" tabindex="-1"></a><span class="do">## 1  -0.3039                                                                    </span></span>
+<span id="cb2-99"><a href="#cb2-99" aria-hidden="true" tabindex="-1"></a><span class="do">##    df    logLik   AICc  delta weight</span></span>
+<span id="cb2-100"><a href="#cb2-100" aria-hidden="true" tabindex="-1"></a><span class="do">## 46  6 -2268.173 4548.4   0.00  0.373</span></span>
+<span id="cb2-101"><a href="#cb2-101" aria-hidden="true" tabindex="-1"></a><span class="do">## 48  7 -2267.341 4548.7   0.34  0.314</span></span>
+<span id="cb2-102"><a href="#cb2-102" aria-hidden="true" tabindex="-1"></a><span class="do">## 62  7 -2268.008 4550.0   1.68  0.161</span></span>
+<span id="cb2-103"><a href="#cb2-103" aria-hidden="true" tabindex="-1"></a><span class="do">## 64  8 -2267.155 4550.3   1.98  0.139</span></span>
+<span id="cb2-104"><a href="#cb2-104" aria-hidden="true" tabindex="-1"></a><span class="do">## 38  5 -2273.321 4556.7   8.29  0.006</span></span>
+<span id="cb2-105"><a href="#cb2-105" aria-hidden="true" tabindex="-1"></a><span class="do">## 40  6 -2272.657 4557.3   8.97  0.004</span></span>
+<span id="cb2-106"><a href="#cb2-106" aria-hidden="true" tabindex="-1"></a><span class="do">## 54  6 -2273.295 4558.6  10.24  0.002</span></span>
+<span id="cb2-107"><a href="#cb2-107" aria-hidden="true" tabindex="-1"></a><span class="do">## 56  7 -2272.625 4559.3  10.91  0.002</span></span>
+<span id="cb2-108"><a href="#cb2-108" aria-hidden="true" tabindex="-1"></a><span class="do">## 61  6 -2308.279 4628.6  80.21  0.000</span></span>
+<span id="cb2-109"><a href="#cb2-109" aria-hidden="true" tabindex="-1"></a><span class="do">## 53  5 -2309.406 4628.8  80.46  0.000</span></span>
+<span id="cb2-110"><a href="#cb2-110" aria-hidden="true" tabindex="-1"></a><span class="do">## 63  7 -2308.279 4630.6  82.22  0.000</span></span>
+<span id="cb2-111"><a href="#cb2-111" aria-hidden="true" tabindex="-1"></a><span class="do">## 55  6 -2309.406 4630.8  82.47  0.000</span></span>
+<span id="cb2-112"><a href="#cb2-112" aria-hidden="true" tabindex="-1"></a><span class="do">## 37  4 -2311.629 4631.3  82.90  0.000</span></span>
+<span id="cb2-113"><a href="#cb2-113" aria-hidden="true" tabindex="-1"></a><span class="do">## 45  5 -2310.989 4632.0  83.62  0.000</span></span>
+<span id="cb2-114"><a href="#cb2-114" aria-hidden="true" tabindex="-1"></a><span class="do">## 39  5 -2311.623 4633.3  84.89  0.000</span></span>
+<span id="cb2-115"><a href="#cb2-115" aria-hidden="true" tabindex="-1"></a><span class="do">## 47  6 -2310.981 4634.0  85.62  0.000</span></span>
+<span id="cb2-116"><a href="#cb2-116" aria-hidden="true" tabindex="-1"></a><span class="do">## 8   5 -2315.206 4640.4  92.06  0.000</span></span>
+<span id="cb2-117"><a href="#cb2-117" aria-hidden="true" tabindex="-1"></a><span class="do">## 16  6 -2314.415 4640.9  92.48  0.000</span></span>
+<span id="cb2-118"><a href="#cb2-118" aria-hidden="true" tabindex="-1"></a><span class="do">## 6   4 -2316.927 4641.9  93.50  0.000</span></span>
+<span id="cb2-119"><a href="#cb2-119" aria-hidden="true" tabindex="-1"></a><span class="do">## 24  6 -2315.206 4642.4  94.06  0.000</span></span>
+<span id="cb2-120"><a href="#cb2-120" aria-hidden="true" tabindex="-1"></a><span class="do">## 14  5 -2316.266 4642.5  94.18  0.000</span></span>
+<span id="cb2-121"><a href="#cb2-121" aria-hidden="true" tabindex="-1"></a><span class="do">## 32  7 -2314.401 4642.8  94.46  0.000</span></span>
+<span id="cb2-122"><a href="#cb2-122" aria-hidden="true" tabindex="-1"></a><span class="do">## 22  5 -2316.927 4643.9  95.50  0.000</span></span>
+<span id="cb2-123"><a href="#cb2-123" aria-hidden="true" tabindex="-1"></a><span class="do">## 30  6 -2316.261 4644.5  96.17  0.000</span></span>
+<span id="cb2-124"><a href="#cb2-124" aria-hidden="true" tabindex="-1"></a><span class="do">## 21  4 -2358.374 4724.8 176.39  0.000</span></span>
+<span id="cb2-125"><a href="#cb2-125" aria-hidden="true" tabindex="-1"></a><span class="do">## 5   3 -2360.069 4726.1 177.78  0.000</span></span>
+<span id="cb2-126"><a href="#cb2-126" aria-hidden="true" tabindex="-1"></a><span class="do">## 29  5 -2358.151 4726.3 177.95  0.000</span></span>
+<span id="cb2-127"><a href="#cb2-127" aria-hidden="true" tabindex="-1"></a><span class="do">## 23  5 -2358.215 4726.4 178.08  0.000</span></span>
+<span id="cb2-128"><a href="#cb2-128" aria-hidden="true" tabindex="-1"></a><span class="do">## 13  4 -2359.618 4727.2 178.88  0.000</span></span>
+<span id="cb2-129"><a href="#cb2-129" aria-hidden="true" tabindex="-1"></a><span class="do">## 7   4 -2359.957 4727.9 179.56  0.000</span></span>
+<span id="cb2-130"><a href="#cb2-130" aria-hidden="true" tabindex="-1"></a><span class="do">## 31  6 -2357.997 4728.0 179.65  0.000</span></span>
+<span id="cb2-131"><a href="#cb2-131" aria-hidden="true" tabindex="-1"></a><span class="do">## 15  5 -2359.507 4729.0 180.66  0.000</span></span>
+<span id="cb2-132"><a href="#cb2-132" aria-hidden="true" tabindex="-1"></a><span class="do">## 44  6 -2380.847 4773.7 225.35  0.000</span></span>
+<span id="cb2-133"><a href="#cb2-133" aria-hidden="true" tabindex="-1"></a><span class="do">## 60  7 -2380.847 4775.7 227.36  0.000</span></span>
+<span id="cb2-134"><a href="#cb2-134" aria-hidden="true" tabindex="-1"></a><span class="do">## 36  5 -2383.854 4777.7 229.35  0.000</span></span>
+<span id="cb2-135"><a href="#cb2-135" aria-hidden="true" tabindex="-1"></a><span class="do">## 52  6 -2383.813 4779.6 231.28  0.000</span></span>
+<span id="cb2-136"><a href="#cb2-136" aria-hidden="true" tabindex="-1"></a><span class="do">## 43  5 -2409.667 4829.3 280.98  0.000</span></span>
+<span id="cb2-137"><a href="#cb2-137" aria-hidden="true" tabindex="-1"></a><span class="do">## 59  6 -2408.958 4829.9 281.57  0.000</span></span>
+<span id="cb2-138"><a href="#cb2-138" aria-hidden="true" tabindex="-1"></a><span class="do">## 42  5 -2410.217 4830.4 282.08  0.000</span></span>
+<span id="cb2-139"><a href="#cb2-139" aria-hidden="true" tabindex="-1"></a><span class="do">## 58  6 -2410.211 4832.4 284.07  0.000</span></span>
+<span id="cb2-140"><a href="#cb2-140" aria-hidden="true" tabindex="-1"></a><span class="do">## 51  5 -2416.609 4843.2 294.87  0.000</span></span>
+<span id="cb2-141"><a href="#cb2-141" aria-hidden="true" tabindex="-1"></a><span class="do">## 34  4 -2418.060 4844.1 295.76  0.000</span></span>
+<span id="cb2-142"><a href="#cb2-142" aria-hidden="true" tabindex="-1"></a><span class="do">## 35  4 -2418.198 4844.4 296.04  0.000</span></span>
+<span id="cb2-143"><a href="#cb2-143" aria-hidden="true" tabindex="-1"></a><span class="do">## 50  5 -2417.890 4845.8 297.43  0.000</span></span>
+<span id="cb2-144"><a href="#cb2-144" aria-hidden="true" tabindex="-1"></a><span class="do">## 41  4 -2444.453 4896.9 348.55  0.000</span></span>
+<span id="cb2-145"><a href="#cb2-145" aria-hidden="true" tabindex="-1"></a><span class="do">## 57  5 -2443.591 4897.2 348.83  0.000</span></span>
+<span id="cb2-146"><a href="#cb2-146" aria-hidden="true" tabindex="-1"></a><span class="do">## 49  4 -2460.365 4928.7 380.37  0.000</span></span>
+<span id="cb2-147"><a href="#cb2-147" aria-hidden="true" tabindex="-1"></a><span class="do">## 33  3 -2462.877 4931.8 383.39  0.000</span></span>
+<span id="cb2-148"><a href="#cb2-148" aria-hidden="true" tabindex="-1"></a><span class="do">## 12  5 -2468.927 4947.9 399.50  0.000</span></span>
+<span id="cb2-149"><a href="#cb2-149" aria-hidden="true" tabindex="-1"></a><span class="do">## 28  6 -2468.571 4949.2 400.79  0.000</span></span>
+<span id="cb2-150"><a href="#cb2-150" aria-hidden="true" tabindex="-1"></a><span class="do">## 4   4 -2493.662 4995.3 446.97  0.000</span></span>
+<span id="cb2-151"><a href="#cb2-151" aria-hidden="true" tabindex="-1"></a><span class="do">## 20  5 -2493.654 4997.3 448.96  0.000</span></span>
+<span id="cb2-152"><a href="#cb2-152" aria-hidden="true" tabindex="-1"></a><span class="do">## 11  4 -2496.060 5000.1 451.76  0.000</span></span>
+<span id="cb2-153"><a href="#cb2-153" aria-hidden="true" tabindex="-1"></a><span class="do">## 27  5 -2496.045 5002.1 453.74  0.000</span></span>
+<span id="cb2-154"><a href="#cb2-154" aria-hidden="true" tabindex="-1"></a><span class="do">## 10  4 -2504.812 5017.6 469.27  0.000</span></span>
+<span id="cb2-155"><a href="#cb2-155" aria-hidden="true" tabindex="-1"></a><span class="do">## 26  5 -2504.515 5019.0 470.68  0.000</span></span>
+<span id="cb2-156"><a href="#cb2-156" aria-hidden="true" tabindex="-1"></a><span class="do">## 3   3 -2533.366 5072.7 524.37  0.000</span></span>
+<span id="cb2-157"><a href="#cb2-157" aria-hidden="true" tabindex="-1"></a><span class="do">## 19  4 -2532.551 5073.1 524.74  0.000</span></span>
+<span id="cb2-158"><a href="#cb2-158" aria-hidden="true" tabindex="-1"></a><span class="do">## 9   3 -2537.714 5081.4 533.07  0.000</span></span>
+<span id="cb2-159"><a href="#cb2-159" aria-hidden="true" tabindex="-1"></a><span class="do">## 25  4 -2537.673 5083.4 534.99  0.000</span></span>
+<span id="cb2-160"><a href="#cb2-160" aria-hidden="true" tabindex="-1"></a><span class="do">## 2   3 -2546.184 5098.4 550.01  0.000</span></span>
+<span id="cb2-161"><a href="#cb2-161" aria-hidden="true" tabindex="-1"></a><span class="do">## 18  4 -2546.156 5100.3 551.95  0.000</span></span>
+<span id="cb2-162"><a href="#cb2-162" aria-hidden="true" tabindex="-1"></a><span class="do">## 17  3 -2598.835 5203.7 655.31  0.000</span></span>
+<span id="cb2-163"><a href="#cb2-163" aria-hidden="true" tabindex="-1"></a><span class="do">## 1   2 -2600.524 5205.1 656.68  0.000</span></span>
+<span id="cb2-164"><a href="#cb2-164" aria-hidden="true" tabindex="-1"></a><span class="do">## Models ranked by AICc(x) </span></span>
+<span id="cb2-165"><a href="#cb2-165" aria-hidden="true" tabindex="-1"></a><span class="do">## Random terms (all models): </span></span>
+<span id="cb2-166"><a href="#cb2-166" aria-hidden="true" tabindex="-1"></a><span class="do">##   1 | id</span></span>
+<span id="cb2-167"><a href="#cb2-167" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb2-168"><a href="#cb2-168" aria-hidden="true" tabindex="-1"></a>avgmodel <span class="ot">&lt;-</span> <span class="fu">model.avg</span>(all_m, <span class="at">rank =</span> <span class="st">"AICc"</span>, <span class="at">subset =</span> delta <span class="sc">&lt;</span> <span class="dv">2</span>)</span>
+<span id="cb2-169"><a href="#cb2-169" aria-hidden="true" tabindex="-1"></a><span class="fu">summary</span>(avgmodel)</span>
+<span id="cb2-170"><a href="#cb2-170" aria-hidden="true" tabindex="-1"></a><span class="do">## </span></span>
+<span id="cb2-171"><a href="#cb2-171" aria-hidden="true" tabindex="-1"></a><span class="do">## Call:</span></span>
+<span id="cb2-172"><a href="#cb2-172" aria-hidden="true" tabindex="-1"></a><span class="do">## model.avg(object = get.models(object = all_m, subset = delta &lt; </span></span>
+<span id="cb2-173"><a href="#cb2-173" aria-hidden="true" tabindex="-1"></a><span class="do">##     2), rank = "AICc")</span></span>
+<span id="cb2-174"><a href="#cb2-174" aria-hidden="true" tabindex="-1"></a><span class="do">## </span></span>
+<span id="cb2-175"><a href="#cb2-175" aria-hidden="true" tabindex="-1"></a><span class="do">## Component model call: </span></span>
+<span id="cb2-176"><a href="#cb2-176" aria-hidden="true" tabindex="-1"></a><span class="do">## glmer(formula = pres_abs ~ &lt;4 unique rhs&gt;, data = DF_mod_day, family = </span></span>
+<span id="cb2-177"><a href="#cb2-177" aria-hidden="true" tabindex="-1"></a><span class="do">##      binomial, na.action = na.fail)</span></span>
+<span id="cb2-178"><a href="#cb2-178" aria-hidden="true" tabindex="-1"></a><span class="do">## </span></span>
+<span id="cb2-179"><a href="#cb2-179" aria-hidden="true" tabindex="-1"></a><span class="do">## Component models: </span></span>
+<span id="cb2-180"><a href="#cb2-180" aria-hidden="true" tabindex="-1"></a><span class="do">##        df   logLik    AICc delta weight</span></span>
+<span id="cb2-181"><a href="#cb2-181" aria-hidden="true" tabindex="-1"></a><span class="do">## 1346    6 -2268.17 4548.37  0.00   0.38</span></span>
+<span id="cb2-182"><a href="#cb2-182" aria-hidden="true" tabindex="-1"></a><span class="do">## 12346   7 -2267.34 4548.71  0.34   0.32</span></span>
+<span id="cb2-183"><a href="#cb2-183" aria-hidden="true" tabindex="-1"></a><span class="do">## 13456   7 -2268.01 4550.04  1.68   0.16</span></span>
+<span id="cb2-184"><a href="#cb2-184" aria-hidden="true" tabindex="-1"></a><span class="do">## 123456  8 -2267.16 4550.35  1.98   0.14</span></span>
+<span id="cb2-185"><a href="#cb2-185" aria-hidden="true" tabindex="-1"></a><span class="do">## </span></span>
+<span id="cb2-186"><a href="#cb2-186" aria-hidden="true" tabindex="-1"></a><span class="do">## Term codes: </span></span>
+<span id="cb2-187"><a href="#cb2-187" aria-hidden="true" tabindex="-1"></a><span class="do">## dist_road_only_scaled      dist_sett_scaled    forest_prop_scaled </span></span>
+<span id="cb2-188"><a href="#cb2-188" aria-hidden="true" tabindex="-1"></a><span class="do">##                     1                     2                     3 </span></span>
+<span id="cb2-189"><a href="#cb2-189" aria-hidden="true" tabindex="-1"></a><span class="do">##          slope_scaled       topo_pos_scaled             us_scaled </span></span>
+<span id="cb2-190"><a href="#cb2-190" aria-hidden="true" tabindex="-1"></a><span class="do">##                     4                     5                     6 </span></span>
+<span id="cb2-191"><a href="#cb2-191" aria-hidden="true" tabindex="-1"></a><span class="do">## </span></span>
+<span id="cb2-192"><a href="#cb2-192" aria-hidden="true" tabindex="-1"></a><span class="do">## Model-averaged coefficients:  </span></span>
+<span id="cb2-193"><a href="#cb2-193" aria-hidden="true" tabindex="-1"></a><span class="do">## (full average) </span></span>
+<span id="cb2-194"><a href="#cb2-194" aria-hidden="true" tabindex="-1"></a><span class="do">##                        Estimate Std. Error Adjusted SE z value Pr(&gt;|z|)    </span></span>
+<span id="cb2-195"><a href="#cb2-195" aria-hidden="true" tabindex="-1"></a><span class="do">## (Intercept)           -0.432191   0.139554    0.139597   3.096  0.00196 ** </span></span>
+<span id="cb2-196"><a href="#cb2-196" aria-hidden="true" tabindex="-1"></a><span class="do">## dist_road_only_scaled  0.416554   0.046861    0.046875   8.886  &lt; 2e-16 ***</span></span>
+<span id="cb2-197"><a href="#cb2-197" aria-hidden="true" tabindex="-1"></a><span class="do">## forest_prop_scaled     0.818821   0.057266    0.057282  14.295  &lt; 2e-16 ***</span></span>
+<span id="cb2-198"><a href="#cb2-198" aria-hidden="true" tabindex="-1"></a><span class="do">## slope_scaled          -0.158651   0.049230    0.049245   3.222  0.00127 ** </span></span>
+<span id="cb2-199"><a href="#cb2-199" aria-hidden="true" tabindex="-1"></a><span class="do">## us_scaled              0.390805   0.041070    0.041083   9.513  &lt; 2e-16 ***</span></span>
+<span id="cb2-200"><a href="#cb2-200" aria-hidden="true" tabindex="-1"></a><span class="do">## dist_sett_scaled      -0.036839   0.058045    0.058054   0.635  0.52571    </span></span>
+<span id="cb2-201"><a href="#cb2-201" aria-hidden="true" tabindex="-1"></a><span class="do">## topo_pos_scaled        0.006678   0.022846    0.022852   0.292  0.77013    </span></span>
+<span id="cb2-202"><a href="#cb2-202" aria-hidden="true" tabindex="-1"></a><span class="do">##  </span></span>
+<span id="cb2-203"><a href="#cb2-203" aria-hidden="true" tabindex="-1"></a><span class="do">## (conditional average) </span></span>
+<span id="cb2-204"><a href="#cb2-204" aria-hidden="true" tabindex="-1"></a><span class="do">##                       Estimate Std. Error Adjusted SE z value Pr(&gt;|z|)    </span></span>
+<span id="cb2-205"><a href="#cb2-205" aria-hidden="true" tabindex="-1"></a><span class="do">## (Intercept)           -0.43219    0.13955     0.13960   3.096  0.00196 ** </span></span>
+<span id="cb2-206"><a href="#cb2-206" aria-hidden="true" tabindex="-1"></a><span class="do">## dist_road_only_scaled  0.41655    0.04686     0.04688   8.886  &lt; 2e-16 ***</span></span>
+<span id="cb2-207"><a href="#cb2-207" aria-hidden="true" tabindex="-1"></a><span class="do">## forest_prop_scaled     0.81882    0.05727     0.05728  14.295  &lt; 2e-16 ***</span></span>
+<span id="cb2-208"><a href="#cb2-208" aria-hidden="true" tabindex="-1"></a><span class="do">## slope_scaled          -0.15865    0.04923     0.04924   3.222  0.00127 ** </span></span>
+<span id="cb2-209"><a href="#cb2-209" aria-hidden="true" tabindex="-1"></a><span class="do">## us_scaled              0.39081    0.04107     0.04108   9.513  &lt; 2e-16 ***</span></span>
+<span id="cb2-210"><a href="#cb2-210" aria-hidden="true" tabindex="-1"></a><span class="do">## dist_sett_scaled      -0.08030    0.06208     0.06210   1.293  0.19597    </span></span>
+<span id="cb2-211"><a href="#cb2-211" aria-hidden="true" tabindex="-1"></a><span class="do">## topo_pos_scaled        0.02197    0.03717     0.03718   0.591  0.55451    </span></span>
+<span id="cb2-212"><a href="#cb2-212" aria-hidden="true" tabindex="-1"></a><span class="do">## ---</span></span>
+<span id="cb2-213"><a href="#cb2-213" aria-hidden="true" tabindex="-1"></a><span class="do">## Signif. codes:  0 '***' 0.001 '**' 0.01 '*' 0.05 '.' 0.1 ' ' 1</span></span></code><button title="In die Zwischenablage kopieren" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
 <ul>
 <li>Die Modellresultate aus dem avgmodel sind grundsätzlich die finalen Resultate die bereits interpretiert werden könnten. Allerdings funktionieren die Diagnosetests und die Darstellung der Resultate mit diesem gemittelten Modell nicht sehr gut, weshalb wir einen re-fit mit glmer machen müssen (an den Resultaten ändert sich dadurch nichts)</li>
@@ -655,7 +802,91 @@ window.onload = function() {
 <div class="sourceCode cell-code" id="cb3"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb3-1"><a href="#cb3-1" aria-hidden="true" tabindex="-1"></a><span class="co"># hier zum Vergleich, dass die Resulate sich nur marginal verändern</span></span>
 <span id="cb3-2"><a href="#cb3-2" aria-hidden="true" tabindex="-1"></a></span>
 <span id="cb3-3"><a href="#cb3-3" aria-hidden="true" tabindex="-1"></a><span class="fu">summary</span>(avgmodel)</span>
-<span id="cb3-4"><a href="#cb3-4" aria-hidden="true" tabindex="-1"></a><span class="fu">summary</span>(m_day)</span></code><button title="In die Zwischenablage kopieren" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<span id="cb3-4"><a href="#cb3-4" aria-hidden="true" tabindex="-1"></a><span class="do">## </span></span>
+<span id="cb3-5"><a href="#cb3-5" aria-hidden="true" tabindex="-1"></a><span class="do">## Call:</span></span>
+<span id="cb3-6"><a href="#cb3-6" aria-hidden="true" tabindex="-1"></a><span class="do">## model.avg(object = get.models(object = all_m, subset = delta &lt; </span></span>
+<span id="cb3-7"><a href="#cb3-7" aria-hidden="true" tabindex="-1"></a><span class="do">##     2), rank = "AICc")</span></span>
+<span id="cb3-8"><a href="#cb3-8" aria-hidden="true" tabindex="-1"></a><span class="do">## </span></span>
+<span id="cb3-9"><a href="#cb3-9" aria-hidden="true" tabindex="-1"></a><span class="do">## Component model call: </span></span>
+<span id="cb3-10"><a href="#cb3-10" aria-hidden="true" tabindex="-1"></a><span class="do">## glmer(formula = pres_abs ~ &lt;4 unique rhs&gt;, data = DF_mod_day, family = </span></span>
+<span id="cb3-11"><a href="#cb3-11" aria-hidden="true" tabindex="-1"></a><span class="do">##      binomial, na.action = na.fail)</span></span>
+<span id="cb3-12"><a href="#cb3-12" aria-hidden="true" tabindex="-1"></a><span class="do">## </span></span>
+<span id="cb3-13"><a href="#cb3-13" aria-hidden="true" tabindex="-1"></a><span class="do">## Component models: </span></span>
+<span id="cb3-14"><a href="#cb3-14" aria-hidden="true" tabindex="-1"></a><span class="do">##        df   logLik    AICc delta weight</span></span>
+<span id="cb3-15"><a href="#cb3-15" aria-hidden="true" tabindex="-1"></a><span class="do">## 1346    6 -2268.17 4548.37  0.00   0.38</span></span>
+<span id="cb3-16"><a href="#cb3-16" aria-hidden="true" tabindex="-1"></a><span class="do">## 12346   7 -2267.34 4548.71  0.34   0.32</span></span>
+<span id="cb3-17"><a href="#cb3-17" aria-hidden="true" tabindex="-1"></a><span class="do">## 13456   7 -2268.01 4550.04  1.68   0.16</span></span>
+<span id="cb3-18"><a href="#cb3-18" aria-hidden="true" tabindex="-1"></a><span class="do">## 123456  8 -2267.16 4550.35  1.98   0.14</span></span>
+<span id="cb3-19"><a href="#cb3-19" aria-hidden="true" tabindex="-1"></a><span class="do">## </span></span>
+<span id="cb3-20"><a href="#cb3-20" aria-hidden="true" tabindex="-1"></a><span class="do">## Term codes: </span></span>
+<span id="cb3-21"><a href="#cb3-21" aria-hidden="true" tabindex="-1"></a><span class="do">## dist_road_only_scaled      dist_sett_scaled    forest_prop_scaled </span></span>
+<span id="cb3-22"><a href="#cb3-22" aria-hidden="true" tabindex="-1"></a><span class="do">##                     1                     2                     3 </span></span>
+<span id="cb3-23"><a href="#cb3-23" aria-hidden="true" tabindex="-1"></a><span class="do">##          slope_scaled       topo_pos_scaled             us_scaled </span></span>
+<span id="cb3-24"><a href="#cb3-24" aria-hidden="true" tabindex="-1"></a><span class="do">##                     4                     5                     6 </span></span>
+<span id="cb3-25"><a href="#cb3-25" aria-hidden="true" tabindex="-1"></a><span class="do">## </span></span>
+<span id="cb3-26"><a href="#cb3-26" aria-hidden="true" tabindex="-1"></a><span class="do">## Model-averaged coefficients:  </span></span>
+<span id="cb3-27"><a href="#cb3-27" aria-hidden="true" tabindex="-1"></a><span class="do">## (full average) </span></span>
+<span id="cb3-28"><a href="#cb3-28" aria-hidden="true" tabindex="-1"></a><span class="do">##                        Estimate Std. Error Adjusted SE z value Pr(&gt;|z|)    </span></span>
+<span id="cb3-29"><a href="#cb3-29" aria-hidden="true" tabindex="-1"></a><span class="do">## (Intercept)           -0.432191   0.139554    0.139597   3.096  0.00196 ** </span></span>
+<span id="cb3-30"><a href="#cb3-30" aria-hidden="true" tabindex="-1"></a><span class="do">## dist_road_only_scaled  0.416554   0.046861    0.046875   8.886  &lt; 2e-16 ***</span></span>
+<span id="cb3-31"><a href="#cb3-31" aria-hidden="true" tabindex="-1"></a><span class="do">## forest_prop_scaled     0.818821   0.057266    0.057282  14.295  &lt; 2e-16 ***</span></span>
+<span id="cb3-32"><a href="#cb3-32" aria-hidden="true" tabindex="-1"></a><span class="do">## slope_scaled          -0.158651   0.049230    0.049245   3.222  0.00127 ** </span></span>
+<span id="cb3-33"><a href="#cb3-33" aria-hidden="true" tabindex="-1"></a><span class="do">## us_scaled              0.390805   0.041070    0.041083   9.513  &lt; 2e-16 ***</span></span>
+<span id="cb3-34"><a href="#cb3-34" aria-hidden="true" tabindex="-1"></a><span class="do">## dist_sett_scaled      -0.036839   0.058045    0.058054   0.635  0.52571    </span></span>
+<span id="cb3-35"><a href="#cb3-35" aria-hidden="true" tabindex="-1"></a><span class="do">## topo_pos_scaled        0.006678   0.022846    0.022852   0.292  0.77013    </span></span>
+<span id="cb3-36"><a href="#cb3-36" aria-hidden="true" tabindex="-1"></a><span class="do">##  </span></span>
+<span id="cb3-37"><a href="#cb3-37" aria-hidden="true" tabindex="-1"></a><span class="do">## (conditional average) </span></span>
+<span id="cb3-38"><a href="#cb3-38" aria-hidden="true" tabindex="-1"></a><span class="do">##                       Estimate Std. Error Adjusted SE z value Pr(&gt;|z|)    </span></span>
+<span id="cb3-39"><a href="#cb3-39" aria-hidden="true" tabindex="-1"></a><span class="do">## (Intercept)           -0.43219    0.13955     0.13960   3.096  0.00196 ** </span></span>
+<span id="cb3-40"><a href="#cb3-40" aria-hidden="true" tabindex="-1"></a><span class="do">## dist_road_only_scaled  0.41655    0.04686     0.04688   8.886  &lt; 2e-16 ***</span></span>
+<span id="cb3-41"><a href="#cb3-41" aria-hidden="true" tabindex="-1"></a><span class="do">## forest_prop_scaled     0.81882    0.05727     0.05728  14.295  &lt; 2e-16 ***</span></span>
+<span id="cb3-42"><a href="#cb3-42" aria-hidden="true" tabindex="-1"></a><span class="do">## slope_scaled          -0.15865    0.04923     0.04924   3.222  0.00127 ** </span></span>
+<span id="cb3-43"><a href="#cb3-43" aria-hidden="true" tabindex="-1"></a><span class="do">## us_scaled              0.39081    0.04107     0.04108   9.513  &lt; 2e-16 ***</span></span>
+<span id="cb3-44"><a href="#cb3-44" aria-hidden="true" tabindex="-1"></a><span class="do">## dist_sett_scaled      -0.08030    0.06208     0.06210   1.293  0.19597    </span></span>
+<span id="cb3-45"><a href="#cb3-45" aria-hidden="true" tabindex="-1"></a><span class="do">## topo_pos_scaled        0.02197    0.03717     0.03718   0.591  0.55451    </span></span>
+<span id="cb3-46"><a href="#cb3-46" aria-hidden="true" tabindex="-1"></a><span class="do">## ---</span></span>
+<span id="cb3-47"><a href="#cb3-47" aria-hidden="true" tabindex="-1"></a><span class="do">## Signif. codes:  0 '***' 0.001 '**' 0.01 '*' 0.05 '.' 0.1 ' ' 1</span></span>
+<span id="cb3-48"><a href="#cb3-48" aria-hidden="true" tabindex="-1"></a><span class="fu">summary</span>(m_day)</span>
+<span id="cb3-49"><a href="#cb3-49" aria-hidden="true" tabindex="-1"></a><span class="do">## Generalized linear mixed model fit by maximum likelihood (Laplace</span></span>
+<span id="cb3-50"><a href="#cb3-50" aria-hidden="true" tabindex="-1"></a><span class="do">##   Approximation) [glmerMod]</span></span>
+<span id="cb3-51"><a href="#cb3-51" aria-hidden="true" tabindex="-1"></a><span class="do">##  Family: binomial  ( logit )</span></span>
+<span id="cb3-52"><a href="#cb3-52" aria-hidden="true" tabindex="-1"></a><span class="do">## Formula: </span></span>
+<span id="cb3-53"><a href="#cb3-53" aria-hidden="true" tabindex="-1"></a><span class="do">## pres_abs ~ slope_scaled + topo_pos_scaled + us_scaled + forest_prop_scaled +  </span></span>
+<span id="cb3-54"><a href="#cb3-54" aria-hidden="true" tabindex="-1"></a><span class="do">##     dist_road_only_scaled + dist_sett_scaled + (1 | id)</span></span>
+<span id="cb3-55"><a href="#cb3-55" aria-hidden="true" tabindex="-1"></a><span class="do">##    Data: DF_mod_day</span></span>
+<span id="cb3-56"><a href="#cb3-56" aria-hidden="true" tabindex="-1"></a><span class="do">## </span></span>
+<span id="cb3-57"><a href="#cb3-57" aria-hidden="true" tabindex="-1"></a><span class="do">##      AIC      BIC   logLik deviance df.resid </span></span>
+<span id="cb3-58"><a href="#cb3-58" aria-hidden="true" tabindex="-1"></a><span class="do">##   4550.3   4600.6  -2267.2   4534.3     3956 </span></span>
+<span id="cb3-59"><a href="#cb3-59" aria-hidden="true" tabindex="-1"></a><span class="do">## </span></span>
+<span id="cb3-60"><a href="#cb3-60" aria-hidden="true" tabindex="-1"></a><span class="do">## Scaled residuals: </span></span>
+<span id="cb3-61"><a href="#cb3-61" aria-hidden="true" tabindex="-1"></a><span class="do">##     Min      1Q  Median      3Q     Max </span></span>
+<span id="cb3-62"><a href="#cb3-62" aria-hidden="true" tabindex="-1"></a><span class="do">## -6.5371 -0.7152 -0.3711  0.8621  3.8118 </span></span>
+<span id="cb3-63"><a href="#cb3-63" aria-hidden="true" tabindex="-1"></a><span class="do">## </span></span>
+<span id="cb3-64"><a href="#cb3-64" aria-hidden="true" tabindex="-1"></a><span class="do">## Random effects:</span></span>
+<span id="cb3-65"><a href="#cb3-65" aria-hidden="true" tabindex="-1"></a><span class="do">##  Groups Name        Variance Std.Dev.</span></span>
+<span id="cb3-66"><a href="#cb3-66" aria-hidden="true" tabindex="-1"></a><span class="do">##  id     (Intercept) 0.2106   0.4589  </span></span>
+<span id="cb3-67"><a href="#cb3-67" aria-hidden="true" tabindex="-1"></a><span class="do">## Number of obs: 3964, groups:  id, 12</span></span>
+<span id="cb3-68"><a href="#cb3-68" aria-hidden="true" tabindex="-1"></a><span class="do">## </span></span>
+<span id="cb3-69"><a href="#cb3-69" aria-hidden="true" tabindex="-1"></a><span class="do">## Fixed effects:</span></span>
+<span id="cb3-70"><a href="#cb3-70" aria-hidden="true" tabindex="-1"></a><span class="do">##                       Estimate Std. Error z value Pr(&gt;|z|)    </span></span>
+<span id="cb3-71"><a href="#cb3-71" aria-hidden="true" tabindex="-1"></a><span class="do">## (Intercept)           -0.43788    0.13888  -3.153  0.00162 ** </span></span>
+<span id="cb3-72"><a href="#cb3-72" aria-hidden="true" tabindex="-1"></a><span class="do">## slope_scaled          -0.16249    0.04946  -3.285  0.00102 ** </span></span>
+<span id="cb3-73"><a href="#cb3-73" aria-hidden="true" tabindex="-1"></a><span class="do">## topo_pos_scaled        0.02269    0.03718   0.610  0.54172    </span></span>
+<span id="cb3-74"><a href="#cb3-74" aria-hidden="true" tabindex="-1"></a><span class="do">## us_scaled              0.38984    0.04111   9.482  &lt; 2e-16 ***</span></span>
+<span id="cb3-75"><a href="#cb3-75" aria-hidden="true" tabindex="-1"></a><span class="do">## forest_prop_scaled     0.84030    0.05835  14.401  &lt; 2e-16 ***</span></span>
+<span id="cb3-76"><a href="#cb3-76" aria-hidden="true" tabindex="-1"></a><span class="do">## dist_road_only_scaled  0.41697    0.04740   8.797  &lt; 2e-16 ***</span></span>
+<span id="cb3-77"><a href="#cb3-77" aria-hidden="true" tabindex="-1"></a><span class="do">## dist_sett_scaled      -0.08108    0.06215  -1.305  0.19203    </span></span>
+<span id="cb3-78"><a href="#cb3-78" aria-hidden="true" tabindex="-1"></a><span class="do">## ---</span></span>
+<span id="cb3-79"><a href="#cb3-79" aria-hidden="true" tabindex="-1"></a><span class="do">## Signif. codes:  0 '***' 0.001 '**' 0.01 '*' 0.05 '.' 0.1 ' ' 1</span></span>
+<span id="cb3-80"><a href="#cb3-80" aria-hidden="true" tabindex="-1"></a><span class="do">## </span></span>
+<span id="cb3-81"><a href="#cb3-81" aria-hidden="true" tabindex="-1"></a><span class="do">## Correlation of Fixed Effects:</span></span>
+<span id="cb3-82"><a href="#cb3-82" aria-hidden="true" tabindex="-1"></a><span class="do">##             (Intr) slp_sc tp_ps_ us_scl frst__ dst___</span></span>
+<span id="cb3-83"><a href="#cb3-83" aria-hidden="true" tabindex="-1"></a><span class="do">## slope_scald  0.040                                   </span></span>
+<span id="cb3-84"><a href="#cb3-84" aria-hidden="true" tabindex="-1"></a><span class="do">## top_ps_scld -0.011 -0.110                            </span></span>
+<span id="cb3-85"><a href="#cb3-85" aria-hidden="true" tabindex="-1"></a><span class="do">## us_scaled    0.006 -0.233  0.048                     </span></span>
+<span id="cb3-86"><a href="#cb3-86" aria-hidden="true" tabindex="-1"></a><span class="do">## frst_prp_sc -0.093 -0.358  0.046 -0.144              </span></span>
+<span id="cb3-87"><a href="#cb3-87" aria-hidden="true" tabindex="-1"></a><span class="do">## dst_rd_nly_ -0.008 -0.213 -0.194  0.024  0.158       </span></span>
+<span id="cb3-88"><a href="#cb3-88" aria-hidden="true" tabindex="-1"></a><span class="do">## dst_stt_scl  0.053  0.050 -0.030  0.056 -0.508 -0.128</span></span></code><button title="In die Zwischenablage kopieren" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
 </section>
 <section id="aufgabe-1" class="level2">
@@ -776,6 +1007,35 @@ window.onload = function() {
 <li>Bestimmen delta AIC nach <span class="citation" data-cites="coppes2017">Coppes u.&nbsp;a. (<a href="../References.html#ref-coppes2017" role="doc-biblioref">2017</a>)</span> → Vergleich des Gesamtmodells gegenüber einem Modell ohne die entsprechende Variable.</li>
 <li>Auftrag auf nächste Woche: Kurze Vorstellung der Modellresultate &amp; Diagnostics im Plenum und Diskussion der Ergebnisse (keine PP-Präsentation nötig)</li>
 </ul>
+<div class="cell">
+<details class="code-fold">
+<summary>Musterlösung</summary>
+<div class="sourceCode cell-code" id="cb7"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb7-1"><a href="#cb7-1" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb7-2"><a href="#cb7-2" aria-hidden="true" tabindex="-1"></a>vars <span class="ot">&lt;-</span> <span class="fu">c</span>(<span class="st">"slope_scaled"</span>, <span class="st">"forest_prop_scaled"</span>, <span class="st">"dist_road_only_scaled"</span>, <span class="st">"dist_sett_scaled"</span>, <span class="st">"topo_pos_scaled"</span>, <span class="st">"us_scaled"</span>)</span>
+<span id="cb7-3"><a href="#cb7-3" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb7-4"><a href="#cb7-4" aria-hidden="true" tabindex="-1"></a><span class="co"># leave-one-out models</span></span>
+<span id="cb7-5"><a href="#cb7-5" aria-hidden="true" tabindex="-1"></a>modelle <span class="ot">&lt;-</span> <span class="fu">lapply</span>(vars, <span class="cf">function</span>(var) {</span>
+<span id="cb7-6"><a href="#cb7-6" aria-hidden="true" tabindex="-1"></a>  formula <span class="ot">&lt;-</span> <span class="fu">as.formula</span>(<span class="fu">paste</span>(<span class="st">"pres_abs ~"</span>, <span class="fu">paste</span>(<span class="fu">setdiff</span>(vars, var), <span class="at">collapse =</span> <span class="st">" + "</span>), <span class="st">"+ (1 | id)"</span>))</span>
+<span id="cb7-7"><a href="#cb7-7" aria-hidden="true" tabindex="-1"></a>  <span class="fu">glmer</span>(formula, <span class="at">data =</span> DF_mod_day, <span class="at">family =</span> binomial, <span class="at">na.action =</span> <span class="st">"na.fail"</span>)</span>
+<span id="cb7-8"><a href="#cb7-8" aria-hidden="true" tabindex="-1"></a>})</span>
+<span id="cb7-9"><a href="#cb7-9" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb7-10"><a href="#cb7-10" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb7-11"><a href="#cb7-11" aria-hidden="true" tabindex="-1"></a><span class="fu">names</span>(modelle) <span class="ot">&lt;-</span> <span class="fu">paste0</span>(<span class="st">"m_"</span>, vars)</span>
+<span id="cb7-12"><a href="#cb7-12" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb7-13"><a href="#cb7-13" aria-hidden="true" tabindex="-1"></a>modelle <span class="ot">&lt;-</span> <span class="fu">c</span>(<span class="fu">list</span>(<span class="at">m_day =</span> m_day), modelle)</span>
+<span id="cb7-14"><a href="#cb7-14" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb7-15"><a href="#cb7-15" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb7-16"><a href="#cb7-16" aria-hidden="true" tabindex="-1"></a>bbmle<span class="sc">::</span><span class="fu">AICtab</span>(modelle)</span>
+<span id="cb7-17"><a href="#cb7-17" aria-hidden="true" tabindex="-1"></a><span class="do">##                         dAIC  df</span></span>
+<span id="cb7-18"><a href="#cb7-18" aria-hidden="true" tabindex="-1"></a><span class="do">## m_topo_pos_scaled         0.0 7 </span></span>
+<span id="cb7-19"><a href="#cb7-19" aria-hidden="true" tabindex="-1"></a><span class="do">## m_dist_sett_scaled        1.3 7 </span></span>
+<span id="cb7-20"><a href="#cb7-20" aria-hidden="true" tabindex="-1"></a><span class="do">## m_day                     1.6 8 </span></span>
+<span id="cb7-21"><a href="#cb7-21" aria-hidden="true" tabindex="-1"></a><span class="do">## m_slope_scaled           10.6 7 </span></span>
+<span id="cb7-22"><a href="#cb7-22" aria-hidden="true" tabindex="-1"></a><span class="do">## m_dist_road_only_scaled  81.9 7 </span></span>
+<span id="cb7-23"><a href="#cb7-23" aria-hidden="true" tabindex="-1"></a><span class="do">## m_us_scaled              94.1 7 </span></span>
+<span id="cb7-24"><a href="#cb7-24" aria-hidden="true" tabindex="-1"></a><span class="do">## m_forest_prop_scaled    227.0 7</span></span></code><button title="In die Zwischenablage kopieren" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</details>
+</div>
 </section>
 <section id="section" class="level2">
 <h2 class="anchored" data-anchor-id="section"></h2>
@@ -1063,24 +1323,6 @@ window.document.addEventListener("DOMContentLoaded", function (event) {
   if (showAllCode) {
     showAllCode.addEventListener("click", toggleCodeHandler(true));
   }
-    var localhostRegex = new RegExp(/^(?:http|https):\/\/localhost\:?[0-9]*\//);
-    var mailtoRegex = new RegExp(/^mailto:/);
-      var filterRegex = new RegExp('/' + window.location.host + '/');
-    var isInternal = (href) => {
-        return filterRegex.test(href) || localhostRegex.test(href) || mailtoRegex.test(href);
-    }
-    // Inspect non-navigation links and adorn them if external
- 	var links = window.document.querySelectorAll('a[href]:not(.nav-link):not(.navbar-brand):not(.toc-action):not(.sidebar-link):not(.sidebar-item-toggle):not(.pagination-link):not(.no-external):not([aria-hidden]):not(.dropdown-item):not(.quarto-navigation-tool)');
-    for (var i=0; i<links.length; i++) {
-      const link = links[i];
-      if (!isInternal(link.href)) {
-        // undo the damage that might have been done by quarto-nav.js in the case of
-        // links that we want to consider external
-        if (link.dataset.originalHref !== undefined) {
-          link.href = link.dataset.originalHref;
-        }
-      }
-    }
   function tippyHover(el, contentFn, onTriggerFn, onUntriggerFn) {
     const config = {
       allowHTML: true,
@@ -1115,11 +1357,7 @@ window.document.addEventListener("DOMContentLoaded", function (event) {
       try { href = new URL(href).hash; } catch {}
       const id = href.replace(/^#\/?/, "");
       const note = window.document.getElementById(id);
-      if (note) {
-        return note.innerHTML;
-      } else {
-        return "";
-      }
+      return note.innerHTML;
     });
   }
   const xrefs = window.document.querySelectorAll('a.quarto-xref');
@@ -1395,12 +1633,12 @@ window.document.addEventListener("DOMContentLoaded", function (event) {
 </script>
 <nav class="page-navigation">
   <div class="nav-page nav-page-previous">
-      <a href="../fallstudie_n/5_Variablenselektion.html" class="pagination-link" aria-label="Variablenselektion Multivariate Modelle">
+      <a href="../fallstudie_n/5_Variablenselektion.html" class="pagination-link  aria-label=" &lt;span="" multivariate="" modelle&lt;="" span&gt;"="">
         <i class="bi bi-arrow-left-short"></i> <span class="nav-page-text"><span class="chapter-title">Variablenselektion Multivariate Modelle</span></span>
       </a>          
   </div>
   <div class="nav-page nav-page-next">
-      <a href="../References.html" class="pagination-link" aria-label="Literaturverzeichnis">
+      <a href="../References.html" class="pagination-link" aria-label="<span class='chapter-number'>46</span>&nbsp; <span class='chapter-title'>Literaturverzeichnis</span>">
         <span class="nav-page-text"><span class="chapter-title">Literaturverzeichnis</span></span> <i class="bi bi-arrow-right-short"></i>
       </a>
   </div>

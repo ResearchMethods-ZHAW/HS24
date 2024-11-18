@@ -71,9 +71,9 @@ summary(ukr)
 ## -----------------------------------------------------------------------------
 #| eval: false
 
-## cor <- cor(ukr[, 2:19])
-## cor[abs(cor)<0.7] <- 0
-## cor
+# cor <- cor(ukr[, 2:19])
+# cor[abs(cor)<0.7] <- 0
+# cor
 
 #' Die Korrelationsanalyse dient dazu, zu entscheiden, ob die Prädiktorvariablen hinreichend voneinander unabhängig sind, um alle in das globale Modell hinein zu nehmen. Bei Pearson’s Korrelationskoeffizienten r, die betragsmässig grösser als 0.7 sind, würde es problematisch. Alternativ hätten wir auch den VIF (Variance Inflation Factor) als Kriterium für den möglichen Ausschluss von Variablen aus dem globalen Modell nehmen können. 
 #' 
@@ -116,7 +116,7 @@ allmodels <- dredge(global_model)
 ## -----------------------------------------------------------------------------
 #| eval: false
 
-## allmodels
+# allmodels
 
 #' 
 #' Jetzt bekommen wir die besten der insgesamt 8192 möglichen Modelle gelistet mit ihren Parameterschätzungen und ihrem AICc.
@@ -133,9 +133,9 @@ sw(allmodels)
 ## -----------------------------------------------------------------------------
 #| eval: false
 
-## # Modelaveraging (Achtung: dauert mit 13 Variablen einige Minuten)
-## avgmodel <- model.avg(allmodels)
-## summary(avgmodel)
+# # Modelaveraging (Achtung: dauert mit 13 Variablen einige Minuten)
+# avgmodel <- model.avg(allmodels)
+# summary(avgmodel)
 
 #' 
 #' Aus dem gemittelten Modell können wir die Richtung der Beziehung (positiv oder negativ) und ggf. die Effektgrössen (wie verändert sich die Artenzahl, wenn die Prädiktorvariable um eine Einheit zunimmt?) ermitteln.
