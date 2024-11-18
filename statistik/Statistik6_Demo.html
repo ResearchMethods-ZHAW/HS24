@@ -1,0 +1,1924 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml" lang="de" xml:lang="de">
+
+<head>
+
+<meta charset="utf-8" />
+<meta name="generator" content="quarto-1.4.555" />
+
+<meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes" />
+
+
+<title>Research Methods HS24 – Statistik 6: Demo</title>
+<style>
+code{white-space: pre-wrap;}
+span.smallcaps{font-variant: small-caps;}
+div.columns{display: flex; gap: min(4vw, 1.5em);}
+div.column{flex: auto; overflow-x: auto;}
+div.hanging-indent{margin-left: 1.5em; text-indent: -1.5em;}
+ul.task-list{list-style: none;}
+ul.task-list li input[type="checkbox"] {
+  width: 0.8em;
+  margin: 0 0.8em 0.2em -1em; /* quarto-specific, see https://github.com/quarto-dev/quarto-cli/issues/4556 */ 
+  vertical-align: middle;
+}
+/* CSS for syntax highlighting */
+pre > code.sourceCode { white-space: pre; position: relative; }
+pre > code.sourceCode > span { line-height: 1.25; }
+pre > code.sourceCode > span:empty { height: 1.2em; }
+.sourceCode { overflow: visible; }
+code.sourceCode > span { color: inherit; text-decoration: inherit; }
+div.sourceCode { margin: 1em 0; }
+pre.sourceCode { margin: 0; }
+@media screen {
+div.sourceCode { overflow: auto; }
+}
+@media print {
+pre > code.sourceCode { white-space: pre-wrap; }
+pre > code.sourceCode > span { text-indent: -5em; padding-left: 5em; }
+}
+pre.numberSource code
+  { counter-reset: source-line 0; }
+pre.numberSource code > span
+  { position: relative; left: -4em; counter-increment: source-line; }
+pre.numberSource code > span > a:first-child::before
+  { content: counter(source-line);
+    position: relative; left: -1em; text-align: right; vertical-align: baseline;
+    border: none; display: inline-block;
+    -webkit-touch-callout: none; -webkit-user-select: none;
+    -khtml-user-select: none; -moz-user-select: none;
+    -ms-user-select: none; user-select: none;
+    padding: 0 4px; width: 4em;
+  }
+pre.numberSource { margin-left: 3em;  padding-left: 4px; }
+div.sourceCode
+  {   }
+@media screen {
+pre > code.sourceCode > span > a:first-child::before { text-decoration: underline; }
+}
+</style>
+
+<!-- htmldependencies:E3FAD763 -->
+<script id="quarto-search-options" type="application/json">{
+  "location": "sidebar",
+  "copy-button": false,
+  "collapse-after": 3,
+  "panel-placement": "start",
+  "type": "textbox",
+  "limit": 50,
+  "keyboard-shortcut": [
+    "f",
+    "/",
+    "s"
+  ],
+  "show-item-context": false,
+  "language": {
+    "search-no-results-text": "Keine Treffer",
+    "search-matching-documents-text": "Treffer",
+    "search-copy-link-title": "Link in die Suche kopieren",
+    "search-hide-matches-text": "Zusätzliche Treffer verbergen",
+    "search-more-match-text": "weitere Treffer in diesem Dokument",
+    "search-more-matches-text": "weitere Treffer in diesem Dokument",
+    "search-clear-button-title": "Zurücksetzen",
+    "search-text-placeholder": "",
+    "search-detached-cancel-button-title": "Abbrechen",
+    "search-submit-button-title": "Abschicken",
+    "search-label": "Suchen"
+  }
+}</script>
+
+
+<!-- loads fontawesome, so that I can create a fontawesome button (see below) -->
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.2/css/all.min.css" integrity="sha512-z3gLpd7yknf1YoNbCzqRKc4qyor8gaKU1qmn+CShxbuBusANI9QpRohGBreCFkKxLhei6S9CQXFEbbKuqLg0DA==" crossorigin="anonymous" referrerpolicy="no-referrer" />
+<script>
+
+// the following function adds padding to all h2 elements, so that I can 
+// easily present the content of the page in a more readable way
+function presenter(){
+    var paragraphs = document.querySelectorAll("h2, h3");
+    paragraphs.forEach(function (paragraph) {
+        paragraph.classList.toggle("padding-top-500");
+    });
+}
+
+// once the page is loaded, the button is injected into the sidebar. This button
+// calls the presenter function (see above)
+window.onload = function() {
+    // create the button (similar to the buttons already availables)
+    const linkElement = document.createElement('a');
+
+    linkElement.classList.add('quarto-navigation-tool');
+    linkElement.classList.add('px-1');
+    linkElement.innerHTML = '<i class="fa-solid fa-person-chalkboard"></i>';
+    linkElement.href = '#';
+    linkElement.addEventListener('click', function(event) {
+        event.preventDefault(); // Prevent the default link behavior
+        presenter();
+    });
+
+    // Find the target element by its class name
+    const sidebar_tools = document.querySelector(".sidebar-tools-main")
+    sidebar_tools.appendChild(linkElement);
+};
+
+</script>
+
+
+<link rel="stylesheet" href="../custom.css" />
+<link rel="stylesheet" href="../theme-custom.scss" />
+</head>
+
+<body>
+
+<div id="quarto-search-results"></div>
+  <header id="quarto-header" class="headroom fixed-top">
+  <nav class="quarto-secondary-nav">
+    <div class="container-fluid d-flex">
+      <button type="button" class="quarto-btn-toggle btn"
+      data-bs-toggle="collapse" data-bs-target=".quarto-sidebar-collapse-item" 
+      aria-controls="quarto-sidebar" aria-expanded="false" aria-label="Seitenleiste umschalten"
+      onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">
+        <i class="bi bi-layout-text-sidebar-reverse"></i>
+      </button>
+        <h1 class="quarto-secondary-nav-title no-breadcrumbs"></h1>
+        <a class="flex-grow-1" role="button" data-bs-toggle="collapse" data-bs-target=".quarto-sidebar-collapse-item" 
+        aria-controls="quarto-sidebar" aria-expanded="false" aria-label="Seitenleiste umschalten"
+        onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">      
+        </a>
+      <button type="button" class="btn quarto-search-button" aria-label="" onclick="window.quartoOpenSearch();">
+        <i class="bi bi-search"></i>
+      </button>
+    </div>
+  </nav>
+</header>
+<!-- content -->
+<div id="quarto-content" class="quarto-container page-columns page-rows-contents page-layout-article">
+<!-- sidebar -->
+  <nav id="quarto-sidebar" class="sidebar collapse collapse-horizontal quarto-sidebar-collapse-item sidebar-navigation floating overflow-auto">
+    <div class="pt-lg-2 mt-2 text-left sidebar-header sidebar-header-stacked">
+      <a href="/index.html" class="sidebar-logo-link">
+      <img src="/images/zhaw_sw_neg.png" alt="" class="sidebar-logo py-0 d-lg-inline d-none"/>
+      </a>
+    <div class="sidebar-title mb-0 py-0">
+      <a href="/">
+      Research Methods HS24
+      </a> 
+        <div class="sidebar-tools-main">
+  <a href="" class="quarto-color-scheme-toggle quarto-navigation-tool  px-1" onclick="window.quartoToggleColorScheme(); return false;" title="Dunkelmodus umschalten"><i class="bi"></i></a>
+  <a href="" class="quarto-reader-toggle quarto-navigation-tool px-1" onclick="window.quartoToggleReader(); return false;" title="Lesemodus umschalten">
+  <div class="quarto-reader-toggle-btn">
+  <i class="bi"></i>
+  </div>
+</a>
+</div>
+    </div>
+      </div>
+        <div class="mt-2 flex-shrink-0 align-items-center">
+        <div class="sidebar-search">
+        <div id="quarto-search" class="" title="Suchen"></div>
+        </div>
+        </div>
+    <div class="sidebar-menu-container"> 
+    <ul class="list-unstyled mt-1">
+        <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="/index.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Willkommen</span></a>
+  </div>
+</li>
+        <li class="sidebar-item sidebar-item-section">
+      <div class="sidebar-item-container"> 
+            <a href="/PrePro.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Pre-Processing</span></a>
+          <a class="sidebar-item-toggle text-start collapsed" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-1" aria-expanded="false" aria-label="Abschnitt umschalten">
+            <i class="bi bi-chevron-right ms-2"></i>
+          </a> 
+      </div>
+      <ul id="quarto-sidebar-section-1" class="collapse list-unstyled sidebar-section depth1 ">  
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="/prepro/Prepro1_Vorbereitung.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class='chapter-number'>1</span>  <span class='chapter-title'>Vorbereitung</span></span></a>
+  </div>
+</li>
+          <li class="px-0"><hr class="sidebar-divider hi "></li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="/prepro/Prepro1_Demo.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class='chapter-number'>2</span>  <span class='chapter-title'>Prepro 1: Demo</span></span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="/prepro/Prepro1_Uebung.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class='chapter-number'>3</span>  <span class='chapter-title'>PrePro 1: Übung</span></span></a>
+  </div>
+</li>
+          <li class="px-0"><hr class="sidebar-divider hi "></li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="/prepro/Prepro2_Demo.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class='chapter-number'>4</span>  <span class='chapter-title'>Prepro 2: Demo</span></span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="/prepro/Prepro2_Uebung_A.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class='chapter-number'>5</span>  <span class='chapter-title'>Prepro 2: Übung A</span></span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="/prepro/Prepro2_Uebung_B.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class='chapter-number'>6</span>  <span class='chapter-title'>Prepro 2: Übung B</span></span></a>
+  </div>
+</li>
+          <li class="px-0"><hr class="sidebar-divider hi "></li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="/prepro/Prepro3_Demo.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class='chapter-number'>7</span>  <span class='chapter-title'>Prepro 3: Demo</span></span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="/prepro/Prepro3_Uebung.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class='chapter-number'>8</span>  <span class='chapter-title'>Prepro 3: Übung</span></span></a>
+  </div>
+</li>
+      </ul>
+  </li>
+        <li class="sidebar-item sidebar-item-section">
+      <div class="sidebar-item-container"> 
+            <a href="/InfoVis.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">InfoVis</span></a>
+          <a class="sidebar-item-toggle text-start collapsed" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-2" aria-expanded="false" aria-label="Abschnitt umschalten">
+            <i class="bi bi-chevron-right ms-2"></i>
+          </a> 
+      </div>
+      <ul id="quarto-sidebar-section-2" class="collapse list-unstyled sidebar-section depth1 ">  
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="/infovis/Infovis1_Vorbereitung.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class='chapter-number'>9</span>  <span class='chapter-title'>Vorbereitung</span></span></a>
+  </div>
+</li>
+          <li class="px-0"><hr class="sidebar-divider hi "></li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="/infovis/Infovis1_Demo.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class='chapter-number'>10</span>  <span class='chapter-title'>Infovis 1: Demo A</span></span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="/infovis/Infovis1_Uebung.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class='chapter-number'>11</span>  <span class='chapter-title'>Infovis 1: Übung</span></span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="/infovis/Infovis1_Script_eda.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class='chapter-number'>12</span>  <span class='chapter-title'>Infovis 1: Script EDA</span></span></a>
+  </div>
+</li>
+          <li class="px-0"><hr class="sidebar-divider hi "></li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="/infovis/Infovis2_Uebung_A.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class='chapter-number'>13</span>  <span class='chapter-title'>Infovis 2: Übung A</span></span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="/infovis/Infovis2_Uebung_B.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class='chapter-number'>14</span>  <span class='chapter-title'>Infovis 2: Übung optional</span></span></a>
+  </div>
+</li>
+      </ul>
+  </li>
+        <li class="sidebar-item sidebar-item-section">
+      <div class="sidebar-item-container"> 
+            <a href="/Statistik.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Statistik</span></a>
+          <a class="sidebar-item-toggle text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-3" aria-expanded="true" aria-label="Abschnitt umschalten">
+            <i class="bi bi-chevron-right ms-2"></i>
+          </a> 
+      </div>
+      <ul id="quarto-sidebar-section-3" class="collapse list-unstyled sidebar-section depth1 show">  
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="/statistik/Statistik0_Vorbereitung.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class='chapter-number'>15</span>  <span class='chapter-title'>Vorbereitung</span></span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="/statistik/Statistik1_Demo.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class='chapter-number'>16</span>  <span class='chapter-title'>Statistik 1: Demo</span></span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="/statistik/Statistik1_Uebung.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class='chapter-number'>17</span>  <span class='chapter-title'>Statistik 1: Übung</span></span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="/statistik/Statistik2_Demo.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class='chapter-number'>18</span>  <span class='chapter-title'>Statistik 2: Demo</span></span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="/statistik/Statistik2_Uebung.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class='chapter-number'>19</span>  <span class='chapter-title'>Statistik 2: Übung</span></span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="/statistik/Statistik3_Demo.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class='chapter-number'>20</span>  <span class='chapter-title'>Statistik 3: Demo</span></span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="/statistik/Statistik3_Uebung.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class='chapter-number'>21</span>  <span class='chapter-title'>Statistik 3: Übung</span></span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="/statistik/Statistik4_Demo.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class='chapter-number'>22</span>  <span class='chapter-title'>Statistik 4: Demo</span></span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="/statistik/Statistik4_Uebung.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class='chapter-number'>23</span>  <span class='chapter-title'>Statistik 4: Übung</span></span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="/statistik/Statistik5_Demo.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class='chapter-number'>24</span>  <span class='chapter-title'>Statistik 5: Demo</span></span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="/statistik/Statistik5_Uebung.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class='chapter-number'>25</span>  <span class='chapter-title'>Statistik 5: Übung</span></span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="/statistik/Statistik6_Demo.html" class="sidebar-item-text sidebar-link active">
+ <span class="menu-text"><span class='chapter-number'>26</span>  <span class='chapter-title'>Statistik 6: Demo</span></span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="/statistik/Statistik6_Uebung.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class='chapter-number'>27</span>  <span class='chapter-title'>Statistik 6: Übung</span></span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="/statistik/Statistik7_Demo.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class='chapter-number'>28</span>  <span class='chapter-title'>Statistik 7: Demo</span></span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="/statistik/Statistik7_Uebung.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class='chapter-number'>29</span>  <span class='chapter-title'>Statistik 7: Übung</span></span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="/statistik/Statistik8_Demo.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class='chapter-number'>30</span>  <span class='chapter-title'>Statistik 8: Demo</span></span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="/statistik/Statistik8_Uebung.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class='chapter-number'>31</span>  <span class='chapter-title'>Statistik 8: Übung</span></span></a>
+  </div>
+</li>
+      </ul>
+  </li>
+        <li class="sidebar-item sidebar-item-section">
+      <div class="sidebar-item-container"> 
+            <a class="sidebar-item-text sidebar-link text-start collapsed" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-4" aria-expanded="false">
+ <span class="menu-text">Fallstudie S</span></a>
+          <a class="sidebar-item-toggle text-start collapsed" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-4" aria-expanded="false" aria-label="Abschnitt umschalten">
+            <i class="bi bi-chevron-right ms-2"></i>
+          </a> 
+      </div>
+      <ul id="quarto-sidebar-section-4" class="collapse list-unstyled sidebar-section depth1 ">  
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="/fallstudie_s/0_Vorbereitung.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class='chapter-number'>32</span>  <span class='chapter-title'>Vorbereitung</span></span></a>
+  </div>
+</li>
+          <li class="px-0"><hr class="sidebar-divider hi "></li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="/fallstudie_s/1_Einführung.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class='chapter-number'>33</span>  <span class='chapter-title'>Einführung</span></span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="/fallstudie_s/2_Besuchermonitoring.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class='chapter-number'>34</span>  <span class='chapter-title'>Monitoring</span></span></a>
+  </div>
+</li>
+          <li class="px-0"><hr class="sidebar-divider hi "></li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="/fallstudie_s/3_Aufgabenstellung_WPZ.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class='chapter-number'>35</span>  <span class='chapter-title'>Aufgabenstellung Abschlussbericht</span></span></a>
+  </div>
+</li>
+          <li class="px-0"><hr class="sidebar-divider hi "></li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="/fallstudie_s/4_Projektierung.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class='chapter-number'>36</span>  <span class='chapter-title'>Projek erstellen</span></span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="/fallstudie_s/5_Datenverarbeitung.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class='chapter-number'>37</span>  <span class='chapter-title'>Datenverarbeitung</span></span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="/fallstudie_s/6_Deskriptive_Analysen.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class='chapter-number'>38</span>  <span class='chapter-title'>Deskriptive Analysen</span></span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="/fallstudie_s/7_Multivariate_Modelle.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class='chapter-number'>39</span>  <span class='chapter-title'>Multivariate Modelle</span></span></a>
+  </div>
+</li>
+      </ul>
+  </li>
+        <li class="sidebar-item sidebar-item-section">
+      <div class="sidebar-item-container"> 
+            <a class="sidebar-item-text sidebar-link text-start collapsed" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-5" aria-expanded="false">
+ <span class="menu-text">Fallstudie N</span></a>
+          <a class="sidebar-item-toggle text-start collapsed" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-5" aria-expanded="false" aria-label="Abschnitt umschalten">
+            <i class="bi bi-chevron-right ms-2"></i>
+          </a> 
+      </div>
+      <ul id="quarto-sidebar-section-5" class="collapse list-unstyled sidebar-section depth1 ">  
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="/fallstudie_n/1_Vorbemerkung.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class='chapter-number'>40</span>  <span class='chapter-title'>Vorbemerkung</span></span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="/fallstudie_n/2_Datenverarbeitung.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class='chapter-number'>41</span>  <span class='chapter-title'>Daten(vor)verarbeitung</span></span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="/fallstudie_n/3_Berechnung_Homeranges.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class='chapter-number'>42</span>  <span class='chapter-title'>Berechnung Homeranges</span></span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="/fallstudie_n/4_Multivariate_Modelle.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class='chapter-number'>43</span>  <span class='chapter-title'>Multivariate Modelle</span></span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="/fallstudie_n/5_Variablenselektion.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class='chapter-number'>44</span>  <span class='chapter-title'>Variablenselektion Multivariate Modelle</span></span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="/fallstudie_n/6_Guete_und_Diagnostics.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class='chapter-number'>45</span>  <span class='chapter-title'>Modellgüte und -diagnostics MM</span></span></a>
+  </div>
+</li>
+      </ul>
+  </li>
+        <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="/References.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class='chapter-number'>46</span>  <span class='chapter-title'>Literaturverzeichnis</span></span></a>
+  </div>
+</li>
+    </ul>
+    </div>
+</nav>
+<div id="quarto-sidebar-glass" class="quarto-sidebar-collapse-item" data-bs-toggle="collapse" data-bs-target=".quarto-sidebar-collapse-item" ></div>
+<!-- margin-sidebar -->
+    <div id="quarto-margin-sidebar" class="sidebar margin-sidebar">
+        <div id="quarto-toc-target"></div>
+    </div>
+<!-- main -->
+<main class="content" id="quarto-document-content">
+
+<header id="title-block-header" class="quarto-title-block default">
+<div class="quarto-title">
+<h1 class="title"><span class="chapter-title">Statistik 6: Demo</span></h1>
+</div>
+
+
+
+<div class="quarto-title-meta">
+
+    
+  
+    
+  </div>
+  
+
+
+</header>
+
+<nav id="TOC" role="doc-toc">
+    <h2 id="toc-title">Inhaltsverzeichnis</h2>
+   
+  <ul>
+  <li><a href="#repeated-measurement" id="toc-repeated-measurement">Repeated measurement</a></li>
+  <li><a href="#split-plot-design" id="toc-split-plot-design">Split-plot Design</a></li>
+  <li><a href="#lmm-with-random-interecept" id="toc-lmm-with-random-interecept">LMM with random interecept</a></li>
+  <li><a href="#random-slope-random-intercept" id="toc-random-slope-random-intercept">Random slope &amp; random intercept</a></li>
+  <li><a href="#glmm" id="toc-glmm">GLMM</a></li>
+  </ul>
+</nav>
+<p><a href="../purl/Statistik6_Demo.R" class="dld">Demoscript herunterladen (.R)</a></p>
+<p><a href="../purl/Statistik6_Demo.qmd" class="dld">Demoscript herunterladen (.qmd)</a></p>
+<ul>
+<li>Datensatz <em>rm_plants.csv</em></li>
+<li>Datensatz <em>DeerEcervi.csv</em></li>
+</ul>
+<div class="cell">
+<div class="sourceCode" id="cb1"><pre class="sourceCode r cell-code"><code class="sourceCode r"><span id="cb1-1"><a href="#cb1-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Packete laden</span></span>
+<span id="cb1-2"><a href="#cb1-2" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(<span class="st">&quot;pacman&quot;</span>)</span>
+<span id="cb1-3"><a href="#cb1-3" aria-hidden="true" tabindex="-1"></a><span class="fu">p_load</span>(<span class="st">&quot;tidyverse&quot;</span>, <span class="st">&quot;sjPlot&quot;</span>, <span class="st">&quot;car&quot;</span>, <span class="st">&quot;lme4&quot;</span>, <span class="st">&quot;glmmTMB&quot;</span>, <span class="st">&quot;performance&quot;</span>, <span class="st">&quot;DHARMa&quot;</span>)</span></code></pre></div>
+</div>
+<section id="repeated-measurement" class="level2">
+<h2>Repeated measurement</h2>
+<p>Es handelt sich um einen Düngeversuch (Daten aus Lepš &amp; Šmilauer 2020). 18 Pflanzenindividuen wurden zufällig einer von drei Düngevarianten zugewiesen und dabei zu vier Zeitpunkten ihre Wuchshöhe gemessen. Abhängigkeiten sind hier in zwei Aspekten vorhanden: einerseits wurde jedes Pflanzenindividuum mehrfach gemessen, andererseits hat es nur jeweils eine Düngervariante erhalten</p>
+<div class="cell">
+<div class="sourceCode" id="cb2"><pre class="sourceCode r cell-code"><code class="sourceCode r"><span id="cb2-1"><a href="#cb2-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Daten laden</span></span>
+<span id="cb2-2"><a href="#cb2-2" aria-hidden="true" tabindex="-1"></a>plantf <span class="ot">&lt;-</span> <span class="fu">read_delim</span>(<span class="st">&quot;datasets/stat/rm_plants.csv&quot;</span>, <span class="at">delim =</span> <span class="st">&quot;;&quot;</span>) <span class="sc">|&gt;</span></span>
+<span id="cb2-3"><a href="#cb2-3" aria-hidden="true" tabindex="-1"></a>  <span class="fu">mutate</span>(<span class="fu">across</span>(<span class="fu">where</span>(is.character), as.factor))</span>
+<span id="cb2-4"><a href="#cb2-4" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb2-5"><a href="#cb2-5" aria-hidden="true" tabindex="-1"></a><span class="fu">str</span>(plantf)</span></code></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>tibble [72 × 4] (S3: tbl_df/tbl/data.frame)
+ $ PlantHeight: num [1:72] 5 7 9 11 6 9 12 15 7 8 ...
+ $ Treatment  : Factor w/ 3 levels &quot;Nitrogen&quot;,&quot;Phosphorus&quot;,..: 3 3 3 3 1 1 1 1 2 2 ...
+ $ Time       : Factor w/ 4 levels &quot;T0&quot;,&quot;T1&quot;,&quot;T2&quot;,..: 1 2 3 4 1 2 3 4 1 2 ...
+ $ PlantID    : Factor w/ 18 levels &quot;P01&quot;,&quot;P02&quot;,&quot;P03&quot;,..: 1 1 1 1 2 2 2 2 3 3 ...</code></pre>
+</div>
+<div class="sourceCode" id="cb4"><pre class="sourceCode r cell-code"><code class="sourceCode r"><span id="cb4-1"><a href="#cb4-1" aria-hidden="true" tabindex="-1"></a><span class="fu">summary</span>(plantf)</span></code></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>  PlantHeight          Treatment  Time       PlantID  
+ Min.   : 4.000   Nitrogen  :24   T0:18   P01    : 4  
+ 1st Qu.: 6.000   Phosphorus:24   T1:18   P02    : 4  
+ Median : 9.000   Water     :24   T2:18   P03    : 4  
+ Mean   : 9.306                   T3:18   P04    : 4  
+ 3rd Qu.:11.000                           P05    : 4  
+ Max.   :18.000                           P06    : 4  
+                                          (Other):48  </code></pre>
+</div>
+<div class="sourceCode" id="cb6"><pre class="sourceCode r cell-code"><code class="sourceCode r"><span id="cb6-1"><a href="#cb6-1" aria-hidden="true" tabindex="-1"></a><span class="fu">table</span>(plantf<span class="sc">$</span>Treatment, plantf<span class="sc">$</span>PlantID)</span></code></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>            
+             P01 P02 P03 P04 P05 P06 P07 P08 P09 P10 P11 P12 P13 P14 P15 P16
+  Nitrogen     0   4   0   0   4   0   0   4   0   0   4   0   0   4   0   0
+  Phosphorus   0   0   4   0   0   4   0   0   4   0   0   4   0   0   4   0
+  Water        4   0   0   4   0   0   4   0   0   4   0   0   4   0   0   4
+            
+             P17 P18
+  Nitrogen     4   0
+  Phosphorus   0   4
+  Water        0   0</code></pre>
+</div>
+<div class="sourceCode" id="cb8"><pre class="sourceCode r cell-code"><code class="sourceCode r"><span id="cb8-1"><a href="#cb8-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Mit aov</span></span>
+<span id="cb8-2"><a href="#cb8-2" aria-hidden="true" tabindex="-1"></a>pf_eaov <span class="ot">&lt;-</span> <span class="fu">aov</span>(PlantHeight <span class="sc">~</span> Treatment <span class="sc">*</span> Time  <span class="sc">+</span> <span class="fu">Error</span>(PlantID), <span class="at">data =</span> plantf)</span>
+<span id="cb8-3"><a href="#cb8-3" aria-hidden="true" tabindex="-1"></a><span class="fu">summary</span>(pf_eaov)</span></code></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>
+Error: PlantID
+          Df Sum Sq Mean Sq F value   Pr(&gt;F)    
+Treatment  2 115.36   57.68   21.68 3.76e-05 ***
+Residuals 15  39.92    2.66                     
+---
+Signif. codes:  0 &#39;***&#39; 0.001 &#39;**&#39; 0.01 &#39;*&#39; 0.05 &#39;.&#39; 0.1 &#39; &#39; 1
+
+Error: Within
+               Df Sum Sq Mean Sq F value   Pr(&gt;F)    
+Time            3  588.1  196.02  382.13  &lt; 2e-16 ***
+Treatment:Time  6   64.9   10.81   21.07 1.37e-11 ***
+Residuals      45   23.1    0.51                     
+---
+Signif. codes:  0 &#39;***&#39; 0.001 &#39;**&#39; 0.01 &#39;*&#39; 0.05 &#39;.&#39; 0.1 &#39; &#39; 1</code></pre>
+</div>
+<div class="sourceCode" id="cb10"><pre class="sourceCode r cell-code"><code class="sourceCode r"><span id="cb10-1"><a href="#cb10-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Als lmm </span></span>
+<span id="cb10-2"><a href="#cb10-2" aria-hidden="true" tabindex="-1"></a>pf_lmm <span class="ot">&lt;-</span> <span class="fu">glmmTMB</span>(PlantHeight <span class="sc">~</span> Treatment <span class="sc">*</span> Time <span class="sc">+</span> (<span class="dv">1</span> <span class="sc">|</span> PlantID), </span>
+<span id="cb10-3"><a href="#cb10-3" aria-hidden="true" tabindex="-1"></a>                 <span class="at">family =</span> gaussian, </span>
+<span id="cb10-4"><a href="#cb10-4" aria-hidden="true" tabindex="-1"></a>                 <span class="at">REML =</span> <span class="cn">TRUE</span>,</span>
+<span id="cb10-5"><a href="#cb10-5" aria-hidden="true" tabindex="-1"></a>                 <span class="at">data =</span> plantf)</span>
+<span id="cb10-6"><a href="#cb10-6" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb10-7"><a href="#cb10-7" aria-hidden="true" tabindex="-1"></a><span class="fu">Anova</span>(pf_lmm)</span></code></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>Analysis of Deviance Table (Type II Wald chisquare tests)
+
+Response: PlantHeight
+                  Chisq Df Pr(&gt;Chisq)    
+Treatment        43.351  2  3.859e-10 ***
+Time           1146.390  3  &lt; 2.2e-16 ***
+Treatment:Time  126.444  6  &lt; 2.2e-16 ***
+---
+Signif. codes:  0 &#39;***&#39; 0.001 &#39;**&#39; 0.01 &#39;*&#39; 0.05 &#39;.&#39; 0.1 &#39; &#39; 1</code></pre>
+</div>
+<div class="sourceCode" id="cb12"><pre class="sourceCode r cell-code"><code class="sourceCode r"><span id="cb12-1"><a href="#cb12-1" aria-hidden="true" tabindex="-1"></a><span class="fu">summary</span>(pf_lmm)</span></code></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code> Family: gaussian  ( identity )
+Formula:          PlantHeight ~ Treatment * Time + (1 | PlantID)
+Data: plantf
+
+     AIC      BIC   logLik deviance df.resid 
+   204.4    236.3    -88.2    176.4       70 
+
+Random effects:
+
+Conditional model:
+ Groups   Name        Variance Std.Dev.
+ PlantID  (Intercept) 0.537    0.7328  
+ Residual             0.513    0.7162  
+Number of obs: 72, groups:  PlantID, 18
+
+Dispersion estimate for gaussian family (sigma^2): 0.513 
+
+Conditional model:
+                           Estimate Std. Error z value Pr(&gt;|z|)    
+(Intercept)                  5.1667     0.4183  12.351  &lt; 2e-16 ***
+TreatmentPhosphorus          0.6667     0.5916   1.127 0.259796    
+TreatmentWater               0.1667     0.5916   0.282 0.778160    
+TimeT1                       4.3333     0.4135  10.479  &lt; 2e-16 ***
+TimeT2                       7.6667     0.4135  18.541  &lt; 2e-16 ***
+TimeT3                      11.3333     0.4135  27.408  &lt; 2e-16 ***
+TreatmentPhosphorus:TimeT1  -2.1667     0.5848  -3.705 0.000211 ***
+TreatmentWater:TimeT1       -2.8333     0.5848  -4.845 1.27e-06 ***
+TreatmentPhosphorus:TimeT2  -3.6667     0.5848  -6.270 3.61e-10 ***
+TreatmentWater:TimeT2       -4.1667     0.5848  -7.125 1.04e-12 ***
+TreatmentPhosphorus:TimeT3  -5.0000     0.5848  -8.550  &lt; 2e-16 ***
+TreatmentWater:TimeT3       -5.8333     0.5848  -9.975  &lt; 2e-16 ***
+---
+Signif. codes:  0 &#39;***&#39; 0.001 &#39;**&#39; 0.01 &#39;*&#39; 0.05 &#39;.&#39; 0.1 &#39; &#39; 1</code></pre>
+</div>
+<div class="sourceCode" id="cb14"><pre class="sourceCode r cell-code"><code class="sourceCode r"><span id="cb14-1"><a href="#cb14-1" aria-hidden="true" tabindex="-1"></a><span class="fu">r2</span>(pf_lmm)</span></code></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code># R2 for Mixed Models
+
+  Conditional R2: 0.957
+     Marginal R2: 0.912</code></pre>
+</div>
+<div class="sourceCode" id="cb16"><pre class="sourceCode r cell-code"><code class="sourceCode r"><span id="cb16-1"><a href="#cb16-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Modellvalidierung mit DHARMa</span></span>
+<span id="cb16-2"><a href="#cb16-2" aria-hidden="true" tabindex="-1"></a><span class="fu">set.seed</span>(<span class="dv">123</span>)</span>
+<span id="cb16-3"><a href="#cb16-3" aria-hidden="true" tabindex="-1"></a>simulationOutput <span class="ot">&lt;-</span> <span class="fu">simulateResiduals</span>(<span class="at">fittedModel =</span> pf_lmm, <span class="at">plot =</span> <span class="cn">TRUE</span>, <span class="at">n =</span> <span class="dv">1000</span>)</span></code></pre></div>
+<div class="cell-output-display">
+<div>
+<figure>
+<p><img src="Statistik6_Demo_files/figure-html/unnamed-chunk-2-1.png" class="img-fluid" width="672" /></p>
+</figure>
+</div>
+</div>
+<div class="sourceCode" id="cb17"><pre class="sourceCode r cell-code"><code class="sourceCode r"><span id="cb17-1"><a href="#cb17-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Plot residuals vs. covariates des models</span></span>
+<span id="cb17-2"><a href="#cb17-2" aria-hidden="true" tabindex="-1"></a><span class="fu">plotResiduals</span>(simulationOutput, <span class="at">form =</span> plantf<span class="sc">$</span>Time)</span></code></pre></div>
+<div class="cell-output-display">
+<div>
+<figure>
+<p><img src="Statistik6_Demo_files/figure-html/unnamed-chunk-2-2.png" class="img-fluid" width="672" /></p>
+</figure>
+</div>
+</div>
+<div class="sourceCode" id="cb18"><pre class="sourceCode r cell-code"><code class="sourceCode r"><span id="cb18-1"><a href="#cb18-1" aria-hidden="true" tabindex="-1"></a><span class="fu">plotResiduals</span>(simulationOutput, <span class="at">form =</span> plantf<span class="sc">$</span>Treatment) </span></code></pre></div>
+<div class="cell-output-display">
+<div>
+<figure>
+<p><img src="Statistik6_Demo_files/figure-html/unnamed-chunk-2-3.png" class="img-fluid" width="672" /></p>
+</figure>
+</div>
+</div>
+<div class="sourceCode" id="cb19"><pre class="sourceCode r cell-code"><code class="sourceCode r"><span id="cb19-1"><a href="#cb19-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Darstellung (Interaktions Plot)</span></span>
+<span id="cb19-2"><a href="#cb19-2" aria-hidden="true" tabindex="-1"></a><span class="fu">plot_model</span>(pf_lmm, </span>
+<span id="cb19-3"><a href="#cb19-3" aria-hidden="true" tabindex="-1"></a>           <span class="at">type =</span> <span class="st">&quot;pred&quot;</span>, <span class="at">pred.type =</span> <span class="st">&quot;re&quot;</span>,</span>
+<span id="cb19-4"><a href="#cb19-4" aria-hidden="true" tabindex="-1"></a>           <span class="at">terms =</span> <span class="fu">c</span>(<span class="st">&quot;Time&quot;</span>, <span class="st">&quot;Treatment&quot;</span>) ) <span class="sc">+</span></span>
+<span id="cb19-5"><a href="#cb19-5" aria-hidden="true" tabindex="-1"></a>  <span class="fu">theme_classic</span>()</span></code></pre></div>
+<div class="cell-output-display">
+<div>
+<figure>
+<p><img src="Statistik6_Demo_files/figure-html/unnamed-chunk-2-4.png" class="img-fluid" width="672" /></p>
+</figure>
+</div>
+</div>
+</div>
+</section>
+<section id="split-plot-design" class="level2">
+<h2>Split-plot Design</h2>
+<p>Es wurden zufällig fünf Untersuchungsgebiete (sites) ausgewählt, in denen jeweils der gleiche Versuchsblock implementiert wurde, bestehend aus dem Management (treatment) und der Frage, ob wilde Grossherbivoren Zugang zur Fläche hatten (plot type) (Abb. 6.1). Je ein Drittel jeder Untersuchungsfläche (zufällig zugewiesen) blieb gänzlich ungenutzt(U), wurde zu Beginn kontrolliert abgebrannt und danach sich selbst überlassen (B) oder wurde jährlich gemäht (M). Innerhalb jedes Drittels wiederum wurde (zufällig zugewiesen) die Hälfte eingezäunt (F = fenced vs. O = open), um die Beweidung durch Grossherbivoren zu verhindern.</p>
+<div class="cell">
+<div class="sourceCode" id="cb20"><pre class="sourceCode r cell-code"><code class="sourceCode r"><span id="cb20-1"><a href="#cb20-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Import Data</span></span>
+<span id="cb20-2"><a href="#cb20-2" aria-hidden="true" tabindex="-1"></a>glex <span class="ot">&lt;-</span> <span class="fu">read_delim</span>(<span class="st">&quot;datasets/stat/Riesch_et_al_2020_grassland.csv&quot;</span>, <span class="at">delim =</span> <span class="st">&quot;;&quot;</span>) <span class="sc">|&gt;</span></span>
+<span id="cb20-3"><a href="#cb20-3" aria-hidden="true" tabindex="-1"></a>  <span class="fu">mutate</span>(<span class="fu">across</span>(<span class="fu">where</span>(is.character), as.factor))</span>
+<span id="cb20-4"><a href="#cb20-4" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb20-5"><a href="#cb20-5" aria-hidden="true" tabindex="-1"></a><span class="fu">str</span>(glex)</span></code></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>tibble [60 × 9] (S3: tbl_df/tbl/data.frame)
+ $ ID_plot       : Factor w/ 60 levels &quot;Eul_A1_MP_14&quot;,..: 1 2 3 4 5 6 7 8 9 10 ...
+ $ year          : num [1:60] 2014 2018 2014 2018 2014 ...
+ $ site_code     : Factor w/ 5 levels &quot;Eul&quot;,&quot;Kug&quot;,&quot;Nun&quot;,..: 1 1 1 1 1 1 1 1 1 1 ...
+ $ site_no       : num [1:60] 4 4 4 4 4 4 4 4 4 4 ...
+ $ treatment     : Factor w/ 3 levels &quot;B&quot;,&quot;M&quot;,&quot;U&quot;: 2 2 2 2 3 3 3 3 1 1 ...
+ $ plot_type     : Factor w/ 2 levels &quot;F&quot;,&quot;O&quot;: 2 2 1 1 2 2 1 1 1 1 ...
+ $ SR            : num [1:60] 44 48 44 47 43 29 44 24 45 37 ...
+ $ inverseSimpson: num [1:60] 11.41 9.9 10.25 6.51 12.35 ...
+ $ BergerParker  : num [1:60] 0.193 0.21 0.187 0.35 0.155 ...</code></pre>
+</div>
+<div class="sourceCode" id="cb22"><pre class="sourceCode r cell-code"><code class="sourceCode r"><span id="cb22-1"><a href="#cb22-1" aria-hidden="true" tabindex="-1"></a>glex<span class="sc">$</span>year <span class="ot">&lt;-</span> <span class="fu">as.factor</span>(glex<span class="sc">$</span>year)</span>
+<span id="cb22-2"><a href="#cb22-2" aria-hidden="true" tabindex="-1"></a><span class="fu">summary</span>(glex)</span></code></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>         ID_plot     year    site_code    site_no  treatment plot_type
+ Eul_A1_MP_14: 1   2014:30   Eul :12   Min.   :1   B:20      F:30     
+ Eul_A1_MP_18: 1   2018:30   Kug :12   1st Qu.:2   M:20      O:30     
+ Eul_A2_MK_14: 1             Nun :12   Median :3   U:20               
+ Eul_A2_MK_18: 1             SomO:12   Mean   :3                      
+ Eul_B1_WP_14: 1             SomW:12   3rd Qu.:4                      
+ Eul_B1_WP_18: 1                       Max.   :5                      
+ (Other)     :54                                                      
+       SR        inverseSimpson    BergerParker   
+ Min.   :24.00   Min.   : 2.538   Min.   :0.1200  
+ 1st Qu.:39.75   1st Qu.: 7.169   1st Qu.:0.1732  
+ Median :44.00   Median : 9.945   Median :0.2133  
+ Mean   :43.52   Mean   : 9.347   Mean   :0.2551  
+ 3rd Qu.:48.00   3rd Qu.:11.555   3rd Qu.:0.2891  
+ Max.   :61.00   Max.   :16.102   Max.   :0.6100  
+                                                  </code></pre>
+</div>
+<div class="sourceCode" id="cb24"><pre class="sourceCode r cell-code"><code class="sourceCode r"><span id="cb24-1"><a href="#cb24-1" aria-hidden="true" tabindex="-1"></a><span class="fu">table</span>(glex<span class="sc">$</span>site_code, glex<span class="sc">$</span>treatment, glex<span class="sc">$</span>plot_type, glex<span class="sc">$</span>year)</span></code></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>, ,  = F,  = 2014
+
+      
+       B M U
+  Eul  1 1 1
+  Kug  1 1 1
+  Nun  1 1 1
+  SomO 1 1 1
+  SomW 1 1 1
+
+, ,  = O,  = 2014
+
+      
+       B M U
+  Eul  1 1 1
+  Kug  1 1 1
+  Nun  1 1 1
+  SomO 1 1 1
+  SomW 1 1 1
+
+, ,  = F,  = 2018
+
+      
+       B M U
+  Eul  1 1 1
+  Kug  1 1 1
+  Nun  1 1 1
+  SomO 1 1 1
+  SomW 1 1 1
+
+, ,  = O,  = 2018
+
+      
+       B M U
+  Eul  1 1 1
+  Kug  1 1 1
+  Nun  1 1 1
+  SomO 1 1 1
+  SomW 1 1 1</code></pre>
+</div>
+<div class="sourceCode" id="cb26"><pre class="sourceCode r cell-code"><code class="sourceCode r"><span id="cb26-1"><a href="#cb26-1" aria-hidden="true" tabindex="-1"></a><span class="co"># balanced Design</span></span></code></pre></div>
+</div>
+</section>
+<section id="lmm-with-random-interecept" class="level2">
+<h2>LMM with random interecept</h2>
+<div class="cell">
+<div class="sourceCode" id="cb27"><pre class="sourceCode r cell-code"><code class="sourceCode r"><span id="cb27-1"><a href="#cb27-1" aria-hidden="true" tabindex="-1"></a><span class="co"># REML = TRUE : (Restricted maximum likelihood) v.s </span></span>
+<span id="cb27-2"><a href="#cb27-2" aria-hidden="true" tabindex="-1"></a><span class="co"># REML = FALSE: Maximum likelihood (ML) </span></span>
+<span id="cb27-3"><a href="#cb27-3" aria-hidden="true" tabindex="-1"></a><span class="co"># Bei REML sind die estimates genauer, aber REML sollte nicht für likelihood </span></span>
+<span id="cb27-4"><a href="#cb27-4" aria-hidden="true" tabindex="-1"></a><span class="co"># ratio test (drop1) benutzt werden</span></span>
+<span id="cb27-5"><a href="#cb27-5" aria-hidden="true" tabindex="-1"></a><span class="co"># Dies ist nur relevant für Gaussian mixed models (LMM) nicht für GLMMs</span></span>
+<span id="cb27-6"><a href="#cb27-6" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb27-7"><a href="#cb27-7" aria-hidden="true" tabindex="-1"></a><span class="co"># 2.1 Model fitten</span></span>
+<span id="cb27-8"><a href="#cb27-8" aria-hidden="true" tabindex="-1"></a>lmm_1 <span class="ot">&lt;-</span> <span class="fu">glmmTMB</span>(SR <span class="sc">~</span> year <span class="sc">*</span> treatment <span class="sc">*</span> plot_type <span class="sc">+</span> </span>
+<span id="cb27-9"><a href="#cb27-9" aria-hidden="true" tabindex="-1"></a>               (<span class="dv">1</span><span class="sc">|</span> site_code<span class="sc">/</span>treatment<span class="sc">/</span>plot_type), </span>
+<span id="cb27-10"><a href="#cb27-10" aria-hidden="true" tabindex="-1"></a>               <span class="at">family =</span> gaussian, </span>
+<span id="cb27-11"><a href="#cb27-11" aria-hidden="true" tabindex="-1"></a>               <span class="at">REML =</span> <span class="cn">FALSE</span>,</span>
+<span id="cb27-12"><a href="#cb27-12" aria-hidden="true" tabindex="-1"></a>               <span class="at">data =</span> glex)</span>
+<span id="cb27-13"><a href="#cb27-13" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb27-14"><a href="#cb27-14" aria-hidden="true" tabindex="-1"></a><span class="fu">Anova</span>(lmm_1)</span></code></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>Analysis of Deviance Table (Type II Wald chisquare tests)
+
+Response: SR
+                           Chisq Df Pr(&gt;Chisq)    
+year                     58.6751  1  1.860e-14 ***
+treatment                 5.3910  2   0.067509 .  
+plot_type                 3.1397  1   0.076406 .  
+year:treatment           27.5733  2  1.029e-06 ***
+year:plot_type            8.0419  1   0.004571 ** 
+treatment:plot_type       3.6181  2   0.163812    
+year:treatment:plot_type  0.9435  2   0.623917    
+---
+Signif. codes:  0 &#39;***&#39; 0.001 &#39;**&#39; 0.01 &#39;*&#39; 0.05 &#39;.&#39; 0.1 &#39; &#39; 1</code></pre>
+</div>
+<div class="sourceCode" id="cb29"><pre class="sourceCode r cell-code"><code class="sourceCode r"><span id="cb29-1"><a href="#cb29-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Model optimierung</span></span>
+<span id="cb29-2"><a href="#cb29-2" aria-hidden="true" tabindex="-1"></a><span class="fu">drop1</span>(lmm_1, <span class="at">test =</span> <span class="st">&quot;Chi&quot;</span>)</span></code></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>Single term deletions
+
+Model:
+SR ~ year * treatment * plot_type + (1 | site_code/treatment/plot_type)
+                         Df    AIC     LRT Pr(&gt;Chi)
+&lt;none&gt;                      385.27                 
+year:treatment:plot_type  2 382.20 0.92894   0.6285</code></pre>
+</div>
+<div class="sourceCode" id="cb31"><pre class="sourceCode r cell-code"><code class="sourceCode r"><span id="cb31-1"><a href="#cb31-1" aria-hidden="true" tabindex="-1"></a>lmm_2 <span class="ot">&lt;-</span> <span class="fu">update</span>(lmm_1,<span class="sc">~</span>. <span class="sc">-</span>year<span class="sc">:</span>treatment<span class="sc">:</span>plot_type)</span>
+<span id="cb31-2"><a href="#cb31-2" aria-hidden="true" tabindex="-1"></a><span class="fu">drop1</span>(lmm_2, <span class="at">test =</span> <span class="st">&quot;Chi&quot;</span>)</span></code></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>Single term deletions
+
+Model:
+SR ~ year + treatment + plot_type + (1 | site_code/treatment/plot_type) + 
+    year:treatment + year:plot_type + treatment:plot_type
+                    Df    AIC     LRT  Pr(&gt;Chi)    
+&lt;none&gt;                 382.20                      
+year:treatment       2 398.84 20.6412 3.295e-05 ***
+year:plot_type       1 387.26  7.0678  0.007848 ** 
+treatment:plot_type  2 381.44  3.2413  0.197775    
+---
+Signif. codes:  0 &#39;***&#39; 0.001 &#39;**&#39; 0.01 &#39;*&#39; 0.05 &#39;.&#39; 0.1 &#39; &#39; 1</code></pre>
+</div>
+<div class="sourceCode" id="cb33"><pre class="sourceCode r cell-code"><code class="sourceCode r"><span id="cb33-1"><a href="#cb33-1" aria-hidden="true" tabindex="-1"></a>lmm_3 <span class="ot">&lt;-</span> <span class="fu">update</span>(lmm_2,<span class="sc">~</span>. <span class="sc">-</span>treatment<span class="sc">:</span>plot_type)</span>
+<span id="cb33-2"><a href="#cb33-2" aria-hidden="true" tabindex="-1"></a><span class="fu">drop1</span>(lmm_3, <span class="at">test =</span> <span class="st">&quot;Chi&quot;</span>)</span></code></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>Single term deletions
+
+Model:
+SR ~ year + treatment + plot_type + (1 | site_code/treatment/plot_type) + 
+    year:treatment + year:plot_type
+               Df    AIC     LRT  Pr(&gt;Chi)    
+&lt;none&gt;            381.44                      
+year:treatment  2 397.16 19.7253 5.208e-05 ***
+year:plot_type  1 386.37  6.9307  0.008473 ** 
+---
+Signif. codes:  0 &#39;***&#39; 0.001 &#39;**&#39; 0.01 &#39;*&#39; 0.05 &#39;.&#39; 0.1 &#39; &#39; 1</code></pre>
+</div>
+<div class="sourceCode" id="cb35"><pre class="sourceCode r cell-code"><code class="sourceCode r"><span id="cb35-1"><a href="#cb35-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Refit with REML</span></span>
+<span id="cb35-2"><a href="#cb35-2" aria-hidden="true" tabindex="-1"></a>lmm_4 <span class="ot">&lt;-</span> <span class="fu">update</span>(lmm_3, <span class="at">REML =</span> <span class="cn">TRUE</span>)</span>
+<span id="cb35-3"><a href="#cb35-3" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb35-4"><a href="#cb35-4" aria-hidden="true" tabindex="-1"></a><span class="co"># Resultat</span></span>
+<span id="cb35-5"><a href="#cb35-5" aria-hidden="true" tabindex="-1"></a><span class="fu">Anova</span>(lmm_4)</span></code></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>Analysis of Deviance Table (Type II Wald chisquare tests)
+
+Response: SR
+                 Chisq Df Pr(&gt;Chisq)    
+year           49.3013  1  2.195e-12 ***
+treatment       4.3128  2   0.115741    
+plot_type       2.3609  1   0.124407    
+year:treatment 23.1682  2  9.313e-06 ***
+year:plot_type  6.7571  1   0.009338 ** 
+---
+Signif. codes:  0 &#39;***&#39; 0.001 &#39;**&#39; 0.01 &#39;*&#39; 0.05 &#39;.&#39; 0.1 &#39; &#39; 1</code></pre>
+</div>
+<div class="sourceCode" id="cb37"><pre class="sourceCode r cell-code"><code class="sourceCode r"><span id="cb37-1"><a href="#cb37-1" aria-hidden="true" tabindex="-1"></a><span class="fu">summary</span>(lmm_4)</span></code></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code> Family: gaussian  ( identity )
+Formula:          
+SR ~ year + treatment + plot_type + (1 | site_code/treatment/plot_type) +  
+    year:treatment + year:plot_type
+Data: glex
+
+     AIC      BIC   logLik deviance df.resid 
+   358.2    383.3   -167.1    334.2       56 
+
+Random effects:
+
+Conditional model:
+ Groups                        Name        Variance Std.Dev.
+ plot_type:treatment:site_code (Intercept)  2.1332  1.4606  
+ treatment:site_code           (Intercept)  8.0931  2.8448  
+ site_code                     (Intercept)  0.8542  0.9242  
+ Residual                                  18.6692  4.3208  
+Number of obs: 60, groups:  
+plot_type:treatment:site_code, 30; treatment:site_code, 15; site_code, 5
+
+Dispersion estimate for gaussian family (sigma^2): 18.7 
+
+Conditional model:
+                    Estimate Std. Error z value Pr(&gt;|z|)    
+(Intercept)           45.900      2.136  21.487  &lt; 2e-16 ***
+year2018              -8.200      2.231  -3.675 0.000238 ***
+treatmentM             2.300      2.720   0.846 0.397761    
+treatmentU             3.800      2.720   1.397 0.162377    
+plot_typeO            -1.000      1.665  -0.600 0.548210    
+year2018:treatmentM    2.400      2.733   0.878 0.379808    
+year2018:treatmentU  -10.000      2.733  -3.659 0.000253 ***
+year2018:plot_typeO    5.800      2.231   2.599 0.009338 ** 
+---
+Signif. codes:  0 &#39;***&#39; 0.001 &#39;**&#39; 0.01 &#39;*&#39; 0.05 &#39;.&#39; 0.1 &#39; &#39; 1</code></pre>
+</div>
+<div class="sourceCode" id="cb39"><pre class="sourceCode r cell-code"><code class="sourceCode r"><span id="cb39-1"><a href="#cb39-1" aria-hidden="true" tabindex="-1"></a><span class="fu">r2</span>(lmm_4)</span></code></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code># R2 for Mixed Models
+
+  Conditional R2: 0.688
+     Marginal R2: 0.502</code></pre>
+</div>
+<div class="sourceCode" id="cb41"><pre class="sourceCode r cell-code"><code class="sourceCode r"><span id="cb41-1"><a href="#cb41-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Modellvalidierung </span></span>
+<span id="cb41-2"><a href="#cb41-2" aria-hidden="true" tabindex="-1"></a><span class="fu">set.seed</span>(<span class="dv">123</span>)</span>
+<span id="cb41-3"><a href="#cb41-3" aria-hidden="true" tabindex="-1"></a>simulationOutput <span class="ot">&lt;-</span> <span class="fu">simulateResiduals</span>(<span class="at">fittedModel =</span> lmm_4, <span class="at">plot =</span> <span class="cn">TRUE</span>, <span class="at">n =</span> <span class="dv">1000</span>)</span></code></pre></div>
+<div class="cell-output-display">
+<div>
+<figure>
+<p><img src="Statistik6_Demo_files/figure-html/unnamed-chunk-4-1.png" class="img-fluid" width="672" /></p>
+</figure>
+</div>
+</div>
+<div class="sourceCode" id="cb42"><pre class="sourceCode r cell-code"><code class="sourceCode r"><span id="cb42-1"><a href="#cb42-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Plot residuals vs. covariates des models</span></span>
+<span id="cb42-2"><a href="#cb42-2" aria-hidden="true" tabindex="-1"></a><span class="fu">plotResiduals</span>(simulationOutput, <span class="at">form =</span> glex<span class="sc">$</span>year)</span></code></pre></div>
+<div class="cell-output-display">
+<div>
+<figure>
+<p><img src="Statistik6_Demo_files/figure-html/unnamed-chunk-4-2.png" class="img-fluid" width="672" /></p>
+</figure>
+</div>
+</div>
+<div class="sourceCode" id="cb43"><pre class="sourceCode r cell-code"><code class="sourceCode r"><span id="cb43-1"><a href="#cb43-1" aria-hidden="true" tabindex="-1"></a><span class="fu">plotResiduals</span>(simulationOutput, <span class="at">form =</span> glex<span class="sc">$</span>treatment)</span></code></pre></div>
+<div class="cell-output-display">
+<div>
+<figure>
+<p><img src="Statistik6_Demo_files/figure-html/unnamed-chunk-4-3.png" class="img-fluid" width="672" /></p>
+</figure>
+</div>
+</div>
+<div class="sourceCode" id="cb44"><pre class="sourceCode r cell-code"><code class="sourceCode r"><span id="cb44-1"><a href="#cb44-1" aria-hidden="true" tabindex="-1"></a><span class="fu">plotResiduals</span>(simulationOutput, <span class="at">form =</span> glex<span class="sc">$</span>plot_type)</span></code></pre></div>
+<div class="cell-output-display">
+<div>
+<figure>
+<p><img src="Statistik6_Demo_files/figure-html/unnamed-chunk-4-4.png" class="img-fluid" width="672" /></p>
+</figure>
+</div>
+</div>
+<div class="sourceCode" id="cb45"><pre class="sourceCode r cell-code"><code class="sourceCode r"><span id="cb45-1"><a href="#cb45-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Darstellung</span></span>
+<span id="cb45-2"><a href="#cb45-2" aria-hidden="true" tabindex="-1"></a><span class="fu">plot_model</span>(lmm_4, </span>
+<span id="cb45-3"><a href="#cb45-3" aria-hidden="true" tabindex="-1"></a>           <span class="at">type =</span> <span class="st">&quot;pred&quot;</span>, <span class="at">pred.type =</span> <span class="st">&quot;re&quot;</span>, </span>
+<span id="cb45-4"><a href="#cb45-4" aria-hidden="true" tabindex="-1"></a>           <span class="at">terms =</span> <span class="fu">c</span>(<span class="st">&quot;year&quot;</span>, <span class="st">&quot;treatment&quot;</span>, <span class="st">&quot;plot_type&quot;</span>) ) <span class="sc">+</span></span>
+<span id="cb45-5"><a href="#cb45-5" aria-hidden="true" tabindex="-1"></a>  <span class="fu">theme_classic</span>()</span></code></pre></div>
+<div class="cell-output-display">
+<div>
+<figure>
+<p><img src="Statistik6_Demo_files/figure-html/unnamed-chunk-4-5.png" class="img-fluid" width="672" /></p>
+</figure>
+</div>
+</div>
+</div>
+</section>
+<section id="random-slope-random-intercept" class="level2">
+<h2>Random slope &amp; random intercept</h2>
+<p>Im folgenden Beispiel wurde bei 18 Versuchspersonen die Wirkung von zunehmenden Schlafentzug auf die Reaktionszeit (in ms) gemessen. Bei jeder Versuchsperson wurde der Effekt an den Tagen 2–9 des Versuchs je einmal gemessen (Tage 0 und 1 sind die Trainingsphase und bleiben daher unberücksichtigt).</p>
+<div class="cell">
+<div class="sourceCode" id="cb46"><pre class="sourceCode r cell-code"><code class="sourceCode r"><span id="cb46-1"><a href="#cb46-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Daten laden</span></span>
+<span id="cb46-2"><a href="#cb46-2" aria-hidden="true" tabindex="-1"></a><span class="fu">data</span>(sleepstudy)</span>
+<span id="cb46-3"><a href="#cb46-3" aria-hidden="true" tabindex="-1"></a>?sleepstudy</span>
+<span id="cb46-4"><a href="#cb46-4" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb46-5"><a href="#cb46-5" aria-hidden="true" tabindex="-1"></a><span class="co"># Daten ohne Trainingsphase</span></span>
+<span id="cb46-6"><a href="#cb46-6" aria-hidden="true" tabindex="-1"></a>sleepstudy_2 <span class="ot">&lt;-</span> <span class="fu">subset</span>(sleepstudy, Days<span class="sc">&gt;=</span><span class="dv">2</span>)</span>
+<span id="cb46-7"><a href="#cb46-7" aria-hidden="true" tabindex="-1"></a><span class="fu">str</span>(sleepstudy_2)</span></code></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>&#39;data.frame&#39;:   144 obs. of  3 variables:
+ $ Reaction: num  251 321 357 415 382 ...
+ $ Days    : num  2 3 4 5 6 7 8 9 2 3 ...
+ $ Subject : Factor w/ 18 levels &quot;308&quot;,&quot;309&quot;,&quot;310&quot;,..: 1 1 1 1 1 1 1 1 2 2 ...</code></pre>
+</div>
+<div class="sourceCode" id="cb48"><pre class="sourceCode r cell-code"><code class="sourceCode r"><span id="cb48-1"><a href="#cb48-1" aria-hidden="true" tabindex="-1"></a><span class="fu">summary</span>(sleepstudy_2)</span></code></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>    Reaction          Days         Subject  
+ Min.   :203.0   Min.   :2.00   308    : 8  
+ 1st Qu.:265.2   1st Qu.:3.75   309    : 8  
+ Median :303.2   Median :5.50   310    : 8  
+ Mean   :308.0   Mean   :5.50   330    : 8  
+ 3rd Qu.:347.7   3rd Qu.:7.25   331    : 8  
+ Max.   :466.4   Max.   :9.00   332    : 8  
+                                (Other):96  </code></pre>
+</div>
+<div class="sourceCode" id="cb50"><pre class="sourceCode r cell-code"><code class="sourceCode r"><span id="cb50-1"><a href="#cb50-1" aria-hidden="true" tabindex="-1"></a><span class="fu">table</span>(sleepstudy_2<span class="sc">$</span>Subject)</span></code></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>
+308 309 310 330 331 332 333 334 335 337 349 350 351 352 369 370 371 372 
+  8   8   8   8   8   8   8   8   8   8   8   8   8   8   8   8   8   8 </code></pre>
+</div>
+<div class="sourceCode" id="cb52"><pre class="sourceCode r cell-code"><code class="sourceCode r"><span id="cb52-1"><a href="#cb52-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Visualisierung</span></span>
+<span id="cb52-2"><a href="#cb52-2" aria-hidden="true" tabindex="-1"></a><span class="fu">ggplot</span>(sleepstudy_2, <span class="fu">aes</span>(<span class="at">y =</span> Reaction, <span class="at">x =</span> Days)) <span class="sc">+</span></span>
+<span id="cb52-3"><a href="#cb52-3" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_point</span>() <span class="sc">+</span></span>
+<span id="cb52-4"><a href="#cb52-4" aria-hidden="true" tabindex="-1"></a>  <span class="fu">xlab</span>(<span class="st">&quot;Number of days of sleep deprivation&quot;</span>) <span class="sc">+</span></span>
+<span id="cb52-5"><a href="#cb52-5" aria-hidden="true" tabindex="-1"></a>  <span class="fu">ylab</span>(<span class="st">&quot;Average reaction time (ms)&quot;</span>) <span class="sc">+</span></span>
+<span id="cb52-6"><a href="#cb52-6" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_smooth</span>(<span class="at">method =</span> <span class="st">&quot;lm&quot;</span>, <span class="at">formula =</span> <span class="st">&#39;y ~ x&#39;</span>, <span class="at">se =</span> F, <span class="at">fullrange =</span> T) <span class="sc">+</span></span>
+<span id="cb52-7"><a href="#cb52-7" aria-hidden="true" tabindex="-1"></a>  <span class="fu">theme_classic</span>() <span class="sc">+</span></span>
+<span id="cb52-8"><a href="#cb52-8" aria-hidden="true" tabindex="-1"></a>  <span class="fu">facet_wrap</span>(<span class="sc">~</span>Subject)</span></code></pre></div>
+<div class="cell-output-display">
+<div>
+<figure>
+<p><img src="Statistik6_Demo_files/figure-html/unnamed-chunk-5-1.png" class="img-fluid" width="672" /></p>
+</figure>
+</div>
+</div>
+</div>
+<p>Wie man in der Visualisierung sehen kann, unterscheiden sich nicht nur die Intercepts (Reaktionszeit ohne Schlafmangel), sondern der Schlafmangel scheint sich auch unterschiedlich stark auf die Reaktionszeit der Probanden auszuwirken. In diesem Fall ist es daher sinnvoll, nicht nur einen Random Intercept, sondern auch einen Random Slope zu fitten.</p>
+<div class="cell">
+<div class="sourceCode" id="cb53"><pre class="sourceCode r cell-code"><code class="sourceCode r"><span id="cb53-1"><a href="#cb53-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Fit model</span></span>
+<span id="cb53-2"><a href="#cb53-2" aria-hidden="true" tabindex="-1"></a>lmm_1 <span class="ot">&lt;-</span> <span class="fu">glmmTMB</span>(Reaction <span class="sc">~</span> Days <span class="sc">+</span> (Days <span class="sc">|</span> Subject),</span>
+<span id="cb53-3"><a href="#cb53-3" aria-hidden="true" tabindex="-1"></a>                 <span class="at">family =</span> gaussian,</span>
+<span id="cb53-4"><a href="#cb53-4" aria-hidden="true" tabindex="-1"></a>                 <span class="at">REML =</span> <span class="cn">TRUE</span>,</span>
+<span id="cb53-5"><a href="#cb53-5" aria-hidden="true" tabindex="-1"></a>                 <span class="at">data =</span> sleepstudy_2)</span>
+<span id="cb53-6"><a href="#cb53-6" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb53-7"><a href="#cb53-7" aria-hidden="true" tabindex="-1"></a><span class="fu">summary</span>(lmm_1)</span></code></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code> Family: gaussian  ( identity )
+Formula:          Reaction ~ Days + (Days | Subject)
+Data: sleepstudy_2
+
+     AIC      BIC   logLik deviance df.resid 
+  1416.1   1433.9   -702.0   1404.1      140 
+
+Random effects:
+
+Conditional model:
+ Groups   Name        Variance Std.Dev. Corr  
+ Subject  (Intercept) 992.63   31.506         
+          Days         45.78    6.766   -0.25 
+ Residual             651.60   25.526         
+Number of obs: 144, groups:  Subject, 18
+
+Dispersion estimate for gaussian family (sigma^2):  652 
+
+Conditional model:
+            Estimate Std. Error z value Pr(&gt;|z|)    
+(Intercept)  245.097      9.260  26.469  &lt; 2e-16 ***
+Days          11.435      1.845   6.197 5.75e-10 ***
+---
+Signif. codes:  0 &#39;***&#39; 0.001 &#39;**&#39; 0.01 &#39;*&#39; 0.05 &#39;.&#39; 0.1 &#39; &#39; 1</code></pre>
+</div>
+<div class="sourceCode" id="cb55"><pre class="sourceCode r cell-code"><code class="sourceCode r"><span id="cb55-1"><a href="#cb55-1" aria-hidden="true" tabindex="-1"></a><span class="fu">r2</span>(lmm_1)</span></code></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code># R2 for Mixed Models
+
+  Conditional R2: 0.806
+     Marginal R2: 0.206</code></pre>
+</div>
+<div class="sourceCode" id="cb57"><pre class="sourceCode r cell-code"><code class="sourceCode r"><span id="cb57-1"><a href="#cb57-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Modellvalidierung</span></span>
+<span id="cb57-2"><a href="#cb57-2" aria-hidden="true" tabindex="-1"></a><span class="fu">set.seed</span>(<span class="dv">123</span>)</span>
+<span id="cb57-3"><a href="#cb57-3" aria-hidden="true" tabindex="-1"></a>simulationOutput <span class="ot">&lt;-</span> <span class="fu">simulateResiduals</span>(<span class="at">fittedModel =</span> lmm_1, <span class="at">plot =</span> <span class="cn">TRUE</span>, <span class="at">n =</span> <span class="dv">1000</span>)</span></code></pre></div>
+<div class="cell-output-display">
+<div>
+<figure>
+<p><img src="Statistik6_Demo_files/figure-html/unnamed-chunk-6-1.png" class="img-fluid" width="672" /></p>
+</figure>
+</div>
+</div>
+<div class="sourceCode" id="cb58"><pre class="sourceCode r cell-code"><code class="sourceCode r"><span id="cb58-1"><a href="#cb58-1" aria-hidden="true" tabindex="-1"></a><span class="fu">plotResiduals</span>(simulationOutput, <span class="at">form =</span> sleepstudy_2<span class="sc">$</span>Days)</span></code></pre></div>
+<div class="cell-output-display">
+<div>
+<figure>
+<p><img src="Statistik6_Demo_files/figure-html/unnamed-chunk-6-2.png" class="img-fluid" width="672" /></p>
+</figure>
+</div>
+</div>
+<div class="sourceCode" id="cb59"><pre class="sourceCode r cell-code"><code class="sourceCode r"><span id="cb59-1"><a href="#cb59-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Visualisierung</span></span>
+<span id="cb59-2"><a href="#cb59-2" aria-hidden="true" tabindex="-1"></a><span class="fu">plot_model</span>(lmm_1, </span>
+<span id="cb59-3"><a href="#cb59-3" aria-hidden="true" tabindex="-1"></a>           <span class="at">type =</span> <span class="st">&quot;pred&quot;</span>, <span class="at">pred.type =</span> <span class="st">&quot;re&quot;</span>,</span>
+<span id="cb59-4"><a href="#cb59-4" aria-hidden="true" tabindex="-1"></a>           <span class="at">show.data =</span> <span class="cn">TRUE</span>) <span class="sc">+</span></span>
+<span id="cb59-5"><a href="#cb59-5" aria-hidden="true" tabindex="-1"></a>  <span class="fu">theme_classic</span>()</span></code></pre></div>
+<div class="cell-output-display">
+<div>
+<figure>
+<p><img src="Statistik6_Demo_files/figure-html/unnamed-chunk-6-3.png" class="img-fluid" width="672" /></p>
+</figure>
+</div>
+</div>
+</div>
+</section>
+<section id="glmm" class="level2">
+<h2>GLMM</h2>
+<p>Befall von Rothirschen (Cervus elaphus) in spanischen Farmen mit dem Parasiten Elaphostrongylus cervi. Modelliert wird Vorkommen/Nichtvorkommen von L1-Larven 130 dieser Nematode in Abhängigkeit von Körperlänge und Geschlecht der Hirsche. Erhoben wurden die Daten auf 24 Farmen.</p>
+<div class="cell">
+<div class="sourceCode" id="cb60"><pre class="sourceCode r cell-code"><code class="sourceCode r"><span id="cb60-1"><a href="#cb60-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Daten laden und für GLMM aufbereiten</span></span>
+<span id="cb60-2"><a href="#cb60-2" aria-hidden="true" tabindex="-1"></a>DeerEcervi <span class="ot">&lt;-</span> <span class="fu">read_delim</span>(<span class="st">&quot;datasets/stat/DeerEcervi.csv&quot;</span>, <span class="at">delim =</span> <span class="st">&quot;;&quot;</span>) <span class="sc">|&gt;</span></span>
+<span id="cb60-3"><a href="#cb60-3" aria-hidden="true" tabindex="-1"></a>  <span class="fu">mutate</span>(<span class="fu">across</span>(<span class="fu">where</span>(is.character), as.factor))</span>
+<span id="cb60-4"><a href="#cb60-4" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb60-5"><a href="#cb60-5" aria-hidden="true" tabindex="-1"></a><span class="co"># Daten anschauen</span></span>
+<span id="cb60-6"><a href="#cb60-6" aria-hidden="true" tabindex="-1"></a><span class="fu">str</span>(DeerEcervi)</span></code></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>tibble [826 × 4] (S3: tbl_df/tbl/data.frame)
+ $ Farm  : Factor w/ 24 levels &quot;AL&quot;,&quot;AU&quot;,&quot;BA&quot;,..: 1 1 1 1 1 1 1 1 1 1 ...
+ $ Sex   : Factor w/ 2 levels &quot;female&quot;,&quot;male&quot;: 2 1 1 1 1 1 1 1 1 1 ...
+ $ Length: num [1:826] 164 216 208 206 204 200 199 197 196 196 ...
+ $ Ecervi: num [1:826] 0 0 0 1 0 0 1 1 1 0 ...</code></pre>
+</div>
+<div class="sourceCode" id="cb62"><pre class="sourceCode r cell-code"><code class="sourceCode r"><span id="cb62-1"><a href="#cb62-1" aria-hidden="true" tabindex="-1"></a><span class="fu">summary</span>(DeerEcervi)</span></code></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>      Farm         Sex          Length          Ecervi      
+ MO     :209   female:448   Min.   : 75.0   Min.   :0.0000  
+ CB     : 85   male  :378   1st Qu.:151.0   1st Qu.:0.0000  
+ QM     : 60                Median :163.0   Median :1.0000  
+ BA     : 50                Mean   :161.8   Mean   :0.6465  
+ PN     : 37                3rd Qu.:174.9   3rd Qu.:1.0000  
+ MB     : 34                Max.   :216.0   Max.   :1.0000  
+ (Other):351                                                </code></pre>
+</div>
+<div class="sourceCode" id="cb64"><pre class="sourceCode r cell-code"><code class="sourceCode r"><span id="cb64-1"><a href="#cb64-1" aria-hidden="true" tabindex="-1"></a><span class="fu">table</span>(DeerEcervi<span class="sc">$</span>Farm)</span></code></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>
+  AL   AU   BA   BE   CB  CRC   HB   LN  MAN   MB   MO   NC   NV   PN   QM   RF 
+  15   32   50   13   85    1   17   33   27   34  209   27   20   37   60   20 
+  RN   RO  SAU   SE   TI   TN VISO   VY 
+  23   30    3   26   19   25   13    7 </code></pre>
+</div>
+</div>
+<div class="cell">
+<div class="sourceCode" id="cb66"><pre class="sourceCode r cell-code"><code class="sourceCode r"><span id="cb66-1"><a href="#cb66-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Kontinuierliche variable Hischlänge standardisieren</span></span>
+<span id="cb66-2"><a href="#cb66-2" aria-hidden="true" tabindex="-1"></a>Std <span class="ot">&lt;-</span> <span class="cf">function</span>(x) { (x <span class="sc">-</span> <span class="fu">mean</span>(x)) <span class="sc">/</span> <span class="fu">sd</span>(x)}</span>
+<span id="cb66-3"><a href="#cb66-3" aria-hidden="true" tabindex="-1"></a>DeerEcervi<span class="sc">$</span>Lengt_std <span class="ot">&lt;-</span>  <span class="fu">Std</span>(DeerEcervi<span class="sc">$</span>Length)</span>
+<span id="cb66-4"><a href="#cb66-4" aria-hidden="true" tabindex="-1"></a><span class="co"># oder</span></span>
+<span id="cb66-5"><a href="#cb66-5" aria-hidden="true" tabindex="-1"></a>DeerEcervi<span class="sc">$</span>Length_std <span class="ot">&lt;-</span> <span class="fu">as.vector</span>( <span class="fu">scale</span>(DeerEcervi<span class="sc">$</span>Length, <span class="at">center =</span> <span class="cn">TRUE</span>))</span>
+<span id="cb66-6"><a href="#cb66-6" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb66-7"><a href="#cb66-7" aria-hidden="true" tabindex="-1"></a><span class="co"># Model fitten</span></span>
+<span id="cb66-8"><a href="#cb66-8" aria-hidden="true" tabindex="-1"></a>glmm_1 <span class="ot">&lt;-</span> <span class="fu">glmmTMB</span>(Ecervi <span class="sc">~</span> <span class="fu">scale</span>(Length) <span class="sc">*</span> Sex <span class="sc">+</span> (<span class="dv">1</span> <span class="sc">|</span> Farm), </span>
+<span id="cb66-9"><a href="#cb66-9" aria-hidden="true" tabindex="-1"></a>                  <span class="at">family =</span> binomial, </span>
+<span id="cb66-10"><a href="#cb66-10" aria-hidden="true" tabindex="-1"></a>                  <span class="at">data =</span> DeerEcervi)</span>
+<span id="cb66-11"><a href="#cb66-11" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb66-12"><a href="#cb66-12" aria-hidden="true" tabindex="-1"></a>car<span class="sc">::</span><span class="fu">Anova</span>(glmm_1)</span></code></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>Analysis of Deviance Table (Type II Wald chisquare tests)
+
+Response: Ecervi
+                    Chisq Df Pr(&gt;Chisq)    
+scale(Length)     70.7552  1  &lt; 2.2e-16 ***
+Sex                4.4962  1   0.033969 *  
+scale(Length):Sex  9.8309  1   0.001716 ** 
+---
+Signif. codes:  0 &#39;***&#39; 0.001 &#39;**&#39; 0.01 &#39;*&#39; 0.05 &#39;.&#39; 0.1 &#39; &#39; 1</code></pre>
+</div>
+<div class="sourceCode" id="cb68"><pre class="sourceCode r cell-code"><code class="sourceCode r"><span id="cb68-1"><a href="#cb68-1" aria-hidden="true" tabindex="-1"></a><span class="fu">drop1</span>(glmm_1, <span class="at">test =</span> <span class="st">&quot;Chi&quot;</span>)</span></code></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>Single term deletions
+
+Model:
+Ecervi ~ scale(Length) * Sex + (1 | Farm)
+                  Df    AIC    LRT Pr(&gt;Chi)   
+&lt;none&gt;               832.56                   
+scale(Length):Sex  1 840.78 10.225 0.001385 **
+---
+Signif. codes:  0 &#39;***&#39; 0.001 &#39;**&#39; 0.01 &#39;*&#39; 0.05 &#39;.&#39; 0.1 &#39; &#39; 1</code></pre>
+</div>
+<div class="sourceCode" id="cb70"><pre class="sourceCode r cell-code"><code class="sourceCode r"><span id="cb70-1"><a href="#cb70-1" aria-hidden="true" tabindex="-1"></a><span class="fu">summary</span>(glmm_1)</span></code></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code> Family: binomial  ( logit )
+Formula:          Ecervi ~ scale(Length) * Sex + (1 | Farm)
+Data: DeerEcervi
+
+     AIC      BIC   logLik deviance df.resid 
+   832.6    856.1   -411.3    822.6      821 
+
+Random effects:
+
+Conditional model:
+ Groups Name        Variance Std.Dev.
+ Farm   (Intercept) 2.393    1.547   
+Number of obs: 826, groups:  Farm, 24
+
+Conditional model:
+                      Estimate Std. Error z value Pr(&gt;|z|)    
+(Intercept)             0.9397     0.3579   2.625  0.00865 ** 
+scale(Length)           0.7638     0.1363   5.604 2.09e-08 ***
+Sexmale                 0.6245     0.2242   2.785  0.00535 ** 
+scale(Length):Sexmale   0.7027     0.2241   3.135  0.00172 ** 
+---
+Signif. codes:  0 &#39;***&#39; 0.001 &#39;**&#39; 0.01 &#39;*&#39; 0.05 &#39;.&#39; 0.1 &#39; &#39; 1</code></pre>
+</div>
+<div class="sourceCode" id="cb72"><pre class="sourceCode r cell-code"><code class="sourceCode r"><span id="cb72-1"><a href="#cb72-1" aria-hidden="true" tabindex="-1"></a><span class="fu">r2</span>(glmm_1)</span></code></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code># R2 for Mixed Models
+
+  Conditional R2: 0.504
+     Marginal R2: 0.143</code></pre>
+</div>
+</div>
+<div class="cell">
+<div class="sourceCode" id="cb74"><pre class="sourceCode r cell-code"><code class="sourceCode r"><span id="cb74-1"><a href="#cb74-1" aria-hidden="true" tabindex="-1"></a><span class="co">#Modellvalidierung</span></span>
+<span id="cb74-2"><a href="#cb74-2" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb74-3"><a href="#cb74-3" aria-hidden="true" tabindex="-1"></a><span class="co"># Test overdisepersion</span></span>
+<span id="cb74-4"><a href="#cb74-4" aria-hidden="true" tabindex="-1"></a><span class="fu">check_overdispersion</span>(glmm_1)</span></code></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code># Overdispersion test
+
+ dispersion ratio = 1.064
+          p-value =   0.6</code></pre>
+</div>
+<div class="sourceCode" id="cb76"><pre class="sourceCode r cell-code"><code class="sourceCode r"><span id="cb76-1"><a href="#cb76-1" aria-hidden="true" tabindex="-1"></a><span class="fu">set.seed</span>(<span class="dv">123</span>)</span>
+<span id="cb76-2"><a href="#cb76-2" aria-hidden="true" tabindex="-1"></a>simulationOutput <span class="ot">&lt;-</span> <span class="fu">simulateResiduals</span>(<span class="at">fittedModel =</span> glmm_1, <span class="at">plot =</span> <span class="cn">TRUE</span>, <span class="at">n =</span> <span class="dv">1000</span>)</span></code></pre></div>
+<div class="cell-output-display">
+<div>
+<figure>
+<p><img src="Statistik6_Demo_files/figure-html/unnamed-chunk-9-1.png" class="img-fluid" width="672" /></p>
+</figure>
+</div>
+</div>
+<div class="sourceCode" id="cb77"><pre class="sourceCode r cell-code"><code class="sourceCode r"><span id="cb77-1"><a href="#cb77-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Plot the scaled quantile residuals versus fitted values.</span></span>
+<span id="cb77-2"><a href="#cb77-2" aria-hidden="true" tabindex="-1"></a><span class="fu">plotResiduals</span>(simulationOutput, <span class="at">form =</span> DeerEcervi<span class="sc">$</span>Sex)</span></code></pre></div>
+<div class="cell-output-display">
+<div>
+<figure>
+<p><img src="Statistik6_Demo_files/figure-html/unnamed-chunk-9-2.png" class="img-fluid" width="672" /></p>
+</figure>
+</div>
+</div>
+<div class="sourceCode" id="cb78"><pre class="sourceCode r cell-code"><code class="sourceCode r"><span id="cb78-1"><a href="#cb78-1" aria-hidden="true" tabindex="-1"></a><span class="fu">plotResiduals</span>(simulationOutput, <span class="at">form =</span> <span class="fu">scale</span>(DeerEcervi<span class="sc">$</span>Length) )</span></code></pre></div>
+<div class="cell-output-display">
+<div>
+<figure>
+<p><img src="Statistik6_Demo_files/figure-html/unnamed-chunk-9-3.png" class="img-fluid" width="672" /></p>
+</figure>
+</div>
+</div>
+</div>
+<div class="cell">
+<div class="sourceCode" id="cb79"><pre class="sourceCode r cell-code"><code class="sourceCode r"><span id="cb79-1"><a href="#cb79-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Visualisierung</span></span>
+<span id="cb79-2"><a href="#cb79-2" aria-hidden="true" tabindex="-1"></a><span class="fu">plot_model</span>(glmm_1, </span>
+<span id="cb79-3"><a href="#cb79-3" aria-hidden="true" tabindex="-1"></a>           <span class="at">type =</span> <span class="st">&quot;pred&quot;</span>, <span class="at">pred.type =</span> <span class="st">&quot;re&quot;</span>, </span>
+<span id="cb79-4"><a href="#cb79-4" aria-hidden="true" tabindex="-1"></a>           <span class="at">terms =</span> <span class="fu">c</span>(<span class="st">&quot;Length[all]&quot;</span>, <span class="st">&quot;Sex&quot;</span>),  </span>
+<span id="cb79-5"><a href="#cb79-5" aria-hidden="true" tabindex="-1"></a>           <span class="at">show.data =</span> <span class="cn">TRUE</span>) <span class="sc">+</span></span>
+<span id="cb79-6"><a href="#cb79-6" aria-hidden="true" tabindex="-1"></a>  <span class="fu">theme_classic</span>()</span></code></pre></div>
+<div class="cell-output-display">
+<div>
+<figure>
+<p><img src="Statistik6_Demo_files/figure-html/unnamed-chunk-10-1.png" class="img-fluid" width="672" /></p>
+</figure>
+</div>
+</div>
+</div>
+<div id="quarto-navigation-envelope" class="hidden">
+<p><span class="hidden" data-render-id="quarto-int-sidebar-title">Research Methods HS24</span> <span class="hidden" data-render-id="quarto-int-navbar-title">Research Methods HS24</span> <span class="hidden" data-render-id="quarto-int-next"><span class="chapter-number">27</span>  <span class="chapter-title">Statistik 6: Übung</span></span> <span class="hidden" data-render-id="quarto-int-prev"><span class="chapter-number">25</span>  <span class="chapter-title">Statistik 5: Übung</span></span> <span class="hidden" data-render-id="quarto-int-sidebar:/index.htmlWillkommen">Willkommen</span> <span class="hidden" data-render-id="quarto-int-sidebar:quarto-sidebar-section-1">Pre-Processing</span> <span class="hidden" data-render-id="quarto-int-sidebar:/prepro/Prepro1_Vorbereitung.html&lt;span-class=&#39;chapter-number&#39;&gt;1&lt;/span&gt;--&lt;span-class=&#39;chapter-title&#39;&gt;Vorbereitung&lt;/span&gt;"><span class="chapter-number">1</span>  <span class="chapter-title">Vorbereitung</span></span> <span class="hidden" data-render-id="quarto-int-sidebar:undefined--">–</span> <span class="hidden" data-render-id="quarto-int-sidebar:/prepro/Prepro1_Demo.html&lt;span-class=&#39;chapter-number&#39;&gt;2&lt;/span&gt;--&lt;span-class=&#39;chapter-title&#39;&gt;Prepro-1:-Demo&lt;/span&gt;"><span class="chapter-number">2</span>  <span class="chapter-title">Prepro 1: Demo</span></span> <span class="hidden" data-render-id="quarto-int-sidebar:/prepro/Prepro1_Uebung.html&lt;span-class=&#39;chapter-number&#39;&gt;3&lt;/span&gt;--&lt;span-class=&#39;chapter-title&#39;&gt;PrePro-1:-Übung&lt;/span&gt;"><span class="chapter-number">3</span>  <span class="chapter-title">PrePro 1: Übung</span></span> <span class="hidden" data-render-id="quarto-int-sidebar:/prepro/Prepro2_Demo.html&lt;span-class=&#39;chapter-number&#39;&gt;4&lt;/span&gt;--&lt;span-class=&#39;chapter-title&#39;&gt;Prepro-2:-Demo&lt;/span&gt;"><span class="chapter-number">4</span>  <span class="chapter-title">Prepro 2: Demo</span></span> <span class="hidden" data-render-id="quarto-int-sidebar:/prepro/Prepro2_Uebung_A.html&lt;span-class=&#39;chapter-number&#39;&gt;5&lt;/span&gt;--&lt;span-class=&#39;chapter-title&#39;&gt;Prepro-2:-Übung-A&lt;/span&gt;"><span class="chapter-number">5</span>  <span class="chapter-title">Prepro 2: Übung A</span></span> <span class="hidden" data-render-id="quarto-int-sidebar:/prepro/Prepro2_Uebung_B.html&lt;span-class=&#39;chapter-number&#39;&gt;6&lt;/span&gt;--&lt;span-class=&#39;chapter-title&#39;&gt;Prepro-2:-Übung-B&lt;/span&gt;"><span class="chapter-number">6</span>  <span class="chapter-title">Prepro 2: Übung B</span></span> <span class="hidden" data-render-id="quarto-int-sidebar:/prepro/Prepro3_Demo.html&lt;span-class=&#39;chapter-number&#39;&gt;7&lt;/span&gt;--&lt;span-class=&#39;chapter-title&#39;&gt;Prepro-3:-Demo&lt;/span&gt;"><span class="chapter-number">7</span>  <span class="chapter-title">Prepro 3: Demo</span></span> <span class="hidden" data-render-id="quarto-int-sidebar:/prepro/Prepro3_Uebung.html&lt;span-class=&#39;chapter-number&#39;&gt;8&lt;/span&gt;--&lt;span-class=&#39;chapter-title&#39;&gt;Prepro-3:-Übung&lt;/span&gt;"><span class="chapter-number">8</span>  <span class="chapter-title">Prepro 3: Übung</span></span> <span class="hidden" data-render-id="quarto-int-sidebar:quarto-sidebar-section-2">InfoVis</span> <span class="hidden" data-render-id="quarto-int-sidebar:/infovis/Infovis1_Vorbereitung.html&lt;span-class=&#39;chapter-number&#39;&gt;9&lt;/span&gt;--&lt;span-class=&#39;chapter-title&#39;&gt;Vorbereitung&lt;/span&gt;"><span class="chapter-number">9</span>  <span class="chapter-title">Vorbereitung</span></span> <span class="hidden" data-render-id="quarto-int-sidebar:/infovis/Infovis1_Demo.html&lt;span-class=&#39;chapter-number&#39;&gt;10&lt;/span&gt;--&lt;span-class=&#39;chapter-title&#39;&gt;Infovis-1:-Demo-A&lt;/span&gt;"><span class="chapter-number">10</span>  <span class="chapter-title">Infovis 1: Demo A</span></span> <span class="hidden" data-render-id="quarto-int-sidebar:/infovis/Infovis1_Uebung.html&lt;span-class=&#39;chapter-number&#39;&gt;11&lt;/span&gt;--&lt;span-class=&#39;chapter-title&#39;&gt;Infovis-1:-Übung&lt;/span&gt;"><span class="chapter-number">11</span>  <span class="chapter-title">Infovis 1: Übung</span></span> <span class="hidden" data-render-id="quarto-int-sidebar:/infovis/Infovis1_Script_eda.html&lt;span-class=&#39;chapter-number&#39;&gt;12&lt;/span&gt;--&lt;span-class=&#39;chapter-title&#39;&gt;Infovis-1:-Script-EDA&lt;/span&gt;"><span class="chapter-number">12</span>  <span class="chapter-title">Infovis 1: Script EDA</span></span> <span class="hidden" data-render-id="quarto-int-sidebar:/infovis/Infovis2_Uebung_A.html&lt;span-class=&#39;chapter-number&#39;&gt;13&lt;/span&gt;--&lt;span-class=&#39;chapter-title&#39;&gt;Infovis-2:-Übung-A&lt;/span&gt;"><span class="chapter-number">13</span>  <span class="chapter-title">Infovis 2: Übung A</span></span> <span class="hidden" data-render-id="quarto-int-sidebar:/infovis/Infovis2_Uebung_B.html&lt;span-class=&#39;chapter-number&#39;&gt;14&lt;/span&gt;--&lt;span-class=&#39;chapter-title&#39;&gt;Infovis-2:-Übung-optional&lt;/span&gt;"><span class="chapter-number">14</span>  <span class="chapter-title">Infovis 2: Übung optional</span></span> <span class="hidden" data-render-id="quarto-int-sidebar:quarto-sidebar-section-3">Statistik</span> <span class="hidden" data-render-id="quarto-int-sidebar:/statistik/Statistik0_Vorbereitung.html&lt;span-class=&#39;chapter-number&#39;&gt;15&lt;/span&gt;--&lt;span-class=&#39;chapter-title&#39;&gt;Vorbereitung&lt;/span&gt;"><span class="chapter-number">15</span>  <span class="chapter-title">Vorbereitung</span></span> <span class="hidden" data-render-id="quarto-int-sidebar:/statistik/Statistik1_Demo.html&lt;span-class=&#39;chapter-number&#39;&gt;16&lt;/span&gt;--&lt;span-class=&#39;chapter-title&#39;&gt;Statistik-1:-Demo&lt;/span&gt;"><span class="chapter-number">16</span>  <span class="chapter-title">Statistik 1: Demo</span></span> <span class="hidden" data-render-id="quarto-int-sidebar:/statistik/Statistik1_Uebung.html&lt;span-class=&#39;chapter-number&#39;&gt;17&lt;/span&gt;--&lt;span-class=&#39;chapter-title&#39;&gt;Statistik-1:-Übung&lt;/span&gt;"><span class="chapter-number">17</span>  <span class="chapter-title">Statistik 1: Übung</span></span> <span class="hidden" data-render-id="quarto-int-sidebar:/statistik/Statistik2_Demo.html&lt;span-class=&#39;chapter-number&#39;&gt;18&lt;/span&gt;--&lt;span-class=&#39;chapter-title&#39;&gt;Statistik-2:-Demo&lt;/span&gt;"><span class="chapter-number">18</span>  <span class="chapter-title">Statistik 2: Demo</span></span> <span class="hidden" data-render-id="quarto-int-sidebar:/statistik/Statistik2_Uebung.html&lt;span-class=&#39;chapter-number&#39;&gt;19&lt;/span&gt;--&lt;span-class=&#39;chapter-title&#39;&gt;Statistik-2:-Übung&lt;/span&gt;"><span class="chapter-number">19</span>  <span class="chapter-title">Statistik 2: Übung</span></span> <span class="hidden" data-render-id="quarto-int-sidebar:/statistik/Statistik3_Demo.html&lt;span-class=&#39;chapter-number&#39;&gt;20&lt;/span&gt;--&lt;span-class=&#39;chapter-title&#39;&gt;Statistik-3:-Demo&lt;/span&gt;"><span class="chapter-number">20</span>  <span class="chapter-title">Statistik 3: Demo</span></span> <span class="hidden" data-render-id="quarto-int-sidebar:/statistik/Statistik3_Uebung.html&lt;span-class=&#39;chapter-number&#39;&gt;21&lt;/span&gt;--&lt;span-class=&#39;chapter-title&#39;&gt;Statistik-3:-Übung&lt;/span&gt;"><span class="chapter-number">21</span>  <span class="chapter-title">Statistik 3: Übung</span></span> <span class="hidden" data-render-id="quarto-int-sidebar:/statistik/Statistik4_Demo.html&lt;span-class=&#39;chapter-number&#39;&gt;22&lt;/span&gt;--&lt;span-class=&#39;chapter-title&#39;&gt;Statistik-4:-Demo&lt;/span&gt;"><span class="chapter-number">22</span>  <span class="chapter-title">Statistik 4: Demo</span></span> <span class="hidden" data-render-id="quarto-int-sidebar:/statistik/Statistik4_Uebung.html&lt;span-class=&#39;chapter-number&#39;&gt;23&lt;/span&gt;--&lt;span-class=&#39;chapter-title&#39;&gt;Statistik-4:-Übung&lt;/span&gt;"><span class="chapter-number">23</span>  <span class="chapter-title">Statistik 4: Übung</span></span> <span class="hidden" data-render-id="quarto-int-sidebar:/statistik/Statistik5_Demo.html&lt;span-class=&#39;chapter-number&#39;&gt;24&lt;/span&gt;--&lt;span-class=&#39;chapter-title&#39;&gt;Statistik-5:-Demo&lt;/span&gt;"><span class="chapter-number">24</span>  <span class="chapter-title">Statistik 5: Demo</span></span> <span class="hidden" data-render-id="quarto-int-sidebar:/statistik/Statistik5_Uebung.html&lt;span-class=&#39;chapter-number&#39;&gt;25&lt;/span&gt;--&lt;span-class=&#39;chapter-title&#39;&gt;Statistik-5:-Übung&lt;/span&gt;"><span class="chapter-number">25</span>  <span class="chapter-title">Statistik 5: Übung</span></span> <span class="hidden" data-render-id="quarto-int-sidebar:/statistik/Statistik6_Demo.html&lt;span-class=&#39;chapter-number&#39;&gt;26&lt;/span&gt;--&lt;span-class=&#39;chapter-title&#39;&gt;Statistik-6:-Demo&lt;/span&gt;"><span class="chapter-number">26</span>  <span class="chapter-title">Statistik 6: Demo</span></span> <span class="hidden" data-render-id="quarto-int-sidebar:/statistik/Statistik6_Uebung.html&lt;span-class=&#39;chapter-number&#39;&gt;27&lt;/span&gt;--&lt;span-class=&#39;chapter-title&#39;&gt;Statistik-6:-Übung&lt;/span&gt;"><span class="chapter-number">27</span>  <span class="chapter-title">Statistik 6: Übung</span></span> <span class="hidden" data-render-id="quarto-int-sidebar:/statistik/Statistik7_Demo.html&lt;span-class=&#39;chapter-number&#39;&gt;28&lt;/span&gt;--&lt;span-class=&#39;chapter-title&#39;&gt;Statistik-7:-Demo&lt;/span&gt;"><span class="chapter-number">28</span>  <span class="chapter-title">Statistik 7: Demo</span></span> <span class="hidden" data-render-id="quarto-int-sidebar:/statistik/Statistik7_Uebung.html&lt;span-class=&#39;chapter-number&#39;&gt;29&lt;/span&gt;--&lt;span-class=&#39;chapter-title&#39;&gt;Statistik-7:-Übung&lt;/span&gt;"><span class="chapter-number">29</span>  <span class="chapter-title">Statistik 7: Übung</span></span> <span class="hidden" data-render-id="quarto-int-sidebar:/statistik/Statistik8_Demo.html&lt;span-class=&#39;chapter-number&#39;&gt;30&lt;/span&gt;--&lt;span-class=&#39;chapter-title&#39;&gt;Statistik-8:-Demo&lt;/span&gt;"><span class="chapter-number">30</span>  <span class="chapter-title">Statistik 8: Demo</span></span> <span class="hidden" data-render-id="quarto-int-sidebar:/statistik/Statistik8_Uebung.html&lt;span-class=&#39;chapter-number&#39;&gt;31&lt;/span&gt;--&lt;span-class=&#39;chapter-title&#39;&gt;Statistik-8:-Übung&lt;/span&gt;"><span class="chapter-number">31</span>  <span class="chapter-title">Statistik 8: Übung</span></span> <span class="hidden" data-render-id="quarto-int-sidebar:quarto-sidebar-section-4">Fallstudie S</span> <span class="hidden" data-render-id="quarto-int-sidebar:/fallstudie_s/0_Vorbereitung.html&lt;span-class=&#39;chapter-number&#39;&gt;32&lt;/span&gt;--&lt;span-class=&#39;chapter-title&#39;&gt;Vorbereitung&lt;/span&gt;"><span class="chapter-number">32</span>  <span class="chapter-title">Vorbereitung</span></span> <span class="hidden" data-render-id="quarto-int-sidebar:/fallstudie_s/1_Einführung.html&lt;span-class=&#39;chapter-number&#39;&gt;33&lt;/span&gt;--&lt;span-class=&#39;chapter-title&#39;&gt;Einführung&lt;/span&gt;"><span class="chapter-number">33</span>  <span class="chapter-title">Einführung</span></span> <span class="hidden" data-render-id="quarto-int-sidebar:/fallstudie_s/2_Besuchermonitoring.html&lt;span-class=&#39;chapter-number&#39;&gt;34&lt;/span&gt;--&lt;span-class=&#39;chapter-title&#39;&gt;Monitoring&lt;/span&gt;"><span class="chapter-number">34</span>  <span class="chapter-title">Monitoring</span></span> <span class="hidden" data-render-id="quarto-int-sidebar:/fallstudie_s/3_Aufgabenstellung_WPZ.html&lt;span-class=&#39;chapter-number&#39;&gt;35&lt;/span&gt;--&lt;span-class=&#39;chapter-title&#39;&gt;Aufgabenstellung-Abschlussbericht&lt;/span&gt;"><span class="chapter-number">35</span>  <span class="chapter-title">Aufgabenstellung Abschlussbericht</span></span> <span class="hidden" data-render-id="quarto-int-sidebar:/fallstudie_s/4_Projektierung.html&lt;span-class=&#39;chapter-number&#39;&gt;36&lt;/span&gt;--&lt;span-class=&#39;chapter-title&#39;&gt;Projek-erstellen&lt;/span&gt;"><span class="chapter-number">36</span>  <span class="chapter-title">Projek erstellen</span></span> <span class="hidden" data-render-id="quarto-int-sidebar:/fallstudie_s/5_Datenverarbeitung.html&lt;span-class=&#39;chapter-number&#39;&gt;37&lt;/span&gt;--&lt;span-class=&#39;chapter-title&#39;&gt;Datenverarbeitung&lt;/span&gt;"><span class="chapter-number">37</span>  <span class="chapter-title">Datenverarbeitung</span></span> <span class="hidden" data-render-id="quarto-int-sidebar:/fallstudie_s/6_Deskriptive_Analysen.html&lt;span-class=&#39;chapter-number&#39;&gt;38&lt;/span&gt;--&lt;span-class=&#39;chapter-title&#39;&gt;Deskriptive-Analysen&lt;/span&gt;"><span class="chapter-number">38</span>  <span class="chapter-title">Deskriptive Analysen</span></span> <span class="hidden" data-render-id="quarto-int-sidebar:/fallstudie_s/7_Multivariate_Modelle.html&lt;span-class=&#39;chapter-number&#39;&gt;39&lt;/span&gt;--&lt;span-class=&#39;chapter-title&#39;&gt;Multivariate-Modelle&lt;/span&gt;"><span class="chapter-number">39</span>  <span class="chapter-title">Multivariate Modelle</span></span> <span class="hidden" data-render-id="quarto-int-sidebar:quarto-sidebar-section-5">Fallstudie N</span> <span class="hidden" data-render-id="quarto-int-sidebar:/fallstudie_n/1_Vorbemerkung.html&lt;span-class=&#39;chapter-number&#39;&gt;40&lt;/span&gt;--&lt;span-class=&#39;chapter-title&#39;&gt;Vorbemerkung&lt;/span&gt;"><span class="chapter-number">40</span>  <span class="chapter-title">Vorbemerkung</span></span> <span class="hidden" data-render-id="quarto-int-sidebar:/fallstudie_n/2_Datenverarbeitung.html&lt;span-class=&#39;chapter-number&#39;&gt;41&lt;/span&gt;--&lt;span-class=&#39;chapter-title&#39;&gt;Daten(vor)verarbeitung&lt;/span&gt;"><span class="chapter-number">41</span>  <span class="chapter-title">Daten(vor)verarbeitung</span></span> <span class="hidden" data-render-id="quarto-int-sidebar:/fallstudie_n/3_Berechnung_Homeranges.html&lt;span-class=&#39;chapter-number&#39;&gt;42&lt;/span&gt;--&lt;span-class=&#39;chapter-title&#39;&gt;Berechnung-Homeranges&lt;/span&gt;"><span class="chapter-number">42</span>  <span class="chapter-title">Berechnung Homeranges</span></span> <span class="hidden" data-render-id="quarto-int-sidebar:/fallstudie_n/4_Multivariate_Modelle.html&lt;span-class=&#39;chapter-number&#39;&gt;43&lt;/span&gt;--&lt;span-class=&#39;chapter-title&#39;&gt;Multivariate-Modelle&lt;/span&gt;"><span class="chapter-number">43</span>  <span class="chapter-title">Multivariate Modelle</span></span> <span class="hidden" data-render-id="quarto-int-sidebar:/fallstudie_n/5_Variablenselektion.html&lt;span-class=&#39;chapter-number&#39;&gt;44&lt;/span&gt;--&lt;span-class=&#39;chapter-title&#39;&gt;Variablenselektion-Multivariate-Modelle&lt;/span&gt;"><span class="chapter-number">44</span>  <span class="chapter-title">Variablenselektion Multivariate Modelle</span></span> <span class="hidden" data-render-id="quarto-int-sidebar:/fallstudie_n/6_Guete_und_Diagnostics.html&lt;span-class=&#39;chapter-number&#39;&gt;45&lt;/span&gt;--&lt;span-class=&#39;chapter-title&#39;&gt;Modellgüte-und--diagnostics-MM&lt;/span&gt;"><span class="chapter-number">45</span>  <span class="chapter-title">Modellgüte und -diagnostics MM</span></span> <span class="hidden" data-render-id="quarto-int-sidebar:/References.html&lt;span-class=&#39;chapter-number&#39;&gt;46&lt;/span&gt;--&lt;span-class=&#39;chapter-title&#39;&gt;Literaturverzeichnis&lt;/span&gt;"><span class="chapter-number">46</span>  <span class="chapter-title">Literaturverzeichnis</span></span> <span class="hidden" data-render-id="quarto-breadcrumbs-Statistik">Statistik</span> <span class="hidden" data-render-id="quarto-breadcrumbs-&lt;span-class=&#39;chapter-number&#39;&gt;26&lt;/span&gt;--&lt;span-class=&#39;chapter-title&#39;&gt;Statistik-6:-Demo&lt;/span&gt;"><span class="chapter-number">26</span>  <span class="chapter-title">Statistik 6: Demo</span></span></p>
+</div>
+<div id="quarto-meta-markdown" class="hidden">
+<p><span class="hidden" data-render-id="quarto-metatitle">Research Methods HS24 - <span class="chapter-title">Statistik 6: Demo</span></span> <span class="hidden" data-render-id="quarto-twittercardtitle">Research Methods HS24 - <span class="chapter-title">Statistik 6: Demo</span></span> <span class="hidden" data-render-id="quarto-ogcardtitle">Research Methods HS24 - <span class="chapter-title">Statistik 6: Demo</span></span> <span class="hidden" data-render-id="quarto-metasitename">Research Methods HS24</span> <span class="hidden" data-render-id="quarto-twittercarddesc"></span> <span class="hidden" data-render-id="quarto-ogcardddesc"></span></p>
+</div>
+</section>
+
+</main> <!-- /main -->
+<script id = "quarto-html-after-body" type="application/javascript">
+window.document.addEventListener("DOMContentLoaded", function (event) {
+  const toggleBodyColorMode = (bsSheetEl) => {
+    const mode = bsSheetEl.getAttribute("data-mode");
+    const bodyEl = window.document.querySelector("body");
+    if (mode === "dark") {
+      bodyEl.classList.add("quarto-dark");
+      bodyEl.classList.remove("quarto-light");
+    } else {
+      bodyEl.classList.add("quarto-light");
+      bodyEl.classList.remove("quarto-dark");
+    }
+  }
+  const toggleBodyColorPrimary = () => {
+    const bsSheetEl = window.document.querySelector("link#quarto-bootstrap");
+    if (bsSheetEl) {
+      toggleBodyColorMode(bsSheetEl);
+    }
+  }
+  toggleBodyColorPrimary();  
+  const disableStylesheet = (stylesheets) => {
+    for (let i=0; i < stylesheets.length; i++) {
+      const stylesheet = stylesheets[i];
+      stylesheet.rel = 'prefetch';
+    }
+  }
+  const enableStylesheet = (stylesheets) => {
+    for (let i=0; i < stylesheets.length; i++) {
+      const stylesheet = stylesheets[i];
+      stylesheet.rel = 'stylesheet';
+    }
+  }
+  const manageTransitions = (selector, allowTransitions) => {
+    const els = window.document.querySelectorAll(selector);
+    for (let i=0; i < els.length; i++) {
+      const el = els[i];
+      if (allowTransitions) {
+        el.classList.remove('notransition');
+      } else {
+        el.classList.add('notransition');
+      }
+    }
+  }
+  const toggleGiscusIfUsed = (isAlternate, darkModeDefault) => {
+    const baseTheme = document.querySelector('#giscus-base-theme')?.value ?? 'light';
+    const alternateTheme = document.querySelector('#giscus-alt-theme')?.value ?? 'dark';
+    let newTheme = '';
+    if(darkModeDefault) {
+      newTheme = isAlternate ? baseTheme : alternateTheme;
+    } else {
+      newTheme = isAlternate ? alternateTheme : baseTheme;
+    }
+    const changeGiscusTheme = () => {
+      // From: https://github.com/giscus/giscus/issues/336
+      const sendMessage = (message) => {
+        const iframe = document.querySelector('iframe.giscus-frame');
+        if (!iframe) return;
+        iframe.contentWindow.postMessage({ giscus: message }, 'https://giscus.app');
+      }
+      sendMessage({
+        setConfig: {
+          theme: newTheme
+        }
+      });
+    }
+    const isGiscussLoaded = window.document.querySelector('iframe.giscus-frame') !== null;
+    if (isGiscussLoaded) {
+      changeGiscusTheme();
+    }
+  }
+  const toggleColorMode = (alternate) => {
+    // Switch the stylesheets
+    const alternateStylesheets = window.document.querySelectorAll('link.quarto-color-scheme.quarto-color-alternate');
+    manageTransitions('#quarto-margin-sidebar .nav-link', false);
+    if (alternate) {
+      enableStylesheet(alternateStylesheets);
+      for (const sheetNode of alternateStylesheets) {
+        if (sheetNode.id === "quarto-bootstrap") {
+          toggleBodyColorMode(sheetNode);
+        }
+      }
+    } else {
+      disableStylesheet(alternateStylesheets);
+      toggleBodyColorPrimary();
+    }
+    manageTransitions('#quarto-margin-sidebar .nav-link', true);
+    // Switch the toggles
+    const toggles = window.document.querySelectorAll('.quarto-color-scheme-toggle');
+    for (let i=0; i < toggles.length; i++) {
+      const toggle = toggles[i];
+      if (toggle) {
+        if (alternate) {
+          toggle.classList.add("alternate");     
+        } else {
+          toggle.classList.remove("alternate");
+        }
+      }
+    }
+    // Hack to workaround the fact that safari doesn't
+    // properly recolor the scrollbar when toggling (#1455)
+    if (navigator.userAgent.indexOf('Safari') > 0 && navigator.userAgent.indexOf('Chrome') == -1) {
+      manageTransitions("body", false);
+      window.scrollTo(0, 1);
+      setTimeout(() => {
+        window.scrollTo(0, 0);
+        manageTransitions("body", true);
+      }, 40);  
+    }
+  }
+  const isFileUrl = () => { 
+    return window.location.protocol === 'file:';
+  }
+  const hasAlternateSentinel = () => {  
+    let styleSentinel = getColorSchemeSentinel();
+    if (styleSentinel !== null) {
+      return styleSentinel === "alternate";
+    } else {
+      return false;
+    }
+  }
+  const setStyleSentinel = (alternate) => {
+    const value = alternate ? "alternate" : "default";
+    if (!isFileUrl()) {
+      window.localStorage.setItem("quarto-color-scheme", value);
+    } else {
+      localAlternateSentinel = value;
+    }
+  }
+  const getColorSchemeSentinel = () => {
+    if (!isFileUrl()) {
+      const storageValue = window.localStorage.getItem("quarto-color-scheme");
+      return storageValue != null ? storageValue : localAlternateSentinel;
+    } else {
+      return localAlternateSentinel;
+    }
+  }
+  const darkModeDefault = true;
+  let localAlternateSentinel = darkModeDefault ? 'alternate' : 'default';
+  // Dark / light mode switch
+  window.quartoToggleColorScheme = () => {
+    // Read the current dark / light value 
+    let toAlternate = !hasAlternateSentinel();
+    toggleColorMode(toAlternate);
+    setStyleSentinel(toAlternate);
+    toggleGiscusIfUsed(toAlternate, darkModeDefault);
+  };
+  // Ensure there is a toggle, if there isn't float one in the top right
+  if (window.document.querySelector('.quarto-color-scheme-toggle') === null) {
+    const a = window.document.createElement('a');
+    a.classList.add('top-right');
+    a.classList.add('quarto-color-scheme-toggle');
+    a.href = "";
+    a.onclick = function() { try { window.quartoToggleColorScheme(); } catch {} return false; };
+    const i = window.document.createElement("i");
+    i.classList.add('bi');
+    a.appendChild(i);
+    window.document.body.appendChild(a);
+  }
+  // Switch to dark mode if need be
+  if (hasAlternateSentinel()) {
+    toggleColorMode(true);
+  } else {
+    toggleColorMode(false);
+  }
+  const icon = "";
+  const anchorJS = new window.AnchorJS();
+  anchorJS.options = {
+    placement: 'right',
+    icon: icon
+  };
+  anchorJS.add('.anchored');
+  const isCodeAnnotation = (el) => {
+    for (const clz of el.classList) {
+      if (clz.startsWith('code-annotation-')) {                     
+        return true;
+      }
+    }
+    return false;
+  }
+  const clipboard = new window.ClipboardJS('.code-copy-button', {
+    text: function(trigger) {
+      const codeEl = trigger.previousElementSibling.cloneNode(true);
+      for (const childEl of codeEl.children) {
+        if (isCodeAnnotation(childEl)) {
+          childEl.remove();
+        }
+      }
+      return codeEl.innerText;
+    }
+  });
+  clipboard.on('success', function(e) {
+    // button target
+    const button = e.trigger;
+    // don't keep focus
+    button.blur();
+    // flash "checked"
+    button.classList.add('code-copy-button-checked');
+    var currentTitle = button.getAttribute("title");
+    button.setAttribute("title", "Kopiert");
+    let tooltip;
+    if (window.bootstrap) {
+      button.setAttribute("data-bs-toggle", "tooltip");
+      button.setAttribute("data-bs-placement", "left");
+      button.setAttribute("data-bs-title", "Kopiert");
+      tooltip = new bootstrap.Tooltip(button, 
+        { trigger: "manual", 
+          customClass: "code-copy-button-tooltip",
+          offset: [0, -8]});
+      tooltip.show();    
+    }
+    setTimeout(function() {
+      if (tooltip) {
+        tooltip.hide();
+        button.removeAttribute("data-bs-title");
+        button.removeAttribute("data-bs-toggle");
+        button.removeAttribute("data-bs-placement");
+      }
+      button.setAttribute("title", currentTitle);
+      button.classList.remove('code-copy-button-checked');
+    }, 1000);
+    // clear code selection
+    e.clearSelection();
+  });
+  const viewSource = window.document.getElementById('quarto-view-source') ||
+                     window.document.getElementById('quarto-code-tools-source');
+  if (viewSource) {
+    const sourceUrl = viewSource.getAttribute("data-quarto-source-url");
+    viewSource.addEventListener("click", function(e) {
+      if (sourceUrl) {
+        // rstudio viewer pane
+        if (/\bcapabilities=\b/.test(window.location)) {
+          window.open(sourceUrl);
+        } else {
+          window.location.href = sourceUrl;
+        }
+      } else {
+        const modal = new bootstrap.Modal(document.getElementById('quarto-embedded-source-code-modal'));
+        modal.show();
+      }
+      return false;
+    });
+  }
+  function toggleCodeHandler(show) {
+    return function(e) {
+      const detailsSrc = window.document.querySelectorAll(".cell > details > .sourceCode");
+      for (let i=0; i<detailsSrc.length; i++) {
+        const details = detailsSrc[i].parentElement;
+        if (show) {
+          details.open = true;
+        } else {
+          details.removeAttribute("open");
+        }
+      }
+      const cellCodeDivs = window.document.querySelectorAll(".cell > .sourceCode");
+      const fromCls = show ? "hidden" : "unhidden";
+      const toCls = show ? "unhidden" : "hidden";
+      for (let i=0; i<cellCodeDivs.length; i++) {
+        const codeDiv = cellCodeDivs[i];
+        if (codeDiv.classList.contains(fromCls)) {
+          codeDiv.classList.remove(fromCls);
+          codeDiv.classList.add(toCls);
+        } 
+      }
+      return false;
+    }
+  }
+  const hideAllCode = window.document.getElementById("quarto-hide-all-code");
+  if (hideAllCode) {
+    hideAllCode.addEventListener("click", toggleCodeHandler(false));
+  }
+  const showAllCode = window.document.getElementById("quarto-show-all-code");
+  if (showAllCode) {
+    showAllCode.addEventListener("click", toggleCodeHandler(true));
+  }
+    var localhostRegex = new RegExp(/^(?:http|https):\/\/localhost\:?[0-9]*\//);
+    var mailtoRegex = new RegExp(/^mailto:/);
+      var filterRegex = new RegExp('/' + window.location.host + '/');
+    var isInternal = (href) => {
+        return filterRegex.test(href) || localhostRegex.test(href) || mailtoRegex.test(href);
+    }
+    // Inspect non-navigation links and adorn them if external
+ 	var links = window.document.querySelectorAll('a[href]:not(.nav-link):not(.navbar-brand):not(.toc-action):not(.sidebar-link):not(.sidebar-item-toggle):not(.pagination-link):not(.no-external):not([aria-hidden]):not(.dropdown-item):not(.quarto-navigation-tool)');
+    for (var i=0; i<links.length; i++) {
+      const link = links[i];
+      if (!isInternal(link.href)) {
+        // undo the damage that might have been done by quarto-nav.js in the case of
+        // links that we want to consider external
+        if (link.dataset.originalHref !== undefined) {
+          link.href = link.dataset.originalHref;
+        }
+      }
+    }
+  function tippyHover(el, contentFn, onTriggerFn, onUntriggerFn) {
+    const config = {
+      allowHTML: true,
+      maxWidth: 500,
+      delay: 100,
+      arrow: false,
+      appendTo: function(el) {
+          return el.parentElement;
+      },
+      interactive: true,
+      interactiveBorder: 10,
+      theme: 'quarto',
+      placement: 'bottom-start',
+    };
+    if (contentFn) {
+      config.content = contentFn;
+    }
+    if (onTriggerFn) {
+      config.onTrigger = onTriggerFn;
+    }
+    if (onUntriggerFn) {
+      config.onUntrigger = onUntriggerFn;
+    }
+    window.tippy(el, config); 
+  }
+  const noterefs = window.document.querySelectorAll('a[role="doc-noteref"]');
+  for (var i=0; i<noterefs.length; i++) {
+    const ref = noterefs[i];
+    tippyHover(ref, function() {
+      // use id or data attribute instead here
+      let href = ref.getAttribute('data-footnote-href') || ref.getAttribute('href');
+      try { href = new URL(href).hash; } catch {}
+      const id = href.replace(/^#\/?/, "");
+      const note = window.document.getElementById(id);
+      if (note) {
+        return note.innerHTML;
+      } else {
+        return "";
+      }
+    });
+  }
+  const xrefs = window.document.querySelectorAll('a.quarto-xref');
+  const processXRef = (id, note) => {
+    // Strip column container classes
+    const stripColumnClz = (el) => {
+      el.classList.remove("page-full", "page-columns");
+      if (el.children) {
+        for (const child of el.children) {
+          stripColumnClz(child);
+        }
+      }
+    }
+    stripColumnClz(note)
+    if (id === null || id.startsWith('sec-')) {
+      // Special case sections, only their first couple elements
+      const container = document.createElement("div");
+      if (note.children && note.children.length > 2) {
+        container.appendChild(note.children[0].cloneNode(true));
+        for (let i = 1; i < note.children.length; i++) {
+          const child = note.children[i];
+          if (child.tagName === "P" && child.innerText === "") {
+            continue;
+          } else {
+            container.appendChild(child.cloneNode(true));
+            break;
+          }
+        }
+        if (window.Quarto?.typesetMath) {
+          window.Quarto.typesetMath(container);
+        }
+        return container.innerHTML
+      } else {
+        if (window.Quarto?.typesetMath) {
+          window.Quarto.typesetMath(note);
+        }
+        return note.innerHTML;
+      }
+    } else {
+      // Remove any anchor links if they are present
+      const anchorLink = note.querySelector('a.anchorjs-link');
+      if (anchorLink) {
+        anchorLink.remove();
+      }
+      if (window.Quarto?.typesetMath) {
+        window.Quarto.typesetMath(note);
+      }
+      // TODO in 1.5, we should make sure this works without a callout special case
+      if (note.classList.contains("callout")) {
+        return note.outerHTML;
+      } else {
+        return note.innerHTML;
+      }
+    }
+  }
+  for (var i=0; i<xrefs.length; i++) {
+    const xref = xrefs[i];
+    tippyHover(xref, undefined, function(instance) {
+      instance.disable();
+      let url = xref.getAttribute('href');
+      let hash = undefined; 
+      if (url.startsWith('#')) {
+        hash = url;
+      } else {
+        try { hash = new URL(url).hash; } catch {}
+      }
+      if (hash) {
+        const id = hash.replace(/^#\/?/, "");
+        const note = window.document.getElementById(id);
+        if (note !== null) {
+          try {
+            const html = processXRef(id, note.cloneNode(true));
+            instance.setContent(html);
+          } finally {
+            instance.enable();
+            instance.show();
+          }
+        } else {
+          // See if we can fetch this
+          fetch(url.split('#')[0])
+          .then(res => res.text())
+          .then(html => {
+            const parser = new DOMParser();
+            const htmlDoc = parser.parseFromString(html, "text/html");
+            const note = htmlDoc.getElementById(id);
+            if (note !== null) {
+              const html = processXRef(id, note);
+              instance.setContent(html);
+            } 
+          }).finally(() => {
+            instance.enable();
+            instance.show();
+          });
+        }
+      } else {
+        // See if we can fetch a full url (with no hash to target)
+        // This is a special case and we should probably do some content thinning / targeting
+        fetch(url)
+        .then(res => res.text())
+        .then(html => {
+          const parser = new DOMParser();
+          const htmlDoc = parser.parseFromString(html, "text/html");
+          const note = htmlDoc.querySelector('main.content');
+          if (note !== null) {
+            // This should only happen for chapter cross references
+            // (since there is no id in the URL)
+            // remove the first header
+            if (note.children.length > 0 && note.children[0].tagName === "HEADER") {
+              note.children[0].remove();
+            }
+            const html = processXRef(null, note);
+            instance.setContent(html);
+          } 
+        }).finally(() => {
+          instance.enable();
+          instance.show();
+        });
+      }
+    }, function(instance) {
+    });
+  }
+      let selectedAnnoteEl;
+      const selectorForAnnotation = ( cell, annotation) => {
+        let cellAttr = 'data-code-cell="' + cell + '"';
+        let lineAttr = 'data-code-annotation="' +  annotation + '"';
+        const selector = 'span[' + cellAttr + '][' + lineAttr + ']';
+        return selector;
+      }
+      const selectCodeLines = (annoteEl) => {
+        const doc = window.document;
+        const targetCell = annoteEl.getAttribute("data-target-cell");
+        const targetAnnotation = annoteEl.getAttribute("data-target-annotation");
+        const annoteSpan = window.document.querySelector(selectorForAnnotation(targetCell, targetAnnotation));
+        const lines = annoteSpan.getAttribute("data-code-lines").split(",");
+        const lineIds = lines.map((line) => {
+          return targetCell + "-" + line;
+        })
+        let top = null;
+        let height = null;
+        let parent = null;
+        if (lineIds.length > 0) {
+            //compute the position of the single el (top and bottom and make a div)
+            const el = window.document.getElementById(lineIds[0]);
+            top = el.offsetTop;
+            height = el.offsetHeight;
+            parent = el.parentElement.parentElement;
+          if (lineIds.length > 1) {
+            const lastEl = window.document.getElementById(lineIds[lineIds.length - 1]);
+            const bottom = lastEl.offsetTop + lastEl.offsetHeight;
+            height = bottom - top;
+          }
+          if (top !== null && height !== null && parent !== null) {
+            // cook up a div (if necessary) and position it 
+            let div = window.document.getElementById("code-annotation-line-highlight");
+            if (div === null) {
+              div = window.document.createElement("div");
+              div.setAttribute("id", "code-annotation-line-highlight");
+              div.style.position = 'absolute';
+              parent.appendChild(div);
+            }
+            div.style.top = top - 2 + "px";
+            div.style.height = height + 4 + "px";
+            div.style.left = 0;
+            let gutterDiv = window.document.getElementById("code-annotation-line-highlight-gutter");
+            if (gutterDiv === null) {
+              gutterDiv = window.document.createElement("div");
+              gutterDiv.setAttribute("id", "code-annotation-line-highlight-gutter");
+              gutterDiv.style.position = 'absolute';
+              const codeCell = window.document.getElementById(targetCell);
+              const gutter = codeCell.querySelector('.code-annotation-gutter');
+              gutter.appendChild(gutterDiv);
+            }
+            gutterDiv.style.top = top - 2 + "px";
+            gutterDiv.style.height = height + 4 + "px";
+          }
+          selectedAnnoteEl = annoteEl;
+        }
+      };
+      const unselectCodeLines = () => {
+        const elementsIds = ["code-annotation-line-highlight", "code-annotation-line-highlight-gutter"];
+        elementsIds.forEach((elId) => {
+          const div = window.document.getElementById(elId);
+          if (div) {
+            div.remove();
+          }
+        });
+        selectedAnnoteEl = undefined;
+      };
+        // Handle positioning of the toggle
+    window.addEventListener(
+      "resize",
+      throttle(() => {
+        elRect = undefined;
+        if (selectedAnnoteEl) {
+          selectCodeLines(selectedAnnoteEl);
+        }
+      }, 10)
+    );
+    function throttle(fn, ms) {
+    let throttle = false;
+    let timer;
+      return (...args) => {
+        if(!throttle) { // first call gets through
+            fn.apply(this, args);
+            throttle = true;
+        } else { // all the others get throttled
+            if(timer) clearTimeout(timer); // cancel #2
+            timer = setTimeout(() => {
+              fn.apply(this, args);
+              timer = throttle = false;
+            }, ms);
+        }
+      };
+    }
+      // Attach click handler to the DT
+      const annoteDls = window.document.querySelectorAll('dt[data-target-cell]');
+      for (const annoteDlNode of annoteDls) {
+        annoteDlNode.addEventListener('click', (event) => {
+          const clickedEl = event.target;
+          if (clickedEl !== selectedAnnoteEl) {
+            unselectCodeLines();
+            const activeEl = window.document.querySelector('dt[data-target-cell].code-annotation-active');
+            if (activeEl) {
+              activeEl.classList.remove('code-annotation-active');
+            }
+            selectCodeLines(clickedEl);
+            clickedEl.classList.add('code-annotation-active');
+          } else {
+            // Unselect the line
+            unselectCodeLines();
+            clickedEl.classList.remove('code-annotation-active');
+          }
+        });
+      }
+  const findCites = (el) => {
+    const parentEl = el.parentElement;
+    if (parentEl) {
+      const cites = parentEl.dataset.cites;
+      if (cites) {
+        return {
+          el,
+          cites: cites.split(' ')
+        };
+      } else {
+        return findCites(el.parentElement)
+      }
+    } else {
+      return undefined;
+    }
+  };
+  var bibliorefs = window.document.querySelectorAll('a[role="doc-biblioref"]');
+  for (var i=0; i<bibliorefs.length; i++) {
+    const ref = bibliorefs[i];
+    const citeInfo = findCites(ref);
+    if (citeInfo) {
+      tippyHover(citeInfo.el, function() {
+        var popup = window.document.createElement('div');
+        citeInfo.cites.forEach(function(cite) {
+          var citeDiv = window.document.createElement('div');
+          citeDiv.classList.add('hanging-indent');
+          citeDiv.classList.add('csl-entry');
+          var biblioDiv = window.document.getElementById('ref-' + cite);
+          if (biblioDiv) {
+            citeDiv.innerHTML = biblioDiv.innerHTML;
+          }
+          popup.appendChild(citeDiv);
+        });
+        return popup.innerHTML;
+      });
+    }
+  }
+});
+</script>
+<nav class="page-navigation">
+  <div class="nav-page nav-page-previous">
+      <a  href="/statistik/Statistik5_Uebung.html" class="pagination-link" aria-label="Statistik 5: Übung">
+        <i class="bi bi-arrow-left-short"></i> <span class="nav-page-text"><span class='chapter-number'>25</span>  <span class='chapter-title'>Statistik 5: Übung</span></span>
+      </a>          
+  </div>
+  <div class="nav-page nav-page-next">
+      <a  href="/statistik/Statistik6_Uebung.html" class="pagination-link" aria-label="Statistik 6: Übung">
+        <span class="nav-page-text"><span class='chapter-number'>27</span>  <span class='chapter-title'>Statistik 6: Übung</span></span> <i class="bi bi-arrow-right-short"></i>
+      </a>
+  </div>
+</nav>
+</div> <!-- /content -->
+
+</body>
+
+</html>
