@@ -31,6 +31,7 @@ Führt mit dem novanimal Datensatz (inviduelle Daten) eine logistische Regressio
 -   Stellt die Ergebnisse dar
 
 
+
 ::::{.content-hidden unless-meta="musterloesung"}
 
 :::{.callout-note}
@@ -40,6 +41,9 @@ Führt mit dem novanimal Datensatz (inviduelle Daten) eine logistische Regressio
 [Demoscript herunterladen (.R)](../purl/Statistik6_Uebung.R){.dld}
 
 [Demoscript herunterladen (.qmd)](../purl/Statistik6_Uebung.qmd){.dld}
+
+- [Lösungstext als Download](Statistik6_Loesung.pdf)
+
 
 ```{r}
 #| echo: false
@@ -87,7 +91,9 @@ drop1(glmm_3, test = "Chi")
 glmm_4 <- update(glmm_3,~. -age_group)
 
 drop1(glmm_4, test = "Chi")
+```
 
+```{r}
 # Model validierung
 # Test overdisepersion
 check_overdispersion(glmm_4)
@@ -101,8 +107,9 @@ plotResiduals(simulationOutput, form = nova$gender)
 plotResiduals(simulationOutput, form = nova$member)
 
 # Die formalen Tests zeigen, dass es Probleme gibt. Die visuelle Inspektion zeigt jedoch, dass es überhaupt keine Probleme gibt und die Residiuen beinahe perfekt normalverteilt sind (dies zeigt, dass die Testergebnisse stark von der Anzahl der Beobachtungen (in diesem Fall viele) abhängen).
+```
 
-
+```{r}
 # Modelresultat
 Anova(glmm_4)
 summary(glmm_4)
@@ -130,8 +137,10 @@ odsr <- rbind(
                  )
 colnames(odsr) <- c("Odds_ratios")
 odsr <- as.data.frame(odsr)
+```
 
 
+```{r}
 # Wahrscheinlichkeiten in %
 odsr$Wahrscheinlichkeit <- ( odsr$Odds_ratios / (odsr$Odds_ratios + 1 ) )
 odsr
