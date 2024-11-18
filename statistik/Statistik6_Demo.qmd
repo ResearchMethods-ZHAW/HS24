@@ -156,8 +156,8 @@ table(sleepstudy_2$Subject)
 # Visualisierung
 ggplot(sleepstudy_2, aes(y = Reaction, x = Days)) +
   geom_point() +
-  xlab("Average reaction time (ms)") +
-  ylab("Number of days of sleep deprivation") +
+  xlab("Number of days of sleep deprivation") +
+  ylab("Average reaction time (ms)") +
   geom_smooth(method = "lm", formula = 'y ~ x', se = F, fullrange = T) +
   theme_classic() +
   facet_wrap(~Subject)
@@ -199,7 +199,6 @@ DeerEcervi <- read_delim("datasets/stat/DeerEcervi.csv", delim = ";") |>
 
 # Daten anschauen
 str(DeerEcervi)
-head(DeerEcervi)
 summary(DeerEcervi)
 table(DeerEcervi$Farm)
 ```
@@ -235,9 +234,8 @@ simulationOutput <- simulateResiduals(fittedModel = glmm_1, plot = TRUE, n = 100
 
 # Plot the scaled quantile residuals versus fitted values.
 plotResiduals(simulationOutput, form = DeerEcervi$Sex)
-plotResiduals(simulationOutput, form = DeerEcervi$Length_std) 
+plotResiduals(simulationOutput, form = scale(DeerEcervi$Length) )
 ```
-
 
 ```{r}
 # Visualisierung

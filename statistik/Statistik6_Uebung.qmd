@@ -53,8 +53,10 @@ p_load("tidyverse", "glmmTMB", "performance", "DHARMa", "car")
 # lade daten
 nova <- read_delim("datasets/stat/novanimal.csv", delim = ";") |>
   mutate(across(where(is.character), as.factor))
-
 str(nova)
+
+# Die Variable“ccrs” (single campus_card holder) sollte ein facor sein
+nova$ccrs <- as.factor(nova$ccrs)
 summary(nova)
 
 # sieht euch die Verteilung zwischen Fleisch und  kein Fleisch an,
@@ -64,10 +66,6 @@ prop.table(table(nova$meat)) # Werte in Prozent
 
 # Definiert das logistische Modell mit ccrs als random intercept und
 # wendet es auf den Datensatz an
-
-# Exkurs für Neugierige
-# check out ICC: https://www.datanovia.com/en/lessons/intraclass-correlation-coefficient-in-r/
-
 glmm_1 <- glmmTMB(meat ~ gender + age_group + member + gender:age_group + gender:member + 
                     (1 | ccrs), 
                  family = binomial, 
@@ -75,38 +73,34 @@ glmm_1 <- glmmTMB(meat ~ gender + age_group + member + gender:age_group + gender
 
 Anova(glmm_1)
 summary(glmm_1)
-## erste Interpretation: Geschlecht (Referenzkategorie: Mann) scheint den Fleischkonsum positiv zu beeinflussen, schauen wir ob wir das Model vereinfachen können:
 
+## erste Interpretation: Geschlecht (Referenzkategorie: Mann) scheint den Fleischkonsum positiv zu beeinflussen, schauen wir ob wir das Model vereinfachen können:
 
 # Model optimierung
 drop1(glmm_1, test = "Chi")
 glmm_2 <- update(glmm_1,~. -gender:age_group)
 
 drop1(glmm_2, test = "Chi")
-glmm_3 <- update(glmm_2,~. -age_group)
+glmm_3 <- update(glmm_2,~. -gender:member)
 
 drop1(glmm_3, test = "Chi")
-glmm_4 <- update(glmm_3,~. -gender:member)
+glmm_4 <- update(glmm_3,~. -age_group)
 
 drop1(glmm_4, test="Chi")
 
-Anova(glmm_4)
-summary(glmm_4)
-
-# Model validation
+# Model validierung
 # Test overdisepersion
-check_overdispersion(glmm_3)
+check_overdispersion(glmm_4)
 # der Wert ist nahe 1 daher i.o
 
 set.seed(123)
 simulationOutput <- simulateResiduals(fittedModel = glmm_4, plot = TRUE, n = 500)
 
-
 # Plot residuals vs covariates des models
 plotResiduals(simulationOutput, form = nova$gender)
 plotResiduals(simulationOutput, form = nova$member)
 
-# Die formalen Tests zeigen, dass es Probleme gibt.Die visuelle Inspektion zeigt jedoch, dass es überhapt keine Probleme gibt und die Residiuen beinahe perfekt normalverteilt sind (dies zeigt, dass die Testergebnisse stark von der Anzahl der Beobachtungen (in diesem Fall viele) abhängen).
+# Die formalen Tests zeigen, dass es Probleme gibt. Die visuelle Inspektion zeigt jedoch, dass es überhaupt keine Probleme gibt und die Residiuen beinahe perfekt normalverteilt sind (dies zeigt, dass die Testergebnisse stark von der Anzahl der Beobachtungen (in diesem Fall viele) abhängen).
 
 
 # Modelresultat

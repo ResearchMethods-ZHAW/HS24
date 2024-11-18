@@ -11,8 +11,8 @@ Im Rahmen von Statistik 1 - 8 werden wir einige R Packages brauchen. Wir empfehl
 
 ```{r}
 pacman::p_load("agricolae", "car", "corrplot", "DHARMa", "doBy", "factoextra",
-"FSA", "glmmTMB", "labdsv", "lme4", "MASS", "MuMIn", "pacman", "performance",
-"performance", "relaimpo", "sjPlot", "tidyverse", "vegan","FSA")
+"FSA", "glmmTMB", "lme4", "MASS", "MuMIn", "pacman", "performance",
+"performance", "relaimpo", "sjPlot", "tidyverse", "vegan")
 ```
 
 
