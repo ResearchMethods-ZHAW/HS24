@@ -146,6 +146,14 @@ odsr$Wahrscheinlichkeit <- ( odsr$Odds_ratios / (odsr$Odds_ratios + 1 ) )
 odsr
 
 #' 
+## -----------------------------------------------------------------------------
+# Visualisierung
+p_load("sjPlot")
+plot_model(glmm_4, 
+           type = "pred", pred.type = "re", 
+           terms = c("member", "gender")) +
+  theme_classic()
+
 #' 
 #' :::
 #' :::: 
