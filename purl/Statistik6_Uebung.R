@@ -3,8 +3,9 @@
 #' knitr:
 #'   opts_chunk: 
 #'     collapse: false
-#' musterloesung: false
+#' musterloesung: true
 #' ---
+#' 
 #' 
 #' # Statistik 6: Übung
 #' 
