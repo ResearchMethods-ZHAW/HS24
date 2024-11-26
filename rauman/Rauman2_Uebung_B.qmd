@@ -2,8 +2,8 @@
 lesson: RaumAn2
 thema: Einführung Rasterdaten
 execute: 
-  echo: true   # set to true to show musterlösung
-  output: true # set to true to show musterlösung
+  echo: false   # set to true to show musterlösung
+  output: false # set to true to show musterlösung
 code-fold: true
 code-summary: "Musterlösung"
 knitr:
@@ -75,6 +75,7 @@ Genau wie `ggplot` basiert `tmap` auf der Idee von "Ebenen", die durch ein `+` v
 ```{r}
 #| output: true
 #| echo: true
+#| code-fold: false
 
 tm_shape(dhm_schwyz) +
   tm_raster()
@@ -87,6 +88,7 @@ Wenn Sie die Hilfe von `?tm_raster` konsultieren, werden Sie eine Vielzahl von O
 ```{r}
 #| output: true
 #| echo: true
+#| code-fold: false
 
 tm_shape(dhm_schwyz) +
   tm_raster(col.scale = tm_scale_continuous())
@@ -97,6 +99,7 @@ Das sieht schon ziemlich toll aus, aber vielleicht wollen wir die Standard-Farbp
 ```{r}
 #| output: true
 #| echo: true
+#| code-fold: false
 
 tm_shape(dhm_schwyz) +
   tm_raster(col.scale = tm_scale_continuous(values = "brewer.spectral"))
@@ -107,6 +110,7 @@ Eine grosse Stärke von `tmap` ist die Tatsache, dass mit dem gleichen Befehl so
 ```{r}
 #| output: true
 #| echo: true
+#| code-fold: false
 
 tmap_mode("view") # wechselt auf interakive Plots
 
@@ -122,6 +126,7 @@ Mit `terra` können wir eine Vielzahl von Rasteroperationen über unser Höhenmo
 
 ```{r}
 #| output: true
+#| fig-cap: Hangneigung des Kantons Schwyz (`v = "slope"`)
 
 terrain(dhm_schwyz, "slope") |>
   plot()
@@ -129,44 +134,20 @@ terrain(dhm_schwyz, "slope") |>
 
 ```{r}
 #| output: true
+#| fig-cap: Hangausrichtung des Kantons Schwyz (`v = "aspect"`). Hier wurde eine eigene Farbpalette erstellt, da sich die Extremwerte 0 und 360 (*Norden*) sich farblich nicht unterscheiden sollten.
 
 schwyz_aspect <- terrain(dhm_schwyz, "aspect")
 
-plot(schwyz_aspect)
-```
- 
-::: {.callout-note}
-Bei "aspect" handelt es sich ja um Werte, die von 0 bis 360 reichen. In klassischen Palettes liegen die beiden Extremwerte (in diesem Fall 0 und 360) farblich weit auseinander. Bei Aspect sollten diese aber nahe beieinander liegen (da eine Ausrichtung von 1° nur 2 Grad von einer Ausrichtung von 359° entfernt ist). Um dieser Tatsache Rechnung zu tragen, können wir eine eigene Colourpalette erstellen, wo die erste Farbe wiederholt ist.
-:::
-
-```{r}
-#| output: true
-#| echo: true
-
-
-# This tmap v3 Code still works, but must be migrated
 tm_shape(schwyz_aspect) +
-  tm_raster(
-    palette = c("#EF476F", "#FFD166", "#06D6A0", "#118AB2", "#EF476F"),
-    style = "cont", breaks = seq(0, 360, 90)
-  )
-```
-
-
-```{r}
-#| echo: false
-#| eval: false
-
-# this should replace the above code, but does not work. Why?
-tm_shape(dhm_schwyz) +
   tm_raster(
     col.scale = tm_scale_continuous(
       values = c("#EF476F", "#FFD166", "#06D6A0", "#118AB2", "#EF476F"),
       ticks = seq(0, 360, 90),values.repeat = TRUE
       )
     )
-```
 
+```
+ 
 ## Aufgabe 3
 
 Mit Hangneigung und -ausrichtung können wir einen *Hillshading*-Effekt berechnen. Hillshading bedeutet, dass der Schattenwurf des Oberflächenmodells bei gegebenen Einfallswinkel der Sonne (Höhe und Azimut) berechnet wird. Der typische Einfallswinkel liegt bei 45° über dem Horizont und von Nordwesten bei 315°.
@@ -175,7 +156,7 @@ Um einen Hillshading Effekt zu erzeugen, berechne zuerst `slope` und `aspect` vo
 
 ```{r}
 #| output: true
-#| fig-cap: Für diese Visualisierung verwende ich `tmap` und als colour palette *cividis*
+#| fig-cap: Für diese Visualisierung verwende ich `tmap` und als die Farbpalette `values = "matplotlib.cividis"`.
 
 dhm_slope <- terrain(dhm_schwyz, "slope", unit = "radians")
 dhm_aspect <- terrain(dhm_schwyz, "aspect", unit = "radians")

@@ -54,7 +54,7 @@ my_idw <- function(groundtruth,column,cellsize, nmax = Inf, maxdist = Inf, idp =
   
   samples <- st_make_grid(extent,cellsize,what = "centers")
   my_formula <- formula(paste(column,"~1"))
-  idw_sf <- gstat::idw(formula = my_formula,groundtruth, newdata = samples, nmin = 1, nmax = nmax, maxdist = maxdist, idp = idp)
+  idw_sf <- gstat::idw(formula = my_formula,groundtruth, newdata = samples, nmin = 1, nmax = nmax, maxdist = maxdist, idp = idp) 
   
   idw_matrix <- cbind(as.data.frame(st_coordinates(idw_sf)),pred = st_drop_geometry(idw_sf)[,1])
   idw_matrix
@@ -95,24 +95,18 @@ Rechnet so den IDW für die Luftqualitätsmessungen mit verschiedenen Parametern
 
 Tips: 
 
-- Was für Distanzen bei `maxdist` Sinn machen, könnt ihr dem Output aus der G-Funktion (vorherige Übung) entnehmen
 - Wählt am Anfang eine etwas konvervative (grosse) `cellsize` und verringert diesen nur, wenn euer Rechner damit gut klar kommt
 - Da der Output aus der Interpolation im gleichen Koordinatenbezugssystem ist wie `schweiz.gpkg`, kann man diese beiden Datensätze im gleichen `ggplot` darstellen. Dafür müsst ihr die *aesthetics* (`aes()`) für jeden Layer einzeln setzen und nicht auf der Ebene von `ggplot()`.
 
 ::: {.column-body}
 ```{r}
-#| output: true
-#| error: false
-#| label: fig-ggplot-ex1
-#| fig.cap: Stickstoffdioxid (NO2) in μg/m3, Interpoliert über die ganze Schweiz mit
-#|   der Inverse Distance Weighted Methode. Die verschiedenen Plots zeigen die Veränderung
-#|   der Interpolation bei steigendem IDP-Wert
-
+#| output: false
+#| echo: false
 library("purrr")
 library("tidyr")
 
 plots <- lapply(1:4, function(idp){
-  idw <- my_idw(groundtruth = luftqualitaet,column = "value",cellsize = 1000, nmax = Inf,maxdist = Inf,idp = idp,extent = schweiz)
+  idw <- my_idw(groundtruth = luftqualitaet,column = "value",cellsize = 1000, nmax = Inf,maxdist = Inf,idp = idp,extent = schweiz) |> invisible()
   ggplot() +
     geom_raster(data = idw, aes(X,Y, fill = pred)) +
     geom_sf(data = schweiz, fill = NA) +
@@ -124,6 +118,17 @@ plots <- lapply(1:4, function(idp){
       legend.key.width = unit(0.10, 'npc'),
       legend.key.height = unit(0.02, 'npc'))
 })
+```
+
+
+```{r}
+#| output: true
+#| echo: false
+#| message: false
+#| label: fig-ggplot-ex1
+#| fig.cap: Stickstoffdioxid (NO2) in μg/m3, Interpoliert über die ganze Schweiz mit
+#|   der Inverse Distance Weighted Methode. Die verschiedenen Plots zeigen die Veränderung
+#|   der Interpolation bei steigendem IDP-Wert
 
 cowplot::plot_grid(plotlist = plots)
 
@@ -149,13 +154,10 @@ ggplot() +
   geom_sf(data = thiessenpolygone, fill = NA)
 ```
 
-`st_voronoi` hat die Thiessenpolygone etwas weiter gezogen als wir sie wollen. Dies ist allerdings eine schöne Illustration der Randeffekte von Thiessenpolygonen, die zum Rand hin (wo es immer weniger Punkte hat) sehr gross werden können. Wir können die Polygone auf die Ausdehnung der Schweiz mit `st_intersection()` clippen. Auch hier braucht es zwei kleine Vorverarbeitungsschritte:
-
-1. Wie vorher müssen wir die einzelnen Kantons-Polygone miteinander verschmelzen. Dies erreichen wir mit `st_union()`. Wir speichern den Output als `schweiz`, was als Resultat ein einzelnes Polygon der Schweizergrenze retourniert.
-2. Für die Thiessen-Polygone machen wir genau das Umgekehrte: `st_voronoi()` liefert ein einzelnes Feature mit allen Polygonen, welches sich nicht gerne clippen lässt. Mit `st_cast()` wird die `GEOMETRYCOLLECTION` in Einzelpolygone aufgeteilt. 
+`st_voronoi` hat die Thiessenpolygone etwas weiter gezogen als wir sie wollen. Dies ist allerdings eine schöne Illustration der Randeffekte von Thiessenpolygonen, die zum Rand hin (wo es immer weniger Punkte hat) sehr gross werden können. Wir können die Polygone auf die Ausdehnung der Schweiz mit `st_intersection()` clippen. Vorher konvertieren wir mit `st_collection_extract()` die `GEOMETRYCOLLECTION` in `POLYGON`. 
 
 ```{r}
-thiessenpolygone <- st_cast(thiessenpolygone)
+thiessenpolygone <- st_collection_extract(thiessenpolygone)
 
 thiessenpolygone_clip <- st_intersection(thiessenpolygone, schweiz)
 ```

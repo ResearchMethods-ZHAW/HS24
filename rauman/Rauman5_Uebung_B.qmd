@@ -47,7 +47,7 @@ wind250m <- rast("datasets/rauman/wind250m.tif")
 #| fig-cap: Datensatz 'wind250m' zur Windgeschwindigkeit in m pro Sekunde
 
 tm_shape(wind250m) +
-  tm_raster(style = "cont")
+  tm_raster(col.scale = tm_scale_continuous())
 ```
 
 ## Aufgabe 2: Wind bewerten
@@ -118,7 +118,8 @@ cbind(wind_klassen, neigung_klassen) |>
 
 ## Aufgabe 4: Raster Overlay {#sec-raster-overlay2}
 
-Analog @sec-raster-overlay1 können wir an dieser Stelle eine vorläufige Beurteilung der Gebiete durchführen. Du kannst die Gewichte wieder so anpassen, wie du willst.
+Analog @sec-raster-overlay1 können wir an dieser Stelle eine vorläufige Beurteilung der Gebiete durchführen. Berechne dafür ein (gewichtetes) Mittel der Kriterien `strassen_classify`, `schutzgebiete_classify`, `wind_classify` und `neigung_classify`.
+Du kannst die Gewichte wieder so anpassen, wie du für sinnvoll hälst. 
 
 ```{r}
 #| fig-cap: Ungewichtetes Überlagern aller Kriterien mit Ausnahme der Ausschlussgebiete
@@ -128,7 +129,7 @@ Analog @sec-raster-overlay1 können wir an dieser Stelle eine vorläufige Beurte
 overlay_prelim_3 <- (strassen_classify + schutzgebiete_classify + wind_classify + neigung_classify) / 4
 
 tm_shape(overlay_prelim_3) +
-  tm_raster(palette = "-Spectral", breaks = seq(0, 1, 0.2), style = "cont", title = "Eignung") +
+  tm_raster(col.scale = tm_scale_continuous(ticks = seq(0, 1, 0.2), values = "brewer.spectral")) +
   tm_layout(frame = FALSE)
 ```
 
@@ -161,6 +162,6 @@ overlay_prelim_4 <- overlay_prelim_3 |>
 tmap_mode("view")
 
 tm_shape(overlay_prelim_4) +
-  tm_raster(palette = "-Spectral", breaks = seq(0, 1, 0.2), style = "cont", alpha = 0.6) +
+  tm_raster(col.scale = tm_scale_continuous(ticks = seq(0, 1, 0.2), values = "brewer.spectral")) +
   tm_basemap("Esri.WorldImagery")
 ```
