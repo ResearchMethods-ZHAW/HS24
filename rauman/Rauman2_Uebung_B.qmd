@@ -82,24 +82,24 @@ tm_shape(dhm_schwyz) +
 
 Beachten Sie, dass `tm_shape()` und `tm_raster()` (in diesem Fall) zusammengehören. Das eine kann nicht ohne das andere leben.
 
-Wenn Sie die Hilfe von `?tm_raster` konsultieren, werden Sie eine Vielzahl von Optionen sehen, mit denen Sie die Visualisierung Ihrer Daten verändern können. Zum Beispiel ist der Standardstil von `tm_raster()` die Erstellung von "Bins" mit einer diskreten Farbskala. Wir können dies mit `style = "cont"` ausser Kraft setzen.
+Wenn Sie die Hilfe von `?tm_raster` konsultieren, werden Sie eine Vielzahl von Optionen sehen, mit denen Sie die Visualisierung Ihrer Daten verändern können. Zum Beispiel ist der Standardstil von `tm_raster()` die Erstellung von "Bins" mit einer diskreten Farbskala. Wir können dies mit `col.scale = tm_scale_continuous()` ausser Kraft setzen.
 
 ```{r}
 #| output: true
 #| echo: true
 
 tm_shape(dhm_schwyz) +
-  tm_raster(style = "cont")
+  tm_raster(col.scale = tm_scale_continuous())
 ```
 
-Das sieht schon ziemlich toll aus, aber vielleicht wollen wir die Standard-Farbpalette ändern. Glücklicherweise ist das in `tmap` viel einfacher als in `ggplot2`. Um sich die verfügbaren Paletten anzusehen, geben Sie `tmaptools::palette_explorer()` oder `RColorBrewer::display.brewer.all()` in der Konsole ein (für Ersteres müssen Sie möglicherweise zusätzliche Pakete installieren, z.B. `shinyjs`).
+Das sieht schon ziemlich toll aus, aber vielleicht wollen wir die Standard-Farbpalette ändern. Ein nettes GUI, die einem die Auswahl der Farben erleitern soll, erhält ihr mit dem Befehl `cols4all::c4a_gui()`.
 
 ```{r}
 #| output: true
 #| echo: true
 
 tm_shape(dhm_schwyz) +
-  tm_raster(style = "cont", palette = "Spectral")
+  tm_raster(col.scale = tm_scale_continuous(values = "brewer.spectral"))
 ```
 
 Eine grosse Stärke von `tmap` ist die Tatsache, dass mit dem gleichen Befehl sowohl statische wie auch interative Plots erstellt werden können. Dafür muss der Modus von statisch auf interaktiv gewechselt werden. 
@@ -111,7 +111,7 @@ Eine grosse Stärke von `tmap` ist die Tatsache, dass mit dem gleichen Befehl so
 tmap_mode("view") # wechselt auf interakive Plots
 
 tm_shape(dhm_schwyz) +
-  tm_raster(style = "cont", palette = "Spectral")
+  tm_raster(col.scale = tm_scale_continuous(values = "brewer.spectral"))
 
 tmap_mode("plot") # wechselt zurück auf statische Plots
 ```
@@ -143,11 +143,28 @@ Bei "aspect" handelt es sich ja um Werte, die von 0 bis 360 reichen. In klassisc
 #| output: true
 #| echo: true
 
+
+# This tmap v3 Code still works, but must be migrated
 tm_shape(schwyz_aspect) +
   tm_raster(
     palette = c("#EF476F", "#FFD166", "#06D6A0", "#118AB2", "#EF476F"),
     style = "cont", breaks = seq(0, 360, 90)
   )
+```
+
+
+```{r}
+#| echo: false
+#| eval: false
+
+# this should replace the above code, but does not work. Why?
+tm_shape(dhm_schwyz) +
+  tm_raster(
+    col.scale = tm_scale_continuous(
+      values = c("#EF476F", "#FFD166", "#06D6A0", "#118AB2", "#EF476F"),
+      ticks = seq(0, 360, 90),values.repeat = TRUE
+      )
+    )
 ```
 
 ## Aufgabe 3
@@ -166,6 +183,7 @@ dhm_aspect <- terrain(dhm_schwyz, "aspect", unit = "radians")
 dhm_hillshade <- shade(dhm_slope, dhm_aspect, 45, 315)
 
 tm_shape(dhm_hillshade) +
-  tm_raster(style = "cont", palette = "cividis", legend.show = FALSE) +
-  tm_layout(frame = FALSE)
+  tm_raster(
+    col.scale = tm_scale_continuous(values = "matplotlib.cividis")
+  )
 ```

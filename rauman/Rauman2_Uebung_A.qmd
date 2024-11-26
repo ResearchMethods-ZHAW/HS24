@@ -31,14 +31,19 @@ wiesen <- read_sf("datasets/rauman/gruental.gpkg", "wiesen")
 baeume <- read_sf("datasets/rauman/gruental.gpkg", "baeume")
 ```
 
-Um die Übung etwas zu vereinfachen, arbeiten wir erstmals mit nur 10 Bäumen. Nutze nachstehenden Code, um zufällig 10 Bäume auszuwählen. Wenn ihr den gleichen "Seed" wie ich benutzt (`set.seed(100)`), habt ihr "zufällig" auch die gleichen Bäume wie ich.
+Um die Übung etwas zu vereinfachen, arbeiten wir erstmals mit nur 10 Bäumen. Diese Bäume befinden sich im Shapefile *baume_sample.shp* (auf Moodle). 
+
+:::{.callout-note}
+
+Ein Shapefile ist ein häufig verwendetes, aber inzwischen veraltetes Dateiformat für Geodaten. Es besteht aus mehreren Dateien (`.shp`, `.shx`, `.prj`...), die zusammen die Geometrie und Attribute von Geodaten speichern. 
+
+:::
 
 ```{r}
 #| echo: true
 #| code-fold: false
 
-set.seed(100)
-baeume_sample <- sample_n(baeume, 10)
+baeume_sample <- read_sf("datasets/rauman/baeume_sample.shp")
 ```
 
 ```{r}
