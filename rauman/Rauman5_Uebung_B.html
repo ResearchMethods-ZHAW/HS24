@@ -1,0 +1,1379 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml" lang="de" xml:lang="de"><head>
+
+<meta charset="utf-8">
+<meta name="generator" content="quarto-1.6.1">
+
+<meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
+
+
+<title>Rauman 5: Übung B – Research Methods HS24</title>
+<style>
+code{white-space: pre-wrap;}
+span.smallcaps{font-variant: small-caps;}
+div.columns{display: flex; gap: min(4vw, 1.5em);}
+div.column{flex: auto; overflow-x: auto;}
+div.hanging-indent{margin-left: 1.5em; text-indent: -1.5em;}
+ul.task-list{list-style: none;}
+ul.task-list li input[type="checkbox"] {
+  width: 0.8em;
+  margin: 0 0.8em 0.2em -1em; /* quarto-specific, see https://github.com/quarto-dev/quarto-cli/issues/4556 */ 
+  vertical-align: middle;
+}
+</style>
+
+
+<script src="../site_libs/quarto-nav/quarto-nav.js"></script>
+<script src="../site_libs/quarto-nav/headroom.min.js"></script>
+<script src="../site_libs/clipboard/clipboard.min.js"></script>
+<script src="../site_libs/quarto-search/autocomplete.umd.js"></script>
+<script src="../site_libs/quarto-search/fuse.min.js"></script>
+<script src="../site_libs/quarto-search/quarto-search.js"></script>
+<meta name="quarto:offset" content="../">
+<link href="../fallstudie_s/0_Vorbereitung.html" rel="next">
+<link href="../rauman/Rauman5_Uebung_A.html" rel="prev">
+<script src="../site_libs/quarto-html/quarto.js"></script>
+<script src="../site_libs/quarto-html/popper.min.js"></script>
+<script src="../site_libs/quarto-html/tippy.umd.min.js"></script>
+<script src="../site_libs/quarto-html/anchor.min.js"></script>
+<link href="../site_libs/quarto-html/tippy.css" rel="stylesheet">
+<link href="../site_libs/quarto-html/quarto-syntax-highlighting.css" rel="stylesheet" class="quarto-color-scheme" id="quarto-text-highlighting-styles">
+<link href="../site_libs/quarto-html/quarto-syntax-highlighting-dark.css" rel="stylesheet" class="quarto-color-scheme quarto-color-alternate" id="quarto-text-highlighting-styles">
+<script src="../site_libs/bootstrap/bootstrap.min.js"></script>
+<link href="../site_libs/bootstrap/bootstrap-icons.css" rel="stylesheet">
+<link href="../site_libs/bootstrap/bootstrap.min.css" rel="stylesheet" class="quarto-color-scheme" id="quarto-bootstrap" data-mode="light">
+<link href="../site_libs/bootstrap/bootstrap-dark.min.css" rel="stylesheet" class="quarto-color-scheme quarto-color-alternate" id="quarto-bootstrap" data-mode="dark">
+<script id="quarto-search-options" type="application/json">{
+  "location": "sidebar",
+  "copy-button": false,
+  "collapse-after": 3,
+  "panel-placement": "start",
+  "type": "textbox",
+  "limit": 50,
+  "keyboard-shortcut": [
+    "f",
+    "/",
+    "s"
+  ],
+  "show-item-context": false,
+  "language": {
+    "search-no-results-text": "Keine Treffer",
+    "search-matching-documents-text": "Treffer",
+    "search-copy-link-title": "Link in die Suche kopieren",
+    "search-hide-matches-text": "Zusätzliche Treffer verbergen",
+    "search-more-match-text": "weitere Treffer in diesem Dokument",
+    "search-more-matches-text": "weitere Treffer in diesem Dokument",
+    "search-clear-button-title": "Zurücksetzen",
+    "search-text-placeholder": "",
+    "search-detached-cancel-button-title": "Abbrechen",
+    "search-submit-button-title": "Abschicken",
+    "search-label": "Suchen"
+  }
+}</script>
+
+
+<!-- loads fontawesome, so that I can create a fontawesome button (see below) -->
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.2/css/all.min.css" integrity="sha512-z3gLpd7yknf1YoNbCzqRKc4qyor8gaKU1qmn+CShxbuBusANI9QpRohGBreCFkKxLhei6S9CQXFEbbKuqLg0DA==" crossorigin="anonymous" referrerpolicy="no-referrer">
+<script>
+
+// the following function adds padding to all h2 elements, so that I can 
+// easily present the content of the page in a more readable way
+function presenter(){
+    var paragraphs = document.querySelectorAll("h2, h3");
+    paragraphs.forEach(function (paragraph) {
+        paragraph.classList.toggle("padding-top-500");
+    });
+}
+
+// once the page is loaded, the button is injected into the sidebar. This button
+// calls the presenter function (see above)
+window.onload = function() {
+    // create the button (similar to the buttons already availables)
+    const linkElement = document.createElement('a');
+
+    linkElement.classList.add('quarto-navigation-tool');
+    linkElement.classList.add('px-1');
+    linkElement.innerHTML = '<i class="fa-solid fa-person-chalkboard"></i>';
+    linkElement.href = '#';
+    linkElement.addEventListener('click', function(event) {
+        event.preventDefault(); // Prevent the default link behavior
+        presenter();
+    });
+
+    // Find the target element by its class name
+    const sidebar_tools = document.querySelector(".sidebar-tools-main")
+    sidebar_tools.appendChild(linkElement);
+};
+
+</script>
+<script src="../site_libs/kePrint-0.0.1/kePrint.js"></script>
+<link href="../site_libs/lightable-0.0.1/lightable.css" rel="stylesheet">
+<link href="../site_libs/htmltools-fill-0.5.8.1/fill.css" rel="stylesheet">
+<script src="../site_libs/htmlwidgets-1.6.4/htmlwidgets.js"></script>
+<script src="../site_libs/jquery-3.6.0/jquery-3.6.0.min.js"></script>
+<link href="../site_libs/leaflet-1.3.1/leaflet.css" rel="stylesheet">
+<script src="../site_libs/leaflet-1.3.1/leaflet.js"></script>
+<link href="../site_libs/leafletfix-1.0.0/leafletfix.css" rel="stylesheet">
+<script src="../site_libs/proj4-2.6.2/proj4.min.js"></script>
+<script src="../site_libs/Proj4Leaflet-1.0.1/proj4leaflet.js"></script>
+<link href="../site_libs/rstudio_leaflet-1.3.1/rstudio_leaflet.css" rel="stylesheet">
+<script src="../site_libs/leaflet-binding-2.2.2/leaflet.js"></script>
+<script src="../site_libs/leaflet-providers-2.0.0/leaflet-providers_2.0.0.js"></script>
+<script src="../site_libs/leaflet-providers-plugin-2.2.2/leaflet-providers-plugin.js"></script>
+
+
+<link rel="stylesheet" href="../custom.css">
+<link rel="stylesheet" href="../theme-custom.scss">
+</head>
+
+<body class="nav-sidebar floating">
+
+<div id="quarto-search-results"></div>
+  <header id="quarto-header" class="headroom fixed-top">
+  <nav class="quarto-secondary-nav">
+    <div class="container-fluid d-flex">
+      <button type="button" class="quarto-btn-toggle btn" data-bs-toggle="collapse" role="button" data-bs-target=".quarto-sidebar-collapse-item" aria-controls="quarto-sidebar" aria-expanded="false" aria-label="Seitenleiste umschalten" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">
+        <i class="bi bi-layout-text-sidebar-reverse"></i>
+      </button>
+        <nav class="quarto-page-breadcrumbs" aria-label="breadcrumb"><ol class="breadcrumb"><li class="breadcrumb-item"><a href="../RaumAn.html">Räumliche Analysen</a></li><li class="breadcrumb-item"><a href="../rauman/Rauman5_Uebung_B.html"><span class="chapter-title">Rauman 5: Übung B</span></a></li></ol></nav>
+        <a class="flex-grow-1" role="navigation" data-bs-toggle="collapse" data-bs-target=".quarto-sidebar-collapse-item" aria-controls="quarto-sidebar" aria-expanded="false" aria-label="Seitenleiste umschalten" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">      
+        </a>
+      <button type="button" class="btn quarto-search-button" aria-label="Suchen" onclick="window.quartoOpenSearch();">
+        <i class="bi bi-search"></i>
+      </button>
+    </div>
+  </nav>
+</header>
+<!-- content -->
+<div id="quarto-content" class="quarto-container page-columns page-rows-contents page-layout-article">
+<!-- sidebar -->
+  <nav id="quarto-sidebar" class="sidebar collapse collapse-horizontal quarto-sidebar-collapse-item sidebar-navigation floating overflow-auto">
+    <div class="pt-lg-2 mt-2 text-left sidebar-header sidebar-header-stacked">
+      <a href="../index.html" class="sidebar-logo-link">
+      <img src="../images/zhaw_sw_neg.png" alt="" class="sidebar-logo py-0 d-lg-inline d-none">
+      </a>
+    <div class="sidebar-title mb-0 py-0">
+      <a href="../">Research Methods HS24</a> 
+        <div class="sidebar-tools-main">
+  <a href="" class="quarto-color-scheme-toggle quarto-navigation-tool  px-1" onclick="window.quartoToggleColorScheme(); return false;" title="Dunkelmodus umschalten"><i class="bi"></i></a>
+  <a href="" class="quarto-reader-toggle quarto-navigation-tool px-1" onclick="window.quartoToggleReader(); return false;" title="Lesemodus umschalten">
+  <div class="quarto-reader-toggle-btn">
+  <i class="bi"></i>
+  </div>
+</a>
+</div>
+    </div>
+      </div>
+        <div class="mt-2 flex-shrink-0 align-items-center">
+        <div class="sidebar-search">
+        <div id="quarto-search" class="" title="Suchen"></div>
+        </div>
+        </div>
+    <div class="sidebar-menu-container"> 
+    <ul class="list-unstyled mt-1">
+        <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../index.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Willkommen</span></a>
+  </div>
+</li>
+        <li class="sidebar-item sidebar-item-section">
+      <div class="sidebar-item-container"> 
+            <a href="../PrePro.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Pre-Processing</span></a>
+          <a class="sidebar-item-toggle text-start collapsed" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-1" role="navigation" aria-expanded="false" aria-label="Abschnitt umschalten">
+            <i class="bi bi-chevron-right ms-2"></i>
+          </a> 
+      </div>
+      <ul id="quarto-sidebar-section-1" class="collapse list-unstyled sidebar-section depth1 ">  
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../prepro/Prepro1_Vorbereitung.html" class="sidebar-item-text sidebar-link"><span class="chapter-title">Vorbereitung</span></a>
+  </div>
+</li>
+          <li class="px-0"><hr class="sidebar-divider hi "></li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../prepro/Prepro1_Demo.html" class="sidebar-item-text sidebar-link"><span class="chapter-title">Prepro 1: Demo</span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../prepro/Prepro1_Uebung.html" class="sidebar-item-text sidebar-link"><span class="chapter-title">PrePro 1: Übung</span></a>
+  </div>
+</li>
+          <li class="px-0"><hr class="sidebar-divider hi "></li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../prepro/Prepro2_Demo.html" class="sidebar-item-text sidebar-link"><span class="chapter-title">Prepro 2: Demo</span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../prepro/Prepro2_Uebung_A.html" class="sidebar-item-text sidebar-link"><span class="chapter-title">Prepro 2: Übung A</span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../prepro/Prepro2_Uebung_B.html" class="sidebar-item-text sidebar-link"><span class="chapter-title">Prepro 2: Übung B</span></a>
+  </div>
+</li>
+          <li class="px-0"><hr class="sidebar-divider hi "></li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../prepro/Prepro3_Demo.html" class="sidebar-item-text sidebar-link"><span class="chapter-title">Prepro 3: Demo</span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../prepro/Prepro3_Uebung.html" class="sidebar-item-text sidebar-link"><span class="chapter-title">Prepro 3: Übung</span></a>
+  </div>
+</li>
+      </ul>
+  </li>
+        <li class="sidebar-item sidebar-item-section">
+      <div class="sidebar-item-container"> 
+            <a href="../InfoVis.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">InfoVis</span></a>
+          <a class="sidebar-item-toggle text-start collapsed" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-2" role="navigation" aria-expanded="false" aria-label="Abschnitt umschalten">
+            <i class="bi bi-chevron-right ms-2"></i>
+          </a> 
+      </div>
+      <ul id="quarto-sidebar-section-2" class="collapse list-unstyled sidebar-section depth1 ">  
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../infovis/Infovis1_Vorbereitung.html" class="sidebar-item-text sidebar-link"><span class="chapter-title">Vorbereitung</span></a>
+  </div>
+</li>
+          <li class="px-0"><hr class="sidebar-divider hi "></li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../infovis/Infovis1_Demo.html" class="sidebar-item-text sidebar-link"><span class="chapter-title">Infovis 1: Demo A</span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../infovis/Infovis1_Uebung.html" class="sidebar-item-text sidebar-link"><span class="chapter-title">Infovis 1: Übung</span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../infovis/Infovis1_Script_eda.html" class="sidebar-item-text sidebar-link"><span class="chapter-title">Infovis 1: Script EDA</span></a>
+  </div>
+</li>
+          <li class="px-0"><hr class="sidebar-divider hi "></li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../infovis/Infovis2_Uebung_A.html" class="sidebar-item-text sidebar-link"><span class="chapter-title">Infovis 2: Übung A</span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../infovis/Infovis2_Uebung_B.html" class="sidebar-item-text sidebar-link"><span class="chapter-title">Infovis 2: Übung optional</span></a>
+  </div>
+</li>
+      </ul>
+  </li>
+        <li class="sidebar-item sidebar-item-section">
+      <div class="sidebar-item-container"> 
+            <a href="../Statistik.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Statistik</span></a>
+          <a class="sidebar-item-toggle text-start collapsed" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-3" role="navigation" aria-expanded="false" aria-label="Abschnitt umschalten">
+            <i class="bi bi-chevron-right ms-2"></i>
+          </a> 
+      </div>
+      <ul id="quarto-sidebar-section-3" class="collapse list-unstyled sidebar-section depth1 ">  
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../statistik/Statistik0_Vorbereitung.html" class="sidebar-item-text sidebar-link"><span class="chapter-title">Vorbereitung</span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../statistik/Statistik1_Demo.html" class="sidebar-item-text sidebar-link"><span class="chapter-title">Statistik 1: Demo</span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../statistik/Statistik1_Uebung.html" class="sidebar-item-text sidebar-link"><span class="chapter-title">Statistik 1: Übung</span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../statistik/Statistik2_Demo.html" class="sidebar-item-text sidebar-link"><span class="chapter-title">Statistik 2: Demo</span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../statistik/Statistik2_Uebung.html" class="sidebar-item-text sidebar-link"><span class="chapter-title">Statistik 2: Übung</span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../statistik/Statistik3_Demo.html" class="sidebar-item-text sidebar-link"><span class="chapter-title">Statistik 3: Demo</span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../statistik/Statistik3_Uebung.html" class="sidebar-item-text sidebar-link"><span class="chapter-title">Statistik 3: Übung</span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../statistik/Statistik4_Demo.html" class="sidebar-item-text sidebar-link"><span class="chapter-title">Statistik 4: Demo</span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../statistik/Statistik4_Uebung.html" class="sidebar-item-text sidebar-link"><span class="chapter-title">Statistik 4: Übung</span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../statistik/Statistik5_Demo.html" class="sidebar-item-text sidebar-link"><span class="chapter-title">Statistik 5: Demo</span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../statistik/Statistik5_Uebung.html" class="sidebar-item-text sidebar-link"><span class="chapter-title">Statistik 5: Übung</span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../statistik/Statistik6_Demo.html" class="sidebar-item-text sidebar-link"><span class="chapter-title">Statistik 6: Demo</span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../statistik/Statistik6_Uebung.html" class="sidebar-item-text sidebar-link"><span class="chapter-title">Statistik 6: Übung</span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../statistik/Statistik7_Demo.html" class="sidebar-item-text sidebar-link"><span class="chapter-title">Statistik 7: Demo</span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../statistik/Statistik7_Uebung.html" class="sidebar-item-text sidebar-link"><span class="chapter-title">Statistik 7: Übung</span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../statistik/Statistik8_Demo.html" class="sidebar-item-text sidebar-link"><span class="chapter-title">Statistik 8: Demo</span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../statistik/Statistik8_Uebung.html" class="sidebar-item-text sidebar-link"><span class="chapter-title">Statistik 8: Übung</span></a>
+  </div>
+</li>
+      </ul>
+  </li>
+        <li class="sidebar-item sidebar-item-section">
+      <div class="sidebar-item-container"> 
+            <a href="../RaumAn.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Räumliche Analysen</span></a>
+          <a class="sidebar-item-toggle text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-4" role="navigation" aria-expanded="true" aria-label="Abschnitt umschalten">
+            <i class="bi bi-chevron-right ms-2"></i>
+          </a> 
+      </div>
+      <ul id="quarto-sidebar-section-4" class="collapse list-unstyled sidebar-section depth1 show">  
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../rauman/Rauman0_Vorbereitung.html" class="sidebar-item-text sidebar-link"><span class="chapter-title">Vorbereitung</span></a>
+  </div>
+</li>
+          <li class="px-0"><hr class="sidebar-divider hi "></li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../rauman/Rauman1_Uebung_A.html" class="sidebar-item-text sidebar-link"><span class="chapter-title">Rauman 1: Übung A</span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../rauman/Rauman1_Uebung_B.html" class="sidebar-item-text sidebar-link"><span class="chapter-title">Rauman 1: Übung B</span></a>
+  </div>
+</li>
+          <li class="px-0"><hr class="sidebar-divider hi "></li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../rauman/Rauman2_Uebung_A.html" class="sidebar-item-text sidebar-link"><span class="chapter-title">Rauman 2: Übung A</span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../rauman/Rauman2_Uebung_B.html" class="sidebar-item-text sidebar-link"><span class="chapter-title">Rauman 2: Übung B</span></a>
+  </div>
+</li>
+          <li class="px-0"><hr class="sidebar-divider hi "></li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../rauman/Rauman3_Uebung_A.html" class="sidebar-item-text sidebar-link"><span class="chapter-title">Rauman 3: Übung A</span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../rauman/Rauman3_Uebung_B.html" class="sidebar-item-text sidebar-link"><span class="chapter-title">Rauman 3: Übung B</span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../rauman/Rauman3_Uebung_C.html" class="sidebar-item-text sidebar-link"><span class="chapter-title">Rauman 3: Übung C (Optional)</span></a>
+  </div>
+</li>
+          <li class="px-0"><hr class="sidebar-divider hi "></li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../rauman/Rauman4_Uebung_A.html" class="sidebar-item-text sidebar-link"><span class="chapter-title">Rauman 4: Übung</span></a>
+  </div>
+</li>
+          <li class="px-0"><hr class="sidebar-divider hi "></li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../rauman/Rauman5_Uebung_A.html" class="sidebar-item-text sidebar-link"><span class="chapter-title">Rauman 5: Übung A</span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../rauman/Rauman5_Uebung_B.html" class="sidebar-item-text sidebar-link active"><span class="chapter-title">Rauman 5: Übung B</span></a>
+  </div>
+</li>
+      </ul>
+  </li>
+        <li class="sidebar-item sidebar-item-section">
+      <div class="sidebar-item-container"> 
+            <a class="sidebar-item-text sidebar-link text-start collapsed" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-5" role="navigation" aria-expanded="false">
+ <span class="menu-text">Fallstudie S</span></a>
+          <a class="sidebar-item-toggle text-start collapsed" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-5" role="navigation" aria-expanded="false" aria-label="Abschnitt umschalten">
+            <i class="bi bi-chevron-right ms-2"></i>
+          </a> 
+      </div>
+      <ul id="quarto-sidebar-section-5" class="collapse list-unstyled sidebar-section depth1 ">  
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../fallstudie_s/0_Vorbereitung.html" class="sidebar-item-text sidebar-link"><span class="chapter-title">Vorbereitung</span></a>
+  </div>
+</li>
+          <li class="px-0"><hr class="sidebar-divider hi "></li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../fallstudie_s/1_Einführung.html" class="sidebar-item-text sidebar-link"><span class="chapter-title">Einführung</span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../fallstudie_s/2_Besuchermonitoring.html" class="sidebar-item-text sidebar-link"><span class="chapter-title">Monitoring</span></a>
+  </div>
+</li>
+          <li class="px-0"><hr class="sidebar-divider hi "></li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../fallstudie_s/3_Aufgabenstellung_WPZ.html" class="sidebar-item-text sidebar-link"><span class="chapter-title">Aufgabenstellung Abschlussbericht</span></a>
+  </div>
+</li>
+          <li class="px-0"><hr class="sidebar-divider hi "></li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../fallstudie_s/4_Projektierung.html" class="sidebar-item-text sidebar-link"><span class="chapter-title">Projek erstellen</span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../fallstudie_s/5_Datenverarbeitung.html" class="sidebar-item-text sidebar-link"><span class="chapter-title">Datenverarbeitung</span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../fallstudie_s/6_Deskriptive_Analysen.html" class="sidebar-item-text sidebar-link"><span class="chapter-title">Deskriptive Analysen</span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../fallstudie_s/7_Multivariate_Modelle.html" class="sidebar-item-text sidebar-link"><span class="chapter-title">Multivariate Modelle</span></a>
+  </div>
+</li>
+      </ul>
+  </li>
+        <li class="sidebar-item sidebar-item-section">
+      <div class="sidebar-item-container"> 
+            <a class="sidebar-item-text sidebar-link text-start collapsed" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-6" role="navigation" aria-expanded="false">
+ <span class="menu-text">Fallstudie N</span></a>
+          <a class="sidebar-item-toggle text-start collapsed" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-6" role="navigation" aria-expanded="false" aria-label="Abschnitt umschalten">
+            <i class="bi bi-chevron-right ms-2"></i>
+          </a> 
+      </div>
+      <ul id="quarto-sidebar-section-6" class="collapse list-unstyled sidebar-section depth1 ">  
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../fallstudie_n/1_Vorbemerkung.html" class="sidebar-item-text sidebar-link"><span class="chapter-title">Vorbemerkung</span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../fallstudie_n/2_Datenverarbeitung.html" class="sidebar-item-text sidebar-link"><span class="chapter-title">Daten(vor)verarbeitung</span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../fallstudie_n/3_Berechnung_Homeranges.html" class="sidebar-item-text sidebar-link"><span class="chapter-title">Berechnung Homeranges</span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../fallstudie_n/4_Multivariate_Modelle.html" class="sidebar-item-text sidebar-link"><span class="chapter-title">Multivariate Modelle</span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../fallstudie_n/5_Variablenselektion.html" class="sidebar-item-text sidebar-link"><span class="chapter-title">Variablenselektion Multivariate Modelle</span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../fallstudie_n/6_Guete_und_Diagnostics.html" class="sidebar-item-text sidebar-link"><span class="chapter-title">Modellgüte und -diagnostics MM</span></a>
+  </div>
+</li>
+      </ul>
+  </li>
+        <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../References.html" class="sidebar-item-text sidebar-link"><span class="chapter-title">Literaturverzeichnis</span></a>
+  </div>
+</li>
+    </ul>
+    </div>
+</nav>
+<div id="quarto-sidebar-glass" class="quarto-sidebar-collapse-item" data-bs-toggle="collapse" data-bs-target=".quarto-sidebar-collapse-item"></div>
+<!-- margin-sidebar -->
+    <div id="quarto-margin-sidebar" class="sidebar margin-sidebar">
+        <nav id="TOC" role="doc-toc" class="toc-active">
+    <h2 id="toc-title">Inhaltsverzeichnis</h2>
+   
+  <ul>
+  <li><a href="#aufgabe-1-rasterdaten-einlesen" id="toc-aufgabe-1-rasterdaten-einlesen" class="nav-link active" data-scroll-target="#aufgabe-1-rasterdaten-einlesen">Aufgabe 1: Rasterdaten einlesen</a></li>
+  <li><a href="#aufgabe-2-wind-bewerten" id="toc-aufgabe-2-wind-bewerten" class="nav-link" data-scroll-target="#aufgabe-2-wind-bewerten">Aufgabe 2: Wind bewerten</a></li>
+  <li><a href="#aufgabe-3-slope-berechnen-und-bewerten" id="toc-aufgabe-3-slope-berechnen-und-bewerten" class="nav-link" data-scroll-target="#aufgabe-3-slope-berechnen-und-bewerten">Aufgabe 3: Slope berechnen und bewerten</a></li>
+  <li><a href="#sec-raster-overlay2" id="toc-sec-raster-overlay2" class="nav-link" data-scroll-target="#sec-raster-overlay2">Aufgabe 4: Raster Overlay</a></li>
+  <li><a href="#aufgabe-5-ausschlusskriterien" id="toc-aufgabe-5-ausschlusskriterien" class="nav-link" data-scroll-target="#aufgabe-5-ausschlusskriterien">Aufgabe 5: Ausschlusskriterien</a></li>
+  </ul>
+</nav>
+    </div>
+<!-- main -->
+<main class="content" id="quarto-document-content">
+
+<header id="title-block-header" class="quarto-title-block default"><nav class="quarto-page-breadcrumbs quarto-title-breadcrumbs d-none d-lg-block" aria-label="breadcrumb"><ol class="breadcrumb"><li class="breadcrumb-item"><a href="../RaumAn.html">Räumliche Analysen</a></li><li class="breadcrumb-item"><a href="../rauman/Rauman5_Uebung_B.html"><span class="chapter-title">Rauman 5: Übung B</span></a></li></ol></nav>
+<div class="quarto-title">
+<h1 class="title"><span class="chapter-title">Rauman 5: Übung B</span></h1>
+</div>
+
+
+
+<div class="quarto-title-meta">
+
+    
+  
+    
+  </div>
+  
+
+
+</header>
+
+
+<p>In der letzten Übung (Übung A) haben wir die potentielle Standorte für Windkraftanlagen hinsichtlich zweier Distanzkriterien bewertet. In dieser Übung (Übung B) schliessen wir die Multikriterien-Evaluation ab, indem wir:</p>
+<ol type="1">
+<li>folgende Kriterien mitberücksichtigen: Windgeschwindigkeit und Hangneigung</li>
+<li>die <em>Ausschlusskriterien</em> vom Resultat ausschliessen</li>
+</ol>
+<p>Für Punkt 1 müssen wir zusätzliche Daten einlesen, die im Rasterformat daherkommen. Punkt 2 beruht im Wesentlichen auf Daten, die wir bereits verwendet haben.</p>
+<!--
+3. Je höher die Windgeschwindigkeit ist
+4. Je geringer die Hangneigung ist
+-->
+<section id="aufgabe-1-rasterdaten-einlesen" class="level2">
+<h2 class="anchored" data-anchor-id="aufgabe-1-rasterdaten-einlesen">Aufgabe 1: Rasterdaten einlesen</h2>
+<p>Zur Bewertung der Standorte hinsichtlich Windgeschwindigkeit steht uns der Datensatz <em>wind250m.tif</em> zur Verfügung (siehe <a href="Rauman5_Uebung_A.html#tbl-mce-data" class="quarto-xref">Tabelle&nbsp;<span>41.1</span></a>). Lade den Datensatz mit der Funktion <code>rast()</code> in R ein. Exploriere den Datensatz visuell und versuche ein Verständnis für die Datensätze zu bekommen.</p>
+<div class="cell">
+<div class="cell-output-display">
+<div class="quarto-figure quarto-figure-center">
+<figure class="figure">
+<p><img src="Rauman5_Uebung_B_files/figure-html/unnamed-chunk-3-1.png" class="img-fluid figure-img" width="672"></p>
+<figcaption>Datensatz ‘wind250m’ zur Windgeschwindigkeit in m pro Sekunde</figcaption>
+</figure>
+</div>
+</div>
+</div>
+</section>
+<section id="aufgabe-2-wind-bewerten" class="level2">
+<h2 class="anchored" data-anchor-id="aufgabe-2-wind-bewerten">Aufgabe 2: Wind bewerten</h2>
+<p>Diese Rasterdaten müssen wir nicht weiter verarbeiten, wir können sie direkt bewerten. Führe diese Bewertung aufgrund nachstehender Tabelle durch. Nutze dafür die Funktion <code>classify()</code> analog <a href="Rauman5_Uebung_A.html#sec-classify1" class="quarto-xref"><span>Aufgabe 3: Distanzkriterien bewerten</span></a>. Ihr könnt die Schwellenwerte frei wählen, wir werden diejenigen verwenden, die in <a href="#tbl-bewerungstabelle-other" class="quarto-xref">Tabelle&nbsp;<span>42.1</span></a> festgehalten sind.</p>
+</section>
+<section id="aufgabe-3-slope-berechnen-und-bewerten" class="level2">
+<h2 class="anchored" data-anchor-id="aufgabe-3-slope-berechnen-und-bewerten">Aufgabe 3: Slope berechnen und bewerten</h2>
+<p>Für die Berechnung und anschliessende Bewertung der Hangneigung brauchen wir ein Höhenmodell. Lade das Höhenmodell <em>dhm250m.tif</em> herunter (siehe <a href="Rauman5_Uebung_A.html#tbl-mce-data" class="quarto-xref">Tabelle&nbsp;<span>41.1</span></a>) und in R ein. Berechne anschliessend die Hangneigung mit der Funktion <code>terrain()</code> analog <a href="Rauman2_Uebung_B.html#sec-raster-slope" class="quarto-xref"><span>Aufgabe 2</span></a> (beachte die Einheit des Output!).</p>
+<p>Bewerte die Hangneigung danach gemäss Tabelle <a href="#tbl-bewerungstabelle-other" class="quarto-xref">Tabelle&nbsp;<span>42.1</span></a>.</p>
+<div class="mce-table">
+<div class="cell">
+<div id="tbl-bewerungstabelle-other" class="cell quarto-float quarto-figure quarto-figure-center anchored">
+<figure class="quarto-float quarto-float-tbl figure">
+<figcaption class="quarto-float-caption-top quarto-float-caption quarto-float-tbl" id="tbl-bewerungstabelle-other-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+Tabelle&nbsp;42.1: Bewertungstabelle die Windgeschwindigkeit (m/s) und Hangneigung (Grad)
+</figcaption>
+<div aria-describedby="tbl-bewerungstabelle-other-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+<div class="cell-output-display">
+<table class="lightable-classic do-not-create-environment cell caption-top table table-sm table-striped small" data-quarto-postprocess="true">
+<colgroup>
+<col style="width: 16%">
+<col style="width: 16%">
+<col style="width: 16%">
+<col style="width: 16%">
+<col style="width: 16%">
+<col style="width: 16%">
+</colgroup>
+<thead>
+<tr class="header">
+<th colspan="3" data-quarto-table-cell-role="th" style="text-align: center; padding-bottom: 0; padding-left: 3px; padding-right: 3px;"><div style="border-bottom: 1px solid #111111; margin-bottom: -1px; ">
+Windgeschwindigkeit
+</div></th>
+<th colspan="3" data-quarto-table-cell-role="th" style="text-align: center; padding-bottom: 0; padding-left: 3px; padding-right: 3px;"><div style="border-bottom: 1px solid #111111; margin-bottom: -1px; ">
+Hangneigung
+</div></th>
+</tr>
+<tr class="odd">
+<th style="text-align: right;" data-quarto-table-cell-role="th">von</th>
+<th style="text-align: right;" data-quarto-table-cell-role="th">bis</th>
+<th style="text-align: right;" data-quarto-table-cell-role="th">zu</th>
+<th style="text-align: right;" data-quarto-table-cell-role="th">von</th>
+<th style="text-align: right;" data-quarto-table-cell-role="th">bis</th>
+<th style="text-align: right;" data-quarto-table-cell-role="th">zu</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td style="text-align: right;">0</td>
+<td style="text-align: right;">20</td>
+<td style="text-align: right;">0.0</td>
+<td style="text-align: right;">0</td>
+<td style="text-align: right;">4</td>
+<td style="text-align: right;">1.0</td>
+</tr>
+<tr class="even">
+<td style="text-align: right;">20</td>
+<td style="text-align: right;">30</td>
+<td style="text-align: right;">0.2</td>
+<td style="text-align: right;">4</td>
+<td style="text-align: right;">8</td>
+<td style="text-align: right;">0.8</td>
+</tr>
+<tr class="odd">
+<td style="text-align: right;">30</td>
+<td style="text-align: right;">40</td>
+<td style="text-align: right;">0.4</td>
+<td style="text-align: right;">8</td>
+<td style="text-align: right;">12</td>
+<td style="text-align: right;">0.6</td>
+</tr>
+<tr class="even">
+<td style="text-align: right;">40</td>
+<td style="text-align: right;">50</td>
+<td style="text-align: right;">0.6</td>
+<td style="text-align: right;">12</td>
+<td style="text-align: right;">16</td>
+<td style="text-align: right;">0.4</td>
+</tr>
+<tr class="odd">
+<td style="text-align: right;">50</td>
+<td style="text-align: right;">60</td>
+<td style="text-align: right;">0.8</td>
+<td style="text-align: right;">16</td>
+<td style="text-align: right;">20</td>
+<td style="text-align: right;">0.2</td>
+</tr>
+<tr class="even">
+<td style="text-align: right;">60</td>
+<td style="text-align: right;">Inf</td>
+<td style="text-align: right;">1.0</td>
+<td style="text-align: right;">20</td>
+<td style="text-align: right;">90</td>
+<td style="text-align: right;">0.0</td>
+</tr>
+</tbody>
+</table>
+
+
+</div>
+</div>
+</figure>
+</div>
+</div>
+</div>
+</section>
+<section id="sec-raster-overlay2" class="level2">
+<h2 class="anchored" data-anchor-id="sec-raster-overlay2">Aufgabe 4: Raster Overlay</h2>
+<p>Analog <a href="Rauman5_Uebung_A.html#sec-raster-overlay1" class="quarto-xref"><span>Aufgabe 4: Raster Overlay</span></a> können wir an dieser Stelle eine vorläufige Beurteilung der Gebiete durchführen. Berechne dafür ein (gewichtetes) Mittel der Kriterien <code>strassen_classify</code>, <code>schutzgebiete_classify</code>, <code>wind_classify</code> und <code>neigung_classify</code>. Du kannst die Gewichte wieder so anpassen, wie du für sinnvoll hälst.</p>
+<div class="cell">
+<div class="cell-output-display">
+<div id="fig-overlay3" class="quarto-float quarto-figure quarto-figure-center anchored">
+<figure class="quarto-float quarto-float-fig figure">
+<div aria-describedby="fig-overlay3-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+<img src="Rauman5_Uebung_B_files/figure-html/fig-overlay3-1.png" class="img-fluid figure-img" width="672">
+</div>
+<figcaption class="quarto-float-caption-bottom quarto-float-caption quarto-float-fig" id="fig-overlay3-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+Abbildung&nbsp;42.1: Ungewichtetes Überlagern aller Kriterien mit Ausnahme der Ausschlussgebiete
+</figcaption>
+</figure>
+</div>
+</div>
+</div>
+</section>
+<section id="aufgabe-5-ausschlusskriterien" class="level2">
+<h2 class="anchored" data-anchor-id="aufgabe-5-ausschlusskriterien">Aufgabe 5: Ausschlusskriterien</h2>
+<p>Als Auschlussgebiete gelten Flächen, wo keine Windkraftanlagen gebaut werden können. Dazu gehören bewohnte Flächen, nationale Schutzgebiete, Waldgebiete und Seen. (Zwar werden Schutzgebiete in unserer Analyse bereits berücksichtigt, aber nicht kategorisch vom Resultat ausgeschlossen.)</p>
+<p>Um diese Flächen aus unserem Resultat auzuschliessen, können wir wieder die Funktion <code>mask()</code> verwenden (siehe <a href="Rauman5_Uebung_A.html#sec-rauman5-mask" class="quarto-xref"><span>Aufgabe 5: Mask Raster</span></a>). Doch diesmal möchten wir nicht die Flächen <em>ausserhalb</em> der Polygone mit <code>NA</code> ersetzen, sondern die Flächen <em>innerhalb</em> der Polygone. Deshalb verwenden wir <code>mask()</code> mit dem Argument <code>inverse = TRUE</code>.</p>
+<p>Versuche mit <code>mask()</code>, den oben erwähnten Vektordatensätze sowie der Option <code>inverse = TRUE</code> die Ausschlussgebiete vom Raster-Overlay zu entfernen und visualisiere das Resultat.</p>
+<div class="cell">
+<div class="cell-output-display">
+<style>#legend01 { background: #FFFFFF; opacity: 1}</style>
+<div class="leaflet html-widget html-fill-item" id="htmlwidget-65008c615de8d1fb1a13" style="width:100%;height:464px;"></div>
+<script type="application/json" data-for="htmlwidget-65008c615de8d1fb1a13">{"x":{"options":{"crs":{"crsClass":"L.CRS.EPSG3857","code":null,"proj4def":null,"projectedBounds":null,"options":{}},"attributionControl":true},"calls":[{"method":"createMapPane","args":["tmap401",401]},{"method":"addLayersControl","args":[[],"overlay_prelim_4",{"collapsed":true,"autoZIndex":true,"position":"topleft"}]},{"method":"addProviderTiles","args":["Esri.WorldImagery",null,"Esri.WorldImagery",{"minZoom":0,"maxZoom":18,"maxNativeZoom":17,"tileSize":256,"subdomains":"abc","errorTileUrl":"","tms":false,"noWrap":false,"zoomOffset":0,"zoomReverse":false,"opacity":1,"zIndex":1,"detectRetina":false,"pane":"tilePane"}]},{"method":"addRasterImage","args":["data:image/png;base64,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",[[47.22740576038751,8.38569109075052],[46.88163140317877,9.0085594770937]],1,null,"overlay_prelim_4","overlay_prelim_4"]},{"method":"addControl","args":["<div>\n  <strong>layer<\/strong>\n<\/div>\n<div style=\"position: relative; margin-top:.5em; margin-bottom:.5em; ;&#10;      width: calc(28px + 1.5em + 2px); height: calc(200px + 0em);\">\n  <img src=\"data:image/svg+xml,%3Csvg%20xmlns%3D%22http%3A%2F%2Fwww.w3.org%2F2000%2Fsvg%22%20version%3D%221.1%22%20width%3D%2228%22%20height%3D%22200%22%3E%0A%20%20%3Csvg%20xmlns%3D%22http%3A%2F%2Fwww.w3.org%2F2000%2Fsvg%22%20version%3D%221.1%22%20width%3D%2228%22%20height%3D%22200%22%3E%0A%20%20%20%20%3Cdefs%3E%0A%20%20%20%20%20%20%3ClinearGradient%20id%3D%22gradient-val-5%22%20x1%3D%220%22%20y1%3D%220%22%20x2%3D%220%22%20y2%3D%221%22%3E%0A%20%20%20%20%20%20%20%20%3Cstop%20offset%3D%220.000%25%22%20stop-color%3D%22%23FFFFFF%22%3E%3C%2Fstop%3E%0A%20%20%20%20%20%20%20%20%3Cstop%20offset%3D%2211.111%25%22%20stop-color%3D%22%23F39B98%22%3E%3C%2Fstop%3E%0A%20%20%20%20%20%20%20%20%3Cstop%20offset%3D%2222.222%25%22%20stop-color%3D%22%23DD5250%22%3E%3C%2Fstop%3E%0A%20%20%20%20%20%20%20%20%3Cstop%20offset%3D%2233.333%25%22%20stop-color%3D%22%23F2915E%22%3E%3C%2Fstop%3E%0A%20%20%20%20%20%20%20%20%3Cstop%20offset%3D%2244.444%25%22%20stop-color%3D%22%23FEC477%22%3E%3C%2Fstop%3E%0A%20%20%20%20%20%20%20%20%3Cstop%20offset%3D%2255.556%25%22%20stop-color%3D%22%23FBECA3%22%3E%3C%2Fstop%3E%0A%20%20%20%20%20%20%20%20%3Cstop%20offset%3D%2266.667%25%22%20stop-color%3D%22%23DBF0AF%22%3E%3C%2Fstop%3E%0A%20%20%20%20%20%20%20%20%3Cstop%20offset%3D%2277.778%25%22%20stop-color%3D%22%23A9DCA6%22%3E%3C%2Fstop%3E%0A%20%20%20%20%20%20%20%20%3Cstop%20offset%3D%2288.889%25%22%20stop-color%3D%22%237BAEAE%22%3E%3C%2Fstop%3E%0A%20%20%20%20%20%20%20%20%3Cstop%20offset%3D%22100.000%25%22%20stop-color%3D%22%233A7DB7%22%3E%3C%2Fstop%3E%0A%20%20%20%20%20%20%3C%2FlinearGradient%3E%0A%20%20%20%20%3C%2Fdefs%3E%0A%20%20%20%20%3Cg%3E%0A%20%20%20%20%20%20%3Crect%20height%3D%22200%22%20width%3D%2220%22%20x%3D%220%22%20rx%3D%220%22%20fill%3D%22url%28%23gradient-val-5%29%22%3E%3C%2Frect%3E%0A%20%20%20%20%3C%2Fg%3E%0A%20%20%20%20%3Cline%20x1%3D%220%22%20x2%3D%224%22%20y1%3D%22160%22%20y2%3D%22160%22%20stroke-width%3D%221%22%20stroke%3D%22black%22%20transform%3D%22translate%2820.000%2C0.000%29%22%3E%3C%2Fline%3E%0A%20%20%20%20%3Cline%20x1%3D%220%22%20x2%3D%224%22%20y1%3D%22120%22%20y2%3D%22120%22%20stroke-width%3D%221%22%20stroke%3D%22black%22%20transform%3D%22translate%2820.000%2C0.000%29%22%3E%3C%2Fline%3E%0A%20%20%20%20%3Cline%20x1%3D%220%22%20x2%3D%224%22%20y1%3D%2280%22%20y2%3D%2280%22%20stroke-width%3D%221%22%20stroke%3D%22black%22%20transform%3D%22translate%2820.000%2C0.000%29%22%3E%3C%2Fline%3E%0A%20%20%20%20%3Cline%20x1%3D%220%22%20x2%3D%224%22%20y1%3D%2240%22%20y2%3D%2240%22%20stroke-width%3D%221%22%20stroke%3D%22black%22%20transform%3D%22translate%2820.000%2C0.000%29%22%3E%3C%2Fline%3E%0A%20%20%3C%2Fsvg%3E%0A%3C%2Fsvg%3E\" style=\"margin-left: 1px;\"/>\n  <p style=\"position: absolute; margin: 0; top: calc(160.00px - .5em);&#10;        right: 0; line-height:1;\">0.8<\/p>\n  <p style=\"position: absolute; margin: 0; top: calc(120.00px - .5em);&#10;        right: 0; line-height:1;\">0.6<\/p>\n  <p style=\"position: absolute; margin: 0; top: calc(80.00px - .5em);&#10;        right: 0; line-height:1;\">0.4<\/p>\n  <p style=\"position: absolute; margin: 0; top: calc(40.00px - .5em);&#10;        right: 0; line-height:1;\">0.2<\/p>\n<\/div>","bottomright","legend01","info legend overlay_prelim_4 leaflegend-group-overlayprelim4"]}],"fitBounds":[46.88388392422353,8.38569109075052,47.22740576038751,9.005263877165957,[]],"limits":{"lat":[46.88163140317877,47.22740576038751],"lng":[8.38569109075052,9.0085594770937]}},"evals":[],"jsHooks":{"render":[{"code":"function(el, x, data) {\n  return (\nfunction(el, x) {\n  var updateLeafLegend = function() {\n    var controlGroups = document.querySelectorAll(\n      'input.leaflet-control-layers-selector');\n    controlGroups.forEach(g => {\n      var groupName = g.nextSibling.innerText.substr(1);\n      var className = 'leaflegend-group-' +\n        groupName.replace(/[^a-zA-Z0-9]/g, '');\n      var checked = g.checked;\n      document.querySelectorAll('.legend.' + className).forEach(l => {\n        l.hidden = !checked;\n      })\n    })\n  }\n\n  updateLeafLegend();\n  this.on('baselayerchange', el => updateLeafLegend())\n  this.on('overlayadd', el => updateLeafLegend());\n  this.on('overlayremove', el => updateLeafLegend());\n}\n                        ).call(this.getMap(), el, x, data);\n}","data":null}]}}</script>
+</div>
+</div>
+
+
+</section>
+
+</main> <!-- /main -->
+<script id="quarto-html-after-body" type="application/javascript">
+window.document.addEventListener("DOMContentLoaded", function (event) {
+  const toggleBodyColorMode = (bsSheetEl) => {
+    const mode = bsSheetEl.getAttribute("data-mode");
+    const bodyEl = window.document.querySelector("body");
+    if (mode === "dark") {
+      bodyEl.classList.add("quarto-dark");
+      bodyEl.classList.remove("quarto-light");
+    } else {
+      bodyEl.classList.add("quarto-light");
+      bodyEl.classList.remove("quarto-dark");
+    }
+  }
+  const toggleBodyColorPrimary = () => {
+    const bsSheetEl = window.document.querySelector("link#quarto-bootstrap");
+    if (bsSheetEl) {
+      toggleBodyColorMode(bsSheetEl);
+    }
+  }
+  toggleBodyColorPrimary();  
+  const disableStylesheet = (stylesheets) => {
+    for (let i=0; i < stylesheets.length; i++) {
+      const stylesheet = stylesheets[i];
+      stylesheet.rel = 'prefetch';
+    }
+  }
+  const enableStylesheet = (stylesheets) => {
+    for (let i=0; i < stylesheets.length; i++) {
+      const stylesheet = stylesheets[i];
+      stylesheet.rel = 'stylesheet';
+    }
+  }
+  const manageTransitions = (selector, allowTransitions) => {
+    const els = window.document.querySelectorAll(selector);
+    for (let i=0; i < els.length; i++) {
+      const el = els[i];
+      if (allowTransitions) {
+        el.classList.remove('notransition');
+      } else {
+        el.classList.add('notransition');
+      }
+    }
+  }
+  const toggleGiscusIfUsed = (isAlternate, darkModeDefault) => {
+    const baseTheme = document.querySelector('#giscus-base-theme')?.value ?? 'light';
+    const alternateTheme = document.querySelector('#giscus-alt-theme')?.value ?? 'dark';
+    let newTheme = '';
+    if(darkModeDefault) {
+      newTheme = isAlternate ? baseTheme : alternateTheme;
+    } else {
+      newTheme = isAlternate ? alternateTheme : baseTheme;
+    }
+    const changeGiscusTheme = () => {
+      // From: https://github.com/giscus/giscus/issues/336
+      const sendMessage = (message) => {
+        const iframe = document.querySelector('iframe.giscus-frame');
+        if (!iframe) return;
+        iframe.contentWindow.postMessage({ giscus: message }, 'https://giscus.app');
+      }
+      sendMessage({
+        setConfig: {
+          theme: newTheme
+        }
+      });
+    }
+    const isGiscussLoaded = window.document.querySelector('iframe.giscus-frame') !== null;
+    if (isGiscussLoaded) {
+      changeGiscusTheme();
+    }
+  }
+  const toggleColorMode = (alternate) => {
+    // Switch the stylesheets
+    const alternateStylesheets = window.document.querySelectorAll('link.quarto-color-scheme.quarto-color-alternate');
+    manageTransitions('#quarto-margin-sidebar .nav-link', false);
+    if (alternate) {
+      enableStylesheet(alternateStylesheets);
+      for (const sheetNode of alternateStylesheets) {
+        if (sheetNode.id === "quarto-bootstrap") {
+          toggleBodyColorMode(sheetNode);
+        }
+      }
+    } else {
+      disableStylesheet(alternateStylesheets);
+      toggleBodyColorPrimary();
+    }
+    manageTransitions('#quarto-margin-sidebar .nav-link', true);
+    // Switch the toggles
+    const toggles = window.document.querySelectorAll('.quarto-color-scheme-toggle');
+    for (let i=0; i < toggles.length; i++) {
+      const toggle = toggles[i];
+      if (toggle) {
+        if (alternate) {
+          toggle.classList.add("alternate");     
+        } else {
+          toggle.classList.remove("alternate");
+        }
+      }
+    }
+    // Hack to workaround the fact that safari doesn't
+    // properly recolor the scrollbar when toggling (#1455)
+    if (navigator.userAgent.indexOf('Safari') > 0 && navigator.userAgent.indexOf('Chrome') == -1) {
+      manageTransitions("body", false);
+      window.scrollTo(0, 1);
+      setTimeout(() => {
+        window.scrollTo(0, 0);
+        manageTransitions("body", true);
+      }, 40);  
+    }
+  }
+  const isFileUrl = () => { 
+    return window.location.protocol === 'file:';
+  }
+  const hasAlternateSentinel = () => {  
+    let styleSentinel = getColorSchemeSentinel();
+    if (styleSentinel !== null) {
+      return styleSentinel === "alternate";
+    } else {
+      return false;
+    }
+  }
+  const setStyleSentinel = (alternate) => {
+    const value = alternate ? "alternate" : "default";
+    if (!isFileUrl()) {
+      window.localStorage.setItem("quarto-color-scheme", value);
+    } else {
+      localAlternateSentinel = value;
+    }
+  }
+  const getColorSchemeSentinel = () => {
+    if (!isFileUrl()) {
+      const storageValue = window.localStorage.getItem("quarto-color-scheme");
+      return storageValue != null ? storageValue : localAlternateSentinel;
+    } else {
+      return localAlternateSentinel;
+    }
+  }
+  const darkModeDefault = true;
+  let localAlternateSentinel = darkModeDefault ? 'alternate' : 'default';
+  // Dark / light mode switch
+  window.quartoToggleColorScheme = () => {
+    // Read the current dark / light value 
+    let toAlternate = !hasAlternateSentinel();
+    toggleColorMode(toAlternate);
+    setStyleSentinel(toAlternate);
+    toggleGiscusIfUsed(toAlternate, darkModeDefault);
+  };
+  // Ensure there is a toggle, if there isn't float one in the top right
+  if (window.document.querySelector('.quarto-color-scheme-toggle') === null) {
+    const a = window.document.createElement('a');
+    a.classList.add('top-right');
+    a.classList.add('quarto-color-scheme-toggle');
+    a.href = "";
+    a.onclick = function() { try { window.quartoToggleColorScheme(); } catch {} return false; };
+    const i = window.document.createElement("i");
+    i.classList.add('bi');
+    a.appendChild(i);
+    window.document.body.appendChild(a);
+  }
+  // Switch to dark mode if need be
+  if (hasAlternateSentinel()) {
+    toggleColorMode(true);
+  } else {
+    toggleColorMode(false);
+  }
+  const icon = "";
+  const anchorJS = new window.AnchorJS();
+  anchorJS.options = {
+    placement: 'right',
+    icon: icon
+  };
+  anchorJS.add('.anchored');
+  const isCodeAnnotation = (el) => {
+    for (const clz of el.classList) {
+      if (clz.startsWith('code-annotation-')) {                     
+        return true;
+      }
+    }
+    return false;
+  }
+  const onCopySuccess = function(e) {
+    // button target
+    const button = e.trigger;
+    // don't keep focus
+    button.blur();
+    // flash "checked"
+    button.classList.add('code-copy-button-checked');
+    var currentTitle = button.getAttribute("title");
+    button.setAttribute("title", "Kopiert");
+    let tooltip;
+    if (window.bootstrap) {
+      button.setAttribute("data-bs-toggle", "tooltip");
+      button.setAttribute("data-bs-placement", "left");
+      button.setAttribute("data-bs-title", "Kopiert");
+      tooltip = new bootstrap.Tooltip(button, 
+        { trigger: "manual", 
+          customClass: "code-copy-button-tooltip",
+          offset: [0, -8]});
+      tooltip.show();    
+    }
+    setTimeout(function() {
+      if (tooltip) {
+        tooltip.hide();
+        button.removeAttribute("data-bs-title");
+        button.removeAttribute("data-bs-toggle");
+        button.removeAttribute("data-bs-placement");
+      }
+      button.setAttribute("title", currentTitle);
+      button.classList.remove('code-copy-button-checked');
+    }, 1000);
+    // clear code selection
+    e.clearSelection();
+  }
+  const getTextToCopy = function(trigger) {
+      const codeEl = trigger.previousElementSibling.cloneNode(true);
+      for (const childEl of codeEl.children) {
+        if (isCodeAnnotation(childEl)) {
+          childEl.remove();
+        }
+      }
+      return codeEl.innerText;
+  }
+  const clipboard = new window.ClipboardJS('.code-copy-button:not([data-in-quarto-modal])', {
+    text: getTextToCopy
+  });
+  clipboard.on('success', onCopySuccess);
+  if (window.document.getElementById('quarto-embedded-source-code-modal')) {
+    // For code content inside modals, clipBoardJS needs to be initialized with a container option
+    // TODO: Check when it could be a function (https://github.com/zenorocha/clipboard.js/issues/860)
+    const clipboardModal = new window.ClipboardJS('.code-copy-button[data-in-quarto-modal]', {
+      text: getTextToCopy,
+      container: window.document.getElementById('quarto-embedded-source-code-modal')
+    });
+    clipboardModal.on('success', onCopySuccess);
+  }
+  const viewSource = window.document.getElementById('quarto-view-source') ||
+                     window.document.getElementById('quarto-code-tools-source');
+  if (viewSource) {
+    const sourceUrl = viewSource.getAttribute("data-quarto-source-url");
+    viewSource.addEventListener("click", function(e) {
+      if (sourceUrl) {
+        // rstudio viewer pane
+        if (/\bcapabilities=\b/.test(window.location)) {
+          window.open(sourceUrl);
+        } else {
+          window.location.href = sourceUrl;
+        }
+      } else {
+        const modal = new bootstrap.Modal(document.getElementById('quarto-embedded-source-code-modal'));
+        modal.show();
+      }
+      return false;
+    });
+  }
+  function toggleCodeHandler(show) {
+    return function(e) {
+      const detailsSrc = window.document.querySelectorAll(".cell > details > .sourceCode");
+      for (let i=0; i<detailsSrc.length; i++) {
+        const details = detailsSrc[i].parentElement;
+        if (show) {
+          details.open = true;
+        } else {
+          details.removeAttribute("open");
+        }
+      }
+      const cellCodeDivs = window.document.querySelectorAll(".cell > .sourceCode");
+      const fromCls = show ? "hidden" : "unhidden";
+      const toCls = show ? "unhidden" : "hidden";
+      for (let i=0; i<cellCodeDivs.length; i++) {
+        const codeDiv = cellCodeDivs[i];
+        if (codeDiv.classList.contains(fromCls)) {
+          codeDiv.classList.remove(fromCls);
+          codeDiv.classList.add(toCls);
+        } 
+      }
+      return false;
+    }
+  }
+  const hideAllCode = window.document.getElementById("quarto-hide-all-code");
+  if (hideAllCode) {
+    hideAllCode.addEventListener("click", toggleCodeHandler(false));
+  }
+  const showAllCode = window.document.getElementById("quarto-show-all-code");
+  if (showAllCode) {
+    showAllCode.addEventListener("click", toggleCodeHandler(true));
+  }
+    var localhostRegex = new RegExp(/^(?:http|https):\/\/localhost\:?[0-9]*\//);
+    var mailtoRegex = new RegExp(/^mailto:/);
+      var filterRegex = new RegExp('/' + window.location.host + '/');
+    var isInternal = (href) => {
+        return filterRegex.test(href) || localhostRegex.test(href) || mailtoRegex.test(href);
+    }
+    // Inspect non-navigation links and adorn them if external
+ 	var links = window.document.querySelectorAll('a[href]:not(.nav-link):not(.navbar-brand):not(.toc-action):not(.sidebar-link):not(.sidebar-item-toggle):not(.pagination-link):not(.no-external):not([aria-hidden]):not(.dropdown-item):not(.quarto-navigation-tool):not(.about-link)');
+    for (var i=0; i<links.length; i++) {
+      const link = links[i];
+      if (!isInternal(link.href)) {
+        // undo the damage that might have been done by quarto-nav.js in the case of
+        // links that we want to consider external
+        if (link.dataset.originalHref !== undefined) {
+          link.href = link.dataset.originalHref;
+        }
+      }
+    }
+  function tippyHover(el, contentFn, onTriggerFn, onUntriggerFn) {
+    const config = {
+      allowHTML: true,
+      maxWidth: 500,
+      delay: 100,
+      arrow: false,
+      appendTo: function(el) {
+          return el.parentElement;
+      },
+      interactive: true,
+      interactiveBorder: 10,
+      theme: 'quarto',
+      placement: 'bottom-start',
+    };
+    if (contentFn) {
+      config.content = contentFn;
+    }
+    if (onTriggerFn) {
+      config.onTrigger = onTriggerFn;
+    }
+    if (onUntriggerFn) {
+      config.onUntrigger = onUntriggerFn;
+    }
+    window.tippy(el, config); 
+  }
+  const noterefs = window.document.querySelectorAll('a[role="doc-noteref"]');
+  for (var i=0; i<noterefs.length; i++) {
+    const ref = noterefs[i];
+    tippyHover(ref, function() {
+      // use id or data attribute instead here
+      let href = ref.getAttribute('data-footnote-href') || ref.getAttribute('href');
+      try { href = new URL(href).hash; } catch {}
+      const id = href.replace(/^#\/?/, "");
+      const note = window.document.getElementById(id);
+      if (note) {
+        return note.innerHTML;
+      } else {
+        return "";
+      }
+    });
+  }
+  const xrefs = window.document.querySelectorAll('a.quarto-xref');
+  const processXRef = (id, note) => {
+    // Strip column container classes
+    const stripColumnClz = (el) => {
+      el.classList.remove("page-full", "page-columns");
+      if (el.children) {
+        for (const child of el.children) {
+          stripColumnClz(child);
+        }
+      }
+    }
+    stripColumnClz(note)
+    if (id === null || id.startsWith('sec-')) {
+      // Special case sections, only their first couple elements
+      const container = document.createElement("div");
+      if (note.children && note.children.length > 2) {
+        container.appendChild(note.children[0].cloneNode(true));
+        for (let i = 1; i < note.children.length; i++) {
+          const child = note.children[i];
+          if (child.tagName === "P" && child.innerText === "") {
+            continue;
+          } else {
+            container.appendChild(child.cloneNode(true));
+            break;
+          }
+        }
+        if (window.Quarto?.typesetMath) {
+          window.Quarto.typesetMath(container);
+        }
+        return container.innerHTML
+      } else {
+        if (window.Quarto?.typesetMath) {
+          window.Quarto.typesetMath(note);
+        }
+        return note.innerHTML;
+      }
+    } else {
+      // Remove any anchor links if they are present
+      const anchorLink = note.querySelector('a.anchorjs-link');
+      if (anchorLink) {
+        anchorLink.remove();
+      }
+      if (window.Quarto?.typesetMath) {
+        window.Quarto.typesetMath(note);
+      }
+      // TODO in 1.5, we should make sure this works without a callout special case
+      if (note.classList.contains("callout")) {
+        return note.outerHTML;
+      } else {
+        return note.innerHTML;
+      }
+    }
+  }
+  for (var i=0; i<xrefs.length; i++) {
+    const xref = xrefs[i];
+    tippyHover(xref, undefined, function(instance) {
+      instance.disable();
+      let url = xref.getAttribute('href');
+      let hash = undefined; 
+      if (url.startsWith('#')) {
+        hash = url;
+      } else {
+        try { hash = new URL(url).hash; } catch {}
+      }
+      if (hash) {
+        const id = hash.replace(/^#\/?/, "");
+        const note = window.document.getElementById(id);
+        if (note !== null) {
+          try {
+            const html = processXRef(id, note.cloneNode(true));
+            instance.setContent(html);
+          } finally {
+            instance.enable();
+            instance.show();
+          }
+        } else {
+          // See if we can fetch this
+          fetch(url.split('#')[0])
+          .then(res => res.text())
+          .then(html => {
+            const parser = new DOMParser();
+            const htmlDoc = parser.parseFromString(html, "text/html");
+            const note = htmlDoc.getElementById(id);
+            if (note !== null) {
+              const html = processXRef(id, note);
+              instance.setContent(html);
+            } 
+          }).finally(() => {
+            instance.enable();
+            instance.show();
+          });
+        }
+      } else {
+        // See if we can fetch a full url (with no hash to target)
+        // This is a special case and we should probably do some content thinning / targeting
+        fetch(url)
+        .then(res => res.text())
+        .then(html => {
+          const parser = new DOMParser();
+          const htmlDoc = parser.parseFromString(html, "text/html");
+          const note = htmlDoc.querySelector('main.content');
+          if (note !== null) {
+            // This should only happen for chapter cross references
+            // (since there is no id in the URL)
+            // remove the first header
+            if (note.children.length > 0 && note.children[0].tagName === "HEADER") {
+              note.children[0].remove();
+            }
+            const html = processXRef(null, note);
+            instance.setContent(html);
+          } 
+        }).finally(() => {
+          instance.enable();
+          instance.show();
+        });
+      }
+    }, function(instance) {
+    });
+  }
+      let selectedAnnoteEl;
+      const selectorForAnnotation = ( cell, annotation) => {
+        let cellAttr = 'data-code-cell="' + cell + '"';
+        let lineAttr = 'data-code-annotation="' +  annotation + '"';
+        const selector = 'span[' + cellAttr + '][' + lineAttr + ']';
+        return selector;
+      }
+      const selectCodeLines = (annoteEl) => {
+        const doc = window.document;
+        const targetCell = annoteEl.getAttribute("data-target-cell");
+        const targetAnnotation = annoteEl.getAttribute("data-target-annotation");
+        const annoteSpan = window.document.querySelector(selectorForAnnotation(targetCell, targetAnnotation));
+        const lines = annoteSpan.getAttribute("data-code-lines").split(",");
+        const lineIds = lines.map((line) => {
+          return targetCell + "-" + line;
+        })
+        let top = null;
+        let height = null;
+        let parent = null;
+        if (lineIds.length > 0) {
+            //compute the position of the single el (top and bottom and make a div)
+            const el = window.document.getElementById(lineIds[0]);
+            top = el.offsetTop;
+            height = el.offsetHeight;
+            parent = el.parentElement.parentElement;
+          if (lineIds.length > 1) {
+            const lastEl = window.document.getElementById(lineIds[lineIds.length - 1]);
+            const bottom = lastEl.offsetTop + lastEl.offsetHeight;
+            height = bottom - top;
+          }
+          if (top !== null && height !== null && parent !== null) {
+            // cook up a div (if necessary) and position it 
+            let div = window.document.getElementById("code-annotation-line-highlight");
+            if (div === null) {
+              div = window.document.createElement("div");
+              div.setAttribute("id", "code-annotation-line-highlight");
+              div.style.position = 'absolute';
+              parent.appendChild(div);
+            }
+            div.style.top = top - 2 + "px";
+            div.style.height = height + 4 + "px";
+            div.style.left = 0;
+            let gutterDiv = window.document.getElementById("code-annotation-line-highlight-gutter");
+            if (gutterDiv === null) {
+              gutterDiv = window.document.createElement("div");
+              gutterDiv.setAttribute("id", "code-annotation-line-highlight-gutter");
+              gutterDiv.style.position = 'absolute';
+              const codeCell = window.document.getElementById(targetCell);
+              const gutter = codeCell.querySelector('.code-annotation-gutter');
+              gutter.appendChild(gutterDiv);
+            }
+            gutterDiv.style.top = top - 2 + "px";
+            gutterDiv.style.height = height + 4 + "px";
+          }
+          selectedAnnoteEl = annoteEl;
+        }
+      };
+      const unselectCodeLines = () => {
+        const elementsIds = ["code-annotation-line-highlight", "code-annotation-line-highlight-gutter"];
+        elementsIds.forEach((elId) => {
+          const div = window.document.getElementById(elId);
+          if (div) {
+            div.remove();
+          }
+        });
+        selectedAnnoteEl = undefined;
+      };
+        // Handle positioning of the toggle
+    window.addEventListener(
+      "resize",
+      throttle(() => {
+        elRect = undefined;
+        if (selectedAnnoteEl) {
+          selectCodeLines(selectedAnnoteEl);
+        }
+      }, 10)
+    );
+    function throttle(fn, ms) {
+    let throttle = false;
+    let timer;
+      return (...args) => {
+        if(!throttle) { // first call gets through
+            fn.apply(this, args);
+            throttle = true;
+        } else { // all the others get throttled
+            if(timer) clearTimeout(timer); // cancel #2
+            timer = setTimeout(() => {
+              fn.apply(this, args);
+              timer = throttle = false;
+            }, ms);
+        }
+      };
+    }
+      // Attach click handler to the DT
+      const annoteDls = window.document.querySelectorAll('dt[data-target-cell]');
+      for (const annoteDlNode of annoteDls) {
+        annoteDlNode.addEventListener('click', (event) => {
+          const clickedEl = event.target;
+          if (clickedEl !== selectedAnnoteEl) {
+            unselectCodeLines();
+            const activeEl = window.document.querySelector('dt[data-target-cell].code-annotation-active');
+            if (activeEl) {
+              activeEl.classList.remove('code-annotation-active');
+            }
+            selectCodeLines(clickedEl);
+            clickedEl.classList.add('code-annotation-active');
+          } else {
+            // Unselect the line
+            unselectCodeLines();
+            clickedEl.classList.remove('code-annotation-active');
+          }
+        });
+      }
+  const findCites = (el) => {
+    const parentEl = el.parentElement;
+    if (parentEl) {
+      const cites = parentEl.dataset.cites;
+      if (cites) {
+        return {
+          el,
+          cites: cites.split(' ')
+        };
+      } else {
+        return findCites(el.parentElement)
+      }
+    } else {
+      return undefined;
+    }
+  };
+  var bibliorefs = window.document.querySelectorAll('a[role="doc-biblioref"]');
+  for (var i=0; i<bibliorefs.length; i++) {
+    const ref = bibliorefs[i];
+    const citeInfo = findCites(ref);
+    if (citeInfo) {
+      tippyHover(citeInfo.el, function() {
+        var popup = window.document.createElement('div');
+        citeInfo.cites.forEach(function(cite) {
+          var citeDiv = window.document.createElement('div');
+          citeDiv.classList.add('hanging-indent');
+          citeDiv.classList.add('csl-entry');
+          var biblioDiv = window.document.getElementById('ref-' + cite);
+          if (biblioDiv) {
+            citeDiv.innerHTML = biblioDiv.innerHTML;
+          }
+          popup.appendChild(citeDiv);
+        });
+        return popup.innerHTML;
+      });
+    }
+  }
+});
+</script>
+<nav class="page-navigation">
+  <div class="nav-page nav-page-previous">
+      <a href="../rauman/Rauman5_Uebung_A.html" class="pagination-link" aria-label="Rauman 5: Übung A">
+        <i class="bi bi-arrow-left-short"></i> <span class="nav-page-text"><span class="chapter-title">Rauman 5: Übung A</span></span>
+      </a>          
+  </div>
+  <div class="nav-page nav-page-next">
+      <a href="../fallstudie_s/0_Vorbereitung.html" class="pagination-link" aria-label="Vorbereitung">
+        <span class="nav-page-text"><span class="chapter-title">Vorbereitung</span></span> <i class="bi bi-arrow-right-short"></i>
+      </a>
+  </div>
+</nav>
+</div> <!-- /content -->
+
+
+
+
+</body></html>

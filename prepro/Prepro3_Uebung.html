@@ -426,6 +426,39 @@ window.onload = function() {
   <a href="../rauman/Rauman2_Uebung_B.html" class="sidebar-item-text sidebar-link"><span class="chapter-title">Rauman 2: Übung B</span></a>
   </div>
 </li>
+          <li class="px-0"><hr class="sidebar-divider hi "></li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../rauman/Rauman3_Uebung_A.html" class="sidebar-item-text sidebar-link"><span class="chapter-title">Rauman 3: Übung A</span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../rauman/Rauman3_Uebung_B.html" class="sidebar-item-text sidebar-link"><span class="chapter-title">Rauman 3: Übung B</span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../rauman/Rauman3_Uebung_C.html" class="sidebar-item-text sidebar-link"><span class="chapter-title">Rauman 3: Übung C (Optional)</span></a>
+  </div>
+</li>
+          <li class="px-0"><hr class="sidebar-divider hi "></li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../rauman/Rauman4_Uebung_A.html" class="sidebar-item-text sidebar-link"><span class="chapter-title">Rauman 4: Übung</span></a>
+  </div>
+</li>
+          <li class="px-0"><hr class="sidebar-divider hi "></li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../rauman/Rauman5_Uebung_A.html" class="sidebar-item-text sidebar-link"><span class="chapter-title">Rauman 5: Übung A</span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../rauman/Rauman5_Uebung_B.html" class="sidebar-item-text sidebar-link"><span class="chapter-title">Rauman 5: Übung B</span></a>
+  </div>
+</li>
       </ul>
   </li>
         <li class="sidebar-item sidebar-item-section">
@@ -660,7 +693,11 @@ window.onload = function() {
 <div class="cell">
 <details class="code-fold">
 <summary>Musterlösung</summary>
-<div class="sourceCode cell-code" id="cb5"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb5-1"><a href="#cb5-1" aria-hidden="true" tabindex="-1"></a>weather <span class="ot">&lt;-</span> <span class="fu">read_delim</span>(<span class="st">"datasets/prepro/weather.csv"</span>, <span class="at">col_types =</span> <span class="fu">cols</span>(<span class="fu">col_factor</span>(), <span class="fu">col_datetime</span>(<span class="st">"%Y%m%d%H"</span>), <span class="fu">col_double</span>()), <span class="st">","</span>)</span></code><button title="In die Zwischenablage kopieren" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb5"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb5-1"><a href="#cb5-1" aria-hidden="true" tabindex="-1"></a>weather <span class="ot">&lt;-</span> <span class="fu">read_delim</span>(<span class="st">"datasets/prepro/weather.csv"</span>)</span>
+<span id="cb5-2"><a href="#cb5-2" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb5-3"><a href="#cb5-3" aria-hidden="true" tabindex="-1"></a>weather<span class="sc">$</span>stn <span class="ot">&lt;-</span> <span class="fu">as.factor</span>(weather<span class="sc">$</span>stn)</span>
+<span id="cb5-4"><a href="#cb5-4" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb5-5"><a href="#cb5-5" aria-hidden="true" tabindex="-1"></a>weather<span class="sc">$</span>time <span class="ot">&lt;-</span> <span class="fu">as.POSIXct</span>(<span class="fu">as.character</span>(weather<span class="sc">$</span>time), <span class="at">format =</span> <span class="st">"%Y%m%d%H"</span>)</span></code><button title="In die Zwischenablage kopieren" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </details>
 </div>
 </section>
