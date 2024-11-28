@@ -3,7 +3,7 @@ lesson: Statistik 8
 knitr:
   opts_chunk: 
     collapse: false
-musterloesung: false
+musterloesung: true
 ---
 
 
@@ -31,6 +31,9 @@ Wegen der sehr ungleichen Varianzen muss auf jeden Fall eine Standardisierung st
 :::{.callout-note}
 
 ## Lösung Übung 8
+
+-   [Lösungstext folgt]
+
 
 [Demoscript herunterladen (.R)](../purl/Statistik8_Uebung.R){.dld}
 
@@ -107,8 +110,8 @@ cld_letters <- data.frame(cluster = names(letters$mcletters$Letters),
 f_Murder <-
   ggplot(crime_KM4, aes(x = cluster,  y = Murder)) + 
   geom_boxplot() +
-  geom_text(data = cld_letters, aes(label = letters, x = c(1:4), y = max(crime_KM4$Murder) * 1.1)) +
-  ylim(0, max(crime_KM4$Murder) * 1.1) +
+  geom_text(data = cld_letters, aes(label = letters, x = c(1:4), y = max(crime_KM4$Murder) * 1.2)) +
+  ylim(0, max(crime_KM4$Murder) * 1.2) +
   theme_classic()
 #
 aov_Rape <- aov(Rape ~ cluster, data = crime_KM4)
@@ -119,8 +122,8 @@ cld_letters <- data.frame(cluster = names(letters$mcletters$Letters),
 f_Rape <-
   ggplot(crime_KM4, aes(x = cluster,  y = Rape)) + 
   geom_boxplot() +
-  geom_text(data = cld_letters, aes(label = letters, x = c(1:4), y = max(crime_KM4$Rape)* 1.1)) +
-  ylim(0, max(crime_KM4$Rape) * 1.1) +
+  geom_text(data = cld_letters, aes(label = letters, x = c(1:4), y = max(crime_KM4$Rape)* 1.2)) +
+  ylim(0, max(crime_KM4$Rape) * 1.2) +
   theme_classic()
 #
 aov_Robbery <- aov(Robbery ~ cluster, data = crime_KM4)
@@ -131,8 +134,8 @@ cld_letters <- data.frame(cluster = names(letters$mcletters$Letters),
 f_Robbery <-
   ggplot(crime_KM4, aes(x = cluster,  y = Robbery)) + 
   geom_boxplot() +
-  geom_text(data = cld_letters, aes(label = letters, x = c(1:4), y = max(crime_KM4$Robbery) * 1.1)) +
-  ylim(0, max(crime_KM4$Robbery) * 1.1) +
+  geom_text(data = cld_letters, aes(label = letters, x = c(1:4), y = max(crime_KM4$Robbery) * 1.2)) +
+  ylim(0, max(crime_KM4$Robbery) * 1.2) +
   theme_classic()
 #
 aov_Assault <- aov(Assault ~ cluster, data = crime_KM4)
@@ -143,8 +146,8 @@ cld_letters <- data.frame(cluster = names(letters$mcletters$Letters),
 f_Ausault <-
   ggplot(crime_KM4, aes(x = cluster,  y = Assault)) + 
   geom_boxplot() +
-  geom_text(data = cld_letters, aes(label = letters, x = c(1:4), y = max(crime_KM4$Assault) * 1.1)) +
-  ylim(0, max(crime_KM4$Assault) * 1.1) +
+  geom_text(data = cld_letters, aes(label = letters, x = c(1:4), y = max(crime_KM4$Assault) * 1.2)) +
+  ylim(0, max(crime_KM4$Assault) * 1.2) +
   theme_classic()
 #
 aov_Burglary <- aov(Burglary ~ cluster, data = crime_KM4)
@@ -155,8 +158,8 @@ cld_letters <- data.frame(cluster = names(letters$mcletters$Letters),
 f_Burglary <-
   ggplot(crime_KM4, aes(x = cluster,  y = Burglary)) + 
   geom_boxplot() +
-  geom_text(data = cld_letters, aes(label = letters, x = c(1:4), y = max(crime_KM4$Burglary)* 1.1)) +
-  ylim(0, max(crime_KM4$Burglary)*1.1) +
+  geom_text(data = cld_letters, aes(label = letters, x = c(1:4), y = max(crime_KM4$Burglary)* 1.2)) +
+  ylim(0, max(crime_KM4$Burglary) * 1.2) +
   theme_classic()
 #
 aov_Theft <- aov(Theft ~ cluster, data = crime_KM4)
@@ -167,8 +170,8 @@ cld_letters <- data.frame(cluster = names(letters$mcletters$Letters),
 f_Theft <-
   ggplot(crime_KM4, aes(x = cluster,  y = Theft)) + 
   geom_boxplot() +
-  geom_text(data = cld_letters, aes(label = letters, x = c(1:4), y = max(crime_KM4$Theft)* 1.1)) +
-  ylim(0, max(crime_KM4$Theft)*1.1) +
+  geom_text(data = cld_letters, aes(label = letters, x = c(1:4), y = max(crime_KM4$Theft)* 1.2)) +
+  ylim(0, max(crime_KM4$Theft) * 1.2) +
   theme_classic()
 #
 aov_Vehicle <- aov(Vehicle ~ cluster, data = crime_KM4)
@@ -179,8 +182,8 @@ cld_letters <- data.frame(cluster = names(letters$mcletters$Letters),
 f_Vehicle <-
   ggplot(crime_KM4, aes(x = cluster,  y = Vehicle)) + 
   geom_boxplot() +
-  geom_text(data = cld_letters, aes(label = letters, x = c(1:4), y = max(crime_KM4$Vehicle) * 1.1)) +
-  ylim(0, max(crime_KM4$Vehicle) * 1.1) +
+  geom_text(data = cld_letters, aes(label = letters, x = c(1:4), y = max(crime_KM4$Vehicle) * 1.2)) +
+  ylim(0, max(crime_KM4$Vehicle) * 1.2) +
   theme_classic()
 
 
