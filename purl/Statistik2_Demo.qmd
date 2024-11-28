@@ -5,10 +5,12 @@ knitr:
     collapse: false 
 ---
 
-
 # Statistik 2: Demo
 
-[Download dieses Demoscript ](../purl/Statistik2_Demo.R) (rechtsklick → speichern unter)
+[Demoscript herunterladen (.R)](../purl/Statistik2_Demo.R){.dld}
+
+[Demoscript herunterladen (.qmd)](../purl/Statistik2_Demo.qmd){.dld}
+
 
 ## ANOVA
 

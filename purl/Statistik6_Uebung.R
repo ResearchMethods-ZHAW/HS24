@@ -140,7 +140,6 @@ odsr <- as.data.frame(odsr)
 
 #' 
 #' 
-#' 
 ## -----------------------------------------------------------------------------
 # Wahrscheinlichkeiten in %
 odsr$Wahrscheinlichkeit <- ( odsr$Odds_ratios / (odsr$Odds_ratios + 1 ) )
