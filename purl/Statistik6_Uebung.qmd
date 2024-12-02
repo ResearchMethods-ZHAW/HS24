@@ -144,6 +144,10 @@ odsr <- as.data.frame(odsr)
 # Wahrscheinlichkeiten in %
 odsr$Wahrscheinlichkeit <- ( odsr$Odds_ratios / (odsr$Odds_ratios + 1 ) )
 odsr
+
+# oder
+p_load("ggeffects")
+predict_response(glmm_4, c("member", "gender") )
 ```
 
 ```{r}

@@ -3,7 +3,7 @@ lesson: Statistik 7
 knitr:
   opts_chunk: 
     collapse: false
-musterloesung: false
+musterloesung: true
 ---
 
 
@@ -21,7 +21,7 @@ musterloesung: false
 ::: callout-note
 ## Lösung Übung 7
 
--   [Lösungstext als Download](Statistik_Loesungstext_7.pdf)
+-   [Lösungstext folgt]
 
 [Demoscript herunterladen (.R)](../purl/Statistik7_Uebung.R){.dld}
 
