@@ -2,14 +2,15 @@
 lesson: Statistik5
 knitr:
   opts_chunk: 
-    collapse: true
+    collapse: false
 ---
 
 
 # Statistik 5: Demo
 
-[Download dieses Demoscript ](../purl/Statistik5_Demo.R) (rechtsklick → speichern unter)
+[Demoscript herunterladen (.R)](../purl/Statistik5_Demo.R){.dld}
 
+[Demoscript herunterladen (.qmd)](../purl/Statistik5_Demo.qmd){.dld}
 
 ## von LMs zu GLMs
 
@@ -47,16 +48,22 @@ ggplot(strand, aes(x = Temperatur, y = Besucher)) +
   theme_classic()
 ```
 
+
 ```{r}
 # GLMs definieren und anschauen
 
 # ist dasselbe wie ein LM
 glm_gaussian <- glm(Besucher ~ Temperatur, family = "gaussian", data = strand) 
+summary(glm_gaussian)
+```
 
+
+## Poisson Regression
+
+```{r}
 # Poisson passt besser zu den Daten 
 glm_poisson <- glm(Besucher ~ Temperatur, family = "poisson", data = strand) 
 
-summary(glm_gaussian)
 summary(glm_poisson)
 ```
 
@@ -97,16 +104,20 @@ plot(glm_quasipoisson, main = "glm_quasipoisson")
 -> Die Outputs von glm_poisson und glm_quasipoisson sind bis auf die p-Werte identisch.
 
 ```{r}
-ggplot(data = strand, aes(x = Temperature, y = Besucher)) +
+ggplot(data = strand, aes(x = Temperatur, y = Besucher)) +
   geom_point() +
   xlim(0, 40) +    
-  stat_smooth(method = "lm", color = "blue") +
+  stat_smooth(method = "lm", color = "blue", se = FALSE) +
   stat_smooth(method = "glm", method.args = list(family = "poisson"), 
                 color = "red", se = FALSE) +
   stat_smooth(method = "glm", method.args = list(family = "quasipoisson"), 
                   color = "green", linetype = "dashed", se = FALSE) +
+    annotate(geom="text", x = 4, y = 2000, label = "gaussian", color = "blue") +
+    annotate(geom="text", x = 4, y = 1800, label = "poisson", color = "red") +
+    annotate(geom="text", x = 4, y = 1600, label = "quasipoisson", color = "green") +
   theme_classic()
 ```
+
 
 ## Logistische Regression
 
@@ -124,18 +135,22 @@ ggplot(bathing, aes(x = temperatur, y = badend)) +
 # Logistisches Modell definieren
 glm_logistic <- glm(badend ~ temperatur, family = "binomial", data = bathing)
 summary(glm_logistic)
-glm_logistic
 
 # Test Overdispersion
 check_overdispersion(glm_logistic)
 
-# Modeldiagnostik (wenn nicht signifikant, dann OK)
+# Modeldiagnostik (godness of fit test, wenn nicht signifikant, dann OK)
 1 - pchisq(glm_logistic$deviance, glm_logistic$df.resid)
 
-# Using function "check_model"
+# Modeldiagnostik mit funktion "check_model"
 check_model(glm_logistic)
+```
 
-# Modellgüte (pseudo-R²)
+
+```{r}
+# Modelresultate
+
+# pseudo-R²
 r2(glm_logistic)
 
 # Steilheit der Beziehung (relative Änderung der odds bei x + 1 vs. x)
@@ -145,8 +160,9 @@ exp(glm_logistic$coefficients[2])
 -glm_logistic$coefficients[1] / glm_logistic$coefficients[2]
 
 # oder
-p_load(MASS)
+p_load("MASS")
 dose.p(glm_logistic, p = 0.5)
+
 
 # Vorhersagen
 predicted <- predict(glm_logistic, type = "response")
@@ -163,13 +179,13 @@ ggplot(data = bathing, aes(x = temperatur, y = badend)) +
   geom_point() +
   xlim(0, 30) +
   labs(x = "Temperature (°C)", y = "% Bathing") +
-  stat_smooth(method = "glm", method.args = list(family = "binomial")) +
+  stat_smooth(method = "glm", method.args = list(family = "binomial"), se = FALSE) +
   theme_classic()
 ```
 
 ## Binominale Regression
 ```{r}
-p_load(doBy)
+p_load("doBy")
 ?budworm
 
 data(budworm)
@@ -200,11 +216,13 @@ drop1(glm_binomial_2, test = "Chisq")
 check_overdispersion(glm_binomial_2)
 check_model(glm_binomial_2)
 
-# Resultat udn Visualisierung
+# Resultat und Visualisierung
 summary(glm_binomial_2)
+# Modellgüte (pseudo-R²)
+1 - (glm_binomial_2$dev / glm_binomial_2$null)
 
-# ld 50 Female (cf = c(1, 3) = Intercept und dosis)
-( ld50_feamle <- dose.p(glm_binomial_2, cf = c(1, 3)) ) 
+# ld 50 Female (cf = c(1, 2) = Intercept und dosis)
+( ld50_feamle <- dose.p(glm_binomial_2, cf = c(1, 2)) ) 
 
 # Zurücktransformieren
 2^ld50_feamle

@@ -3,21 +3,21 @@ lesson: Statistik 4
 knitr:
   opts_chunk: 
     collapse: false
-musterloesung: false
+musterloesung: true
 ---
+
+
 
 # Statistik 4: Übung
 
-- Lesen Sie den Datensatz *steprasen_ukraine.csv* in R  ein. Dieser enthält Pflanzenartenzahlen (Species.richness) von 199
-10 m² grossen Plots (Vegetationsaufnahmen) von Steppenrasen in der Ukraine sowie zahlreiche Umweltvariablen, deren Bedeutung und Einheiten im Kopf der ExcelTabelle angegeben sind.
+- Lesen Sie den Datensatz *steprasen_ukraine.csv* in R  ein. Dieser enthält Pflanzenartenzahlen (Species_richness) von 199 10 m² grossen Plots (Vegetationsaufnahmen) von Steppenrasen in der Ukraine sowie zahlreiche Umweltvariablen, deren Bedeutung und Einheiten im Kopf der ExcelTabelle angegeben sind.
 - **Ermitteln Sie ein minimal adäquates Modell, das den Artenreichtum in den Plots durch die Umweltvariablen erklärt.**
-- Bitte erklären und begründen Sie die einzelnen Schritte, die Sie unternehmen, um zu diesem Ergebnis zu kommen. Dazu erstellen Sie bitte ein Word-Dokument, in das Sie Schritt für Schritt den verwendeten R-Code, die dazu gehörigen Ausgaben von R, Ihre Interpretation derselben und die sich ergebenden Schlussfolgerungen für das weitere Vorgehen dokumentieren.
+- Bitte erklären und begründen Sie die einzelnen Schritte, die Sie unternehmen, um zu diesem Ergebnis zu kommen. Dazu erstellen Sie bitte ein mit Quarto generiertes html-Dokument, in das Sie Schritt für Schritt den verwendeten R-Code, die dazu gehörigen Ausgaben von R, Ihre Interpretation derselben und die sich ergebenden Schlussfolgerungen für das weitere Vorgehen dokumentieren.
 - Dieser Ablauf sollte insbesondere beinhalten:
   - Überprüfen der Datenstruktur nach dem Einlesen: welches sind die abhängige(n)
     und welches die unabängige(n) Variablen, sind alle Variablen für die Analyse
     geeignet?
-  - Explorative Datenanalyse, um zu sehen, ob die abhängige Variable in der
-    vorliegenden Form für die Analyse geeignet ist
+  - Explorative Datenanalyse
   - Definition eines globalen Modelles und dessen Reduktion zu einem minimal
     adäquaten Modell
   - Durchführen der Modelldiagnostik für dieses
@@ -29,9 +29,7 @@ musterloesung: false
     einem Absatz von ca. 60-100 Worten, resp. 3-8 Sätzen für den Methoden- und
     Ergebnisteil). D. h. alle wichtigen Informationen sollten enthalten sein, unnötige
     Redundanz dagegen vermieden werden.
-  - **Zu erstellen sind (a) Ein lauffähiges R-Skript; (b) begründeter Lösungsweg
-    (Kombination aus R-Code, R Output und dessen Interpretation) und (c)
-    ausformulierter Methoden- und Ergebnisteil (für eine wiss. Arbeit).**
+    - **Zu erstellen sind (1) Ein quarto generiertes html-Dokument mit begründetem Lösungsweg (Kombination aus R-Code, R Output und dessen Interpretation) und (2) ausformulierter Methoden- und Ergebnisteil (für eine wiss. Arbeit).**
 
 
 ::::{.content-hidden unless-meta="musterloesung"}
@@ -40,10 +38,11 @@ musterloesung: false
 
 ## Lösung Übung 4
 
-[Download dieses Demoscript ](../purl/Statistik4_Uebung.R) (rechtsklick → speichern unter)
+[Demoscript herunterladen (.R)](../purl/Statistik4_Uebung.R){.dld}
 
+[Demoscript herunterladen (.qmd)](../purl/Statistik4_Uebung.qmd){.dld}
 
-- [Lösungstext als Download](Statistik_Loesung_4.pdf)
+- [Lösungstext als Download](Statistik4_Loesung.pdf)
 
 ```{r}
 library(pacman)
