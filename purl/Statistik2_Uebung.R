@@ -120,9 +120,9 @@ plot(aov_2)
 ## -----------------------------------------------------------------------------
 #| eval: false
 
-# influence.measures(aov_2) #
-# # kann man sich zusätzlich zum "plot" ansehen, um herauszufinden,
-# # ob es evtl. sehr einflussreiche Werte mit Cook's D von 1 oder grösser gibt
+## influence.measures(aov_2) #
+## # kann man sich zusätzlich zum "plot" ansehen, um herauszufinden,
+## # ob es evtl. sehr einflussreiche Werte mit Cook's D von 1 oder grösser gibt
 
 #' 
 #' Links oben ist alles bestens, d. h. keine Hinweise auf Varianzheterogenität („Keil“) oder Nichtlinearität („Banane“)

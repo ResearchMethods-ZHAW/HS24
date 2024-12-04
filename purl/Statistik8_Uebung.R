@@ -30,15 +30,15 @@
 #' 
 #' :::{.callout-note}
 #' 
+#' 
 #' ## Lösung Übung 8
 #' 
-#' -   [Lösungstext folgt]
+#' - [Lösungstext als Download](Statistik8_Loesung.pdf)
 #' 
 #' 
 #' [Demoscript herunterladen (.R)](../purl/Statistik8_Uebung.R){.dld}
 #' 
 #' [Demoscript herunterladen (.qmd)](../purl/Statistik8_Uebung.qmd){.dld}
-#' 
 #' 
 #' 
 ## -----------------------------------------------------------------------------
