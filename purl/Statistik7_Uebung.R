@@ -21,7 +21,7 @@
 #' ::: callout-note
 #' ## Lösung Übung 7
 #' 
-#' -   [Lösungstext folgt]
+#' - [Lösungstext als Download](Statistik7_Loesung.pdf)
 #' 
 #' [Demoscript herunterladen (.R)](../purl/Statistik7_Uebung.R){.dld}
 #' 

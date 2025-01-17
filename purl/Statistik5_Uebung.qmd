@@ -3,7 +3,7 @@ lesson: Statistik 5
 knitr:
   opts_chunk: 
     collapse: false
-musterloesung: false
+musterloesung: true
 ---
 
 
@@ -19,15 +19,16 @@ Bitte prüft mit einer logistischen Regression, ob und ggf. wie die Inselform di
 ::::{.content-hidden unless-meta="musterloesung"}
 :::{.callout-note}
 
-[Download dieses Demoscript ](../purl/Statistik5_Uebung.R) (rechtsklick → speichern unter)
+[Demoscript herunterladen (.R)](../purl/Statistik5_Uebung.R){.dld}
+
+[Demoscript herunterladen (.qmd)](../purl/Statistik5_Uebung.qmd){.dld}
+
+
+- [Lösungstext als Download](Statistik5_Loesung.pdf)
 
 
 
-- [Lösungstext als Download](Statistik_Loesung_5.pdf)
-
-
-
-## Musterlösung Aufgabe 5: Multiple logistische Regression
+## Musterlösung Übung 5
 
 ```{r}
 library("pacman")
@@ -53,12 +54,12 @@ Modell ist signifikant (p-Wert in Zeile RATIO ist < 0.05). Jetzt müssen wir noc
 
 ```{r}
 # Test Overdispersion
+p_load("performance")
 check_overdispersion(glm_1)
 
 # Modelldiagnostik für das gewählte Modell (wenn nicht signifikant, dann OK)
 1 - pchisq(glm_1$deviance, glm_1$df.resid)
 
-p_load("performance")
 check_model(glm_1)
 ```
 
