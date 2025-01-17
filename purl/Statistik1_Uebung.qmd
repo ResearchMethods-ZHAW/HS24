@@ -3,24 +3,23 @@ lesson: Statistik 1
 knitr:
   opts_chunk: 
     collapse: false
-musterloesung: true
+musterloesung: false
 ---
 
 # Statistik 1: Übung
-
 
 
 # Anleitung zu den Übungen
 
 **Zu erstellen sind:**
 
-1. Ein quarto generiertes html-Dokument mit dem begründeten Lösungsweg (R-Code, R Output und dessen Interpretation)
-
-2.  ein ausformulierter Methoden- und Ergebnisteil (für eine wiss.Arbeit).
+a.  ein lauffähiges R-Skript
+b.  ein begründeter Lösungsweg (Kombination aus R-Code, R Output und dessen Interpretation)
+c.  ein ausformulierter Methoden- und Ergebnisteil (für eine wiss.Arbeit).
 
 **Wichtige Hinweise zur Ausgestaltung:**
 
--   Bitte **erklärt und begründet die einzelnen Schritte,** die ihr unternehmt, um zu eurem Ergebnis zu kommen. Dazu erstellt bitte ein mit Quarto generiertes html-Dokument (oder Word-Dokument), in dem ihr Schritt für Schritt den verwendeten **R-Code**, die dazu gehörigen **Ausgaben von R**, eure **Interpretation** derselben und die sich ergebenden **Schlussfolgerungen** für das weitere Vorgehen dokumentiert.
+-   Bitte **erklärt und begründet die einzelnen Schritte,** die ihr unternehmt, um zu eurem Ergebnis zu kommen. Dazu erstellt bitte ein Word-Dokument (oder ein z.B. mit Quarto generiertes pdf- oder html-Dokument), in dem ihr Schritt für Schritt den verwendeten **R-Code**, die dazu gehörigen **Ausgaben von R**, eure **Interpretation** derselben und die sich ergebenden **Schlussfolgerungen** für das weitere Vorgehen dokumentiert.
 -   Dieser **Ablauf** sollte insbesondere beinhalten:
     -   Überprüfen der Datenstruktur nach dem Einlesen, welches sind die abhängige(n) und welches die unabängige(n) Variablen etc.
     -   Explorative Datenanalyse, um zu sehen, ob evtl. Dateneingabefehler vorliegen oder Datentransformationen vorgenommen werden sollten
@@ -35,7 +34,7 @@ musterloesung: true
 
 ## Aufgabe 1.1: Assoziationstest
 
-Führt einen Assoziationstest zweier kategorialer Variablen (mit je zwei Ausprägungen) durch. Dazu erhebt ihr selbst die Daten (wozu ihr euch auch in Teams zusammenschliessen könnt). Ihr könnt z.B. eine Datenerhebung unter Mitstudierenden durchführen (etwa Nutzung Mac/Windows vs. männlich/weiblich). Bitte formuliert vor der Datenerhebung eine Hypothese, d.h. eine Erwartungshaltung, ob und welche Assoziation vorliegt und wenn ja warum. Beachtet, dass ihr für diese Form des Assoziationstests genau zwei binäre Variablen benötigt. Wenn ihr also kategoriale Variablen mit mehr als zwei Ausprägungen habt, so könnt ihr entweder Ausprägungen sinnvoll zusammenfassen oder seltene Ausprägungen im Test unberücksichtigt lassen.
+Führt einen Assoziationstest zweier kategorialer Variablen (mit je zwei Ausprägungen) mit Chi-Quadrat und Fishers exaktem Test durch. Dazu erhebt ihr selbst die Daten (wozu ihr euch auch in Teams zusammenschliessen könnt). Ihr könnt z.B. eine Datenerhebung unter Mitstudierenden durchführen (etwa Nutzung Mac/Windows vs. männlich/weiblich). Bitte formuliert vor der Datenerhebung eine Hypothese, d.h. eine Erwartungshaltung, ob und welche Assoziation vorliegt und wenn ja warum. Beachtet, dass ihr für diese Form des Assoziationstests genau zwei binäre Variablen benötigt. Wenn ihr also kategoriale Variablen mit mehr als zwei Ausprägungen habt, so könnt ihr entweder Ausprägungen sinnvoll zusammenfassen oder seltene Ausprägungen im Test unberücksichtigt lassen.
 
 ## Aufgabe 1.2: t-Test
 
@@ -59,14 +58,14 @@ Wurden in den Basis- und Interventionswochen unterschiedlich viele Gerichte verk
 
 :::{.callout-note}
 
+## Lösung Übung 1
+
+
+
 
 # Statistik 1: Lösung
 
-[Demoscript herunterladen (.R)](../purl/Statistik1_Uebung.R){.dld}
-
-[Demoscript herunterladen (.qmd)](../purl/Statistik1_Uebung.qmd){.dld}
-
-- [Lösungstext als Download](Statistik1_Lösung.pdf)
+[Download dieses Demoscript ](../purStatistik1_Uebung.R) (rechtsklick → speichern unter)
 
 ## Vorebreitung R-Session
 
@@ -165,9 +164,8 @@ ggplot(df, aes(x = condit, y = tot_sold)) + # achtung 0 Punkt fehlt
 # es wird angenommen, dass die Verkaufszahlen zwischen den Bedingungen
 # unabhängig sind
 
-t_test <- t.test(tot_sold ~ condit, data = df)
+t_test <- t.test(tot_sold ~ condit, data = df, var.equl = T)
 t_test
-
 
 # alternative Formulierung
 t.test(
@@ -179,6 +177,7 @@ t.test(
 ### Methoden
 
 Unser Ziel bestand darin, einen Vergleich der aggregierten Verkaufszahlen zwischen den Interventions- und Basiswochen durchzuführen. Wir gingen davon aus, dass die wöchentlichen Verkaufszahlen unabhängig voneinander sind, weshalb wir die Unterschiede zwischen den Verkaufszahlen pro Woche in den beiden Bedingungen mittels eines t-Tests untersuchten. Obwohl bei der visuellen Prüfung der Modellvoraussetzungen keine schwerwiegenden Verletzungen festgestellt wurden (abgesehen von einem Ausreißer), entschieden wir uns dennoch für einen Welch t-Test. Es sei angemerkt, dass die Gruppengröße mit jeweils n = 6 Wochen eher klein war. Trotzdem erzielten die T-Tests verlässliche Ergebnisse. Für weitere Informationen zu diesem Thema verweisen wir auf die verlinkte [Studie](https://scholarworks.umass.edu/cgi/viewcontent.cgi?article=1307&context=pare).
+
 
 
 
