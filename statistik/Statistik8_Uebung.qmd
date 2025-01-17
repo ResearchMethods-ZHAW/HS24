@@ -31,6 +31,7 @@ Wegen der sehr ungleichen Varianzen muss auf jeden Fall eine Standardisierung st
 :::{.callout-note}
 
 
+
 ## Lösung Übung 8
 
 - [Lösungstext als Download](Statistik8_Loesung.pdf)
